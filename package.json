@@ -1,0 +1,48 @@
+{
+  "name": "leaflet-bundle",
+  "private": true,
+  "version": "0.0.1",
+  "homepage": "https://github.com/MrRedBeard/Leaflet-Bundle",
+  "description": "Bundled Leaflet with Plugins and some minor quality of life improvements",
+  "type": "module",
+  "exports": {
+    "./src/": "./src/",
+    "./dist/": "./dist/",
+    ".": "./dist/content/js/leaflet_bundle.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MrRedBeard/Leaflet-Bundle.git"
+  },
+  "keywords": [
+    "gis",
+    "map"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "node-polyfill": "^1.0.0",
+    "vite": "^7.0.4"
+  },
+  "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@geoman-io/leaflet-geoman-free": "^2.18.3",
+    "@mapbox/leaflet-omnivore": "^0.3.4",
+    "chroma-js": "^3.1.2",
+    "georaster": "^1.6.0",
+    "georaster-layer-for-leaflet": "^3.10.0",
+    "ih-leaflet-canvaslayer-field": "^1.5.3",
+    "leaflet": "^1.9.4",
+    "leaflet-contextmenu": "^1.4.0",
+    "leaflet-draw": "^1.0.4",
+    "leaflet-gpx": "^2.2.0",
+    "leaflet-rastercoords": "^1.0.6",
+    "leaflet.tilelayer.pouchdbcached": "github:MrRedBeard/Leaflet.TileLayer.PouchDBCached",
+    "pouchdb": "^9.0.0",
+    "pouchdb-browser": "^9.0.0"
+  }
+}
