@@ -12,7 +12,104 @@ Got tired of manually patching paths and dealing with dead plugin projects and w
 
 ---
 
-## 🚀 Features
+## Usage
+```
+<link rel="stylesheet" href="/content/css/leaflet-bundle.css">
+<script src="/content/js/leaflet_bundle.iife.js"></script>
+
+  
+
+<script>
+    (() =>
+    {
+        //var map = L.map('map').setView([34.99784454433927, -91.98272109031679], 13);
+
+        var map = L.map('map', {
+        center: [34.99784454433927, -91.98272109031679],
+        zoom: 13,
+        contextmenu: true,
+        contextmenuItems: [
+            {
+            text: 'Show Coordinates',
+            callback: function (e) {
+                alert('Latitude: ' + e.latlng.lat + '\nLongitude: ' + e.latlng.lng);
+            }
+            },
+            '-',
+            {
+            text: 'Zoom in',
+            callback: function () {
+                map.zoomIn();
+            }
+            }
+        ]
+        });
+
+        map.pm.addControls({
+            position: 'topleft',
+            drawCircle: true,
+            drawMarker: true,
+            drawPolygon: true,
+            editMode: true,
+            dragMode: true,
+            cutPolygon: true,
+        });
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        //console.log('L.tileLayer:', Object.keys(L.tileLayer));
+
+        // Tile Caching
+        const tileLayer = L.tileLayer.pouchDBCached(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                pouchDbName: 'osm-cache',
+                useOnlyCache: false,
+                saveToCache: true,
+                useCache: true,
+                crossOrigin: true
+            }
+        );
+        tileLayer.addTo(map);
+
+        tileLayer.on('tilecachehit', function (e)
+        {
+        console.log('[cache hit]', e.tile.src);
+        });
+
+        tileLayer.on('tilecachemiss', function (e)
+        {
+        console.log('[cache miss]', e.tile.src);
+        });
+
+        tileLayer.on('tilecacheready', function ()
+        {
+        console.log('[cache ready] All tile caching systems are go!');
+        });
+
+        var marker = L.marker([34.99722053861641, -91.97359085083009]).addTo(map);
+
+        var m_icon = L.icon({
+            iconUrl: '/content/img/marker-icon.png',
+            shadowUrl: '/content/img/marker-shadow.png'
+        });
+
+        L.marker([34.99784454433927, -91.98272109031679], {icon: m_icon}).addTo(map);   
+
+        map.on('click', (e) =>
+        {
+            console.log(e.latlng);
+        });
+
+    })();
+    
+</script>
+```
+
+## Features
 
 Bundled with:
 
@@ -21,7 +118,7 @@ Bundled with:
 - Support for GPX, GeoTIFF, and omnivore formats
 - Plugin-rich with drawing, context menu, and raster support
 
-### 🧱 Leaflet Core & Plugins
+### Leaflet Core & Plugins
 - `leaflet` (1.9.4)
 - `leaflet-contextmenu`
 - `leaflet-draw`
