@@ -288,6 +288,19 @@ if(debug)
   // const rc = new L.RasterCoords(map, [width, height]);
   // map.setMaxZoom(rc.zoomLevel());
   // map.setView(rc.unproject([width, height]), rc.zoomLevel()-1);
+
+  const allLayers = [];
+
+  for (const id in map._layers)
+  {
+    if (map._layers.hasOwnProperty(id))
+    {
+      const layer = map._layers[id];
+      allLayers.push(layer);
+    }
+  }
+
+  console.log(allLayers);
 }
 
 
