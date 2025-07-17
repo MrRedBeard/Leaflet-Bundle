@@ -1,4 +1,4 @@
-let debug = true;
+let debug = false;
 
 window.global = window;
 
