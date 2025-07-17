@@ -2,7 +2,7 @@
   "name": "leaflet-bundle",
   "sideEffects": true,
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/MrRedBeard/Leaflet-Bundle",
   "description": "Bundled Leaflet with Plugins and some minor quality of life improvements",
   "main": "src/main.js",
