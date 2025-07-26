@@ -157,13 +157,13 @@ Bundled with:
 - `github:VictorVelarde/Leaflet.CanvasLayer.Field`
     - https://github.com/IHCantabria/Leaflet.CanvasLayer.Field
 
-### 💾 Offline Tile Caching
+### Offline Tile Caching
 - Powered by [`leaflet.tilelayer.pouchdbcached`](https://github.com/MrRedBeard/Leaflet.TileLayer.PouchDBCached)
 - Transparent integration with OpenStreetMap or any XYZ tile provider
 - Tiles are saved to IndexedDB via PouchDB
 - pouchdb is bundled in
 
-### 📈 Elevation Control
+### Elevation Control
 - Uses a customized fork of [`leaflet-elevation`](https://github.com/Raruto/leaflet-elevation.git)
 - Handlers include:
   - `Altitude`, `Distance`, `Time`, `Heart`, `Cadence`, `Runner`, `Slope`, `Speed`, `Temperature`, `Acceleration`, `Pace`, `LinearGradient`, `Labels`
@@ -204,4 +204,4 @@ npm run build
 
 ## Links
 
-* GitHub: [MrRedBeard/Leaflet-Bundle](https://github.com/MrRedBeard/Leaflet-Bundle)
+* GitHub: [MrRedBeard/Leaflet-Bundle](https://github.com/MrRedBeard/Leaflet-Bundle)S
