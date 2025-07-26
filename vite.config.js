@@ -40,7 +40,8 @@ const sharedOutputOptions = {
   dir: 'dist/',
   globals: {
     leaflet: 'L',
-    'pouchdb-browser': 'PouchDB'
+    'pouchdb-browser': 'PouchDB',
+    'LeafletPathDrag': 'LeafletPathDrag'
   }
 };
 
@@ -92,6 +93,7 @@ export default defineConfig({
       'proj4-fully-loaded',
       'pouchdb-browser',
       'leaflet.tilelayer.pouchdbcached',
+      'LeafletPathDrag',
       'xdim',
     ],
     //exclude: ['xdim', 'quick-scale'],
@@ -137,6 +139,7 @@ export default defineConfig({
             'proj4',
             'pouchdb-browser',
             'leaflet.tilelayer.pouchdbcached',
+            'LeafletPathDrag',
             'leaflet-path-drag',
             'xdim',
             'quickScale'

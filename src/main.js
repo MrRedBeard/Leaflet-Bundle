@@ -15,6 +15,7 @@ if (typeof window !== 'undefined')
 
 import PouchDB from 'pouchdb-browser';
 window.PouchDB = PouchDB;
+
 import pouchPlugin from 'leaflet.tilelayer.pouchdbcached';
 
 //var L = Leaflet;
@@ -47,7 +48,10 @@ window.L.tileLayer.pouchDBCached = Leaflet.tileLayer.pouchDBCached;
 
 import 'leaflet-rastercoords';
 import 'leaflet-gpx';
+
 import LeafletPathDrag from 'leaflet-path-drag';
+window.LeafletPathDrag = LeafletPathDrag;
+
 import omnivore from '@mapbox/leaflet-omnivore';
 import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import parseGeoraster from 'georaster';
