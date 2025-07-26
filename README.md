@@ -1,5 +1,7 @@
 # Leaflet Bundle
 
+A modern build of Leaflet with bundled plugins and optional elevation, GPX, local caching, and Geoman controls.
+
 [`Leaflet`](https://leafletjs.com/) 
 
 [`Leaflet on Github`](https://github.com/Leaflet/Leaflet) 
@@ -13,11 +15,23 @@ Got tired of manually patching paths and dealing with dead plugin projects and w
 ---
 
 ## Usage
+```JS
+npm install
 ```
+
+### Node Module
+```JS
+import L from './dist/leaflet_bundle.esm.js';
+```
+
+### ESM
+```
+import L from './dist/leaflet_bundle.esm.js';
+```
+
+```html
 <link rel="stylesheet" href="/content/css/leaflet-bundle.css">
 <script src="/content/js/leaflet_bundle.iife.js"></script>
-
-  
 
 <script>
     (() =>
@@ -120,14 +134,28 @@ Bundled with:
 
 ### Leaflet Core & Plugins
 - `leaflet` (1.9.4)
-- `leaflet-contextmenu`
+- `leaflet-contextmenu` 
+    - https://github.com/aratcliffe/Leaflet.contextmenu
 - `leaflet-draw`
+    - https://github.com/Leaflet/Leaflet.draw/
 - `leaflet-gpx`
+    - https://github.com/mpetazzoni/leaflet-gpx
+- `Leaflet.Elevation`
+    - https://github.com/MrMufflon/Leaflet.Elevation
+- `github:MrRedBeard/Leaflet.Path.Drag`
+    - npm install github:MrRedBeard/Leaflet.Path.Drag
+- `github:MrRedBeard/Leaflet.TileLayer.PouchDBCached`
+    - npm install github:MrRedBeard/Leaflet.TileLayer.PouchDBCached
 - `@geoman-io/leaflet-geoman-free`
+    - https://github.com/geoman-io/leaflet-geoman
 - `@mapbox/leaflet-omnivore`
+    - https://github.com/mapbox/leaflet-omnivore
 - `leaflet-rastercoords`
+    - https://github.com/commenthol/leaflet-rastercoords
 - `georaster-layer-for-leaflet`
+    - https://github.com/geotiff/georaster-layer-for-leaflet
 - `github:VictorVelarde/Leaflet.CanvasLayer.Field`
+    - https://github.com/IHCantabria/Leaflet.CanvasLayer.Field
 
 ### 💾 Offline Tile Caching
 - Powered by [`leaflet.tilelayer.pouchdbcached`](https://github.com/MrRedBeard/Leaflet.TileLayer.PouchDBCached)
@@ -162,3 +190,18 @@ npm run build
 ### leaflet-elevation https://github.com/Raruto/leaflet-elevation
 `chmod +x install-leaflet-elevation.sh
 ./install-leaflet-elevation.sh`
+
+---
+
+## Notes
+
+* Uses `globalThis.process` polyfill for better Node emulation
+* Uses quick-scale and xdim wrappers for compatibility
+* Tile caching works with OpenStreetMap or any standard tile source
+* Map is debug-initialized only when `debug = true` in `main.js`
+
+---
+
+## Links
+
+* GitHub: [MrRedBeard/Leaflet-Bundle](https://github.com/MrRedBeard/Leaflet-Bundle)

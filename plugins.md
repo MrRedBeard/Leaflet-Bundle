@@ -1,5 +1,6 @@
 - Context Menu https://github.com/aratcliffe/Leaflet.contextmenu
 - Leaflet.TileLayer.PouchDBCached https://github.com/MrRedBeard/Leaflet.TileLayer.PouchDBCached
+- Leaflet.Path.Drag https://github.com/MrRedBeard/Leaflet.Path.Drag
 - leaflet-geoman https://github.com/geoman-io/leaflet-geoman
 - Leaflet.CanvasLayer.Field https://github.com/IHCantabria/Leaflet.CanvasLayer.Field
 - Leaflet.Elevation https://github.com/MrMufflon/Leaflet.Elevation

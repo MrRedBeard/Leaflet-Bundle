@@ -1,3 +1,10 @@
+# 0.1.0 (2025-07-26)
+* Proper module setup
+* Updated build process
+* Updated documentation
+* Updates
+* Added leaflet-path-drag to the bundle
+
 # 0.0.2 (2025-07-17)
 
 * Confirmed working offline

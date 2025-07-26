@@ -47,6 +47,7 @@ window.L.tileLayer.pouchDBCached = Leaflet.tileLayer.pouchDBCached;
 
 import 'leaflet-rastercoords';
 import 'leaflet-gpx';
+import LeafletPathDrag from 'leaflet-path-drag';
 import omnivore from '@mapbox/leaflet-omnivore';
 import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import parseGeoraster from 'georaster';
@@ -157,7 +158,7 @@ if(debug)
   /** @type {L.Map} */
   const map = L.map('map',
   {
-    center: [40.0, -90.0],
+    center: [34.99717163817537, -91.98252260684968],
     zoom: 5,
 
     contextmenu: true,
@@ -179,15 +180,28 @@ if(debug)
         callback: () => map.zoomOut()
       }
     ]
-  });
+  }).setView([34.99697374179657, -91.98339700698854], 18);
   /*** Initialize leaflet end ***/
+
+  map.on('pm:create', e =>
+  {
+    if (e.layer.dragging) 
+    {
+      e.layer.dragging.enable();
+    }
+  });
+
+  LeafletPathDrag.enable();
+
   /***************************************************************************************/
+
   /*** leaflet base map start ***/
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
   /*** leaflet base map end ***/
+
   /*** leaflet local caching start ***/
   const tileLayer = L.tileLayer.pouchDBCached(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -201,8 +215,10 @@ if(debug)
   );
   tileLayer.addTo(map);
   /*** leaflet local caching end ***/
+
   /*** leaflet controls start ***/
-  map.pm.addControls({
+  map.pm.addControls(
+  {
     position: 'topleft',
     drawCircle: true,
     drawMarker: true,
@@ -212,14 +228,45 @@ if(debug)
     cutPolygon: true,
   });
   /*** leaflet controls end ***/
+
   /*** leaflet GPX start ***/
-  new L.GPX('/content/data/test.gpx', {
-    async: true,
-    marker_options: { startIconUrl: 'start.png' }
-  }).on('loaded', function(e)
-  {
-    map.fitBounds(e.target.getBounds());
+  // new L.GPX('/content/data/test.gpx',
+  // {
+  //   async: true,
+  //   marker_options: { startIconUrl: 'start.png' }
+  // }).on('loaded', function(e)
+  // {
+  //   map.fitBounds(e.target.getBounds());
+  // }).addTo(map);
+
+  const latlngs = [
+    [34.99697374179657, -91.98339700698854],
+    [34.99745212321335, -91.98250098329999],
+    [34.99715311329774, -91.98208272457124],
+    [34.996827650708546, -91.98265135288239],
+    [34.997056331333724, -91.98305373326761]
+  ];
+
+  const polygon = L.polygon(latlngs, {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.4,
+    weight: 3,
+    draggable: true,
+    interactive: true
   }).addTo(map);
+
+  polygon.makeDraggable();
+
+  map.on('click', (e) =>
+  {
+      // 'e' is the event object, and 'e.latlng' contains the clicked coordinates
+      var lat = e.latlng.lat;
+      var lng = e.latlng.lng;
+
+      // Log the coordinates to the console
+      console.log(lat + ", " + lng);
+  });
 
   /*** leaflet GPX end ***/
   /*** omnivore start ***/

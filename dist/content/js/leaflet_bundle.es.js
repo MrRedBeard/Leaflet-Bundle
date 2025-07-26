@@ -1,4 +1,5 @@
 import "xdim";
+/*! Leaflet Bundle v0.1.0 | https://github.com/MrRedBeard/Leaflet-Bundle */
 function FT(t, r) {
   for (var n = 0; n < r.length; n++) {
     const i = r[n];
@@ -12056,6 +12057,7 @@ function ZI(t) {
   };
 }
 qn.plugin(lI).plugin(mI).plugin(RI).plugin(ZI);
+/*! LeafletPouchDBCached v1.0.3 */
 var D5 = typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : {};
 function cP() {
   throw new Error("setTimeout has not been defined");
@@ -17894,16 +17896,20 @@ L.TileLayer.PouchDBCached = L.TileLayer.extend(
     }
   }
 );
-HTMLCanvasElement.prototype.toBlob || Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
-  value: function(t, r, n) {
-    var i = this.toDataURL(r, n).split(",")[1];
-    setTimeout(function() {
-      for (var e = atob(i), o = e.length, l = new Uint8Array(o), s = 0; s < o; s++)
-        l[s] = e.charCodeAt(s);
-      t(new Blob([l], { type: r || "image/png" }));
-    });
+HTMLCanvasElement.prototype.toBlob || Object.defineProperty(
+  HTMLCanvasElement.prototype,
+  "toBlob",
+  {
+    value: function(t, r, n) {
+      var i = this.toDataURL(r, n).split(",")[1];
+      setTimeout(function() {
+        for (var e = atob(i), o = e.length, l = new Uint8Array(o), s = 0; s < o; s++)
+          l[s] = e.charCodeAt(s);
+        t(new Blob([l], { type: r || "image/png" }));
+      });
+    }
   }
-});
+);
 L.TileLayer.addInitHook(function() {
   if (!this.options.useCache) {
     this._db = null;
@@ -17916,173 +17922,188 @@ L.TileLayer.prototype.options.saveToCache = !0;
 L.TileLayer.prototype.options.useOnlyCache = !1;
 L.TileLayer.prototype.options.cacheFormat = "image/png";
 L.TileLayer.prototype.options.cacheMaxAge = 24 * 3600 * 1e3;
-L.TileLayer.PouchDBCached.include({
-  // Overwrites L.TileLayer.prototype.createTile
-  createTile: function(t, r) {
-    var n = document.createElement("img");
-    n.onerror = L.bind(this._tileOnError, this, r, n), this.options.crossOrigin && (n.crossOrigin = ""), n.alt = "";
-    var i = this.getTileUrl(t), e = this._maskURL(i);
-    return this.options.useCache ? this._db.get(
-      e,
-      { revs_info: !0 },
-      this._onCacheLookup(n, i, r)
-    ) : (n.onload = L.bind(this._tileOnLoad, this, r, n), n.src = i), n;
-  },
-  _maskURL: function(t) {
-    if (this.options.cacheURLMask) {
-      var r = t.replace(this.options.cacheURLMask, "");
-      return r;
-    }
-    return t;
-  },
-  // Returns a callback (closure over tile/key/originalSrc) to be run when the DB
-  //   backend is finished with a fetch operation.
-  _onCacheLookup: function(t, r, n) {
-    return (function(i, e) {
-      return e ? this._onCacheHit(t, r, e, n) : this._onCacheMiss(t, r, n);
-    }).bind(this);
-  },
-  _onCacheHit: function(t, r, n, i) {
-    this.fire("tilecachehit", {
-      tile: t,
-      url: r
-    }), this._db.getAttachment(n._id, "tile").then(
-      (function(e) {
-        var o = URL.createObjectURL(e);
-        Date.now() > n.timestamp + this.options.cacheMaxAge && !this.options.useOnlyCache ? (console.log("Tile is too old: ", r), this.options.saveToCache && (t.onload = L.bind(
-          this._saveTile,
-          this,
-          t,
-          r,
-          n._revs_info[0].rev,
-          i
-        )), t.crossOrigin = "Anonymous", t.src = r, t.onerror = function(l) {
-          this.src = o;
-        }) : (t.onload = L.bind(this._tileOnLoad, this, i, t), t.src = o);
-      }).bind(this)
-    );
-  },
-  _onCacheMiss: function(t, r, n) {
-    this.fire("tilecachemiss", {
-      tile: t,
-      url: r
-    }), this.options.useOnlyCache ? (t.onload = L.Util.falseFn, t.src = L.Util.emptyImageUrl) : (this.options.saveToCache ? t.onload = L.bind(
-      this._saveTile,
-      this,
-      t,
-      r,
-      void 0,
-      n
-    ) : t.onload = L.bind(this._tileOnLoad, this, n, t), t.crossOrigin = "Anonymous", t.src = r);
-  },
-  // Async'ly saves the tile as a PouchDB attachment
-  // Will run the done() callback (if any) when finished.
-  _saveTile: function(t, r, n, i) {
-    if (this.options.saveToCache) {
-      var e = document.createElement("canvas");
-      e.width = t.naturalWidth || t.width, e.height = t.naturalHeight || t.height;
-      var o = e.getContext("2d");
-      o.drawImage(t, 0, 0);
-      var l = this.options.cacheFormat;
-      e.toBlob(
-        (function(s) {
-          var c = this._maskURL(r);
-          this._db.put({
-            _id: c,
-            _rev: n,
-            timestamp: Date.now()
-          }).then(
-            (function(h) {
-              return this._db.putAttachment(
-                c,
-                "tile",
-                h.rev,
-                s,
-                l
-              );
-            }).bind(this)
-          ).then(function(h) {
-            i && i();
-          }).catch(function() {
-            i && i();
-          });
-        }).bind(this),
-        l
+L.TileLayer.PouchDBCached.include(
+  {
+    // Overwrites L.TileLayer.prototype.createTile
+    createTile: function(t, r) {
+      var n = document.createElement("img");
+      n.onerror = L.bind(this._tileOnError, this, r, n), this.options.crossOrigin && (n.crossOrigin = ""), n.alt = "";
+      var i = this.getTileUrl(t), e = this._maskURL(i);
+      return this.options.useCache ? this._db.get(
+        e,
+        { revs_info: !0 },
+        this._onCacheLookup(n, i, r)
+      ) : (n.onload = L.bind(this._tileOnLoad, this, r, n), n.src = i), n;
+    },
+    _maskURL: function(t) {
+      if (this.options.cacheURLMask) {
+        var r = t.replace(this.options.cacheURLMask, "");
+        return r;
+      }
+      return t;
+    },
+    // Returns a callback (closure over tile/key/originalSrc) to be run when the DB
+    //   backend is finished with a fetch operation.
+    _onCacheLookup: function(t, r, n) {
+      return (function(i, e) {
+        return e ? this._onCacheHit(t, r, e, n) : this._onCacheMiss(t, r, n);
+      }).bind(this);
+    },
+    _onCacheHit: function(t, r, n, i) {
+      this.fire(
+        "tilecachehit",
+        {
+          tile: t,
+          url: r
+        }
+      ), this._db.getAttachment(n._id, "tile").then(
+        (function(e) {
+          var o = URL.createObjectURL(e);
+          Date.now() > n.timestamp + this.options.cacheMaxAge && !this.options.useOnlyCache ? (console.log("Tile is too old: ", r), this.options.saveToCache && (t.onload = L.bind(
+            this._saveTile,
+            this,
+            t,
+            r,
+            n._revs_info[0].rev,
+            i
+          )), t.crossOrigin = "Anonymous", t.src = r, t.onerror = function(l) {
+            this.src = o;
+          }) : (t.onload = L.bind(this._tileOnLoad, this, i, t), t.src = o);
+        }).bind(this)
+      );
+    },
+    _onCacheMiss: function(t, r, n) {
+      this.fire(
+        "tilecachemiss",
+        {
+          tile: t,
+          url: r
+        }
+      ), this.options.useOnlyCache ? (t.onload = L.Util.falseFn, t.src = L.Util.emptyImageUrl) : (this.options.saveToCache ? t.onload = L.bind(
+        this._saveTile,
+        this,
+        t,
+        r,
+        void 0,
+        n
+      ) : t.onload = L.bind(this._tileOnLoad, this, n, t), t.crossOrigin = "Anonymous", t.src = r);
+    },
+    // Async'ly saves the tile as a PouchDB attachment
+    // Will run the done() callback (if any) when finished.
+    _saveTile: function(t, r, n, i) {
+      if (this.options.saveToCache) {
+        var e = document.createElement("canvas");
+        e.width = t.naturalWidth || t.width, e.height = t.naturalHeight || t.height;
+        var o = e.getContext("2d");
+        o.drawImage(t, 0, 0);
+        var l = this.options.cacheFormat;
+        e.toBlob(
+          (function(s) {
+            var c = this._maskURL(r);
+            this._db.put(
+              {
+                _id: c,
+                _rev: n,
+                timestamp: Date.now()
+              }
+            ).then(
+              (function(h) {
+                return this._db.putAttachment(
+                  c,
+                  "tile",
+                  h.rev,
+                  s,
+                  l
+                );
+              }).bind(this)
+            ).then(function(h) {
+              i && i();
+            }).catch(function() {
+              i && i();
+            });
+          }).bind(this),
+          l
+        );
+      }
+    },
+    // 🍂section PouchDB tile caching methods
+    // 🍂method seed(bbox: LatLngBounds, minZoom: Number, maxZoom: Number): this
+    // Starts seeding the cache given a bounding box and the minimum/maximum zoom levels
+    // Use with care! This can spawn thousands of requests and flood tileservers!
+    seed: function(t, r, n) {
+      if (this.options.useCache && !(r > n) && this._map) {
+        for (var i = [], e = r; e <= n; e++)
+          for (var o = this._map.project(t.getNorthEast(), e), l = this._map.project(t.getSouthWest(), e), s = this._pxBoundsToTileRange(
+            L.bounds([o, l])
+          ), c = s.min.y; c <= s.max.y; c++)
+            for (var h = s.min.x; h <= s.max.x; h++) {
+              var d = new L.Point(h, c);
+              d.z = e, i.push(this._getTileUrl(d));
+            }
+        var u = {
+          bbox: t,
+          minZoom: r,
+          maxZoom: n,
+          queueLength: i.length
+        };
+        this.fire("seedstart", u);
+        var p = this._createTile();
+        return p._layer = this, this._seedOneTile(p, i, u), this;
+      }
+    },
+    _createTile: function() {
+      return document.createElement("img");
+    },
+    // Modified L.TileLayer.getTileUrl, this will use the zoom given by the parameter coords
+    //  instead of the maps current zoomlevel.
+    _getTileUrl: function(t) {
+      var r = t.z;
+      return this.options.zoomReverse && (r = this.options.maxZoom - r), r += this.options.zoomOffset, L.Util.template(
+        this._url,
+        L.extend(
+          {
+            r: this.options.detectRetina && L.Browser.retina && this.options.maxZoom > 0 ? "@2x" : "",
+            s: this._getSubdomain(t),
+            x: t.x,
+            y: this.options.tms ? this._globalTileRange.max.y - t.y : t.y,
+            z: this.options.maxNativeZoom ? Math.min(r, this.options.maxNativeZoom) : r
+          },
+          this.options
+        )
+      );
+    },
+    // Uses a defined tile to eat through one item in the queue and
+    //   asynchronously recursively call itself when the tile has
+    //   finished loading.
+    _seedOneTile: function(t, r, n) {
+      if (!r.length) {
+        this.fire("seedend", n);
+        return;
+      }
+      this.fire(
+        "seedprogress",
+        {
+          bbox: n.bbox,
+          minZoom: n.minZoom,
+          maxZoom: n.maxZoom,
+          queueLength: n.queueLength,
+          remainingLength: r.length
+        }
+      );
+      var i = r.shift();
+      this._db.get(
+        i,
+        (function(e, o) {
+          o ? this._seedOneTile(t, r, n) : (t.onerror = (function() {
+            console.warn("Tile failed to load:", i), this._seedOneTile(t, r, n);
+          }).bind(this), t.onload = (function(l) {
+            this._saveTile(t, i, null), this._seedOneTile(t, r, n);
+          }).bind(this), t.crossOrigin = "Anonymous", t.src = i);
+        }).bind(this)
       );
     }
-  },
-  // 🍂section PouchDB tile caching methods
-  // 🍂method seed(bbox: LatLngBounds, minZoom: Number, maxZoom: Number): this
-  // Starts seeding the cache given a bounding box and the minimum/maximum zoom levels
-  // Use with care! This can spawn thousands of requests and flood tileservers!
-  seed: function(t, r, n) {
-    if (this.options.useCache && !(r > n) && this._map) {
-      for (var i = [], e = r; e <= n; e++)
-        for (var o = this._map.project(t.getNorthEast(), e), l = this._map.project(t.getSouthWest(), e), s = this._pxBoundsToTileRange(
-          L.bounds([o, l])
-        ), c = s.min.y; c <= s.max.y; c++)
-          for (var h = s.min.x; h <= s.max.x; h++) {
-            var d = new L.Point(h, c);
-            d.z = e, i.push(this._getTileUrl(d));
-          }
-      var u = {
-        bbox: t,
-        minZoom: r,
-        maxZoom: n,
-        queueLength: i.length
-      };
-      this.fire("seedstart", u);
-      var p = this._createTile();
-      return p._layer = this, this._seedOneTile(p, i, u), this;
-    }
-  },
-  _createTile: function() {
-    return document.createElement("img");
-  },
-  // Modified L.TileLayer.getTileUrl, this will use the zoom given by the parameter coords
-  //  instead of the maps current zoomlevel.
-  _getTileUrl: function(t) {
-    var r = t.z;
-    return this.options.zoomReverse && (r = this.options.maxZoom - r), r += this.options.zoomOffset, L.Util.template(
-      this._url,
-      L.extend(
-        {
-          r: this.options.detectRetina && L.Browser.retina && this.options.maxZoom > 0 ? "@2x" : "",
-          s: this._getSubdomain(t),
-          x: t.x,
-          y: this.options.tms ? this._globalTileRange.max.y - t.y : t.y,
-          z: this.options.maxNativeZoom ? Math.min(r, this.options.maxNativeZoom) : r
-        },
-        this.options
-      )
-    );
-  },
-  // Uses a defined tile to eat through one item in the queue and
-  //   asynchronously recursively call itself when the tile has
-  //   finished loading.
-  _seedOneTile: function(t, r, n) {
-    if (!r.length) {
-      this.fire("seedend", n);
-      return;
-    }
-    this.fire("seedprogress", {
-      bbox: n.bbox,
-      minZoom: n.minZoom,
-      maxZoom: n.maxZoom,
-      queueLength: n.queueLength,
-      remainingLength: r.length
-    });
-    var i = r.shift();
-    this._db.get(
-      i,
-      (function(e, o) {
-        o ? this._seedOneTile(t, r, n) : (t.onload = (function(l) {
-          this._saveTile(t, i, null), this._seedOneTile(t, r, n);
-        }).bind(this), t.crossOrigin = "Anonymous", t.src = i);
-      }).bind(this)
-    );
   }
-});
+);
 L.tileLayer.pouchDBCached = function(t, r) {
   return new L.TileLayer.PouchDBCached(t, r);
 };
@@ -30398,8 +30419,8 @@ function EW() {
             return typeof R == "number" && (rt = y(rt, { digits: R })), B && u(M) && (rt += "i"), rt;
           }
           if (V === "-" && nt) {
-            const rt = "1", G = _(g, o(M));
-            return s(rt, G, { ellipsis: A, max_decimal_digits: R });
+            const G = _(g, o(M));
+            return s("1", G, { ellipsis: A, max_decimal_digits: R });
           }
           if (!nt) {
             M = o(M);

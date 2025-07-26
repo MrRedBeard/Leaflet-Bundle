@@ -3,8 +3,11 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import commonjs from '@rollup/plugin-commonjs';
 import path from 'node:path';
+import { readFileSync } from 'fs';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
+const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url)));
+const banner = `/*! Leaflet Bundle v${pkg.version} | ${pkg.homepage} */`;
 
 import quickScale from 'quick-scale';
 const createScaleFunction = quickScale.createScaleFunction;
@@ -134,6 +137,7 @@ export default defineConfig({
             'proj4',
             'pouchdb-browser',
             'leaflet.tilelayer.pouchdbcached',
+            'leaflet-path-drag',
             'xdim',
             'quickScale'
             // /plugins\/.*\.js/
@@ -148,17 +152,21 @@ export default defineConfig({
       output: [
         {
           ...sharedOutputOptions,
-          format: 'es'
+          format: 'esm',
+          name: 'leaflet_bundle',
+          banner
         },
         {
           ...sharedOutputOptions,
           format: 'umd',
           name: 'leaflet_bundle',
+          banner
         },
         {
           ...sharedOutputOptions,
           format: 'iife',
-          name: 'leaflet_bundle'
+          name: 'leaflet_bundle',
+          banner
         }
       ]
     }

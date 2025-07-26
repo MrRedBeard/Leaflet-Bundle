@@ -2,16 +2,19 @@
   "name": "leaflet-bundle",
   "sideEffects": true,
   "private": true,
-  "version": "0.0.2",
+  "version": "0.1.0",
   "homepage": "https://github.com/MrRedBeard/Leaflet-Bundle",
   "description": "Bundled Leaflet with Plugins and some minor quality of life improvements",
-  "main": "src/main.js",
   "type": "module",
+  "main": "./dist/leaflet_bundle.umd.js",
+  "module": "./dist/leaflet_bundle.esm.js",
   "exports": {
-    "./src/": "./src/",
-    "./dist/": "./dist/",
-    ".": "./dist/content/js/leaflet_bundle.min.js"
+    "import": "./dist/leaflet_bundle.esm.js",
+    "require": "./dist/leaflet_bundle.umd.js"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/MrRedBeard/Leaflet-Bundle.git"
@@ -45,6 +48,7 @@
     "leaflet-contextmenu": "^1.4.0",
     "leaflet-draw": "^1.0.4",
     "leaflet-gpx": "^2.2.0",
+    "leaflet-path-drag": "github:MrRedBeard/Leaflet.Path.Drag",
     "leaflet-rastercoords": "^1.0.6",
     "leaflet.tilelayer.pouchdbcached": "github:MrRedBeard/Leaflet.TileLayer.PouchDBCached",
     "process": "^0.11.10",
