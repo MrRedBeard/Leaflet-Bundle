@@ -1,3 +1,6 @@
+# 0.1.2 (2025-08-02)
+* Rebuilt a fork of Leaflet.contextmenu and replaced the one in the bundle [https://github.com/MrRedBeard/Leaflet.contextmenu](https://github.com/MrRedBeard/Leaflet.contextmenu)
+
 # 0.1.1 (2025-07-26)
 * Woops - added LeafletPathDrag to include and to window context
 

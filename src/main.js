@@ -1,4 +1,4 @@
-let debug = false;
+let debug = true;
 
 window.global = window;
 
@@ -7,6 +7,8 @@ import './leaflet-overrides.css';
 
 //import * as Leaflet from 'leaflet'
 import L from 'leaflet';
+
+import '@geoman-io/leaflet-geoman-free';
 
 if (typeof window !== 'undefined')
 {
@@ -52,6 +54,9 @@ import 'leaflet-gpx';
 import LeafletPathDrag from 'leaflet-path-drag';
 window.LeafletPathDrag = LeafletPathDrag;
 
+// import 'leaflet-snap';
+// window.SnapMixin = L.SnapMixin;
+
 import omnivore from '@mapbox/leaflet-omnivore';
 import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import parseGeoraster from 'georaster';
@@ -59,16 +64,22 @@ import './plugins/canvaslayerfield/leaflet.canvaslayer.field.js';
 
 /************************************************/
 
+import leafletContextmenu from 'leaflet-contextmenu';
+import '../node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css';
+L.Map.addInitHook('addHandler', 'contextmenu', LeafletContextMenu);
+window.leafletContextmenu = leafletContextmenu;
+
 // THEN load Geoman
 import 'leaflet-draw';
-import 'leaflet-contextmenu';
-import 'leaflet-contextmenu/dist/leaflet.contextmenu.css';
-import '@geoman-io/leaflet-geoman-free';
+import '../node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css';
+// import '@geoman-io/leaflet-geoman-free';
 import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css';
 
 // THEN register
 import { registerGeomanPlugin } from './register-geoman-plugin.js';
+window.registerGeomanPlugin = registerGeomanPlugin;
 registerGeomanPlugin(Leaflet);
+console.log(Leaflet.PM)
 
 /************************************************/
 
@@ -96,7 +107,11 @@ window.chroma = chroma;
 
 //ToDo: come back to elevation
 import * as ElevationHandlers from './ElevationHandlers.js';
-L.Control.Elevation.Handlers ||= {};
+// if(typeof L.Control.Elevation === 'undefined')
+// {
+//   L.Control.Elevation = {};
+//   L.Control.Elevation.Handlers = {};
+// }
 
 import './plugins/leaflet-elevation/src/leaflet-elevation.js';
 import './plugins/leaflet-elevation/src/leaflet-elevation.css';
@@ -110,49 +125,49 @@ import './plugins/leaflet-elevation/src/leaflet-elevation.css';
 // 		L.Control.Elevation.Handlers[inst.name] = handlerFn;
 // 	}
 // }
-L.Control.Elevation.prototype._loadModules = async function ()
-{
-	const handlerMap = {
-		distance: ElevationHandlers.Distance,
-		altitude: ElevationHandlers.Altitude,
-		acceleration: ElevationHandlers.Acceleration,
-		time: ElevationHandlers.Time,
-		speed: ElevationHandlers.Speed,
-		slope: ElevationHandlers.Slope,
-		labels: ElevationHandlers.Labels,
-		heart: ElevationHandlers.Heart,
-		temperature: ElevationHandlers.Temperature,
-		pace: ElevationHandlers.Pace,
-		cadence: ElevationHandlers.Cadence,
-		runner: ElevationHandlers.Runner,
-		lineargradient: ElevationHandlers.LinearGradient
-	};
-	this.options.handlers = this.options.handlers.map(name =>
-	{
-		const fn = typeof name === 'string' ? handlerMap[name.toLowerCase()] : name;
+// L.Control.Elevation.prototype._loadModules = async function ()
+// {
+// 	const handlerMap = {
+// 		distance: ElevationHandlers.Distance,
+// 		altitude: ElevationHandlers.Altitude,
+// 		acceleration: ElevationHandlers.Acceleration,
+// 		time: ElevationHandlers.Time,
+// 		speed: ElevationHandlers.Speed,
+// 		slope: ElevationHandlers.Slope,
+// 		labels: ElevationHandlers.Labels,
+// 		heart: ElevationHandlers.Heart,
+// 		temperature: ElevationHandlers.Temperature,
+// 		pace: ElevationHandlers.Pace,
+// 		cadence: ElevationHandlers.Cadence,
+// 		runner: ElevationHandlers.Runner,
+// 		lineargradient: ElevationHandlers.LinearGradient
+// 	};
+// 	this.options.handlers = this.options.handlers.map(name =>
+// 	{
+// 		const fn = typeof name === 'string' ? handlerMap[name.toLowerCase()] : name;
 
-		if (!fn || typeof fn !== 'function')
-		{
-			console.warn(`Unknown or missing elevation handler: "${name}"`);
-			return null;
-		}
+// 		if (!fn || typeof fn !== 'function')
+// 		{
+// 			console.warn(`Unknown or missing elevation handler: "${name}"`);
+// 			return null;
+// 		}
 
-		return fn;
-	}).filter(Boolean);
+// 		return fn;
+// 	}).filter(Boolean);
 
-  L.Control.Elevation.Utils = L.Control.Elevation.Utils || {};
-  L.Control.Elevation.Utils.iMax = Math.max;
-  L.Control.Elevation.Utils.iMin = Math.min;
-  L.Control.Elevation.Utils.iAvg = function (arr)
-  {
-    return arr && arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
-  };
-  // L._ = window._;
-};
-(() =>
-{
-  L.Control.Elevation.prototype._loadModules();
-})();
+//   L.Control.Elevation.Utils = L.Control.Elevation.Utils || {};
+//   L.Control.Elevation.Utils.iMax = Math.max;
+//   L.Control.Elevation.Utils.iMin = Math.min;
+//   L.Control.Elevation.Utils.iAvg = function (arr)
+//   {
+//     return arr && arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+//   };
+//   // L._ = window._;
+// };
+// (() =>
+// {
+//   L.Control.Elevation.prototype._loadModules();
+// })();
 /*** leaflet-elevation end ***/
 /***************************************************************************************/
 
@@ -175,6 +190,14 @@ if(debug)
       {
         separator: true
       },
+      {
+        text: 'Connections',
+        submenu: [
+          { text: 'Add Connection', iconCls: 'kfi-magnify-alt', callback: () => console.log('Add') },
+          { text: 'Remove Connection', iconCls: 'kfi-math-plus', callback: () => console.log('Remove') }
+        ]
+      }, 
+      '-',
       {
         text: 'Zoom in',
         callback: () => map.zoomIn()
@@ -271,6 +294,23 @@ if(debug)
       // Log the coordinates to the console
       console.log(lat + ", " + lng);
   });
+
+  const marker1 = L.marker(new L.LatLng(34.997056331333724, -91.98305373326761)).addTo(map);
+
+  map.contextmenu.bindContextMenuToLayer(marker1, [
+    {
+        separator: true
+    },
+    {
+      text: 'Marker item',
+      callback: (e) => alert('Marker 1 right-clicked')
+    }
+  ], { inherit: true });
+
+
+  /************************************************************************/
+
+
 
   /*** leaflet GPX end ***/
   /*** omnivore start ***/
