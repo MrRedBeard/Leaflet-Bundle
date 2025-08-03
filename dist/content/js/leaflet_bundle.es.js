@@ -1281,12 +1281,12 @@ function kP() {
       var kr = "_leaflet_events";
       function vn(o, f, g, P) {
         if (arguments.length === 1)
-          ls(o), delete o[kr];
+          as(o), delete o[kr];
         else if (f && typeof f == "object")
           for (var R in f)
             ai(o, R, f[R], g);
         else if (f = y(f), arguments.length === 2)
-          ls(o, function(Lt) {
+          as(o, function(Lt) {
             return C(f, Lt) !== -1;
           });
         else
@@ -1294,7 +1294,7 @@ function kP() {
             ai(o, f[J], g, P);
         return this;
       }
-      function ls(o, f) {
+      function as(o, f) {
         for (var g in o[kr]) {
           var P = g.split(/\d/)[0];
           (!f || f(P)) && ai(o, P, null, null, g);
@@ -1356,11 +1356,11 @@ function kP() {
           (o.clientY - P.top) / g.y - f.clientTop
         );
       }
-      var Ss = $.linux && $.chrome ? window.devicePixelRatio : $.mac ? window.devicePixelRatio * 3 : window.devicePixelRatio > 0 ? 2 * window.devicePixelRatio : 1;
+      var Es = $.linux && $.chrome ? window.devicePixelRatio : $.mac ? window.devicePixelRatio * 3 : window.devicePixelRatio > 0 ? 2 * window.devicePixelRatio : 1;
       function Ho(o) {
         return $.edge ? o.wheelDeltaY / 2 : (
           // Don't trust window-geometry-based delta
-          o.deltaY && o.deltaMode === 0 ? -o.deltaY / Ss : (
+          o.deltaY && o.deltaMode === 0 ? -o.deltaY / Es : (
             // Pixels
             o.deltaY && o.deltaMode === 1 ? -o.deltaY * 20 : (
               // Lines
@@ -1623,7 +1623,7 @@ function kP() {
           o = nt(o), f = f === void 0 ? dt : f;
           var Lt = Math.max(J.x, J.y), Rt = Lt * this.getZoomScale(dt, f), Vt = R.distanceTo(P) || 1, be = 1.42, Se = be * be;
           function qe(Tn) {
-            var po = Tn ? -1 : 1, il = Tn ? Rt : Lt, Ki = Rt * Rt - Lt * Lt + po * Se * Se * Vt * Vt, ol = 2 * il * Se * Vt, _o = Ki / ol, Is = Math.sqrt(_o * _o + 1) - _o, sl = Is < 1e-9 ? -18 : Math.log(Is);
+            var po = Tn ? -1 : 1, il = Tn ? Rt : Lt, Ki = Rt * Rt - Lt * Lt + po * Se * Se * Vt * Vt, ol = 2 * il * Se * Vt, _o = Ki / ol, Os = Math.sqrt(_o * _o + 1) - _o, sl = Os < 1e-9 ? -18 : Math.log(Os);
             return sl;
           }
           function Vn(Tn) {
@@ -1642,12 +1642,12 @@ function kP() {
           function ta(Tn) {
             return Lt * (xn(jn) * mr(jn + be * Tn) - Vn(jn)) / Se;
           }
-          function Os(Tn) {
+          function As(Tn) {
             return 1 - Math.pow(1 - Tn, 1.5);
           }
           var Oa = Date.now(), ts = (qe(1) - jn) / be, rl = g.duration ? 1e3 * g.duration : 1e3 * ts * 0.8;
           function ea() {
-            var Tn = (Date.now() - Oa) / rl, po = Os(Tn) * ts;
+            var Tn = (Date.now() - Oa) / rl, po = As(Tn) * ts;
             Tn <= 1 ? (this._flyToFrame = U(ea, this), this._move(
               this.unproject(P.add(R.subtract(P).multiplyBy(ta(po) / Vt)), dt),
               this.getScaleZoom(Lt / ci(po), dt),
@@ -2743,7 +2743,7 @@ function kP() {
       Cr.addTo = function(o, f) {
         return o.addHandler(f, this), this;
       };
-      var Lr = { Events: rt }, us = $.touch ? "touchstart mousedown" : "mousedown", Kr = ot.extend({
+      var Lr = { Events: rt }, ls = $.touch ? "touchstart mousedown" : "mousedown", Kr = ot.extend({
         options: {
           // @section
           // @aka Draggable options
@@ -2760,12 +2760,12 @@ function kP() {
         // @method enable()
         // Enables the dragging ability
         enable: function() {
-          this._enabled || (Ne(this._dragStartTarget, us, this._onDown, this), this._enabled = !0);
+          this._enabled || (Ne(this._dragStartTarget, ls, this._onDown, this), this._enabled = !0);
         },
         // @method disable()
         // Disables the dragging ability
         disable: function() {
-          this._enabled && (Kr._dragging === this && this.finishDrag(!0), vn(this._dragStartTarget, us, this._onDown, this), this._enabled = !1, this._moved = !1);
+          this._enabled && (Kr._dragging === this && this.finishDrag(!0), vn(this._dragStartTarget, ls, this._onDown, this), this._enabled = !1, this._moved = !1);
         },
         _onDown: function(o) {
           if (this._enabled && (this._moved = !1, !ar(this._element, "leaflet-zoom-anim"))) {
@@ -2808,7 +2808,7 @@ function kP() {
           });
         }
       });
-      function hs(o, f, g) {
+      function us(o, f, g) {
         var P, R = [1, 4, 2, 8], J, dt, Lt, Rt, Vt, be, Se, qe;
         for (J = 0, be = o.length; J < be; J++)
           o[J]._code = Ir(o[J], f);
@@ -2819,7 +2819,7 @@ function kP() {
         }
         return o;
       }
-      function cs(o, f) {
+      function hs(o, f) {
         var g, P, R, J, dt, Lt, Rt, Vt, be;
         if (!o || o.length === 0)
           throw new Error("latlngs not passed");
@@ -2846,11 +2846,11 @@ function kP() {
       }
       var Ys = {
         __proto__: null,
-        clipPolygon: hs,
-        polygonCenter: cs,
+        clipPolygon: us,
+        polygonCenter: hs,
         centroid: Po
       };
-      function fs(o, f) {
+      function cs(o, f) {
         if (!f || !o.length)
           return o.slice();
         var g = f * f;
@@ -2914,7 +2914,7 @@ function kP() {
       function pi(o) {
         return console.warn("Deprecated use of _flat, please use L.LineUtil.isFlat instead."), dr(o);
       }
-      function ds(o, f) {
+      function fs(o, f) {
         var g, P, R, J, dt, Lt, Rt, Vt;
         if (!o || o.length === 0)
           throw new Error("latlngs not passed");
@@ -2942,9 +2942,9 @@ function kP() {
         var jn = f.unproject(q(Vt));
         return nt([jn.lat + be.lat, jn.lng + be.lng]);
       }
-      var ps = {
+      var ds = {
         __proto__: null,
-        simplify: fs,
+        simplify: cs,
         pointToSegmentDistance: Vo,
         closestPointOnSegment: $s,
         clipSegment: yr,
@@ -2953,7 +2953,7 @@ function kP() {
         _sqClosestPointOnSegment: Ui,
         isFlat: dr,
         _flat: pi,
-        polylineCenter: ds
+        polylineCenter: fs
       }, Ko = {
         project: function(o) {
           return new F(o.lng, o.lat);
@@ -2980,18 +2980,18 @@ function kP() {
         LonLat: Ko,
         Mercator: hi,
         SphericalMercator: H
-      }, _s = e({}, z, {
+      }, ps = e({}, z, {
         code: "EPSG:3395",
         projection: hi,
         transformation: function() {
           var o = 0.5 / (Math.PI * hi.R);
           return ft(o, 0.5, -o, 0.5);
         }()
-      }), ms = e({}, z, {
+      }), _s = e({}, z, {
         code: "EPSG:4326",
         projection: Ko,
         transformation: ft(1 / 180, 1, -1 / 180, 0.5)
-      }), Cs = e({}, V, {
+      }), Ss = e({}, V, {
         projection: Ko,
         transformation: ft(1, 0, -1, 0),
         scale: function(o) {
@@ -3006,7 +3006,7 @@ function kP() {
         },
         infinite: !0
       });
-      V.Earth = z, V.EPSG3395 = _s, V.EPSG3857 = bt, V.EPSG900913 = Dt, V.EPSG4326 = ms, V.Simple = Cs;
+      V.Earth = z, V.EPSG3395 = ps, V.EPSG3857 = bt, V.EPSG900913 = Dt, V.EPSG4326 = _s, V.Simple = Ss;
       var pr = ot.extend({
         // Classes extending `L.Layer` will inherit the following options:
         options: {
@@ -3835,7 +3835,7 @@ function kP() {
         getCenter: function() {
           if (!this._map)
             throw new Error("Must add layer to map before using getCenter()");
-          return ds(this._defaultShape(), this._map.options.crs);
+          return fs(this._defaultShape(), this._map.options.crs);
         },
         // @method getBounds(): LatLngBounds
         // Returns the `LatLngBounds` of the path.
@@ -3900,7 +3900,7 @@ function kP() {
         // simplify each clipped part of the polyline for performance
         _simplifyPoints: function() {
           for (var o = this._parts, f = this.options.smoothFactor, g = 0, P = o.length; g < P; g++)
-            o[g] = fs(o[g], f);
+            o[g] = cs(o[g], f);
         },
         _update: function() {
           this._map && (this._clipPoints(), this._simplifyPoints(), this._updatePath());
@@ -3920,7 +3920,7 @@ function kP() {
           return !1;
         }
       });
-      function gs(o, f) {
+      function ms(o, f) {
         return new Wn(o, f);
       }
       Wn._flat = pi;
@@ -3936,7 +3936,7 @@ function kP() {
         getCenter: function() {
           if (!this._map)
             throw new Error("Must add layer to map before using getCenter()");
-          return cs(this._defaultShape(), this._map.options.crs);
+          return hs(this._defaultShape(), this._map.options.crs);
         },
         _convertLatLngs: function(o) {
           var f = Wn.prototype._convertLatLngs.call(this, o), g = f.length;
@@ -3956,7 +3956,7 @@ function kP() {
               return;
             }
             for (var P = 0, R = this._rings.length, J; P < R; P++)
-              J = hs(this._rings[P], o, !0), J.length && this._parts.push(J);
+              J = us(this._rings[P], o, !0), J.length && this._parts.push(J);
           }
         },
         _updatePath: function() {
@@ -4067,10 +4067,10 @@ function kP() {
           return null;
         switch (g.type) {
           case "Point":
-            return Lt = dt(P), Ps(J, o, Lt, f);
+            return Lt = dt(P), Cs(J, o, Lt, f);
           case "MultiPoint":
             for (Vt = 0, be = P.length; Vt < be; Vt++)
-              Lt = dt(P[Vt]), R.push(Ps(J, o, Lt, f));
+              Lt = dt(P[Vt]), R.push(Cs(J, o, Lt, f));
             return new zr(R);
           case "LineString":
           case "MultiLineString":
@@ -4098,7 +4098,7 @@ function kP() {
             throw new Error("Invalid GeoJSON object.");
         }
       }
-      function Ps(o, f, g, P) {
+      function Cs(o, f, g, P) {
         return o ? o(f, g) : new so(g, P && P.markersInheritOptions && P);
       }
       function To(o) {
@@ -4359,7 +4359,7 @@ function kP() {
       function Js(o, f, g) {
         return new Io(o, f, g);
       }
-      var Ts = Hi.extend({
+      var Ps = Hi.extend({
         _initImage: function() {
           var o = this._image = this._url;
           Ae(o, "leaflet-image-layer"), this._zoomAnimated && Ae(o, "leaflet-zoom-animated"), this.options.className && Ae(o, this.options.className), o.onselectstart = h, o.onmousemove = h;
@@ -4369,7 +4369,7 @@ function kP() {
         // used by this overlay.
       });
       function Ma(o, f, g) {
-        return new Ts(o, f, g);
+        return new Ps(o, f, g);
       }
       var Ur = pr.extend({
         // @section
@@ -4907,7 +4907,7 @@ function kP() {
           this._tooltip.options.sticky && o.originalEvent && (g = this._map.mouseEventToContainerPoint(o.originalEvent), P = this._map.containerPointToLayerPoint(g), f = this._map.layerPointToLatLng(P)), this._tooltip.setLatLng(f);
         }
       });
-      var As = wi.extend({
+      var Ts = wi.extend({
         options: {
           // @section
           // @aka DivIcon options
@@ -4937,7 +4937,7 @@ function kP() {
         }
       });
       function Ca(o) {
-        return new As(o);
+        return new Ts(o);
       }
       wi.Default = qi;
       var Zi = pr.extend({
@@ -5463,7 +5463,7 @@ function kP() {
             return Zi.prototype._tileReady.call(this, o, f, g);
         }
       });
-      function vs(o, f) {
+      function gs(o, f) {
         return new Li(o, f);
       }
       var Xo = Li.extend({
@@ -5515,7 +5515,7 @@ function kP() {
           this.wmsParams[f] = this._crs.code, Li.prototype.onAdd.call(this, o);
         },
         getTileUrl: function(o) {
-          var f = this._tileCoordsToNwSe(o), g = this._crs, P = K(g.project(f[0]), g.project(f[1])), R = P.min, J = P.max, dt = (this._wmsVersion >= 1.3 && this._crs === ms ? [R.y, R.x, J.y, J.x] : [R.x, R.y, J.x, J.y]).join(","), Lt = Li.prototype.getTileUrl.call(this, o);
+          var f = this._tileCoordsToNwSe(o), g = this._crs, P = K(g.project(f[0]), g.project(f[1])), R = P.min, J = P.max, dt = (this._wmsVersion >= 1.3 && this._crs === _s ? [R.y, R.x, J.y, J.x] : [R.x, R.y, J.x, J.y]).join(","), Lt = Li.prototype.getTileUrl.call(this, o);
           return Lt + E(this.wmsParams, Lt, this.options.uppercase) + (this.options.uppercase ? "&BBOX=" : "&bbox=") + dt;
         },
         // @method setParams(params: Object, noRedraw?: Boolean): this
@@ -5527,7 +5527,7 @@ function kP() {
       function Ta(o, f) {
         return new Xo(o, f);
       }
-      Li.WMS = Xo, vs.wms = Ta;
+      Li.WMS = Xo, gs.wms = Ta;
       var Wr = pr.extend({
         // @section
         // @aka Renderer options
@@ -5582,7 +5582,7 @@ function kP() {
           var o = this.options.padding, f = this._map.getSize(), g = this._map.containerPointToLayerPoint(f.multiplyBy(-o)).round();
           this._bounds = new j(g, g.add(f.multiplyBy(1 + o * 2)).round()), this._center = this._map.getCenter(), this._zoom = this._map.getZoom();
         }
-      }), ys = Wr.extend({
+      }), vs = Wr.extend({
         // @section
         // @aka Canvas options
         options: {
@@ -5767,7 +5767,7 @@ function kP() {
         }
       });
       function Qo(o) {
-        return $.canvas ? new ys(o) : null;
+        return $.canvas ? new vs(o) : null;
       }
       var Wi = function() {
         try {
@@ -5888,7 +5888,7 @@ function kP() {
           return this.options.preferCanvas && Qo(o) || $r(o);
         }
       });
-      var bs = to.extend({
+      var ys = to.extend({
         initialize: function(o, f) {
           to.prototype.initialize.call(this, this._boundsToLatLngs(o), f);
         },
@@ -5907,7 +5907,7 @@ function kP() {
         }
       });
       function Mi(o, f) {
-        return new bs(o, f);
+        return new ys(o, f);
       }
       Dr.create = Vi, Dr.pointsToPath = Ft, rr.geometryToLayer = ao, rr.coordsToLatLng = To, rr.coordsToLatLngs = lo, rr.latLngToCoords = Ao, rr.latLngsToCoords = uo, rr.getFeature = xi, rr.asFeature = ho, Ze.mergeOptions({
         // @option boxZoom: Boolean = true
@@ -6350,7 +6350,7 @@ function kP() {
           this._zooming = !1, N(this._animRequest), vn(document, "touchmove", this._onTouchMove, this), vn(document, "touchend touchcancel", this._onTouchEnd, this), this._map.options.zoomAnimation ? this._map._animateZoom(this._center, this._map._limitZoom(this._zoom), !0, this._map.options.zoomSnap) : this._map._resetView(this._center, this._map._limitZoom(this._zoom));
         }
       });
-      Ze.addInitHook("addHandler", "touchZoom", oi), Ze.BoxZoom = En, Ze.DoubleClickZoom = Mr, Ze.Drag = fo, Ze.Keyboard = br, Ze.ScrollWheelZoom = Pn, Ze.TapHold = ii, Ze.TouchZoom = oi, n.Bounds = j, n.Browser = $, n.CRS = V, n.Canvas = ys, n.Circle = Xs, n.CircleMarker = Zn, n.Class = X, n.Control = pn, n.DivIcon = As, n.DivOverlay = Ur, n.DomEvent = Co, n.DomUtil = nl, n.Draggable = Kr, n.Evented = ot, n.FeatureGroup = zr, n.GeoJSON = rr, n.GridLayer = Zi, n.Handler = Cr, n.Icon = wi, n.ImageOverlay = Hi, n.LatLng = pt, n.LatLngBounds = ut, n.Layer = pr, n.LayerGroup = bi, n.LineUtil = ps, n.Map = Ze, n.Marker = so, n.Mixin = Lr, n.Path = Yr, n.Point = F, n.PolyUtil = Ys, n.Polygon = to, n.Polyline = Wn, n.Popup = ki, n.PosAnimation = Zo, n.Projection = Di, n.Rectangle = bs, n.Renderer = Wr, n.SVG = Dr, n.SVGOverlay = Ts, n.TileLayer = Li, n.Tooltip = co, n.Transformation = et, n.Util = Y, n.VideoOverlay = Io, n.bind = l, n.bounds = K, n.canvas = Qo, n.circle = Pr, n.circleMarker = Rr, n.control = ui, n.divIcon = Ca, n.extend = e, n.featureGroup = wa, n.geoJSON = $o, n.geoJson = Qs, n.gridLayer = Pa, n.icon = xa, n.imageOverlay = La, n.latLng = nt, n.latLngBounds = Z, n.layerGroup = ba, n.map = tu, n.marker = ka, n.point = q, n.polygon = ur, n.polyline = gs, n.popup = Ea, n.rectangle = Mi, n.setOptions = A, n.stamp = c, n.svg = $r, n.svgOverlay = Ma, n.tileLayer = vs, n.tooltip = Sa, n.transformation = ft, n.version = i, n.videoOverlay = Js;
+      Ze.addInitHook("addHandler", "touchZoom", oi), Ze.BoxZoom = En, Ze.DoubleClickZoom = Mr, Ze.Drag = fo, Ze.Keyboard = br, Ze.ScrollWheelZoom = Pn, Ze.TapHold = ii, Ze.TouchZoom = oi, n.Bounds = j, n.Browser = $, n.CRS = V, n.Canvas = vs, n.Circle = Xs, n.CircleMarker = Zn, n.Class = X, n.Control = pn, n.DivIcon = Ts, n.DivOverlay = Ur, n.DomEvent = Co, n.DomUtil = nl, n.Draggable = Kr, n.Evented = ot, n.FeatureGroup = zr, n.GeoJSON = rr, n.GridLayer = Zi, n.Handler = Cr, n.Icon = wi, n.ImageOverlay = Hi, n.LatLng = pt, n.LatLngBounds = ut, n.Layer = pr, n.LayerGroup = bi, n.LineUtil = ds, n.Map = Ze, n.Marker = so, n.Mixin = Lr, n.Path = Yr, n.Point = F, n.PolyUtil = Ys, n.Polygon = to, n.Polyline = Wn, n.Popup = ki, n.PosAnimation = Zo, n.Projection = Di, n.Rectangle = ys, n.Renderer = Wr, n.SVG = Dr, n.SVGOverlay = Ps, n.TileLayer = Li, n.Tooltip = co, n.Transformation = et, n.Util = Y, n.VideoOverlay = Io, n.bind = l, n.bounds = K, n.canvas = Qo, n.circle = Pr, n.circleMarker = Rr, n.control = ui, n.divIcon = Ca, n.extend = e, n.featureGroup = wa, n.geoJSON = $o, n.geoJson = Qs, n.gridLayer = Pa, n.icon = xa, n.imageOverlay = La, n.latLng = nt, n.latLngBounds = Z, n.layerGroup = ba, n.map = tu, n.marker = ka, n.point = q, n.polygon = ur, n.polyline = ms, n.popup = Ea, n.rectangle = Mi, n.setOptions = A, n.stamp = c, n.svg = $r, n.svgOverlay = Ma, n.tileLayer = gs, n.tooltip = Sa, n.transformation = ft, n.version = i, n.videoOverlay = Js;
       var Jo = window.L;
       n.noConflict = function() {
         return window.L = Jo, this;
@@ -6359,9 +6359,9 @@ function kP() {
   }(im, im.exports)), im.exports;
 }
 var Hr = kP();
-const Tu = /* @__PURE__ */ ma(Hr), WA = /* @__PURE__ */ HA({
+const C1 = /* @__PURE__ */ ma(Hr), WA = /* @__PURE__ */ HA({
   __proto__: null,
-  default: Tu
+  default: C1
 }, [Hr]);
 var XE = {}, QE;
 function VA() {
@@ -7921,7 +7921,7 @@ function VA() {
       }
       return !1;
     } });
-    var ar = { version: "2.18.3" }, Ae = c(ee()), Be = { tooltips: { placeMarker: "Click to place marker", firstVertex: "Click to place first vertex", continueLine: "Click to continue drawing", finishLine: "Click any existing marker to finish", finishPoly: "Click first marker to finish", finishRect: "Click to finish", startCircle: "Click to place circle center", finishCircle: "Click to finish circle", placeCircleMarker: "Click to place circle marker", placeText: "Click to place text", selectFirstLayerFor: "Select first layer for {action}", selectSecondLayerFor: "Select second layer for {action}" }, actions: { finish: "Finish", cancel: "Cancel", removeLastVertex: "Remove Last Vertex" }, buttonTitles: { drawMarkerButton: "Draw Marker", drawPolyButton: "Draw Polygons", drawLineButton: "Draw Polyline", drawCircleButton: "Draw Circle", drawRectButton: "Draw Rectangle", editButton: "Edit Layers", dragButton: "Drag Layers", cutButton: "Cut Layers", deleteButton: "Remove Layers", drawCircleMarkerButton: "Draw Circle Marker", snappingButton: "Snap dragged marker to other layers and vertices", pinningButton: "Pin shared vertices together", rotateButton: "Rotate Layers", drawTextButton: "Draw Text", scaleButton: "Scale Layers", autoTracingButton: "Auto trace Line", snapGuidesButton: "Show SnapGuides", unionButton: "Union layers", differenceButton: "Subtract layers" }, measurements: { totalLength: "Length", segmentLength: "Segment length", area: "Area", radius: "Radius", perimeter: "Perimeter", height: "Height", width: "Width", coordinates: "Position", coordinatesMarker: "Position Marker" } }, mn = { tooltips: { placeMarker: "Platziere den Marker mit Klick", firstVertex: "Platziere den ersten Marker mit Klick", continueLine: "Klicke, um weiter zu zeichnen", finishLine: "Beende mit Klick auf existierenden Marker", finishPoly: "Beende mit Klick auf ersten Marker", finishRect: "Beende mit Klick", startCircle: "Platziere das Kreiszentrum mit Klick", finishCircle: "Beende den Kreis mit Klick", placeCircleMarker: "Platziere den Kreismarker mit Klick", placeText: "Platziere den Text mit Klick" }, actions: { finish: "Beenden", cancel: "Abbrechen", removeLastVertex: "Letzten Vertex löschen" }, buttonTitles: { drawMarkerButton: "Marker zeichnen", drawPolyButton: "Polygon zeichnen", drawLineButton: "Polyline zeichnen", drawCircleButton: "Kreis zeichnen", drawRectButton: "Rechteck zeichnen", editButton: "Layer editieren", dragButton: "Layer bewegen", cutButton: "Layer schneiden", deleteButton: "Layer löschen", drawCircleMarkerButton: "Kreismarker zeichnen", snappingButton: "Bewegter Layer an andere Layer oder Vertexe einhacken", pinningButton: "Vertexe an der gleichen Position verknüpfen", rotateButton: "Layer drehen", drawTextButton: "Text zeichnen", scaleButton: "Layer skalieren", autoTracingButton: "Linie automatisch nachzeichen" }, measurements: { totalLength: "Länge", segmentLength: "Segment Länge", area: "Fläche", radius: "Radius", perimeter: "Umfang", height: "Höhe", width: "Breite", coordinates: "Position", coordinatesMarker: "Position Marker" } }, yn = { tooltips: { placeMarker: "Clicca per posizionare un Marker", firstVertex: "Clicca per posizionare il primo vertice", continueLine: "Clicca per continuare a disegnare", finishLine: "Clicca qualsiasi marker esistente per terminare", finishPoly: "Clicca il primo marker per terminare", finishRect: "Clicca per terminare", startCircle: "Clicca per posizionare il punto centrale del cerchio", finishCircle: "Clicca per terminare il cerchio", placeCircleMarker: "Clicca per posizionare un Marker del cherchio" }, actions: { finish: "Termina", cancel: "Annulla", removeLastVertex: "Rimuovi l'ultimo vertice" }, buttonTitles: { drawMarkerButton: "Disegna Marker", drawPolyButton: "Disegna Poligoni", drawLineButton: "Disegna Polilinea", drawCircleButton: "Disegna Cerchio", drawRectButton: "Disegna Rettangolo", editButton: "Modifica Livelli", dragButton: "Sposta Livelli", cutButton: "Ritaglia Livelli", deleteButton: "Elimina Livelli", drawCircleMarkerButton: "Disegna Marker del Cerchio", snappingButton: "Snap ha trascinato il pennarello su altri strati e vertici", pinningButton: "Pin condiviso vertici insieme", rotateButton: "Ruota livello" } }, Xe = { tooltips: { placeMarker: "Klik untuk menempatkan marker", firstVertex: "Klik untuk menempatkan vertex pertama", continueLine: "Klik untuk meneruskan digitasi", finishLine: "Klik pada sembarang marker yang ada untuk mengakhiri", finishPoly: "Klik marker pertama untuk mengakhiri", finishRect: "Klik untuk mengakhiri", startCircle: "Klik untuk menempatkan titik pusat lingkaran", finishCircle: "Klik untuk mengakhiri lingkaran", placeCircleMarker: "Klik untuk menempatkan penanda lingkarann" }, actions: { finish: "Selesai", cancel: "Batal", removeLastVertex: "Hilangkan Vertex Terakhir" }, buttonTitles: { drawMarkerButton: "Digitasi Marker", drawPolyButton: "Digitasi Polygon", drawLineButton: "Digitasi Polyline", drawCircleButton: "Digitasi Lingkaran", drawRectButton: "Digitasi Segi Empat", editButton: "Edit Layer", dragButton: "Geser Layer", cutButton: "Potong Layer", deleteButton: "Hilangkan Layer", drawCircleMarkerButton: "Digitasi Penanda Lingkaran", snappingButton: "Jepretkan penanda yang ditarik ke lapisan dan simpul lain", pinningButton: "Sematkan simpul bersama bersama", rotateButton: "Putar lapisan" } }, cr = { tooltips: { placeMarker: "Adaugă un punct", firstVertex: "Apasă aici pentru a adăuga primul Vertex", continueLine: "Apasă aici pentru a continua desenul", finishLine: "Apasă pe orice obiect pentru a finisa desenul", finishPoly: "Apasă pe primul obiect pentru a finisa", finishRect: "Apasă pentru a finisa", startCircle: "Apasă pentru a desena un cerc", finishCircle: "Apasă pentru a finisa un cerc", placeCircleMarker: "Adaugă un punct" }, actions: { finish: "Termină", cancel: "Anulează", removeLastVertex: "Șterge ultimul Vertex" }, buttonTitles: { drawMarkerButton: "Adaugă o bulină", drawPolyButton: "Desenează un poligon", drawLineButton: "Desenează o linie", drawCircleButton: "Desenează un cerc", drawRectButton: "Desenează un dreptunghi", editButton: "Editează straturile", dragButton: "Mută straturile", cutButton: "Taie straturile", deleteButton: "Șterge straturile", drawCircleMarkerButton: "Desenează marcatorul cercului", snappingButton: "Fixați marcatorul glisat pe alte straturi și vârfuri", pinningButton: "Fixați vârfurile partajate împreună", rotateButton: "Rotiți stratul" } }, Ye = { tooltips: { placeMarker: "Нажмите, чтобы нанести маркер", firstVertex: "Нажмите, чтобы нанести первый объект", continueLine: "Нажмите, чтобы продолжить рисование", finishLine: "Нажмите любой существующий маркер для завершения", finishPoly: "Выберите первую точку, чтобы закончить", finishRect: "Нажмите, чтобы закончить", startCircle: "Нажмите, чтобы добавить центр круга", finishCircle: "Нажмите, чтобы задать радиус", placeCircleMarker: "Нажмите, чтобы нанести круговой маркер" }, actions: { finish: "Завершить", cancel: "Отменить", removeLastVertex: "Отменить последнее действие" }, buttonTitles: { drawMarkerButton: "Добавить маркер", drawPolyButton: "Рисовать полигон", drawLineButton: "Рисовать кривую", drawCircleButton: "Рисовать круг", drawRectButton: "Рисовать прямоугольник", editButton: "Редактировать слой", dragButton: "Перенести слой", cutButton: "Вырезать слой", deleteButton: "Удалить слой", drawCircleMarkerButton: "Добавить круговой маркер", snappingButton: "Привязать перетаскиваемый маркер к другим слоям и вершинам", pinningButton: "Связать общие точки вместе", rotateButton: "Поворот слоя" } }, Qe = { tooltips: { placeMarker: "Presiona para colocar un marcador", firstVertex: "Presiona para colocar el primer vértice", continueLine: "Presiona para continuar dibujando", finishLine: "Presiona cualquier marcador existente para finalizar", finishPoly: "Presiona el primer marcador para finalizar", finishRect: "Presiona para finalizar", startCircle: "Presiona para colocar el centro del círculo", finishCircle: "Presiona para finalizar el círculo", placeCircleMarker: "Presiona para colocar un marcador de círculo" }, actions: { finish: "Finalizar", cancel: "Cancelar", removeLastVertex: "Eliminar último vértice" }, buttonTitles: { drawMarkerButton: "Dibujar Marcador", drawPolyButton: "Dibujar Polígono", drawLineButton: "Dibujar Línea", drawCircleButton: "Dibujar Círculo", drawRectButton: "Dibujar Rectángulo", editButton: "Editar Capas", dragButton: "Arrastrar Capas", cutButton: "Cortar Capas", deleteButton: "Eliminar Capas", drawCircleMarkerButton: "Dibujar Marcador de Círculo", snappingButton: "El marcador de Snap arrastrado a otras capas y vértices", pinningButton: "Fijar juntos los vértices compartidos", rotateButton: "Rotar capa" } }, dn = { tooltips: { placeMarker: "Klik om een marker te plaatsen", firstVertex: "Klik om het eerste punt te plaatsen", continueLine: "Klik om te blijven tekenen", finishLine: "Klik op een bestaand punt om te beëindigen", finishPoly: "Klik op het eerst punt om te beëindigen", finishRect: "Klik om te beëindigen", startCircle: "Klik om het middelpunt te plaatsen", finishCircle: "Klik om de cirkel te beëindigen", placeCircleMarker: "Klik om een marker te plaatsen" }, actions: { finish: "Bewaar", cancel: "Annuleer", removeLastVertex: "Verwijder laatste punt" }, buttonTitles: { drawMarkerButton: "Plaats Marker", drawPolyButton: "Teken een vlak", drawLineButton: "Teken een lijn", drawCircleButton: "Teken een cirkel", drawRectButton: "Teken een vierkant", editButton: "Bewerk", dragButton: "Verplaats", cutButton: "Knip", deleteButton: "Verwijder", drawCircleMarkerButton: "Plaats Marker", snappingButton: "Snap gesleepte marker naar andere lagen en hoekpunten", pinningButton: "Speld gedeelde hoekpunten samen", rotateButton: "Laag roteren" } }, Mn = { tooltips: { placeMarker: "Cliquez pour placer un marqueur", firstVertex: "Cliquez pour placer le premier sommet", continueLine: "Cliquez pour continuer à dessiner", finishLine: "Cliquez sur n'importe quel marqueur pour terminer", finishPoly: "Cliquez sur le premier marqueur pour terminer", finishRect: "Cliquez pour terminer", startCircle: "Cliquez pour placer le centre du cercle", finishCircle: "Cliquez pour finir le cercle", placeCircleMarker: "Cliquez pour placer le marqueur circulaire" }, actions: { finish: "Terminer", cancel: "Annuler", removeLastVertex: "Retirer le dernier sommet" }, buttonTitles: { drawMarkerButton: "Placer des marqueurs", drawPolyButton: "Dessiner des polygones", drawLineButton: "Dessiner des polylignes", drawCircleButton: "Dessiner un cercle", drawRectButton: "Dessiner un rectangle", editButton: "Éditer des calques", dragButton: "Déplacer des calques", cutButton: "Couper des calques", deleteButton: "Supprimer des calques", drawCircleMarkerButton: "Dessiner un marqueur circulaire", snappingButton: "Glisser le marqueur vers d'autres couches et sommets", pinningButton: "Épingler ensemble les sommets partagés", rotateButton: "Tourner des calques" } }, Cn = { tooltips: { placeMarker: "单击放置标记", firstVertex: "单击放置首个顶点", continueLine: "单击继续绘制", finishLine: "单击任何存在的标记以完成", finishPoly: "单击第一个标记以完成", finishRect: "单击完成", startCircle: "单击放置圆心", finishCircle: "单击完成圆形", placeCircleMarker: "点击放置圆形标记" }, actions: { finish: "完成", cancel: "取消", removeLastVertex: "移除最后的顶点" }, buttonTitles: { drawMarkerButton: "绘制标记", drawPolyButton: "绘制多边形", drawLineButton: "绘制线段", drawCircleButton: "绘制圆形", drawRectButton: "绘制长方形", editButton: "编辑图层", dragButton: "拖拽图层", cutButton: "剪切图层", deleteButton: "删除图层", drawCircleMarkerButton: "画圆圈标记", snappingButton: "将拖动的标记捕捉到其他图层和顶点", pinningButton: "将共享顶点固定在一起", rotateButton: "旋转图层" } }, Br = { tooltips: { placeMarker: "單擊放置標記", firstVertex: "單擊放置第一個頂點", continueLine: "單擊繼續繪製", finishLine: "單擊任何存在的標記以完成", finishPoly: "單擊第一個標記以完成", finishRect: "單擊完成", startCircle: "單擊放置圓心", finishCircle: "單擊完成圓形", placeCircleMarker: "點擊放置圓形標記" }, actions: { finish: "完成", cancel: "取消", removeLastVertex: "移除最後一個頂點" }, buttonTitles: { drawMarkerButton: "放置標記", drawPolyButton: "繪製多邊形", drawLineButton: "繪製線段", drawCircleButton: "繪製圓形", drawRectButton: "繪製方形", editButton: "編輯圖形", dragButton: "移動圖形", cutButton: "裁切圖形", deleteButton: "刪除圖形", drawCircleMarkerButton: "畫圓圈標記", snappingButton: "將拖動的標記對齊到其他圖層和頂點", pinningButton: "將共享頂點固定在一起", rotateButton: "旋轉圖形" } }, ei = { tooltips: { placeMarker: "Clique para posicionar o marcador", firstVertex: "Clique para posicionar o primeiro vértice", continueLine: "Clique para continuar desenhando", finishLine: "Clique em qualquer marcador existente para finalizar", finishPoly: "Clique no primeiro marcador para finalizar", finishRect: "Clique para finalizar", startCircle: "Clique para posicionar o centro do círculo", finishCircle: "Clique para finalizar o círculo", placeCircleMarker: "Clique para posicionar o marcador circular", placeText: "Clique para inserir texto" }, actions: { finish: "Finalizar", cancel: "Cancelar", removeLastVertex: "Remover último vértice" }, buttonTitles: { drawMarkerButton: "Desenhar Marcador", drawPolyButton: "Desenhar Polígonos", drawLineButton: "Desenhar Linha Poligonal", drawCircleButton: "Desenhar Círculo", drawRectButton: "Desenhar Retângulo", editButton: "Editar Camadas", dragButton: "Arrastar Camadas", cutButton: "Recortar Camadas", deleteButton: "Remover Camadas", drawCircleMarkerButton: "Desenhar Marcador de Círculo", snappingButton: "Ajustar marcador arrastado a outras camadas e vértices", pinningButton: "Unir vértices compartilhados", rotateButton: "Rotacionar Camadas", drawTextButton: "Desenhar Texto", scaleButton: "Redimensionar Camadas", autoTracingButton: "Traçado Automático de Linha" }, measurements: { totalLength: "Comprimento", segmentLength: "Comprimento do Segmento", area: "Área", radius: "Raio", perimeter: "Perímetro", height: "Altura", width: "Largura", coordinates: "Posição", coordinatesMarker: "Marcador de Posição" } }, Or = { tooltips: { placeMarker: "Clique para colocar marcador", firstVertex: "Clique para colocar primeiro vértice", continueLine: "Clique para continuar a desenhar", finishLine: "Clique num marcador existente para terminar", finishPoly: "Clique no primeiro marcador para terminar", finishRect: "Clique para terminar", startCircle: "Clique para colocar o centro do círculo", finishCircle: "Clique para terminar o círculo", placeCircleMarker: "Clique para colocar marcador de círculo", placeText: "Clique para colocar texto" }, actions: { finish: "Terminar", cancel: "Cancelar", removeLastVertex: "Remover Último Vértice" }, buttonTitles: { drawMarkerButton: "Desenhar Marcador", drawPolyButton: "Desenhar Polígonos", drawLineButton: "Desenhar Polilinha", drawCircleButton: "Desenhar Círculo", drawRectButton: "Desenhar Retângulo", editButton: "Editar Camadas", dragButton: "Arrastar Camadas", cutButton: "Cortar Camadas", deleteButton: "Remover Camadas", drawCircleMarkerButton: "Desenhar Marcador de Círculo", snappingButton: "Ajustar marcador arrastado a outras camadas e vértices", pinningButton: "Unir vértices partilhados", rotateButton: "Rodar Camadas", drawTextButton: "Desenhar Texto", scaleButton: "Escalar Camadas", autoTracingButton: "Traçado Automático de Linha" }, measurements: { totalLength: "Comprimento", segmentLength: "Comprimento do Segmento", area: "Área", radius: "Raio", perimeter: "Perímetro", height: "Altura", width: "Largura", coordinates: "Posição", coordinatesMarker: "Marcador de Posição" } }, Nr = { tooltips: { placeMarker: "Kliknij, aby umieścić znacznik", firstVertex: "Kliknij, aby umieścić pierwszy wierzchołek", continueLine: "Kliknij, aby kontynuować rysowanie", finishLine: "Kliknij dowolny istniejący znacznik, aby zakończyć", finishPoly: "Kliknij pierwszy znacznik, aby zakończyć", finishRect: "Kliknij, aby zakończyć", startCircle: "Kliknij, aby umieścić środek okręgu", finishCircle: "Kliknij, aby zakończyć okrąg", placeCircleMarker: "Kliknij, aby umieścić znacznik okręgu", placeText: "Kliknij, aby umieścić tekst" }, actions: { finish: "Zakończ", cancel: "Anuluj", removeLastVertex: "Usuń ostatni wierzchołek" }, buttonTitles: { drawMarkerButton: "Rysuj znacznik", drawPolyButton: "Rysuj wielokąt", drawLineButton: "Rysuj linię", drawCircleButton: "Rysuj okrąg", drawRectButton: "Rysuj prostokąt", editButton: "Edytuj warstwy", dragButton: "Przeciągnij warstwy", cutButton: "Wytnij warstwy", deleteButton: "Usuń warstwy", drawCircleMarkerButton: "Rysuj znacznik okrągły", snappingButton: "Przyciągnij przenoszony znacznik do innych warstw i wierzchołków", pinningButton: "Przypnij wspólne wierzchołki razem", rotateButton: "Obróć warstwy", drawTextButton: "Rysuj tekst", scaleButton: "Skaluj warstwy", autoTracingButton: "Automatyczne śledzenie linii" }, measurements: { totalLength: "Długość", segmentLength: "Długość odcinka", area: "Obszar", radius: "Promień", perimeter: "Obwód", height: "Wysokość", width: "Szerokość", coordinates: "Pozycja", coordinatesMarker: "Znacznik pozycji" } }, Zr = { tooltips: { placeMarker: "Klicka för att placera markör", firstVertex: "Klicka för att placera första hörnet", continueLine: "Klicka för att fortsätta rita", finishLine: "Klicka på en existerande punkt för att slutföra", finishPoly: "Klicka på den första punkten för att slutföra", finishRect: "Klicka för att slutföra", startCircle: "Klicka för att placera cirkelns centrum", finishCircle: "Klicka för att slutföra cirkeln", placeCircleMarker: "Klicka för att placera cirkelmarkör" }, actions: { finish: "Slutför", cancel: "Avbryt", removeLastVertex: "Ta bort sista hörnet" }, buttonTitles: { drawMarkerButton: "Rita Markör", drawPolyButton: "Rita Polygoner", drawLineButton: "Rita Linje", drawCircleButton: "Rita Cirkel", drawRectButton: "Rita Rektangel", editButton: "Redigera Lager", dragButton: "Dra Lager", cutButton: "Klipp i Lager", deleteButton: "Ta bort Lager", drawCircleMarkerButton: "Rita Cirkelmarkör", snappingButton: "Snäpp dra markören till andra lager och hörn", pinningButton: "Fäst delade hörn tillsammans", rotateButton: "Rotera lagret" } }, ni = { tooltips: { placeMarker: "Κάντε κλικ για να τοποθετήσετε Δείκτη", firstVertex: "Κάντε κλικ για να τοποθετήσετε το πρώτο σημείο", continueLine: "Κάντε κλικ για να συνεχίσετε να σχεδιάζετε", finishLine: "Κάντε κλικ σε οποιονδήποτε υπάρχον σημείο για να ολοκληρωθεί", finishPoly: "Κάντε κλικ στο πρώτο σημείο για να τελειώσετε", finishRect: "Κάντε κλικ για να τελειώσετε", startCircle: "Κάντε κλικ για να τοποθετήσετε κέντρο Κύκλου", finishCircle: "Κάντε κλικ για να ολοκληρώσετε τον Κύκλο", placeCircleMarker: "Κάντε κλικ για να τοποθετήσετε Κυκλικό Δείκτη" }, actions: { finish: "Τέλος", cancel: "Ακύρωση", removeLastVertex: "Κατάργηση τελευταίου σημείου" }, buttonTitles: { drawMarkerButton: "Σχεδίαση Δείκτη", drawPolyButton: "Σχεδίαση Πολυγώνου", drawLineButton: "Σχεδίαση Γραμμής", drawCircleButton: "Σχεδίαση Κύκλου", drawRectButton: "Σχεδίαση Ορθογωνίου", editButton: "Επεξεργασία Επιπέδων", dragButton: "Μεταφορά Επιπέδων", cutButton: "Αποκοπή Επιπέδων", deleteButton: "Κατάργηση Επιπέδων", drawCircleMarkerButton: "Σχεδίαση Κυκλικού Δείκτη", snappingButton: "Προσκόλληση του Δείκτη μεταφοράς σε άλλα Επίπεδα και Κορυφές", pinningButton: "Περικοπή κοινών κορυφών μαζί", rotateButton: "Περιστρέψτε το στρώμα" } }, ji = { tooltips: { placeMarker: "Kattintson a jelölő elhelyezéséhez", firstVertex: "Kattintson az első pont elhelyezéséhez", continueLine: "Kattintson a következő pont elhelyezéséhez", finishLine: "A befejezéshez kattintson egy meglévő pontra", finishPoly: "A befejezéshez kattintson az első pontra", finishRect: "Kattintson a befejezéshez", startCircle: "Kattintson a kör középpontjának elhelyezéséhez", finishCircle: "Kattintson a kör befejezéséhez", placeCircleMarker: "Kattintson a körjelölő elhelyezéséhez" }, actions: { finish: "Befejezés", cancel: "Mégse", removeLastVertex: "Utolsó pont eltávolítása" }, buttonTitles: { drawMarkerButton: "Jelölő rajzolása", drawPolyButton: "Poligon rajzolása", drawLineButton: "Vonal rajzolása", drawCircleButton: "Kör rajzolása", drawRectButton: "Négyzet rajzolása", editButton: "Elemek szerkesztése", dragButton: "Elemek mozgatása", cutButton: "Elemek vágása", deleteButton: "Elemek törlése", drawCircleMarkerButton: "Kör jelölő rajzolása", snappingButton: "Kapcsolja a jelöltőt másik elemhez vagy ponthoz", pinningButton: "Közös pontok összekötése", rotateButton: "Fólia elforgatása" } }, nn = { tooltips: { placeMarker: "Tryk for at placere en markør", firstVertex: "Tryk for at placere det første punkt", continueLine: "Tryk for at fortsætte linjen", finishLine: "Tryk på et eksisterende punkt for at afslutte", finishPoly: "Tryk på det første punkt for at afslutte", finishRect: "Tryk for at afslutte", startCircle: "Tryk for at placere cirklens center", finishCircle: "Tryk for at afslutte cirklen", placeCircleMarker: "Tryk for at placere en cirkelmarkør" }, actions: { finish: "Afslut", cancel: "Afbryd", removeLastVertex: "Fjern sidste punkt" }, buttonTitles: { drawMarkerButton: "Placer markør", drawPolyButton: "Tegn polygon", drawLineButton: "Tegn linje", drawCircleButton: "Tegn cirkel", drawRectButton: "Tegn firkant", editButton: "Rediger", dragButton: "Træk", cutButton: "Klip", deleteButton: "Fjern", drawCircleMarkerButton: "Tegn cirkelmarkør", snappingButton: "Fastgør trukket markør til andre elementer", pinningButton: "Sammenlæg delte elementer", rotateButton: "Roter laget" } }, Fi = { tooltips: { placeMarker: "Klikk for å plassere punkt", firstVertex: "Klikk for å plassere første punkt", continueLine: "Klikk for å tegne videre", finishLine: "Klikk på et eksisterende punkt for å fullføre", finishPoly: "Klikk første punkt for å fullføre", finishRect: "Klikk for å fullføre", startCircle: "Klikk for å sette sirkel midtpunkt", finishCircle: "Klikk for å fullføre sirkel", placeCircleMarker: "Klikk for å plassere sirkel", placeText: "Klikk for å plassere tekst" }, actions: { finish: "Fullfør", cancel: "Kanseller", removeLastVertex: "Fjern forrige punkt" }, buttonTitles: { drawMarkerButton: "Tegn punkt", drawPolyButton: "Tegn flate", drawLineButton: "Tegn linje", drawCircleButton: "Tegn sirkel", drawRectButton: "Tegn rektangel", editButton: "Rediger objekter", dragButton: "Dra objekter", cutButton: "Kutt objekter", deleteButton: "Fjern objekter", drawCircleMarkerButton: "Tegn sirkel-punkt", snappingButton: "Fest dratt punkt til andre objekter og punkt", pinningButton: "Pin delte punkter sammen", rotateButton: "Rotér objekter", drawTextButton: "Tegn tekst", scaleButton: "Skalér objekter", autoTracingButton: "Automatisk sporing av linje" }, measurements: { totalLength: "Lengde", segmentLength: "Segmentlengde", area: "Område", radius: "Radius", perimeter: "Omriss", height: "Høyde", width: "Bredde", coordinates: "Posisjon", coordinatesMarker: "Posisjonsmarkør" } }, Nn = { tooltips: { placeMarker: "کلیک برای جانمایی نشان", firstVertex: "کلیک برای رسم اولین رأس", continueLine: "کلیک برای ادامه رسم", finishLine: "کلیک روی هر نشان موجود برای پایان", finishPoly: "کلیک روی اولین نشان برای پایان", finishRect: "کلیک برای پایان", startCircle: "کلیک برای رسم مرکز دایره", finishCircle: "کلیک برای پایان رسم دایره", placeCircleMarker: "کلیک برای رسم نشان دایره", placeText: "کلیک برای نوشتن متن" }, actions: { finish: "پایان", cancel: "لفو", removeLastVertex: "حذف آخرین رأس" }, buttonTitles: { drawMarkerButton: "درج نشان", drawPolyButton: "رسم چندضلعی", drawLineButton: "رسم خط", drawCircleButton: "رسم دایره", drawRectButton: "رسم چهارضلعی", editButton: "ویرایش لایه‌ها", dragButton: "جابجایی لایه‌ها", cutButton: "برش لایه‌ها", deleteButton: "حذف لایه‌ها", drawCircleMarkerButton: "رسم نشان دایره", snappingButton: "نشانگر را به لایه‌ها و رئوس دیگر بکشید", pinningButton: "رئوس مشترک را با هم پین کنید", rotateButton: "چرخش لایه", drawTextButton: "رسم متن", scaleButton: "مقیاس‌گذاری", autoTracingButton: "ردیاب خودکار" }, measurements: { totalLength: "طول", segmentLength: "طول بخش", area: "ناحیه", radius: "شعاع", perimeter: "محیط", height: "ارتفاع", width: "عرض", coordinates: "موقعیت", coordinatesMarker: "موقعیت نشان" } }, qn = { tooltips: { placeMarker: "Натисніть, щоб нанести маркер", firstVertex: "Натисніть, щоб нанести першу вершину", continueLine: "Натисніть, щоб продовжити малювати", finishLine: "Натисніть будь-який існуючий маркер для завершення", finishPoly: "Виберіть перший маркер, щоб завершити", finishRect: "Натисніть, щоб завершити", startCircle: "Натисніть, щоб додати центр кола", finishCircle: "Натисніть, щоб завершити коло", placeCircleMarker: "Натисніть, щоб нанести круговий маркер" }, actions: { finish: "Завершити", cancel: "Відмінити", removeLastVertex: "Видалити попередню вершину" }, buttonTitles: { drawMarkerButton: "Малювати маркер", drawPolyButton: "Малювати полігон", drawLineButton: "Малювати криву", drawCircleButton: "Малювати коло", drawRectButton: "Малювати прямокутник", editButton: "Редагувати шари", dragButton: "Перенести шари", cutButton: "Вирізати шари", deleteButton: "Видалити шари", drawCircleMarkerButton: "Малювати круговий маркер", snappingButton: "Прив’язати перетягнутий маркер до інших шарів та вершин", pinningButton: "Зв'язати спільні вершини разом", rotateButton: "Повернути шар" } }, nl = { tooltips: { placeMarker: "İşaretçi yerleştirmek için tıklayın", firstVertex: "İlk tepe noktasını yerleştirmek için tıklayın", continueLine: "Çizime devam etmek için tıklayın", finishLine: "Bitirmek için mevcut herhangi bir işaretçiyi tıklayın", finishPoly: "Bitirmek için ilk işaretçiyi tıklayın", finishRect: "Bitirmek için tıklayın", startCircle: "Daire merkezine yerleştirmek için tıklayın", finishCircle: "Daireyi bitirmek için tıklayın", placeCircleMarker: "Daire işaretçisi yerleştirmek için tıklayın" }, actions: { finish: "Bitir", cancel: "İptal", removeLastVertex: "Son köşeyi kaldır" }, buttonTitles: { drawMarkerButton: "Çizim İşaretçisi", drawPolyButton: "Çokgenler çiz", drawLineButton: "Çoklu çizgi çiz", drawCircleButton: "Çember çiz", drawRectButton: "Dikdörtgen çiz", editButton: "Katmanları düzenle", dragButton: "Katmanları sürükle", cutButton: "Katmanları kes", deleteButton: "Katmanları kaldır", drawCircleMarkerButton: "Daire işaretçisi çiz", snappingButton: "Sürüklenen işaretçiyi diğer katmanlara ve köşelere yapıştır", pinningButton: "Paylaşılan köşeleri birbirine sabitle", rotateButton: "Katmanı döndür" } }, Ne = { tooltips: { placeMarker: "Kliknutím vytvoříte značku", firstVertex: "Kliknutím vytvoříte první objekt", continueLine: "Kliknutím pokračujte v kreslení", finishLine: "Kliknutí na libovolnou existující značku pro dokončení", finishPoly: "Vyberte první bod pro dokončení", finishRect: "Klikněte pro dokončení", startCircle: "Kliknutím přidejte střed kruhu", finishCircle: "Нажмите, чтобы задать радиус", placeCircleMarker: "Kliknutím nastavte poloměr" }, actions: { finish: "Dokončit", cancel: "Zrušit", removeLastVertex: "Zrušit poslední akci" }, buttonTitles: { drawMarkerButton: "Přidat značku", drawPolyButton: "Nakreslit polygon", drawLineButton: "Nakreslit křivku", drawCircleButton: "Nakreslit kruh", drawRectButton: "Nakreslit obdélník", editButton: "Upravit vrstvu", dragButton: "Přeneste vrstvu", cutButton: "Vyjmout vrstvu", deleteButton: "Smazat vrstvu", drawCircleMarkerButton: "Přidat kruhovou značku", snappingButton: "Navázat tažnou značku k dalším vrstvám a vrcholům", pinningButton: "Spojit společné body dohromady", rotateButton: "Otočte vrstvu" } }, kr = { tooltips: { placeMarker: "クリックしてマーカーを配置", firstVertex: "クリックして最初の頂点を配置", continueLine: "クリックして描画を続ける", finishLine: "任意のマーカーをクリックして終了", finishPoly: "最初のマーカーをクリックして終了", finishRect: "クリックして終了", startCircle: "クリックして円の中心を配置", finishCircle: "クリックして円の描画を終了", placeCircleMarker: "クリックして円マーカーを配置", placeText: "クリックしてテキストを配置" }, actions: { finish: "終了", cancel: "キャンセル", removeLastVertex: "最後の頂点を削除" }, buttonTitles: { drawMarkerButton: "マーカーを描画", drawPolyButton: "ポリゴンを描画", drawLineButton: "折れ線を描画", drawCircleButton: "円を描画", drawRectButton: "矩形を描画", editButton: "レイヤーを編集", dragButton: "レイヤーをドラッグ", cutButton: "レイヤーを切り取り", deleteButton: "レイヤーを削除", drawCircleMarkerButton: "円マーカーを描画", snappingButton: "ドラッグしたマーカーを他のレイヤーや頂点にスナップする", pinningButton: "共有する頂点を同時に動かす", rotateButton: "レイヤーを回転", drawTextButton: "テキストを描画" } }, vn = { tooltips: { placeMarker: "Klikkaa asettaaksesi merkin", firstVertex: "Klikkaa asettaakseni ensimmäisen osuuden", continueLine: "Klikkaa jatkaaksesi piirtämistä", finishLine: "Klikkaa olemassa olevaa merkkiä lopettaaksesi", finishPoly: "Klikkaa ensimmäistä merkkiä lopettaaksesi", finishRect: "Klikkaa lopettaaksesi", startCircle: "Klikkaa asettaaksesi ympyrän keskipisteen", finishCircle: "Klikkaa lopettaaksesi ympyrän", placeCircleMarker: "Klikkaa asettaaksesi ympyrämerkin", placeText: "Klikkaa asettaaksesi tekstin" }, actions: { finish: "Valmis", cancel: "Peruuta", removeLastVertex: "Poista viimeinen osuus" }, buttonTitles: { drawMarkerButton: "Piirrä merkkejä", drawPolyButton: "Piirrä monikulmioita", drawLineButton: "Piirrä viivoja", drawCircleButton: "Piirrä ympyrä", drawRectButton: "Piirrä neliskulmioita", editButton: "Muokkaa", dragButton: "Siirrä", cutButton: "Leikkaa", deleteButton: "Poista", drawCircleMarkerButton: "Piirrä ympyrämerkki", snappingButton: "Kiinnitä siirrettävä merkki toisiin muotoihin", pinningButton: "Kiinnitä jaetut muodot yhteen", rotateButton: "Käännä", drawTextButton: "Piirrä tekstiä" } }, ls = { tooltips: { placeMarker: "마커 위치를 클릭하세요", firstVertex: "첫번째 꼭지점 위치을 클릭하세요", continueLine: "계속 그리려면 클릭하세요", finishLine: "끝내려면 기존 마커를 클릭하세요", finishPoly: "끝내려면 처음 마커를 클릭하세요", finishRect: "끝내려면 클릭하세요", startCircle: "원의 중심이 될 위치를 클릭하세요", finishCircle: "원을 끝내려면 클릭하세요", placeCircleMarker: "원 마커 위치를 클릭하세요", placeText: "텍스트 위치를 클릭하세요" }, actions: { finish: "끝내기", cancel: "취소", removeLastVertex: "마지막 꼭지점 제거" }, buttonTitles: { drawMarkerButton: "마커 그리기", drawPolyButton: "다각형 그리기", drawLineButton: "다각선 그리기", drawCircleButton: "원 그리기", drawRectButton: "직사각형 그리기", editButton: "레이어 편집하기", dragButton: "레이어 끌기", cutButton: "레이어 자르기", deleteButton: "레이어 제거하기", drawCircleMarkerButton: "원 마커 그리기", snappingButton: "잡아끈 마커를 다른 레이어 및 꼭지점에 들러붙게 하기", pinningButton: "공유 꼭지점을 함께 찍기", rotateButton: "레이어 회전하기", drawTextButton: "텍스트 그리기" } }, On = { tooltips: { placeMarker: "Маркерди жайгаштыруу үчүн басыңыз", firstVertex: "Биринчи чокуну жайгаштырууну үчүн басыңыз", continueLine: "Сүрөт тартууну улантуу үчүн басыңыз", finishLine: "Аяктоо үчүн учурдагы маркерди басыңыз", finishPoly: "Бүтүрүү үчүн биринчи маркерди басыңыз", finishRect: "Бүтүрүү үчүн басыңыз", startCircle: "Айлананын борборун жайгаштырууну үчүн басыңыз", finishCircle: "Айлананы бүтүрүү үчүн басыңыз", placeCircleMarker: "Тегерек маркерди жайгаштыруу үчүн басыңыз", placeText: "Текстти жайгаштыруу үчүн басыңыз" }, actions: { finish: "Аягы", cancel: "Жок кылуу", removeLastVertex: "Акыркы чокуну өчүрүү" }, buttonTitles: { drawMarkerButton: "Маркерди чизуу", drawPolyButton: "Полигон чизуу", drawLineButton: "Полилиния чизуу", drawCircleButton: "Дайынды чизуу", drawRectButton: "Прямоугольник чизуу", editButton: "Слоопту түзөтүү", dragButton: "Слоопту карап сүйлөү", cutButton: "Слооптун башын кесүү", deleteButton: "Слооптун өчүрүү", drawCircleMarkerButton: "Дайынды маркерди чизуу", snappingButton: "Башка слооптордун жана вертекстердин арасына чекилдөө", pinningButton: "Бөлүшкөн вертекстерди бирге тутуштуруу", rotateButton: "Слооптун өзгөртүү", drawTextButton: "Текст чизуу", scaleButton: "Слооптун өлчөмүн өзгөртүү", autoTracingButton: "Автоматтык тизмеги чизуу" }, measurements: { totalLength: "Узундук", segmentLength: "Сегмент узундугу", area: "Аймак", radius: "Радиус", perimeter: "Периметр", height: "Диаметр", width: "Кенчилик", coordinates: "Координаттар", coordinatesMarker: "Маркердин координаттары" } }, Hn = Or, ai = { en: Be, de: mn, it: yn, id: Xe, ro: cr, ru: Ye, es: Qe, nl: dn, fr: Mn, pt: Hn, pt_br: ei, pt_pt: Or, zh: Cn, zh_tw: Br, pl: Nr, sv: Zr, el: ni, hu: ji, da: nn, no: Fi, fa: Nn, ua: qn, tr: nl, cz: Ne, ja: kr, fi: vn, ko: ls, ky: On }, ri = { _globalEditModeEnabled: !1, enableGlobalEditMode(v) {
+    var ar = { version: "2.18.3" }, Ae = c(ee()), Be = { tooltips: { placeMarker: "Click to place marker", firstVertex: "Click to place first vertex", continueLine: "Click to continue drawing", finishLine: "Click any existing marker to finish", finishPoly: "Click first marker to finish", finishRect: "Click to finish", startCircle: "Click to place circle center", finishCircle: "Click to finish circle", placeCircleMarker: "Click to place circle marker", placeText: "Click to place text", selectFirstLayerFor: "Select first layer for {action}", selectSecondLayerFor: "Select second layer for {action}" }, actions: { finish: "Finish", cancel: "Cancel", removeLastVertex: "Remove Last Vertex" }, buttonTitles: { drawMarkerButton: "Draw Marker", drawPolyButton: "Draw Polygons", drawLineButton: "Draw Polyline", drawCircleButton: "Draw Circle", drawRectButton: "Draw Rectangle", editButton: "Edit Layers", dragButton: "Drag Layers", cutButton: "Cut Layers", deleteButton: "Remove Layers", drawCircleMarkerButton: "Draw Circle Marker", snappingButton: "Snap dragged marker to other layers and vertices", pinningButton: "Pin shared vertices together", rotateButton: "Rotate Layers", drawTextButton: "Draw Text", scaleButton: "Scale Layers", autoTracingButton: "Auto trace Line", snapGuidesButton: "Show SnapGuides", unionButton: "Union layers", differenceButton: "Subtract layers" }, measurements: { totalLength: "Length", segmentLength: "Segment length", area: "Area", radius: "Radius", perimeter: "Perimeter", height: "Height", width: "Width", coordinates: "Position", coordinatesMarker: "Position Marker" } }, mn = { tooltips: { placeMarker: "Platziere den Marker mit Klick", firstVertex: "Platziere den ersten Marker mit Klick", continueLine: "Klicke, um weiter zu zeichnen", finishLine: "Beende mit Klick auf existierenden Marker", finishPoly: "Beende mit Klick auf ersten Marker", finishRect: "Beende mit Klick", startCircle: "Platziere das Kreiszentrum mit Klick", finishCircle: "Beende den Kreis mit Klick", placeCircleMarker: "Platziere den Kreismarker mit Klick", placeText: "Platziere den Text mit Klick" }, actions: { finish: "Beenden", cancel: "Abbrechen", removeLastVertex: "Letzten Vertex löschen" }, buttonTitles: { drawMarkerButton: "Marker zeichnen", drawPolyButton: "Polygon zeichnen", drawLineButton: "Polyline zeichnen", drawCircleButton: "Kreis zeichnen", drawRectButton: "Rechteck zeichnen", editButton: "Layer editieren", dragButton: "Layer bewegen", cutButton: "Layer schneiden", deleteButton: "Layer löschen", drawCircleMarkerButton: "Kreismarker zeichnen", snappingButton: "Bewegter Layer an andere Layer oder Vertexe einhacken", pinningButton: "Vertexe an der gleichen Position verknüpfen", rotateButton: "Layer drehen", drawTextButton: "Text zeichnen", scaleButton: "Layer skalieren", autoTracingButton: "Linie automatisch nachzeichen" }, measurements: { totalLength: "Länge", segmentLength: "Segment Länge", area: "Fläche", radius: "Radius", perimeter: "Umfang", height: "Höhe", width: "Breite", coordinates: "Position", coordinatesMarker: "Position Marker" } }, yn = { tooltips: { placeMarker: "Clicca per posizionare un Marker", firstVertex: "Clicca per posizionare il primo vertice", continueLine: "Clicca per continuare a disegnare", finishLine: "Clicca qualsiasi marker esistente per terminare", finishPoly: "Clicca il primo marker per terminare", finishRect: "Clicca per terminare", startCircle: "Clicca per posizionare il punto centrale del cerchio", finishCircle: "Clicca per terminare il cerchio", placeCircleMarker: "Clicca per posizionare un Marker del cherchio" }, actions: { finish: "Termina", cancel: "Annulla", removeLastVertex: "Rimuovi l'ultimo vertice" }, buttonTitles: { drawMarkerButton: "Disegna Marker", drawPolyButton: "Disegna Poligoni", drawLineButton: "Disegna Polilinea", drawCircleButton: "Disegna Cerchio", drawRectButton: "Disegna Rettangolo", editButton: "Modifica Livelli", dragButton: "Sposta Livelli", cutButton: "Ritaglia Livelli", deleteButton: "Elimina Livelli", drawCircleMarkerButton: "Disegna Marker del Cerchio", snappingButton: "Snap ha trascinato il pennarello su altri strati e vertici", pinningButton: "Pin condiviso vertici insieme", rotateButton: "Ruota livello" } }, Xe = { tooltips: { placeMarker: "Klik untuk menempatkan marker", firstVertex: "Klik untuk menempatkan vertex pertama", continueLine: "Klik untuk meneruskan digitasi", finishLine: "Klik pada sembarang marker yang ada untuk mengakhiri", finishPoly: "Klik marker pertama untuk mengakhiri", finishRect: "Klik untuk mengakhiri", startCircle: "Klik untuk menempatkan titik pusat lingkaran", finishCircle: "Klik untuk mengakhiri lingkaran", placeCircleMarker: "Klik untuk menempatkan penanda lingkarann" }, actions: { finish: "Selesai", cancel: "Batal", removeLastVertex: "Hilangkan Vertex Terakhir" }, buttonTitles: { drawMarkerButton: "Digitasi Marker", drawPolyButton: "Digitasi Polygon", drawLineButton: "Digitasi Polyline", drawCircleButton: "Digitasi Lingkaran", drawRectButton: "Digitasi Segi Empat", editButton: "Edit Layer", dragButton: "Geser Layer", cutButton: "Potong Layer", deleteButton: "Hilangkan Layer", drawCircleMarkerButton: "Digitasi Penanda Lingkaran", snappingButton: "Jepretkan penanda yang ditarik ke lapisan dan simpul lain", pinningButton: "Sematkan simpul bersama bersama", rotateButton: "Putar lapisan" } }, cr = { tooltips: { placeMarker: "Adaugă un punct", firstVertex: "Apasă aici pentru a adăuga primul Vertex", continueLine: "Apasă aici pentru a continua desenul", finishLine: "Apasă pe orice obiect pentru a finisa desenul", finishPoly: "Apasă pe primul obiect pentru a finisa", finishRect: "Apasă pentru a finisa", startCircle: "Apasă pentru a desena un cerc", finishCircle: "Apasă pentru a finisa un cerc", placeCircleMarker: "Adaugă un punct" }, actions: { finish: "Termină", cancel: "Anulează", removeLastVertex: "Șterge ultimul Vertex" }, buttonTitles: { drawMarkerButton: "Adaugă o bulină", drawPolyButton: "Desenează un poligon", drawLineButton: "Desenează o linie", drawCircleButton: "Desenează un cerc", drawRectButton: "Desenează un dreptunghi", editButton: "Editează straturile", dragButton: "Mută straturile", cutButton: "Taie straturile", deleteButton: "Șterge straturile", drawCircleMarkerButton: "Desenează marcatorul cercului", snappingButton: "Fixați marcatorul glisat pe alte straturi și vârfuri", pinningButton: "Fixați vârfurile partajate împreună", rotateButton: "Rotiți stratul" } }, Ye = { tooltips: { placeMarker: "Нажмите, чтобы нанести маркер", firstVertex: "Нажмите, чтобы нанести первый объект", continueLine: "Нажмите, чтобы продолжить рисование", finishLine: "Нажмите любой существующий маркер для завершения", finishPoly: "Выберите первую точку, чтобы закончить", finishRect: "Нажмите, чтобы закончить", startCircle: "Нажмите, чтобы добавить центр круга", finishCircle: "Нажмите, чтобы задать радиус", placeCircleMarker: "Нажмите, чтобы нанести круговой маркер" }, actions: { finish: "Завершить", cancel: "Отменить", removeLastVertex: "Отменить последнее действие" }, buttonTitles: { drawMarkerButton: "Добавить маркер", drawPolyButton: "Рисовать полигон", drawLineButton: "Рисовать кривую", drawCircleButton: "Рисовать круг", drawRectButton: "Рисовать прямоугольник", editButton: "Редактировать слой", dragButton: "Перенести слой", cutButton: "Вырезать слой", deleteButton: "Удалить слой", drawCircleMarkerButton: "Добавить круговой маркер", snappingButton: "Привязать перетаскиваемый маркер к другим слоям и вершинам", pinningButton: "Связать общие точки вместе", rotateButton: "Поворот слоя" } }, Qe = { tooltips: { placeMarker: "Presiona para colocar un marcador", firstVertex: "Presiona para colocar el primer vértice", continueLine: "Presiona para continuar dibujando", finishLine: "Presiona cualquier marcador existente para finalizar", finishPoly: "Presiona el primer marcador para finalizar", finishRect: "Presiona para finalizar", startCircle: "Presiona para colocar el centro del círculo", finishCircle: "Presiona para finalizar el círculo", placeCircleMarker: "Presiona para colocar un marcador de círculo" }, actions: { finish: "Finalizar", cancel: "Cancelar", removeLastVertex: "Eliminar último vértice" }, buttonTitles: { drawMarkerButton: "Dibujar Marcador", drawPolyButton: "Dibujar Polígono", drawLineButton: "Dibujar Línea", drawCircleButton: "Dibujar Círculo", drawRectButton: "Dibujar Rectángulo", editButton: "Editar Capas", dragButton: "Arrastrar Capas", cutButton: "Cortar Capas", deleteButton: "Eliminar Capas", drawCircleMarkerButton: "Dibujar Marcador de Círculo", snappingButton: "El marcador de Snap arrastrado a otras capas y vértices", pinningButton: "Fijar juntos los vértices compartidos", rotateButton: "Rotar capa" } }, dn = { tooltips: { placeMarker: "Klik om een marker te plaatsen", firstVertex: "Klik om het eerste punt te plaatsen", continueLine: "Klik om te blijven tekenen", finishLine: "Klik op een bestaand punt om te beëindigen", finishPoly: "Klik op het eerst punt om te beëindigen", finishRect: "Klik om te beëindigen", startCircle: "Klik om het middelpunt te plaatsen", finishCircle: "Klik om de cirkel te beëindigen", placeCircleMarker: "Klik om een marker te plaatsen" }, actions: { finish: "Bewaar", cancel: "Annuleer", removeLastVertex: "Verwijder laatste punt" }, buttonTitles: { drawMarkerButton: "Plaats Marker", drawPolyButton: "Teken een vlak", drawLineButton: "Teken een lijn", drawCircleButton: "Teken een cirkel", drawRectButton: "Teken een vierkant", editButton: "Bewerk", dragButton: "Verplaats", cutButton: "Knip", deleteButton: "Verwijder", drawCircleMarkerButton: "Plaats Marker", snappingButton: "Snap gesleepte marker naar andere lagen en hoekpunten", pinningButton: "Speld gedeelde hoekpunten samen", rotateButton: "Laag roteren" } }, Mn = { tooltips: { placeMarker: "Cliquez pour placer un marqueur", firstVertex: "Cliquez pour placer le premier sommet", continueLine: "Cliquez pour continuer à dessiner", finishLine: "Cliquez sur n'importe quel marqueur pour terminer", finishPoly: "Cliquez sur le premier marqueur pour terminer", finishRect: "Cliquez pour terminer", startCircle: "Cliquez pour placer le centre du cercle", finishCircle: "Cliquez pour finir le cercle", placeCircleMarker: "Cliquez pour placer le marqueur circulaire" }, actions: { finish: "Terminer", cancel: "Annuler", removeLastVertex: "Retirer le dernier sommet" }, buttonTitles: { drawMarkerButton: "Placer des marqueurs", drawPolyButton: "Dessiner des polygones", drawLineButton: "Dessiner des polylignes", drawCircleButton: "Dessiner un cercle", drawRectButton: "Dessiner un rectangle", editButton: "Éditer des calques", dragButton: "Déplacer des calques", cutButton: "Couper des calques", deleteButton: "Supprimer des calques", drawCircleMarkerButton: "Dessiner un marqueur circulaire", snappingButton: "Glisser le marqueur vers d'autres couches et sommets", pinningButton: "Épingler ensemble les sommets partagés", rotateButton: "Tourner des calques" } }, Cn = { tooltips: { placeMarker: "单击放置标记", firstVertex: "单击放置首个顶点", continueLine: "单击继续绘制", finishLine: "单击任何存在的标记以完成", finishPoly: "单击第一个标记以完成", finishRect: "单击完成", startCircle: "单击放置圆心", finishCircle: "单击完成圆形", placeCircleMarker: "点击放置圆形标记" }, actions: { finish: "完成", cancel: "取消", removeLastVertex: "移除最后的顶点" }, buttonTitles: { drawMarkerButton: "绘制标记", drawPolyButton: "绘制多边形", drawLineButton: "绘制线段", drawCircleButton: "绘制圆形", drawRectButton: "绘制长方形", editButton: "编辑图层", dragButton: "拖拽图层", cutButton: "剪切图层", deleteButton: "删除图层", drawCircleMarkerButton: "画圆圈标记", snappingButton: "将拖动的标记捕捉到其他图层和顶点", pinningButton: "将共享顶点固定在一起", rotateButton: "旋转图层" } }, Br = { tooltips: { placeMarker: "單擊放置標記", firstVertex: "單擊放置第一個頂點", continueLine: "單擊繼續繪製", finishLine: "單擊任何存在的標記以完成", finishPoly: "單擊第一個標記以完成", finishRect: "單擊完成", startCircle: "單擊放置圓心", finishCircle: "單擊完成圓形", placeCircleMarker: "點擊放置圓形標記" }, actions: { finish: "完成", cancel: "取消", removeLastVertex: "移除最後一個頂點" }, buttonTitles: { drawMarkerButton: "放置標記", drawPolyButton: "繪製多邊形", drawLineButton: "繪製線段", drawCircleButton: "繪製圓形", drawRectButton: "繪製方形", editButton: "編輯圖形", dragButton: "移動圖形", cutButton: "裁切圖形", deleteButton: "刪除圖形", drawCircleMarkerButton: "畫圓圈標記", snappingButton: "將拖動的標記對齊到其他圖層和頂點", pinningButton: "將共享頂點固定在一起", rotateButton: "旋轉圖形" } }, ei = { tooltips: { placeMarker: "Clique para posicionar o marcador", firstVertex: "Clique para posicionar o primeiro vértice", continueLine: "Clique para continuar desenhando", finishLine: "Clique em qualquer marcador existente para finalizar", finishPoly: "Clique no primeiro marcador para finalizar", finishRect: "Clique para finalizar", startCircle: "Clique para posicionar o centro do círculo", finishCircle: "Clique para finalizar o círculo", placeCircleMarker: "Clique para posicionar o marcador circular", placeText: "Clique para inserir texto" }, actions: { finish: "Finalizar", cancel: "Cancelar", removeLastVertex: "Remover último vértice" }, buttonTitles: { drawMarkerButton: "Desenhar Marcador", drawPolyButton: "Desenhar Polígonos", drawLineButton: "Desenhar Linha Poligonal", drawCircleButton: "Desenhar Círculo", drawRectButton: "Desenhar Retângulo", editButton: "Editar Camadas", dragButton: "Arrastar Camadas", cutButton: "Recortar Camadas", deleteButton: "Remover Camadas", drawCircleMarkerButton: "Desenhar Marcador de Círculo", snappingButton: "Ajustar marcador arrastado a outras camadas e vértices", pinningButton: "Unir vértices compartilhados", rotateButton: "Rotacionar Camadas", drawTextButton: "Desenhar Texto", scaleButton: "Redimensionar Camadas", autoTracingButton: "Traçado Automático de Linha" }, measurements: { totalLength: "Comprimento", segmentLength: "Comprimento do Segmento", area: "Área", radius: "Raio", perimeter: "Perímetro", height: "Altura", width: "Largura", coordinates: "Posição", coordinatesMarker: "Marcador de Posição" } }, Or = { tooltips: { placeMarker: "Clique para colocar marcador", firstVertex: "Clique para colocar primeiro vértice", continueLine: "Clique para continuar a desenhar", finishLine: "Clique num marcador existente para terminar", finishPoly: "Clique no primeiro marcador para terminar", finishRect: "Clique para terminar", startCircle: "Clique para colocar o centro do círculo", finishCircle: "Clique para terminar o círculo", placeCircleMarker: "Clique para colocar marcador de círculo", placeText: "Clique para colocar texto" }, actions: { finish: "Terminar", cancel: "Cancelar", removeLastVertex: "Remover Último Vértice" }, buttonTitles: { drawMarkerButton: "Desenhar Marcador", drawPolyButton: "Desenhar Polígonos", drawLineButton: "Desenhar Polilinha", drawCircleButton: "Desenhar Círculo", drawRectButton: "Desenhar Retângulo", editButton: "Editar Camadas", dragButton: "Arrastar Camadas", cutButton: "Cortar Camadas", deleteButton: "Remover Camadas", drawCircleMarkerButton: "Desenhar Marcador de Círculo", snappingButton: "Ajustar marcador arrastado a outras camadas e vértices", pinningButton: "Unir vértices partilhados", rotateButton: "Rodar Camadas", drawTextButton: "Desenhar Texto", scaleButton: "Escalar Camadas", autoTracingButton: "Traçado Automático de Linha" }, measurements: { totalLength: "Comprimento", segmentLength: "Comprimento do Segmento", area: "Área", radius: "Raio", perimeter: "Perímetro", height: "Altura", width: "Largura", coordinates: "Posição", coordinatesMarker: "Marcador de Posição" } }, Nr = { tooltips: { placeMarker: "Kliknij, aby umieścić znacznik", firstVertex: "Kliknij, aby umieścić pierwszy wierzchołek", continueLine: "Kliknij, aby kontynuować rysowanie", finishLine: "Kliknij dowolny istniejący znacznik, aby zakończyć", finishPoly: "Kliknij pierwszy znacznik, aby zakończyć", finishRect: "Kliknij, aby zakończyć", startCircle: "Kliknij, aby umieścić środek okręgu", finishCircle: "Kliknij, aby zakończyć okrąg", placeCircleMarker: "Kliknij, aby umieścić znacznik okręgu", placeText: "Kliknij, aby umieścić tekst" }, actions: { finish: "Zakończ", cancel: "Anuluj", removeLastVertex: "Usuń ostatni wierzchołek" }, buttonTitles: { drawMarkerButton: "Rysuj znacznik", drawPolyButton: "Rysuj wielokąt", drawLineButton: "Rysuj linię", drawCircleButton: "Rysuj okrąg", drawRectButton: "Rysuj prostokąt", editButton: "Edytuj warstwy", dragButton: "Przeciągnij warstwy", cutButton: "Wytnij warstwy", deleteButton: "Usuń warstwy", drawCircleMarkerButton: "Rysuj znacznik okrągły", snappingButton: "Przyciągnij przenoszony znacznik do innych warstw i wierzchołków", pinningButton: "Przypnij wspólne wierzchołki razem", rotateButton: "Obróć warstwy", drawTextButton: "Rysuj tekst", scaleButton: "Skaluj warstwy", autoTracingButton: "Automatyczne śledzenie linii" }, measurements: { totalLength: "Długość", segmentLength: "Długość odcinka", area: "Obszar", radius: "Promień", perimeter: "Obwód", height: "Wysokość", width: "Szerokość", coordinates: "Pozycja", coordinatesMarker: "Znacznik pozycji" } }, Zr = { tooltips: { placeMarker: "Klicka för att placera markör", firstVertex: "Klicka för att placera första hörnet", continueLine: "Klicka för att fortsätta rita", finishLine: "Klicka på en existerande punkt för att slutföra", finishPoly: "Klicka på den första punkten för att slutföra", finishRect: "Klicka för att slutföra", startCircle: "Klicka för att placera cirkelns centrum", finishCircle: "Klicka för att slutföra cirkeln", placeCircleMarker: "Klicka för att placera cirkelmarkör" }, actions: { finish: "Slutför", cancel: "Avbryt", removeLastVertex: "Ta bort sista hörnet" }, buttonTitles: { drawMarkerButton: "Rita Markör", drawPolyButton: "Rita Polygoner", drawLineButton: "Rita Linje", drawCircleButton: "Rita Cirkel", drawRectButton: "Rita Rektangel", editButton: "Redigera Lager", dragButton: "Dra Lager", cutButton: "Klipp i Lager", deleteButton: "Ta bort Lager", drawCircleMarkerButton: "Rita Cirkelmarkör", snappingButton: "Snäpp dra markören till andra lager och hörn", pinningButton: "Fäst delade hörn tillsammans", rotateButton: "Rotera lagret" } }, ni = { tooltips: { placeMarker: "Κάντε κλικ για να τοποθετήσετε Δείκτη", firstVertex: "Κάντε κλικ για να τοποθετήσετε το πρώτο σημείο", continueLine: "Κάντε κλικ για να συνεχίσετε να σχεδιάζετε", finishLine: "Κάντε κλικ σε οποιονδήποτε υπάρχον σημείο για να ολοκληρωθεί", finishPoly: "Κάντε κλικ στο πρώτο σημείο για να τελειώσετε", finishRect: "Κάντε κλικ για να τελειώσετε", startCircle: "Κάντε κλικ για να τοποθετήσετε κέντρο Κύκλου", finishCircle: "Κάντε κλικ για να ολοκληρώσετε τον Κύκλο", placeCircleMarker: "Κάντε κλικ για να τοποθετήσετε Κυκλικό Δείκτη" }, actions: { finish: "Τέλος", cancel: "Ακύρωση", removeLastVertex: "Κατάργηση τελευταίου σημείου" }, buttonTitles: { drawMarkerButton: "Σχεδίαση Δείκτη", drawPolyButton: "Σχεδίαση Πολυγώνου", drawLineButton: "Σχεδίαση Γραμμής", drawCircleButton: "Σχεδίαση Κύκλου", drawRectButton: "Σχεδίαση Ορθογωνίου", editButton: "Επεξεργασία Επιπέδων", dragButton: "Μεταφορά Επιπέδων", cutButton: "Αποκοπή Επιπέδων", deleteButton: "Κατάργηση Επιπέδων", drawCircleMarkerButton: "Σχεδίαση Κυκλικού Δείκτη", snappingButton: "Προσκόλληση του Δείκτη μεταφοράς σε άλλα Επίπεδα και Κορυφές", pinningButton: "Περικοπή κοινών κορυφών μαζί", rotateButton: "Περιστρέψτε το στρώμα" } }, ji = { tooltips: { placeMarker: "Kattintson a jelölő elhelyezéséhez", firstVertex: "Kattintson az első pont elhelyezéséhez", continueLine: "Kattintson a következő pont elhelyezéséhez", finishLine: "A befejezéshez kattintson egy meglévő pontra", finishPoly: "A befejezéshez kattintson az első pontra", finishRect: "Kattintson a befejezéshez", startCircle: "Kattintson a kör középpontjának elhelyezéséhez", finishCircle: "Kattintson a kör befejezéséhez", placeCircleMarker: "Kattintson a körjelölő elhelyezéséhez" }, actions: { finish: "Befejezés", cancel: "Mégse", removeLastVertex: "Utolsó pont eltávolítása" }, buttonTitles: { drawMarkerButton: "Jelölő rajzolása", drawPolyButton: "Poligon rajzolása", drawLineButton: "Vonal rajzolása", drawCircleButton: "Kör rajzolása", drawRectButton: "Négyzet rajzolása", editButton: "Elemek szerkesztése", dragButton: "Elemek mozgatása", cutButton: "Elemek vágása", deleteButton: "Elemek törlése", drawCircleMarkerButton: "Kör jelölő rajzolása", snappingButton: "Kapcsolja a jelöltőt másik elemhez vagy ponthoz", pinningButton: "Közös pontok összekötése", rotateButton: "Fólia elforgatása" } }, nn = { tooltips: { placeMarker: "Tryk for at placere en markør", firstVertex: "Tryk for at placere det første punkt", continueLine: "Tryk for at fortsætte linjen", finishLine: "Tryk på et eksisterende punkt for at afslutte", finishPoly: "Tryk på det første punkt for at afslutte", finishRect: "Tryk for at afslutte", startCircle: "Tryk for at placere cirklens center", finishCircle: "Tryk for at afslutte cirklen", placeCircleMarker: "Tryk for at placere en cirkelmarkør" }, actions: { finish: "Afslut", cancel: "Afbryd", removeLastVertex: "Fjern sidste punkt" }, buttonTitles: { drawMarkerButton: "Placer markør", drawPolyButton: "Tegn polygon", drawLineButton: "Tegn linje", drawCircleButton: "Tegn cirkel", drawRectButton: "Tegn firkant", editButton: "Rediger", dragButton: "Træk", cutButton: "Klip", deleteButton: "Fjern", drawCircleMarkerButton: "Tegn cirkelmarkør", snappingButton: "Fastgør trukket markør til andre elementer", pinningButton: "Sammenlæg delte elementer", rotateButton: "Roter laget" } }, Fi = { tooltips: { placeMarker: "Klikk for å plassere punkt", firstVertex: "Klikk for å plassere første punkt", continueLine: "Klikk for å tegne videre", finishLine: "Klikk på et eksisterende punkt for å fullføre", finishPoly: "Klikk første punkt for å fullføre", finishRect: "Klikk for å fullføre", startCircle: "Klikk for å sette sirkel midtpunkt", finishCircle: "Klikk for å fullføre sirkel", placeCircleMarker: "Klikk for å plassere sirkel", placeText: "Klikk for å plassere tekst" }, actions: { finish: "Fullfør", cancel: "Kanseller", removeLastVertex: "Fjern forrige punkt" }, buttonTitles: { drawMarkerButton: "Tegn punkt", drawPolyButton: "Tegn flate", drawLineButton: "Tegn linje", drawCircleButton: "Tegn sirkel", drawRectButton: "Tegn rektangel", editButton: "Rediger objekter", dragButton: "Dra objekter", cutButton: "Kutt objekter", deleteButton: "Fjern objekter", drawCircleMarkerButton: "Tegn sirkel-punkt", snappingButton: "Fest dratt punkt til andre objekter og punkt", pinningButton: "Pin delte punkter sammen", rotateButton: "Rotér objekter", drawTextButton: "Tegn tekst", scaleButton: "Skalér objekter", autoTracingButton: "Automatisk sporing av linje" }, measurements: { totalLength: "Lengde", segmentLength: "Segmentlengde", area: "Område", radius: "Radius", perimeter: "Omriss", height: "Høyde", width: "Bredde", coordinates: "Posisjon", coordinatesMarker: "Posisjonsmarkør" } }, Nn = { tooltips: { placeMarker: "کلیک برای جانمایی نشان", firstVertex: "کلیک برای رسم اولین رأس", continueLine: "کلیک برای ادامه رسم", finishLine: "کلیک روی هر نشان موجود برای پایان", finishPoly: "کلیک روی اولین نشان برای پایان", finishRect: "کلیک برای پایان", startCircle: "کلیک برای رسم مرکز دایره", finishCircle: "کلیک برای پایان رسم دایره", placeCircleMarker: "کلیک برای رسم نشان دایره", placeText: "کلیک برای نوشتن متن" }, actions: { finish: "پایان", cancel: "لفو", removeLastVertex: "حذف آخرین رأس" }, buttonTitles: { drawMarkerButton: "درج نشان", drawPolyButton: "رسم چندضلعی", drawLineButton: "رسم خط", drawCircleButton: "رسم دایره", drawRectButton: "رسم چهارضلعی", editButton: "ویرایش لایه‌ها", dragButton: "جابجایی لایه‌ها", cutButton: "برش لایه‌ها", deleteButton: "حذف لایه‌ها", drawCircleMarkerButton: "رسم نشان دایره", snappingButton: "نشانگر را به لایه‌ها و رئوس دیگر بکشید", pinningButton: "رئوس مشترک را با هم پین کنید", rotateButton: "چرخش لایه", drawTextButton: "رسم متن", scaleButton: "مقیاس‌گذاری", autoTracingButton: "ردیاب خودکار" }, measurements: { totalLength: "طول", segmentLength: "طول بخش", area: "ناحیه", radius: "شعاع", perimeter: "محیط", height: "ارتفاع", width: "عرض", coordinates: "موقعیت", coordinatesMarker: "موقعیت نشان" } }, qn = { tooltips: { placeMarker: "Натисніть, щоб нанести маркер", firstVertex: "Натисніть, щоб нанести першу вершину", continueLine: "Натисніть, щоб продовжити малювати", finishLine: "Натисніть будь-який існуючий маркер для завершення", finishPoly: "Виберіть перший маркер, щоб завершити", finishRect: "Натисніть, щоб завершити", startCircle: "Натисніть, щоб додати центр кола", finishCircle: "Натисніть, щоб завершити коло", placeCircleMarker: "Натисніть, щоб нанести круговий маркер" }, actions: { finish: "Завершити", cancel: "Відмінити", removeLastVertex: "Видалити попередню вершину" }, buttonTitles: { drawMarkerButton: "Малювати маркер", drawPolyButton: "Малювати полігон", drawLineButton: "Малювати криву", drawCircleButton: "Малювати коло", drawRectButton: "Малювати прямокутник", editButton: "Редагувати шари", dragButton: "Перенести шари", cutButton: "Вирізати шари", deleteButton: "Видалити шари", drawCircleMarkerButton: "Малювати круговий маркер", snappingButton: "Прив’язати перетягнутий маркер до інших шарів та вершин", pinningButton: "Зв'язати спільні вершини разом", rotateButton: "Повернути шар" } }, nl = { tooltips: { placeMarker: "İşaretçi yerleştirmek için tıklayın", firstVertex: "İlk tepe noktasını yerleştirmek için tıklayın", continueLine: "Çizime devam etmek için tıklayın", finishLine: "Bitirmek için mevcut herhangi bir işaretçiyi tıklayın", finishPoly: "Bitirmek için ilk işaretçiyi tıklayın", finishRect: "Bitirmek için tıklayın", startCircle: "Daire merkezine yerleştirmek için tıklayın", finishCircle: "Daireyi bitirmek için tıklayın", placeCircleMarker: "Daire işaretçisi yerleştirmek için tıklayın" }, actions: { finish: "Bitir", cancel: "İptal", removeLastVertex: "Son köşeyi kaldır" }, buttonTitles: { drawMarkerButton: "Çizim İşaretçisi", drawPolyButton: "Çokgenler çiz", drawLineButton: "Çoklu çizgi çiz", drawCircleButton: "Çember çiz", drawRectButton: "Dikdörtgen çiz", editButton: "Katmanları düzenle", dragButton: "Katmanları sürükle", cutButton: "Katmanları kes", deleteButton: "Katmanları kaldır", drawCircleMarkerButton: "Daire işaretçisi çiz", snappingButton: "Sürüklenen işaretçiyi diğer katmanlara ve köşelere yapıştır", pinningButton: "Paylaşılan köşeleri birbirine sabitle", rotateButton: "Katmanı döndür" } }, Ne = { tooltips: { placeMarker: "Kliknutím vytvoříte značku", firstVertex: "Kliknutím vytvoříte první objekt", continueLine: "Kliknutím pokračujte v kreslení", finishLine: "Kliknutí na libovolnou existující značku pro dokončení", finishPoly: "Vyberte první bod pro dokončení", finishRect: "Klikněte pro dokončení", startCircle: "Kliknutím přidejte střed kruhu", finishCircle: "Нажмите, чтобы задать радиус", placeCircleMarker: "Kliknutím nastavte poloměr" }, actions: { finish: "Dokončit", cancel: "Zrušit", removeLastVertex: "Zrušit poslední akci" }, buttonTitles: { drawMarkerButton: "Přidat značku", drawPolyButton: "Nakreslit polygon", drawLineButton: "Nakreslit křivku", drawCircleButton: "Nakreslit kruh", drawRectButton: "Nakreslit obdélník", editButton: "Upravit vrstvu", dragButton: "Přeneste vrstvu", cutButton: "Vyjmout vrstvu", deleteButton: "Smazat vrstvu", drawCircleMarkerButton: "Přidat kruhovou značku", snappingButton: "Navázat tažnou značku k dalším vrstvám a vrcholům", pinningButton: "Spojit společné body dohromady", rotateButton: "Otočte vrstvu" } }, kr = { tooltips: { placeMarker: "クリックしてマーカーを配置", firstVertex: "クリックして最初の頂点を配置", continueLine: "クリックして描画を続ける", finishLine: "任意のマーカーをクリックして終了", finishPoly: "最初のマーカーをクリックして終了", finishRect: "クリックして終了", startCircle: "クリックして円の中心を配置", finishCircle: "クリックして円の描画を終了", placeCircleMarker: "クリックして円マーカーを配置", placeText: "クリックしてテキストを配置" }, actions: { finish: "終了", cancel: "キャンセル", removeLastVertex: "最後の頂点を削除" }, buttonTitles: { drawMarkerButton: "マーカーを描画", drawPolyButton: "ポリゴンを描画", drawLineButton: "折れ線を描画", drawCircleButton: "円を描画", drawRectButton: "矩形を描画", editButton: "レイヤーを編集", dragButton: "レイヤーをドラッグ", cutButton: "レイヤーを切り取り", deleteButton: "レイヤーを削除", drawCircleMarkerButton: "円マーカーを描画", snappingButton: "ドラッグしたマーカーを他のレイヤーや頂点にスナップする", pinningButton: "共有する頂点を同時に動かす", rotateButton: "レイヤーを回転", drawTextButton: "テキストを描画" } }, vn = { tooltips: { placeMarker: "Klikkaa asettaaksesi merkin", firstVertex: "Klikkaa asettaakseni ensimmäisen osuuden", continueLine: "Klikkaa jatkaaksesi piirtämistä", finishLine: "Klikkaa olemassa olevaa merkkiä lopettaaksesi", finishPoly: "Klikkaa ensimmäistä merkkiä lopettaaksesi", finishRect: "Klikkaa lopettaaksesi", startCircle: "Klikkaa asettaaksesi ympyrän keskipisteen", finishCircle: "Klikkaa lopettaaksesi ympyrän", placeCircleMarker: "Klikkaa asettaaksesi ympyrämerkin", placeText: "Klikkaa asettaaksesi tekstin" }, actions: { finish: "Valmis", cancel: "Peruuta", removeLastVertex: "Poista viimeinen osuus" }, buttonTitles: { drawMarkerButton: "Piirrä merkkejä", drawPolyButton: "Piirrä monikulmioita", drawLineButton: "Piirrä viivoja", drawCircleButton: "Piirrä ympyrä", drawRectButton: "Piirrä neliskulmioita", editButton: "Muokkaa", dragButton: "Siirrä", cutButton: "Leikkaa", deleteButton: "Poista", drawCircleMarkerButton: "Piirrä ympyrämerkki", snappingButton: "Kiinnitä siirrettävä merkki toisiin muotoihin", pinningButton: "Kiinnitä jaetut muodot yhteen", rotateButton: "Käännä", drawTextButton: "Piirrä tekstiä" } }, as = { tooltips: { placeMarker: "마커 위치를 클릭하세요", firstVertex: "첫번째 꼭지점 위치을 클릭하세요", continueLine: "계속 그리려면 클릭하세요", finishLine: "끝내려면 기존 마커를 클릭하세요", finishPoly: "끝내려면 처음 마커를 클릭하세요", finishRect: "끝내려면 클릭하세요", startCircle: "원의 중심이 될 위치를 클릭하세요", finishCircle: "원을 끝내려면 클릭하세요", placeCircleMarker: "원 마커 위치를 클릭하세요", placeText: "텍스트 위치를 클릭하세요" }, actions: { finish: "끝내기", cancel: "취소", removeLastVertex: "마지막 꼭지점 제거" }, buttonTitles: { drawMarkerButton: "마커 그리기", drawPolyButton: "다각형 그리기", drawLineButton: "다각선 그리기", drawCircleButton: "원 그리기", drawRectButton: "직사각형 그리기", editButton: "레이어 편집하기", dragButton: "레이어 끌기", cutButton: "레이어 자르기", deleteButton: "레이어 제거하기", drawCircleMarkerButton: "원 마커 그리기", snappingButton: "잡아끈 마커를 다른 레이어 및 꼭지점에 들러붙게 하기", pinningButton: "공유 꼭지점을 함께 찍기", rotateButton: "레이어 회전하기", drawTextButton: "텍스트 그리기" } }, On = { tooltips: { placeMarker: "Маркерди жайгаштыруу үчүн басыңыз", firstVertex: "Биринчи чокуну жайгаштырууну үчүн басыңыз", continueLine: "Сүрөт тартууну улантуу үчүн басыңыз", finishLine: "Аяктоо үчүн учурдагы маркерди басыңыз", finishPoly: "Бүтүрүү үчүн биринчи маркерди басыңыз", finishRect: "Бүтүрүү үчүн басыңыз", startCircle: "Айлананын борборун жайгаштырууну үчүн басыңыз", finishCircle: "Айлананы бүтүрүү үчүн басыңыз", placeCircleMarker: "Тегерек маркерди жайгаштыруу үчүн басыңыз", placeText: "Текстти жайгаштыруу үчүн басыңыз" }, actions: { finish: "Аягы", cancel: "Жок кылуу", removeLastVertex: "Акыркы чокуну өчүрүү" }, buttonTitles: { drawMarkerButton: "Маркерди чизуу", drawPolyButton: "Полигон чизуу", drawLineButton: "Полилиния чизуу", drawCircleButton: "Дайынды чизуу", drawRectButton: "Прямоугольник чизуу", editButton: "Слоопту түзөтүү", dragButton: "Слоопту карап сүйлөү", cutButton: "Слооптун башын кесүү", deleteButton: "Слооптун өчүрүү", drawCircleMarkerButton: "Дайынды маркерди чизуу", snappingButton: "Башка слооптордун жана вертекстердин арасына чекилдөө", pinningButton: "Бөлүшкөн вертекстерди бирге тутуштуруу", rotateButton: "Слооптун өзгөртүү", drawTextButton: "Текст чизуу", scaleButton: "Слооптун өлчөмүн өзгөртүү", autoTracingButton: "Автоматтык тизмеги чизуу" }, measurements: { totalLength: "Узундук", segmentLength: "Сегмент узундугу", area: "Аймак", radius: "Радиус", perimeter: "Периметр", height: "Диаметр", width: "Кенчилик", coordinates: "Координаттар", coordinatesMarker: "Маркердин координаттары" } }, Hn = Or, ai = { en: Be, de: mn, it: yn, id: Xe, ro: cr, ru: Ye, es: Qe, nl: dn, fr: Mn, pt: Hn, pt_br: ei, pt_pt: Or, zh: Cn, zh_tw: Br, pl: Nr, sv: Zr, el: ni, hu: ji, da: nn, no: Fi, fa: Nn, ua: qn, tr: nl, cz: Ne, ja: kr, fi: vn, ko: as, ky: On }, ri = { _globalEditModeEnabled: !1, enableGlobalEditMode(v) {
       let k = { ...v };
       this._globalEditModeEnabled = !0, this.Toolbar.toggleButton("editMode", this.globalEditModeEnabled()), L.PM.Utils.findLayers(this.map).forEach((T) => {
         this._isRelevantForEdit(T) && T.pm.enable(k);
@@ -8019,7 +8019,7 @@ function VA() {
       }
     }, _layerAddedRotate({ layer: v }) {
       this._addedLayersRotate[L.stamp(v)] = v;
-    } }, Ss = qo, Ho = c(ee()), oo = { _fireDrawStart(v = "Draw", k = {}) {
+    } }, Es = qo, Ho = c(ee()), oo = { _fireDrawStart(v = "Draw", k = {}) {
       this.__fire(this._map, "pm:drawstart", { shape: this._shape, workingLayer: this._layer }, v, k);
     }, _fireDrawEnd(v = "Draw", k = {}) {
       this.__fire(this._map, "pm:drawend", { shape: this._shape }, v, k);
@@ -8231,7 +8231,7 @@ function VA() {
     function Cr(v) {
       return v.options.renderer || v._map && (v._map._getPaneRenderer(v.options.pane) || v._map.options.renderer || v._map._renderer) || v._renderer;
     }
-    var Lr = L.Class.extend({ includes: [Gr, cn, ga, Ss, Co], initialize(v) {
+    var Lr = L.Class.extend({ includes: [Gr, cn, ga, Es, Co], initialize(v) {
       this.map = v, this.Draw = new L.PM.Draw(v), this.Toolbar = new L.PM.Toolbar(v), this.Keyboard = Ze(), this.globalOptions = { snappable: !0, layerGroup: void 0, snappingOrder: ["Marker", "CircleMarker", "Circle", "Line", "Polygon", "Rectangle"], panes: { vertexPane: "markerPane", layerPane: "overlayPane", markerPane: "markerPane" }, draggable: !0 }, this.Keyboard._initKeyListener(v);
     }, setLang(v = "en", k, T = "en") {
       if (v = v.trim().toLowerCase(), !/^[a-z]{2}$/.test(v)) {
@@ -8325,7 +8325,7 @@ function VA() {
         T = document.createEvent("MouseEvents"), T.initMouseEvent(v, k.bubbles, k.cancelable, k.view, I.detail, I.screenX, I.screenY, I.clientX, I.clientY, k.ctrlKey, k.altKey, k.shiftKey, k.metaKey, k.button, k.relatedTarget);
       }
       return T;
-    } }), us = Lr, Kr = L.Control.extend({ includes: [Co], options: { position: "topleft", disableByOtherButtons: !0 }, initialize(v) {
+    } }), ls = Lr, Kr = L.Control.extend({ includes: [Co], options: { position: "topleft", disableByOtherButtons: !0 }, initialize(v) {
       this._button = L.Util.extend({}, this.options, v);
     }, onAdd(v) {
       return this._map = v, this._map.pm.Toolbar.options.oneBlock ? this._container = this._map.pm.Toolbar._createContainer(this.options.position) : this._button.tool === "edit" ? this._container = this._map.pm.Toolbar.editContainer : this._button.tool === "options" ? this._container = this._map.pm.Toolbar.optionsContainer : this._button.tool === "custom" ? this._container = this._map.pm.Toolbar.customContainer : this._container = this._map.pm.Toolbar.drawContainer, this._renderButton(), this._container;
@@ -8409,9 +8409,9 @@ function VA() {
       v._preparedActions?.forEach((k) => {
         k?._node && (k.isActive && k.isActive.call(this) ? L.DomUtil.addClass(k._node, "active-action") : L.DomUtil.removeClass(k._node, "active-action"));
       });
-    } }), hs = Kr;
-    L.Control.PMButton = hs;
-    var cs = L.Class.extend({ options: { drawMarker: !0, drawRectangle: !0, drawPolyline: !0, drawPolygon: !0, drawCircle: !0, drawCircleMarker: !0, drawText: !0, editMode: !0, dragMode: !0, cutPolygon: !0, removalMode: !0, rotateMode: !0, snappingOption: !0, drawControls: !0, editControls: !0, optionsControls: !0, customControls: !0, oneBlock: !1, position: "topleft", positions: { draw: "", edit: "", options: "", custom: "" } }, customButtons: [], initialize(v) {
+    } }), us = Kr;
+    L.Control.PMButton = us;
+    var hs = L.Class.extend({ options: { drawMarker: !0, drawRectangle: !0, drawPolyline: !0, drawPolygon: !0, drawCircle: !0, drawCircleMarker: !0, drawText: !0, editMode: !0, dragMode: !0, cutPolygon: !0, removalMode: !0, rotateMode: !0, snappingOption: !0, drawControls: !0, editControls: !0, optionsControls: !0, customControls: !0, oneBlock: !1, position: "topleft", positions: { draw: "", edit: "", options: "", custom: "" } }, customButtons: [], initialize(v) {
       this.customButtons = [], this.options.positions = { draw: "", edit: "", options: "", custom: "" }, this.init(v);
     }, reinit() {
       let v = this.isVisible;
@@ -8570,7 +8570,7 @@ function VA() {
     }, _btnNameMapping(v) {
       let k = this._shapeMapping();
       return k[v] ? k[v] : v;
-    } }), Po = cs, Ys = c(ee()), fs = { _initSnappableMarkers() {
+    } }), Po = hs, Ys = c(ee()), cs = { _initSnappableMarkers() {
       this.options.snapDistance = this.options.snapDistance || 30, this.options.snapSegment = this.options.snapSegment === void 0 ? !0 : this.options.snapSegment, this._assignEvents(this._markers), this._layer.off("pm:dragstart", this._unsnap, this), this._layer.on("pm:dragstart", this._unsnap, this);
     }, _disableSnapping() {
       this._layer.off("pm:dragstart", this._unsnap, this);
@@ -8702,7 +8702,7 @@ function VA() {
       return L.LineUtil.pointToSegmentDistance(G, tt, it);
     }, _getDistance(v, k, T) {
       return v.latLngToContainerPoint(k).distanceTo(v.latLngToContainerPoint(T));
-    } }, Vo = fs, $s = L.Class.extend({ includes: [Vo, Co], options: { snappable: !0, snapDistance: 20, snapMiddle: !1, allowSelfIntersection: !0, tooltips: !0, templineStyle: {}, hintlineStyle: { color: "#3388ff", dashArray: "5,5" }, pathOptions: null, cursorMarker: !0, finishOn: null, markerStyle: { draggable: !0, icon: L.icon() }, hideMiddleMarkers: !1, minRadiusCircle: null, maxRadiusCircle: null, minRadiusCircleMarker: null, maxRadiusCircleMarker: null, resizeableCircleMarker: !1, resizeableCircle: !0, markerEditable: !0, continueDrawing: !1, snapSegment: !0, requireSnapToFinish: !1, rectangleAngle: 0, textOptions: { text: null, focusAfterDraw: null, removeIfEmpty: null, className: null }, snapVertex: !0 }, setOptions(v) {
+    } }, Vo = cs, $s = L.Class.extend({ includes: [Vo, Co], options: { snappable: !0, snapDistance: 20, snapMiddle: !1, allowSelfIntersection: !0, tooltips: !0, templineStyle: {}, hintlineStyle: { color: "#3388ff", dashArray: "5,5" }, pathOptions: null, cursorMarker: !0, finishOn: null, markerStyle: { draggable: !0, icon: L.icon() }, hideMiddleMarkers: !1, minRadiusCircle: null, maxRadiusCircle: null, minRadiusCircleMarker: null, maxRadiusCircleMarker: null, resizeableCircleMarker: !1, resizeableCircle: !0, markerEditable: !0, continueDrawing: !1, snapSegment: !0, requireSnapToFinish: !1, rectangleAngle: 0, textOptions: { text: null, focusAfterDraw: null, removeIfEmpty: null, className: null }, snapVertex: !0 }, setOptions(v) {
       L.Util.setOptions(this, v), this.setStyle(this.options);
     }, setStyle() {
     }, getOptions() {
@@ -8801,7 +8801,7 @@ function VA() {
       if (T === void 0 && (T = {}), !v) throw new Error("coordinates is required");
       if (!Array.isArray(v)) throw new Error("coordinates must be an Array");
       if (v.length < 2) throw new Error("coordinates must be at least 2 numbers long");
-      if (!ds(v[0]) || !ds(v[1])) throw new Error("coordinates must contain numbers");
+      if (!fs(v[0]) || !fs(v[1])) throw new Error("coordinates must contain numbers");
       var I = { type: "Point", coordinates: v };
       return lr(I, k, T);
     }
@@ -8835,10 +8835,10 @@ function VA() {
       var k = v % 360;
       return k * Math.PI / 180;
     }
-    function ds(v) {
+    function fs(v) {
       return !isNaN(v) && v !== null && !Array.isArray(v);
     }
-    function ps(v) {
+    function ds(v) {
       var k, T, I = { type: "FeatureCollection", features: [] };
       if (v.type === "Feature" ? T = v.geometry : T = v, T.type === "LineString") k = [T.coordinates];
       else if (T.type === "MultiLineString") k = T.coordinates;
@@ -8883,11 +8883,11 @@ function VA() {
       let k = this._layer._defaultShape().slice();
       k.push(this._hintMarker.getLatLng()), this._change(k);
     }, hasSelfIntersection() {
-      return ps(this._layer.toGeoJSON(15)).features.length > 0;
+      return ds(this._layer.toGeoJSON(15)).features.length > 0;
     }, _handleSelfIntersection(v, k) {
       let T = L.polyline(this._layer.getLatLngs());
       v && (k || (k = this._hintMarker.getLatLng()), T.addLatLng(k));
-      let I = ps(T.toGeoJSON(15));
+      let I = ds(T.toGeoJSON(15));
       this._doesSelfIntersect = I.features.length > 0, this._doesSelfIntersect ? this.isRed || (this.isRed = !0, this._hintline.setStyle({ color: "#f00000ff" }), this._fireIntersect(I, this._map, "Draw")) : this._hintline.isEmpty() || (this.isRed = !1, this._hintline.setStyle(this.options.hintlineStyle));
     }, _createVertex(v) {
       if (!this.options.allowSelfIntersection && (this._handleSelfIntersection(!0, v.latlng), this._doesSelfIntersect)) return;
@@ -9129,13 +9129,13 @@ function VA() {
       } else if (v.coordinates) return v.coordinates;
       throw new Error("coords must be GeoJSON Feature, Geometry Object or an Array");
     }
-    function _s(v) {
+    function ps(v) {
       return v.type === "Feature" ? v.geometry : v;
     }
-    function ms(v, k) {
+    function _s(v, k) {
       return v.type === "FeatureCollection" ? "FeatureCollection" : v.type === "GeometryCollection" ? "GeometryCollection" : v.type === "Feature" && v.geometry !== null ? v.geometry.type : v.type;
     }
-    function Cs(v, k, T) {
+    function Ss(v, k, T) {
       if (v !== null) for (var I, G, tt, it, at, mt, yt, zt = 0, Nt = 0, ie, pe = v.type, Oe = pe === "FeatureCollection", We = pe === "Feature", un = Oe ? v.features.length : 1, ir = 0; ir < un; ir++) {
         yt = Oe ? v.features[ir].geometry : We ? v.geometry : v, ie = yt ? yt.type === "GeometryCollection" : !1, at = ie ? yt.geometries.length : 1;
         for (var Gt = 0; Gt < at; Gt++) {
@@ -9182,7 +9182,7 @@ function VA() {
                 }
                 break;
               case "GeometryCollection":
-                for (I = 0; I < it.geometries.length; I++) if (Cs(it.geometries[I], k) === !1) return !1;
+                for (I = 0; I < it.geometries.length; I++) if (Ss(it.geometries[I], k) === !1) return !1;
                 break;
               default:
                 throw new Error("Unknown Geometry Type");
@@ -9342,10 +9342,10 @@ function VA() {
         return [mt - (G - T) / 2, T, mt + (G - T) / 2, G];
       }
     }
-    var gs = Wn;
+    var ms = Wn;
     function to(v) {
       var k = [1 / 0, 1 / 0, -1 / 0, -1 / 0];
-      return Cs(v, function(T) {
+      return Ss(v, function(T) {
         k[0] > T[0] && (k[0] = T[0]), k[1] > T[1] && (k[1] = T[1]), k[2] < T[0] && (k[2] = T[0]), k[3] < T[1] && (k[3] = T[1]);
       }), k;
     }
@@ -9359,7 +9359,7 @@ function VA() {
       if (typeof I != "number") throw new Error("<coordinates> must be a number");
       (G === !1 || G === void 0) && (v = JSON.parse(JSON.stringify(v)));
       var tt = Math.pow(10, T);
-      return Cs(v, function(it) {
+      return Ss(v, function(it) {
         ao(it, tt, I);
       }), v;
     }
@@ -9368,7 +9368,7 @@ function VA() {
       for (var I = 0; I < v.length; I++) v[I] = Math.round(v[I] * k) / k;
       return v;
     }
-    var Ps = rr;
+    var Cs = rr;
     function To(v, k, T) {
       if (T === void 0 && (T = {}), T.final === !0) return lo(v, k);
       var I = hi(v), G = hi(k), tt = pi(I[0]), it = pi(G[0]), at = pi(I[1]), mt = pi(G[1]), yt = Math.sin(it - tt) * Math.cos(mt), zt = Math.cos(at) * Math.sin(mt) - Math.sin(at) * Math.cos(mt) * Math.cos(it - tt);
@@ -9401,11 +9401,11 @@ function VA() {
     function ho(v, k) {
       if (!v) throw new Error("line is required");
       if (!k) throw new Error("splitter is required");
-      var T = ms(v), I = ms(k);
+      var T = _s(v), I = _s(k);
       if (T !== "LineString") throw new Error("line must be LineString");
       if (I === "FeatureCollection") throw new Error("splitter cannot be a FeatureCollection");
       if (I === "GeometryCollection") throw new Error("splitter cannot be a GeometryCollection");
-      var G = Ps(k, { precision: 7 });
+      var G = Cs(k, { precision: 7 });
       switch (I) {
         case "Point":
           return $o(v, G);
@@ -9424,7 +9424,7 @@ function VA() {
         if (T.forEach(function(at, mt) {
           at.id = mt;
         }), !T.length) T = $o(v, G).features, T.forEach(function(at) {
-          at.bbox || (at.bbox = gs(ur(at)));
+          at.bbox || (at.bbox = ms(ur(at)));
         }), I.load(Ir(T));
         else {
           var tt = I.search(G);
@@ -9468,8 +9468,8 @@ function VA() {
     function Io(v, k, T) {
       if (T === void 0 && (T = {}), !v) throw new Error("point is required");
       if (!k) throw new Error("polygon is required");
-      var I = hi(v), G = _s(k), tt = G.type, it = k.bbox, at = G.coordinates;
-      if (it && Ts(I, it) === !1) return !1;
+      var I = hi(v), G = ps(k), tt = G.type, it = k.bbox, at = G.coordinates;
+      if (it && Ps(I, it) === !1) return !1;
       tt === "Polygon" && (at = [at]);
       for (var mt = !1, yt = 0; yt < at.length && !mt; yt++) if (Js(I, at[yt][0], T.ignoreBoundary)) {
         for (var zt = !1, Nt = 1; Nt < at[yt].length && !zt; ) Js(I, at[yt][Nt], !T.ignoreBoundary) && (zt = !0), Nt++;
@@ -9488,7 +9488,7 @@ function VA() {
       }
       return I;
     }
-    function Ts(v, k) {
+    function Ps(v, k) {
       return k[0] <= v[0] && k[1] <= v[1] && k[2] >= v[0] && k[3] >= v[1];
     }
     function Ma(v, k, T) {
@@ -9513,7 +9513,7 @@ function VA() {
     }
     var ki = Ma;
     function Ea(v, k) {
-      var T = _s(v), I = _s(k), G = T.type, tt = I.type, it = T.coordinates, at = I.coordinates;
+      var T = ps(v), I = ps(k), G = T.type, tt = I.type, it = T.coordinates, at = I.coordinates;
       switch (G) {
         case "Point":
           switch (tt) {
@@ -9538,7 +9538,7 @@ function VA() {
             case "LineString":
               return Zi(T, I);
             case "MultiPoint":
-              return As(T, I);
+              return Ts(T, I);
             default:
               throw new Error("feature2 " + tt + " geometry not supported");
           }
@@ -9580,7 +9580,7 @@ function VA() {
       }
       return !0;
     }
-    function As(v, k) {
+    function Ts(v, k) {
       for (var T = !1, I = 0, G = k.coordinates; I < G.length; I++) {
         var tt = G[I];
         if (ki(tt, v, { ignoreEndVertices: !0 }) && (T = !0), !ki(tt, v)) return !1;
@@ -9603,7 +9603,7 @@ function VA() {
     }
     function Pa(v, k) {
       var T = !1, I = 0, G = ur(v), tt = ur(k);
-      if (!vs(G, tt)) return !1;
+      if (!gs(G, tt)) return !1;
       for (I; I < k.coordinates.length - 1; I++) {
         var it = Ta(k.coordinates[I], k.coordinates[I + 1]);
         if (Io({ type: "Point", coordinates: it }, v, { ignoreBoundary: !0 })) {
@@ -9616,14 +9616,14 @@ function VA() {
     function Li(v, k) {
       if (v.type === "Feature" && v.geometry === null || k.type === "Feature" && k.geometry === null) return !1;
       var T = ur(v), I = ur(k);
-      if (!vs(T, I)) return !1;
-      for (var G = _s(k).coordinates, tt = 0, it = G; tt < it.length; tt++) for (var at = it[tt], mt = 0, yt = at; mt < yt.length; mt++) {
+      if (!gs(T, I)) return !1;
+      for (var G = ps(k).coordinates, tt = 0, it = G; tt < it.length; tt++) for (var at = it[tt], mt = 0, yt = at; mt < yt.length; mt++) {
         var zt = yt[mt];
         if (!Io(zt, v)) return !1;
       }
       return !0;
     }
-    function vs(v, k) {
+    function gs(v, k) {
       return !(v[0] > k[0] || v[2] < k[2] || v[1] > k[1] || v[3] < k[3]);
     }
     function Xo(v, k) {
@@ -9632,18 +9632,18 @@ function VA() {
     function Ta(v, k) {
       return [(v[0] + k[0]) / 2, (v[1] + k[1]) / 2];
     }
-    var Wr = c(ln()), ys = (v) => () => v, Qo = (v) => {
-      let k = v ? (T, I) => I.minus(T).abs().isLessThanOrEqualTo(v) : ys(!1);
+    var Wr = c(ln()), vs = (v) => () => v, Qo = (v) => {
+      let k = v ? (T, I) => I.minus(T).abs().isLessThanOrEqualTo(v) : vs(!1);
       return (T, I) => k(T, I) ? 0 : T.comparedTo(I);
     };
     function Wi(v) {
-      let k = v ? (T, I, G, tt, it) => T.exponentiatedBy(2).isLessThanOrEqualTo(tt.minus(I).exponentiatedBy(2).plus(it.minus(G).exponentiatedBy(2)).times(v)) : ys(!1);
+      let k = v ? (T, I, G, tt, it) => T.exponentiatedBy(2).isLessThanOrEqualTo(tt.minus(I).exponentiatedBy(2).plus(it.minus(G).exponentiatedBy(2)).times(v)) : vs(!1);
       return (T, I, G) => {
         let tt = T.x, it = T.y, at = G.x, mt = G.y, yt = it.minus(mt).times(I.x.minus(at)).minus(tt.minus(at).times(I.y.minus(mt)));
         return k(yt, tt, it, at, mt) ? 0 : yt.comparedTo(0);
       };
     }
-    var Aa = /^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i, Vi = Math.ceil, Dr = Math.floor, $r = "[BigNumber Error] ", bs = $r + "Number primitive has more than 15 significant digits: ", Mi = 1e14, En = 14, Mr = 9007199254740991, fo = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13], br = 1e7, Pn = 1e9;
+    var Aa = /^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i, Vi = Math.ceil, Dr = Math.floor, $r = "[BigNumber Error] ", ys = $r + "Number primitive has more than 15 significant digits: ", Mi = 1e14, En = 14, Mr = 9007199254740991, fo = [1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13], br = 1e7, Pn = 1e9;
     function gi(v) {
       var k, T, I, G = Gt.prototype = { constructor: Gt, toString: null, valueOf: null }, tt = new Gt(1), it = 20, at = 4, mt = -7, yt = 21, zt = -1e7, Nt = 1e7, ie = !1, pe = 1, Oe = 0, We = { prefix: "", groupSize: 3, secondaryGroupSize: 0, groupSeparator: ",", decimalSeparator: ".", fractionGroupSize: 0, fractionGroupSeparator: " ", suffix: "" }, un = "0123456789abcdefghijklmnopqrstuvwxyz", ir = !0;
       function Gt(_t, xt) {
@@ -9670,7 +9670,7 @@ function VA() {
           if (o(xt, 2, un.length, "Base"), xt == 10 && ir) return se = new Gt(_t), oe(se, it + se.e + 1, at);
           if (ue = String(_t), Kt = typeof _t == "number") {
             if (_t * 0 != 0) return I(se, ue, Kt, xt);
-            if (se.s = 1 / _t < 0 ? (ue = ue.slice(1), -1) : 1, Gt.DEBUG && ue.replace(/^0\.0*|\./, "").length > 15) throw Error(bs + _t);
+            if (se.s = 1 / _t < 0 ? (ue = ue.slice(1), -1) : 1, Gt.DEBUG && ue.replace(/^0\.0*|\./, "").length > 15) throw Error(ys + _t);
           } else se.s = ue.charCodeAt(0) === 45 ? (ue = ue.slice(1), -1) : 1;
           for (Mt = un.slice(0, xt), It = Yt = 0, te = ue.length; Yt < te; Yt++) if (Mt.indexOf(Pt = ue.charAt(Yt)) < 0) {
             if (Pt == ".") {
@@ -9689,7 +9689,7 @@ function VA() {
         for (Yt = 0; ue.charCodeAt(Yt) === 48; Yt++) ;
         for (te = ue.length; ue.charCodeAt(--te) === 48; ) ;
         if (ue = ue.slice(Yt, ++te)) {
-          if (te -= Yt, Kt && Gt.DEBUG && te > 15 && (_t > Mr || _t !== Dr(_t))) throw Error(bs + se.s * _t);
+          if (te -= Yt, Kt && Gt.DEBUG && te > 15 && (_t > Mr || _t !== Dr(_t))) throw Error(ys + se.s * _t);
           if ((It = It - Yt - 1) > Nt) se.c = se.e = null;
           else if (It < zt) se.c = [se.e = 0];
           else {
@@ -9809,21 +9809,21 @@ function VA() {
           for (; !Pt[0] && Pt.length > 1; Pt.splice(0, 1)) ;
         }
         return function(Pt, Ot, It, Yt, Kt) {
-          var te, ue, se, Ce, tn, fn, wn, gr, Un, In, Kn, vi, ll, Dc, h0, Ds, nu, hr = Pt.s == Ot.s ? 1 : -1, Yn = Pt.c, Rn = Ot.c;
+          var te, ue, se, Ce, tn, fn, wn, gr, Un, In, Kn, vi, ll, Rc, u0, Rs, nu, hr = Pt.s == Ot.s ? 1 : -1, Yn = Pt.c, Rn = Ot.c;
           if (!Yn || !Yn[0] || !Rn || !Rn[0]) return new Gt(!Pt.s || !Ot.s || (Yn ? Rn && Yn[0] == Rn[0] : !Rn) ? NaN : Yn && Yn[0] == 0 || !Rn ? hr * 0 : hr / 0);
           for (gr = new Gt(hr), Un = gr.c = [], ue = Pt.e - Ot.e, hr = It + ue + 1, Kt || (Kt = Mi, ue = ii(Pt.e / En) - ii(Ot.e / En), hr = hr / En | 0), se = 0; Rn[se] == (Yn[se] || 0); se++) ;
           if (Rn[se] > (Yn[se] || 0) && ue--, hr < 0) Un.push(1), Ce = !0;
           else {
-            for (Dc = Yn.length, Ds = Rn.length, se = 0, hr += 2, tn = Dr(Kt / (Rn[0] + 1)), tn > 1 && (Rn = _t(Rn, tn, Kt), Yn = _t(Yn, tn, Kt), Ds = Rn.length, Dc = Yn.length), ll = Ds, In = Yn.slice(0, Ds), Kn = In.length; Kn < Ds; In[Kn++] = 0) ;
-            nu = Rn.slice(), nu = [0].concat(nu), h0 = Rn[0], Rn[1] >= Kt / 2 && h0++;
+            for (Rc = Yn.length, Rs = Rn.length, se = 0, hr += 2, tn = Dr(Kt / (Rn[0] + 1)), tn > 1 && (Rn = _t(Rn, tn, Kt), Yn = _t(Yn, tn, Kt), Rs = Rn.length, Rc = Yn.length), ll = Rs, In = Yn.slice(0, Rs), Kn = In.length; Kn < Rs; In[Kn++] = 0) ;
+            nu = Rn.slice(), nu = [0].concat(nu), u0 = Rn[0], Rn[1] >= Kt / 2 && u0++;
             do {
-              if (tn = 0, te = xt(Rn, In, Ds, Kn), te < 0) {
-                if (vi = In[0], Ds != Kn && (vi = vi * Kt + (In[1] || 0)), tn = Dr(vi / h0), tn > 1) for (tn >= Kt && (tn = Kt - 1), fn = _t(Rn, tn, Kt), wn = fn.length, Kn = In.length; xt(fn, In, wn, Kn) == 1; ) tn--, Mt(fn, Ds < wn ? nu : Rn, wn, Kt), wn = fn.length, te = 1;
+              if (tn = 0, te = xt(Rn, In, Rs, Kn), te < 0) {
+                if (vi = In[0], Rs != Kn && (vi = vi * Kt + (In[1] || 0)), tn = Dr(vi / u0), tn > 1) for (tn >= Kt && (tn = Kt - 1), fn = _t(Rn, tn, Kt), wn = fn.length, Kn = In.length; xt(fn, In, wn, Kn) == 1; ) tn--, Mt(fn, Rs < wn ? nu : Rn, wn, Kt), wn = fn.length, te = 1;
                 else tn == 0 && (te = tn = 1), fn = Rn.slice(), wn = fn.length;
-                if (wn < Kn && (fn = [0].concat(fn)), Mt(In, fn, Kn, Kt), Kn = In.length, te == -1) for (; xt(Rn, In, Ds, Kn) < 1; ) tn++, Mt(In, Ds < Kn ? nu : Rn, Kn, Kt), Kn = In.length;
+                if (wn < Kn && (fn = [0].concat(fn)), Mt(In, fn, Kn, Kt), Kn = In.length, te == -1) for (; xt(Rn, In, Rs, Kn) < 1; ) tn++, Mt(In, Rs < Kn ? nu : Rn, Kn, Kt), Kn = In.length;
               } else te === 0 && (tn++, In = [0]);
               Un[se++] = tn, In[0] ? In[Kn++] = Yn[ll] || 0 : (In = [Yn[ll]], Kn = 1);
-            } while ((ll++ < Dc || In[0] != null) && hr--);
+            } while ((ll++ < Rc || In[0] != null) && hr--);
             Ce = In[0] != null, Un[0] || Un.splice(0, 1);
           }
           if (Kt == Mi) {
@@ -10414,9 +10414,9 @@ function VA() {
       if (k.ur.x.isLessThan(v.ll.x) || v.ur.x.isLessThan(k.ll.x) || k.ur.y.isLessThan(v.ll.y) || v.ur.y.isLessThan(k.ll.y)) return null;
       let T = v.ll.x.isLessThan(k.ll.x) ? k.ll.x : v.ll.x, I = v.ur.x.isLessThan(k.ur.x) ? v.ur.x : k.ur.x, G = v.ll.y.isLessThan(k.ll.y) ? k.ll.y : v.ll.y, tt = v.ur.y.isLessThan(k.ur.y) ? v.ur.y : k.ur.y;
       return { ll: { x: T, y: G }, ur: { x: I, y: tt } };
-    }, Os = (v, k) => v.x.times(k.y).minus(v.y.times(k.x)), Oa = (v, k) => v.x.times(k.x).plus(v.y.times(k.y)), ts = (v) => Oa(v, v).sqrt(), rl = (v, k, T) => {
+    }, As = (v, k) => v.x.times(k.y).minus(v.y.times(k.x)), Oa = (v, k) => v.x.times(k.x).plus(v.y.times(k.y)), ts = (v) => Oa(v, v).sqrt(), rl = (v, k, T) => {
       let I = { x: k.x.minus(v.x), y: k.y.minus(v.y) }, G = { x: T.x.minus(v.x), y: T.y.minus(v.y) };
-      return Os(G, I).div(ts(G)).div(ts(I));
+      return As(G, I).div(ts(G)).div(ts(I));
     }, ea = (v, k, T) => {
       let I = { x: k.x.minus(v.x), y: k.y.minus(v.y) }, G = { x: T.x.minus(v.x), y: T.y.minus(v.y) };
       return Oa(G, I).div(ts(G)).div(ts(I));
@@ -10425,9 +10425,9 @@ function VA() {
       if (I.x.isZero()) return po(v, k, T.x);
       if (k.y.isZero()) return Tn(T, I, v.y);
       if (I.y.isZero()) return Tn(v, k, T.y);
-      let G = Os(k, I);
+      let G = As(k, I);
       if (G.isZero()) return null;
-      let tt = { x: T.x.minus(v.x), y: T.y.minus(v.y) }, it = Os(tt, k).div(G), at = Os(tt, I).div(G), mt = v.x.plus(at.times(k.x)), yt = T.x.plus(it.times(I.x)), zt = v.y.plus(at.times(k.y)), Nt = T.y.plus(it.times(I.y)), ie = mt.plus(yt).div(2), pe = zt.plus(Nt).div(2);
+      let tt = { x: T.x.minus(v.x), y: T.y.minus(v.y) }, it = As(tt, k).div(G), at = As(tt, I).div(G), mt = v.x.plus(at.times(k.x)), yt = T.x.plus(it.times(I.x)), zt = v.y.plus(at.times(k.y)), Nt = T.y.plus(it.times(I.y)), ie = mt.plus(yt).div(2), pe = zt.plus(Nt).div(2);
       return { x: ie, y: pe };
     }, Ki = class LP {
       point;
@@ -10483,7 +10483,7 @@ function VA() {
           return it.isGreaterThanOrEqualTo(0) && mt.isGreaterThanOrEqualTo(0) ? at.isLessThan(yt) ? 1 : at.isGreaterThan(yt) ? -1 : 0 : it.isLessThan(0) && mt.isLessThan(0) ? at.isLessThan(yt) ? -1 : at.isGreaterThan(yt) ? 1 : 0 : mt.isLessThan(it) ? -1 : mt.isGreaterThan(it) ? 1 : 0;
         };
       }
-    }, ol = 0, _o = class Qb {
+    }, ol = 0, _o = class Xb {
       id;
       leftSE;
       rightSE;
@@ -10545,7 +10545,7 @@ function VA() {
         else if (at > 0) G = T, tt = k, it = -1;
         else throw new Error(`Tried to create degenerate segment at [${k.x}, ${k.y}]`);
         let mt = new Ki(G, !0), yt = new Ki(tt, !1);
-        return new Qb(mt, yt, [I], [it]);
+        return new Xb(mt, yt, [I], [it]);
       }
       replaceRightSE(k) {
         this.rightSE = k, this.rightSE.segment = this, this.rightSE.otherSE = this.leftSE, this.leftSE.otherSE = this.rightSE;
@@ -10579,7 +10579,7 @@ function VA() {
       split(k) {
         let T = [], I = k.events !== void 0, G = new Ki(k, !0), tt = new Ki(k, !1), it = this.rightSE;
         this.replaceRightSE(tt), T.push(tt), T.push(G);
-        let at = new Qb(G, it, this.rings.slice(), this.windings.slice());
+        let at = new Xb(G, it, this.rings.slice(), this.windings.slice());
         return Ki.comparePoints(at.leftSE.point, at.rightSE.point) > 0 && at.swapEvents(), Ki.comparePoints(this.leftSE.point, this.rightSE.point) > 0 && this.swapEvents(), I && (G.checkForConsuming(), tt.checkForConsuming()), T;
       }
       swapEvents() {
@@ -10591,7 +10591,7 @@ function VA() {
         let T = this, I = k;
         for (; T.consumedBy; ) T = T.consumedBy;
         for (; I.consumedBy; ) I = I.consumedBy;
-        let G = Qb.compare(T, I);
+        let G = Xb.compare(T, I);
         if (G !== 0) {
           if (G > 0) {
             let tt = T;
@@ -10674,7 +10674,7 @@ function VA() {
         }
         return this._isInResult;
       }
-    }, Is = class {
+    }, Os = class {
       poly;
       isExterior;
       segments;
@@ -10707,9 +10707,9 @@ function VA() {
       bbox;
       constructor(v, k) {
         if (!Array.isArray(v)) throw new Error("Input geometry is not a valid Polygon or MultiPolygon");
-        this.exteriorRing = new Is(v[0], this, !0), this.bbox = { ll: { x: this.exteriorRing.bbox.ll.x, y: this.exteriorRing.bbox.ll.y }, ur: { x: this.exteriorRing.bbox.ur.x, y: this.exteriorRing.bbox.ur.y } }, this.interiorRings = [];
+        this.exteriorRing = new Os(v[0], this, !0), this.bbox = { ll: { x: this.exteriorRing.bbox.ll.x, y: this.exteriorRing.bbox.ll.y }, ur: { x: this.exteriorRing.bbox.ur.x, y: this.exteriorRing.bbox.ur.y } }, this.interiorRings = [];
         for (let T = 1, I = v.length; T < I; T++) {
-          let G = new Is(v[T], this, !1);
+          let G = new Os(v[T], this, !1);
           G.bbox.ll.x.isLessThan(this.bbox.ll.x) && (this.bbox.ll.x = G.bbox.ll.x), G.bbox.ll.y.isLessThan(this.bbox.ll.y) && (this.bbox.ll.y = G.bbox.ll.y), G.bbox.ur.x.isGreaterThan(this.bbox.ur.x) && (this.bbox.ur.x = G.bbox.ur.x), G.bbox.ur.y.isGreaterThan(this.bbox.ur.y) && (this.bbox.ur.y = G.bbox.ur.y), this.interiorRings.push(G);
         }
         this.multiPoly = k;
@@ -10722,7 +10722,7 @@ function VA() {
         }
         return v;
       }
-    }, ju = class {
+    }, Gu = class {
       isSubject;
       polys;
       bbox;
@@ -10747,7 +10747,7 @@ function VA() {
         }
         return v;
       }
-    }, kh = class L4 {
+    }, xh = class L4 {
       events;
       poly;
       _isExteriorRing;
@@ -10829,7 +10829,7 @@ function VA() {
           T = I.prevInResult(), I = T ? T.prevInResult() : null;
         }
       }
-    }, Fu = class {
+    }, ju = class {
       exteriorRing;
       interiorRings;
       constructor(v) {
@@ -10848,7 +10848,7 @@ function VA() {
         }
         return k;
       }
-    }, Lh = class {
+    }, kh = class {
       rings;
       polys;
       constructor(v) {
@@ -10866,15 +10866,15 @@ function VA() {
         let k = [];
         for (let T = 0, I = v.length; T < I; T++) {
           let G = v[T];
-          if (!G.poly) if (G.isExteriorRing()) k.push(new Fu(G));
+          if (!G.poly) if (G.isExteriorRing()) k.push(new ju(G));
           else {
             let tt = G.enclosingRing();
-            tt?.poly || k.push(new Fu(tt)), tt?.poly?.addInterior(G);
+            tt?.poly || k.push(new ju(tt)), tt?.poly?.addInterior(G);
           }
         }
         return k;
       }
-    }, Mh = class {
+    }, Lh = class {
       queue;
       tree;
       segments;
@@ -10941,13 +10941,13 @@ function VA() {
         let I = v.split(k);
         return I.push(T), v.consumedBy === void 0 && this.tree.add(v), I;
       }
-    }, Eh = class {
+    }, Mh = class {
       type;
       numMultiPolys;
       run(v, k, T) {
         al.type = v;
-        let I = [new ju(k, !0)];
-        for (let mt = 0, yt = T.length; mt < yt; mt++) I.push(new ju(T[mt], !1));
+        let I = [new Gu(k, !0)];
+        for (let mt = 0, yt = T.length; mt < yt; mt++) I.push(new Gu(T[mt], !1));
         if (al.numMultiPolys = I.length, al.type === "difference") {
           let mt = I[0], yt = 1;
           for (; yt < I.length; ) ta(I[yt].bbox, mt.bbox) !== null ? yt++ : I.splice(yt, 1);
@@ -10961,7 +10961,7 @@ function VA() {
           let zt = I[mt].getSweepEvents();
           for (let Nt = 0, ie = zt.length; Nt < ie; Nt++) G.add(zt[Nt]);
         }
-        let tt = new Mh(G), it = null;
+        let tt = new Lh(G), it = null;
         for (G.size != 0 && (it = G.first(), G.delete(it)); it; ) {
           let mt = tt.process(it);
           for (let yt = 0, zt = mt.length; yt < zt; yt++) {
@@ -10971,10 +10971,10 @@ function VA() {
           G.size != 0 ? (it = G.first(), G.delete(it)) : it = null;
         }
         jn.reset();
-        let at = kh.factory(tt.segments);
-        return new Lh(at).getGeom();
+        let at = xh.factory(tt.segments);
+        return new kh(at).getGeom();
       }
-    }, al = new Eh(), Il = al, Sh = (v, ...k) => Il.run("intersection", v, k), Ch = (v, ...k) => Il.run("difference", v, k);
+    }, al = new Mh(), Il = al, Eh = (v, ...k) => Il.run("intersection", v, k), Sh = (v, ...k) => Il.run("difference", v, k);
     jn.set;
     function Rl(v) {
       let k = { type: "Feature" };
@@ -10983,44 +10983,44 @@ function VA() {
     function Dl(v) {
       return v.type === "Feature" ? v.geometry : v;
     }
-    function zu(v) {
+    function Fu(v) {
       return v && v.geometry && v.geometry.coordinates ? v.geometry.coordinates : v;
     }
-    function Ph(v) {
+    function Ch(v) {
       return Rl({ type: "LineString", coordinates: v });
     }
-    function Th(v) {
+    function Ph(v) {
       return Rl({ type: "MultiLineString", coordinates: v });
     }
-    function Uu(v) {
+    function zu(v) {
       return Rl({ type: "Polygon", coordinates: v });
     }
-    function qu(v) {
+    function Uu(v) {
       return Rl({ type: "MultiPolygon", coordinates: v });
+    }
+    function Th(v, k) {
+      let T = Dl(v), I = Dl(k), G = Eh(T.coordinates, I.coordinates);
+      return G.length === 0 ? null : G.length === 1 ? zu(G[0]) : Uu(G);
     }
     function Ah(v, k) {
       let T = Dl(v), I = Dl(k), G = Sh(T.coordinates, I.coordinates);
-      return G.length === 0 ? null : G.length === 1 ? Uu(G[0]) : qu(G);
+      return G.length === 0 ? null : G.length === 1 ? zu(G[0]) : Uu(G);
     }
-    function Oh(v, k) {
-      let T = Dl(v), I = Dl(k), G = Ch(T.coordinates, I.coordinates);
-      return G.length === 0 ? null : G.length === 1 ? Uu(G[0]) : qu(G);
+    function qu(v) {
+      return Array.isArray(v) ? 1 + qu(v[0]) : -1;
     }
-    function Hu(v) {
-      return Array.isArray(v) ? 1 + Hu(v[0]) : -1;
-    }
-    function Ih(v) {
+    function Oh(v) {
       v instanceof L.Polyline && (v = v.toGeoJSON(15));
-      let k = zu(v), T = Hu(k), I = [];
+      let k = Fu(v), T = qu(k), I = [];
       return T > 1 ? k.forEach((G) => {
-        I.push(Ph(G));
+        I.push(Ch(G));
       }) : I.push(v), I;
     }
-    function Rh(v) {
+    function Ih(v) {
       let k = [];
       return v.eachLayer((T) => {
-        k.push(zu(T.toGeoJSON(15)));
-      }), Th(k);
+        k.push(Fu(T.toGeoJSON(15)));
+      }), Ph(k);
     }
     bn.Cut = bn.Polygon.extend({ initialize(v) {
       this._map = v, this._shape = "Cut", this.toolbarButtonName = "cutPolygon";
@@ -11039,7 +11039,7 @@ function VA() {
       Object.keys(k).map((I) => k[I]).filter((I) => I.pm).filter((I) => !I._pmTempLayer).filter((I) => !L.PM.optIn && !I.options.pmIgnore || L.PM.optIn && I.options.pmIgnore === !1).filter((I) => I instanceof L.Polyline).filter((I) => I !== v).filter((I) => I.pm.options.allowCutting).filter((I) => this.options.layersToCut && L.Util.isArray(this.options.layersToCut) && this.options.layersToCut.length > 0 ? this.options.layersToCut.indexOf(I) > -1 : !0).filter((I) => !this._layerGroup.hasLayer(I)).filter((I) => {
         try {
           let G = !!Zn(v.toGeoJSON(15), I.toGeoJSON(15)).features.length > 0;
-          return G || I instanceof L.Polyline && !(I instanceof L.Polygon) ? G : !!Ah(v.toGeoJSON(15), I.toGeoJSON(15));
+          return G || I instanceof L.Polyline && !(I instanceof L.Polygon) ? G : !!Th(v.toGeoJSON(15), I.toGeoJSON(15));
         } catch {
           return I instanceof L.Polygon && console.error("You can't cut polygons with self-intersections"), !1;
         }
@@ -11074,15 +11074,15 @@ function VA() {
       });
     }, _cutLayer(v, k) {
       let T = L.geoJSON(), I;
-      if (k instanceof L.Polygon) I = Oh(k.toGeoJSON(15), v.toGeoJSON(15));
+      if (k instanceof L.Polygon) I = Ah(k.toGeoJSON(15), v.toGeoJSON(15));
       else {
-        let G = Ih(k);
+        let G = Oh(k);
         G.forEach((tt) => {
           let it = La(tt, v.toGeoJSON(15)), at;
           it && it.features.length > 0 ? at = L.geoJSON(it) : at = L.geoJSON(tt), at.getLayers().forEach((mt) => {
             Ea(v.toGeoJSON(15), mt.toGeoJSON(15)) || mt.addTo(T);
           });
-        }), G.length > 1 ? I = Rh(T) : I = T.toGeoJSON(15);
+        }), G.length > 1 ? I = Ih(T) : I = T.toGeoJSON(15);
       }
       return I;
     }, _change: L.Util.falseFn }), bn.Text = bn.extend({ initialize(v) {
@@ -11123,7 +11123,7 @@ function VA() {
     }, _createTextIcon(v) {
       return L.divIcon({ className: "pm-text-marker", html: v });
     } });
-    var Dh = { enableLayerDrag() {
+    var Rh = { enableLayerDrag() {
       if (!this.options.draggable || !this._layer._map) return;
       this.disable(), this._layerDragEnabled = !0, this._map || (this._map = this._layer._map), (this._layer instanceof L.Marker || this._layer instanceof L.ImageOverlay) && L.DomEvent.on(this._getDOMElem(), "dragstart", this._stopDOMImageDrag), this._layer.dragging && this._layer.dragging.disable(), this._tempDragCoord = null, Cr(this._layer) instanceof L.Canvas ? (this._layer.on("mouseout", this.removeDraggingClass, this), this._layer.on("mouseover", this.addDraggingClass, this)) : this.addDraggingClass(), this._originalMapDragState = this._layer._map.dragging._enabled, this._safeToCacheDragState = !0;
       let v = this._getDOMElem();
@@ -11215,19 +11215,19 @@ function VA() {
       return !1;
     }, _stopDOMImageDrag(v) {
       return v.preventDefault(), !1;
-    } }, Bh = Dh, Nh = c(ln());
-    function Gh(v, k, T, I) {
+    } }, Dh = Rh, Bh = c(ln());
+    function Nh(v, k, T, I) {
       return T.unproject(k.transform(T.project(v, I)), I);
     }
-    function Zu(v, k, T) {
+    function Hu(v, k, T) {
       let I = T.getMaxZoom();
       if (I === 1 / 0 && (I = T.getZoom()), L.Util.isArray(v)) {
         let G = [];
         return v.forEach((tt) => {
-          G.push(Zu(tt, k, T));
+          G.push(Hu(tt, k, T));
         }), G;
       }
-      return v instanceof L.LatLng ? Gh(v, k, T, I) : null;
+      return v instanceof L.LatLng ? Nh(v, k, T, I) : null;
     }
     function Ia(v, k) {
       k instanceof L.Layer && (k = k.getLatLng());
@@ -11238,7 +11238,7 @@ function VA() {
       let T = v.getMaxZoom();
       return T === 1 / 0 && (T = v.getZoom()), v.unproject(k, T);
     }
-    var jh = { _onRotateStart(v) {
+    var Gh = { _onRotateStart(v) {
       this._preventRenderingMarkers(!0), this._rotationOriginLatLng = this._getRotationCenter().clone(), this._rotationOriginPoint = Ia(this._map, this._rotationOriginLatLng), this._rotationStartPoint = Ia(this._map, v.target.getLatLng()), this._initialRotateLatLng = Jn(this._layer), this._startAngle = this.getAngle();
       let k = Jn(this._rotationLayer, this._rotationLayer.pm._rotateOrgLatLng);
       this._fireRotationStart(this._rotationLayer, k), this._fireRotationStart(this._map, k);
@@ -11249,7 +11249,7 @@ function VA() {
       function it(zt, Nt = [], ie = -1) {
         if (ie > -1 && Nt.push(ie), L.Util.isArray(zt[0])) zt.forEach((pe, Oe) => it(pe, Nt.slice(), Oe));
         else {
-          let pe = Nt.length > 0 ? (0, Nh.default)(tt._markers, Nt) : tt._markers[0];
+          let pe = Nt.length > 0 ? (0, Bh.default)(tt._markers, Nt) : tt._markers[0];
           zt.forEach((Oe, We) => {
             pe[We].setLatLng(Oe);
           });
@@ -11269,7 +11269,7 @@ function VA() {
       this._rotationLayer.pm._rotateOrgLatLng = Jn(this._rotationLayer), this._fireRotationEnd(this._rotationLayer, v, k), this._fireRotationEnd(this._map, v, k), this._rotationLayer.pm._fireEdit(this._rotationLayer, "Rotation"), this._preventRenderingMarkers(!1), this._layerRotated = !0;
     }, _rotateLayer(v, k, T, I, G) {
       let tt = Ia(G, T);
-      return this._matrix = I.clone().rotate(v, tt).flip(), Zu(k, this._matrix, G);
+      return this._matrix = I.clone().rotate(v, tt).flip(), Hu(k, this._matrix, G);
     }, _setAngle(v) {
       v = v < 0 ? v + 360 : v, this._angle = v % 360;
     }, _getRotationCenter() {
@@ -11304,7 +11304,7 @@ function VA() {
       return this._getRotationCenter();
     }, setRotationCenter(v) {
       this._rotationCenter = v, this._rotatePoly && this._rotatePoly.pm.setRotationCenter(v);
-    } }, Fh = jh, zh = L.Class.extend({ includes: [Bh, Vo, Fh, Co], options: { snappable: !0, snapDistance: 20, allowSelfIntersection: !0, allowSelfIntersectionEdit: !1, preventMarkerRemoval: !1, removeLayerBelowMinVertexCount: !0, limitMarkersToCount: -1, hideMiddleMarkers: !1, snapSegment: !0, syncLayersOnDrag: !1, draggable: !0, allowEditing: !0, allowRemoval: !0, allowCutting: !0, allowRotation: !0, addVertexOn: "click", removeVertexOn: "contextmenu", removeVertexValidation: void 0, addVertexValidation: void 0, moveVertexValidation: void 0, resizeableCircleMarker: !1, resizeableCircle: !0, snapMiddle: !1, snapVertex: !0 }, setOptions(v) {
+    } }, jh = Gh, Fh = L.Class.extend({ includes: [Dh, Vo, jh, Co], options: { snappable: !0, snapDistance: 20, allowSelfIntersection: !0, allowSelfIntersectionEdit: !1, preventMarkerRemoval: !1, removeLayerBelowMinVertexCount: !0, limitMarkersToCount: -1, hideMiddleMarkers: !1, snapSegment: !0, syncLayersOnDrag: !1, draggable: !0, allowEditing: !0, allowRemoval: !0, allowCutting: !0, allowRotation: !0, addVertexOn: "click", removeVertexOn: "contextmenu", removeVertexValidation: void 0, addVertexValidation: void 0, moveVertexValidation: void 0, resizeableCircleMarker: !1, resizeableCircle: !0, snapMiddle: !1, snapVertex: !0 }, setOptions(v) {
       L.Util.setOptions(this, v);
     }, getOptions() {
       return this.options;
@@ -11324,7 +11324,7 @@ function VA() {
       return v._cancelDragEventChain ? (v._latlng = v._cancelDragEventChain, v.update(), !1) : !0;
     }, _vertexValidationDragEnd(v) {
       return v._cancelDragEventChain ? (v._cancelDragEventChain = null, !1) : !0;
-    } }), _i = zh;
+    } }), _i = Fh;
     _i.LayerGroup = L.Class.extend({ initialize(v) {
       this._layerGroup = v, this._layers = this.getLayers(), this._getMap(), this._layers.forEach((I) => this._initLayer(I));
       let k = (I) => {
@@ -11407,7 +11407,7 @@ function VA() {
       let v = this._layer;
       v.off("pm:drag", this._handleSnapping, this), v.off("pm:dragend", this._cleanupSnapping, this), v.off("pm:dragstart", this._unsnap, this);
     } });
-    var Rs = c(ln()), Uh = { filterMarkerGroup() {
+    var Is = c(ln()), zh = { filterMarkerGroup() {
       this.markerCache = [], this.createCache(), this._layer.on("pm:edit", this.createCache, this), this.applyLimitFilters({}), this.throttledApplyLimitFilters || (this.throttledApplyLimitFilters = L.Util.throttle(this.applyLimitFilters, 100, this)), this._layer.on("pm:disable", this._removeMarkerLimitEvents, this), this._layer.on("remove", this._removeMarkerLimitEvents, this), this.options.limitMarkersToCount > -1 && (this._layer.on("pm:vertexremoved", this._initMarkers, this), this._map.on("mousemove", this.throttledApplyLimitFilters, this));
     }, _removeMarkerLimitEvents() {
       this._map.off("mousemove", this.throttledApplyLimitFilters, this), this._layer.off("pm:edit", this.createCache, this), this._layer.off("pm:disable", this._removeMarkerLimitEvents, this), this._layer.off("pm:vertexremoved", this._initMarkers, this);
@@ -11433,8 +11433,8 @@ function VA() {
       }), k.filter((I, G) => T > -1 ? G < T : !0));
     }, _preventRenderMarkers: !1, _preventRenderingMarkers(v) {
       this._preventRenderMarkers = !!v;
-    } }, qh = Uh;
-    _i.Line = _i.extend({ includes: [qh], _shape: "Line", initialize(v) {
+    } }, Uh = zh;
+    _i.Line = _i.extend({ includes: [Uh], _shape: "Line", initialize(v) {
       this._layer = v, this._enabled = !1;
     }, enable(v) {
       if (L.Util.setOptions(this, v), this._map = this._layer._map, !!this._map) {
@@ -11500,15 +11500,15 @@ function VA() {
       v.off("movestart", this._onMiddleMarkerMoveStart, this), v.off(this.options.addVertexOn, this._onMiddleMarkerClick, this);
       let I = v.getLatLng(), G = this._layer._latlngs;
       delete v.leftM, delete v.rightM;
-      let { indexPath: tt, index: it, parentPath: at } = L.PM.Utils.findDeepMarkerIndex(this._markers, k), mt = tt.length > 1 ? (0, Rs.default)(G, at) : G, yt = tt.length > 1 ? (0, Rs.default)(this._markers, at) : this._markers;
+      let { indexPath: tt, index: it, parentPath: at } = L.PM.Utils.findDeepMarkerIndex(this._markers, k), mt = tt.length > 1 ? (0, Is.default)(G, at) : G, yt = tt.length > 1 ? (0, Is.default)(this._markers, at) : this._markers;
       mt.splice(it + 1, 0, I), yt.splice(it + 1, 0, v), this._layer.setLatLngs(G), this.options.hideMiddleMarkers !== !0 && (this._createMiddleMarker(k, v), this._createMiddleMarker(v, T)), this._fireEdit(), this._layerEdited = !0, this._fireChange(this._layer.getLatLngs(), "Edit"), this._fireVertexAdded(v, L.PM.Utils.findDeepMarkerIndex(this._markers, v).indexPath, I), this.options.snappable && this._initSnappableMarkers();
     }, hasSelfIntersection() {
-      return ps(this._layer.toGeoJSON(15)).features.length > 0;
+      return ds(this._layer.toGeoJSON(15)).features.length > 0;
     }, _handleSelfIntersectionOnVertexRemoval() {
       this._handleLayerStyle(!0) && (this._layer.setLatLngs(this._coordsBeforeEdit), this._coordsBeforeEdit = null, this._initMarkers());
     }, _handleLayerStyle(v) {
       let k = this._layer, T, I;
-      if (this.options.allowSelfIntersection ? T = !1 : (I = ps(this._layer.toGeoJSON(15)), T = I.features.length > 0), T) {
+      if (this.options.allowSelfIntersection ? T = !1 : (I = ds(this._layer.toGeoJSON(15)), T = I.features.length > 0), T) {
         if (!this.options.allowSelfIntersection && this.options.allowSelfIntersectionEdit && this._updateDisabledMarkerStyle(this._markers, !0), this.isRed) return T;
         v ? this._flashLayer() : (k.setStyle({ color: "#f00000ff" }), this.isRed = !0), this._fireIntersect(I);
       } else k.setStyle({ color: this.cachedColor }), this.isRed = !1, !this.options.allowSelfIntersection && this.options.allowSelfIntersectionEdit && this._updateDisabledMarkerStyle(this._markers, !1);
@@ -11527,14 +11527,14 @@ function VA() {
       this.options.allowSelfIntersection || (this._coordsBeforeEdit = Jn(this._layer, this._layer.getLatLngs()));
       let T = this._layer.getLatLngs(), { indexPath: I, index: G, parentPath: tt } = L.PM.Utils.findDeepMarkerIndex(this._markers, k);
       if (!I) return;
-      let it = I.length > 1 ? (0, Rs.default)(T, tt) : T, at = I.length > 1 ? (0, Rs.default)(this._markers, tt) : this._markers, mt = tt[tt.length - 1] > 0 && this._layer instanceof L.Polygon;
+      let it = I.length > 1 ? (0, Is.default)(T, tt) : T, at = I.length > 1 ? (0, Is.default)(this._markers, tt) : this._markers, mt = tt[tt.length - 1] > 0 && this._layer instanceof L.Polygon;
       if (!this.options.removeLayerBelowMinVertexCount && !mt && (it.length <= 2 || this.isPolygon() && it.length <= 3)) {
         this._flashLayer();
         return;
       }
       it.splice(G, 1), this._layer.setLatLngs(T), this.isPolygon() && it.length <= 2 && it.splice(0, it.length);
       let yt = !1;
-      if (it.length <= 1 && (it.splice(0, it.length), tt.length > 1 && I.length > 1 && (T = zi(T)), this._layer.setLatLngs(T), this._initMarkers(), yt = !0), ui(T) || this._layer.remove(), T = zi(T), this._layer.setLatLngs(T), this._markers = zi(this._markers), !yt && (at = I.length > 1 ? (0, Rs.default)(this._markers, tt) : this._markers, k._middleMarkerPrev && (this._markerGroup.removeLayer(k._middleMarkerPrev), this._removeFromCache(k._middleMarkerPrev)), k._middleMarkerNext && (this._markerGroup.removeLayer(k._middleMarkerNext), this._removeFromCache(k._middleMarkerNext)), this._markerGroup.removeLayer(k), this._removeFromCache(k), at)) {
+      if (it.length <= 1 && (it.splice(0, it.length), tt.length > 1 && I.length > 1 && (T = zi(T)), this._layer.setLatLngs(T), this._initMarkers(), yt = !0), ui(T) || this._layer.remove(), T = zi(T), this._layer.setLatLngs(T), this._markers = zi(this._markers), !yt && (at = I.length > 1 ? (0, Is.default)(this._markers, tt) : this._markers, k._middleMarkerPrev && (this._markerGroup.removeLayer(k._middleMarkerPrev), this._removeFromCache(k._middleMarkerPrev)), k._middleMarkerNext && (this._markerGroup.removeLayer(k._middleMarkerNext), this._removeFromCache(k._middleMarkerNext)), this._markerGroup.removeLayer(k), this._removeFromCache(k), at)) {
         let zt, Nt;
         if (this.isPolygon() ? (zt = (G + 1) % at.length, Nt = (G + (at.length - 1)) % at.length) : (Nt = G - 1 < 0 ? void 0 : G - 1, zt = G + 1 >= at.length ? void 0 : G + 1), zt !== Nt) {
           let ie = at[Nt], pe = at[zt];
@@ -11545,9 +11545,9 @@ function VA() {
       this._fireEdit(), this._layerEdited = !0, this._fireVertexRemoved(k, I), this._fireChange(this._layer.getLatLngs(), "Edit");
     }, updatePolygonCoordsFromMarkerDrag(v) {
       let k = this._layer.getLatLngs(), T = v.getLatLng(), { indexPath: I, index: G, parentPath: tt } = L.PM.Utils.findDeepMarkerIndex(this._markers, v);
-      (I.length > 1 ? (0, Rs.default)(k, tt) : k).splice(G, 1, T), this._layer.setLatLngs(k);
+      (I.length > 1 ? (0, Is.default)(k, tt) : k).splice(G, 1, T), this._layer.setLatLngs(k);
     }, _getNeighborMarkers(v) {
-      let { indexPath: k, index: T, parentPath: I } = L.PM.Utils.findDeepMarkerIndex(this._markers, v), G = k.length > 1 ? (0, Rs.default)(this._markers, I) : this._markers, tt = (T + 1) % G.length, it = (T + (G.length - 1)) % G.length, at = G[it], mt = G[tt];
+      let { indexPath: k, index: T, parentPath: I } = L.PM.Utils.findDeepMarkerIndex(this._markers, v), G = k.length > 1 ? (0, Is.default)(this._markers, I) : this._markers, tt = (T + 1) % G.length, it = (T + (G.length - 1)) % G.length, at = G[it], mt = G[tt];
       return { prevMarker: at, nextMarker: mt };
     }, _checkMarkerAllowedToDrag(v) {
       let { prevMarker: k, nextMarker: T } = this._getNeighborMarkers(v), I = L.polyline([k.getLatLng(), v.getLatLng()]), G = L.polyline([v.getLatLng(), T.getLatLng()]), tt = Zn(this._layer.toGeoJSON(15), I.toGeoJSON(15)).features.length, it = Zn(this._layer.toGeoJSON(15), G.toGeoJSON(15)).features.length;
@@ -11567,7 +11567,7 @@ function VA() {
         return;
       }
       this.updatePolygonCoordsFromMarkerDrag(k);
-      let tt = T.length > 1 ? (0, Rs.default)(this._markers, G) : this._markers, it = (I + 1) % tt.length, at = (I + (tt.length - 1)) % tt.length, mt = k.getLatLng(), yt = tt[at].getLatLng(), zt = tt[it].getLatLng();
+      let tt = T.length > 1 ? (0, Is.default)(this._markers, G) : this._markers, it = (I + 1) % tt.length, at = (I + (tt.length - 1)) % tt.length, mt = k.getLatLng(), yt = tt[at].getLatLng(), zt = tt[it].getLatLng();
       if (k._middleMarkerNext) {
         let Nt = L.PM.Utils.calcMiddleLatLng(this._map, mt, zt);
         k._middleMarkerNext.setLatLng(Nt);
@@ -11911,7 +11911,7 @@ function VA() {
       }
       return this._matrix = [it[0][0], it[1][0], it[0][1], it[1][1], it[0][2], it[1][2]], this;
     } };
-    var Hh = eu, Er = { calcMiddleLatLng(v, k, T) {
+    var qh = eu, Er = { calcMiddleLatLng(v, k, T) {
       let I = v.project(k), G = v.project(T);
       return v.unproject(I._add(G)._divideBy(2));
     }, findLayers(v) {
@@ -11977,7 +11977,7 @@ function VA() {
       let I = k.project(T), G = L.point(I.x + v, I.y);
       return k.distance(k.unproject(G), T);
     } }, si = Er;
-    L.PM = L.PM || { version: ar.version, Map: us, Toolbar: Po, Draw: bn, Edit: _i, Utils: si, Matrix: Hh, activeLang: "en", optIn: !1, initialize(v) {
+    L.PM = L.PM || { version: ar.version, Map: ls, Toolbar: Po, Draw: bn, Edit: _i, Utils: si, Matrix: qh, activeLang: "en", optIn: !1, initialize(v) {
       this.addInitHooks(v);
     }, setOptIn(v) {
       this.optIn = !!v;
@@ -12185,11 +12185,11 @@ function KA() {
 }
 var YA = KA();
 const M4 = /* @__PURE__ */ ma(YA);
-var yb, $A = new Uint8Array(16);
+var vb, $A = new Uint8Array(16);
 function XA() {
-  if (!yb && (yb = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto < "u" && typeof msCrypto.getRandomValues == "function" && msCrypto.getRandomValues.bind(msCrypto), !yb))
+  if (!vb && (vb = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto < "u" && typeof msCrypto.getRandomValues == "function" && msCrypto.getRandomValues.bind(msCrypto), !vb))
     throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-  return yb($A);
+  return vb($A);
 }
 const QA = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
 function JA(t) {
@@ -12215,10 +12215,10 @@ function xk(t, r, n) {
   }
   return tO(i);
 }
-var bb = {}, tS;
+var yb = {}, tS;
 function eO() {
-  if (tS) return bb;
-  tS = 1, bb.stringify = function(n) {
+  if (tS) return yb;
+  tS = 1, yb.stringify = function(n) {
     var i = [];
     i.push({ obj: n });
     for (var e = "", s, l, a, c, d, p, h, _, u, y, A; s = i.pop(); )
@@ -12254,7 +12254,7 @@ function eO() {
     } else
       n.push(r);
   }
-  return bb.parse = function(r) {
+  return yb.parse = function(r) {
     for (var n = [], i = [], e = 0, s, l, a, c, d, p, h, _, u; ; ) {
       if (s = r[e++], s === "}" || s === "]" || typeof s > "u") {
         if (n.length === 1)
@@ -12316,13 +12316,13 @@ function eO() {
           );
       }
     }
-  }, bb;
+  }, yb;
 }
 var nO = eO();
 const MP = /* @__PURE__ */ ma(nO);
-var wb = { exports: {} }, eS;
+var bb = { exports: {} }, eS;
 function rO() {
-  if (eS) return wb.exports;
+  if (eS) return bb.exports;
   eS = 1;
   var t = typeof Reflect == "object" ? Reflect : null, r = t && typeof t.apply == "function" ? t.apply : function(m, S, w) {
     return Function.prototype.apply.call(m, S, w);
@@ -12341,7 +12341,7 @@ function rO() {
   function s() {
     s.init.call(this);
   }
-  wb.exports = s, wb.exports.once = b, s.EventEmitter = s, s.prototype._events = void 0, s.prototype._eventsCount = 0, s.prototype._maxListeners = void 0;
+  bb.exports = s, bb.exports.once = b, s.EventEmitter = s, s.prototype._events = void 0, s.prototype._eventsCount = 0, s.prototype._maxListeners = void 0;
   var l = 10;
   function a(C) {
     if (typeof C != "function")
@@ -12530,10 +12530,10 @@ function rO() {
     else
       throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof C);
   }
-  return wb.exports;
+  return bb.exports;
 }
 var iO = rO();
-const qf = /* @__PURE__ */ ma(iO);
+const Uf = /* @__PURE__ */ ma(iO);
 function oO(t) {
   return typeof ArrayBuffer < "u" && t instanceof ArrayBuffer || typeof Blob < "u" && t instanceof Blob;
 }
@@ -12548,13 +12548,13 @@ function lO(t) {
   var n = r.constructor;
   return typeof n == "function" && n instanceof n && EP.call(n) == aO;
 }
-function ss(t) {
+function os(t) {
   var r, n, i;
   if (!t || typeof t != "object")
     return t;
   if (Array.isArray(t)) {
     for (r = [], n = 0, i = t.length; n < i; n++)
-      r[n] = ss(t[n]);
+      r[n] = os(t[n]);
     return r;
   }
   if (t instanceof Date && isFinite(t))
@@ -12566,7 +12566,7 @@ function ss(t) {
   r = {};
   for (n in t)
     if (Object.prototype.hasOwnProperty.call(t, n)) {
-      var e = ss(t[n]);
+      var e = os(t[n]);
       typeof e < "u" && (r[n] = e);
     }
   return r;
@@ -12581,7 +12581,7 @@ function SP(t) {
 }
 function CP(t) {
   return function(...r) {
-    r = ss(r);
+    r = os(r);
     var n = this, i = typeof r[r.length - 1] == "function" ? r.pop() : !1, e = new Promise(function(s, l) {
       var a;
       try {
@@ -12626,7 +12626,7 @@ function ko(t, r) {
     });
   });
 }
-function Sm(t, r) {
+function Em(t, r) {
   for (var n = {}, i = 0, e = r.length; i < e; i++) {
     var s = r[i];
     s in t && (n[s] = t[s]);
@@ -12678,7 +12678,7 @@ function PP(t, r, n) {
   }
   function y(A, E) {
     A.forEach(function(b, M) {
-      var x = E + M, C = e.get(b), m = Sm(C[0], ["atts_since", "attachments"]);
+      var x = E + M, C = e.get(b), m = Em(C[0], ["atts_since", "attachments"]);
       m.open_revs = C.map(function(w) {
         return w.rev;
       }), m.open_revs = m.open_revs.filter(nS);
@@ -12699,15 +12699,15 @@ try {
 } catch {
   E4 = !1;
 }
-function fw() {
+function cw() {
   return E4;
 }
-const Oc = typeof queueMicrotask == "function" ? queueMicrotask : function(r) {
+const Ac = typeof queueMicrotask == "function" ? queueMicrotask : function(r) {
   Promise.resolve().then(r);
 };
-let fO = class extends qf {
+let fO = class extends Uf {
   constructor() {
-    super(), this._listeners = {}, fw() && addEventListener("storage", (r) => {
+    super(), this._listeners = {}, cw() && addEventListener("storage", (r) => {
       this.emit(r.key);
     });
   }
@@ -12723,7 +12723,7 @@ let fO = class extends qf {
         return;
       }
       s = !0;
-      var c = Sm(e, [
+      var c = Em(e, [
         "style",
         "include_docs",
         "attachments",
@@ -12742,7 +12742,7 @@ let fO = class extends qf {
       i.changes(c).on("change", function(p) {
         p.seq > e.since && !e.cancelled && (e.since = p.seq, e.onChange(p));
       }).on("complete", function() {
-        s === "waiting" && Oc(a), s = !1;
+        s === "waiting" && Ac(a), s = !1;
       }).on("error", d);
     }
     this._listeners[n] = a, this.on(r, a);
@@ -12751,13 +12751,13 @@ let fO = class extends qf {
     n in this._listeners && (super.removeListener(r, this._listeners[n]), delete this._listeners[n]);
   }
   notifyLocalWindows(r) {
-    fw() && (localStorage[r] = localStorage[r] === "a" ? "b" : "a");
+    cw() && (localStorage[r] = localStorage[r] === "a" ? "b" : "a");
   }
   notify(r) {
     this.emit(r), this.notifyLocalWindows(r);
   }
 };
-function Bu(t) {
+function Du(t) {
   if (typeof console < "u" && typeof console[t] == "function") {
     var r = Array.prototype.slice.call(arguments, 1);
     console[t].apply(console, r);
@@ -12774,7 +12774,7 @@ function pO(t) {
   return t || (r = 2e3), dO(t, r);
 }
 function S4(t, r) {
-  Bu("info", "The above " + t + " is totally normal. " + r);
+  Du("info", "The above " + t + " is totally normal. " + r);
 }
 let Oi = class extends Error {
   constructor(r, n, i) {
@@ -12790,7 +12790,7 @@ let Oi = class extends Error {
   }
 };
 new Oi(401, "unauthorized", "Name or password is incorrect.");
-var _O = new Oi(400, "bad_request", "Missing JSON list of 'docs'"), Au = new Oi(404, "not_found", "missing"), x1 = new Oi(409, "conflict", "Document update conflict"), TP = new Oi(400, "bad_request", "_id field must contain a string"), mO = new Oi(412, "missing_id", "_id is required for puts"), gO = new Oi(400, "bad_request", "Only reserved document ids may start with underscore.");
+var _O = new Oi(400, "bad_request", "Missing JSON list of 'docs'"), Tu = new Oi(404, "not_found", "missing"), w1 = new Oi(409, "conflict", "Document update conflict"), TP = new Oi(400, "bad_request", "_id field must contain a string"), mO = new Oi(412, "missing_id", "_id is required for puts"), gO = new Oi(400, "bad_request", "Only reserved document ids may start with underscore.");
 new Oi(412, "precondition_failed", "Database not open");
 var kk = new Oi(500, "unknown_error", "Database encountered an unknown error"), AP = new Oi(500, "badarg", "Some query argument is invalid");
 new Oi(400, "invalid_request", "Request was invalid");
@@ -12800,7 +12800,7 @@ var Lk = new Oi(500, "indexed_db_went_bad", "unknown");
 new Oi(500, "web_sql_went_bad", "unknown");
 new Oi(500, "levelDB_went_went_bad", "unknown");
 new Oi(403, "forbidden", "Forbidden by design doc validate_doc_update function");
-var Jb = new Oi(400, "bad_request", "Invalid rev format");
+var Qb = new Oi(400, "bad_request", "Invalid rev format");
 new Oi(412, "file_exists", "The database could not be created, the file already exists.");
 var yO = new Oi(412, "missing_stub", "A pre-existing attachment stub wasn't found");
 new Oi(413, "invalid_url", "Provided URL is invalid");
@@ -12812,7 +12812,7 @@ function $n(t, r) {
   }
   return n.prototype = Oi.prototype, new n(r);
 }
-function k1(t) {
+function x1(t) {
   if (typeof t != "object") {
     var r = t;
     t = kk, t.data = r;
@@ -12849,14 +12849,14 @@ function OP(t) {
   if (t ? typeof t != "string" ? r = $n(TP) : /^_/.test(t) && !/^_(design|local)/.test(t) && (r = $n(gO)) : r = $n(mO), r)
     throw r;
 }
-function Cc(t) {
-  return typeof t._remote == "boolean" ? t._remote : typeof t.type == "function" ? (Bu(
+function Sc(t) {
+  return typeof t._remote == "boolean" ? t._remote : typeof t.type == "function" ? (Du(
     "warn",
     "db.type() is deprecated and will be removed in a future version of PouchDB"
   ), t.type() === "http") : !1;
 }
 function wO(t, r) {
-  return "listenerCount" in t ? t.listenerCount(r) : qf.listenerCount(t, r);
+  return "listenerCount" in t ? t.listenerCount(r) : Uf.listenerCount(t, r);
 }
 function C4(t) {
   if (!t)
@@ -12899,7 +12899,7 @@ function Ek(t, r) {
     Object.prototype.hasOwnProperty.call(r, e) && (n.push(e), i.push(r[e]));
   return n.push(t), Function.apply(null, n).apply(null, i);
 }
-function dw(t, r, n) {
+function fw(t, r, n) {
   return t.get(r).catch(function(i) {
     if (i.status !== 404)
       throw i;
@@ -12918,12 +12918,12 @@ function LO(t, r, n) {
   }, function(i) {
     if (i.status !== 409)
       throw i;
-    return dw(t, r._id, n);
+    return fw(t, r._id, n);
   });
 }
 var Sk = function(t) {
   return atob(t);
-}, Cm = function(t) {
+}, Sm = function(t) {
   return btoa(t);
 };
 function Ck(t, r) {
@@ -12970,7 +12970,7 @@ function DP(t, r) {
 }
 function Ak(t, r) {
   DP(t, function(n) {
-    r(Cm(n));
+    r(Sm(n));
   });
 }
 function SO(t, r) {
@@ -12982,7 +12982,7 @@ function SO(t, r) {
 }
 var CO = self.setImmediate || self.setTimeout, PO = 32768;
 function TO(t) {
-  return Cm(t);
+  return Sm(t);
 }
 function AO(t, r, n, i, e) {
   (n > 0 || i < r.size) && (r = r.slice(n, i)), SO(r, function(s) {
@@ -13017,7 +13017,7 @@ function NP(t, r) {
   return delete n._rev_tree, BP(JSON.stringify(n));
 }
 var Iw = xk;
-function $0(t) {
+function Y0(t) {
   for (var r, n, i, e = t.rev_tree.slice(), s; s = e.pop(); ) {
     var l = s.ids, a = l[2], c = s.pos;
     if (a.length) {
@@ -13030,7 +13030,7 @@ function $0(t) {
   }
   return n + "-" + r;
 }
-function X0(t, r) {
+function $0(t, r) {
   for (var n = t.slice(), i; i = n.pop(); )
     for (var e = i.pos, s = i.ids, l = s[2], a = r(l.length === 0, e, s[0], i.ctx, s[1]), c = 0, d = l.length; c < d; c++)
       n.push({ pos: e + 1, ids: l[c], ctx: a });
@@ -13040,7 +13040,7 @@ function IO(t, r) {
 }
 function Ik(t) {
   var r = [];
-  X0(t, function(e, s, l, a, c) {
+  $0(t, function(e, s, l, a, c) {
     e && r.push({ rev: s + "-" + l, pos: s, opts: c });
   }), r.sort(IO).reverse();
   for (var n = 0, i = r.length; n < i; n++)
@@ -13048,7 +13048,7 @@ function Ik(t) {
   return r;
 }
 function Rk(t) {
-  for (var r = $0(t), n = Ik(t.rev_tree), i = [], e = 0, s = n.length; e < s; e++) {
+  for (var r = Y0(t), n = Ik(t.rev_tree), i = [], e = 0, s = n.length; e < s; e++) {
     var l = n[e];
     l.rev !== r && !l.opts.deleted && i.push(l.rev);
   }
@@ -13056,7 +13056,7 @@ function Rk(t) {
 }
 function RO(t) {
   var r = [];
-  return X0(t.rev_tree, function(n, i, e, s, l) {
+  return $0(t.rev_tree, function(n, i, e, s, l) {
     l.status === "available" && !n && (r.push(i + "-" + e), l.status = "missing");
   }), r;
 }
@@ -13181,7 +13181,7 @@ function FO(t, r) {
       };
     e ? e = jP(e, d, !0).tree : e = [d];
   }
-  return i && X0(e, function(u, y, A) {
+  return i && $0(e, function(u, y, A) {
     delete i[y + "-" + A];
   }), {
     tree: e,
@@ -13208,15 +13208,15 @@ function zO(t, r) {
 function UO(t) {
   return t.ids;
 }
-function Gf(t, r) {
-  r || (r = $0(t));
+function Nf(t, r) {
+  r || (r = Y0(t));
   for (var n = r.substring(r.indexOf("-") + 1), i = t.rev_tree.map(UO), e; e = i.pop(); ) {
     if (e[0] === n)
       return !!e[1].deleted;
     i = i.concat(e[2]);
   }
 }
-function V0(t) {
+function W0(t) {
   return typeof t == "string" && t.startsWith("_local/");
 }
 function qO(t, r) {
@@ -13237,7 +13237,7 @@ function HO(t, r, n, i) {
   try {
     t.emit("change", r, n, i);
   } catch (e) {
-    Bu("error", 'Error in .on("change", function):', e);
+    Du("error", 'Error in .on("change", function):', e);
   }
 }
 function ZO(t, r, n) {
@@ -13250,11 +13250,11 @@ function ZO(t, r, n) {
     changes: i,
     doc: t
   };
-  return Gf(r, t._rev) && (e.deleted = !0), n.conflicts && (e.doc._conflicts = Rk(r), e.doc._conflicts.length || delete e.doc._conflicts), e;
+  return Nf(r, t._rev) && (e.deleted = !0), n.conflicts && (e.doc._conflicts = Rk(r), e.doc._conflicts.length || delete e.doc._conflicts), e;
 }
-let WO = class extends qf {
+let WO = class extends Uf {
   constructor(r, n, i) {
-    super(), this.db = r, n = n ? ss(n) : {};
+    super(), this.db = r, n = n ? os(n) : {};
     var e = n.complete = SP((a, c) => {
       a ? wO(this, "error") > 0 && this.emit("error", a) : this.emit("complete", c), this.removeAllListeners(), r.removeListener("destroyed", s);
     });
@@ -13293,7 +13293,7 @@ let WO = class extends qf {
   }
   doChanges(r) {
     var n = r.complete;
-    if (r = ss(r), "live" in r && !("continuous" in r) && (r.continuous = r.live), r.processChange = ZO, r.since === "latest" && (r.since = "now"), r.since || (r.since = 0), r.since === "now") {
+    if (r = os(r), "live" in r && !("continuous" in r) && (r.continuous = r.live), r.processChange = ZO, r.since === "latest" && (r.since = "now"), r.since || (r.since = 0), r.since === "now") {
       this.db.info().then((e) => {
         if (this.isCancelled) {
           n(null, { status: "cancelled" });
@@ -13308,7 +13308,7 @@ let WO = class extends qf {
         return tr._changesFilterPlugin.filter(this, r);
     } else
       ["doc_ids", "filter", "selector", "view"].forEach(function(e) {
-        e in r && Bu(
+        e in r && Du(
           "warn",
           'The "' + e + '" option was passed in to changes/replicate, but pouchdb-changes-filter plugin is not installed, so it was ignored. Please install the plugin to enable filtering.'
         );
@@ -13336,7 +13336,7 @@ function VO(t) {
     else if (n._attachments)
       for (var i = Object.keys(n._attachments), e = 0; e < i.length; e++) {
         var s = i[e];
-        n._attachments[s] = Sm(
+        n._attachments[s] = Em(
           n._attachments[s],
           ["data", "digest", "content_type", "length", "revpos", "stub"]
         );
@@ -13352,7 +13352,7 @@ function KO(t, r) {
 }
 function YO(t) {
   var r = {}, n = [];
-  return X0(t, function(i, e, s, l) {
+  return $0(t, function(i, e, s, l) {
     var a = e + "-" + s;
     return i && (r[a] = 0), l !== void 0 && n.push({ from: l, to: a }), a;
   }), n.reverse(), n.forEach(function(i) {
@@ -13369,7 +13369,7 @@ function zP(t) {
     return !1;
   }).then(function(e) {
     e && e.last_seq && (n.last_seq = e.last_seq), t._compact(n, function(s, l) {
-      s ? i(s) : i(null, l), Oc(function() {
+      s ? i(s) : i(null, l), Ac(function() {
         t._compactionQueue.shift(), t._compactionQueue.length && zP(t);
       });
     });
@@ -13409,7 +13409,7 @@ const JO = /^\d+-[^-]*$/;
 function x6(t) {
   return typeof t == "string" && JO.test(t);
 }
-let UP = class extends qf {
+let UP = class extends Uf {
   _setup() {
     this.post = ko("post", function(r, n, i) {
       if (typeof n == "function" && (i = n, n = {}), w6(r))
@@ -13419,8 +13419,8 @@ let UP = class extends qf {
       if (typeof n == "function" && (i = n, n = {}), w6(r))
         return i($n(y6));
       if (OP(r._id), "_rev" in r && !x6(r._rev))
-        return i($n(Jb));
-      if (V0(r._id) && typeof this._putLocal == "function")
+        return i($n(Qb));
+      if (W0(r._id) && typeof this._putLocal == "function")
         return r._deleted ? this._removeLocal(r, i) : this._putLocal(r, i);
       const e = (l) => {
         typeof this._put == "function" && n.new_edits !== !1 ? this._put(r, n, l) : this.bulkDocs({ docs: [r] }, n, b6(l, r._id));
@@ -13438,7 +13438,7 @@ let UP = class extends qf {
       }
     }).bind(this), this.putAttachment = ko("putAttachment", function(r, n, i, e, s) {
       var l = this;
-      typeof s == "function" && (s = e, e = i, i = null), typeof s > "u" && (s = e, e = i, i = null), s || Bu("warn", "Attachment", n, "on document", r, "is missing content_type");
+      typeof s == "function" && (s = e, e = i, i = null), typeof s > "u" && (s = e, e = i, i = null), s || Du("warn", "Attachment", n, "on document", r, "is missing content_type");
       function a(c) {
         var d = "_rev" in c ? parseInt(c._rev, 10) : 0;
         return c._attachments = c._attachments || {}, c._attachments[n] = {
@@ -13449,10 +13449,10 @@ let UP = class extends qf {
       }
       return l.get(r).then(function(c) {
         if (c._rev !== i)
-          throw $n(x1);
+          throw $n(w1);
         return a(c);
       }, function(c) {
-        if (c.reason === Au.message)
+        if (c.reason === Tu.message)
           return a({ _id: r });
         throw c;
       });
@@ -13463,7 +13463,7 @@ let UP = class extends qf {
           return;
         }
         if (l._rev !== i) {
-          e($n(x1));
+          e($n(w1));
           return;
         }
         if (!l._attachments)
@@ -13477,7 +13477,7 @@ let UP = class extends qf {
         _rev: n
       }, typeof i == "function" && (e = i, i = {})) : (s = r, typeof n == "function" ? (e = n, i = {}) : (e = i, i = n)), i = i || {}, i.was_delete = !0;
       var l = { _id: s._id, _rev: s._rev || i.rev };
-      if (l._deleted = !0, V0(l._id) && typeof this._removeLocal == "function")
+      if (l._deleted = !0, W0(l._id) && typeof this._removeLocal == "function")
         return this._removeLocal(s, e);
       this.bulkDocs({ docs: [l] }, i, b6(e, l._id));
     }).bind(this), this.revsDiff = ko("revsDiff", function(r, n, i) {
@@ -13491,7 +13491,7 @@ let UP = class extends qf {
       }
       function c(d, p) {
         var h = r[d].slice(0);
-        X0(p, function(_, u, y, A, E) {
+        $0(p, function(_, u, y, A, E) {
           var b = u + "-" + y, M = h.indexOf(b);
           M !== -1 && (h.splice(M, 1), E.status !== "available" && a(d, b));
         }), h.forEach(function(_) {
@@ -13524,7 +13524,7 @@ let UP = class extends qf {
         var l = YO(s), a = [], c = [];
         Object.keys(l).forEach(function(d) {
           l[d] > n && a.push(d);
-        }), X0(s, function(d, p, h, _, u) {
+        }), $0(s, function(d, p, h, _, u) {
           var y = p + "-" + h;
           u.status === "available" && a.indexOf(y) !== -1 && c.push(y);
         }), this._doCompaction(r, c, i);
@@ -13534,7 +13534,7 @@ let UP = class extends qf {
     }).bind(this), this.get = ko("get", function(r, n, i) {
       if (typeof n == "function" && (i = n, n = {}), n = n || {}, typeof r != "string")
         return i($n(TP));
-      if (V0(r) && typeof this._getLocal == "function")
+      if (W0(r) && typeof this._getLocal == "function")
         return this._getLocal(r, i);
       var e = [];
       const s = () => {
@@ -13577,7 +13577,7 @@ let UP = class extends qf {
           for (var l = 0; l < e.length; l++) {
             var a = e[l];
             if (!x6(a))
-              return i($n(Jb));
+              return i($n(Qb));
           }
           s();
         } else
@@ -13592,7 +13592,7 @@ let UP = class extends qf {
           var u = Rk(h);
           u.length && (p._conflicts = u);
         }
-        if (Gf(h, p._rev) && (p._deleted = !0), n.revs || n.revs_info) {
+        if (Nf(h, p._rev) && (p._deleted = !0), n.revs || n.revs_info) {
           for (var y = p._rev.split("-"), A = parseInt(y[0], 10), E = y[1], b = GP(h.rev_tree), M = null, x = 0; x < b.length; x++) {
             var C = b[x];
             const Y = C.ids.findIndex((X) => X.id === E);
@@ -13652,7 +13652,7 @@ let UP = class extends qf {
             e
           );
         else
-          return e($n(Au));
+          return e($n(Tu));
       });
     }).bind(this), this.allDocs = ko("allDocs", function(r, n) {
       if (typeof r == "function" && (n = r, r = {}), r.skip = typeof r.skip < "u" ? r.skip : 0, r.start_key && (r.startkey = r.start_key), r.end_key && (r.endkey = r.end_key), "keys" in r) {
@@ -13668,7 +13668,7 @@ let UP = class extends qf {
           ));
           return;
         }
-        if (!Cc(this) && ($O(r), r.keys.length === 0))
+        if (!Sc(this) && ($O(r), r.keys.length === 0))
           return this._allDocs({ limit: 0 }, n);
       }
       return this._allDocs(r, n);
@@ -13678,7 +13678,7 @@ let UP = class extends qf {
       this._info((n, i) => {
         if (n)
           return r(n);
-        i.db_name = i.db_name || this.name, i.auto_compaction = !!(this.auto_compaction && !Cc(this)), i.adapter = this.adapter, r(null, i);
+        i.db_name = i.db_name || this.name, i.auto_compaction = !!(this.auto_compaction && !Sc(this)), i.adapter = this.adapter, r(null, i);
       });
     }).bind(this), this.id = ko("id", function(r) {
       return this._id(r);
@@ -13692,18 +13692,18 @@ let UP = class extends qf {
         if (w6(c))
           return i($n(y6));
         if ("_rev" in c && !x6(c._rev))
-          return i($n(Jb));
+          return i($n(Qb));
       }
       var s;
       if (r.docs.forEach(function(c) {
         c._attachments && Object.keys(c._attachments).forEach(function(d) {
-          s = s || QO(d), c._attachments[d].content_type || Bu("warn", "Attachment", d, "on document", c._id, "is missing content_type");
+          s = s || QO(d), c._attachments[d].content_type || Du("warn", "Attachment", d, "on document", c._id, "is missing content_type");
         });
       }), s)
         return i($n(Ow, s));
       "new_edits" in n || ("new_edits" in r ? n.new_edits = r.new_edits : n.new_edits = !0);
       var l = this;
-      !n.new_edits && !Cc(l) && r.docs.sort(KO), VO(r.docs);
+      !n.new_edits && !Sc(l) && r.docs.sort(KO), VO(r.docs);
       var a = r.docs.map(function(c) {
         return c._id;
       });
@@ -13712,19 +13712,19 @@ let UP = class extends qf {
           return i(c);
         if (n.new_edits || (d = d.filter(function(_) {
           return _.error;
-        })), !Cc(l))
+        })), !Sc(l))
           for (var p = 0, h = d.length; p < h; p++)
             d[p].id = d[p].id || a[p];
         i(null, d);
       });
     }).bind(this), this.registerDependentDatabase = ko("registerDependentDatabase", function(r, n) {
-      var i = ss(this.__opts);
+      var i = os(this.__opts);
       this.__opts.view_adapter && (i.adapter = this.__opts.view_adapter);
       var e = new this.constructor(r, i);
       function s(l) {
         return l.dependentDbs = l.dependentDbs || {}, l.dependentDbs[r] ? !1 : (l.dependentDbs[r] = !0, l);
       }
-      dw(this, "_local/_pouch_dependentDbs", s).then(function() {
+      fw(this, "_local/_pouch_dependentDbs", s).then(function() {
         n(null, { db: e });
       }).catch(n);
     }).bind(this), this.destroy = ko("destroy", function(r, n) {
@@ -13737,7 +13737,7 @@ let UP = class extends qf {
           this._destroyed = !0, this.emit("destroyed"), n(null, l || { ok: !0 });
         });
       };
-      if (Cc(this))
+      if (Sc(this))
         return e();
       this.get("_local/_pouch_dependentDbs", (s, l) => {
         if (s)
@@ -13764,7 +13764,7 @@ let UP = class extends qf {
       this.activeTasks.remove(s, p), n(p);
     }, d = (p) => {
       var h = p.last_seq;
-      Promise.all(e).then(() => dw(this, "_local/compaction", (_) => !_.last_seq || _.last_seq < h ? (_.last_seq = h, _) : !1)).then(() => {
+      Promise.all(e).then(() => fw(this, "_local/compaction", (_) => !_.last_seq || _.last_seq < h ? (_.last_seq = h, _) : !1)).then(() => {
         this.activeTasks.remove(s), n(null, { ok: !0 });
       }).catch(c);
     };
@@ -13790,7 +13790,7 @@ UP.prototype.purge = ko("_purge", function(t, r, n) {
     if (e)
       return n(e);
     if (!s)
-      return n($n(Au));
+      return n($n(Tu));
     let l;
     try {
       l = DO(s, r);
@@ -13839,8 +13839,8 @@ function eI(t, r) {
   var i = tr.adapters, e = tr.preferredAdapters, s = tr.prefix, l = r.adapter;
   if (!l)
     for (var a = 0; a < e.length; ++a) {
-      if (l = e[a], l === "idb" && "websql" in i && fw() && localStorage["_pouch__websqldb_" + s + t]) {
-        Bu("log", 'PouchDB is downgrading "' + t + '" to WebSQL to avoid data loss, because it was already opened with WebSQL.');
+      if (l = e[a], l === "idb" && "websql" in i && cw() && localStorage["_pouch__websqldb_" + s + t]) {
+        Du("log", 'PouchDB is downgrading "' + t + '" to WebSQL to avoid data loss, because it was already opened with WebSQL.');
         continue;
       }
       break;
@@ -13878,7 +13878,7 @@ let uS = class extends UP {
     super(), this._setup(r, n);
   }
   _setup(r, n) {
-    if (super._setup(), n = n || {}, r && typeof r == "object" && (n = r, r = n.name, delete n.name), n.deterministic_revs === void 0 && (n.deterministic_revs = !0), this.__opts = n = ss(n), this.auto_compaction = n.auto_compaction, this.purged_infos_limit = n.purged_infos_limit || 1e3, this.prefix = tr.prefix, typeof r != "string")
+    if (super._setup(), n = n || {}, r && typeof r == "object" && (n = r, r = n.name, delete n.name), n.deterministic_revs === void 0 && (n.deterministic_revs = !0), this.__opts = n = os(n), this.auto_compaction = n.auto_compaction, this.purged_infos_limit = n.purged_infos_limit || 1e3, this.prefix = tr.prefix, typeof r != "string")
       throw new Error("Missing/invalid DB name");
     var i = (n.prefix || "") + r, e = eI(i, n);
     if (n.name = e.name, n.adapter = n.adapter || e.adapter, this.name = r, this._adapter = n.adapter, tr.emit("debug", ["adapter", "Picked adapter: ", n.adapter]), !tr.adapters[n.adapter] || !tr.adapters[n.adapter].valid())
@@ -13895,7 +13895,7 @@ let uS = class extends UP {
 const tr = qP(uS, function(t, r) {
   uS.prototype._setup.call(this, t, r);
 });
-var HP = fetch, _1 = Headers;
+var HP = fetch, p1 = Headers;
 let iI = class {
   constructor() {
     this.tasks = {};
@@ -13938,10 +13938,10 @@ let iI = class {
 tr.adapters = {};
 tr.preferredAdapters = [];
 tr.prefix = "_pouch_";
-var hS = new qf();
+var hS = new Uf();
 function oI(t) {
-  Object.keys(qf.prototype).forEach(function(n) {
-    typeof qf.prototype[n] == "function" && (t[n] = hS[n].bind(hS));
+  Object.keys(Uf.prototype).forEach(function(n) {
+    typeof Uf.prototype[n] == "function" && (t[n] = hS[n].bind(hS));
   });
   var r = t._destructionListeners = /* @__PURE__ */ new Map();
   t.on("ref", function(i) {
@@ -14091,7 +14091,7 @@ function KP(t, r) {
   return r;
 }
 function _I(t) {
-  var r = ss(t);
+  var r = os(t);
   KP(r, !1) && (r = VP(r), "$and" in r && (r = vm(r.$and))), ["$or", "$nor"].forEach(function(l) {
     l in r && r[l].forEach(function(a) {
       for (var c = Object.keys(a), d = 0; d < c.length; d++) {
@@ -14127,7 +14127,7 @@ var YP = -324, T4 = 3, A4 = "";
 function Eo(t, r) {
   if (t === r)
     return 0;
-  t = Q0(t), r = Q0(r);
+  t = X0(t), r = X0(r);
   var n = O4(t), i = O4(r);
   if (n - i !== 0)
     return n - i;
@@ -14141,7 +14141,7 @@ function Eo(t, r) {
   }
   return Array.isArray(t) ? xI(t, r) : LI(t, r);
 }
-function Q0(t) {
+function X0(t) {
   switch (typeof t) {
     case "undefined":
       return null;
@@ -14153,7 +14153,7 @@ function Q0(t) {
         var n = t.length;
         t = new Array(n);
         for (var i = 0; i < n; i++)
-          t[i] = Q0(r[i]);
+          t[i] = X0(r[i]);
       } else {
         if (t instanceof Date)
           return t.toJSON();
@@ -14162,7 +14162,7 @@ function Q0(t) {
           for (var e in r)
             if (Object.prototype.hasOwnProperty.call(r, e)) {
               var s = r[e];
-              typeof s < "u" && (t[e] = Q0(s));
+              typeof s < "u" && (t[e] = X0(s));
             }
         }
       }
@@ -14183,19 +14183,19 @@ function vI(t) {
         var r = Array.isArray(t), n = r ? t : Object.keys(t), i = -1, e = n.length, s = "";
         if (r)
           for (; ++i < e; )
-            s += ph(n[i]);
+            s += dh(n[i]);
         else
           for (; ++i < e; ) {
             var l = n[i];
-            s += ph(l) + ph(t[l]);
+            s += dh(l) + dh(t[l]);
           }
         return s;
     }
   return "";
 }
-function ph(t) {
+function dh(t) {
   var r = "\0";
-  return t = Q0(t), O4(t) + A4 + vI(t) + r;
+  return t = X0(t), O4(t) + A4 + vI(t) + r;
 }
 function yI(t, r) {
   var n = r, i, e = t[r] === "1";
@@ -14325,7 +14325,7 @@ function EI(t) {
 }
 function SI(t, r, n) {
   if (t = t.filter(function(l) {
-    return m1(l.doc, r.selector, n);
+    return _1(l.doc, r.selector, n);
   }), r.sort) {
     var i = EI(r.sort);
     t = t.sort(i), typeof r.sort[0] != "string" && uI(r.sort[0]) === "desc" && (t = t.reverse());
@@ -14336,13 +14336,13 @@ function SI(t, r, n) {
   }
   return t;
 }
-function m1(t, r, n) {
+function _1(t, r, n) {
   return n.every(function(i) {
     var e = r[i], s = Bk(i), l = Dk(t, s);
-    return ZP(i) ? CI(i, e, t) : pw(e, t, s, l);
+    return ZP(i) ? CI(i, e, t) : dw(e, t, s, l);
   });
 }
-function pw(t, r, n, i) {
+function dw(t, r, n, i) {
   return t ? typeof t == "object" ? Object.keys(t).every(function(e) {
     var s = t[e];
     if (e.indexOf("$") === 0)
@@ -14351,14 +14351,14 @@ function pw(t, r, n, i) {
     if (i === void 0 && typeof s != "object" && l.length > 0)
       return !1;
     var a = Dk(i, l);
-    return typeof s == "object" ? pw(s, r, n, a) : cS("$eq", r, s, l, a);
+    return typeof s == "object" ? dw(s, r, n, a) : cS("$eq", r, s, l, a);
   }) : t === i : !0;
 }
 function CI(t, r, n) {
   return t === "$or" ? r.some(function(i) {
-    return m1(n, i, Object.keys(i));
-  }) : t === "$not" ? !m1(n, r, Object.keys(r)) : !r.find(function(i) {
-    return m1(n, i, Object.keys(i));
+    return _1(n, i, Object.keys(i));
+  }) : t === "$not" ? !_1(n, r, Object.keys(r)) : !r.find(function(i) {
+    return _1(n, i, Object.keys(i));
   });
 }
 function cS(t, r, n, i, e) {
@@ -14369,7 +14369,7 @@ function cS(t, r, n, i, e) {
 function J_(t) {
   return typeof t < "u" && t !== null;
 }
-function D0(t) {
+function R0(t) {
   return typeof t < "u";
 }
 function PI(t, r) {
@@ -14418,35 +14418,35 @@ function II(t, r) {
 var dS = {
   $elemMatch: function(t, r, n, i) {
     return !Array.isArray(i) || i.length === 0 ? !1 : typeof i[0] == "object" && i[0] !== null ? i.some(function(e) {
-      return m1(e, r, Object.keys(r));
+      return _1(e, r, Object.keys(r));
     }) : i.some(function(e) {
-      return pw(r, t, n, e);
+      return dw(r, t, n, e);
     });
   },
   $allMatch: function(t, r, n, i) {
     return !Array.isArray(i) || i.length === 0 ? !1 : typeof i[0] == "object" && i[0] !== null ? i.every(function(e) {
-      return m1(e, r, Object.keys(r));
+      return _1(e, r, Object.keys(r));
     }) : i.every(function(e) {
-      return pw(r, t, n, e);
+      return dw(r, t, n, e);
     });
   },
   $eq: function(t, r, n, i) {
-    return D0(i) && Eo(i, r) === 0;
+    return R0(i) && Eo(i, r) === 0;
   },
   $gte: function(t, r, n, i) {
-    return D0(i) && Eo(i, r) >= 0;
+    return R0(i) && Eo(i, r) >= 0;
   },
   $gt: function(t, r, n, i) {
-    return D0(i) && Eo(i, r) > 0;
+    return R0(i) && Eo(i, r) > 0;
   },
   $lte: function(t, r, n, i) {
-    return D0(i) && Eo(i, r) <= 0;
+    return R0(i) && Eo(i, r) <= 0;
   },
   $lt: function(t, r, n, i) {
-    return D0(i) && Eo(i, r) < 0;
+    return R0(i) && Eo(i, r) < 0;
   },
   $exists: function(t, r, n, i) {
-    return r ? D0(i) : !D0(i);
+    return r ? R0(i) : !R0(i);
   },
   $mod: function(t, r, n, i) {
     return J_(i) && PI(i, r);
@@ -14519,7 +14519,7 @@ function GI(t) {
   t.view && !t.filter && (t.filter = "_view"), t.selector && !t.filter && (t.filter = "_selector"), t.filter && typeof t.filter == "string" && (t.filter === "_view" ? t.view = iS(t.view) : t.filter = iS(t.filter));
 }
 function jI(t, r) {
-  return r.filter && typeof r.filter == "string" && !r.doc_ids && !Cc(t.db);
+  return r.filter && typeof r.filter == "string" && !r.doc_ids && !Sc(t.db);
 }
 function FI(t, r) {
   var n = r.complete;
@@ -14536,11 +14536,11 @@ function FI(t, r) {
       if (t.isCancelled)
         return n(null, { status: "cancelled" });
       if (l)
-        return n(k1(l));
+        return n(x1(l));
       var c = a && a.views && a.views[e[1]] && a.views[e[1]].map;
       if (!c)
         return n($n(
-          Au,
+          Tu,
           a.views ? "missing json key: " + e[1] : "missing json key: views"
         ));
       r.filter = BI(c), t.doChanges(r);
@@ -14555,11 +14555,11 @@ function FI(t, r) {
       if (t.isCancelled)
         return n(null, { status: "cancelled" });
       if (l)
-        return n(k1(l));
+        return n(x1(l));
       var c = a && a.filters && a.filters[s[1]];
       if (!c)
         return n($n(
-          Au,
+          Tu,
           a && a.filters ? "missing json key: " + s[1] : "missing json key: filters"
         ));
       r.filter = DI(c), t.doChanges(r);
@@ -14631,7 +14631,7 @@ var qI = $P([
 ]);
 function pS(t) {
   if (!/^\d+-/.test(t))
-    return $n(Jb);
+    return $n(Qb);
   var r = t.indexOf("-"), n = t.substring(0, r), i = t.substring(r + 1);
   return {
     prefix: parseInt(n, 10),
@@ -14699,7 +14699,7 @@ function VI(t, r, n) {
   var i = WI(t.data);
   if (i.error)
     return n(i.error);
-  t.length = i.length, r === "blob" ? t.data = Pk(i, t.content_type) : r === "base64" ? t.data = Cm(i) : t.data = i, Ok(i, function(e) {
+  t.length = i.length, r === "blob" ? t.data = Pk(i, t.content_type) : r === "base64" ? t.data = Sm(i) : t.data = i, Ok(i, function(e) {
     t.digest = "md5-" + e, n();
   });
 }
@@ -14742,20 +14742,20 @@ function $I(t, r, n) {
 function XI(t, r, n, i, e, s, l, a) {
   if (zO(r.rev_tree, n.metadata.rev) && !a)
     return i[e] = n, s();
-  var c = r.winningRev || $0(r), d = "deleted" in r ? r.deleted : Gf(r, c), p = "deleted" in n.metadata ? n.metadata.deleted : Gf(n.metadata), h = /^1-/.test(n.metadata.rev);
+  var c = r.winningRev || Y0(r), d = "deleted" in r ? r.deleted : Nf(r, c), p = "deleted" in n.metadata ? n.metadata.deleted : Nf(n.metadata), h = /^1-/.test(n.metadata.rev);
   if (d && !p && a && h) {
     var _ = n.data;
     _._rev = c, _._id = n.metadata.id, n = XP(_, a);
   }
   var u = FP(r.rev_tree, n.metadata.rev_tree[0], t), y = a && (d && p && u.conflicts !== "new_leaf" || !d && u.conflicts !== "new_leaf" || d && !p && u.conflicts === "new_branch");
   if (y) {
-    var A = $n(x1);
+    var A = $n(w1);
     return i[e] = A, s();
   }
   var E = n.metadata.rev;
   n.metadata.rev_tree = u.tree, n.stemmedRevs = u.stemmedRevs || [], r.rev_map && (n.metadata.rev_map = r.rev_map);
-  var b = $0(n.metadata), M = Gf(n.metadata, b), x = d === M ? 0 : d < M ? -1 : 1, C;
-  E === b ? C = M : C = Gf(n.metadata, E), l(
+  var b = Y0(n.metadata), M = Nf(n.metadata, b), x = d === M ? 0 : d < M ? -1 : 1, C;
+  E === b ? C = M : C = Nf(n.metadata, E), l(
     n,
     b,
     M,
@@ -14772,12 +14772,12 @@ function QI(t) {
 function JI(t, r, n, i, e, s, l, a, c) {
   t = t || 1e3;
   function d(A, E, b) {
-    var M = $0(A.metadata), x = Gf(A.metadata, M);
+    var M = Y0(A.metadata), x = Nf(A.metadata, M);
     if ("was_delete" in a && x)
-      return s[E] = $n(Au, "deleted"), b();
+      return s[E] = $n(Tu, "deleted"), b();
     var C = p && QI(A);
     if (C) {
-      var m = $n(x1);
+      var m = $n(w1);
       return s[E] = m, b();
     }
     var S = x ? 0 : 1;
@@ -14797,7 +14797,7 @@ function JI(t, r, n, i, e, s, l, a, c) {
     ++_ === u && c && c();
   }
   r.forEach(function(A, E) {
-    if (A._id && V0(A._id)) {
+    if (A._id && W0(A._id)) {
       var b = A._deleted ? "_removeLocal" : "_putLocal";
       n[b](A, { ctx: e }, function(x, C) {
         s[E] = x || C, y();
@@ -14832,7 +14832,7 @@ function JI(t, r, n, i, e, s, l, a, c) {
     x();
   });
 }
-var tR = 5, zo = "document-store", Vs = "by-sequence", Ou = "attach-store", U0 = "attach-seq-store", Ja = "meta-store", Lc = "local-store", k6 = "detect-blob-support";
+var tR = 5, zo = "document-store", Vs = "by-sequence", Au = "attach-store", z0 = "attach-seq-store", Ja = "meta-store", kc = "local-store", k6 = "detect-blob-support";
 function eR(t) {
   try {
     return JSON.parse(t);
@@ -14847,7 +14847,7 @@ function nR(t) {
     return MP.stringify(t);
   }
 }
-function Ec(t) {
+function Mc(t) {
   return function(r) {
     var n = "unknown_error";
     r.target && r.target.error && (n = r.target.error.name || r.target.error.message), t($n(Lk, n, r.type));
@@ -14863,13 +14863,13 @@ function I4(t, r, n) {
     id: t.id
   };
 }
-function q0(t) {
+function U0(t) {
   if (!t)
     return null;
   var r = eR(t.data);
   return r.winningRev = t.winningRev, r.deleted = t.deletedOrLocal === "1", r.seq = t.seq, r;
 }
-function _w(t) {
+function pw(t) {
   if (!t)
     return t;
   var r = t._doc_id_rev.lastIndexOf(":");
@@ -14877,7 +14877,7 @@ function _w(t) {
 }
 function QP(t, r, n, i) {
   n ? i(t ? typeof t != "string" ? t : Tk(t, r) : Ck([""], { type: r })) : t ? typeof t != "string" ? RP(t, function(e) {
-    i(Cm(e));
+    i(Sm(e));
   }) : i(t) : i("");
 }
 function JP(t, r, n, i) {
@@ -14889,7 +14889,7 @@ function JP(t, r, n, i) {
     ++s === e.length && i && i();
   }
   function a(c, d) {
-    var p = c._attachments[d], h = p.digest, _ = n.objectStore(Ou).get(h);
+    var p = c._attachments[d], h = p.digest, _ = n.objectStore(Au).get(h);
     _.onsuccess = function(u) {
       p.body = u.target.result.body, l();
     };
@@ -14909,7 +14909,7 @@ function R4(t, r) {
           return new Promise(function(c) {
             QP(l, a, r, function(d) {
               n.doc._attachments[e] = Object.assign(
-                Sm(s, ["digest", "content_type"]),
+                Em(s, ["digest", "content_type"]),
                 { data: d }
               ), c();
             });
@@ -14920,7 +14920,7 @@ function R4(t, r) {
   }));
 }
 function t7(t, r, n) {
-  var i = [], e = n.objectStore(Vs), s = n.objectStore(Ou), l = n.objectStore(U0), a = t.length;
+  var i = [], e = n.objectStore(Vs), s = n.objectStore(Au), l = n.objectStore(z0), a = t.length;
   function c() {
     a--, a || d();
   }
@@ -14959,7 +14959,7 @@ function t7(t, r, n) {
     };
   });
 }
-function _h(t, r, n) {
+function ph(t, r, n) {
   try {
     return {
       txn: t.transaction(r, n)
@@ -14974,7 +14974,7 @@ var cm = new fO();
 function rR(t, r, n, i, e, s) {
   for (var l = r.docs, a, c, d, p, h, _, u, y, A = 0, E = l.length; A < E; A++) {
     var b = l[A];
-    b._id && V0(b._id) || (b = l[A] = XP(b, n.new_edits, t), b.error && !u && (u = b));
+    b._id && W0(b._id) || (b = l[A] = XP(b, n.new_edits, t), b.error && !u && (u = b));
   }
   if (u)
     return s(u);
@@ -14988,14 +14988,14 @@ function rR(t, r, n, i, e, s) {
     var j = [
       zo,
       Vs,
-      Ou,
-      Lc,
-      U0,
+      Au,
+      kc,
+      z0,
       Ja
-    ], K = _h(e, j, "readwrite");
+    ], K = ph(e, j, "readwrite");
     if (K.error)
       return s(K.error);
-    a = K.txn, a.onabort = Ec(s), a.ontimeout = Ec(s), a.oncomplete = Y, c = a.objectStore(zo), d = a.objectStore(Vs), p = a.objectStore(Ou), h = a.objectStore(U0), _ = a.objectStore(Ja), _.get(Ja).onsuccess = function(ut) {
+    a = K.txn, a.onabort = Mc(s), a.ontimeout = Mc(s), a.oncomplete = Y, c = a.objectStore(zo), d = a.objectStore(Vs), p = a.objectStore(Au), h = a.objectStore(z0), _ = a.objectStore(Ja), _.get(Ja).onsuccess = function(ut) {
       y = ut.target.result, U();
     }, Q(function(ut) {
       if (ut)
@@ -15030,12 +15030,12 @@ function rR(t, r, n, i, e, s) {
       ++j === l.length && D();
     }
     function ut(z) {
-      var ct = q0(z.target.result);
+      var ct = U0(z.target.result);
       ct && m.set(ct.id, ct), K();
     }
     for (var Z = 0, pt = l.length; Z < pt; Z++) {
       var nt = l[Z];
-      if (nt._id && V0(nt._id)) {
+      if (nt._id && W0(nt._id)) {
         K();
         continue;
       }
@@ -15278,12 +15278,12 @@ function aR(t, r, n) {
       h.message
     ));
   var _ = [zo, Vs, Ja];
-  t.attachments && _.push(Ou);
-  var u = _h(r, _, "readonly");
+  t.attachments && _.push(Au);
+  var u = ph(r, _, "readonly");
   if (u.error)
     return n(u.error);
   var y = u.txn;
-  y.oncomplete = N, y.onabort = Ec(n);
+  y.oncomplete = N, y.onabort = Mc(n);
   var A = y.objectStore(zo), E = y.objectStore(Vs), b = y.objectStore(Ja), M = E.index("_doc_id_rev"), x = [], C, m;
   b.get(Ja).onsuccess = function(Y) {
     C = Y.target.result.docCount;
@@ -15294,7 +15294,7 @@ function aR(t, r, n) {
   function S(Y, X, Q) {
     var rt = Y.id + "::" + Q;
     M.get(rt).onsuccess = function(F) {
-      if (X.doc = _w(F.target.result) || {}, t.conflicts) {
+      if (X.doc = pw(F.target.result) || {}, t.conflicts) {
         var W = Rk(Y);
         W.length && (X.doc._conflicts = W);
       }
@@ -15318,7 +15318,7 @@ function aR(t, r, n) {
         x.push(rt);
         continue;
       }
-      var ot = q0(rt), F = ot.winningRev;
+      var ot = U0(rt), F = ot.winningRev;
       w(F, ot);
     }
   }
@@ -15368,14 +15368,14 @@ function _S() {
 function hR(t, r, n) {
   B4.push(function() {
     t(function(s, l) {
-      uR(r, s, l, n), D4 = !1, Oc(function() {
+      uR(r, s, l, n), D4 = !1, Ac(function() {
         _S();
       });
     });
   }), _S();
 }
 function cR(t, r, n, i) {
-  if (t = ss(t), t.continuous) {
+  if (t = os(t), t.continuous) {
     var e = n + ":" + Iw();
     return cm.addListener(n, e, r, t), cm.notify(n), {
       cancel: function() {
@@ -15419,7 +15419,7 @@ function cR(t, r, n, i) {
     }
     var Q = 0;
     B.forEach(function(rt, ot) {
-      var F = _w(rt), W = O[ot];
+      var F = pw(rt), W = O[ot];
       M(F, W, function(q, j) {
         N[ot] = q, U[ot] = j, ++Q === O.length && X();
       });
@@ -15432,7 +15432,7 @@ function cR(t, r, n, i) {
       return U(D, O);
     var N = O._id + "::" + D.winningRev, Y = A.get(N);
     Y.onsuccess = function(X) {
-      U(D, _w(X.target.result));
+      U(D, pw(X.target.result));
     };
   }
   function M(O, B, D) {
@@ -15442,7 +15442,7 @@ function cR(t, r, n, i) {
     if (U)
       return b(O, B, U, D);
     y.get(O._id).onsuccess = function(N) {
-      U = q0(N.target.result), h.set(O._id, U), b(O, B, U, D);
+      U = U0(N.target.result), h.set(O._id, U), b(O, B, U, D);
     };
   }
   function x() {
@@ -15455,15 +15455,15 @@ function cR(t, r, n, i) {
     !t.continuous && t.attachments ? R4(c).then(x) : x();
   }
   var m = [zo, Vs];
-  t.attachments && m.push(Ou);
-  var S = _h(i, m, "readonly");
+  t.attachments && m.push(Au);
+  var S = ph(i, m, "readonly");
   if (S.error)
     return t.complete(S.error);
-  _ = S.txn, _.onabort = Ec(t.complete), _.oncomplete = C, u = _.objectStore(Vs), y = _.objectStore(zo), A = u.index("_doc_id_rev");
+  _ = S.txn, _.onabort = Mc(t.complete), _.oncomplete = C, u = _.objectStore(Vs), y = _.objectStore(zo), A = u.index("_doc_id_rev");
   var w = t.since && !t.descending ? IDBKeyRange.lowerBound(t.since, !0) : null;
   e7(u, w, t.descending, a, E);
 }
-var n1 = /* @__PURE__ */ new Map(), L6, M6 = /* @__PURE__ */ new Map();
+var e1 = /* @__PURE__ */ new Map(), L6, M6 = /* @__PURE__ */ new Map();
 function n7(t, r) {
   var n = this;
   hR(function(i) {
@@ -15480,9 +15480,9 @@ function fR(t, r, n) {
   }
   function a(E) {
     var b = E.createObjectStore(zo, { keyPath: "id" });
-    E.createObjectStore(Vs, { autoIncrement: !0 }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 }), E.createObjectStore(Ou, { keyPath: "digest" }), E.createObjectStore(Ja, { keyPath: "id", autoIncrement: !1 }), E.createObjectStore(k6), b.createIndex("deletedOrLocal", "deletedOrLocal", { unique: !1 }), E.createObjectStore(Lc, { keyPath: "_id" });
+    E.createObjectStore(Vs, { autoIncrement: !0 }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 }), E.createObjectStore(Au, { keyPath: "digest" }), E.createObjectStore(Ja, { keyPath: "id", autoIncrement: !1 }), E.createObjectStore(k6), b.createIndex("deletedOrLocal", "deletedOrLocal", { unique: !1 }), E.createObjectStore(kc, { keyPath: "_id" });
     var M = E.createObjectStore(
-      U0,
+      z0,
       { autoIncrement: !0 }
     );
     M.createIndex("seq", "seq"), M.createIndex("digestSeq", "digestSeq", { unique: !0 });
@@ -15492,21 +15492,21 @@ function fR(t, r, n) {
     M.createIndex("deletedOrLocal", "deletedOrLocal", { unique: !1 }), M.openCursor().onsuccess = function(x) {
       var C = x.target.result;
       if (C) {
-        var m = C.value, S = Gf(m);
+        var m = C.value, S = Nf(m);
         m.deletedOrLocal = S ? "1" : "0", M.put(m), C.continue();
       } else
         b();
     };
   }
   function d(E) {
-    E.createObjectStore(Lc, { keyPath: "_id" }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 });
+    E.createObjectStore(kc, { keyPath: "_id" }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 });
   }
   function p(E, b) {
-    var M = E.objectStore(Lc), x = E.objectStore(zo), C = E.objectStore(Vs), m = x.openCursor();
+    var M = E.objectStore(kc), x = E.objectStore(zo), C = E.objectStore(Vs), m = x.openCursor();
     m.onsuccess = function(S) {
       var w = S.target.result;
       if (w) {
-        var O = w.value, B = O.id, D = V0(B), U = $0(O);
+        var O = w.value, B = O.id, D = W0(B), U = Y0(O);
         if (D) {
           var N = B + "::" + U, Y = B + "::", X = B + "::~", Q = C.index("_doc_id_rev"), rt = IDBKeyRange.bound(Y, X, !1, !1), ot = Q.openCursor(rt);
           ot.onsuccess = function(F) {
@@ -15524,13 +15524,13 @@ function fR(t, r, n) {
   }
   function h(E) {
     var b = E.createObjectStore(
-      U0,
+      z0,
       { autoIncrement: !0 }
     );
     b.createIndex("seq", "seq"), b.createIndex("digestSeq", "digestSeq", { unique: !0 });
   }
   function _(E, b) {
-    var M = E.objectStore(Vs), x = E.objectStore(Ou), C = E.objectStore(U0), m = x.count();
+    var M = E.objectStore(Vs), x = E.objectStore(Au), C = E.objectStore(z0), m = x.count();
     m.onsuccess = function(S) {
       var w = S.target.result;
       if (!w)
@@ -15557,7 +15557,7 @@ function fR(t, r, n) {
   }
   function u(E) {
     function b(m) {
-      return m.data ? q0(m) : (m.deleted = m.deletedOrLocal === "1", m);
+      return m.data ? U0(m) : (m.deleted = m.deletedOrLocal === "1", m);
     }
     var M = E.objectStore(Vs), x = E.objectStore(zo), C = x.openCursor();
     C.onsuccess = function(m) {
@@ -15565,7 +15565,7 @@ function fR(t, r, n) {
       if (!S)
         return;
       var w = b(S.value);
-      w.winningRev = w.winningRev || $0(w);
+      w.winningRev = w.winningRev || Y0(w);
       function O() {
         var D = w.id + "::", U = w.id + "::￿", N = M.index("_doc_id_rev").openCursor(
           IDBKeyRange.bound(D, U)
@@ -15602,9 +15602,9 @@ function fR(t, r, n) {
   }, t._get = function(b, M, x) {
     var C, m, S, w = M.ctx;
     if (!w) {
-      var O = _h(
+      var O = ph(
         e,
-        [zo, Vs, Ou],
+        [zo, Vs, Au],
         "readonly"
       );
       if (O.error)
@@ -15615,21 +15615,21 @@ function fR(t, r, n) {
       x(S, { doc: C, metadata: m, ctx: w });
     }
     w.objectStore(zo).get(b).onsuccess = function(D) {
-      if (m = q0(D.target.result), !m)
-        return S = $n(Au, "missing"), B();
+      if (m = U0(D.target.result), !m)
+        return S = $n(Tu, "missing"), B();
       var U;
       if (M.rev)
         U = M.latest ? qO(M.rev, m) : M.rev;
       else {
         U = m.winningRev;
-        var N = Gf(m);
+        var N = Nf(m);
         if (N)
-          return S = $n(Au, "deleted"), B();
+          return S = $n(Tu, "deleted"), B();
       }
       var Y = w.objectStore(Vs), X = m.id + "::" + U;
       Y.index("_doc_id_rev").get(X).onsuccess = function(Q) {
-        if (C = Q.target.result, C && (C = _w(C)), !C)
-          return S = $n(Au, "missing"), B();
+        if (C = Q.target.result, C && (C = pw(C)), !C)
+          return S = $n(Tu, "missing"), B();
         B();
       };
     };
@@ -15638,9 +15638,9 @@ function fR(t, r, n) {
     if (x.ctx)
       m = x.ctx;
     else {
-      var S = _h(
+      var S = ph(
         e,
-        [zo, Vs, Ou],
+        [zo, Vs, Au],
         "readonly"
       );
       if (S.error)
@@ -15648,14 +15648,14 @@ function fR(t, r, n) {
       m = S.txn;
     }
     var w = M.digest, O = M.content_type;
-    m.objectStore(Ou).get(w).onsuccess = function(B) {
+    m.objectStore(Au).get(w).onsuccess = function(B) {
       var D = B.target.result.body;
       QP(D, O, x.binary, function(U) {
         C(null, U);
       });
     };
   }, t._info = function(b) {
-    var M, x, C = _h(e, [Ja, Vs], "readonly");
+    var M, x, C = ph(e, [Ja, Vs], "readonly");
     if (C.error)
       return b(C.error);
     var m = C.txn;
@@ -15677,29 +15677,29 @@ function fR(t, r, n) {
   }, t._changes = function(b) {
     return cR(b, t, i, e);
   }, t._close = function(E) {
-    e.close(), n1.delete(i), E();
+    e.close(), e1.delete(i), E();
   }, t._getRevisionTree = function(E, b) {
-    var M = _h(e, [zo], "readonly");
+    var M = ph(e, [zo], "readonly");
     if (M.error)
       return b(M.error);
     var x = M.txn, C = x.objectStore(zo).get(E);
     C.onsuccess = function(m) {
-      var S = q0(m.target.result);
-      S ? b(null, S.rev_tree) : b($n(Au));
+      var S = U0(m.target.result);
+      S ? b(null, S.rev_tree) : b($n(Tu));
     };
   }, t._doCompaction = function(E, b, M) {
     var x = [
       zo,
       Vs,
-      Ou,
-      U0
-    ], C = _h(e, x, "readwrite");
+      Au,
+      z0
+    ], C = ph(e, x, "readwrite");
     if (C.error)
       return M(C.error);
     var m = C.txn, S = m.objectStore(zo);
     S.get(E).onsuccess = function(w) {
-      var O = q0(w.target.result);
-      X0(O.rev_tree, function(U, N, Y, X, Q) {
+      var O = U0(w.target.result);
+      $0(O.rev_tree, function(U, N, Y, X, Q) {
         var rt = N + "-" + Y;
         b.indexOf(rt) !== -1 && (Q.status = "missing");
       }), t7(b, E, m);
@@ -15707,17 +15707,17 @@ function fR(t, r, n) {
       m.objectStore(zo).put(
         I4(O, B, D)
       );
-    }, m.onabort = Ec(M), m.oncomplete = function() {
+    }, m.onabort = Mc(M), m.oncomplete = function() {
       M();
     };
   }, t._getLocal = function(E, b) {
-    var M = _h(e, [Lc], "readonly");
+    var M = ph(e, [kc], "readonly");
     if (M.error)
       return b(M.error);
-    var x = M.txn, C = x.objectStore(Lc).get(E);
-    C.onerror = Ec(b), C.onsuccess = function(m) {
+    var x = M.txn, C = x.objectStore(kc).get(E);
+    C.onerror = Mc(b), C.onsuccess = function(m) {
       var S = m.target.result;
-      S ? (delete S._doc_id_rev, b(null, S)) : b($n(Au));
+      S ? (delete S._doc_id_rev, b(null, S)) : b($n(Tu));
     };
   }, t._putLocal = function(E, b, M) {
     typeof b == "function" && (M = b, b = {}), delete E._revisions;
@@ -15725,18 +15725,18 @@ function fR(t, r, n) {
     x ? E._rev = "0-" + (parseInt(x.split("-")[1], 10) + 1) : E._rev = "0-1";
     var m = b.ctx, S;
     if (!m) {
-      var w = _h(e, [Lc], "readwrite");
+      var w = ph(e, [kc], "readwrite");
       if (w.error)
         return M(w.error);
-      m = w.txn, m.onerror = Ec(M), m.oncomplete = function() {
+      m = w.txn, m.onerror = Mc(M), m.oncomplete = function() {
         S && M(null, S);
       };
     }
-    var O = m.objectStore(Lc), B;
+    var O = m.objectStore(kc), B;
     x ? (B = O.get(C), B.onsuccess = function(D) {
       var U = D.target.result;
       if (!U || U._rev !== x)
-        M($n(x1));
+        M($n(w1));
       else {
         var N = O.put(E);
         N.onsuccess = function() {
@@ -15744,7 +15744,7 @@ function fR(t, r, n) {
         };
       }
     }) : (B = O.add(E), B.onerror = function(D) {
-      M($n(x1)), D.preventDefault(), D.stopPropagation();
+      M($n(w1)), D.preventDefault(), D.stopPropagation();
     }, B.onsuccess = function() {
       S = { ok: !0, id: E._id, rev: E._rev }, b.ctx && M(null, S);
     });
@@ -15752,30 +15752,30 @@ function fR(t, r, n) {
     typeof b == "function" && (M = b, b = {});
     var x = b.ctx;
     if (!x) {
-      var C = _h(e, [Lc], "readwrite");
+      var C = ph(e, [kc], "readwrite");
       if (C.error)
         return M(C.error);
       x = C.txn, x.oncomplete = function() {
         m && M(null, m);
       };
     }
-    var m, S = E._id, w = x.objectStore(Lc), O = w.get(S);
-    O.onerror = Ec(M), O.onsuccess = function(B) {
+    var m, S = E._id, w = x.objectStore(kc), O = w.get(S);
+    O.onerror = Mc(M), O.onsuccess = function(B) {
       var D = B.target.result;
-      !D || D._rev !== E._rev ? M($n(Au)) : (w.delete(S), m = { ok: !0, id: S, rev: "0-0" }, b.ctx && M(null, m));
+      !D || D._rev !== E._rev ? M($n(Tu)) : (w.delete(S), m = { ok: !0, id: S, rev: "0-0" }, b.ctx && M(null, m));
     };
   }, t._destroy = function(E, b) {
     cm.removeAllListeners(i);
     var M = M6.get(i);
-    M && M.result && (M.result.close(), n1.delete(i));
+    M && M.result && (M.result.close(), e1.delete(i));
     var x = indexedDB.deleteDatabase(i);
     x.onsuccess = function() {
-      M6.delete(i), fw() && i in localStorage && delete localStorage[i], b(null, { ok: !0 });
-    }, x.onerror = Ec(b);
+      M6.delete(i), cw() && i in localStorage && delete localStorage[i], b(null, { ok: !0 });
+    }, x.onerror = Mc(b);
   };
-  var y = n1.get(i);
+  var y = e1.get(i);
   if (y)
-    return e = y.idb, t._meta = y.global, Oc(function() {
+    return e = y.idb, t._meta = y.global, Ac(function() {
       n(null, t);
     });
   var A = indexedDB.open(i, tR);
@@ -15802,9 +15802,9 @@ function fR(t, r, n) {
     m();
   }, A.onsuccess = function(E) {
     e = E.target.result, e.onversionchange = function() {
-      e.close(), n1.delete(i);
+      e.close(), e1.delete(i);
     }, e.onabort = function(B) {
-      Bu("error", "Database has a global failure", B.target.error), s = B.target.error, e.close(), n1.delete(i);
+      Du("error", "Database has a global failure", B.target.error), s = B.target.error, e.close(), e1.delete(i);
     };
     var b = e.transaction([
       Ja,
@@ -15816,7 +15816,7 @@ function fR(t, r, n) {
         name: i,
         instanceId: S,
         blobSupport: m
-      }, n1.set(i, {
+      }, e1.set(i, {
         idb: e,
         global: t._meta
       }), n(null, t));
@@ -15835,10 +15835,10 @@ function fR(t, r, n) {
       m = B, w();
     }), b.oncomplete = function() {
       M = !0, w();
-    }, b.onabort = Ec(n);
+    }, b.onabort = Mc(n);
   }, A.onerror = function(E) {
     var b = E.target.error && E.target.error.message;
-    b ? b.indexOf("stored database is a higher version") !== -1 && (b = new Error('This DB was created with the newer "indexeddb" adapter, but you are trying to open it with the older "idb" adapter')) : b = "Failed to open indexedDB, are you in private browsing mode?", Bu("error", b), n($n(Lk, b));
+    b ? b.indexOf("stored database is a higher version") !== -1 && (b = new Error('This DB was created with the newer "indexeddb" adapter, but you are trying to open it with the older "idb" adapter')) : b = "Failed to open indexedDB, are you in private browsing mode?", Du("error", b), n($n(Lk, b));
   };
 }
 n7.valid = function() {
@@ -15873,7 +15873,7 @@ function pR(t, r) {
     u();
   });
 }
-const _R = 25, mR = 50, xb = 5e3, gR = 1e4, E6 = {};
+const _R = 25, mR = 50, wb = 5e3, gR = 1e4, E6 = {};
 function S6(t) {
   const r = t.doc || t.ok, n = r && r._attachments;
   n && Object.keys(n).forEach(function(i) {
@@ -15881,7 +15881,7 @@ function S6(t) {
     e.data = Tk(e.data, e.content_type);
   });
 }
-function B0(t) {
+function D0(t) {
   return /^_design/.test(t) ? "_design/" + encodeURIComponent(t.slice(8)) : t.startsWith("_local/") ? "_local/" + encodeURIComponent(t.slice(7)) : encodeURIComponent(t);
 }
 function mS(t) {
@@ -15912,13 +15912,13 @@ function yR(t, r) {
   return n.db = i.pop(), n.db.indexOf("%") === -1 && (n.db = encodeURIComponent(n.db)), n.path = i.join("/"), n;
 }
 function ns(t, r) {
-  return tw(t, t.db + "/" + r);
+  return Jb(t, t.db + "/" + r);
 }
-function tw(t, r) {
+function Jb(t, r) {
   const n = t.path ? "/" : "";
   return t.protocol + "://" + t.host + (t.port ? ":" + t.port : "") + "/" + t.path + n + r;
 }
-function kb(t) {
+function xb(t) {
   const r = Object.keys(t);
   return r.length === 0 ? "" : "?" + r.map((n) => n + "=" + encodeURIComponent(t[n])).join("&");
 }
@@ -15928,10 +15928,10 @@ function bR(t) {
 }
 function N4(t, r) {
   const n = this, i = yR(t.name, t), e = ns(i, "");
-  t = ss(t);
+  t = os(t);
   const s = async function(h, _) {
-    if (_ = _ || {}, _.headers = _.headers || new _1(), _.credentials = "include", t.auth || i.auth) {
-      const A = t.auth || i.auth, E = A.username + ":" + A.password, b = Cm(unescape(encodeURIComponent(E)));
+    if (_ = _ || {}, _.headers = _.headers || new p1(), _.credentials = "include", t.auth || i.auth) {
+      const A = t.auth || i.auth, E = A.username + ":" + A.password, b = Sm(unescape(encodeURIComponent(E)));
       _.headers.set("Authorization", "Basic " + b);
     }
     const u = t.headers || {};
@@ -15950,14 +15950,14 @@ function N4(t, r) {
   }
   async function a(h, _) {
     const u = {};
-    _ = _ || {}, _.headers = _.headers || new _1(), _.headers.get("Content-Type") || _.headers.set("Content-Type", "application/json"), _.headers.get("Accept") || _.headers.set("Accept", "application/json");
+    _ = _ || {}, _.headers = _.headers || new p1(), _.headers.get("Content-Type") || _.headers.set("Content-Type", "application/json"), _.headers.get("Accept") || _.headers.set("Accept", "application/json");
     const y = await s(h, _);
     u.ok = y.ok, u.status = y.status;
     const A = await y.json();
     if (u.data = A, !u.ok)
-      throw u.data.status = u.status, k1(u.data);
+      throw u.data.status = u.status, x1(u.data);
     return Array.isArray(u.data) && (u.data = u.data.map(function(E) {
-      return E.error || E.missing ? k1(E) : E;
+      return E.error || E.missing ? x1(E) : E;
     })), u;
   }
   let c;
@@ -15970,21 +15970,21 @@ function N4(t, r) {
       c = null;
     }), c);
   }
-  Oc(function() {
+  Ac(function() {
     r(null, n);
   }), n._remote = !0, n.type = function() {
     return "http";
   }, n.id = l("id", async function(h) {
     let _;
     try {
-      _ = await (await s(tw(i, ""))).json();
+      _ = await (await s(Jb(i, ""))).json();
     } catch {
       _ = {};
     }
     const u = _ && _.uuid ? _.uuid + i.db : ns(i, "");
     h(null, u);
   }), n.compact = l("compact", async function(h, _) {
-    typeof h == "function" && (_ = h, h = {}), h = ss(h), await a(ns(i, "_compact"), { method: "POST" });
+    typeof h == "function" && (_ = h, h = {}), h = os(h), await a(ns(i, "_compact"), { method: "POST" });
     function u() {
       n.info(function(y, A) {
         A && !A.compact_running ? _(null, { ok: !0 }) : setTimeout(u, h.interval || 200);
@@ -15997,7 +15997,7 @@ function N4(t, r) {
       const x = {};
       h.revs && (x.revs = !0), h.attachments && (x.attachments = !0), h.latest && (x.latest = !0);
       try {
-        const C = await a(ns(i, "_bulk_get" + kb(x)), {
+        const C = await a(ns(i, "_bulk_get" + xb(x)), {
           method: "POST",
           body: JSON.stringify({ docs: h.docs })
         });
@@ -16018,14 +16018,14 @@ function N4(t, r) {
         };
       }
       for (let w = 0; w < x; w++) {
-        const O = Sm(h, ["revs", "attachments", "binary", "latest"]);
+        const O = Em(h, ["revs", "attachments", "binary", "latest"]);
         O.docs = h.docs.slice(
           w * M,
           Math.min(h.docs.length, (w + 1) * M)
         ), PP(u, O, S(w));
       }
     }
-    const E = tw(i, ""), b = E6[E];
+    const E = Jb(i, ""), b = E6[E];
     typeof b != "boolean" ? y(function(M, x) {
       M ? (E6[E] = !1, S4(
         M.status,
@@ -16042,18 +16042,18 @@ function N4(t, r) {
     }
   }, n.fetch = async function(h, _) {
     await d();
-    const u = h.substring(0, 1) === "/" ? tw(i, h.substring(1)) : ns(i, h);
+    const u = h.substring(0, 1) === "/" ? Jb(i, h.substring(1)) : ns(i, h);
     return s(u, _);
   }, n.get = l("get", async function(h, _, u) {
-    typeof _ == "function" && (u = _, _ = {}), _ = ss(_);
+    typeof _ == "function" && (u = _, _ = {}), _ = os(_);
     const y = {};
-    _.revs && (y.revs = !0), _.revs_info && (y.revs_info = !0), _.latest && (y.latest = !0), _.open_revs && (_.open_revs !== "all" && (_.open_revs = JSON.stringify(_.open_revs)), y.open_revs = _.open_revs), _.rev && (y.rev = _.rev), _.conflicts && (y.conflicts = _.conflicts), _.update_seq && (y.update_seq = _.update_seq), h = B0(h);
+    _.revs && (y.revs = !0), _.revs_info && (y.revs_info = !0), _.latest && (y.latest = !0), _.open_revs && (_.open_revs !== "all" && (_.open_revs = JSON.stringify(_.open_revs)), y.open_revs = _.open_revs), _.rev && (y.rev = _.rev), _.conflicts && (y.conflicts = _.conflicts), _.update_seq && (y.update_seq = _.update_seq), h = D0(h);
     function A(M) {
       const x = M._attachments, C = x && Object.keys(x);
       if (!x || !C.length)
         return;
       async function m(w) {
-        const O = x[w], B = B0(M._id) + "/" + p(w) + "?rev=" + M._rev, D = await s(ns(i, B));
+        const O = x[w], B = D0(M._id) + "/" + p(w) + "?rev=" + M._rev, D = await s(ns(i, B));
         let U;
         "buffer" in D ? U = await D.buffer() : U = await D.blob();
         let N;
@@ -16079,7 +16079,7 @@ function N4(t, r) {
           return A(x.ok);
       })) : A(M);
     }
-    const b = ns(i, h + kb(y));
+    const b = ns(i, h + xb(y));
     try {
       const M = await a(b);
       _.attachments && await E(M.data), u(null, M.data);
@@ -16092,7 +16092,7 @@ function N4(t, r) {
       _id: h,
       _rev: _
     }, typeof u == "function" && (y = u, u = {})) : (A = h, typeof _ == "function" ? (y = _, u = {}) : (y = u, u = _));
-    const E = A._rev || u.rev, b = ns(i, B0(A._id)) + "?rev=" + E;
+    const E = A._rev || u.rev, b = ns(i, D0(A._id)) + "?rev=" + E;
     try {
       const M = await a(b, { method: "DELETE" });
       y(null, M.data);
@@ -16105,7 +16105,7 @@ function N4(t, r) {
   }
   n.getAttachment = l("getAttachment", async function(h, _, u, y) {
     typeof u == "function" && (y = u, u = {});
-    const A = u.rev ? "?rev=" + u.rev : "", E = ns(i, B0(h)) + "/" + p(_) + A;
+    const A = u.rev ? "?rev=" + u.rev : "", E = ns(i, D0(h)) + "/" + p(_) + A;
     let b;
     try {
       const M = await s(E, { method: "GET" });
@@ -16122,7 +16122,7 @@ function N4(t, r) {
       y(M);
     }
   }), n.removeAttachment = l("removeAttachment", async function(h, _, u, y) {
-    const A = ns(i, B0(h) + "/" + p(_)) + "?rev=" + u;
+    const A = ns(i, D0(h) + "/" + p(_)) + "?rev=" + u;
     try {
       const E = await a(A, { method: "DELETE" });
       y(null, E.data);
@@ -16131,7 +16131,7 @@ function N4(t, r) {
     }
   }), n.putAttachment = l("putAttachment", async function(h, _, u, y, A, E) {
     typeof A == "function" && (E = A, A = y, y = u, u = null);
-    const b = B0(h) + "/" + p(_);
+    const b = D0(h) + "/" + p(_);
     let M = ns(i, b);
     if (u && (M += "?rev=" + u), typeof y == "string") {
       let x;
@@ -16147,7 +16147,7 @@ function N4(t, r) {
     }
     try {
       const x = await a(M, {
-        headers: new _1({ "Content-Type": A }),
+        headers: new p1({ "Content-Type": A }),
         method: "PUT",
         body: y
       });
@@ -16170,7 +16170,7 @@ function N4(t, r) {
   }, n._put = async function(h, _, u) {
     try {
       await d(), await mS(h);
-      const y = await a(ns(i, B0(h._id)), {
+      const y = await a(ns(i, D0(h._id)), {
         method: "PUT",
         body: JSON.stringify(h)
       });
@@ -16179,11 +16179,11 @@ function N4(t, r) {
       y.docId = h && h._id, u(y);
     }
   }, n.allDocs = l("allDocs", async function(h, _) {
-    typeof h == "function" && (_ = h, h = {}), h = ss(h);
+    typeof h == "function" && (_ = h, h = {}), h = os(h);
     const u = {};
     let y, A = "GET";
     h.conflicts && (u.conflicts = !0), h.update_seq && (u.update_seq = !0), h.descending && (u.descending = !0), h.include_docs && (u.include_docs = !0), h.attachments && (u.attachments = !0), h.key && (u.key = JSON.stringify(h.key)), h.start_key && (h.startkey = h.start_key), h.startkey && (u.startkey = JSON.stringify(h.startkey)), h.end_key && (h.endkey = h.end_key), h.endkey && (u.endkey = JSON.stringify(h.endkey)), typeof h.inclusive_end < "u" && (u.inclusive_end = !!h.inclusive_end), typeof h.limit < "u" && (u.limit = h.limit), typeof h.skip < "u" && (u.skip = h.skip);
-    const E = kb(u);
+    const E = xb(u);
     typeof h.keys < "u" && (A = "POST", y = { keys: h.keys });
     try {
       const b = await a(ns(i, "_all_docs" + E), {
@@ -16196,9 +16196,9 @@ function N4(t, r) {
     }
   }), n._changes = function(h) {
     const _ = "batch_size" in h ? h.batch_size : _R;
-    h = ss(h), h.continuous && !("heartbeat" in h) && (h.heartbeat = gR);
+    h = os(h), h.continuous && !("heartbeat" in h) && (h.heartbeat = gR);
     let u = "timeout" in h ? h.timeout : 30 * 1e3;
-    "timeout" in h && h.timeout && u - h.timeout < xb && (u = h.timeout + xb), "heartbeat" in h && h.heartbeat && u - h.heartbeat < xb && (u = h.heartbeat + xb);
+    "timeout" in h && h.timeout && u - h.timeout < wb && (u = h.timeout + wb), "heartbeat" in h && h.heartbeat && u - h.heartbeat < wb && (u = h.heartbeat + wb);
     const y = {};
     "timeout" in h && h.timeout && (y.timeout = h.timeout);
     const A = typeof h.limit < "u" ? h.limit : !1;
@@ -16214,7 +16214,7 @@ function N4(t, r) {
       if (h.aborted)
         return;
       y.since = O, typeof y.since == "object" && (y.since = JSON.stringify(y.since)), h.descending ? A && (y.limit = E) : y.limit = !A || E > _ ? _ : E;
-      const D = ns(i, "_changes" + kb(y)), U = {
+      const D = ns(i, "_changes" + xb(y)), U = {
         signal: x.signal,
         method: b,
         body: JSON.stringify(M)
@@ -16245,7 +16245,7 @@ function N4(t, r) {
       }
       B && B.last_seq && (C = B.last_seq);
       const U = A && E <= 0 || B && D < _ || h.descending;
-      h.continuous && !(A && E <= 0) || !U ? Oc(function() {
+      h.continuous && !(A && E <= 0) || !U ? Ac(function() {
         m(C, w);
       }) : h.complete(null, S);
     };
@@ -16309,11 +16309,11 @@ let tm = class r7 extends Error {
 };
 function l7(t, r) {
   return r && t.then(function(n) {
-    Oc(function() {
+    Ac(function() {
       r(null, n);
     });
   }, function(n) {
-    Oc(function() {
+    Ac(function() {
       r(n);
     });
   }), t;
@@ -16377,7 +16377,7 @@ function G4(t) {
   }
   return r;
 }
-var LR = Bu.bind(null, "log"), MR = Array.isArray, ER = JSON.parse;
+var LR = Du.bind(null, "log"), MR = Array.isArray, ER = JSON.parse;
 function u7(t, r) {
   return Ek(
     "return (" + t.replace(/;\s*$/, "") + ");",
@@ -16432,7 +16432,7 @@ async function bS(t, r, n, i, e, s) {
       if (!M[p])
         return M[p] = !0, E;
     }
-    await dw(t, "_local/" + s, h);
+    await fw(t, "_local/" + s, h);
     const u = (await t.registerDependentDatabase(p)).db;
     u.auto_compaction = !0;
     const y = {
@@ -16467,13 +16467,13 @@ function kS(t, r, n) {
   try {
     t.emit("error", r);
   } catch {
-    Bu(
+    Du(
       "error",
       `The user's map/reduce function threw an uncaught error.
 You can debug this error by doing:
 myDatabase.on('error', function (err) { debugger; });
 Please double-check your map/reduce function.`
-    ), Bu("error", r, n);
+    ), Du("error", r, n);
   }
 }
 function TR(t, r, n, i) {
@@ -16562,14 +16562,14 @@ function TR(t, r, n, i) {
     }
     if (typeof W == "string") {
       const V = T6(W), z = await F.fetch("_design/" + V[0] + "/_view/" + V[1] + j, {
-        headers: new _1({ "Content-Type": "application/json" }),
+        headers: new p1({ "Content-Type": "application/json" }),
         method: ut,
         body: JSON.stringify(K)
       });
       Z = z.ok;
       const ct = await z.json();
       if (!Z)
-        throw ct.status = z.status, k1(ct);
+        throw ct.status = z.status, x1(ct);
       for (const H of ct.rows)
         if (H.value && H.value.error && H.value.error === "builtin_reduce_error")
           throw new Error(H.reason);
@@ -16581,14 +16581,14 @@ function TR(t, r, n, i) {
     for (const V of Object.keys(W))
       Array.isArray(W[V]) ? K[V] = W[V] : K[V] = W[V].toString();
     const pt = await F.fetch("_temp_view" + j, {
-      headers: new _1({ "Content-Type": "application/json" }),
+      headers: new p1({ "Content-Type": "application/json" }),
       method: "POST",
       body: JSON.stringify(K)
     });
     Z = pt.ok;
     const nt = await pt.json();
     if (!Z)
-      throw nt.status = pt.status, k1(nt);
+      throw nt.status = pt.status, x1(nt);
     return new Promise(function(V) {
       V(nt);
     }).then(p(q));
@@ -16693,8 +16693,8 @@ function TR(t, r, n, i) {
   async function B(F, W) {
     let q, j, K;
     function ut(Ft, Jt) {
-      const ve = { id: j._id, key: Q0(Ft) };
-      typeof Jt < "u" && Jt !== null && (ve.value = Q0(Jt)), q.push(ve);
+      const ve = { id: j._id, key: X0(Ft) };
+      typeof Jt < "u" && Jt !== null && (ve.value = X0(Jt)), q.push(ve);
     }
     const Z = r(F.mapFun, ut);
     let pt = F.seq || 0;
@@ -16796,7 +16796,7 @@ function TR(t, r, n, i) {
       let ve;
       for (let ne = 0, Ht = Ft.length; ne < Ht; ne++) {
         const ge = Ft[ne], Ie = [ge.key, ge.id];
-        ne > 0 && Eo(ge.key, ve) === 0 && Ie.push(ne), Jt.set(ph(Ie), ge), ve = ge.key;
+        ne > 0 && Eo(ge.key, ve) === 0 && Ie.push(ne), Jt.set(dh(Ie), ge), ve = ge.key;
       }
       return Jt;
     }
@@ -16891,8 +16891,8 @@ function TR(t, r, n, i) {
     if (typeof W.keys < "u") {
       const nt = W.keys.map(function(ct) {
         const H = {
-          startkey: ph([ct]),
-          endkey: ph([ct, {}])
+          startkey: dh([ct]),
+          endkey: dh([ct, {}])
         };
         return W.update_seq && (H.update_seq = !0), ut(H);
       }), z = (await Promise.all(nt)).flat();
@@ -16903,14 +16903,14 @@ function TR(t, r, n, i) {
       };
       W.update_seq && (pt.update_seq = !0);
       let nt, V;
-      if ("start_key" in W && (nt = W.start_key), "startkey" in W && (nt = W.startkey), "end_key" in W && (V = W.end_key), "endkey" in W && (V = W.endkey), typeof nt < "u" && (pt.startkey = W.descending ? ph([nt, {}]) : ph([nt])), typeof V < "u") {
+      if ("start_key" in W && (nt = W.start_key), "startkey" in W && (nt = W.startkey), "end_key" in W && (V = W.end_key), "endkey" in W && (V = W.endkey), typeof nt < "u" && (pt.startkey = W.descending ? dh([nt, {}]) : dh([nt])), typeof V < "u") {
         let ct = W.inclusive_end !== !1;
-        W.descending && (ct = !ct), pt.endkey = ph(
+        W.descending && (ct = !ct), pt.endkey = dh(
           ct ? [V, {}] : [V]
         );
       }
       if (typeof W.key < "u") {
-        const ct = ph([W.key]), H = ph([W.key, {}]);
+        const ct = dh([W.key]), H = dh([W.key, {}]);
         pt.descending ? (pt.endkey = ct, pt.startkey = H) : (pt.startkey = ct, pt.endkey = H);
       }
       j || (typeof W.limit == "number" && (pt.limit = W.limit), pt.skip = K);
@@ -16920,7 +16920,7 @@ function TR(t, r, n, i) {
   }
   async function Y(F) {
     return (await F.fetch("_view_cleanup", {
-      headers: new _1({ "Content-Type": "application/json" }),
+      headers: new p1({ "Content-Type": "application/json" }),
       method: "POST"
     })).json();
   }
@@ -16965,7 +16965,7 @@ function TR(t, r, n, i) {
   async function Q(F, W, q) {
     if (typeof F._query == "function")
       return b(F, W, q);
-    if (Cc(F))
+    if (Sc(F))
       return E(F, W, q);
     const j = {
       changes_batch_size: F.__opts.view_update_changes_batch_size || CR
@@ -17016,7 +17016,7 @@ function TR(t, r, n, i) {
         /* localDocName */
         t
       );
-      return q.stale === "ok" || q.stale === "update_after" ? (q.stale === "update_after" && Oc(function() {
+      return q.stale === "ok" || q.stale === "update_after" ? (q.stale === "update_after" && Ac(function() {
         O(V, j);
       }), U(V, q)) : (await O(V, j), U(V, q));
     }
@@ -17031,7 +17031,7 @@ function TR(t, r, n, i) {
   }
   const ot = xR(function() {
     const F = this;
-    return typeof F._viewCleanup == "function" ? M(F) : Cc(F) ? Y(F) : X(F);
+    return typeof F._viewCleanup == "function" ? M(F) : Sc(F) ? Y(F) : X(F);
   });
   return {
     query: rt,
@@ -17111,7 +17111,7 @@ function LS(t, r) {
   }));
 }
 function FR(t, r, n) {
-  var i = Cc(r) && !Cc(t), e = Object.keys(n._attachments);
+  var i = Sc(r) && !Sc(t), e = Object.keys(n._attachments);
   return i ? t.get(n._id).then(function(s) {
     return Promise.all(e.map(function(l) {
       return jR(s, n, l) ? r.getAttachment(n._id, l) : t.getAttachment(s._id, l);
@@ -17139,7 +17139,7 @@ function zR(t) {
   };
 }
 function UR(t, r, n, i) {
-  n = ss(n);
+  n = os(n);
   var e = [], s = !0;
   function l() {
     var c = zR(n);
@@ -17168,7 +17168,7 @@ function UR(t, r, n, i) {
   }
   return Promise.resolve().then(l).then(a);
 }
-var MS = 1, ES = "pouchdb", qR = 5, ch = 0;
+var MS = 1, ES = "pouchdb", qR = 5, hh = 0;
 function F4(t, r, n, i, e) {
   return t.get(r).catch(function(s) {
     if (s.status === 404)
@@ -17238,34 +17238,34 @@ let SS = class {
   }
   getCheckpoint() {
     var r = this;
-    return !r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? Promise.resolve(ch) : r.opts && r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? r.src.get(r.id).then(function(n) {
-      return n.last_seq || ch;
+    return !r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? Promise.resolve(hh) : r.opts && r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? r.src.get(r.id).then(function(n) {
+      return n.last_seq || hh;
     }).catch(function(n) {
       if (n.status !== 404)
         throw n;
-      return ch;
+      return hh;
     }) : r.target.get(r.id).then(function(n) {
-      return r.opts && r.opts.writeTargetCheckpoint && !r.opts.writeSourceCheckpoint ? n.last_seq || ch : r.src.get(r.id).then(function(i) {
+      return r.opts && r.opts.writeTargetCheckpoint && !r.opts.writeSourceCheckpoint ? n.last_seq || hh : r.src.get(r.id).then(function(i) {
         if (n.version !== i.version)
-          return ch;
+          return hh;
         var e;
-        return n.version ? e = n.version.toString() : e = "undefined", e in CS ? CS[e](n, i) : ch;
+        return n.version ? e = n.version.toString() : e = "undefined", e in CS ? CS[e](n, i) : hh;
       }, function(i) {
         if (i.status === 404 && n.last_seq)
           return r.src.put({
             _id: r.id,
-            last_seq: ch
+            last_seq: hh
           }).then(function() {
-            return ch;
+            return hh;
           }, function(e) {
-            return PS(e) ? (r.opts.writeSourceCheckpoint = !1, n.last_seq) : ch;
+            return PS(e) ? (r.opts.writeSourceCheckpoint = !1, n.last_seq) : hh;
           });
         throw i;
       });
     }).catch(function(n) {
       if (n.status !== 404)
         throw n;
-      return ch;
+      return hh;
     });
   }
 };
@@ -17287,7 +17287,7 @@ function c7(t, r) {
   var n = t[0], i = t.slice(1), e = r[0], s = r.slice(1);
   if (!n || r.length === 0)
     return {
-      last_seq: ch,
+      last_seq: hh,
       history: []
     };
   var l = n.session_id;
@@ -17385,7 +17385,7 @@ function d7(t, r, n, i, e) {
             e.errors.push(ft);
             var bt = (ft.name || "").toLowerCase();
             if (bt === "unauthorized" || bt === "forbidden")
-              i.emit("denied", ss(ft));
+              i.emit("denied", os(ft));
             else
               throw ft;
           } else
@@ -17400,7 +17400,7 @@ function d7(t, r, n, i, e) {
     if (l.error)
       throw new Error("There was a problem getting docs.");
     e.last_seq = _ = l.seq;
-    var nt = ss(e);
+    var nt = os(e);
     return S.length && (nt.docs = S, typeof l.pending == "number" && (nt.pending = l.pending, delete l.pending), i.emit("change", nt)), c = !0, t.info().then(function(V) {
       var z = t.activeTasks.get(O);
       if (!(!l || !z)) {
@@ -17493,7 +17493,7 @@ function d7(t, r, n, i, e) {
       }
       return;
     }
-    a.seq = nt.seq || z, a.changes.push(nt), i.emit("checkpoint", { pending_batch: a.seq }), Oc(function() {
+    a.seq = nt.seq || z, a.changes.push(nt), i.emit("checkpoint", { pending_batch: a.seq }), Ac(function() {
       rt(s.length === 0 && B.live);
     });
   }
@@ -17585,7 +17585,7 @@ function d7(t, r, n, i, e) {
     _ = n.since, Z();
   }).catch(pt);
 }
-let KR = class extends qf {
+let KR = class extends Uf {
   constructor() {
     super(), this.cancelled = !1, this.state = "pending";
     const r = new Promise((n, i) => {
@@ -17615,7 +17615,7 @@ let KR = class extends qf {
     this.once("complete", e), this.once("error", e);
   }
 };
-function mw(t, r) {
+function _w(t, r) {
   var n = r.PouchConstructor;
   return typeof t == "string" ? new n(t, r) : t;
 }
@@ -17625,14 +17625,14 @@ function U4(t, r, n, i) {
       Ow,
       "`doc_ids` filter parameter is not a list."
     );
-  n.complete = i, n = ss(n), n.continuous = n.continuous || n.live, n.retry = "retry" in n ? n.retry : !1, n.PouchConstructor = n.PouchConstructor || this;
-  var e = new KR(n), s = mw(t, n), l = mw(r, n);
+  n.complete = i, n = os(n), n.continuous = n.continuous || n.live, n.retry = "retry" in n ? n.retry : !1, n.PouchConstructor = n.PouchConstructor || this;
+  var e = new KR(n), s = _w(t, n), l = _w(r, n);
   return d7(s, l, n, e), e;
 }
 function YR(t, r, n, i) {
-  return typeof n == "function" && (i = n, n = {}), typeof n > "u" && (n = {}), n = ss(n), n.PouchConstructor = n.PouchConstructor || this, t = mw(t, n), r = mw(r, n), new $R(t, r, n, i);
+  return typeof n == "function" && (i = n, n = {}), typeof n > "u" && (n = {}), n = os(n), n.PouchConstructor = n.PouchConstructor || this, t = _w(t, n), r = _w(r, n), new $R(t, r, n, i);
 }
-let $R = class extends qf {
+let $R = class extends Uf {
   constructor(r, n, i, e) {
     super(), this.canceled = !1;
     const s = i.push ? Object.assign({}, i, i.push) : i, l = i.pull ? Object.assign({}, i, i.pull) : i;
@@ -17732,53 +17732,53 @@ function p7() {
 function _7() {
   throw new Error("clearTimeout has not been defined");
 }
-var Qd = p7, Jd = _7;
-typeof Nk.setTimeout == "function" && (Qd = setTimeout);
-typeof Nk.clearTimeout == "function" && (Jd = clearTimeout);
+var Xd = p7, Qd = _7;
+typeof Nk.setTimeout == "function" && (Xd = setTimeout);
+typeof Nk.clearTimeout == "function" && (Qd = clearTimeout);
 function m7(t) {
-  if (Qd === setTimeout)
+  if (Xd === setTimeout)
     return setTimeout(t, 0);
-  if ((Qd === p7 || !Qd) && setTimeout)
-    return Qd = setTimeout, setTimeout(t, 0);
+  if ((Xd === p7 || !Xd) && setTimeout)
+    return Xd = setTimeout, setTimeout(t, 0);
   try {
-    return Qd(t, 0);
+    return Xd(t, 0);
   } catch {
     try {
-      return Qd.call(null, t, 0);
+      return Xd.call(null, t, 0);
     } catch {
-      return Qd.call(this, t, 0);
+      return Xd.call(this, t, 0);
     }
   }
 }
 function QR(t) {
-  if (Jd === clearTimeout)
+  if (Qd === clearTimeout)
     return clearTimeout(t);
-  if ((Jd === _7 || !Jd) && clearTimeout)
-    return Jd = clearTimeout, clearTimeout(t);
+  if ((Qd === _7 || !Qd) && clearTimeout)
+    return Qd = clearTimeout, clearTimeout(t);
   try {
-    return Jd(t);
+    return Qd(t);
   } catch {
     try {
-      return Jd.call(null, t);
+      return Qd.call(null, t);
     } catch {
-      return Jd.call(this, t);
+      return Qd.call(this, t);
     }
   }
 }
-var jf = [], g1 = !1, H0, ew = -1;
+var Gf = [], m1 = !1, q0, tw = -1;
 function JR() {
-  !g1 || !H0 || (g1 = !1, H0.length ? jf = H0.concat(jf) : ew = -1, jf.length && g7());
+  !m1 || !q0 || (m1 = !1, q0.length ? Gf = q0.concat(Gf) : tw = -1, Gf.length && g7());
 }
 function g7() {
-  if (!g1) {
+  if (!m1) {
     var t = m7(JR);
-    g1 = !0;
-    for (var r = jf.length; r; ) {
-      for (H0 = jf, jf = []; ++ew < r; )
-        H0 && H0[ew].run();
-      ew = -1, r = jf.length;
+    m1 = !0;
+    for (var r = Gf.length; r; ) {
+      for (q0 = Gf, Gf = []; ++tw < r; )
+        q0 && q0[tw].run();
+      tw = -1, r = Gf.length;
     }
-    H0 = null, g1 = !1, QR(t);
+    q0 = null, m1 = !1, QR(t);
   }
 }
 function tD(t) {
@@ -17786,7 +17786,7 @@ function tD(t) {
   if (arguments.length > 1)
     for (var n = 1; n < arguments.length; n++)
       r[n - 1] = arguments[n];
-  jf.push(new v7(t, r)), jf.length === 1 && !g1 && m7(g7);
+  Gf.push(new v7(t, r)), Gf.length === 1 && !m1 && m7(g7);
 }
 function v7(t, r) {
   this.fun = t, this.array = r;
@@ -17795,9 +17795,9 @@ v7.prototype.run = function() {
   this.fun.apply(null, this.array);
 };
 var eD = "browser", nD = "browser", rD = !0, iD = {}, oD = [], sD = "", aD = {}, lD = {}, uD = {};
-function ip() {
+function rp() {
 }
-var hD = ip, cD = ip, fD = ip, dD = ip, pD = ip, _D = ip, mD = ip;
+var hD = rp, cD = rp, fD = rp, dD = rp, pD = rp, _D = rp, mD = rp;
 function gD(t) {
   throw new Error("process.binding is not supported");
 }
@@ -17810,11 +17810,11 @@ function yD(t) {
 function bD() {
   return 0;
 }
-var u1 = Nk.performance || {}, wD = u1.now || u1.mozNow || u1.msNow || u1.oNow || u1.webkitNow || function() {
+var l1 = Nk.performance || {}, wD = l1.now || l1.mozNow || l1.msNow || l1.oNow || l1.webkitNow || function() {
   return (/* @__PURE__ */ new Date()).getTime();
 };
 function xD(t) {
-  var r = wD.call(u1) * 1e-3, n = Math.floor(r), i = Math.floor(r % 1 * 1e9);
+  var r = wD.call(l1) * 1e-3, n = Math.floor(r), i = Math.floor(r % 1 * 1e9);
   return t && (n = n - t[0], i = i - t[1], i < 0 && (n--, i += 1e9)), [n, i];
 }
 var kD = /* @__PURE__ */ new Date();
@@ -17822,7 +17822,7 @@ function LD() {
   var t = /* @__PURE__ */ new Date(), r = t - kD;
   return r / 1e3;
 }
-var Lb = {
+var kb = {
   nextTick: tD,
   title: eD,
   browser: rD,
@@ -18003,11 +18003,11 @@ function MD() {
     });
   }(O6)), O6.exports;
 }
-var ED = MD(), q4 = /* @__PURE__ */ y7(ED), Mb, SD = new Uint8Array(16);
+var ED = MD(), q4 = /* @__PURE__ */ y7(ED), Lb, SD = new Uint8Array(16);
 function CD() {
-  if (!Mb && (Mb = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto < "u" && typeof msCrypto.getRandomValues == "function" && msCrypto.getRandomValues.bind(msCrypto), !Mb))
+  if (!Lb && (Lb = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto < "u" && typeof msCrypto.getRandomValues == "function" && msCrypto.getRandomValues.bind(msCrypto), !Lb))
     throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-  return Mb(SD);
+  return Lb(SD);
 }
 var PD = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
 function TD(t) {
@@ -18033,10 +18033,10 @@ function Gk(t, r, n) {
   }
   return AD(i);
 }
-var Eb = {}, OS;
+var Mb = {}, OS;
 function OD() {
-  if (OS) return Eb;
-  OS = 1, Eb.stringify = function(n) {
+  if (OS) return Mb;
+  OS = 1, Mb.stringify = function(n) {
     var i = [];
     i.push({ obj: n });
     for (var e = "", s, l, a, c, d, p, h, _, u, y, A; s = i.pop(); )
@@ -18072,7 +18072,7 @@ function OD() {
     } else
       n.push(r);
   }
-  return Eb.parse = function(r) {
+  return Mb.parse = function(r) {
     for (var n = [], i = [], e = 0, s, l, a, c, d, p, h, _, u; ; ) {
       if (s = r[e++], s === "}" || s === "]" || typeof s > "u") {
         if (n.length === 1)
@@ -18134,12 +18134,12 @@ function OD() {
           );
       }
     }
-  }, Eb;
+  }, Mb;
 }
 var ID = OD(), b7 = /* @__PURE__ */ y7(ID), R6;
-function r0() {
+function n0() {
 }
-r0.prototype = /* @__PURE__ */ Object.create(null);
+n0.prototype = /* @__PURE__ */ Object.create(null);
 function Ar() {
   Ar.init.call(this);
 }
@@ -18150,7 +18150,7 @@ Ar.prototype._events = void 0;
 Ar.prototype._maxListeners = void 0;
 Ar.defaultMaxListeners = 10;
 Ar.init = function() {
-  this.domain = null, Ar.usingDomains && R6.active && !(this instanceof R6.Domain) && (this.domain = R6.active), (!this._events || this._events === Object.getPrototypeOf(this)._events) && (this._events = new r0(), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
+  this.domain = null, Ar.usingDomains && R6.active && !(this instanceof R6.Domain) && (this.domain = R6.active), (!this._events || this._events === Object.getPrototypeOf(this)._events) && (this._events = new n0(), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
 };
 Ar.prototype.setMaxListeners = function(r) {
   if (typeof r != "number" || r < 0 || isNaN(r))
@@ -18167,35 +18167,35 @@ function RD(t, r, n) {
   if (r)
     t.call(n);
   else
-    for (var i = t.length, e = Pm(t, i), s = 0; s < i; ++s)
+    for (var i = t.length, e = Cm(t, i), s = 0; s < i; ++s)
       e[s].call(n);
 }
 function DD(t, r, n, i) {
   if (r)
     t.call(n, i);
   else
-    for (var e = t.length, s = Pm(t, e), l = 0; l < e; ++l)
+    for (var e = t.length, s = Cm(t, e), l = 0; l < e; ++l)
       s[l].call(n, i);
 }
 function BD(t, r, n, i, e) {
   if (r)
     t.call(n, i, e);
   else
-    for (var s = t.length, l = Pm(t, s), a = 0; a < s; ++a)
+    for (var s = t.length, l = Cm(t, s), a = 0; a < s; ++a)
       l[a].call(n, i, e);
 }
 function ND(t, r, n, i, e, s) {
   if (r)
     t.call(n, i, e, s);
   else
-    for (var l = t.length, a = Pm(t, l), c = 0; c < l; ++c)
+    for (var l = t.length, a = Cm(t, l), c = 0; c < l; ++c)
       a[c].call(n, i, e, s);
 }
 function GD(t, r, n, i) {
   if (r)
     t.apply(n, i);
   else
-    for (var e = t.length, s = Pm(t, e), l = 0; l < e; ++l)
+    for (var e = t.length, s = Cm(t, e), l = 0; l < e; ++l)
       s[l].apply(n, i);
 }
 Ar.prototype.emit = function(r) {
@@ -18248,7 +18248,7 @@ function x7(t, r, n, i) {
     "newListener",
     r,
     n.listener ? n.listener : n
-  ), s = t._events), l = s[r]) : (s = t._events = new r0(), t._eventsCount = 0), !l)
+  ), s = t._events), l = s[r]) : (s = t._events = new n0(), t._eventsCount = 0), !l)
     l = s[r] = n, ++t._eventsCount;
   else if (typeof l == "function" ? l = s[r] = i ? [n, l] : [l, n] : i ? l.unshift(n) : l.push(n), !l.warned && (e = w7(t), e && e > 0 && l.length > e)) {
     l.warned = !0;
@@ -18293,7 +18293,7 @@ Ar.prototype.removeListener = function(r, n) {
   if (i = e[r], !i)
     return this;
   if (i === n || i.listener && i.listener === n)
-    --this._eventsCount === 0 ? this._events = new r0() : (delete e[r], e.removeListener && this.emit("removeListener", r, i.listener || n));
+    --this._eventsCount === 0 ? this._events = new n0() : (delete e[r], e.removeListener && this.emit("removeListener", r, i.listener || n));
   else if (typeof i != "function") {
     for (s = -1, l = i.length; l-- > 0; )
       if (i[l] === n || i[l].listener && i[l].listener === n) {
@@ -18304,7 +18304,7 @@ Ar.prototype.removeListener = function(r, n) {
       return this;
     if (i.length === 1) {
       if (i[0] = void 0, --this._eventsCount === 0)
-        return this._events = new r0(), this;
+        return this._events = new n0(), this;
       delete e[r];
     } else
       FD(i, s);
@@ -18317,11 +18317,11 @@ Ar.prototype.removeAllListeners = function(r) {
   if (i = this._events, !i)
     return this;
   if (!i.removeListener)
-    return arguments.length === 0 ? (this._events = new r0(), this._eventsCount = 0) : i[r] && (--this._eventsCount === 0 ? this._events = new r0() : delete i[r]), this;
+    return arguments.length === 0 ? (this._events = new n0(), this._eventsCount = 0) : i[r] && (--this._eventsCount === 0 ? this._events = new n0() : delete i[r]), this;
   if (arguments.length === 0) {
     for (var e = Object.keys(i), s = 0, l; s < e.length; ++s)
       l = e[s], l !== "removeListener" && this.removeAllListeners(l);
-    return this.removeAllListeners("removeListener"), this._events = new r0(), this._eventsCount = 0, this;
+    return this.removeAllListeners("removeListener"), this._events = new n0(), this._eventsCount = 0, this;
   }
   if (n = i[r], typeof n == "function")
     this.removeListener(r, n);
@@ -18358,7 +18358,7 @@ function FD(t, r) {
     t[n] = t[i];
   t.pop();
 }
-function Pm(t, r) {
+function Cm(t, r) {
   for (var n = new Array(r); r--; )
     n[r] = t[r];
   return n;
@@ -18382,13 +18382,13 @@ function ZD(t) {
   var n = r.constructor;
   return typeof n == "function" && n instanceof n && M7.call(n) == HD;
 }
-function as(t) {
+function ss(t) {
   var r, n, i;
   if (!t || typeof t != "object")
     return t;
   if (Array.isArray(t)) {
     for (r = [], n = 0, i = t.length; n < i; n++)
-      r[n] = as(t[n]);
+      r[n] = ss(t[n]);
     return r;
   }
   if (t instanceof Date && isFinite(t))
@@ -18400,7 +18400,7 @@ function as(t) {
   r = {};
   for (n in t)
     if (Object.prototype.hasOwnProperty.call(t, n)) {
-      var e = as(t[n]);
+      var e = ss(t[n]);
       typeof e < "u" && (r[n] = e);
     }
   return r;
@@ -18415,7 +18415,7 @@ function E7(t) {
 }
 function S7(t) {
   return function(...r) {
-    r = as(r);
+    r = ss(r);
     var n = this, i = typeof r[r.length - 1] == "function" ? r.pop() : !1, e = new Promise(function(s, l) {
       var a;
       try {
@@ -18460,7 +18460,7 @@ function Lo(t, r) {
     });
   });
 }
-function Tm(t, r) {
+function Pm(t, r) {
   for (var n = {}, i = 0, e = r.length; i < e; i++) {
     var s = r[i];
     s in t && (n[s] = t[s]);
@@ -18512,7 +18512,7 @@ function C7(t, r, n) {
   }
   function y(A, E) {
     A.forEach(function(b, M) {
-      var x = E + M, C = e.get(b), m = Tm(C[0], ["atts_since", "attachments"]);
+      var x = E + M, C = e.get(b), m = Pm(C[0], ["atts_since", "attachments"]);
       m.open_revs = C.map(function(w) {
         return w.rev;
       }), m.open_revs = m.open_revs.filter(IS);
@@ -18533,15 +18533,15 @@ try {
 } catch {
   H4 = !1;
 }
-function gw() {
+function mw() {
   return H4;
 }
-const Ic = typeof queueMicrotask == "function" ? queueMicrotask : function(r) {
+const Oc = typeof queueMicrotask == "function" ? queueMicrotask : function(r) {
   Promise.resolve().then(r);
 };
 class YD extends Ar {
   constructor() {
-    super(), this._listeners = {}, gw() && addEventListener("storage", (r) => {
+    super(), this._listeners = {}, mw() && addEventListener("storage", (r) => {
       this.emit(r.key);
     });
   }
@@ -18557,7 +18557,7 @@ class YD extends Ar {
         return;
       }
       s = !0;
-      var c = Tm(e, [
+      var c = Pm(e, [
         "style",
         "include_docs",
         "attachments",
@@ -18576,7 +18576,7 @@ class YD extends Ar {
       i.changes(c).on("change", function(p) {
         p.seq > e.since && !e.cancelled && (e.since = p.seq, e.onChange(p));
       }).on("complete", function() {
-        s === "waiting" && Ic(a), s = !1;
+        s === "waiting" && Oc(a), s = !1;
       }).on("error", d);
     }
     this._listeners[n] = a, this.on(r, a);
@@ -18585,13 +18585,13 @@ class YD extends Ar {
     n in this._listeners && (super.removeListener(r, this._listeners[n]), delete this._listeners[n]);
   }
   notifyLocalWindows(r) {
-    gw() && (localStorage[r] = localStorage[r] === "a" ? "b" : "a");
+    mw() && (localStorage[r] = localStorage[r] === "a" ? "b" : "a");
   }
   notify(r) {
     this.emit(r), this.notifyLocalWindows(r);
   }
 }
-function Nu(t) {
+function Bu(t) {
   if (typeof console < "u" && typeof console[t] == "function") {
     var r = Array.prototype.slice.call(arguments, 1);
     console[t].apply(console, r);
@@ -18608,7 +18608,7 @@ function XD(t) {
   return t || (r = 2e3), $D(t, r);
 }
 function Z4(t, r) {
-  Nu("info", "The above " + t + " is totally normal. " + r);
+  Bu("info", "The above " + t + " is totally normal. " + r);
 }
 class Ii extends Error {
   constructor(r, n, i) {
@@ -18624,7 +18624,7 @@ class Ii extends Error {
   }
 }
 new Ii(401, "unauthorized", "Name or password is incorrect.");
-var QD = new Ii(400, "bad_request", "Missing JSON list of 'docs'"), Iu = new Ii(404, "not_found", "missing"), L1 = new Ii(409, "conflict", "Document update conflict"), P7 = new Ii(400, "bad_request", "_id field must contain a string"), JD = new Ii(412, "missing_id", "_id is required for puts"), tB = new Ii(400, "bad_request", "Only reserved document ids may start with underscore.");
+var QD = new Ii(400, "bad_request", "Missing JSON list of 'docs'"), Ou = new Ii(404, "not_found", "missing"), k1 = new Ii(409, "conflict", "Document update conflict"), P7 = new Ii(400, "bad_request", "_id field must contain a string"), JD = new Ii(412, "missing_id", "_id is required for puts"), tB = new Ii(400, "bad_request", "Only reserved document ids may start with underscore.");
 new Ii(412, "precondition_failed", "Database not open");
 var jk = new Ii(500, "unknown_error", "Database encountered an unknown error"), T7 = new Ii(500, "badarg", "Some query argument is invalid");
 new Ii(400, "invalid_request", "Request was invalid");
@@ -18634,7 +18634,7 @@ var Fk = new Ii(500, "indexed_db_went_bad", "unknown");
 new Ii(500, "web_sql_went_bad", "unknown");
 new Ii(500, "levelDB_went_went_bad", "unknown");
 new Ii(403, "forbidden", "Forbidden by design doc validate_doc_update function");
-var nw = new Ii(400, "bad_request", "Invalid rev format");
+var ew = new Ii(400, "bad_request", "Invalid rev format");
 new Ii(412, "file_exists", "The database could not be created, the file already exists.");
 var nB = new Ii(412, "missing_stub", "A pre-existing attachment stub wasn't found");
 new Ii(413, "invalid_url", "Provided URL is invalid");
@@ -18646,7 +18646,7 @@ function Xn(t, r) {
   }
   return n.prototype = Ii.prototype, new n(r);
 }
-function M1(t) {
+function L1(t) {
   if (typeof t != "object") {
     var r = t;
     t = jk, t.data = r;
@@ -18683,8 +18683,8 @@ function A7(t) {
   if (t ? typeof t != "string" ? r = Xn(P7) : /^_/.test(t) && !/^_(design|local)/.test(t) && (r = Xn(tB)) : r = Xn(JD), r)
     throw r;
 }
-function Pc(t) {
-  return typeof t._remote == "boolean" ? t._remote : typeof t.type == "function" ? (Nu(
+function Cc(t) {
+  return typeof t._remote == "boolean" ? t._remote : typeof t.type == "function" ? (Bu(
     "warn",
     "db.type() is deprecated and will be removed in a future version of PouchDB"
   ), t.type() === "http") : !1;
@@ -18733,7 +18733,7 @@ function Uk(t, r) {
     Object.prototype.hasOwnProperty.call(r, e) && (n.push(e), i.push(r[e]));
   return n.push(t), Function.apply(null, n).apply(null, i);
 }
-function vw(t, r, n) {
+function gw(t, r, n) {
   return t.get(r).catch(function(i) {
     if (i.status !== 404)
       throw i;
@@ -18752,12 +18752,12 @@ function aB(t, r, n) {
   }, function(i) {
     if (i.status !== 409)
       throw i;
-    return vw(t, r._id, n);
+    return gw(t, r._id, n);
   });
 }
 var qk = function(t) {
   return atob(t);
-}, Am = function(t) {
+}, Tm = function(t) {
   return btoa(t);
 };
 function Hk(t, r) {
@@ -18804,7 +18804,7 @@ function R7(t, r) {
 }
 function Vk(t, r) {
   R7(t, function(n) {
-    r(Am(n));
+    r(Tm(n));
   });
 }
 function hB(t, r) {
@@ -18816,7 +18816,7 @@ function hB(t, r) {
 }
 var cB = self.setImmediate || self.setTimeout, fB = 32768;
 function dB(t) {
-  return Am(t);
+  return Tm(t);
 }
 function pB(t, r, n, i, e) {
   (n > 0 || i < r.size) && (r = r.slice(n, i)), hB(r, function(s) {
@@ -18851,7 +18851,7 @@ function B7(t, r) {
   return delete n._rev_tree, D7(JSON.stringify(n));
 }
 var Dw = Gk;
-function J0(t) {
+function Q0(t) {
   for (var r, n, i, e = t.rev_tree.slice(), s; s = e.pop(); ) {
     var l = s.ids, a = l[2], c = s.pos;
     if (a.length) {
@@ -18864,7 +18864,7 @@ function J0(t) {
   }
   return n + "-" + r;
 }
-function tp(t, r) {
+function J0(t, r) {
   for (var n = t.slice(), i; i = n.pop(); )
     for (var e = i.pos, s = i.ids, l = s[2], a = r(l.length === 0, e, s[0], i.ctx, s[1]), c = 0, d = l.length; c < d; c++)
       n.push({ pos: e + 1, ids: l[c], ctx: a });
@@ -18874,7 +18874,7 @@ function mB(t, r) {
 }
 function Yk(t) {
   var r = [];
-  tp(t, function(e, s, l, a, c) {
+  J0(t, function(e, s, l, a, c) {
     e && r.push({ rev: s + "-" + l, pos: s, opts: c });
   }), r.sort(mB).reverse();
   for (var n = 0, i = r.length; n < i; n++)
@@ -18882,7 +18882,7 @@ function Yk(t) {
   return r;
 }
 function $k(t) {
-  for (var r = J0(t), n = Yk(t.rev_tree), i = [], e = 0, s = n.length; e < s; e++) {
+  for (var r = Q0(t), n = Yk(t.rev_tree), i = [], e = 0, s = n.length; e < s; e++) {
     var l = n[e];
     l.rev !== r && !l.opts.deleted && i.push(l.rev);
   }
@@ -18890,7 +18890,7 @@ function $k(t) {
 }
 function gB(t) {
   var r = [];
-  return tp(t.rev_tree, function(n, i, e, s, l) {
+  return J0(t.rev_tree, function(n, i, e, s, l) {
     l.status === "available" && !n && (r.push(i + "-" + e), l.status = "missing");
   }), r;
 }
@@ -19015,7 +19015,7 @@ function kB(t, r) {
       };
     e ? e = G7(e, d, !0).tree : e = [d];
   }
-  return i && tp(e, function(u, y, A) {
+  return i && J0(e, function(u, y, A) {
     delete i[y + "-" + A];
   }), {
     tree: e,
@@ -19042,15 +19042,15 @@ function LB(t, r) {
 function MB(t) {
   return t.ids;
 }
-function Ff(t, r) {
-  r || (r = J0(t));
+function jf(t, r) {
+  r || (r = Q0(t));
   for (var n = r.substring(r.indexOf("-") + 1), i = t.rev_tree.map(MB), e; e = i.pop(); ) {
     if (e[0] === n)
       return !!e[1].deleted;
     i = i.concat(e[2]);
   }
 }
-function K0(t) {
+function V0(t) {
   return typeof t == "string" && t.startsWith("_local/");
 }
 function EB(t, r) {
@@ -19071,7 +19071,7 @@ function SB(t, r, n, i) {
   try {
     t.emit("change", r, n, i);
   } catch (e) {
-    Nu("error", 'Error in .on("change", function):', e);
+    Bu("error", 'Error in .on("change", function):', e);
   }
 }
 function CB(t, r, n) {
@@ -19084,11 +19084,11 @@ function CB(t, r, n) {
     changes: i,
     doc: t
   };
-  return Ff(r, t._rev) && (e.deleted = !0), n.conflicts && (e.doc._conflicts = $k(r), e.doc._conflicts.length || delete e.doc._conflicts), e;
+  return jf(r, t._rev) && (e.deleted = !0), n.conflicts && (e.doc._conflicts = $k(r), e.doc._conflicts.length || delete e.doc._conflicts), e;
 }
 class PB extends Ar {
   constructor(r, n, i) {
-    super(), this.db = r, n = n ? as(n) : {};
+    super(), this.db = r, n = n ? ss(n) : {};
     var e = n.complete = E7((a, c) => {
       a ? iB(this, "error") > 0 && this.emit("error", a) : this.emit("complete", c), this.removeAllListeners(), r.removeListener("destroyed", s);
     });
@@ -19127,7 +19127,7 @@ class PB extends Ar {
   }
   doChanges(r) {
     var n = r.complete;
-    if (r = as(r), "live" in r && !("continuous" in r) && (r.continuous = r.live), r.processChange = CB, r.since === "latest" && (r.since = "now"), r.since || (r.since = 0), r.since === "now") {
+    if (r = ss(r), "live" in r && !("continuous" in r) && (r.continuous = r.live), r.processChange = CB, r.since === "latest" && (r.since = "now"), r.since || (r.since = 0), r.since === "now") {
       this.db.info().then((e) => {
         if (this.isCancelled) {
           n(null, { status: "cancelled" });
@@ -19142,7 +19142,7 @@ class PB extends Ar {
         return or._changesFilterPlugin.filter(this, r);
     } else
       ["doc_ids", "filter", "selector", "view"].forEach(function(e) {
-        e in r && Nu(
+        e in r && Bu(
           "warn",
           'The "' + e + '" option was passed in to changes/replicate, but pouchdb-changes-filter plugin is not installed, so it was ignored. Please install the plugin to enable filtering.'
         );
@@ -19170,7 +19170,7 @@ function TB(t) {
     else if (n._attachments)
       for (var i = Object.keys(n._attachments), e = 0; e < i.length; e++) {
         var s = i[e];
-        n._attachments[s] = Tm(
+        n._attachments[s] = Pm(
           n._attachments[s],
           ["data", "digest", "content_type", "length", "revpos", "stub"]
         );
@@ -19186,7 +19186,7 @@ function AB(t, r) {
 }
 function OB(t) {
   var r = {}, n = [];
-  return tp(t, function(i, e, s, l) {
+  return J0(t, function(i, e, s, l) {
     var a = e + "-" + s;
     return i && (r[a] = 0), l !== void 0 && n.push({ from: l, to: a }), a;
   }), n.reverse(), n.forEach(function(i) {
@@ -19203,7 +19203,7 @@ function F7(t) {
     return !1;
   }).then(function(e) {
     e && e.last_seq && (n.last_seq = e.last_seq), t._compact(n, function(s, l) {
-      s ? i(s) : i(null, l), Ic(function() {
+      s ? i(s) : i(null, l), Oc(function() {
         t._compactionQueue.shift(), t._compactionQueue.length && F7(t);
       });
     });
@@ -19253,8 +19253,8 @@ class z7 extends Ar {
       if (typeof n == "function" && (i = n, n = {}), N6(r))
         return i(Xn(D6));
       if (A7(r._id), "_rev" in r && !G6(r._rev))
-        return i(Xn(nw));
-      if (K0(r._id) && typeof this._putLocal == "function")
+        return i(Xn(ew));
+      if (V0(r._id) && typeof this._putLocal == "function")
         return r._deleted ? this._removeLocal(r, i) : this._putLocal(r, i);
       const e = (l) => {
         typeof this._put == "function" && n.new_edits !== !1 ? this._put(r, n, l) : this.bulkDocs({ docs: [r] }, n, B6(l, r._id));
@@ -19272,7 +19272,7 @@ class z7 extends Ar {
       }
     }).bind(this), this.putAttachment = Lo("putAttachment", function(r, n, i, e, s) {
       var l = this;
-      typeof s == "function" && (s = e, e = i, i = null), typeof s > "u" && (s = e, e = i, i = null), s || Nu("warn", "Attachment", n, "on document", r, "is missing content_type");
+      typeof s == "function" && (s = e, e = i, i = null), typeof s > "u" && (s = e, e = i, i = null), s || Bu("warn", "Attachment", n, "on document", r, "is missing content_type");
       function a(c) {
         var d = "_rev" in c ? parseInt(c._rev, 10) : 0;
         return c._attachments = c._attachments || {}, c._attachments[n] = {
@@ -19283,10 +19283,10 @@ class z7 extends Ar {
       }
       return l.get(r).then(function(c) {
         if (c._rev !== i)
-          throw Xn(L1);
+          throw Xn(k1);
         return a(c);
       }, function(c) {
-        if (c.reason === Iu.message)
+        if (c.reason === Ou.message)
           return a({ _id: r });
         throw c;
       });
@@ -19297,7 +19297,7 @@ class z7 extends Ar {
           return;
         }
         if (l._rev !== i) {
-          e(Xn(L1));
+          e(Xn(k1));
           return;
         }
         if (!l._attachments)
@@ -19311,7 +19311,7 @@ class z7 extends Ar {
         _rev: n
       }, typeof i == "function" && (e = i, i = {})) : (s = r, typeof n == "function" ? (e = n, i = {}) : (e = i, i = n)), i = i || {}, i.was_delete = !0;
       var l = { _id: s._id, _rev: s._rev || i.rev };
-      if (l._deleted = !0, K0(l._id) && typeof this._removeLocal == "function")
+      if (l._deleted = !0, V0(l._id) && typeof this._removeLocal == "function")
         return this._removeLocal(s, e);
       this.bulkDocs({ docs: [l] }, i, B6(e, l._id));
     }).bind(this), this.revsDiff = Lo("revsDiff", function(r, n, i) {
@@ -19325,7 +19325,7 @@ class z7 extends Ar {
       }
       function c(d, p) {
         var h = r[d].slice(0);
-        tp(p, function(_, u, y, A, E) {
+        J0(p, function(_, u, y, A, E) {
           var b = u + "-" + y, M = h.indexOf(b);
           M !== -1 && (h.splice(M, 1), E.status !== "available" && a(d, b));
         }), h.forEach(function(_) {
@@ -19358,7 +19358,7 @@ class z7 extends Ar {
         var l = OB(s), a = [], c = [];
         Object.keys(l).forEach(function(d) {
           l[d] > n && a.push(d);
-        }), tp(s, function(d, p, h, _, u) {
+        }), J0(s, function(d, p, h, _, u) {
           var y = p + "-" + h;
           u.status === "available" && a.indexOf(y) !== -1 && c.push(y);
         }), this._doCompaction(r, c, i);
@@ -19368,7 +19368,7 @@ class z7 extends Ar {
     }).bind(this), this.get = Lo("get", function(r, n, i) {
       if (typeof n == "function" && (i = n, n = {}), n = n || {}, typeof r != "string")
         return i(Xn(P7));
-      if (K0(r) && typeof this._getLocal == "function")
+      if (V0(r) && typeof this._getLocal == "function")
         return this._getLocal(r, i);
       var e = [];
       const s = () => {
@@ -19411,7 +19411,7 @@ class z7 extends Ar {
           for (var l = 0; l < e.length; l++) {
             var a = e[l];
             if (!G6(a))
-              return i(Xn(nw));
+              return i(Xn(ew));
           }
           s();
         } else
@@ -19426,7 +19426,7 @@ class z7 extends Ar {
           var u = $k(h);
           u.length && (p._conflicts = u);
         }
-        if (Ff(h, p._rev) && (p._deleted = !0), n.revs || n.revs_info) {
+        if (jf(h, p._rev) && (p._deleted = !0), n.revs || n.revs_info) {
           for (var y = p._rev.split("-"), A = parseInt(y[0], 10), E = y[1], b = N7(h.rev_tree), M = null, x = 0; x < b.length; x++) {
             var C = b[x];
             const Y = C.ids.findIndex((X) => X.id === E);
@@ -19486,7 +19486,7 @@ class z7 extends Ar {
             e
           );
         else
-          return e(Xn(Iu));
+          return e(Xn(Ou));
       });
     }).bind(this), this.allDocs = Lo("allDocs", function(r, n) {
       if (typeof r == "function" && (n = r, r = {}), r.skip = typeof r.skip < "u" ? r.skip : 0, r.start_key && (r.startkey = r.start_key), r.end_key && (r.endkey = r.end_key), "keys" in r) {
@@ -19502,7 +19502,7 @@ class z7 extends Ar {
           ));
           return;
         }
-        if (!Pc(this) && (IB(r), r.keys.length === 0))
+        if (!Cc(this) && (IB(r), r.keys.length === 0))
           return this._allDocs({ limit: 0 }, n);
       }
       return this._allDocs(r, n);
@@ -19512,7 +19512,7 @@ class z7 extends Ar {
       this._info((n, i) => {
         if (n)
           return r(n);
-        i.db_name = i.db_name || this.name, i.auto_compaction = !!(this.auto_compaction && !Pc(this)), i.adapter = this.adapter, r(null, i);
+        i.db_name = i.db_name || this.name, i.auto_compaction = !!(this.auto_compaction && !Cc(this)), i.adapter = this.adapter, r(null, i);
       });
     }).bind(this), this.id = Lo("id", function(r) {
       return this._id(r);
@@ -19526,18 +19526,18 @@ class z7 extends Ar {
         if (N6(c))
           return i(Xn(D6));
         if ("_rev" in c && !G6(c._rev))
-          return i(Xn(nw));
+          return i(Xn(ew));
       }
       var s;
       if (r.docs.forEach(function(c) {
         c._attachments && Object.keys(c._attachments).forEach(function(d) {
-          s = s || DB(d), c._attachments[d].content_type || Nu("warn", "Attachment", d, "on document", c._id, "is missing content_type");
+          s = s || DB(d), c._attachments[d].content_type || Bu("warn", "Attachment", d, "on document", c._id, "is missing content_type");
         });
       }), s)
         return i(Xn(Rw, s));
       "new_edits" in n || ("new_edits" in r ? n.new_edits = r.new_edits : n.new_edits = !0);
       var l = this;
-      !n.new_edits && !Pc(l) && r.docs.sort(AB), TB(r.docs);
+      !n.new_edits && !Cc(l) && r.docs.sort(AB), TB(r.docs);
       var a = r.docs.map(function(c) {
         return c._id;
       });
@@ -19546,19 +19546,19 @@ class z7 extends Ar {
           return i(c);
         if (n.new_edits || (d = d.filter(function(_) {
           return _.error;
-        })), !Pc(l))
+        })), !Cc(l))
           for (var p = 0, h = d.length; p < h; p++)
             d[p].id = d[p].id || a[p];
         i(null, d);
       });
     }).bind(this), this.registerDependentDatabase = Lo("registerDependentDatabase", function(r, n) {
-      var i = as(this.__opts);
+      var i = ss(this.__opts);
       this.__opts.view_adapter && (i.adapter = this.__opts.view_adapter);
       var e = new this.constructor(r, i);
       function s(l) {
         return l.dependentDbs = l.dependentDbs || {}, l.dependentDbs[r] ? !1 : (l.dependentDbs[r] = !0, l);
       }
-      vw(this, "_local/_pouch_dependentDbs", s).then(function() {
+      gw(this, "_local/_pouch_dependentDbs", s).then(function() {
         n(null, { db: e });
       }).catch(n);
     }).bind(this), this.destroy = Lo("destroy", function(r, n) {
@@ -19571,7 +19571,7 @@ class z7 extends Ar {
           this._destroyed = !0, this.emit("destroyed"), n(null, l || { ok: !0 });
         });
       };
-      if (Pc(this))
+      if (Cc(this))
         return e();
       this.get("_local/_pouch_dependentDbs", (s, l) => {
         if (s)
@@ -19598,7 +19598,7 @@ class z7 extends Ar {
       this.activeTasks.remove(s, p), n(p);
     }, d = (p) => {
       var h = p.last_seq;
-      Promise.all(e).then(() => vw(this, "_local/compaction", (_) => !_.last_seq || _.last_seq < h ? (_.last_seq = h, _) : !1)).then(() => {
+      Promise.all(e).then(() => gw(this, "_local/compaction", (_) => !_.last_seq || _.last_seq < h ? (_.last_seq = h, _) : !1)).then(() => {
         this.activeTasks.remove(s), n(null, { ok: !0 });
       }).catch(c);
     };
@@ -19624,7 +19624,7 @@ z7.prototype.purge = Lo("_purge", function(t, r, n) {
     if (e)
       return n(e);
     if (!s)
-      return n(Xn(Iu));
+      return n(Xn(Ou));
     let l;
     try {
       l = vB(s, r);
@@ -19673,8 +19673,8 @@ function GB(t, r) {
   var i = or.adapters, e = or.preferredAdapters, s = or.prefix, l = r.adapter;
   if (!l)
     for (var a = 0; a < e.length; ++a) {
-      if (l = e[a], l === "idb" && "websql" in i && gw() && localStorage["_pouch__websqldb_" + s + t]) {
-        Nu("log", 'PouchDB is downgrading "' + t + '" to WebSQL to avoid data loss, because it was already opened with WebSQL.');
+      if (l = e[a], l === "idb" && "websql" in i && mw() && localStorage["_pouch__websqldb_" + s + t]) {
+        Bu("log", 'PouchDB is downgrading "' + t + '" to WebSQL to avoid data loss, because it was already opened with WebSQL.');
         continue;
       }
       break;
@@ -19712,7 +19712,7 @@ class FS extends z7 {
     super(), this._setup(r, n);
   }
   _setup(r, n) {
-    if (super._setup(), n = n || {}, r && typeof r == "object" && (n = r, r = n.name, delete n.name), n.deterministic_revs === void 0 && (n.deterministic_revs = !0), this.__opts = n = as(n), this.auto_compaction = n.auto_compaction, this.purged_infos_limit = n.purged_infos_limit || 1e3, this.prefix = or.prefix, typeof r != "string")
+    if (super._setup(), n = n || {}, r && typeof r == "object" && (n = r, r = n.name, delete n.name), n.deterministic_revs === void 0 && (n.deterministic_revs = !0), this.__opts = n = ss(n), this.auto_compaction = n.auto_compaction, this.purged_infos_limit = n.purged_infos_limit || 1e3, this.prefix = or.prefix, typeof r != "string")
       throw new Error("Missing/invalid DB name");
     var i = (n.prefix || "") + r, e = GB(i, n);
     if (n.name = e.name, n.adapter = n.adapter || e.adapter, this.name = r, this._adapter = n.adapter, or.emit("debug", ["adapter", "Picked adapter: ", n.adapter]), !or.adapters[n.adapter] || !or.adapters[n.adapter].valid())
@@ -19729,7 +19729,7 @@ class FS extends z7 {
 const or = U7(FS, function(t, r) {
   FS.prototype._setup.call(this, t, r);
 });
-var q7 = fetch, v1 = Headers;
+var q7 = fetch, g1 = Headers;
 class zB {
   constructor() {
     this.tasks = {};
@@ -19925,7 +19925,7 @@ function V7(t, r) {
   return r;
 }
 function QB(t) {
-  var r = as(t);
+  var r = ss(t);
   V7(r, !1) && (r = W7(r), "$and" in r && (r = ym(r.$and))), ["$or", "$nor"].forEach(function(l) {
     l in r && r[l].forEach(function(a) {
       for (var c = Object.keys(a), d = 0; d < c.length; d++) {
@@ -19961,7 +19961,7 @@ var K7 = -324, K4 = 3, Y4 = "";
 function So(t, r) {
   if (t === r)
     return 0;
-  t = ep(t), r = ep(r);
+  t = tp(t), r = tp(r);
   var n = $4(t), i = $4(r);
   if (n - i !== 0)
     return n - i;
@@ -19975,7 +19975,7 @@ function So(t, r) {
   }
   return Array.isArray(t) ? oN(t, r) : aN(t, r);
 }
-function ep(t) {
+function tp(t) {
   switch (typeof t) {
     case "undefined":
       return null;
@@ -19987,7 +19987,7 @@ function ep(t) {
         var n = t.length;
         t = new Array(n);
         for (var i = 0; i < n; i++)
-          t[i] = ep(r[i]);
+          t[i] = tp(r[i]);
       } else {
         if (t instanceof Date)
           return t.toJSON();
@@ -19996,7 +19996,7 @@ function ep(t) {
           for (var e in r)
             if (Object.prototype.hasOwnProperty.call(r, e)) {
               var s = r[e];
-              typeof s < "u" && (t[e] = ep(s));
+              typeof s < "u" && (t[e] = tp(s));
             }
         }
       }
@@ -20017,19 +20017,19 @@ function eN(t) {
         var r = Array.isArray(t), n = r ? t : Object.keys(t), i = -1, e = n.length, s = "";
         if (r)
           for (; ++i < e; )
-            s += mh(n[i]);
+            s += _h(n[i]);
         else
           for (; ++i < e; ) {
             var l = n[i];
-            s += mh(l) + mh(t[l]);
+            s += _h(l) + _h(t[l]);
           }
         return s;
     }
   return "";
 }
-function mh(t) {
+function _h(t) {
   var r = "\0";
-  return t = ep(t), $4(t) + Y4 + eN(t) + r;
+  return t = tp(t), $4(t) + Y4 + eN(t) + r;
 }
 function nN(t, r) {
   var n = r, i, e = t[r] === "1";
@@ -20159,7 +20159,7 @@ function uN(t) {
 }
 function hN(t, r, n) {
   if (t = t.filter(function(l) {
-    return y1(l.doc, r.selector, n);
+    return v1(l.doc, r.selector, n);
   }), r.sort) {
     var i = uN(r.sort);
     t = t.sort(i), typeof r.sort[0] != "string" && WB(r.sort[0]) === "desc" && (t = t.reverse());
@@ -20170,13 +20170,13 @@ function hN(t, r, n) {
   }
   return t;
 }
-function y1(t, r, n) {
+function v1(t, r, n) {
   return n.every(function(i) {
     var e = r[i], s = Qk(i), l = Xk(t, s);
-    return H7(i) ? cN(i, e, t) : yw(e, t, s, l);
+    return H7(i) ? cN(i, e, t) : vw(e, t, s, l);
   });
 }
-function yw(t, r, n, i) {
+function vw(t, r, n, i) {
   return t ? typeof t == "object" ? Object.keys(t).every(function(e) {
     var s = t[e];
     if (e.indexOf("$") === 0)
@@ -20185,14 +20185,14 @@ function yw(t, r, n, i) {
     if (i === void 0 && typeof s != "object" && l.length > 0)
       return !1;
     var a = Xk(i, l);
-    return typeof s == "object" ? yw(s, r, n, a) : US("$eq", r, s, l, a);
+    return typeof s == "object" ? vw(s, r, n, a) : US("$eq", r, s, l, a);
   }) : t === i : !0;
 }
 function cN(t, r, n) {
   return t === "$or" ? r.some(function(i) {
-    return y1(n, i, Object.keys(i));
-  }) : t === "$not" ? !y1(n, r, Object.keys(r)) : !r.find(function(i) {
-    return y1(n, i, Object.keys(i));
+    return v1(n, i, Object.keys(i));
+  }) : t === "$not" ? !v1(n, r, Object.keys(r)) : !r.find(function(i) {
+    return v1(n, i, Object.keys(i));
   });
 }
 function US(t, r, n, i, e) {
@@ -20203,7 +20203,7 @@ function US(t, r, n, i, e) {
 function em(t) {
   return typeof t < "u" && t !== null;
 }
-function N0(t) {
+function B0(t) {
   return typeof t < "u";
 }
 function fN(t, r) {
@@ -20252,35 +20252,35 @@ function mN(t, r) {
 var HS = {
   $elemMatch: function(t, r, n, i) {
     return !Array.isArray(i) || i.length === 0 ? !1 : typeof i[0] == "object" && i[0] !== null ? i.some(function(e) {
-      return y1(e, r, Object.keys(r));
+      return v1(e, r, Object.keys(r));
     }) : i.some(function(e) {
-      return yw(r, t, n, e);
+      return vw(r, t, n, e);
     });
   },
   $allMatch: function(t, r, n, i) {
     return !Array.isArray(i) || i.length === 0 ? !1 : typeof i[0] == "object" && i[0] !== null ? i.every(function(e) {
-      return y1(e, r, Object.keys(r));
+      return v1(e, r, Object.keys(r));
     }) : i.every(function(e) {
-      return yw(r, t, n, e);
+      return vw(r, t, n, e);
     });
   },
   $eq: function(t, r, n, i) {
-    return N0(i) && So(i, r) === 0;
+    return B0(i) && So(i, r) === 0;
   },
   $gte: function(t, r, n, i) {
-    return N0(i) && So(i, r) >= 0;
+    return B0(i) && So(i, r) >= 0;
   },
   $gt: function(t, r, n, i) {
-    return N0(i) && So(i, r) > 0;
+    return B0(i) && So(i, r) > 0;
   },
   $lte: function(t, r, n, i) {
-    return N0(i) && So(i, r) <= 0;
+    return B0(i) && So(i, r) <= 0;
   },
   $lt: function(t, r, n, i) {
-    return N0(i) && So(i, r) < 0;
+    return B0(i) && So(i, r) < 0;
   },
   $exists: function(t, r, n, i) {
-    return r ? N0(i) : !N0(i);
+    return r ? B0(i) : !B0(i);
   },
   $mod: function(t, r, n, i) {
     return em(i) && fN(i, r);
@@ -20353,7 +20353,7 @@ function wN(t) {
   t.view && !t.filter && (t.filter = "_view"), t.selector && !t.filter && (t.filter = "_selector"), t.filter && typeof t.filter == "string" && (t.filter === "_view" ? t.view = DS(t.view) : t.filter = DS(t.filter));
 }
 function xN(t, r) {
-  return r.filter && typeof r.filter == "string" && !r.doc_ids && !Pc(t.db);
+  return r.filter && typeof r.filter == "string" && !r.doc_ids && !Cc(t.db);
 }
 function kN(t, r) {
   var n = r.complete;
@@ -20370,11 +20370,11 @@ function kN(t, r) {
       if (t.isCancelled)
         return n(null, { status: "cancelled" });
       if (l)
-        return n(M1(l));
+        return n(L1(l));
       var c = a && a.views && a.views[e[1]] && a.views[e[1]].map;
       if (!c)
         return n(Xn(
-          Iu,
+          Ou,
           a.views ? "missing json key: " + e[1] : "missing json key: views"
         ));
       r.filter = yN(c), t.doChanges(r);
@@ -20389,11 +20389,11 @@ function kN(t, r) {
       if (t.isCancelled)
         return n(null, { status: "cancelled" });
       if (l)
-        return n(M1(l));
+        return n(L1(l));
       var c = a && a.filters && a.filters[s[1]];
       if (!c)
         return n(Xn(
-          Iu,
+          Ou,
           a && a.filters ? "missing json key: " + s[1] : "missing json key: filters"
         ));
       r.filter = vN(c), t.doChanges(r);
@@ -20465,7 +20465,7 @@ var EN = Y7([
 ]);
 function ZS(t) {
   if (!/^\d+-/.test(t))
-    return Xn(nw);
+    return Xn(ew);
   var r = t.indexOf("-"), n = t.substring(0, r), i = t.substring(r + 1);
   return {
     prefix: parseInt(n, 10),
@@ -20533,7 +20533,7 @@ function TN(t, r, n) {
   var i = PN(t.data);
   if (i.error)
     return n(i.error);
-  t.length = i.length, r === "blob" ? t.data = Zk(i, t.content_type) : r === "base64" ? t.data = Am(i) : t.data = i, Kk(i, function(e) {
+  t.length = i.length, r === "blob" ? t.data = Zk(i, t.content_type) : r === "base64" ? t.data = Tm(i) : t.data = i, Kk(i, function(e) {
     t.digest = "md5-" + e, n();
   });
 }
@@ -20576,20 +20576,20 @@ function IN(t, r, n) {
 function RN(t, r, n, i, e, s, l, a) {
   if (LB(r.rev_tree, n.metadata.rev) && !a)
     return i[e] = n, s();
-  var c = r.winningRev || J0(r), d = "deleted" in r ? r.deleted : Ff(r, c), p = "deleted" in n.metadata ? n.metadata.deleted : Ff(n.metadata), h = /^1-/.test(n.metadata.rev);
+  var c = r.winningRev || Q0(r), d = "deleted" in r ? r.deleted : jf(r, c), p = "deleted" in n.metadata ? n.metadata.deleted : jf(n.metadata), h = /^1-/.test(n.metadata.rev);
   if (d && !p && a && h) {
     var _ = n.data;
     _._rev = c, _._id = n.metadata.id, n = $7(_, a);
   }
   var u = j7(r.rev_tree, n.metadata.rev_tree[0], t), y = a && (d && p && u.conflicts !== "new_leaf" || !d && u.conflicts !== "new_leaf" || d && !p && u.conflicts === "new_branch");
   if (y) {
-    var A = Xn(L1);
+    var A = Xn(k1);
     return i[e] = A, s();
   }
   var E = n.metadata.rev;
   n.metadata.rev_tree = u.tree, n.stemmedRevs = u.stemmedRevs || [], r.rev_map && (n.metadata.rev_map = r.rev_map);
-  var b = J0(n.metadata), M = Ff(n.metadata, b), x = d === M ? 0 : d < M ? -1 : 1, C;
-  E === b ? C = M : C = Ff(n.metadata, E), l(
+  var b = Q0(n.metadata), M = jf(n.metadata, b), x = d === M ? 0 : d < M ? -1 : 1, C;
+  E === b ? C = M : C = jf(n.metadata, E), l(
     n,
     b,
     M,
@@ -20606,12 +20606,12 @@ function DN(t) {
 function BN(t, r, n, i, e, s, l, a, c) {
   t = t || 1e3;
   function d(A, E, b) {
-    var M = J0(A.metadata), x = Ff(A.metadata, M);
+    var M = Q0(A.metadata), x = jf(A.metadata, M);
     if ("was_delete" in a && x)
-      return s[E] = Xn(Iu, "deleted"), b();
+      return s[E] = Xn(Ou, "deleted"), b();
     var C = p && DN(A);
     if (C) {
-      var m = Xn(L1);
+      var m = Xn(k1);
       return s[E] = m, b();
     }
     var S = x ? 0 : 1;
@@ -20631,7 +20631,7 @@ function BN(t, r, n, i, e, s, l, a, c) {
     ++_ === u && c && c();
   }
   r.forEach(function(A, E) {
-    if (A._id && K0(A._id)) {
+    if (A._id && V0(A._id)) {
       var b = A._deleted ? "_removeLocal" : "_putLocal";
       n[b](A, { ctx: e }, function(x, C) {
         s[E] = x || C, y();
@@ -20666,7 +20666,7 @@ function BN(t, r, n, i, e, s, l, a, c) {
     x();
   });
 }
-var NN = 5, Uo = "document-store", Ks = "by-sequence", Ru = "attach-store", Z0 = "attach-seq-store", tl = "meta-store", Mc = "local-store", j6 = "detect-blob-support";
+var NN = 5, Uo = "document-store", Ks = "by-sequence", Iu = "attach-store", H0 = "attach-seq-store", tl = "meta-store", Lc = "local-store", j6 = "detect-blob-support";
 function GN(t) {
   try {
     return JSON.parse(t);
@@ -20681,7 +20681,7 @@ function jN(t) {
     return b7.stringify(t);
   }
 }
-function Sc(t) {
+function Ec(t) {
   return function(r) {
     var n = "unknown_error";
     r.target && r.target.error && (n = r.target.error.name || r.target.error.message), t(Xn(Fk, n, r.type));
@@ -20697,13 +20697,13 @@ function X4(t, r, n) {
     id: t.id
   };
 }
-function W0(t) {
+function Z0(t) {
   if (!t)
     return null;
   var r = GN(t.data);
   return r.winningRev = t.winningRev, r.deleted = t.deletedOrLocal === "1", r.seq = t.seq, r;
 }
-function bw(t) {
+function yw(t) {
   if (!t)
     return t;
   var r = t._doc_id_rev.lastIndexOf(":");
@@ -20711,7 +20711,7 @@ function bw(t) {
 }
 function X7(t, r, n, i) {
   n ? i(t ? typeof t != "string" ? t : Wk(t, r) : Hk([""], { type: r })) : t ? typeof t != "string" ? I7(t, function(e) {
-    i(Am(e));
+    i(Tm(e));
   }) : i(t) : i("");
 }
 function Q7(t, r, n, i) {
@@ -20723,7 +20723,7 @@ function Q7(t, r, n, i) {
     ++s === e.length && i && i();
   }
   function a(c, d) {
-    var p = c._attachments[d], h = p.digest, _ = n.objectStore(Ru).get(h);
+    var p = c._attachments[d], h = p.digest, _ = n.objectStore(Iu).get(h);
     _.onsuccess = function(u) {
       p.body = u.target.result.body, l();
     };
@@ -20743,7 +20743,7 @@ function Q4(t, r) {
           return new Promise(function(c) {
             X7(l, a, r, function(d) {
               n.doc._attachments[e] = Object.assign(
-                Tm(s, ["digest", "content_type"]),
+                Pm(s, ["digest", "content_type"]),
                 { data: d }
               ), c();
             });
@@ -20754,7 +20754,7 @@ function Q4(t, r) {
   }));
 }
 function J7(t, r, n) {
-  var i = [], e = n.objectStore(Ks), s = n.objectStore(Ru), l = n.objectStore(Z0), a = t.length;
+  var i = [], e = n.objectStore(Ks), s = n.objectStore(Iu), l = n.objectStore(H0), a = t.length;
   function c() {
     a--, a || d();
   }
@@ -20793,7 +20793,7 @@ function J7(t, r, n) {
     };
   });
 }
-function gh(t, r, n) {
+function mh(t, r, n) {
   try {
     return {
       txn: t.transaction(r, n)
@@ -20808,7 +20808,7 @@ var fm = new YD();
 function FN(t, r, n, i, e, s) {
   for (var l = r.docs, a, c, d, p, h, _, u, y, A = 0, E = l.length; A < E; A++) {
     var b = l[A];
-    b._id && K0(b._id) || (b = l[A] = $7(b, n.new_edits, t), b.error && !u && (u = b));
+    b._id && V0(b._id) || (b = l[A] = $7(b, n.new_edits, t), b.error && !u && (u = b));
   }
   if (u)
     return s(u);
@@ -20822,14 +20822,14 @@ function FN(t, r, n, i, e, s) {
     var j = [
       Uo,
       Ks,
-      Ru,
-      Mc,
-      Z0,
+      Iu,
+      Lc,
+      H0,
       tl
-    ], K = gh(e, j, "readwrite");
+    ], K = mh(e, j, "readwrite");
     if (K.error)
       return s(K.error);
-    a = K.txn, a.onabort = Sc(s), a.ontimeout = Sc(s), a.oncomplete = Y, c = a.objectStore(Uo), d = a.objectStore(Ks), p = a.objectStore(Ru), h = a.objectStore(Z0), _ = a.objectStore(tl), _.get(tl).onsuccess = function(ut) {
+    a = K.txn, a.onabort = Ec(s), a.ontimeout = Ec(s), a.oncomplete = Y, c = a.objectStore(Uo), d = a.objectStore(Ks), p = a.objectStore(Iu), h = a.objectStore(H0), _ = a.objectStore(tl), _.get(tl).onsuccess = function(ut) {
       y = ut.target.result, U();
     }, Q(function(ut) {
       if (ut)
@@ -20864,12 +20864,12 @@ function FN(t, r, n, i, e, s) {
       ++j === l.length && D();
     }
     function ut(z) {
-      var ct = W0(z.target.result);
+      var ct = Z0(z.target.result);
       ct && m.set(ct.id, ct), K();
     }
     for (var Z = 0, pt = l.length; Z < pt; Z++) {
       var nt = l[Z];
-      if (nt._id && K0(nt._id)) {
+      if (nt._id && V0(nt._id)) {
         K();
         continue;
       }
@@ -21112,12 +21112,12 @@ function HN(t, r, n) {
       h.message
     ));
   var _ = [Uo, Ks, tl];
-  t.attachments && _.push(Ru);
-  var u = gh(r, _, "readonly");
+  t.attachments && _.push(Iu);
+  var u = mh(r, _, "readonly");
   if (u.error)
     return n(u.error);
   var y = u.txn;
-  y.oncomplete = N, y.onabort = Sc(n);
+  y.oncomplete = N, y.onabort = Ec(n);
   var A = y.objectStore(Uo), E = y.objectStore(Ks), b = y.objectStore(tl), M = E.index("_doc_id_rev"), x = [], C, m;
   b.get(tl).onsuccess = function(Y) {
     C = Y.target.result.docCount;
@@ -21128,7 +21128,7 @@ function HN(t, r, n) {
   function S(Y, X, Q) {
     var rt = Y.id + "::" + Q;
     M.get(rt).onsuccess = function(F) {
-      if (X.doc = bw(F.target.result) || {}, t.conflicts) {
+      if (X.doc = yw(F.target.result) || {}, t.conflicts) {
         var W = $k(Y);
         W.length && (X.doc._conflicts = W);
       }
@@ -21152,7 +21152,7 @@ function HN(t, r, n) {
         x.push(rt);
         continue;
       }
-      var ot = W0(rt), F = ot.winningRev;
+      var ot = Z0(rt), F = ot.winningRev;
       w(F, ot);
     }
   }
@@ -21202,14 +21202,14 @@ function WS() {
 function VN(t, r, n) {
   tk.push(function() {
     t(function(s, l) {
-      WN(r, s, l, n), J4 = !1, Ic(function() {
+      WN(r, s, l, n), J4 = !1, Oc(function() {
         WS();
       });
     });
   }), WS();
 }
 function KN(t, r, n, i) {
-  if (t = as(t), t.continuous) {
+  if (t = ss(t), t.continuous) {
     var e = n + ":" + Dw();
     return fm.addListener(n, e, r, t), fm.notify(n), {
       cancel: function() {
@@ -21253,7 +21253,7 @@ function KN(t, r, n, i) {
     }
     var Q = 0;
     B.forEach(function(rt, ot) {
-      var F = bw(rt), W = O[ot];
+      var F = yw(rt), W = O[ot];
       M(F, W, function(q, j) {
         N[ot] = q, U[ot] = j, ++Q === O.length && X();
       });
@@ -21266,7 +21266,7 @@ function KN(t, r, n, i) {
       return U(D, O);
     var N = O._id + "::" + D.winningRev, Y = A.get(N);
     Y.onsuccess = function(X) {
-      U(D, bw(X.target.result));
+      U(D, yw(X.target.result));
     };
   }
   function M(O, B, D) {
@@ -21276,7 +21276,7 @@ function KN(t, r, n, i) {
     if (U)
       return b(O, B, U, D);
     y.get(O._id).onsuccess = function(N) {
-      U = W0(N.target.result), h.set(O._id, U), b(O, B, U, D);
+      U = Z0(N.target.result), h.set(O._id, U), b(O, B, U, D);
     };
   }
   function x() {
@@ -21289,15 +21289,15 @@ function KN(t, r, n, i) {
     !t.continuous && t.attachments ? Q4(c).then(x) : x();
   }
   var m = [Uo, Ks];
-  t.attachments && m.push(Ru);
-  var S = gh(i, m, "readonly");
+  t.attachments && m.push(Iu);
+  var S = mh(i, m, "readonly");
   if (S.error)
     return t.complete(S.error);
-  _ = S.txn, _.onabort = Sc(t.complete), _.oncomplete = C, u = _.objectStore(Ks), y = _.objectStore(Uo), A = u.index("_doc_id_rev");
+  _ = S.txn, _.onabort = Ec(t.complete), _.oncomplete = C, u = _.objectStore(Ks), y = _.objectStore(Uo), A = u.index("_doc_id_rev");
   var w = t.since && !t.descending ? IDBKeyRange.lowerBound(t.since, !0) : null;
   tT(u, w, t.descending, a, E);
 }
-var r1 = /* @__PURE__ */ new Map(), F6, z6 = /* @__PURE__ */ new Map();
+var n1 = /* @__PURE__ */ new Map(), F6, z6 = /* @__PURE__ */ new Map();
 function eT(t, r) {
   var n = this;
   VN(function(i) {
@@ -21314,9 +21314,9 @@ function YN(t, r, n) {
   }
   function a(E) {
     var b = E.createObjectStore(Uo, { keyPath: "id" });
-    E.createObjectStore(Ks, { autoIncrement: !0 }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 }), E.createObjectStore(Ru, { keyPath: "digest" }), E.createObjectStore(tl, { keyPath: "id", autoIncrement: !1 }), E.createObjectStore(j6), b.createIndex("deletedOrLocal", "deletedOrLocal", { unique: !1 }), E.createObjectStore(Mc, { keyPath: "_id" });
+    E.createObjectStore(Ks, { autoIncrement: !0 }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 }), E.createObjectStore(Iu, { keyPath: "digest" }), E.createObjectStore(tl, { keyPath: "id", autoIncrement: !1 }), E.createObjectStore(j6), b.createIndex("deletedOrLocal", "deletedOrLocal", { unique: !1 }), E.createObjectStore(Lc, { keyPath: "_id" });
     var M = E.createObjectStore(
-      Z0,
+      H0,
       { autoIncrement: !0 }
     );
     M.createIndex("seq", "seq"), M.createIndex("digestSeq", "digestSeq", { unique: !0 });
@@ -21326,21 +21326,21 @@ function YN(t, r, n) {
     M.createIndex("deletedOrLocal", "deletedOrLocal", { unique: !1 }), M.openCursor().onsuccess = function(x) {
       var C = x.target.result;
       if (C) {
-        var m = C.value, S = Ff(m);
+        var m = C.value, S = jf(m);
         m.deletedOrLocal = S ? "1" : "0", M.put(m), C.continue();
       } else
         b();
     };
   }
   function d(E) {
-    E.createObjectStore(Mc, { keyPath: "_id" }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 });
+    E.createObjectStore(Lc, { keyPath: "_id" }).createIndex("_doc_id_rev", "_doc_id_rev", { unique: !0 });
   }
   function p(E, b) {
-    var M = E.objectStore(Mc), x = E.objectStore(Uo), C = E.objectStore(Ks), m = x.openCursor();
+    var M = E.objectStore(Lc), x = E.objectStore(Uo), C = E.objectStore(Ks), m = x.openCursor();
     m.onsuccess = function(S) {
       var w = S.target.result;
       if (w) {
-        var O = w.value, B = O.id, D = K0(B), U = J0(O);
+        var O = w.value, B = O.id, D = V0(B), U = Q0(O);
         if (D) {
           var N = B + "::" + U, Y = B + "::", X = B + "::~", Q = C.index("_doc_id_rev"), rt = IDBKeyRange.bound(Y, X, !1, !1), ot = Q.openCursor(rt);
           ot.onsuccess = function(F) {
@@ -21358,13 +21358,13 @@ function YN(t, r, n) {
   }
   function h(E) {
     var b = E.createObjectStore(
-      Z0,
+      H0,
       { autoIncrement: !0 }
     );
     b.createIndex("seq", "seq"), b.createIndex("digestSeq", "digestSeq", { unique: !0 });
   }
   function _(E, b) {
-    var M = E.objectStore(Ks), x = E.objectStore(Ru), C = E.objectStore(Z0), m = x.count();
+    var M = E.objectStore(Ks), x = E.objectStore(Iu), C = E.objectStore(H0), m = x.count();
     m.onsuccess = function(S) {
       var w = S.target.result;
       if (!w)
@@ -21391,7 +21391,7 @@ function YN(t, r, n) {
   }
   function u(E) {
     function b(m) {
-      return m.data ? W0(m) : (m.deleted = m.deletedOrLocal === "1", m);
+      return m.data ? Z0(m) : (m.deleted = m.deletedOrLocal === "1", m);
     }
     var M = E.objectStore(Ks), x = E.objectStore(Uo), C = x.openCursor();
     C.onsuccess = function(m) {
@@ -21399,7 +21399,7 @@ function YN(t, r, n) {
       if (!S)
         return;
       var w = b(S.value);
-      w.winningRev = w.winningRev || J0(w);
+      w.winningRev = w.winningRev || Q0(w);
       function O() {
         var D = w.id + "::", U = w.id + "::￿", N = M.index("_doc_id_rev").openCursor(
           IDBKeyRange.bound(D, U)
@@ -21436,9 +21436,9 @@ function YN(t, r, n) {
   }, t._get = function(b, M, x) {
     var C, m, S, w = M.ctx;
     if (!w) {
-      var O = gh(
+      var O = mh(
         e,
-        [Uo, Ks, Ru],
+        [Uo, Ks, Iu],
         "readonly"
       );
       if (O.error)
@@ -21449,21 +21449,21 @@ function YN(t, r, n) {
       x(S, { doc: C, metadata: m, ctx: w });
     }
     w.objectStore(Uo).get(b).onsuccess = function(D) {
-      if (m = W0(D.target.result), !m)
-        return S = Xn(Iu, "missing"), B();
+      if (m = Z0(D.target.result), !m)
+        return S = Xn(Ou, "missing"), B();
       var U;
       if (M.rev)
         U = M.latest ? EB(M.rev, m) : M.rev;
       else {
         U = m.winningRev;
-        var N = Ff(m);
+        var N = jf(m);
         if (N)
-          return S = Xn(Iu, "deleted"), B();
+          return S = Xn(Ou, "deleted"), B();
       }
       var Y = w.objectStore(Ks), X = m.id + "::" + U;
       Y.index("_doc_id_rev").get(X).onsuccess = function(Q) {
-        if (C = Q.target.result, C && (C = bw(C)), !C)
-          return S = Xn(Iu, "missing"), B();
+        if (C = Q.target.result, C && (C = yw(C)), !C)
+          return S = Xn(Ou, "missing"), B();
         B();
       };
     };
@@ -21472,9 +21472,9 @@ function YN(t, r, n) {
     if (x.ctx)
       m = x.ctx;
     else {
-      var S = gh(
+      var S = mh(
         e,
-        [Uo, Ks, Ru],
+        [Uo, Ks, Iu],
         "readonly"
       );
       if (S.error)
@@ -21482,14 +21482,14 @@ function YN(t, r, n) {
       m = S.txn;
     }
     var w = M.digest, O = M.content_type;
-    m.objectStore(Ru).get(w).onsuccess = function(B) {
+    m.objectStore(Iu).get(w).onsuccess = function(B) {
       var D = B.target.result.body;
       X7(D, O, x.binary, function(U) {
         C(null, U);
       });
     };
   }, t._info = function(b) {
-    var M, x, C = gh(e, [tl, Ks], "readonly");
+    var M, x, C = mh(e, [tl, Ks], "readonly");
     if (C.error)
       return b(C.error);
     var m = C.txn;
@@ -21511,29 +21511,29 @@ function YN(t, r, n) {
   }, t._changes = function(b) {
     return KN(b, t, i, e);
   }, t._close = function(E) {
-    e.close(), r1.delete(i), E();
+    e.close(), n1.delete(i), E();
   }, t._getRevisionTree = function(E, b) {
-    var M = gh(e, [Uo], "readonly");
+    var M = mh(e, [Uo], "readonly");
     if (M.error)
       return b(M.error);
     var x = M.txn, C = x.objectStore(Uo).get(E);
     C.onsuccess = function(m) {
-      var S = W0(m.target.result);
-      S ? b(null, S.rev_tree) : b(Xn(Iu));
+      var S = Z0(m.target.result);
+      S ? b(null, S.rev_tree) : b(Xn(Ou));
     };
   }, t._doCompaction = function(E, b, M) {
     var x = [
       Uo,
       Ks,
-      Ru,
-      Z0
-    ], C = gh(e, x, "readwrite");
+      Iu,
+      H0
+    ], C = mh(e, x, "readwrite");
     if (C.error)
       return M(C.error);
     var m = C.txn, S = m.objectStore(Uo);
     S.get(E).onsuccess = function(w) {
-      var O = W0(w.target.result);
-      tp(O.rev_tree, function(U, N, Y, X, Q) {
+      var O = Z0(w.target.result);
+      J0(O.rev_tree, function(U, N, Y, X, Q) {
         var rt = N + "-" + Y;
         b.indexOf(rt) !== -1 && (Q.status = "missing");
       }), J7(b, E, m);
@@ -21541,17 +21541,17 @@ function YN(t, r, n) {
       m.objectStore(Uo).put(
         X4(O, B, D)
       );
-    }, m.onabort = Sc(M), m.oncomplete = function() {
+    }, m.onabort = Ec(M), m.oncomplete = function() {
       M();
     };
   }, t._getLocal = function(E, b) {
-    var M = gh(e, [Mc], "readonly");
+    var M = mh(e, [Lc], "readonly");
     if (M.error)
       return b(M.error);
-    var x = M.txn, C = x.objectStore(Mc).get(E);
-    C.onerror = Sc(b), C.onsuccess = function(m) {
+    var x = M.txn, C = x.objectStore(Lc).get(E);
+    C.onerror = Ec(b), C.onsuccess = function(m) {
       var S = m.target.result;
-      S ? (delete S._doc_id_rev, b(null, S)) : b(Xn(Iu));
+      S ? (delete S._doc_id_rev, b(null, S)) : b(Xn(Ou));
     };
   }, t._putLocal = function(E, b, M) {
     typeof b == "function" && (M = b, b = {}), delete E._revisions;
@@ -21559,18 +21559,18 @@ function YN(t, r, n) {
     x ? E._rev = "0-" + (parseInt(x.split("-")[1], 10) + 1) : E._rev = "0-1";
     var m = b.ctx, S;
     if (!m) {
-      var w = gh(e, [Mc], "readwrite");
+      var w = mh(e, [Lc], "readwrite");
       if (w.error)
         return M(w.error);
-      m = w.txn, m.onerror = Sc(M), m.oncomplete = function() {
+      m = w.txn, m.onerror = Ec(M), m.oncomplete = function() {
         S && M(null, S);
       };
     }
-    var O = m.objectStore(Mc), B;
+    var O = m.objectStore(Lc), B;
     x ? (B = O.get(C), B.onsuccess = function(D) {
       var U = D.target.result;
       if (!U || U._rev !== x)
-        M(Xn(L1));
+        M(Xn(k1));
       else {
         var N = O.put(E);
         N.onsuccess = function() {
@@ -21578,7 +21578,7 @@ function YN(t, r, n) {
         };
       }
     }) : (B = O.add(E), B.onerror = function(D) {
-      M(Xn(L1)), D.preventDefault(), D.stopPropagation();
+      M(Xn(k1)), D.preventDefault(), D.stopPropagation();
     }, B.onsuccess = function() {
       S = { ok: !0, id: E._id, rev: E._rev }, b.ctx && M(null, S);
     });
@@ -21586,30 +21586,30 @@ function YN(t, r, n) {
     typeof b == "function" && (M = b, b = {});
     var x = b.ctx;
     if (!x) {
-      var C = gh(e, [Mc], "readwrite");
+      var C = mh(e, [Lc], "readwrite");
       if (C.error)
         return M(C.error);
       x = C.txn, x.oncomplete = function() {
         m && M(null, m);
       };
     }
-    var m, S = E._id, w = x.objectStore(Mc), O = w.get(S);
-    O.onerror = Sc(M), O.onsuccess = function(B) {
+    var m, S = E._id, w = x.objectStore(Lc), O = w.get(S);
+    O.onerror = Ec(M), O.onsuccess = function(B) {
       var D = B.target.result;
-      !D || D._rev !== E._rev ? M(Xn(Iu)) : (w.delete(S), m = { ok: !0, id: S, rev: "0-0" }, b.ctx && M(null, m));
+      !D || D._rev !== E._rev ? M(Xn(Ou)) : (w.delete(S), m = { ok: !0, id: S, rev: "0-0" }, b.ctx && M(null, m));
     };
   }, t._destroy = function(E, b) {
     fm.removeAllListeners(i);
     var M = z6.get(i);
-    M && M.result && (M.result.close(), r1.delete(i));
+    M && M.result && (M.result.close(), n1.delete(i));
     var x = indexedDB.deleteDatabase(i);
     x.onsuccess = function() {
-      z6.delete(i), gw() && i in localStorage && delete localStorage[i], b(null, { ok: !0 });
-    }, x.onerror = Sc(b);
+      z6.delete(i), mw() && i in localStorage && delete localStorage[i], b(null, { ok: !0 });
+    }, x.onerror = Ec(b);
   };
-  var y = r1.get(i);
+  var y = n1.get(i);
   if (y)
-    return e = y.idb, t._meta = y.global, Ic(function() {
+    return e = y.idb, t._meta = y.global, Oc(function() {
       n(null, t);
     });
   var A = indexedDB.open(i, NN);
@@ -21636,9 +21636,9 @@ function YN(t, r, n) {
     m();
   }, A.onsuccess = function(E) {
     e = E.target.result, e.onversionchange = function() {
-      e.close(), r1.delete(i);
+      e.close(), n1.delete(i);
     }, e.onabort = function(B) {
-      Nu("error", "Database has a global failure", B.target.error), s = B.target.error, e.close(), r1.delete(i);
+      Bu("error", "Database has a global failure", B.target.error), s = B.target.error, e.close(), n1.delete(i);
     };
     var b = e.transaction([
       tl,
@@ -21650,7 +21650,7 @@ function YN(t, r, n) {
         name: i,
         instanceId: S,
         blobSupport: m
-      }, r1.set(i, {
+      }, n1.set(i, {
         idb: e,
         global: t._meta
       }), n(null, t));
@@ -21669,10 +21669,10 @@ function YN(t, r, n) {
       m = B, w();
     }), b.oncomplete = function() {
       M = !0, w();
-    }, b.onabort = Sc(n);
+    }, b.onabort = Ec(n);
   }, A.onerror = function(E) {
     var b = E.target.error && E.target.error.message;
-    b ? b.indexOf("stored database is a higher version") !== -1 && (b = new Error('This DB was created with the newer "indexeddb" adapter, but you are trying to open it with the older "idb" adapter')) : b = "Failed to open indexedDB, are you in private browsing mode?", Nu("error", b), n(Xn(Fk, b));
+    b ? b.indexOf("stored database is a higher version") !== -1 && (b = new Error('This DB was created with the newer "indexeddb" adapter, but you are trying to open it with the older "idb" adapter')) : b = "Failed to open indexedDB, are you in private browsing mode?", Bu("error", b), n(Xn(Fk, b));
   };
 }
 eT.valid = function() {
@@ -21707,7 +21707,7 @@ function XN(t, r) {
     u();
   });
 }
-const QN = 25, JN = 50, Sb = 5e3, tG = 1e4, U6 = {};
+const QN = 25, JN = 50, Eb = 5e3, tG = 1e4, U6 = {};
 function q6(t) {
   const r = t.doc || t.ok, n = r && r._attachments;
   n && Object.keys(n).forEach(function(i) {
@@ -21715,7 +21715,7 @@ function q6(t) {
     e.data = Wk(e.data, e.content_type);
   });
 }
-function G0(t) {
+function N0(t) {
   return /^_design/.test(t) ? "_design/" + encodeURIComponent(t.slice(8)) : t.startsWith("_local/") ? "_local/" + encodeURIComponent(t.slice(7)) : encodeURIComponent(t);
 }
 function VS(t) {
@@ -21746,13 +21746,13 @@ function nG(t, r) {
   return n.db = i.pop(), n.db.indexOf("%") === -1 && (n.db = encodeURIComponent(n.db)), n.path = i.join("/"), n;
 }
 function rs(t, r) {
-  return rw(t, t.db + "/" + r);
+  return nw(t, t.db + "/" + r);
 }
-function rw(t, r) {
+function nw(t, r) {
   const n = t.path ? "/" : "";
   return t.protocol + "://" + t.host + (t.port ? ":" + t.port : "") + "/" + t.path + n + r;
 }
-function Cb(t) {
+function Sb(t) {
   const r = Object.keys(t);
   return r.length === 0 ? "" : "?" + r.map((n) => n + "=" + encodeURIComponent(t[n])).join("&");
 }
@@ -21762,10 +21762,10 @@ function rG(t) {
 }
 function ek(t, r) {
   const n = this, i = nG(t.name, t), e = rs(i, "");
-  t = as(t);
+  t = ss(t);
   const s = async function(h, _) {
-    if (_ = _ || {}, _.headers = _.headers || new v1(), _.credentials = "include", t.auth || i.auth) {
-      const A = t.auth || i.auth, E = A.username + ":" + A.password, b = Am(unescape(encodeURIComponent(E)));
+    if (_ = _ || {}, _.headers = _.headers || new g1(), _.credentials = "include", t.auth || i.auth) {
+      const A = t.auth || i.auth, E = A.username + ":" + A.password, b = Tm(unescape(encodeURIComponent(E)));
       _.headers.set("Authorization", "Basic " + b);
     }
     const u = t.headers || {};
@@ -21784,14 +21784,14 @@ function ek(t, r) {
   }
   async function a(h, _) {
     const u = {};
-    _ = _ || {}, _.headers = _.headers || new v1(), _.headers.get("Content-Type") || _.headers.set("Content-Type", "application/json"), _.headers.get("Accept") || _.headers.set("Accept", "application/json");
+    _ = _ || {}, _.headers = _.headers || new g1(), _.headers.get("Content-Type") || _.headers.set("Content-Type", "application/json"), _.headers.get("Accept") || _.headers.set("Accept", "application/json");
     const y = await s(h, _);
     u.ok = y.ok, u.status = y.status;
     const A = await y.json();
     if (u.data = A, !u.ok)
-      throw u.data.status = u.status, M1(u.data);
+      throw u.data.status = u.status, L1(u.data);
     return Array.isArray(u.data) && (u.data = u.data.map(function(E) {
-      return E.error || E.missing ? M1(E) : E;
+      return E.error || E.missing ? L1(E) : E;
     })), u;
   }
   let c;
@@ -21804,21 +21804,21 @@ function ek(t, r) {
       c = null;
     }), c);
   }
-  Ic(function() {
+  Oc(function() {
     r(null, n);
   }), n._remote = !0, n.type = function() {
     return "http";
   }, n.id = l("id", async function(h) {
     let _;
     try {
-      _ = await (await s(rw(i, ""))).json();
+      _ = await (await s(nw(i, ""))).json();
     } catch {
       _ = {};
     }
     const u = _ && _.uuid ? _.uuid + i.db : rs(i, "");
     h(null, u);
   }), n.compact = l("compact", async function(h, _) {
-    typeof h == "function" && (_ = h, h = {}), h = as(h), await a(rs(i, "_compact"), { method: "POST" });
+    typeof h == "function" && (_ = h, h = {}), h = ss(h), await a(rs(i, "_compact"), { method: "POST" });
     function u() {
       n.info(function(y, A) {
         A && !A.compact_running ? _(null, { ok: !0 }) : setTimeout(u, h.interval || 200);
@@ -21831,7 +21831,7 @@ function ek(t, r) {
       const x = {};
       h.revs && (x.revs = !0), h.attachments && (x.attachments = !0), h.latest && (x.latest = !0);
       try {
-        const C = await a(rs(i, "_bulk_get" + Cb(x)), {
+        const C = await a(rs(i, "_bulk_get" + Sb(x)), {
           method: "POST",
           body: JSON.stringify({ docs: h.docs })
         });
@@ -21852,14 +21852,14 @@ function ek(t, r) {
         };
       }
       for (let w = 0; w < x; w++) {
-        const O = Tm(h, ["revs", "attachments", "binary", "latest"]);
+        const O = Pm(h, ["revs", "attachments", "binary", "latest"]);
         O.docs = h.docs.slice(
           w * M,
           Math.min(h.docs.length, (w + 1) * M)
         ), C7(u, O, S(w));
       }
     }
-    const E = rw(i, ""), b = U6[E];
+    const E = nw(i, ""), b = U6[E];
     typeof b != "boolean" ? y(function(M, x) {
       M ? (U6[E] = !1, Z4(
         M.status,
@@ -21876,18 +21876,18 @@ function ek(t, r) {
     }
   }, n.fetch = async function(h, _) {
     await d();
-    const u = h.substring(0, 1) === "/" ? rw(i, h.substring(1)) : rs(i, h);
+    const u = h.substring(0, 1) === "/" ? nw(i, h.substring(1)) : rs(i, h);
     return s(u, _);
   }, n.get = l("get", async function(h, _, u) {
-    typeof _ == "function" && (u = _, _ = {}), _ = as(_);
+    typeof _ == "function" && (u = _, _ = {}), _ = ss(_);
     const y = {};
-    _.revs && (y.revs = !0), _.revs_info && (y.revs_info = !0), _.latest && (y.latest = !0), _.open_revs && (_.open_revs !== "all" && (_.open_revs = JSON.stringify(_.open_revs)), y.open_revs = _.open_revs), _.rev && (y.rev = _.rev), _.conflicts && (y.conflicts = _.conflicts), _.update_seq && (y.update_seq = _.update_seq), h = G0(h);
+    _.revs && (y.revs = !0), _.revs_info && (y.revs_info = !0), _.latest && (y.latest = !0), _.open_revs && (_.open_revs !== "all" && (_.open_revs = JSON.stringify(_.open_revs)), y.open_revs = _.open_revs), _.rev && (y.rev = _.rev), _.conflicts && (y.conflicts = _.conflicts), _.update_seq && (y.update_seq = _.update_seq), h = N0(h);
     function A(M) {
       const x = M._attachments, C = x && Object.keys(x);
       if (!x || !C.length)
         return;
       async function m(w) {
-        const O = x[w], B = G0(M._id) + "/" + p(w) + "?rev=" + M._rev, D = await s(rs(i, B));
+        const O = x[w], B = N0(M._id) + "/" + p(w) + "?rev=" + M._rev, D = await s(rs(i, B));
         let U;
         "buffer" in D ? U = await D.buffer() : U = await D.blob();
         let N;
@@ -21913,7 +21913,7 @@ function ek(t, r) {
           return A(x.ok);
       })) : A(M);
     }
-    const b = rs(i, h + Cb(y));
+    const b = rs(i, h + Sb(y));
     try {
       const M = await a(b);
       _.attachments && await E(M.data), u(null, M.data);
@@ -21926,7 +21926,7 @@ function ek(t, r) {
       _id: h,
       _rev: _
     }, typeof u == "function" && (y = u, u = {})) : (A = h, typeof _ == "function" ? (y = _, u = {}) : (y = u, u = _));
-    const E = A._rev || u.rev, b = rs(i, G0(A._id)) + "?rev=" + E;
+    const E = A._rev || u.rev, b = rs(i, N0(A._id)) + "?rev=" + E;
     try {
       const M = await a(b, { method: "DELETE" });
       y(null, M.data);
@@ -21939,7 +21939,7 @@ function ek(t, r) {
   }
   n.getAttachment = l("getAttachment", async function(h, _, u, y) {
     typeof u == "function" && (y = u, u = {});
-    const A = u.rev ? "?rev=" + u.rev : "", E = rs(i, G0(h)) + "/" + p(_) + A;
+    const A = u.rev ? "?rev=" + u.rev : "", E = rs(i, N0(h)) + "/" + p(_) + A;
     let b;
     try {
       const M = await s(E, { method: "GET" });
@@ -21947,12 +21947,12 @@ function ek(t, r) {
         throw M;
       b = M.headers.get("content-type");
       let x;
-      typeof Lb < "u" && !Lb.browser && typeof M.buffer == "function" || (x = await M.blob()), typeof Lb < "u" && Lb.browser, y(null, x);
+      typeof kb < "u" && !kb.browser && typeof M.buffer == "function" || (x = await M.blob()), typeof kb < "u" && kb.browser, y(null, x);
     } catch (M) {
       y(M);
     }
   }), n.removeAttachment = l("removeAttachment", async function(h, _, u, y) {
-    const A = rs(i, G0(h) + "/" + p(_)) + "?rev=" + u;
+    const A = rs(i, N0(h) + "/" + p(_)) + "?rev=" + u;
     try {
       const E = await a(A, { method: "DELETE" });
       y(null, E.data);
@@ -21961,7 +21961,7 @@ function ek(t, r) {
     }
   }), n.putAttachment = l("putAttachment", async function(h, _, u, y, A, E) {
     typeof A == "function" && (E = A, A = y, y = u, u = null);
-    const b = G0(h) + "/" + p(_);
+    const b = N0(h) + "/" + p(_);
     let M = rs(i, b);
     if (u && (M += "?rev=" + u), typeof y == "string") {
       let x;
@@ -21977,7 +21977,7 @@ function ek(t, r) {
     }
     try {
       const x = await a(M, {
-        headers: new v1({ "Content-Type": A }),
+        headers: new g1({ "Content-Type": A }),
         method: "PUT",
         body: y
       });
@@ -22000,7 +22000,7 @@ function ek(t, r) {
   }, n._put = async function(h, _, u) {
     try {
       await d(), await VS(h);
-      const y = await a(rs(i, G0(h._id)), {
+      const y = await a(rs(i, N0(h._id)), {
         method: "PUT",
         body: JSON.stringify(h)
       });
@@ -22009,11 +22009,11 @@ function ek(t, r) {
       y.docId = h && h._id, u(y);
     }
   }, n.allDocs = l("allDocs", async function(h, _) {
-    typeof h == "function" && (_ = h, h = {}), h = as(h);
+    typeof h == "function" && (_ = h, h = {}), h = ss(h);
     const u = {};
     let y, A = "GET";
     h.conflicts && (u.conflicts = !0), h.update_seq && (u.update_seq = !0), h.descending && (u.descending = !0), h.include_docs && (u.include_docs = !0), h.attachments && (u.attachments = !0), h.key && (u.key = JSON.stringify(h.key)), h.start_key && (h.startkey = h.start_key), h.startkey && (u.startkey = JSON.stringify(h.startkey)), h.end_key && (h.endkey = h.end_key), h.endkey && (u.endkey = JSON.stringify(h.endkey)), typeof h.inclusive_end < "u" && (u.inclusive_end = !!h.inclusive_end), typeof h.limit < "u" && (u.limit = h.limit), typeof h.skip < "u" && (u.skip = h.skip);
-    const E = Cb(u);
+    const E = Sb(u);
     typeof h.keys < "u" && (A = "POST", y = { keys: h.keys });
     try {
       const b = await a(rs(i, "_all_docs" + E), {
@@ -22026,9 +22026,9 @@ function ek(t, r) {
     }
   }), n._changes = function(h) {
     const _ = "batch_size" in h ? h.batch_size : QN;
-    h = as(h), h.continuous && !("heartbeat" in h) && (h.heartbeat = tG);
+    h = ss(h), h.continuous && !("heartbeat" in h) && (h.heartbeat = tG);
     let u = "timeout" in h ? h.timeout : 30 * 1e3;
-    "timeout" in h && h.timeout && u - h.timeout < Sb && (u = h.timeout + Sb), "heartbeat" in h && h.heartbeat && u - h.heartbeat < Sb && (u = h.heartbeat + Sb);
+    "timeout" in h && h.timeout && u - h.timeout < Eb && (u = h.timeout + Eb), "heartbeat" in h && h.heartbeat && u - h.heartbeat < Eb && (u = h.heartbeat + Eb);
     const y = {};
     "timeout" in h && h.timeout && (y.timeout = h.timeout);
     const A = typeof h.limit < "u" ? h.limit : !1;
@@ -22044,7 +22044,7 @@ function ek(t, r) {
       if (h.aborted)
         return;
       y.since = O, typeof y.since == "object" && (y.since = JSON.stringify(y.since)), h.descending ? A && (y.limit = E) : y.limit = !A || E > _ ? _ : E;
-      const D = rs(i, "_changes" + Cb(y)), U = {
+      const D = rs(i, "_changes" + Sb(y)), U = {
         signal: x.signal,
         method: b,
         body: JSON.stringify(M)
@@ -22075,7 +22075,7 @@ function ek(t, r) {
       }
       B && B.last_seq && (C = B.last_seq);
       const U = A && E <= 0 || B && D < _ || h.descending;
-      h.continuous && !(A && E <= 0) || !U ? Ic(function() {
+      h.continuous && !(A && E <= 0) || !U ? Oc(function() {
         m(C, w);
       }) : h.complete(null, S);
     };
@@ -22112,11 +22112,11 @@ ek.valid = function() {
 function iG(t) {
   t.adapter("http", ek, !1), t.adapter("https", ek, !1);
 }
-class z0 extends Error {
+class F0 extends Error {
   constructor(r) {
     super(), this.status = 400, this.name = "query_parse_error", this.message = r, this.error = !0;
     try {
-      Error.captureStackTrace(this, z0);
+      Error.captureStackTrace(this, F0);
     } catch {
     }
   }
@@ -22141,11 +22141,11 @@ class Nw extends Error {
 }
 function nT(t, r) {
   return r && t.then(function(n) {
-    Ic(function() {
+    Oc(function() {
       r(null, n);
     });
   }, function(n) {
-    Ic(function() {
+    Oc(function() {
       r(n);
     });
   }), t;
@@ -22209,7 +22209,7 @@ function nk(t) {
   }
   return r;
 }
-var aG = Nu.bind(null, "log"), lG = Array.isArray, uG = JSON.parse;
+var aG = Bu.bind(null, "log"), lG = Array.isArray, uG = JSON.parse;
 function rT(t, r) {
   return Uk(
     "return (" + t.replace(/;\s*$/, "") + ");",
@@ -22264,7 +22264,7 @@ async function XS(t, r, n, i, e, s) {
       if (!M[p])
         return M[p] = !0, E;
     }
-    await vw(t, "_local/" + s, h);
+    await gw(t, "_local/" + s, h);
     const u = (await t.registerDependentDatabase(p)).db;
     u.auto_compaction = !0;
     const y = {
@@ -22299,13 +22299,13 @@ function tC(t, r, n) {
   try {
     t.emit("error", r);
   } catch {
-    Nu(
+    Bu(
       "error",
       `The user's map/reduce function threw an uncaught error.
 You can debug this error by doing:
 myDatabase.on('error', function (err) { debugger; });
 Please double-check your map/reduce function.`
-    ), Nu("error", r, n);
+    ), Bu("error", r, n);
   }
 }
 function dG(t, r, n, i) {
@@ -22365,20 +22365,20 @@ function dG(t, r, n, i) {
   function y(F) {
     if (F) {
       if (typeof F != "number")
-        return new z0(`Invalid value for integer: "${F}"`);
+        return new F0(`Invalid value for integer: "${F}"`);
       if (F < 0)
-        return new z0(`Invalid value for positive integer: "${F}"`);
+        return new F0(`Invalid value for positive integer: "${F}"`);
     }
   }
   function A(F, W) {
     const q = F.descending ? "endkey" : "startkey", j = F.descending ? "startkey" : "endkey";
     if (typeof F[q] < "u" && typeof F[j] < "u" && So(F[q], F[j]) > 0)
-      throw new z0("No rows can match your key range, reverse your start_key and end_key or set {descending : true}");
+      throw new F0("No rows can match your key range, reverse your start_key and end_key or set {descending : true}");
     if (W.reduce && F.reduce !== !1) {
       if (F.include_docs)
-        throw new z0("{include_docs:true} is invalid for reduce");
+        throw new F0("{include_docs:true} is invalid for reduce");
       if (F.keys && F.keys.length > 1 && !F.group && !F.group_level)
-        throw new z0("Multi-key fetches for reduce views must use {group: true}");
+        throw new F0("Multi-key fetches for reduce views must use {group: true}");
     }
     for (const K of ["group_level", "limit", "skip"]) {
       const ut = y(F[K]);
@@ -22394,14 +22394,14 @@ function dG(t, r, n, i) {
     }
     if (typeof W == "string") {
       const V = W6(W), z = await F.fetch("_design/" + V[0] + "/_view/" + V[1] + j, {
-        headers: new v1({ "Content-Type": "application/json" }),
+        headers: new g1({ "Content-Type": "application/json" }),
         method: ut,
         body: JSON.stringify(K)
       });
       Z = z.ok;
       const ct = await z.json();
       if (!Z)
-        throw ct.status = z.status, M1(ct);
+        throw ct.status = z.status, L1(ct);
       for (const H of ct.rows)
         if (H.value && H.value.error && H.value.error === "builtin_reduce_error")
           throw new Error(H.reason);
@@ -22413,14 +22413,14 @@ function dG(t, r, n, i) {
     for (const V of Object.keys(W))
       Array.isArray(W[V]) ? K[V] = W[V] : K[V] = W[V].toString();
     const pt = await F.fetch("_temp_view" + j, {
-      headers: new v1({ "Content-Type": "application/json" }),
+      headers: new g1({ "Content-Type": "application/json" }),
       method: "POST",
       body: JSON.stringify(K)
     });
     Z = pt.ok;
     const nt = await pt.json();
     if (!Z)
-      throw nt.status = pt.status, M1(nt);
+      throw nt.status = pt.status, L1(nt);
     return new Promise(function(V) {
       V(nt);
     }).then(p(q));
@@ -22525,8 +22525,8 @@ function dG(t, r, n, i) {
   async function B(F, W) {
     let q, j, K;
     function ut(Ft, Jt) {
-      const ve = { id: j._id, key: ep(Ft) };
-      typeof Jt < "u" && Jt !== null && (ve.value = ep(Jt)), q.push(ve);
+      const ve = { id: j._id, key: tp(Ft) };
+      typeof Jt < "u" && Jt !== null && (ve.value = tp(Jt)), q.push(ve);
     }
     const Z = r(F.mapFun, ut);
     let pt = F.seq || 0;
@@ -22628,7 +22628,7 @@ function dG(t, r, n, i) {
       let ve;
       for (let ne = 0, Ht = Ft.length; ne < Ht; ne++) {
         const ge = Ft[ne], Ie = [ge.key, ge.id];
-        ne > 0 && So(ge.key, ve) === 0 && Ie.push(ne), Jt.set(mh(Ie), ge), ve = ge.key;
+        ne > 0 && So(ge.key, ve) === 0 && Ie.push(ne), Jt.set(_h(Ie), ge), ve = ge.key;
       }
       return Jt;
     }
@@ -22723,8 +22723,8 @@ function dG(t, r, n, i) {
     if (typeof W.keys < "u") {
       const nt = W.keys.map(function(ct) {
         const H = {
-          startkey: mh([ct]),
-          endkey: mh([ct, {}])
+          startkey: _h([ct]),
+          endkey: _h([ct, {}])
         };
         return W.update_seq && (H.update_seq = !0), ut(H);
       }), z = (await Promise.all(nt)).flat();
@@ -22735,14 +22735,14 @@ function dG(t, r, n, i) {
       };
       W.update_seq && (pt.update_seq = !0);
       let nt, V;
-      if ("start_key" in W && (nt = W.start_key), "startkey" in W && (nt = W.startkey), "end_key" in W && (V = W.end_key), "endkey" in W && (V = W.endkey), typeof nt < "u" && (pt.startkey = W.descending ? mh([nt, {}]) : mh([nt])), typeof V < "u") {
+      if ("start_key" in W && (nt = W.start_key), "startkey" in W && (nt = W.startkey), "end_key" in W && (V = W.end_key), "endkey" in W && (V = W.endkey), typeof nt < "u" && (pt.startkey = W.descending ? _h([nt, {}]) : _h([nt])), typeof V < "u") {
         let ct = W.inclusive_end !== !1;
-        W.descending && (ct = !ct), pt.endkey = mh(
+        W.descending && (ct = !ct), pt.endkey = _h(
           ct ? [V, {}] : [V]
         );
       }
       if (typeof W.key < "u") {
-        const ct = mh([W.key]), H = mh([W.key, {}]);
+        const ct = _h([W.key]), H = _h([W.key, {}]);
         pt.descending ? (pt.endkey = ct, pt.startkey = H) : (pt.startkey = ct, pt.endkey = H);
       }
       j || (typeof W.limit == "number" && (pt.limit = W.limit), pt.skip = K);
@@ -22752,7 +22752,7 @@ function dG(t, r, n, i) {
   }
   async function Y(F) {
     return (await F.fetch("_view_cleanup", {
-      headers: new v1({ "Content-Type": "application/json" }),
+      headers: new g1({ "Content-Type": "application/json" }),
       method: "POST"
     })).json();
   }
@@ -22797,7 +22797,7 @@ function dG(t, r, n, i) {
   async function Q(F, W, q) {
     if (typeof F._query == "function")
       return b(F, W, q);
-    if (Pc(F))
+    if (Cc(F))
       return E(F, W, q);
     const j = {
       changes_batch_size: F.__opts.view_update_changes_batch_size || cG
@@ -22848,7 +22848,7 @@ function dG(t, r, n, i) {
         /* localDocName */
         t
       );
-      return q.stale === "ok" || q.stale === "update_after" ? (q.stale === "update_after" && Ic(function() {
+      return q.stale === "ok" || q.stale === "update_after" ? (q.stale === "update_after" && Oc(function() {
         O(V, j);
       }), U(V, q)) : (await O(V, j), U(V, q));
     }
@@ -22863,7 +22863,7 @@ function dG(t, r, n, i) {
   }
   const ot = oG(function() {
     const F = this;
-    return typeof F._viewCleanup == "function" ? M(F) : Pc(F) ? Y(F) : X(F);
+    return typeof F._viewCleanup == "function" ? M(F) : Cc(F) ? Y(F) : X(F);
   });
   return {
     query: rt,
@@ -22943,7 +22943,7 @@ function eC(t, r) {
   }));
 }
 function kG(t, r, n) {
-  var i = Pc(r) && !Pc(t), e = Object.keys(n._attachments);
+  var i = Cc(r) && !Cc(t), e = Object.keys(n._attachments);
   return i ? t.get(n._id).then(function(s) {
     return Promise.all(e.map(function(l) {
       return xG(s, n, l) ? r.getAttachment(n._id, l) : t.getAttachment(s._id, l);
@@ -22971,7 +22971,7 @@ function LG(t) {
   };
 }
 function MG(t, r, n, i) {
-  n = as(n);
+  n = ss(n);
   var e = [], s = !0;
   function l() {
     var c = LG(n);
@@ -23000,7 +23000,7 @@ function MG(t, r, n, i) {
   }
   return Promise.resolve().then(l).then(a);
 }
-var nC = 1, rC = "pouchdb", EG = 5, fh = 0;
+var nC = 1, rC = "pouchdb", EG = 5, ch = 0;
 function ik(t, r, n, i, e) {
   return t.get(r).catch(function(s) {
     if (s.status === 404)
@@ -23070,34 +23070,34 @@ class iC {
   }
   getCheckpoint() {
     var r = this;
-    return !r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? Promise.resolve(fh) : r.opts && r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? r.src.get(r.id).then(function(n) {
-      return n.last_seq || fh;
+    return !r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? Promise.resolve(ch) : r.opts && r.opts.writeSourceCheckpoint && !r.opts.writeTargetCheckpoint ? r.src.get(r.id).then(function(n) {
+      return n.last_seq || ch;
     }).catch(function(n) {
       if (n.status !== 404)
         throw n;
-      return fh;
+      return ch;
     }) : r.target.get(r.id).then(function(n) {
-      return r.opts && r.opts.writeTargetCheckpoint && !r.opts.writeSourceCheckpoint ? n.last_seq || fh : r.src.get(r.id).then(function(i) {
+      return r.opts && r.opts.writeTargetCheckpoint && !r.opts.writeSourceCheckpoint ? n.last_seq || ch : r.src.get(r.id).then(function(i) {
         if (n.version !== i.version)
-          return fh;
+          return ch;
         var e;
-        return n.version ? e = n.version.toString() : e = "undefined", e in oC ? oC[e](n, i) : fh;
+        return n.version ? e = n.version.toString() : e = "undefined", e in oC ? oC[e](n, i) : ch;
       }, function(i) {
         if (i.status === 404 && n.last_seq)
           return r.src.put({
             _id: r.id,
-            last_seq: fh
+            last_seq: ch
           }).then(function() {
-            return fh;
+            return ch;
           }, function(e) {
-            return sC(e) ? (r.opts.writeSourceCheckpoint = !1, n.last_seq) : fh;
+            return sC(e) ? (r.opts.writeSourceCheckpoint = !1, n.last_seq) : ch;
           });
         throw i;
       });
     }).catch(function(n) {
       if (n.status !== 404)
         throw n;
-      return fh;
+      return ch;
     });
   }
 }
@@ -23119,7 +23119,7 @@ function oT(t, r) {
   var n = t[0], i = t.slice(1), e = r[0], s = r.slice(1);
   if (!n || r.length === 0)
     return {
-      last_seq: fh,
+      last_seq: ch,
       history: []
     };
   var l = n.session_id;
@@ -23217,7 +23217,7 @@ function aT(t, r, n, i, e) {
             e.errors.push(ft);
             var bt = (ft.name || "").toLowerCase();
             if (bt === "unauthorized" || bt === "forbidden")
-              i.emit("denied", as(ft));
+              i.emit("denied", ss(ft));
             else
               throw ft;
           } else
@@ -23232,7 +23232,7 @@ function aT(t, r, n, i, e) {
     if (l.error)
       throw new Error("There was a problem getting docs.");
     e.last_seq = _ = l.seq;
-    var nt = as(e);
+    var nt = ss(e);
     return S.length && (nt.docs = S, typeof l.pending == "number" && (nt.pending = l.pending, delete l.pending), i.emit("change", nt)), c = !0, t.info().then(function(V) {
       var z = t.activeTasks.get(O);
       if (!(!l || !z)) {
@@ -23325,7 +23325,7 @@ function aT(t, r, n, i, e) {
       }
       return;
     }
-    a.seq = nt.seq || z, a.changes.push(nt), i.emit("checkpoint", { pending_batch: a.seq }), Ic(function() {
+    a.seq = nt.seq || z, a.changes.push(nt), i.emit("checkpoint", { pending_batch: a.seq }), Oc(function() {
       rt(s.length === 0 && B.live);
     });
   }
@@ -23447,7 +23447,7 @@ class AG extends Ar {
     this.once("complete", e), this.once("error", e);
   }
 }
-function ww(t, r) {
+function bw(t, r) {
   var n = r.PouchConstructor;
   return typeof t == "string" ? new n(t, r) : t;
 }
@@ -23457,12 +23457,12 @@ function sk(t, r, n, i) {
       Rw,
       "`doc_ids` filter parameter is not a list."
     );
-  n.complete = i, n = as(n), n.continuous = n.continuous || n.live, n.retry = "retry" in n ? n.retry : !1, n.PouchConstructor = n.PouchConstructor || this;
-  var e = new AG(n), s = ww(t, n), l = ww(r, n);
+  n.complete = i, n = ss(n), n.continuous = n.continuous || n.live, n.retry = "retry" in n ? n.retry : !1, n.PouchConstructor = n.PouchConstructor || this;
+  var e = new AG(n), s = bw(t, n), l = bw(r, n);
   return aT(s, l, n, e), e;
 }
 function OG(t, r, n, i) {
-  return typeof n == "function" && (i = n, n = {}), typeof n > "u" && (n = {}), n = as(n), n.PouchConstructor = n.PouchConstructor || this, t = ww(t, n), r = ww(r, n), new IG(t, r, n, i);
+  return typeof n == "function" && (i = n, n = {}), typeof n > "u" && (n = {}), n = ss(n), n.PouchConstructor = n.PouchConstructor || this, t = bw(t, n), r = bw(r, n), new IG(t, r, n, i);
 }
 class IG extends Ar {
   constructor(r, n, i, e) {
@@ -23838,16 +23838,16 @@ function DG() {
   }(K6)), K6.exports;
 }
 DG();
-var BG = 15e3, ak = 1e3, lk = 60 * ak, iw = 60 * lk, Y6 = 24 * iw, NG = "http://www.topografix.com/GPX/gpx_style/0/2", Pb = new L.Icon.Default(), GG = {
-  startIcon: Pb,
-  endIcon: Pb,
+var BG = 15e3, ak = 1e3, lk = 60 * ak, rw = 60 * lk, Y6 = 24 * rw, NG = "http://www.topografix.com/GPX/gpx_style/0/2", Cb = new L.Icon.Default(), GG = {
+  startIcon: Cb,
+  endIcon: Cb,
   // Based on 'sym' waypoint key
   wptIcons: {
-    "": Pb
+    "": Cb
   },
   // Based on 'type' waypoint key
   wptTypeIcons: {
-    "": Pb
+    "": Cb
   },
   // Based on a regex over the waypoint's name
   pointMatchers: []
@@ -23876,7 +23876,7 @@ L.GPX = L.FeatureGroup.extend({
   },
   get_duration_string: function(t, r) {
     var n = "";
-    t >= Y6 && (n += Math.floor(t / Y6) + "d ", t = t % Y6), t >= iw && (n += Math.floor(t / iw) + ":", t = t % iw);
+    t >= Y6 && (n += Math.floor(t / Y6) + "d ", t = t % Y6), t >= rw && (n += Math.floor(t / rw) + ":", t = t % rw);
     var i = Math.floor(t / lk);
     t = t % lk, i < 10 && (n += "0"), n += i + "'";
     var e = Math.floor(t / ak);
@@ -24362,7 +24362,7 @@ L.GPX = L.FeatureGroup.extend({
   }
 });
 /*! LeafletPathDrag v2.0.2 */
-class bm {
+class ww {
   /**
    * Apply all patches and extend Leaflet classes
    *
@@ -24370,8 +24370,8 @@ class bm {
    * @memberof LeafletPathDrag
    */
   static enable() {
-    if ((!L.version || parseFloat(L.version) < 1.7) && console.warn("LeafletPathDrag may not be compatible with Leaflet < 1.7"), bm._enabled) return;
-    bm._enabled = !0;
+    if ((!L.version || parseFloat(L.version) < 1.7) && console.warn("LeafletPathDrag may not be compatible with Leaflet < 1.7"), ww._enabled) return;
+    ww._enabled = !0;
     const { Path: r, Handler: n, DomEvent: i, DomUtil: e, Util: s, Browser: l, svg: a, Canvas: c, SVG: d, point: p, LatLngBounds: h } = L;
     d?.include && typeof d.include == "function" && d.include(
       {
@@ -24723,10 +24723,10 @@ const JG = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   tsvParse: YG,
   tsvParseRows: $G
 }, Symbol.toStringTag, { value: "Module" })), tj = /* @__PURE__ */ wk(JG);
-var j0 = { exports: {} }, cC;
+var G0 = { exports: {} }, cC;
 function ej() {
-  if (cC) return j0.exports;
-  cC = 1, j0.exports = t, j0.exports.pair = s, j0.exports.format = n, j0.exports.formatPair = r, j0.exports.coordToDMS = i;
+  if (cC) return G0.exports;
+  cC = 1, G0.exports = t, G0.exports.pair = s, G0.exports.format = n, G0.exports.formatPair = r, G0.exports.coordToDMS = i;
   function t(a, c) {
     return e(a, c).val;
   }
@@ -24771,7 +24771,7 @@ function ej() {
     if (d === "N" || d === "S") return [a, c];
     if (d === "W" || d === "E") return [c, a];
   }
-  return j0.exports;
+  return G0.exports;
 }
 var Q6, fC;
 function nj() {
@@ -28222,7 +28222,7 @@ function Oj(t) {
     t("EPSG:" + (32600 + r), "+proj=utm +zone=" + r + " +datum=WGS84 +units=m"), t("EPSG:" + (32700 + r), "+proj=utm +zone=" + r + " +south +datum=WGS84 +units=m");
   t.WGS84 = t["EPSG:4326"], t["EPSG:3785"] = t["EPSG:3857"], t.GOOGLE = t["EPSG:3857"], t["EPSG:900913"] = t["EPSG:3857"], t["EPSG:102113"] = t["EPSG:3857"];
 }
-var np = 1, rp = 2, b1 = 3, Ij = 4, uk = 5, s9 = 6378137, Rj = 6356752314e-3, a9 = 0.0066943799901413165, dm = 484813681109536e-20, Ge = Math.PI / 2, Dj = 0.16666666666666666, Bj = 0.04722222222222222, Nj = 0.022156084656084655, Je = 1e-10, Ws = 0.017453292519943295, Tc = 57.29577951308232, Jr = Math.PI / 4, wm = Math.PI * 2, Mo = 3.14159265359, Ol = {};
+var ep = 1, np = 2, y1 = 3, Ij = 4, uk = 5, s9 = 6378137, Rj = 6356752314e-3, a9 = 0.0066943799901413165, dm = 484813681109536e-20, Ge = Math.PI / 2, Dj = 0.16666666666666666, Bj = 0.04722222222222222, Nj = 0.022156084656084655, Je = 1e-10, Ws = 0.017453292519943295, Pc = 57.29577951308232, Jr = Math.PI / 4, bm = Math.PI * 2, Mo = 3.14159265359, Ol = {};
 Ol.greenwich = 0;
 Ol.lisbon = -9.131906111111;
 Ol.paris = 2.337229166667;
@@ -28259,7 +28259,7 @@ const Gj = {
   "us-yd": { to_meter: 0.914401828803658 }
 };
 var l9 = /[\s_\-\/\(\)]/g;
-function o0(t, r) {
+function i0(t, r) {
   if (t[r])
     return t[r];
   for (var n = Object.keys(t), i = r.toLowerCase().replace(l9, ""), e = -1, s, l; ++e < n.length; )
@@ -28350,14 +28350,14 @@ function hk(t) {
     },
     units: function(a) {
       r.units = a;
-      var c = o0(Gj, a);
+      var c = i0(Gj, a);
       c && (r.to_meter = c.to_meter);
     },
     from_greenwich: function(a) {
       r.from_greenwich = a * Ws;
     },
     pm: function(a) {
-      var c = o0(Ol, a);
+      var c = i0(Ol, a);
       r.from_greenwich = (c || parseFloat(a)) * Ws;
     },
     nadgrids: function(a) {
@@ -28574,13 +28574,13 @@ function qj(t) {
   const r = t.toUpperCase();
   return r.includes("PROJCRS") || r.includes("GEOGCRS") || r.includes("BOUNDCRS") || r.includes("VERTCRS") || r.includes("LENGTHUNIT") || r.includes("ANGLEUNIT") || r.includes("SCALEUNIT") ? "WKT2" : (r.includes("PROJCS") || r.includes("GEOGCS") || r.includes("LOCAL_CS") || r.includes("VERT_CS") || r.includes("UNIT"), "WKT1");
 }
-var xm = 1, AT = 2, OT = 3, xw = 4, IT = 5, t5 = -1, Hj = /\s/, Zj = /[A-Za-z]/, Wj = /[A-Za-z84_]/, zw = /[,\]]/, RT = /[\d\.E\-\+]/;
-function Hf(t) {
+var wm = 1, AT = 2, OT = 3, xw = 4, IT = 5, t5 = -1, Hj = /\s/, Zj = /[A-Za-z]/, Wj = /[A-Za-z84_]/, zw = /[,\]]/, RT = /[\d\.E\-\+]/;
+function qf(t) {
   if (typeof t != "string")
     throw new Error("not a string");
-  this.text = t.trim(), this.level = 0, this.place = 0, this.root = null, this.stack = [], this.currentObject = null, this.state = xm;
+  this.text = t.trim(), this.level = 0, this.place = 0, this.root = null, this.stack = [], this.currentObject = null, this.state = wm;
 }
-Hf.prototype.readCharicter = function() {
+qf.prototype.readCharicter = function() {
   var t = this.text[this.place++];
   if (this.state !== xw)
     for (; Hj.test(t); ) {
@@ -28589,7 +28589,7 @@ Hf.prototype.readCharicter = function() {
       t = this.text[this.place++];
     }
   switch (this.state) {
-    case xm:
+    case wm:
       return this.neutral(t);
     case AT:
       return this.keyword(t);
@@ -28603,7 +28603,7 @@ Hf.prototype.readCharicter = function() {
       return;
   }
 };
-Hf.prototype.afterquote = function(t) {
+qf.prototype.afterquote = function(t) {
   if (t === '"') {
     this.word += '"', this.state = xw;
     return;
@@ -28614,17 +28614,17 @@ Hf.prototype.afterquote = function(t) {
   }
   throw new Error(`havn't handled "` + t + '" in afterquote yet, index ' + this.place);
 };
-Hf.prototype.afterItem = function(t) {
+qf.prototype.afterItem = function(t) {
   if (t === ",") {
-    this.word !== null && this.currentObject.push(this.word), this.word = null, this.state = xm;
+    this.word !== null && this.currentObject.push(this.word), this.word = null, this.state = wm;
     return;
   }
   if (t === "]") {
-    this.level--, this.word !== null && (this.currentObject.push(this.word), this.word = null), this.state = xm, this.currentObject = this.stack.pop(), this.currentObject || (this.state = t5);
+    this.level--, this.word !== null && (this.currentObject.push(this.word), this.word = null), this.state = wm, this.currentObject = this.stack.pop(), this.currentObject || (this.state = t5);
     return;
   }
 };
-Hf.prototype.number = function(t) {
+qf.prototype.number = function(t) {
   if (RT.test(t)) {
     this.word += t;
     return;
@@ -28635,21 +28635,21 @@ Hf.prototype.number = function(t) {
   }
   throw new Error(`havn't handled "` + t + '" in number yet, index ' + this.place);
 };
-Hf.prototype.quoted = function(t) {
+qf.prototype.quoted = function(t) {
   if (t === '"') {
     this.state = IT;
     return;
   }
   this.word += t;
 };
-Hf.prototype.keyword = function(t) {
+qf.prototype.keyword = function(t) {
   if (Wj.test(t)) {
     this.word += t;
     return;
   }
   if (t === "[") {
     var r = [];
-    r.push(this.word), this.level++, this.root === null ? this.root = r : this.currentObject.push(r), this.stack.push(this.currentObject), this.currentObject = r, this.state = xm;
+    r.push(this.word), this.level++, this.root === null ? this.root = r : this.currentObject.push(r), this.stack.push(this.currentObject), this.currentObject = r, this.state = wm;
     return;
   }
   if (zw.test(t)) {
@@ -28658,7 +28658,7 @@ Hf.prototype.keyword = function(t) {
   }
   throw new Error(`havn't handled "` + t + '" in keyword yet, index ' + this.place);
 };
-Hf.prototype.neutral = function(t) {
+qf.prototype.neutral = function(t) {
   if (Zj.test(t)) {
     this.word = t, this.state = AT;
     return;
@@ -28677,7 +28677,7 @@ Hf.prototype.neutral = function(t) {
   }
   throw new Error(`havn't handled "` + t + '" in neutral yet, index ' + this.place);
 };
-Hf.prototype.output = function() {
+qf.prototype.output = function() {
   for (; this.place < this.text.length; )
     this.readCharicter();
   if (this.state === t5)
@@ -28685,17 +28685,17 @@ Hf.prototype.output = function() {
   throw new Error('unable to parse string "' + this.text + '". State is ' + this.state);
 };
 function Vj(t) {
-  var r = new Hf(t);
+  var r = new qf(t);
   return r.output();
 }
 function Zx(t, r, n) {
   Array.isArray(r) && (n.unshift(r), r = null);
   var i = r ? {} : t, e = n.reduce(function(s, l) {
-    return c1(l, s), s;
+    return h1(l, s), s;
   }, i);
   r && (t[r] = e);
 }
-function c1(t, r) {
+function h1(t, r) {
   if (!Array.isArray(t)) {
     r[t] = !0;
     return;
@@ -28703,7 +28703,7 @@ function c1(t, r) {
   var n = t.shift();
   if (n === "PARAMETER" && (n = t.shift()), t.length === 1) {
     if (Array.isArray(t[0])) {
-      r[n] = {}, c1(t[0], r[n]);
+      r[n] = {}, h1(t[0], r[n]);
       return;
     }
     r[n] = t[0];
@@ -28730,7 +28730,7 @@ function c1(t, r) {
       r[n] = {
         name: t[0].toLowerCase(),
         convert: t[1]
-      }, t.length === 3 && c1(t[2], r[n]);
+      }, t.length === 3 && h1(t[2], r[n]);
       return;
     case "SPHEROID":
     case "ELLIPSOID":
@@ -28738,7 +28738,7 @@ function c1(t, r) {
         name: t[0],
         a: t[1],
         rf: t[2]
-      }, t.length === 4 && c1(t[3], r[n]);
+      }, t.length === 4 && h1(t[3], r[n]);
       return;
     case "EDATUM":
     case "ENGINEERINGDATUM":
@@ -28770,17 +28770,17 @@ function c1(t, r) {
     default:
       for (i = -1; ++i < t.length; )
         if (!Array.isArray(t[i]))
-          return c1(t, r[n]);
+          return h1(t, r[n]);
       return Zx(r, n, t);
   }
 }
 var Kj = 0.017453292519943295;
-function dh(t) {
+function fh(t) {
   return t * Kj;
 }
 function DT(t) {
   const r = (t.projName || "").toLowerCase().replace(/_/g, " ");
-  !t.long0 && t.longc && (r === "albers conic equal area" || r === "lambert azimuthal equal area") && (t.long0 = t.longc), !t.lat_ts && t.lat1 && (r === "stereographic south pole" || r === "polar stereographic (variant b)") ? (t.lat0 = dh(t.lat1 > 0 ? 90 : -90), t.lat_ts = t.lat1, delete t.lat1) : !t.lat_ts && t.lat0 && (r === "polar stereographic" || r === "polar stereographic (variant a)") && (t.lat_ts = t.lat0, t.lat0 = dh(t.lat0 > 0 ? 90 : -90), delete t.lat1);
+  !t.long0 && t.longc && (r === "albers conic equal area" || r === "lambert azimuthal equal area") && (t.long0 = t.longc), !t.lat_ts && t.lat1 && (r === "stereographic south pole" || r === "polar stereographic (variant b)") ? (t.lat0 = fh(t.lat1 > 0 ? 90 : -90), t.lat_ts = t.lat1, delete t.lat1) : !t.lat_ts && t.lat0 && (r === "polar stereographic" || r === "polar stereographic (variant a)") && (t.lat_ts = t.lat0, t.lat0 = fh(t.lat0 > 0 ? 90 : -90), delete t.lat1);
 }
 function u9(t) {
   let r = { units: null, to_meter: void 0 };
@@ -28888,7 +28888,7 @@ function Xj(t) {
   }
   t.UNIT && (t.units = t.UNIT.name.toLowerCase(), t.units === "metre" && (t.units = "meter"), t.UNIT.convert && (t.type === "GEOGCS" ? t.DATUM && t.DATUM.SPHEROID && (t.to_meter = t.UNIT.convert * t.DATUM.SPHEROID.a) : t.to_meter = t.UNIT.convert));
   var l = t.GEOGCS;
-  t.type === "GEOGCS" && (l = t), l && (l.DATUM ? t.datumCode = l.DATUM.name.toLowerCase() : t.datumCode = l.name.toLowerCase(), t.datumCode.slice(0, 2) === "d_" && (t.datumCode = t.datumCode.slice(2)), t.datumCode === "new_zealand_1949" && (t.datumCode = "nzgd49"), (t.datumCode === "wgs_1984" || t.datumCode === "world_geodetic_system_1984") && (t.PROJECTION === "Mercator_Auxiliary_Sphere" && (t.sphere = !0), t.datumCode = "wgs84"), t.datumCode === "belge_1972" && (t.datumCode = "rnb72"), l.DATUM && l.DATUM.SPHEROID && (t.ellps = l.DATUM.SPHEROID.name.replace("_19", "").replace(/[Cc]larke\_18/, "clrk"), t.ellps.toLowerCase().slice(0, 13) === "international" && (t.ellps = "intl"), t.a = l.DATUM.SPHEROID.a, t.rf = parseFloat(l.DATUM.SPHEROID.rf, 10)), l.DATUM && l.DATUM.TOWGS84 && (t.datum_params = l.DATUM.TOWGS84), ~t.datumCode.indexOf("osgb_1936") && (t.datumCode = "osgb36"), ~t.datumCode.indexOf("osni_1952") && (t.datumCode = "osni52"), (~t.datumCode.indexOf("tm65") || ~t.datumCode.indexOf("geodetic_datum_of_1965")) && (t.datumCode = "ire65"), t.datumCode === "ch1903+" && (t.datumCode = "ch1903"), ~t.datumCode.indexOf("israel") && (t.datumCode = "isr93")), t.b && !isFinite(t.b) && (t.b = t.a), t.rectified_grid_angle && (t.rectified_grid_angle = dh(t.rectified_grid_angle));
+  t.type === "GEOGCS" && (l = t), l && (l.DATUM ? t.datumCode = l.DATUM.name.toLowerCase() : t.datumCode = l.name.toLowerCase(), t.datumCode.slice(0, 2) === "d_" && (t.datumCode = t.datumCode.slice(2)), t.datumCode === "new_zealand_1949" && (t.datumCode = "nzgd49"), (t.datumCode === "wgs_1984" || t.datumCode === "world_geodetic_system_1984") && (t.PROJECTION === "Mercator_Auxiliary_Sphere" && (t.sphere = !0), t.datumCode = "wgs84"), t.datumCode === "belge_1972" && (t.datumCode = "rnb72"), l.DATUM && l.DATUM.SPHEROID && (t.ellps = l.DATUM.SPHEROID.name.replace("_19", "").replace(/[Cc]larke\_18/, "clrk"), t.ellps.toLowerCase().slice(0, 13) === "international" && (t.ellps = "intl"), t.a = l.DATUM.SPHEROID.a, t.rf = parseFloat(l.DATUM.SPHEROID.rf, 10)), l.DATUM && l.DATUM.TOWGS84 && (t.datum_params = l.DATUM.TOWGS84), ~t.datumCode.indexOf("osgb_1936") && (t.datumCode = "osgb36"), ~t.datumCode.indexOf("osni_1952") && (t.datumCode = "osni52"), (~t.datumCode.indexOf("tm65") || ~t.datumCode.indexOf("geodetic_datum_of_1965")) && (t.datumCode = "ire65"), t.datumCode === "ch1903+" && (t.datumCode = "ch1903"), ~t.datumCode.indexOf("israel") && (t.datumCode = "isr93")), t.b && !isFinite(t.b) && (t.b = t.a), t.rectified_grid_angle && (t.rectified_grid_angle = fh(t.rectified_grid_angle));
   function a(p) {
     var h = t.to_meter || 1;
     return p * h;
@@ -28917,19 +28917,19 @@ function Xj(t) {
     ["k0", "scale_factor"],
     ["latitude_of_center", "Latitude_Of_Center"],
     ["latitude_of_center", "Latitude_of_center"],
-    ["lat0", "latitude_of_center", dh],
+    ["lat0", "latitude_of_center", fh],
     ["longitude_of_center", "Longitude_Of_Center"],
     ["longitude_of_center", "Longitude_of_center"],
-    ["longc", "longitude_of_center", dh],
+    ["longc", "longitude_of_center", fh],
     ["x0", "false_easting", a],
     ["y0", "false_northing", a],
-    ["long0", "central_meridian", dh],
-    ["lat0", "latitude_of_origin", dh],
-    ["lat0", "standard_parallel_1", dh],
-    ["lat1", "standard_parallel_1", dh],
-    ["lat2", "standard_parallel_2", dh],
+    ["long0", "central_meridian", fh],
+    ["lat0", "latitude_of_origin", fh],
+    ["lat0", "standard_parallel_1", fh],
+    ["lat1", "standard_parallel_1", fh],
+    ["lat2", "standard_parallel_2", fh],
     ["azimuth", "Azimuth"],
-    ["alpha", "azimuth", dh],
+    ["alpha", "azimuth", fh],
     ["srsCode", "name"]
   ];
   d.forEach(c), DT(t);
@@ -28944,7 +28944,7 @@ function ck(t) {
     return kw(s);
   }
   var i = n[0], e = {};
-  return c1(n, e), BT(e), e[i];
+  return h1(n, e), BT(e), e[i];
 }
 function Xa(t) {
   var r = this;
@@ -28984,16 +28984,16 @@ function tF(t) {
 }
 var eF = ["3857", "900913", "3785", "102113"];
 function nF(t) {
-  var r = o0(t, "authority");
+  var r = i0(t, "authority");
   if (r) {
-    var n = o0(r, "epsg");
+    var n = i0(r, "epsg");
     return n && eF.indexOf(n) > -1;
   }
 }
 function rF(t) {
-  var r = o0(t, "extension");
+  var r = i0(t, "extension");
   if (r)
-    return o0(r, "proj4");
+    return i0(r, "proj4");
 }
 function iF(t) {
   return t[0] === "+";
@@ -29022,21 +29022,21 @@ function f9(t, r) {
     n = r[i], n !== void 0 && (t[i] = n);
   return t;
 }
-function Rc(t, r, n) {
+function Ic(t, r, n) {
   var i = t * r;
   return n / Math.sqrt(1 - i * i);
 }
-function Om(t) {
+function Am(t) {
   return t < 0 ? -1 : 1;
 }
 function hn(t) {
-  return Math.abs(t) <= Mo ? t : t - Om(t) * wm;
+  return Math.abs(t) <= Mo ? t : t - Am(t) * bm;
 }
-function yh(t, r, n) {
+function vh(t, r, n) {
   var i = t * n, e = 0.5 * t;
   return i = Math.pow((1 - i) / (1 + i), e), Math.tan(0.5 * (Ge - r)) / i;
 }
-function km(t, r) {
+function xm(t, r) {
   for (var n = 0.5 * t, i, e, s = Ge - 2 * Math.atan(r), l = 0; l <= 15; l++)
     if (i = t * Math.sin(s), e = Ge - 2 * Math.atan(r * Math.pow((1 - i) / (1 + i), n)) - s, s += e, Math.abs(e) <= 1e-10)
       return s;
@@ -29044,11 +29044,11 @@ function km(t, r) {
 }
 function sF() {
   var t = this.b / this.a;
-  this.es = 1 - t * t, "x0" in this || (this.x0 = 0), "y0" in this || (this.y0 = 0), this.e = Math.sqrt(this.es), this.lat_ts ? this.sphere ? this.k0 = Math.cos(this.lat_ts) : this.k0 = Rc(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) : this.k0 || (this.k ? this.k0 = this.k : this.k0 = 1);
+  this.es = 1 - t * t, "x0" in this || (this.x0 = 0), "y0" in this || (this.y0 = 0), this.e = Math.sqrt(this.es), this.lat_ts ? this.sphere ? this.k0 = Math.cos(this.lat_ts) : this.k0 = Ic(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) : this.k0 || (this.k ? this.k0 = this.k : this.k0 = 1);
 }
 function aF(t) {
   var r = t.x, n = t.y;
-  if (n * Tc > 90 && n * Tc < -90 && r * Tc > 180 && r * Tc < -180)
+  if (n * Pc > 90 && n * Pc < -90 && r * Pc > 180 && r * Pc < -180)
     return null;
   var i, e;
   if (Math.abs(Math.abs(n) - Ge) <= Je)
@@ -29056,7 +29056,7 @@ function aF(t) {
   if (this.sphere)
     i = this.x0 + this.a * this.k0 * hn(r - this.long0), e = this.y0 + this.a * this.k0 * Math.log(Math.tan(Jr + 0.5 * n));
   else {
-    var s = Math.sin(n), l = yh(this.e, n, s);
+    var s = Math.sin(n), l = vh(this.e, n, s);
     i = this.x0 + this.a * this.k0 * hn(r - this.long0), e = this.y0 - this.a * this.k0 * Math.log(l);
   }
   return t.x = i, t.y = e, t;
@@ -29067,7 +29067,7 @@ function lF(t) {
     e = Ge - 2 * Math.atan(Math.exp(-n / (this.a * this.k0)));
   else {
     var s = Math.exp(-n / (this.a * this.k0));
-    if (e = km(this.e, s), e === -9999)
+    if (e = xm(this.e, s), e === -9999)
       return null;
   }
   return i = hn(this.long0 + r / (this.a * this.k0)), t.x = i, t.y = e, t;
@@ -29091,11 +29091,11 @@ const dF = {
   inverse: d9,
   names: fF
 };
-var pF = [hF, dF], F0 = {}, f1 = [];
+var pF = [hF, dF], j0 = {}, c1 = [];
 function NT(t, r) {
-  var n = f1.length;
-  return t.names ? (f1[n] = t, t.names.forEach(function(i) {
-    F0[i.toLowerCase()] = n;
+  var n = c1.length;
+  return t.names ? (c1[n] = t, t.names.forEach(function(i) {
+    j0[i.toLowerCase()] = n;
   }), this) : (console.log(r), !0);
 }
 function GT(t) {
@@ -29105,8 +29105,8 @@ function _F(t) {
   if (!t)
     return !1;
   var r = t.toLowerCase();
-  if (typeof F0[r] < "u" && f1[F0[r]] || (r = GT(r), r in F0 && f1[F0[r]]))
-    return f1[F0[r]];
+  if (typeof j0[r] < "u" && c1[j0[r]] || (r = GT(r), r in j0 && c1[j0[r]]))
+    return c1[j0[r]];
 }
 function mF() {
   pF.forEach(NT);
@@ -29352,7 +29352,7 @@ function yF(t, r, n, i) {
 }
 function bF(t, r, n, i, e) {
   if (!t) {
-    var s = o0(jT, i);
+    var s = i0(jT, i);
     s || (s = vF), t = s.a, r = s.b, n = s.rf;
   }
   return n && !r && (r = (1 - 1 / n) * t), (n === 0 || Math.abs(t - r) < Je) && (e = !0, r = t), {
@@ -29362,7 +29362,7 @@ function bF(t, r, n, i, e) {
     sphere: e
   };
 }
-var ow = {
+var iw = {
   wgs84: {
     towgs84: "0,0,0",
     ellipse: "WGS84",
@@ -30633,13 +30633,13 @@ var ow = {
     towgs84: "589,76,480"
   }
 };
-for (var wF in ow) {
-  var Wx = ow[wF];
-  Wx.datumName && (ow[Wx.datumName] = Wx);
+for (var wF in iw) {
+  var Wx = iw[wF];
+  Wx.datumName && (iw[Wx.datumName] = Wx);
 }
 function xF(t, r, n, i, e, s, l) {
   var a = {};
-  return t === void 0 || t === "none" ? a.datum_type = uk : a.datum_type = Ij, r && (a.datum_params = r.map(parseFloat), (a.datum_params[0] !== 0 || a.datum_params[1] !== 0 || a.datum_params[2] !== 0) && (a.datum_type = np), a.datum_params.length > 3 && (a.datum_params[3] !== 0 || a.datum_params[4] !== 0 || a.datum_params[5] !== 0 || a.datum_params[6] !== 0) && (a.datum_type = rp, a.datum_params[3] *= dm, a.datum_params[4] *= dm, a.datum_params[5] *= dm, a.datum_params[6] = a.datum_params[6] / 1e6 + 1)), l && (a.datum_type = b1, a.grids = l), a.a = n, a.b = i, a.es = e, a.ep2 = s, a;
+  return t === void 0 || t === "none" ? a.datum_type = uk : a.datum_type = Ij, r && (a.datum_params = r.map(parseFloat), (a.datum_params[0] !== 0 || a.datum_params[1] !== 0 || a.datum_params[2] !== 0) && (a.datum_type = ep), a.datum_params.length > 3 && (a.datum_params[3] !== 0 || a.datum_params[4] !== 0 || a.datum_params[5] !== 0 || a.datum_params[6] !== 0) && (a.datum_type = np, a.datum_params[3] *= dm, a.datum_params[4] *= dm, a.datum_params[5] *= dm, a.datum_params[6] = a.datum_params[6] / 1e6 + 1)), l && (a.datum_type = y1, a.grids = l), a.a = n, a.b = i, a.es = e, a.ep2 = s, a;
 }
 var e5 = {};
 function kF(t, r, n) {
@@ -30657,7 +30657,7 @@ async function MF(t, r) {
     for (let M = c[1] - 1; M >= 0; M--)
       for (let x = c[0] - 1; x >= 0; x--) {
         var E = M * c[0] + x;
-        A.push([-n0(y[E]), n0(u[E])]);
+        A.push([-e0(y[E]), e0(u[E])]);
       }
     n.push({
       del: p,
@@ -30694,7 +30694,7 @@ function SF(t) {
 function p9(t) {
   return t * Math.PI / 180;
 }
-function n0(t) {
+function e0(t) {
   return t / 3600 * Math.PI / 180;
 }
 function CF(t) {
@@ -30724,8 +30724,8 @@ function TF(t, r, n, i) {
       1 + (a.upperLatitude - a.lowerLatitude) / a.latitudeInterval
     );
     s.push({
-      ll: [n0(a.lowerLongitude), n0(a.lowerLatitude)],
-      del: [n0(a.longitudeInterval), n0(a.latitudeInterval)],
+      ll: [e0(a.lowerLongitude), e0(a.lowerLatitude)],
+      del: [e0(a.longitudeInterval), e0(a.latitudeInterval)],
       lim: [d, p],
       count: a.gridNodeCount,
       cvs: AF(c)
@@ -30737,7 +30737,7 @@ function TF(t, r, n, i) {
 }
 function AF(t) {
   return t.map(function(r) {
-    return [n0(r.longitudeShift), n0(r.latitudeShift)];
+    return [e0(r.longitudeShift), e0(r.latitudeShift)];
   });
 }
 function OF(t, r, n) {
@@ -30765,9 +30765,9 @@ function IF(t, r, n, i, e) {
   }
   return a;
 }
-function bh(t, r) {
-  if (!(this instanceof bh))
-    return new bh(t);
+function yh(t, r) {
+  if (!(this instanceof yh))
+    return new yh(t);
   this.forward = null, this.inverse = null, this.init = null, this.name, this.names = null, this.title, r = r || function(d) {
     if (d)
       throw d;
@@ -30777,13 +30777,13 @@ function bh(t, r) {
     r("Could not parse to valid json: " + t);
     return;
   }
-  var i = bh.projections.get(n.projName);
+  var i = yh.projections.get(n.projName);
   if (!i) {
     r("Could not get projection name from: " + t);
     return;
   }
   if (n.datumCode && n.datumCode !== "none") {
-    var e = o0(ow, n.datumCode);
+    var e = i0(iw, n.datumCode);
     e && (n.datum_params = n.datum_params || (e.towgs84 ? e.towgs84.split(",") : null), n.ellps = e.ellipse, n.datumName = e.datumName ? e.datumName : n.datumCode);
   }
   n.k0 = n.k0 || 1, n.axis = n.axis || "enu", n.ellps = n.ellps || "wgs84", n.lat1 = n.lat1 || n.lat0;
@@ -30798,10 +30798,10 @@ function bh(t, r) {
   );
   f9(this, n), f9(this, i), this.a = s.a, this.b = s.b, this.rf = s.rf, this.sphere = s.sphere, this.es = l.es, this.e = l.e, this.ep2 = l.ep2, this.datum = c, "init" in this && typeof this.init == "function" && this.init(), r(null, this);
 }
-bh.projections = gF;
-bh.projections.start();
+yh.projections = gF;
+yh.projections.start();
 function RF(t, r) {
-  return t.datum_type !== r.datum_type || t.a !== r.a || Math.abs(t.es - r.es) > 5e-11 ? !1 : t.datum_type === np ? t.datum_params[0] === r.datum_params[0] && t.datum_params[1] === r.datum_params[1] && t.datum_params[2] === r.datum_params[2] : t.datum_type === rp ? t.datum_params[0] === r.datum_params[0] && t.datum_params[1] === r.datum_params[1] && t.datum_params[2] === r.datum_params[2] && t.datum_params[3] === r.datum_params[3] && t.datum_params[4] === r.datum_params[4] && t.datum_params[5] === r.datum_params[5] && t.datum_params[6] === r.datum_params[6] : !0;
+  return t.datum_type !== r.datum_type || t.a !== r.a || Math.abs(t.es - r.es) > 5e-11 ? !1 : t.datum_type === ep ? t.datum_params[0] === r.datum_params[0] && t.datum_params[1] === r.datum_params[1] && t.datum_params[2] === r.datum_params[2] : t.datum_type === np ? t.datum_params[0] === r.datum_params[0] && t.datum_params[1] === r.datum_params[1] && t.datum_params[2] === r.datum_params[2] && t.datum_params[3] === r.datum_params[3] && t.datum_params[4] === r.datum_params[4] && t.datum_params[5] === r.datum_params[5] && t.datum_params[6] === r.datum_params[6] : !0;
 }
 function FT(t, r, n) {
   var i = t.x, e = t.y, s = t.z ? t.z : 0, l, a, c, d;
@@ -30843,13 +30843,13 @@ function zT(t, r, n, i) {
   };
 }
 function DF(t, r, n) {
-  if (r === np)
+  if (r === ep)
     return {
       x: t.x + n[0],
       y: t.y + n[1],
       z: t.z + n[2]
     };
-  if (r === rp) {
+  if (r === np) {
     var i = n[0], e = n[1], s = n[2], l = n[3], a = n[4], c = n[5], d = n[6];
     return {
       x: d * (t.x - c * t.y + a * t.z) + i,
@@ -30859,13 +30859,13 @@ function DF(t, r, n) {
   }
 }
 function BF(t, r, n) {
-  if (r === np)
+  if (r === ep)
     return {
       x: t.x - n[0],
       y: t.y - n[1],
       z: t.z - n[2]
     };
-  if (r === rp) {
+  if (r === np) {
     var i = n[0], e = n[1], s = n[2], l = n[3], a = n[4], c = n[5], d = n[6], p = (t.x - i) / d, h = (t.y - e) / d, _ = (t.z - s) / d;
     return {
       x: p + c * h - a * _,
@@ -30874,23 +30874,23 @@ function BF(t, r, n) {
     };
   }
 }
-function Tb(t) {
-  return t === np || t === rp;
+function Pb(t) {
+  return t === ep || t === np;
 }
 function NF(t, r, n) {
   if (RF(t, r) || t.datum_type === uk || r.datum_type === uk)
     return n;
   var i = t.a, e = t.es;
-  if (t.datum_type === b1) {
+  if (t.datum_type === y1) {
     var s = _9(t, !1, n);
     if (s !== 0)
       return;
     i = s9, e = a9;
   }
   var l = r.a, a = r.b, c = r.es;
-  if (r.datum_type === b1 && (l = s9, a = Rj, c = a9), e === c && i === l && !Tb(t.datum_type) && !Tb(r.datum_type))
+  if (r.datum_type === y1 && (l = s9, a = Rj, c = a9), e === c && i === l && !Pb(t.datum_type) && !Pb(r.datum_type))
     return n;
-  if (n = FT(n, e, i), Tb(t.datum_type) && (n = DF(n, t.datum_type, t.datum_params)), Tb(r.datum_type) && (n = BF(n, r.datum_type, r.datum_params)), n = zT(n, c, l, a), r.datum_type === b1) {
+  if (n = FT(n, e, i), Pb(t.datum_type) && (n = DF(n, t.datum_type, t.datum_params)), Pb(r.datum_type) && (n = BF(n, r.datum_type, r.datum_params)), n = zT(n, c, l, a), r.datum_type === y1) {
     var d = _9(r, !0, n);
     if (d !== 0)
       return;
@@ -30919,7 +30919,7 @@ function _9(t, r, n) {
           break t;
       }
     }
-  return isNaN(e.x) ? (console.log("Failed to find a grid shift table for location '" + -i.x * Tc + " " + i.y * Tc + " tried: '" + s + "'"), -1) : (n.x = -e.x, n.y = e.y, 0);
+  return isNaN(e.x) ? (console.log("Failed to find a grid shift table for location '" + -i.x * Pc + " " + i.y * Pc + " tried: '" + s + "'"), -1) : (n.x = -e.x, n.y = e.y, 0);
 }
 function GF(t, r, n) {
   var i = { x: Number.NaN, y: Number.NaN };
@@ -31009,7 +31009,7 @@ function v9(t) {
     throw new TypeError("coordinates must be finite numbers");
 }
 function FF(t, r) {
-  return (t.datum.datum_type === np || t.datum.datum_type === rp || t.datum.datum_type === b1) && r.datumCode !== "WGS84" || (r.datum.datum_type === np || r.datum.datum_type === rp || r.datum.datum_type === b1) && t.datumCode !== "WGS84";
+  return (t.datum.datum_type === ep || t.datum.datum_type === np || t.datum.datum_type === y1) && r.datumCode !== "WGS84" || (r.datum.datum_type === ep || r.datum.datum_type === np || r.datum.datum_type === y1) && t.datumCode !== "WGS84";
 }
 function Lw(t, r, n, i) {
   var e;
@@ -31020,7 +31020,7 @@ function Lw(t, r, n, i) {
     m: n.m
   };
   var s = n.z !== void 0;
-  if (jF(n), t.datum && r.datum && FF(t, r) && (e = new bh("WGS84"), n = Lw(t, e, n, i), t = e), i && t.axis !== "enu" && (n = g9(t, !1, n)), t.projName === "longlat")
+  if (jF(n), t.datum && r.datum && FF(t, r) && (e = new yh("WGS84"), n = Lw(t, e, n, i), t = e), i && t.axis !== "enu" && (n = g9(t, !1, n)), t.projName === "longlat")
     n = {
       x: n.x * Ws,
       y: n.y * Ws,
@@ -31039,8 +31039,8 @@ function Lw(t, r, n, i) {
       y: n.y,
       z: n.z || 0
     }), r.projName === "longlat" ? n = {
-      x: n.x * Tc,
-      y: n.y * Tc,
+      x: n.x * Pc,
+      y: n.y * Pc,
       z: n.z || 0
     } : (n = r.forward(n), r.to_meter && (n = {
       x: n.x / r.to_meter,
@@ -31048,7 +31048,7 @@ function Lw(t, r, n, i) {
       z: n.z || 0
     })), i && r.axis !== "enu" ? g9(r, !0, n) : (n && !s && delete n.z, n);
 }
-var y9 = bh("WGS84");
+var y9 = yh("WGS84");
 function Vx(t, r, n, i) {
   var e, s, l;
   return Array.isArray(n) ? (e = Lw(t, r, n, i) || { x: NaN, y: NaN }, n.length > 2 ? typeof t.name < "u" && t.name === "geocent" || typeof r.name < "u" && r.name === "geocent" ? typeof e.z == "number" ? (
@@ -31073,18 +31073,18 @@ function Vx(t, r, n, i) {
   }), /** @type {T} */
   s);
 }
-function Ab(t) {
-  return t instanceof bh ? t : typeof t == "object" && "oProj" in t ? t.oProj : bh(
+function Tb(t) {
+  return t instanceof yh ? t : typeof t == "object" && "oProj" in t ? t.oProj : yh(
     /** @type {string | PROJJSONDefinition} */
     t
   );
 }
 function zF(t, r, n) {
   var i, e, s = !1, l;
-  return typeof r > "u" ? (e = Ab(t), i = y9, s = !0) : (typeof /** @type {?} */
+  return typeof r > "u" ? (e = Tb(t), i = y9, s = !0) : (typeof /** @type {?} */
   r.x < "u" || Array.isArray(r)) && (n = /** @type {T} */
   /** @type {?} */
-  r, e = Ab(t), i = y9, s = !0), i || (i = Ab(t)), e || (e = Ab(
+  r, e = Tb(t), i = y9, s = !0), i || (i = Tb(t)), e || (e = Tb(
     /** @type {string | PROJJSONDefinition | proj } */
     r
   )), n ? Vx(i, e, n) : (l = {
@@ -31108,7 +31108,7 @@ function zF(t, r, n) {
     }
   }, s && (l.oProj = e), l);
 }
-var b9 = 6, qT = "AJSAJS", HT = "AFAFAF", d1 = 65, Pl = 73, Pu = 79, lm = 86, um = 90;
+var b9 = 6, qT = "AJSAJS", HT = "AFAFAF", f1 = 65, Pl = 73, Pu = 79, lm = 86, um = 90;
 const UF = {
   forward: ZT,
   inverse: qF,
@@ -31194,7 +31194,7 @@ function VT(t) {
 }
 function KF(t, r, n) {
   var i = n - 1, e = qT.charCodeAt(i), s = HT.charCodeAt(i), l = e + t - 1, a = s + r, c = !1;
-  l > um && (l = l - um + d1 - 1, c = !0), (l === Pl || e < Pl && l > Pl || (l > Pl || e < Pl) && c) && l++, (l === Pu || e < Pu && l > Pu || (l > Pu || e < Pu) && c) && (l++, l === Pl && l++), l > um && (l = l - um + d1 - 1), a > lm ? (a = a - lm + d1 - 1, c = !0) : c = !1, (a === Pl || s < Pl && a > Pl || (a > Pl || s < Pl) && c) && a++, (a === Pu || s < Pu && a > Pu || (a > Pu || s < Pu) && c) && (a++, a === Pl && a++), a > lm && (a = a - lm + d1 - 1);
+  l > um && (l = l - um + f1 - 1, c = !0), (l === Pl || e < Pl && l > Pl || (l > Pl || e < Pl) && c) && l++, (l === Pu || e < Pu && l > Pu || (l > Pu || e < Pu) && c) && (l++, l === Pl && l++), l > um && (l = l - um + f1 - 1), a > lm ? (a = a - lm + f1 - 1, c = !0) : c = !1, (a === Pl || s < Pl && a > Pl || (a > Pl || s < Pl) && c) && a++, (a === Pu || s < Pu && a > Pu || (a > Pu || s < Pu) && c) && (a++, a === Pl && a++), a > lm && (a = a - lm + f1 - 1);
   var d = String.fromCharCode(l) + String.fromCharCode(a);
   return d;
 }
@@ -31235,7 +31235,7 @@ function YF(t, r) {
     if (n++, n === Pl && n++, n === Pu && n++, n > um) {
       if (e)
         throw "Bad character: " + t;
-      n = d1, e = !0;
+      n = f1, e = !0;
     }
     i += 1e5;
   }
@@ -31248,7 +31248,7 @@ function $F(t, r) {
     if (n++, n === Pl && n++, n === Pu && n++, n > lm) {
       if (e)
         throw "Bad character: " + t;
-      n = d1, e = !0;
+      n = f1, e = !0;
     }
     i += 1e5;
   }
@@ -31324,9 +31324,9 @@ function XF(t) {
     return r;
   throw "Invalid zone letter: " + t;
 }
-function E1(t, r, n) {
-  if (!(this instanceof E1))
-    return new E1(t, r, n);
+function M1(t, r, n) {
+  if (!(this instanceof M1))
+    return new M1(t, r, n);
   if (Array.isArray(t))
     this.x = t[0], this.y = t[1], this.z = t[2] || 0;
   else if (typeof t == "object")
@@ -31338,10 +31338,10 @@ function E1(t, r, n) {
     this.x = t, this.y = r, this.z = n || 0;
   console.warn("proj4.Point will be removed in version 3, use proj4.toPoint");
 }
-E1.fromMGRS = function(t) {
-  return new E1(WT(t));
+M1.fromMGRS = function(t) {
+  return new M1(WT(t));
 };
-E1.prototype.toMGRS = function(t) {
+M1.prototype.toMGRS = function(t) {
   return ZT([this.x, this.y], t);
 };
 var QF = 1, JF = 0.25, x9 = 0.046875, k9 = 0.01953125, L9 = 0.01068115234375, tz = 0.75, ez = 0.46875, nz = 0.013020833333333334, rz = 0.007120768229166667, iz = 0.3645833333333333, oz = 0.005696614583333333, sz = 0.3076171875;
@@ -31396,7 +31396,7 @@ function hz(t) {
       var M = s * Math.sqrt(r) / this.k0, x = Math.pow(M, 2);
       r = r * u, i = n - r * x / (1 - this.es) * 0.5 * (1 - x / 12 * (5 + 3 * E - 9 * y * E + y - 4 * A - x / 30 * (61 + 90 * E - 252 * y * E + 45 * b + 46 * y - x / 56 * (1385 + 3633 * E + 4095 * b + 1574 * b * E)))), e = hn(this.long0 + M * (1 - x / 6 * (1 + 2 * E + y - x / 20 * (5 + 28 * E + 24 * b + 8 * y * E + 6 * y - x / 42 * (61 + 662 * E + 1320 * b + 720 * b * E)))) / _);
     } else
-      i = Ge * Om(l), e = 0;
+      i = Ge * Am(l), e = 0;
   else {
     var a = Math.exp(s / this.k0), c = 0.5 * (a - 1 / a), d = this.lat0 + l / this.k0, p = Math.cos(d);
     r = Math.sqrt((1 - Math.pow(p, 2)) / (1 + Math.pow(c, 2))), i = Math.asin(r), l < 0 && (i = -i), c === 0 && p === 0 ? e = 0 : e = hn(Math.atan2(c, p) + this.long0);
@@ -31404,7 +31404,7 @@ function hz(t) {
   return t.x = e, t.y = i, t;
 }
 var cz = ["Fast_Transverse_Mercator", "Fast Transverse Mercator"];
-const sw = {
+const ow = {
   init: lz,
   forward: uz,
   inverse: hz,
@@ -31449,7 +31449,7 @@ function $T(t, r, n) {
 function mz() {
   if (!this.approx && (isNaN(this.es) || this.es <= 0))
     throw new Error('Incorrect elliptical usage. Try using the +approx option in the proj string, or PROJECTION["Fast_Transverse_Mercator"] in the WKT.');
-  this.approx && (sw.init.apply(this), this.forward = sw.forward, this.inverse = sw.inverse), this.x0 = this.x0 !== void 0 ? this.x0 : 0, this.y0 = this.y0 !== void 0 ? this.y0 : 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0, this.lat0 = this.lat0 !== void 0 ? this.lat0 : 0, this.cgb = [], this.cbg = [], this.utg = [], this.gtu = [];
+  this.approx && (ow.init.apply(this), this.forward = ow.forward, this.inverse = ow.inverse), this.x0 = this.x0 !== void 0 ? this.x0 : 0, this.y0 = this.y0 !== void 0 ? this.y0 : 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0, this.lat0 = this.lat0 !== void 0 ? this.lat0 : 0, this.cgb = [], this.cbg = [], this.utg = [], this.gtu = [];
   var t = this.es / (1 + Math.sqrt(1 - this.es)), r = t / (2 - t), n = r;
   this.cgb[0] = r * (2 + r * (-2 / 3 + r * (-2 + r * (116 / 45 + r * (26 / 45 + r * (-2854 / 675)))))), this.cbg[0] = r * (-2 + r * (2 / 3 + r * (4 / 3 + r * (-82 / 45 + r * (32 / 45 + r * (4642 / 4725)))))), n = n * r, this.cgb[1] = n * (7 / 3 + r * (-8 / 5 + r * (-227 / 45 + r * (2704 / 315 + r * (2323 / 945))))), this.cbg[1] = n * (5 / 3 + r * (-16 / 15 + r * (-13 / 9 + r * (904 / 315 + r * (-1522 / 945))))), n = n * r, this.cgb[2] = n * (56 / 15 + r * (-136 / 35 + r * (-1262 / 105 + r * (73814 / 2835)))), this.cbg[2] = n * (-26 / 15 + r * (34 / 21 + r * (8 / 5 + r * (-12686 / 2835)))), n = n * r, this.cgb[3] = n * (4279 / 630 + r * (-332 / 35 + r * (-399572 / 14175))), this.cbg[3] = n * (1237 / 630 + r * (-12 / 5 + r * (-24832 / 14175))), n = n * r, this.cgb[4] = n * (4174 / 315 + r * (-144838 / 6237)), this.cbg[4] = n * (-734 / 315 + r * (109598 / 31185)), n = n * r, this.cgb[5] = n * (601676 / 22275), this.cbg[5] = n * (444337 / 155925), n = Math.pow(r, 2), this.Qn = this.k0 / (1 + r) * (1 + n * (1 / 4 + n * (1 / 64 + n / 256))), this.utg[0] = r * (-0.5 + r * (2 / 3 + r * (-37 / 96 + r * (1 / 360 + r * (81 / 512 + r * (-96199 / 604800)))))), this.gtu[0] = r * (0.5 + r * (-2 / 3 + r * (5 / 16 + r * (41 / 180 + r * (-127 / 288 + r * (7891 / 37800)))))), this.utg[1] = n * (-1 / 48 + r * (-1 / 15 + r * (437 / 1440 + r * (-46 / 105 + r * (1118711 / 3870720))))), this.gtu[1] = n * (13 / 48 + r * (-3 / 5 + r * (557 / 1440 + r * (281 / 630 + r * (-1983433 / 1935360))))), n = n * r, this.utg[2] = n * (-17 / 480 + r * (37 / 840 + r * (209 / 4480 + r * (-5569 / 90720)))), this.gtu[2] = n * (61 / 240 + r * (-103 / 140 + r * (15061 / 26880 + r * (167603 / 181440)))), n = n * r, this.utg[3] = n * (-4397 / 161280 + r * (11 / 504 + r * (830251 / 7257600))), this.gtu[3] = n * (49561 / 161280 + r * (-179 / 168 + r * (6601661 / 7257600))), n = n * r, this.utg[4] = n * (-4583 / 161280 + r * (108847 / 3991680)), this.gtu[4] = n * (34729 / 80640 + r * (-3418889 / 1995840)), n = n * r, this.utg[5] = n * (-20648693 / 638668800), this.gtu[5] = n * (212378941 / 319334400);
   var i = o5(this.cbg, this.lat0);
@@ -31479,7 +31479,7 @@ function vz(t) {
   return t.x = i, t.y = e, t;
 }
 var yz = ["Extended_Transverse_Mercator", "Extended Transverse Mercator", "etmerc", "Transverse_Mercator", "Transverse Mercator", "Gauss Kruger", "Gauss_Kruger", "tmerc"];
-const aw = {
+const sw = {
   init: mz,
   forward: gz,
   inverse: vz,
@@ -31499,7 +31499,7 @@ function xz() {
   var t = bz(this.zone, this.long0);
   if (t === void 0)
     throw new Error("unknown utm zone");
-  this.lat0 = 0, this.long0 = (6 * Math.abs(t) - 183) * Ws, this.x0 = 5e5, this.y0 = this.utmSouth ? 1e7 : 0, this.k0 = 0.9996, aw.init.apply(this), this.forward = aw.forward, this.inverse = aw.inverse;
+  this.lat0 = 0, this.long0 = (6 * Math.abs(t) - 183) * Ws, this.x0 = 5e5, this.y0 = this.utmSouth ? 1e7 : 0, this.k0 = 0.9996, sw.init.apply(this), this.forward = sw.forward, this.inverse = sw.inverse;
 }
 var kz = ["Universal Transverse Mercator System", "utm"];
 const Lz = {
@@ -31556,11 +31556,11 @@ function l5(t, r, n) {
   return r *= n, Math.tan(0.5 * (Ge + t)) * Math.pow((1 - r) / (1 + r), 0.5 * n);
 }
 function Rz() {
-  this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.coslat0 = Math.cos(this.lat0), this.sinlat0 = Math.sin(this.lat0), this.sphere ? this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= Je && (this.k0 = 0.5 * (1 + Om(this.lat0) * Math.sin(this.lat_ts))) : (Math.abs(this.coslat0) <= Je && (this.lat0 > 0 ? this.con = 1 : this.con = -1), this.cons = Math.sqrt(Math.pow(1 + this.e, 1 + this.e) * Math.pow(1 - this.e, 1 - this.e)), this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= Je && Math.abs(Math.cos(this.lat_ts)) > Je && (this.k0 = 0.5 * this.cons * Rc(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) / yh(this.e, this.con * this.lat_ts, this.con * Math.sin(this.lat_ts))), this.ms1 = Rc(this.e, this.sinlat0, this.coslat0), this.X0 = 2 * Math.atan(l5(this.lat0, this.sinlat0, this.e)) - Ge, this.cosX0 = Math.cos(this.X0), this.sinX0 = Math.sin(this.X0));
+  this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.coslat0 = Math.cos(this.lat0), this.sinlat0 = Math.sin(this.lat0), this.sphere ? this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= Je && (this.k0 = 0.5 * (1 + Am(this.lat0) * Math.sin(this.lat_ts))) : (Math.abs(this.coslat0) <= Je && (this.lat0 > 0 ? this.con = 1 : this.con = -1), this.cons = Math.sqrt(Math.pow(1 + this.e, 1 + this.e) * Math.pow(1 - this.e, 1 - this.e)), this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= Je && Math.abs(Math.cos(this.lat_ts)) > Je && (this.k0 = 0.5 * this.cons * Ic(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) / vh(this.e, this.con * this.lat_ts, this.con * Math.sin(this.lat_ts))), this.ms1 = Ic(this.e, this.sinlat0, this.coslat0), this.X0 = 2 * Math.atan(l5(this.lat0, this.sinlat0, this.e)) - Ge, this.cosX0 = Math.cos(this.X0), this.sinX0 = Math.sin(this.X0));
 }
 function Dz(t) {
   var r = t.x, n = t.y, i = Math.sin(n), e = Math.cos(n), s, l, a, c, d, p, h = hn(r - this.long0);
-  return Math.abs(Math.abs(r - this.long0) - Math.PI) <= Je && Math.abs(n + this.lat0) <= Je ? (t.x = NaN, t.y = NaN, t) : this.sphere ? (s = 2 * this.k0 / (1 + this.sinlat0 * i + this.coslat0 * e * Math.cos(h)), t.x = this.a * s * e * Math.sin(h) + this.x0, t.y = this.a * s * (this.coslat0 * i - this.sinlat0 * e * Math.cos(h)) + this.y0, t) : (l = 2 * Math.atan(l5(n, i, this.e)) - Ge, c = Math.cos(l), a = Math.sin(l), Math.abs(this.coslat0) <= Je ? (d = yh(this.e, n * this.con, this.con * i), p = 2 * this.a * this.k0 * d / this.cons, t.x = this.x0 + p * Math.sin(r - this.long0), t.y = this.y0 - this.con * p * Math.cos(r - this.long0), t) : (Math.abs(this.sinlat0) < Je ? (s = 2 * this.a * this.k0 / (1 + c * Math.cos(h)), t.y = s * a) : (s = 2 * this.a * this.k0 * this.ms1 / (this.cosX0 * (1 + this.sinX0 * a + this.cosX0 * c * Math.cos(h))), t.y = s * (this.cosX0 * a - this.sinX0 * c * Math.cos(h)) + this.y0), t.x = s * c * Math.sin(h) + this.x0, t));
+  return Math.abs(Math.abs(r - this.long0) - Math.PI) <= Je && Math.abs(n + this.lat0) <= Je ? (t.x = NaN, t.y = NaN, t) : this.sphere ? (s = 2 * this.k0 / (1 + this.sinlat0 * i + this.coslat0 * e * Math.cos(h)), t.x = this.a * s * e * Math.sin(h) + this.x0, t.y = this.a * s * (this.coslat0 * i - this.sinlat0 * e * Math.cos(h)) + this.y0, t) : (l = 2 * Math.atan(l5(n, i, this.e)) - Ge, c = Math.cos(l), a = Math.sin(l), Math.abs(this.coslat0) <= Je ? (d = vh(this.e, n * this.con, this.con * i), p = 2 * this.a * this.k0 * d / this.cons, t.x = this.x0 + p * Math.sin(r - this.long0), t.y = this.y0 - this.con * p * Math.cos(r - this.long0), t) : (Math.abs(this.sinlat0) < Je ? (s = 2 * this.a * this.k0 / (1 + c * Math.cos(h)), t.y = s * a) : (s = 2 * this.a * this.k0 * this.ms1 / (this.cosX0 * (1 + this.sinX0 * a + this.cosX0 * c * Math.cos(h))), t.y = s * (this.cosX0 * a - this.sinX0 * c * Math.cos(h)) + this.y0), t.x = s * c * Math.sin(h) + this.x0, t));
 }
 function Bz(t) {
   t.x -= this.x0, t.y -= this.y0;
@@ -31571,9 +31571,9 @@ function Bz(t) {
   } else if (Math.abs(this.coslat0) <= Je) {
     if (l <= Je)
       return n = this.lat0, r = this.long0, t.x = r, t.y = n, t;
-    t.x *= this.con, t.y *= this.con, i = l * this.cons / (2 * this.a * this.k0), n = this.con * km(this.e, i), r = this.con * hn(this.con * this.long0 + Math.atan2(t.x, -1 * t.y));
+    t.x *= this.con, t.y *= this.con, i = l * this.cons / (2 * this.a * this.k0), n = this.con * xm(this.e, i), r = this.con * hn(this.con * this.long0 + Math.atan2(t.x, -1 * t.y));
   } else
-    e = 2 * Math.atan(l * this.cosX0 / (2 * this.a * this.k0 * this.ms1)), r = this.long0, l <= Je ? s = this.X0 : (s = Math.asin(Math.cos(e) * this.sinX0 + t.y * Math.sin(e) * this.cosX0 / l), r = hn(this.long0 + Math.atan2(t.x * Math.sin(e), l * this.cosX0 * Math.cos(e) - t.y * this.sinX0 * Math.sin(e)))), n = -1 * km(this.e, Math.tan(0.5 * (Ge + s)));
+    e = 2 * Math.atan(l * this.cosX0 / (2 * this.a * this.k0 * this.ms1)), r = this.long0, l <= Je ? s = this.X0 : (s = Math.asin(Math.cos(e) * this.sinX0 + t.y * Math.sin(e) * this.cosX0 / l), r = hn(this.long0 + Math.atan2(t.x * Math.sin(e), l * this.cosX0 * Math.cos(e) - t.y * this.sinX0 * Math.sin(e)))), n = -1 * xm(this.e, Math.tan(0.5 * (Ge + s)));
   return t.x = r, t.y = n, t;
 }
 var Nz = ["stere", "Stereographic_South_Pole", "Polar_Stereographic_variant_A", "Polar_Stereographic_variant_B", "Polar_Stereographic"];
@@ -31611,7 +31611,7 @@ const qz = {
   inverse: zz,
   names: Uz
 };
-var h1 = 1e-7;
+var u1 = 1e-7;
 function Hz(t) {
   var r = ["Hotine_Oblique_Mercator", "Hotine_Oblique_Mercator_variant_A", "Hotine_Oblique_Mercator_Azimuth_Natural_Origin"], n = typeof t.projName == "object" ? Object.keys(t.projName)[0] : t.projName;
   return "no_uoff" in t || "no_off" in t || r.indexOf(n) !== -1 || r.indexOf(GT(n)) !== -1;
@@ -31624,17 +31624,17 @@ function Zz() {
   var x = !1;
   if ("rectified_grid_angle" in this && (x = !0), M && (b = this.alpha), x && (p = this.rectified_grid_angle), M || x)
     _ = this.longc;
-  else if (u = this.long1, A = this.lat1, y = this.long2, E = this.lat2, Math.abs(A - E) <= h1 || (t = Math.abs(A)) <= h1 || Math.abs(t - Ge) <= h1 || Math.abs(Math.abs(this.lat0) - Ge) <= h1 || Math.abs(Math.abs(E) - Ge) <= h1)
+  else if (u = this.long1, A = this.lat1, y = this.long2, E = this.lat2, Math.abs(A - E) <= u1 || (t = Math.abs(A)) <= u1 || Math.abs(t - Ge) <= u1 || Math.abs(Math.abs(this.lat0) - Ge) <= u1 || Math.abs(Math.abs(E) - Ge) <= u1)
     throw new Error();
   var C = 1 - this.es;
-  r = Math.sqrt(C), Math.abs(this.lat0) > Je ? (a = Math.sin(this.lat0), n = Math.cos(this.lat0), t = 1 - this.es * a * a, this.B = n * n, this.B = Math.sqrt(1 + this.es * this.B * this.B / C), this.A = this.B * this.k0 * r / t, i = this.B * r / (n * Math.sqrt(t)), e = i * i - 1, e <= 0 ? e = 0 : (e = Math.sqrt(e), this.lat0 < 0 && (e = -e)), this.E = e += i, this.E *= Math.pow(yh(this.e, this.lat0, a), this.B)) : (this.B = 1 / r, this.A = this.k0, this.E = i = e = 1), M || x ? (M ? (h = Math.asin(Math.sin(b) / i), x || (p = b)) : (h = p, b = Math.asin(i * Math.sin(h))), this.lam0 = _ - Math.asin(0.5 * (e - 1 / e) * Math.tan(h)) / this.B) : (s = Math.pow(yh(this.e, A, Math.sin(A)), this.B), l = Math.pow(yh(this.e, E, Math.sin(E)), this.B), e = this.E / s, c = (l - s) / (l + s), d = this.E * this.E, d = (d - l * s) / (d + l * s), t = u - y, t < -Math.PI ? y -= wm : t > Math.PI && (y += wm), this.lam0 = hn(0.5 * (u + y) - Math.atan(d * Math.tan(0.5 * this.B * (u - y)) / c) / this.B), h = Math.atan(2 * Math.sin(this.B * hn(u - this.lam0)) / (e - 1 / e)), p = b = Math.asin(i * Math.sin(h))), this.singam = Math.sin(h), this.cosgam = Math.cos(h), this.sinrot = Math.sin(p), this.cosrot = Math.cos(p), this.rB = 1 / this.B, this.ArB = this.A * this.rB, this.BrA = 1 / this.ArB, this.no_off ? this.u_0 = 0 : (this.u_0 = Math.abs(this.ArB * Math.atan(Math.sqrt(i * i - 1) / Math.cos(b))), this.lat0 < 0 && (this.u_0 = -this.u_0)), e = 0.5 * h, this.v_pole_n = this.ArB * Math.log(Math.tan(Jr - e)), this.v_pole_s = this.ArB * Math.log(Math.tan(Jr + e));
+  r = Math.sqrt(C), Math.abs(this.lat0) > Je ? (a = Math.sin(this.lat0), n = Math.cos(this.lat0), t = 1 - this.es * a * a, this.B = n * n, this.B = Math.sqrt(1 + this.es * this.B * this.B / C), this.A = this.B * this.k0 * r / t, i = this.B * r / (n * Math.sqrt(t)), e = i * i - 1, e <= 0 ? e = 0 : (e = Math.sqrt(e), this.lat0 < 0 && (e = -e)), this.E = e += i, this.E *= Math.pow(vh(this.e, this.lat0, a), this.B)) : (this.B = 1 / r, this.A = this.k0, this.E = i = e = 1), M || x ? (M ? (h = Math.asin(Math.sin(b) / i), x || (p = b)) : (h = p, b = Math.asin(i * Math.sin(h))), this.lam0 = _ - Math.asin(0.5 * (e - 1 / e) * Math.tan(h)) / this.B) : (s = Math.pow(vh(this.e, A, Math.sin(A)), this.B), l = Math.pow(vh(this.e, E, Math.sin(E)), this.B), e = this.E / s, c = (l - s) / (l + s), d = this.E * this.E, d = (d - l * s) / (d + l * s), t = u - y, t < -Math.PI ? y -= bm : t > Math.PI && (y += bm), this.lam0 = hn(0.5 * (u + y) - Math.atan(d * Math.tan(0.5 * this.B * (u - y)) / c) / this.B), h = Math.atan(2 * Math.sin(this.B * hn(u - this.lam0)) / (e - 1 / e)), p = b = Math.asin(i * Math.sin(h))), this.singam = Math.sin(h), this.cosgam = Math.cos(h), this.sinrot = Math.sin(p), this.cosrot = Math.cos(p), this.rB = 1 / this.B, this.ArB = this.A * this.rB, this.BrA = 1 / this.ArB, this.no_off ? this.u_0 = 0 : (this.u_0 = Math.abs(this.ArB * Math.atan(Math.sqrt(i * i - 1) / Math.cos(b))), this.lat0 < 0 && (this.u_0 = -this.u_0)), e = 0.5 * h, this.v_pole_n = this.ArB * Math.log(Math.tan(Jr - e)), this.v_pole_s = this.ArB * Math.log(Math.tan(Jr + e));
 }
 function Wz(t) {
   var r = {}, n, i, e, s, l, a, c, d;
   if (t.x = t.x - this.lam0, Math.abs(Math.abs(t.y) - Ge) > Je) {
-    if (l = this.E / Math.pow(yh(this.e, t.y, Math.sin(t.y)), this.B), a = 1 / l, n = 0.5 * (l - a), i = 0.5 * (l + a), s = Math.sin(this.B * t.x), e = (n * this.singam - s * this.cosgam) / i, Math.abs(Math.abs(e) - 1) < Je)
+    if (l = this.E / Math.pow(vh(this.e, t.y, Math.sin(t.y)), this.B), a = 1 / l, n = 0.5 * (l - a), i = 0.5 * (l + a), s = Math.sin(this.B * t.x), e = (n * this.singam - s * this.cosgam) / i, Math.abs(Math.abs(e) - 1) < Je)
       throw new Error();
-    d = 0.5 * this.ArB * Math.log((1 - e) / (1 + e)), a = Math.cos(this.B * t.x), Math.abs(a) < h1 ? c = this.A * t.x : c = this.ArB * Math.atan2(n * this.cosgam + s * this.singam, a);
+    d = 0.5 * this.ArB * Math.log((1 - e) / (1 + e)), a = Math.cos(this.B * t.x), Math.abs(a) < u1 ? c = this.A * t.x : c = this.ArB * Math.atan2(n * this.cosgam + s * this.singam, a);
   } else
     d = t.y > 0 ? this.v_pole_n : this.v_pole_s, c = this.ArB * t.y;
   return this.no_rot ? (r.x = c, r.y = d) : (c -= this.u_0, r.x = d * this.cosrot + c * this.sinrot, r.y = c * this.cosrot - d * this.sinrot), r.x = this.a * r.x + this.x0, r.y = this.a * r.y + this.y0, r;
@@ -31644,7 +31644,7 @@ function Vz(t) {
   if (t.x = (t.x - this.x0) * (1 / this.a), t.y = (t.y - this.y0) * (1 / this.a), this.no_rot ? (n = t.y, r = t.x) : (n = t.x * this.cosrot - t.y * this.sinrot, r = t.y * this.cosrot + t.x * this.sinrot + this.u_0), i = Math.exp(-this.BrA * n), e = 0.5 * (i - 1 / i), s = 0.5 * (i + 1 / i), l = Math.sin(this.BrA * r), a = (l * this.cosgam + e * this.singam) / s, Math.abs(Math.abs(a) - 1) < Je)
     c.x = 0, c.y = a < 0 ? -Ge : Ge;
   else {
-    if (c.y = this.E / Math.sqrt((1 + a) / (1 - a)), c.y = km(this.e, Math.pow(c.y, 1 / this.B)), c.y === 1 / 0)
+    if (c.y = this.E / Math.sqrt((1 + a) / (1 - a)), c.y = xm(this.e, Math.pow(c.y, 1 / this.B)), c.y === 1 / 0)
       throw new Error();
     c.x = -this.rB * Math.atan2(e * this.cosgam - l * this.singam, Math.cos(this.BrA * r));
   }
@@ -31661,16 +31661,16 @@ function $z() {
   if (this.lat2 || (this.lat2 = this.lat1), this.k0 || (this.k0 = 1), this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, !(Math.abs(this.lat1 + this.lat2) < Je)) {
     var t = this.b / this.a;
     this.e = Math.sqrt(1 - t * t);
-    var r = Math.sin(this.lat1), n = Math.cos(this.lat1), i = Rc(this.e, r, n), e = yh(this.e, this.lat1, r), s = Math.sin(this.lat2), l = Math.cos(this.lat2), a = Rc(this.e, s, l), c = yh(this.e, this.lat2, s), d = Math.abs(Math.abs(this.lat0) - Ge) < Je ? 0 : yh(this.e, this.lat0, Math.sin(this.lat0));
+    var r = Math.sin(this.lat1), n = Math.cos(this.lat1), i = Ic(this.e, r, n), e = vh(this.e, this.lat1, r), s = Math.sin(this.lat2), l = Math.cos(this.lat2), a = Ic(this.e, s, l), c = vh(this.e, this.lat2, s), d = Math.abs(Math.abs(this.lat0) - Ge) < Je ? 0 : vh(this.e, this.lat0, Math.sin(this.lat0));
     Math.abs(this.lat1 - this.lat2) > Je ? this.ns = Math.log(i / a) / Math.log(e / c) : this.ns = r, isNaN(this.ns) && (this.ns = r), this.f0 = i / (this.ns * Math.pow(e, this.ns)), this.rh = this.a * this.f0 * Math.pow(d, this.ns), this.title || (this.title = "Lambert Conformal Conic");
   }
 }
 function Xz(t) {
   var r = t.x, n = t.y;
-  Math.abs(2 * Math.abs(n) - Math.PI) <= Je && (n = Om(n) * (Ge - 2 * Je));
+  Math.abs(2 * Math.abs(n) - Math.PI) <= Je && (n = Am(n) * (Ge - 2 * Je));
   var i = Math.abs(Math.abs(n) - Ge), e, s;
   if (i > Je)
-    e = yh(this.e, n, Math.sin(n)), s = this.a * this.f0 * Math.pow(e, this.ns);
+    e = vh(this.e, n, Math.sin(n)), s = this.a * this.f0 * Math.pow(e, this.ns);
   else {
     if (i = n * this.ns, i <= 0)
       return null;
@@ -31684,7 +31684,7 @@ function Qz(t) {
   this.ns > 0 ? (r = Math.sqrt(l * l + a * a), n = 1) : (r = -Math.sqrt(l * l + a * a), n = -1);
   var c = 0;
   if (r !== 0 && (c = Math.atan2(n * l, n * a)), r !== 0 || this.ns > 0) {
-    if (n = 1 / this.ns, i = Math.pow(r / (this.a * this.f0), n), e = km(this.e, i), e === -9999)
+    if (n = 1 / this.ns, i = Math.pow(r / (this.a * this.f0), n), e = xm(this.e, i), e === -9999)
       return null;
   } else
     e = -Ge;
@@ -31731,24 +31731,24 @@ const oU = {
 function el(t, r, n, i, e) {
   return t * e - r * Math.sin(2 * e) + n * Math.sin(4 * e) - i * Math.sin(6 * e);
 }
-function Im(t) {
+function Om(t) {
   return 1 - 0.25 * t * (1 + t / 16 * (3 + 1.25 * t));
 }
-function Rm(t) {
+function Im(t) {
   return 0.375 * t * (1 + 0.25 * t * (1 + 0.46875 * t));
 }
-function Dm(t) {
+function Rm(t) {
   return 0.05859375 * t * t * (1 + 0.75 * t);
 }
-function Bm(t) {
+function Dm(t) {
   return t * t * t * (35 / 3072);
 }
 function u5(t, r, n) {
   var i = r * n;
   return t / Math.sqrt(1 - i * i);
 }
-function a0(t) {
-  return Math.abs(t) < Ge ? t : t - Om(t) * Math.PI;
+function s0(t) {
+  return Math.abs(t) < Ge ? t : t - Am(t) * Math.PI;
 }
 function Mw(t, r, n, i, e) {
   var s, l;
@@ -31759,7 +31759,7 @@ function Mw(t, r, n, i, e) {
   return NaN;
 }
 function sU() {
-  this.sphere || (this.e0 = Im(this.es), this.e1 = Rm(this.es), this.e2 = Dm(this.es), this.e3 = Bm(this.es), this.ml0 = this.a * el(this.e0, this.e1, this.e2, this.e3, this.lat0));
+  this.sphere || (this.e0 = Om(this.es), this.e1 = Im(this.es), this.e2 = Rm(this.es), this.e3 = Dm(this.es), this.ml0 = this.a * el(this.e0, this.e1, this.e2, this.e3, this.lat0));
 }
 function aU(t) {
   var r, n, i = t.x, e = t.y;
@@ -31784,7 +31784,7 @@ function lU(t) {
     var c = u5(this.a, this.e, Math.sin(a)), d = c * c * c / this.a / this.a * (1 - this.es), p = Math.pow(Math.tan(a), 2), h = r * this.a / c, _ = h * h;
     i = a - c * Math.tan(a) / d * h * h * (0.5 - (1 + 3 * p) * h * h / 24), e = h * (1 - _ * (p / 3 + (1 + 3 * p) * p * _ / 15)) / Math.cos(a);
   }
-  return t.x = hn(e + this.long0), t.y = a0(i), t;
+  return t.x = hn(e + this.long0), t.y = s0(i), t;
 }
 var uU = ["Cassini", "Cassini_Soldner", "cass"];
 const hU = {
@@ -31793,16 +31793,16 @@ const hU = {
   inverse: lU,
   names: uU
 };
-function i0(t, r) {
+function r0(t, r) {
   var n;
   return t > 1e-7 ? (n = t * r, (1 - t * t) * (r / (1 - n * n) - 0.5 / t * Math.log((1 - n) / (1 + n)))) : 2 * r;
 }
-var dk = 1, pk = 2, _k = 3, lw = 4;
+var dk = 1, pk = 2, _k = 3, aw = 4;
 function cU() {
   var t = Math.abs(this.lat0);
-  if (Math.abs(t - Ge) < Je ? this.mode = this.lat0 < 0 ? dk : pk : Math.abs(t) < Je ? this.mode = _k : this.mode = lw, this.es > 0) {
+  if (Math.abs(t - Ge) < Je ? this.mode = this.lat0 < 0 ? dk : pk : Math.abs(t) < Je ? this.mode = _k : this.mode = aw, this.es > 0) {
     var r;
-    switch (this.qp = i0(this.e, 1), this.mmf = 0.5 / (1 - this.es), this.apa = bU(this.es), this.mode) {
+    switch (this.qp = r0(this.e, 1), this.mmf = 0.5 / (1 - this.es), this.apa = bU(this.es), this.mode) {
       case pk:
         this.dd = 1;
         break;
@@ -31812,12 +31812,12 @@ function cU() {
       case _k:
         this.rq = Math.sqrt(0.5 * this.qp), this.dd = 1 / this.rq, this.xmf = 1, this.ymf = 0.5 * this.qp;
         break;
-      case lw:
-        this.rq = Math.sqrt(0.5 * this.qp), r = Math.sin(this.lat0), this.sinb1 = i0(this.e, r) / this.qp, this.cosb1 = Math.sqrt(1 - this.sinb1 * this.sinb1), this.dd = Math.cos(this.lat0) / (Math.sqrt(1 - this.es * r * r) * this.rq * this.cosb1), this.ymf = (this.xmf = this.rq) / this.dd, this.xmf *= this.dd;
+      case aw:
+        this.rq = Math.sqrt(0.5 * this.qp), r = Math.sin(this.lat0), this.sinb1 = r0(this.e, r) / this.qp, this.cosb1 = Math.sqrt(1 - this.sinb1 * this.sinb1), this.dd = Math.cos(this.lat0) / (Math.sqrt(1 - this.es * r * r) * this.rq * this.cosb1), this.ymf = (this.xmf = this.rq) / this.dd, this.xmf *= this.dd;
         break;
     }
   } else
-    this.mode === lw && (this.sinph0 = Math.sin(this.lat0), this.cosph0 = Math.cos(this.lat0));
+    this.mode === aw && (this.sinph0 = Math.sin(this.lat0), this.cosph0 = Math.cos(this.lat0));
 }
 function fU(t) {
   var r, n, i, e, s, l, a, c, d, p, h = t.x, _ = t.y;
@@ -31832,7 +31832,7 @@ function fU(t) {
       n = Jr - _ * 0.5, n = 2 * (this.mode === this.S_POLE ? Math.cos(n) : Math.sin(n)), r = n * Math.sin(h), n *= i;
     }
   } else {
-    switch (a = 0, c = 0, d = 0, i = Math.cos(h), e = Math.sin(h), s = Math.sin(_), l = i0(this.e, s), (this.mode === this.OBLIQ || this.mode === this.EQUIT) && (a = l / this.qp, c = Math.sqrt(1 - a * a)), this.mode) {
+    switch (a = 0, c = 0, d = 0, i = Math.cos(h), e = Math.sin(h), s = Math.sin(_), l = r0(this.e, s), (this.mode === this.OBLIQ || this.mode === this.EQUIT) && (a = l / this.qp, c = Math.sqrt(1 - a * a)), this.mode) {
       case this.OBLIQ:
         d = 1 + this.sinb1 * a + this.cosb1 * c * i;
         break;
@@ -31915,18 +31915,18 @@ const kU = {
   S_POLE: dk,
   N_POLE: pk,
   EQUIT: _k,
-  OBLIQ: lw
+  OBLIQ: aw
 };
-function s0(t) {
+function o0(t) {
   return Math.abs(t) > 1 && (t = t > 1 ? 1 : -1), Math.asin(t);
 }
 function LU() {
-  Math.abs(this.lat1 + this.lat2) < Je || (this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e3 = Math.sqrt(this.es), this.sin_po = Math.sin(this.lat1), this.cos_po = Math.cos(this.lat1), this.t1 = this.sin_po, this.con = this.sin_po, this.ms1 = Rc(this.e3, this.sin_po, this.cos_po), this.qs1 = i0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat2), this.cos_po = Math.cos(this.lat2), this.t2 = this.sin_po, this.ms2 = Rc(this.e3, this.sin_po, this.cos_po), this.qs2 = i0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat0), this.cos_po = Math.cos(this.lat0), this.t3 = this.sin_po, this.qs0 = i0(this.e3, this.sin_po), Math.abs(this.lat1 - this.lat2) > Je ? this.ns0 = (this.ms1 * this.ms1 - this.ms2 * this.ms2) / (this.qs2 - this.qs1) : this.ns0 = this.con, this.c = this.ms1 * this.ms1 + this.ns0 * this.qs1, this.rh = this.a * Math.sqrt(this.c - this.ns0 * this.qs0) / this.ns0);
+  Math.abs(this.lat1 + this.lat2) < Je || (this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e3 = Math.sqrt(this.es), this.sin_po = Math.sin(this.lat1), this.cos_po = Math.cos(this.lat1), this.t1 = this.sin_po, this.con = this.sin_po, this.ms1 = Ic(this.e3, this.sin_po, this.cos_po), this.qs1 = r0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat2), this.cos_po = Math.cos(this.lat2), this.t2 = this.sin_po, this.ms2 = Ic(this.e3, this.sin_po, this.cos_po), this.qs2 = r0(this.e3, this.sin_po), this.sin_po = Math.sin(this.lat0), this.cos_po = Math.cos(this.lat0), this.t3 = this.sin_po, this.qs0 = r0(this.e3, this.sin_po), Math.abs(this.lat1 - this.lat2) > Je ? this.ns0 = (this.ms1 * this.ms1 - this.ms2 * this.ms2) / (this.qs2 - this.qs1) : this.ns0 = this.con, this.c = this.ms1 * this.ms1 + this.ns0 * this.qs1, this.rh = this.a * Math.sqrt(this.c - this.ns0 * this.qs0) / this.ns0);
 }
 function MU(t) {
   var r = t.x, n = t.y;
   this.sin_phi = Math.sin(n), this.cos_phi = Math.cos(n);
-  var i = i0(this.e3, this.sin_phi), e = this.a * Math.sqrt(this.c - this.ns0 * i) / this.ns0, s = this.ns0 * hn(r - this.long0), l = e * Math.sin(s) + this.x0, a = this.rh - e * Math.cos(s) + this.y0;
+  var i = r0(this.e3, this.sin_phi), e = this.a * Math.sqrt(this.c - this.ns0 * i) / this.ns0, s = this.ns0 * hn(r - this.long0), l = e * Math.sin(s) + this.x0, a = this.rh - e * Math.cos(s) + this.y0;
   return t.x = l, t.y = a, t;
 }
 function EU(t) {
@@ -31934,7 +31934,7 @@ function EU(t) {
   return t.x -= this.x0, t.y = this.rh - t.y + this.y0, this.ns0 >= 0 ? (r = Math.sqrt(t.x * t.x + t.y * t.y), i = 1) : (r = -Math.sqrt(t.x * t.x + t.y * t.y), i = -1), e = 0, r !== 0 && (e = Math.atan2(i * t.x, i * t.y)), i = r * this.ns0 / this.a, this.sphere ? l = Math.asin((this.c - i * i) / (2 * this.ns0)) : (n = (this.c - i * i) / this.ns0, l = this.phi1z(this.e3, n)), s = hn(e / this.ns0 + this.long0), t.x = s, t.y = l, t;
 }
 function SU(t, r) {
-  var n, i, e, s, l, a = s0(0.5 * r);
+  var n, i, e, s, l, a = o0(0.5 * r);
   if (t < Je)
     return a;
   for (var c = t * t, d = 1; d <= 25; d++)
@@ -31959,7 +31959,7 @@ function AU(t) {
 }
 function OU(t) {
   var r, n, i, e, s, l;
-  return t.x = (t.x - this.x0) / this.a, t.y = (t.y - this.y0) / this.a, t.x /= this.k0, t.y /= this.k0, (r = Math.sqrt(t.x * t.x + t.y * t.y)) ? (e = Math.atan2(r, this.rc), n = Math.sin(e), i = Math.cos(e), l = s0(i * this.sin_p14 + t.y * n * this.cos_p14 / r), s = Math.atan2(t.x * n, r * this.cos_p14 * i - t.y * this.sin_p14 * n), s = hn(this.long0 + s)) : (l = this.phic0, s = 0), t.x = s, t.y = l, t;
+  return t.x = (t.x - this.x0) / this.a, t.y = (t.y - this.y0) / this.a, t.x /= this.k0, t.y /= this.k0, (r = Math.sqrt(t.x * t.x + t.y * t.y)) ? (e = Math.atan2(r, this.rc), n = Math.sin(e), i = Math.cos(e), l = o0(i * this.sin_p14 + t.y * n * this.cos_p14 / r), s = Math.atan2(t.x * n, r * this.cos_p14 * i - t.y * this.sin_p14 * n), s = hn(this.long0 + s)) : (l = this.phic0, s = 0), t.x = s, t.y = l, t;
 }
 var IU = ["gnom"];
 const RU = {
@@ -31978,14 +31978,14 @@ function DU(t, r) {
   return NaN;
 }
 function BU() {
-  this.sphere || (this.k0 = Rc(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)));
+  this.sphere || (this.k0 = Ic(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)));
 }
 function NU(t) {
   var r = t.x, n = t.y, i, e, s = hn(r - this.long0);
   if (this.sphere)
     i = this.x0 + this.a * s * Math.cos(this.lat_ts), e = this.y0 + this.a * Math.sin(n) / Math.cos(this.lat_ts);
   else {
-    var l = i0(this.e, Math.sin(n));
+    var l = r0(this.e, Math.sin(n));
     i = this.x0 + this.a * this.k0 * s, e = this.y0 + this.a * l * 0.5 / this.k0;
   }
   return t.x = i, t.y = e, t;
@@ -32006,12 +32006,12 @@ function zU() {
   this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.lat_ts = this.lat_ts || 0, this.title = this.title || "Equidistant Cylindrical (Plate Carre)", this.rc = Math.cos(this.lat_ts);
 }
 function UU(t) {
-  var r = t.x, n = t.y, i = hn(r - this.long0), e = a0(n - this.lat0);
+  var r = t.x, n = t.y, i = hn(r - this.long0), e = s0(n - this.lat0);
   return t.x = this.x0 + this.a * i * this.rc, t.y = this.y0 + this.a * e, t;
 }
 function qU(t) {
   var r = t.x, n = t.y;
-  return t.x = hn(this.long0 + (r - this.x0) / (this.a * this.rc)), t.y = a0(this.lat0 + (n - this.y0) / this.a), t;
+  return t.x = hn(this.long0 + (r - this.x0) / (this.a * this.rc)), t.y = s0(this.lat0 + (n - this.y0) / this.a), t;
 }
 var HU = ["Equirectangular", "Equidistant_Cylindrical", "Equidistant_Cylindrical_Spherical", "eqc"];
 const ZU = {
@@ -32022,12 +32022,12 @@ const ZU = {
 };
 var M9 = 20;
 function WU() {
-  this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = Im(this.es), this.e1 = Rm(this.es), this.e2 = Dm(this.es), this.e3 = Bm(this.es), this.ml0 = this.a * el(this.e0, this.e1, this.e2, this.e3, this.lat0);
+  this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = Om(this.es), this.e1 = Im(this.es), this.e2 = Rm(this.es), this.e3 = Dm(this.es), this.ml0 = this.a * el(this.e0, this.e1, this.e2, this.e3, this.lat0);
 }
 function VU(t) {
   var r = t.x, n = t.y, i, e, s, l = hn(r - this.long0);
   if (s = l * Math.sin(n), this.sphere)
-    Math.abs(n) <= Je ? (i = this.a * l, e = -1 * this.a * this.lat0) : (i = this.a * Math.sin(s) / Math.tan(n), e = this.a * (a0(n - this.lat0) + (1 - Math.cos(s)) / Math.tan(n)));
+    Math.abs(n) <= Je ? (i = this.a * l, e = -1 * this.a * this.lat0) : (i = this.a * Math.sin(s) / Math.tan(n), e = this.a * (s0(n - this.lat0) + (1 - Math.cos(s)) / Math.tan(n)));
   else if (Math.abs(n) <= Je)
     i = this.a * l, e = -1 * this.ml0;
   else {
@@ -32154,7 +32154,7 @@ function uq(t) {
 }
 function hq(t) {
   var r, n, i, e;
-  return t.x -= this.x0, i = t.x / this.a, t.y -= this.y0, r = t.y / this.a, this.sphere ? (r /= this.C_y, i = i / (this.C_x * (this.m + Math.cos(r))), this.m ? r = s0((this.m * r + Math.sin(r)) / this.n) : this.n !== 1 && (r = s0(Math.sin(r) / this.n)), i = hn(i + this.long0), r = a0(r)) : (r = i5(t.y / this.a, this.es, this.en), e = Math.abs(r), e < Ge ? (e = Math.sin(r), n = this.long0 + t.x * Math.sqrt(1 - this.es * e * e) / (this.a * Math.cos(r)), i = hn(n)) : e - Je < Ge && (i = this.long0)), t.x = i, t.y = r, t;
+  return t.x -= this.x0, i = t.x / this.a, t.y -= this.y0, r = t.y / this.a, this.sphere ? (r /= this.C_y, i = i / (this.C_x * (this.m + Math.cos(r))), this.m ? r = o0((this.m * r + Math.sin(r)) / this.n) : this.n !== 1 && (r = o0(Math.sin(r) / this.n)), i = hn(i + this.long0), r = s0(r)) : (r = i5(t.y / this.a, this.es, this.en), e = Math.abs(r), e < Ge ? (e = Math.sin(r), n = this.long0 + t.x * Math.sqrt(1 - this.es * e * e) / (this.a * Math.cos(r)), i = hn(n)) : e - Je < Ge && (i = this.long0)), t.x = i, t.y = r, t;
 }
 var cq = ["Sinusoidal", "sinu"];
 const fq = {
@@ -32191,7 +32191,7 @@ const gq = {
   names: mq
 };
 function vq() {
-  Math.abs(this.lat1 + this.lat2) < Je || (this.lat2 = this.lat2 || this.lat1, this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = Im(this.es), this.e1 = Rm(this.es), this.e2 = Dm(this.es), this.e3 = Bm(this.es), this.sin_phi = Math.sin(this.lat1), this.cos_phi = Math.cos(this.lat1), this.ms1 = Rc(this.e, this.sin_phi, this.cos_phi), this.ml1 = el(this.e0, this.e1, this.e2, this.e3, this.lat1), Math.abs(this.lat1 - this.lat2) < Je ? this.ns = this.sin_phi : (this.sin_phi = Math.sin(this.lat2), this.cos_phi = Math.cos(this.lat2), this.ms2 = Rc(this.e, this.sin_phi, this.cos_phi), this.ml2 = el(this.e0, this.e1, this.e2, this.e3, this.lat2), this.ns = (this.ms1 - this.ms2) / (this.ml2 - this.ml1)), this.g = this.ml1 + this.ms1 / this.ns, this.ml0 = el(this.e0, this.e1, this.e2, this.e3, this.lat0), this.rh = this.a * (this.g - this.ml0));
+  Math.abs(this.lat1 + this.lat2) < Je || (this.lat2 = this.lat2 || this.lat1, this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = Om(this.es), this.e1 = Im(this.es), this.e2 = Rm(this.es), this.e3 = Dm(this.es), this.sin_phi = Math.sin(this.lat1), this.cos_phi = Math.cos(this.lat1), this.ms1 = Ic(this.e, this.sin_phi, this.cos_phi), this.ml1 = el(this.e0, this.e1, this.e2, this.e3, this.lat1), Math.abs(this.lat1 - this.lat2) < Je ? this.ns = this.sin_phi : (this.sin_phi = Math.sin(this.lat2), this.cos_phi = Math.cos(this.lat2), this.ms2 = Ic(this.e, this.sin_phi, this.cos_phi), this.ml2 = el(this.e0, this.e1, this.e2, this.e3, this.lat2), this.ns = (this.ms1 - this.ms2) / (this.ml2 - this.ml1)), this.g = this.ml1 + this.ms1 / this.ns, this.ml0 = el(this.e0, this.e1, this.e2, this.e3, this.lat0), this.rh = this.a * (this.g - this.ml0));
 }
 function yq(t) {
   var r = t.x, n = t.y, i;
@@ -32210,7 +32210,7 @@ function bq(t) {
   this.ns >= 0 ? (n = Math.sqrt(t.x * t.x + t.y * t.y), r = 1) : (n = -Math.sqrt(t.x * t.x + t.y * t.y), r = -1);
   var s = 0;
   if (n !== 0 && (s = Math.atan2(r * t.x, r * t.y)), this.sphere)
-    return e = hn(this.long0 + s / this.ns), i = a0(this.g - n / this.a), t.x = e, t.y = i, t;
+    return e = hn(this.long0 + s / this.ns), i = s0(this.g - n / this.a), t.x = e, t.y = i, t;
   var l = this.g - n / this.a;
   return i = Mw(l, this.e0, this.e1, this.e2, this.e3), e = hn(this.long0 + s / this.ns), t.x = e, t.y = i, t;
 }
@@ -32227,7 +32227,7 @@ function kq() {
 function Lq(t) {
   var r = t.x, n = t.y, i = hn(r - this.long0), e, s;
   Math.abs(n) <= Je && (e = this.x0 + this.R * i, s = this.y0);
-  var l = s0(2 * Math.abs(n / Math.PI));
+  var l = o0(2 * Math.abs(n / Math.PI));
   (Math.abs(i) <= Je || Math.abs(Math.abs(n) - Ge) <= Je) && (e = this.x0, n >= 0 ? s = this.y0 + Math.PI * this.R * Math.tan(0.5 * l) : s = this.y0 + Math.PI * this.R * -Math.tan(0.5 * l));
   var a = 0.5 * Math.abs(Math.PI / i - i / Math.PI), c = a * a, d = Math.sin(l), p = Math.cos(l), h = p / (d + p - 1), _ = h * h, u = h * (2 / d - 1), y = u * u, A = Math.PI * this.R * (a * (h - y) + Math.sqrt(c * (h - y) * (h - y) - (y + c) * (_ - y))) / (y + c);
   i < 0 && (A = -A), e = this.x0 + A;
@@ -32279,12 +32279,12 @@ function Tq() {
 }
 function Aq(t) {
   var r = t.x, n = t.y, i = Math.sin(t.y), e = Math.cos(t.y), s = hn(r - this.long0), l, a, c, d, p, h, _, u, y, A, E;
-  return this.sphere ? Math.abs(this.sin_p12 - 1) <= Je ? (t.x = this.x0 + this.a * (Ge - n) * Math.sin(s), t.y = this.y0 - this.a * (Ge - n) * Math.cos(s), t) : Math.abs(this.sin_p12 + 1) <= Je ? (t.x = this.x0 + this.a * (Ge + n) * Math.sin(s), t.y = this.y0 + this.a * (Ge + n) * Math.cos(s), t) : (y = this.sin_p12 * i + this.cos_p12 * e * Math.cos(s), _ = Math.acos(y), u = _ ? _ / Math.sin(_) : 1, t.x = this.x0 + this.a * u * e * Math.sin(s), t.y = this.y0 + this.a * u * (this.cos_p12 * i - this.sin_p12 * e * Math.cos(s)), t) : (l = Im(this.es), a = Rm(this.es), c = Dm(this.es), d = Bm(this.es), Math.abs(this.sin_p12 - 1) <= Je ? (p = this.a * el(l, a, c, d, Ge), h = this.a * el(l, a, c, d, n), t.x = this.x0 + (p - h) * Math.sin(s), t.y = this.y0 - (p - h) * Math.cos(s), t) : Math.abs(this.sin_p12 + 1) <= Je ? (p = this.a * el(l, a, c, d, Ge), h = this.a * el(l, a, c, d, n), t.x = this.x0 + (p + h) * Math.sin(s), t.y = this.y0 + (p + h) * Math.cos(s), t) : Math.abs(r) < Je && Math.abs(n - this.lat0) < Je ? (t.x = t.y = 0, t) : (A = Cq(this.lat0, this.long0, n, r, this.a, this.f), E = A.azi1, t.x = A.s12 * Math.sin(E), t.y = A.s12 * Math.cos(E), t));
+  return this.sphere ? Math.abs(this.sin_p12 - 1) <= Je ? (t.x = this.x0 + this.a * (Ge - n) * Math.sin(s), t.y = this.y0 - this.a * (Ge - n) * Math.cos(s), t) : Math.abs(this.sin_p12 + 1) <= Je ? (t.x = this.x0 + this.a * (Ge + n) * Math.sin(s), t.y = this.y0 + this.a * (Ge + n) * Math.cos(s), t) : (y = this.sin_p12 * i + this.cos_p12 * e * Math.cos(s), _ = Math.acos(y), u = _ ? _ / Math.sin(_) : 1, t.x = this.x0 + this.a * u * e * Math.sin(s), t.y = this.y0 + this.a * u * (this.cos_p12 * i - this.sin_p12 * e * Math.cos(s)), t) : (l = Om(this.es), a = Im(this.es), c = Rm(this.es), d = Dm(this.es), Math.abs(this.sin_p12 - 1) <= Je ? (p = this.a * el(l, a, c, d, Ge), h = this.a * el(l, a, c, d, n), t.x = this.x0 + (p - h) * Math.sin(s), t.y = this.y0 - (p - h) * Math.cos(s), t) : Math.abs(this.sin_p12 + 1) <= Je ? (p = this.a * el(l, a, c, d, Ge), h = this.a * el(l, a, c, d, n), t.x = this.x0 + (p + h) * Math.sin(s), t.y = this.y0 + (p + h) * Math.cos(s), t) : Math.abs(r) < Je && Math.abs(n - this.lat0) < Je ? (t.x = t.y = 0, t) : (A = Cq(this.lat0, this.long0, n, r, this.a, this.f), E = A.azi1, t.x = A.s12 * Math.sin(E), t.y = A.s12 * Math.cos(E), t));
 }
 function Oq(t) {
   t.x -= this.x0, t.y -= this.y0;
   var r, n, i, e, s, l, a, c, d, p, h, _, u, y, A, E;
-  return this.sphere ? (r = Math.sqrt(t.x * t.x + t.y * t.y), r > 2 * Ge * this.a ? void 0 : (n = r / this.a, i = Math.sin(n), e = Math.cos(n), s = this.long0, Math.abs(r) <= Je ? l = this.lat0 : (l = s0(e * this.sin_p12 + t.y * i * this.cos_p12 / r), a = Math.abs(this.lat0) - Ge, Math.abs(a) <= Je ? this.lat0 >= 0 ? s = hn(this.long0 + Math.atan2(t.x, -t.y)) : s = hn(this.long0 - Math.atan2(-t.x, t.y)) : s = hn(this.long0 + Math.atan2(t.x * i, r * this.cos_p12 * e - t.y * this.sin_p12 * i))), t.x = s, t.y = l, t)) : (c = Im(this.es), d = Rm(this.es), p = Dm(this.es), h = Bm(this.es), Math.abs(this.sin_p12 - 1) <= Je ? (_ = this.a * el(c, d, p, h, Ge), r = Math.sqrt(t.x * t.x + t.y * t.y), u = _ - r, l = Mw(u / this.a, c, d, p, h), s = hn(this.long0 + Math.atan2(t.x, -1 * t.y)), t.x = s, t.y = l, t) : Math.abs(this.sin_p12 + 1) <= Je ? (_ = this.a * el(c, d, p, h, Ge), r = Math.sqrt(t.x * t.x + t.y * t.y), u = r - _, l = Mw(u / this.a, c, d, p, h), s = hn(this.long0 + Math.atan2(t.x, t.y)), t.x = s, t.y = l, t) : (y = Math.atan2(t.x, t.y), A = Math.sqrt(t.x * t.x + t.y * t.y), E = Pq(this.lat0, this.long0, y, A, this.a, this.f), t.x = E.lon2, t.y = E.lat2, t));
+  return this.sphere ? (r = Math.sqrt(t.x * t.x + t.y * t.y), r > 2 * Ge * this.a ? void 0 : (n = r / this.a, i = Math.sin(n), e = Math.cos(n), s = this.long0, Math.abs(r) <= Je ? l = this.lat0 : (l = o0(e * this.sin_p12 + t.y * i * this.cos_p12 / r), a = Math.abs(this.lat0) - Ge, Math.abs(a) <= Je ? this.lat0 >= 0 ? s = hn(this.long0 + Math.atan2(t.x, -t.y)) : s = hn(this.long0 - Math.atan2(-t.x, t.y)) : s = hn(this.long0 + Math.atan2(t.x * i, r * this.cos_p12 * e - t.y * this.sin_p12 * i))), t.x = s, t.y = l, t)) : (c = Om(this.es), d = Im(this.es), p = Rm(this.es), h = Dm(this.es), Math.abs(this.sin_p12 - 1) <= Je ? (_ = this.a * el(c, d, p, h, Ge), r = Math.sqrt(t.x * t.x + t.y * t.y), u = _ - r, l = Mw(u / this.a, c, d, p, h), s = hn(this.long0 + Math.atan2(t.x, -1 * t.y)), t.x = s, t.y = l, t) : Math.abs(this.sin_p12 + 1) <= Je ? (_ = this.a * el(c, d, p, h, Ge), r = Math.sqrt(t.x * t.x + t.y * t.y), u = r - _, l = Mw(u / this.a, c, d, p, h), s = hn(this.long0 + Math.atan2(t.x, t.y)), t.x = s, t.y = l, t) : (y = Math.atan2(t.x, t.y), A = Math.sqrt(t.x * t.x + t.y * t.y), E = Pq(this.lat0, this.long0, y, A, this.a, this.f), t.x = E.lon2, t.y = E.lat2, t));
 }
 var Iq = ["Azimuthal_Equidistant", "aeqd"];
 const Rq = {
@@ -32302,7 +32302,7 @@ function Bq(t) {
 }
 function Nq(t) {
   var r, n, i, e, s, l, a;
-  return t.x -= this.x0, t.y -= this.y0, r = Math.sqrt(t.x * t.x + t.y * t.y), n = s0(r / this.a), i = Math.sin(n), e = Math.cos(n), l = this.long0, Math.abs(r) <= Je ? (a = this.lat0, t.x = l, t.y = a, t) : (a = s0(e * this.sin_p14 + t.y * i * this.cos_p14 / r), s = Math.abs(this.lat0) - Ge, Math.abs(s) <= Je ? (this.lat0 >= 0 ? l = hn(this.long0 + Math.atan2(t.x, -t.y)) : l = hn(this.long0 - Math.atan2(-t.x, t.y)), t.x = l, t.y = a, t) : (l = hn(this.long0 + Math.atan2(t.x * i, r * this.cos_p14 * e - t.y * this.sin_p14 * i)), t.x = l, t.y = a, t));
+  return t.x -= this.x0, t.y -= this.y0, r = Math.sqrt(t.x * t.x + t.y * t.y), n = o0(r / this.a), i = Math.sin(n), e = Math.cos(n), l = this.long0, Math.abs(r) <= Je ? (a = this.lat0, t.x = l, t.y = a, t) : (a = o0(e * this.sin_p14 + t.y * i * this.cos_p14 / r), s = Math.abs(this.lat0) - Ge, Math.abs(s) <= Je ? (this.lat0 >= 0 ? l = hn(this.long0 + Math.atan2(t.x, -t.y)) : l = hn(this.long0 - Math.atan2(-t.x, t.y)), t.x = l, t.y = a, t) : (l = hn(this.long0 + Math.atan2(t.x * i, r * this.cos_p14 * e - t.y * this.sin_p14 * i)), t.x = l, t.y = a, t));
 }
 var Gq = ["ortho"];
 const jq = {
@@ -32335,7 +32335,7 @@ function zq(t) {
     s = Ge + n, i >= Jr && i <= Ge + Jr ? (c.value = ti.AREA_0, e = -i + Ge) : i < Jr && i >= -Jr ? (c.value = ti.AREA_1, e = -i) : i < -Jr && i >= -(Ge + Jr) ? (c.value = ti.AREA_2, e = -i - Ge) : (c.value = ti.AREA_3, e = i > 0 ? -i + Mo : -i - Mo);
   else {
     var d, p, h, _, u, y, A;
-    this.face === Ji.RIGHT ? i = w1(i, +Ge) : this.face === Ji.BACK ? i = w1(i, +Mo) : this.face === Ji.LEFT && (i = w1(i, -Ge)), _ = Math.sin(n), u = Math.cos(n), y = Math.sin(i), A = Math.cos(i), d = u * A, p = u * y, h = _, this.face === Ji.FRONT ? (s = Math.acos(d), e = Ob(s, h, p, c)) : this.face === Ji.RIGHT ? (s = Math.acos(p), e = Ob(s, h, -d, c)) : this.face === Ji.BACK ? (s = Math.acos(-d), e = Ob(s, h, -p, c)) : this.face === Ji.LEFT ? (s = Math.acos(-p), e = Ob(s, h, d, c)) : (s = e = 0, c.value = ti.AREA_0);
+    this.face === Ji.RIGHT ? i = b1(i, +Ge) : this.face === Ji.BACK ? i = b1(i, +Mo) : this.face === Ji.LEFT && (i = b1(i, -Ge)), _ = Math.sin(n), u = Math.cos(n), y = Math.sin(i), A = Math.cos(i), d = u * A, p = u * y, h = _, this.face === Ji.FRONT ? (s = Math.acos(d), e = Ab(s, h, p, c)) : this.face === Ji.RIGHT ? (s = Math.acos(p), e = Ab(s, h, -d, c)) : this.face === Ji.BACK ? (s = Math.acos(-d), e = Ab(s, h, -p, c)) : this.face === Ji.LEFT ? (s = Math.acos(-p), e = Ab(s, h, d, c)) : (s = e = 0, c.value = ti.AREA_0);
   }
   return a = Math.atan(12 / Mo * (e + Math.acos(Math.sin(e) * Math.cos(Jr)) - Ge)), l = Math.sqrt((1 - Math.cos(s)) / (Math.cos(a) * Math.cos(a)) / (1 - Math.cos(Math.atan(1 / Math.cos(e))))), c.value === ti.AREA_1 ? a += Ge : c.value === ti.AREA_2 ? a += Mo : c.value === ti.AREA_3 && (a += 1.5 * Mo), r.x = l * Math.cos(a), r.y = l * Math.sin(a), r.x = r.x * this.a + this.x0, r.y = r.y * this.a + this.y0, t.x = r.x, t.y = r.y, t;
 }
@@ -32347,7 +32347,7 @@ function Uq(t) {
     d = Math.acos(c), r.phi = d - Ge, h.value === ti.AREA_0 ? r.lam = -a + Ge : h.value === ti.AREA_1 ? r.lam = -a : h.value === ti.AREA_2 ? r.lam = -a - Ge : r.lam = a < 0 ? -a - Mo : -a + Mo;
   else {
     var _, u, y;
-    _ = c, p = _ * _, p >= 1 ? y = 0 : y = Math.sqrt(1 - p) * Math.sin(a), p += y * y, p >= 1 ? u = 0 : u = Math.sqrt(1 - p), h.value === ti.AREA_1 ? (p = u, u = -y, y = p) : h.value === ti.AREA_2 ? (u = -u, y = -y) : h.value === ti.AREA_3 && (p = u, u = y, y = -p), this.face === Ji.RIGHT ? (p = _, _ = -u, u = p) : this.face === Ji.BACK ? (_ = -_, u = -u) : this.face === Ji.LEFT && (p = _, _ = u, u = -p), r.phi = Math.acos(-y) - Ge, r.lam = Math.atan2(u, _), this.face === Ji.RIGHT ? r.lam = w1(r.lam, -Ge) : this.face === Ji.BACK ? r.lam = w1(r.lam, -Mo) : this.face === Ji.LEFT && (r.lam = w1(r.lam, +Ge));
+    _ = c, p = _ * _, p >= 1 ? y = 0 : y = Math.sqrt(1 - p) * Math.sin(a), p += y * y, p >= 1 ? u = 0 : u = Math.sqrt(1 - p), h.value === ti.AREA_1 ? (p = u, u = -y, y = p) : h.value === ti.AREA_2 ? (u = -u, y = -y) : h.value === ti.AREA_3 && (p = u, u = y, y = -p), this.face === Ji.RIGHT ? (p = _, _ = -u, u = p) : this.face === Ji.BACK ? (_ = -_, u = -u) : this.face === Ji.LEFT && (p = _, _ = u, u = -p), r.phi = Math.acos(-y) - Ge, r.lam = Math.atan2(u, _), this.face === Ji.RIGHT ? r.lam = b1(r.lam, -Ge) : this.face === Ji.BACK ? r.lam = b1(r.lam, -Mo) : this.face === Ji.LEFT && (r.lam = b1(r.lam, +Ge));
   }
   if (this.es !== 0) {
     var A, E, b;
@@ -32355,13 +32355,13 @@ function Uq(t) {
   }
   return r.lam += this.long0, t.x = r.lam, t.y = r.phi, t;
 }
-function Ob(t, r, n, i) {
+function Ab(t, r, n, i) {
   var e;
   return t < Je ? (i.value = ti.AREA_0, e = 0) : (e = Math.atan2(r, n), Math.abs(e) <= Jr ? i.value = ti.AREA_0 : e > Jr && e <= Ge + Jr ? (i.value = ti.AREA_1, e -= Ge) : e > Ge + Jr || e <= -(Ge + Jr) ? (i.value = ti.AREA_2, e = e >= 0 ? e - Mo : e + Mo) : (i.value = ti.AREA_3, e += Ge)), e;
 }
-function w1(t, r) {
+function b1(t, r) {
   var n = t + r;
-  return n < -Mo ? n += wm : n > +Mo && (n -= wm), n;
+  return n < -Mo ? n += bm : n > +Mo && (n -= bm), n;
 }
 var qq = ["Quadrilateralized Spherical Cube", "Quadrilateralized_Spherical_Cube", "qsc"];
 const Hq = {
@@ -32410,7 +32410,7 @@ var mk = [
   [0.9394, 840947e-8, -192841e-9, -42106e-10],
   [0.9761, 616527e-8, -256e-6, -42106e-10],
   [1, 328947e-8, -319159e-9, -42106e-10]
-], XT = 0.8487, QT = 1.3523, JT = Tc / 5, Zq = 1 / JT, p1 = 18, Ew = function(t, r) {
+], XT = 0.8487, QT = 1.3523, JT = Pc / 5, Zq = 1 / JT, d1 = 18, Ew = function(t, r) {
   return t[0] + r * (t[1] + r * (t[2] + r * t[3]));
 }, Wq = function(t, r) {
   return t[1] + r * (2 * t[2] + r * 3 * t[3]);
@@ -32428,7 +32428,7 @@ function Kq() {
 }
 function Yq(t) {
   var r = hn(t.x - this.long0), n = Math.abs(t.y), i = Math.floor(n * JT);
-  i < 0 ? i = 0 : i >= p1 && (i = p1 - 1), n = Tc * (n - Zq * i);
+  i < 0 ? i = 0 : i >= d1 && (i = d1 - 1), n = Pc * (n - Zq * i);
   var e = {
     x: Ew(mk[i], n) * r,
     y: Ew(hm[i], n)
@@ -32441,10 +32441,10 @@ function $q(t) {
     y: Math.abs(t.y - this.y0) / (this.a * QT)
   };
   if (r.y >= 1)
-    r.x /= mk[p1][0], r.y = t.y < 0 ? -Ge : Ge;
+    r.x /= mk[d1][0], r.y = t.y < 0 ? -Ge : Ge;
   else {
-    var n = Math.floor(r.y * p1);
-    for (n < 0 ? n = 0 : n >= p1 && (n = p1 - 1); ; )
+    var n = Math.floor(r.y * d1);
+    for (n < 0 ? n = 0 : n >= d1 && (n = d1 - 1); ; )
       if (hm[n][0] > r.y)
         --n;
       else if (hm[n + 1][0] <= r.y)
@@ -32649,17 +32649,17 @@ const vH = {
   inverse: mH,
   names: gH
 };
-var Lm = 1e-10;
+var km = 1e-10;
 function yH() {
   var t;
-  if (this.phi1 = this.lat1, Math.abs(this.phi1) < Lm)
+  if (this.phi1 = this.lat1, Math.abs(this.phi1) < km)
     throw new Error();
   this.es ? (this.en = r5(this.es), this.m1 = T1(
     this.phi1,
     this.am1 = Math.sin(this.phi1),
     t = Math.cos(this.phi1),
     this.en
-  ), this.am1 = t / (Math.sqrt(1 - this.es * this.am1 * this.am1) * this.am1), this.inverse = wH, this.forward = bH) : (Math.abs(this.phi1) + Lm >= Ge ? this.cphi1 = 0 : this.cphi1 = 1 / Math.tan(this.phi1), this.inverse = kH, this.forward = xH);
+  ), this.am1 = t / (Math.sqrt(1 - this.es * this.am1 * this.am1) * this.am1), this.inverse = wH, this.forward = bH) : (Math.abs(this.phi1) + km >= Ge ? this.cphi1 = 0 : this.cphi1 = 1 / Math.tan(this.phi1), this.inverse = kH, this.forward = xH);
 }
 function bH(t) {
   var r = hn(t.x - (this.long0 || 0)), n = t.y, i, e, s;
@@ -32670,22 +32670,22 @@ function wH(t) {
   var r, n, i, e;
   if (n = Al(t.x, t.y = this.am1 - t.y), e = i5(this.am1 + this.m1 - n, this.es, this.en), (r = Math.abs(e)) < Ge)
     r = Math.sin(e), i = n * Math.atan2(t.x, t.y) * Math.sqrt(1 - this.es * r * r) / Math.cos(e);
-  else if (Math.abs(r - Ge) <= Lm)
+  else if (Math.abs(r - Ge) <= km)
     i = 0;
   else
     throw new Error();
-  return t.x = hn(i + (this.long0 || 0)), t.y = a0(e), t;
+  return t.x = hn(i + (this.long0 || 0)), t.y = s0(e), t;
 }
 function xH(t) {
   var r = hn(t.x - (this.long0 || 0)), n = t.y, i, e;
-  return e = this.cphi1 + this.phi1 - n, Math.abs(e) > Lm ? (t.x = e * Math.sin(i = r * Math.cos(n) / e), t.y = this.cphi1 - e * Math.cos(i)) : t.x = t.y = 0, t.x = this.a * t.x + (this.x0 || 0), t.y = this.a * t.y + (this.y0 || 0), t;
+  return e = this.cphi1 + this.phi1 - n, Math.abs(e) > km ? (t.x = e * Math.sin(i = r * Math.cos(n) / e), t.y = this.cphi1 - e * Math.cos(i)) : t.x = t.y = 0, t.x = this.a * t.x + (this.x0 || 0), t.y = this.a * t.y + (this.y0 || 0), t;
 }
 function kH(t) {
   t.x = (t.x - (this.x0 || 0)) / this.a, t.y = (t.y - (this.y0 || 0)) / this.a;
   var r, n, i = Al(t.x, t.y = this.cphi1 - t.y);
   if (n = this.cphi1 + this.phi1 - i, Math.abs(n) > Ge)
     throw new Error();
-  return Math.abs(Math.abs(n) - Ge) <= Lm ? r = 0 : r = i * Math.atan2(t.x, t.y) / Math.cos(n), t.x = hn(r + (this.long0 || 0)), t.y = a0(n), t;
+  return Math.abs(Math.abs(n) - Ge) <= km ? r = 0 : r = i * Math.atan2(t.x, t.y) / Math.cos(n), t.x = hn(r + (this.long0 || 0)), t.y = s0(n), t;
 }
 var LH = ["bonne", "Bonne (Werner lat_1=90)"];
 const MH = {
@@ -32693,13 +32693,13 @@ const MH = {
   names: LH
 };
 function EH(t) {
-  t.Proj.projections.add(sw), t.Proj.projections.add(aw), t.Proj.projections.add(Lz), t.Proj.projections.add(Iz), t.Proj.projections.add(Gz), t.Proj.projections.add(qz), t.Proj.projections.add(Yz), t.Proj.projections.add(tU), t.Proj.projections.add(oU), t.Proj.projections.add(hU), t.Proj.projections.add(kU), t.Proj.projections.add(PU), t.Proj.projections.add(RU), t.Proj.projections.add(FU), t.Proj.projections.add(ZU), t.Proj.projections.add($U), t.Proj.projections.add(eq), t.Proj.projections.add(sq), t.Proj.projections.add(fq), t.Proj.projections.add(gq), t.Proj.projections.add(xq), t.Proj.projections.add(Sq), t.Proj.projections.add(Rq), t.Proj.projections.add(jq), t.Proj.projections.add(Hq), t.Proj.projections.add(Qq), t.Proj.projections.add(rH), t.Proj.projections.add(lH), t.Proj.projections.add(dH), t.Proj.projections.add(vH), t.Proj.projections.add(MH);
+  t.Proj.projections.add(ow), t.Proj.projections.add(sw), t.Proj.projections.add(Lz), t.Proj.projections.add(Iz), t.Proj.projections.add(Gz), t.Proj.projections.add(qz), t.Proj.projections.add(Yz), t.Proj.projections.add(tU), t.Proj.projections.add(oU), t.Proj.projections.add(hU), t.Proj.projections.add(kU), t.Proj.projections.add(PU), t.Proj.projections.add(RU), t.Proj.projections.add(FU), t.Proj.projections.add(ZU), t.Proj.projections.add($U), t.Proj.projections.add(eq), t.Proj.projections.add(sq), t.Proj.projections.add(fq), t.Proj.projections.add(gq), t.Proj.projections.add(xq), t.Proj.projections.add(Sq), t.Proj.projections.add(Rq), t.Proj.projections.add(jq), t.Proj.projections.add(Hq), t.Proj.projections.add(Qq), t.Proj.projections.add(rH), t.Proj.projections.add(lH), t.Proj.projections.add(dH), t.Proj.projections.add(vH), t.Proj.projections.add(MH);
 }
 const tA = Object.assign(zF, {
   defaultDatum: "WGS84",
-  Proj: bh,
-  WGS84: new bh("WGS84"),
-  Point: E1,
+  Proj: yh,
+  WGS84: new yh("WGS84"),
+  Point: M1,
   toPoint: UT,
   defs: Xa,
   nadgrid: kF,
@@ -32716,14 +32716,14 @@ var Yx, E9;
 function PH() {
   if (E9) return Yx;
   E9 = 1;
-  const t = " +no_defs", r = " +towgs84=0,0,0,0,0,0,0", n = " +ellps=GRS80", i = "+proj=tmerc", e = " +units=m", s = " +towgs84=23.92,-141.27,-80.9,-0,0.35,0.82,-0.12", l = " +towgs84=24.47,-130.89,-81.56,-0,-0,0.13,-0.22", a = "+proj=lcc", c = "+proj=utm", d = " +units=us-ft", p = "+proj=longlat", h = " +lat_0=0", _ = " +ellps=krass", u = " +y_0=0", y = " +x_0=500000", A = " +towgs84=0,0,4.5,0,0,0.554,0.2263", E = " +towgs84=0,0,1.9,0,0,0.814,-0.38", b = " +ellps=intl", M = " +datum=WGS84", x = " +ellps=WGS72", C = " +towgs84=15.8,-154.4,-82.3,0,0,0,0", m = " +k=0.9999", S = " +towgs84=59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993", w = " +datum=NAD27", O = " +ellps=bessel", B = " +x_0=609601.2192024384", D = " +x_0=600000", U = " +towgs84=33.4,-146.6,-76.3,-0.359,-0.053,0.844,-0.84", N = " +ellps=clrk80", Y = " +b=6356755.288157528", X = " +x_0=152400.3048006096", Q = " +lat_0=36.66666666666666", rt = " +towgs84=-146.414,507.337,680.507,0,0,0,0", ot = " +x_0=200000", F = " +ellps=clrk66", W = " +ellps=WGS84", q = " +x_0=500000.001016002", j = " +x_0=240000", K = " +lat_0=-90", ut = " +towgs84=-87,-98,-121,0,0,0,0", Z = " +south", pt = " +lat_0=41.66666666666666", nt = " +y_0=36000", V = " +towgs84=-117.808,-51.536,137.784,0.303,0.446,0.234,-0.29", z = " +x_0=0", ct = " +units=ft", H = " +x_0=400000", et = " +towgs84=-115.854,-99.0583,-152.462,0,0,0,0", ft = " +towgs84=-208.406,-109.878,-2.5764,0,0,0,0", bt = " +ellps=aust_SA", Dt = " +lat_0=39.33333333333334", qt = " +towgs84=577.326,90.129,463.919,5.137,1.474,5.297,2.4232", Ft = " +lat_0=37.66666666666666", Jt = " +lat_0=36.33333333333334", ve = " +towgs84=598.1,73.7,418.2,0.202,0.045,-2.455,6.7", ne = " +y_0=500000.0001016001", Ht = " +x_0=200000.0001016002", ge = " +x_0=500000.0001016001", Ie = " +x_0=500000.00001016", Ee = " +y_0=1000000", xe = " +x_0=300000", he = " +lon_0=-120.5", rn = " +lat_0=43.66666666666666", Ve = " +lat_0=43.83333333333334", Ue = " +lat_1=-68.66666666666667", on = " +lat_2=-71.33333333333333", Pe = " +k=0.999966667", Me = " +k=0.9996", kn = " +lat_0=38.33333333333334", Sn = " +lat_1=73.66666666666667", Ln = " +lat_2=70.33333333333333", sn = " +lat_0=72.02500919444445", Ke = " +a=6378249.2", ze = " +x_0=1500000", An = " +lat_ts=-80.23861111111111", wr = " +towgs84=-288,175,-376,0,0,0,0", Qn = " +lat_1=41.78333333333333", Dn = " +lat_2=-75.33333333333333", xr = " +towgs84=278.3,93,474.5,7.889,0.05,-6.61,6.21", Re = " +x_0=304800", $e = " +x_0=2000000.0001016", an = " +k=0.9999375", He = " +y_0=500000", De = " +towgs84=-209.362,-87.8162,404.62,0.0046,3.4784,0.5805,-1.4547", gn = " +lon_0=-100.3333333333333", ht = " +lat_1=-72.66666666666667", gt = " +lat_1=-76.66666666666667", vt = " +lat_2=-79.33333333333333", kt = " +y_0=10000000", Tt = " +towgs84=-57,1,-41,0,0,0,0", st = " +k=0.999941177", $ = " +x_0=800000.0000101599", lt = " +y_0=99999.99998983997", wt = " +lat_1=38.43333333333333", Et = " +lat_0=24.33333333333333", Bt = " +towgs84=26,-121,-78,0,0,0,0", Ct = " +a=6378140", At = " +towgs84=-96.062,-82.428,-121.753,4.801,0.345,-1.376,1.496", St = " +x_0=399999.99998984", jt = " +towgs84=-24,-15,5,0,0,0,0", Ut = " +towgs84=682,-203,480,0,0,0,0", re = " +towgs84=-136,-108,-292,0,0,0,0", Wt = " +b=6356075.41314024", Xt = " +lat_1=37.96666666666667", ee = " +lat_0=38.83333333333334", ye = " +lat_0=40.16666666666666", ke = " +lat_0=34.33333333333334", we = " +lat_0=42.83333333333334", $t = " +lon_0=-84.36666666666666", _e = " +x_0=300000.0000000001", fe = " +k=0.999933333", Le = " +lat_1=48.73333333333333", ae = " +lon_0=-111.5", Te = " +k=0.9999473679999999", me = " +towgs84=-67.35,3.88,-38.22,0,0,0,0", en = " +lat_2=73.66666666666667", ln = " +lat_0=75.36440330555556", le = " +b=6356515", je = " +towgs84=25,-141,-78.5,-0,0.35,0.736,0", _n = "+proj=stere", Fn = " +lat_1=-64.66666666666667", nr = " +lat_2=-67.33333333333333", ar = " +b=6356514.966398753", Ae = " +towgs84=295,736,257,0,0,0,0", Be = " +x_0=100000", mn = " +towgs84=-11,851,5,0,0,0,0", yn = " +towgs84=414.1,41.3,603.1,-0.855,2.141,-7.023,0", Xe = " +towgs84=-127.62,-67.24,-47.04,-3.068,4.903,1.578,-1.06", cr = " +lat_0=39.66666666666666", Ye = " +x_0=1000000", Qe = " +lon_0=-105.5", dn = " +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15", Mn = " +a=6378249.145", Cn = " +x_0=2000000", Br = " +lat_0=45.66666666666666", ei = " +lat_1=80.33333333333333", Or = " +lat_0=78.70733752777778", Nr = " +b=6356774.50408554", Zr = " +lon_0=-91.33333333333333", ni = " +lon_0=-123.3333333333333", ji = " +towgs84=-168,-60,320,0,0,0,0", nn = " +lat_0=31", Fi = " +towgs84=0.072,-0.507,-0.245,-0.0183,0.0003,-0.007,-0.0093", Nn = " +x_0=150000", qn = " +x_0=3500000", nl = " +towgs84=213.11,9.37,-74.95,0,0,0,0", Ne = " +lat_1=43.66666666666666", kr = " +lat_0=40.33333333333334", vn = " +towgs84=-148,136,90,0,0,0,0", ls = " +towgs84=616,97,-251,0,0,0,0", On = " +lon_0=-90", Hn = " +x_0=250000", ai = " +x_0=914401.8288036576", ri = " +lon_0=-90.33333333333333", Gr = " +a=6377276.345", li = " +b=6356103.038993155", cn = " +lat_0=40.5", di = " +towgs84=-134,-48,149,0,0,0,0", ga = " +towgs84=25,-141,-78.5,0,0.35,0.736,0", qo = " +lat_1=27.83333333333333", Ss = " +lat_2=26.16666666666667", Ho = " +lat_2=40.71666666666667", oo = " +lat_2=39.01666666666667", Co = " +lat_2=37.21666666666667", Zo = " +lat_1=70.33333333333333", Ze = " +lat_0=68.68747555555557", tu = " +towgs84=-104.1,-49.1,-9.9,0.971,-2.917,0.714,-11.68", pn = " +y_0=304800.6096012192", ui = " +x_0=699999.9998983998", zi = " +y_0=999999.9998983998", _r = " +y_0=800000", Bn = " +k=0.99995", jr = " +lat_0=34.75", zn = " +lon_0=-81", fr = " +lon_0=-100", Wo = " +b=6356098.145120132", Jn = "+proj=omerc", Fr = " +lon_0=-98.5", Cr = " +towgs84=-103.746,-9.614,-255.95,0,0,0,0", Lr = " +x_0=800000", us = " +lat_0=37.83333333333334", Kr = " +lat_2=44.33333333333334", hs = " +lat_2=42.33333333333334", cs = " +lat_0=29.66666666666667", Po = " +lat_0=25.66666666666667", Ys = " +lat_0=35.83333333333334", fs = " +lat_1=83.66666666666667", Vo = " +lat_2=80.33333333333333", $s = " +lat_0=82.05842488888888", bn = " +lat_0=38", Gn = " +x_0=2500000", va = " +towgs84=-377,681,-50,0,0,0,0", lr = "+proj=cass", yr = " +y_0=2000000", Ri = " +towgs84=-143,-236,7,0,0,0,0", Ir = " +lon_0=-110.1666666666667", ya = " +lon_0=-111.9166666666667", Ui = " +lon_0=-75.41666666666667", dr = " +lon_0=-82.16666666666667", pi = " +lon_0=-84.16666666666667", ds = " +lon_0=-112.1666666666667", ps = " +lon_0=-88.83333333333333", Ko = " +lon_0=-104.3333333333333", hi = " +lon_0=-107.8333333333333", Di = " +lon_0=-76.58333333333333", _s = " +lon_0=-78.58333333333333", ms = " +lon_0=-120.8333333333333", Cs = " +lon_0=-88.33333333333333", pr = " +lon_0=-90.16666666666667", bi = " +lon_0=-85.66666666666667", ba = " +lon_0=-87.08333333333333", zr = " +lon_0=-70.16666666666667", wa = " +lon_0=-93.09999999999999", wi = " +lon_0=-115.5833333333333", xa = " +lon_0=-116.6666666666667", qi = " +lon_0=-118.5833333333333", Yo = " +lon_0=-71.66666666666667", so = " +lon_0=-105.1666666666667", ka = " +lon_0=-107.3333333333333", Yr = " +lon_0=-110.0833333333333", Zn = " +lat_0=37.5", Rr = " +y_0=700000", Xs = " +towgs84=-242.2,-144.9,370.3,0,0,0,0", Pr = " +x_0=4500000", Wn = " +y_0=1500000", gs = " +x_0=599999.9999976", to = " +towgs84=-275.722,94.7824,340.894,-8.001,-4.42,-11.821,1", ur = "+proj=aea", rr = " +y_0=-2500000", ao = " +lat_2=38.96666666666667", Ps = " +lat_1=41.66666666666666", To = " +lat_1=39.83333333333334", lo = " +lat_2=38.33333333333334", Ao = " +lat_2=37.06666666666667", uo = " +lat_0=35.33333333333334", xi = " +lat_1=35.46666666666667", ho = " +lat_2=34.03333333333333", Oo = " +lat_1=33.88333333333333", $o = " +lat_2=32.78333333333333", Qs = " +lat_0=32.16666666666666", Hi = " +lat_2=37.23333333333333", La = " +lat_1=41.86666666666667", Io = " +lat_0=40.83333333333334", Js = " +lat_2=29.58333333333333", Ts = " +lat_2=41.71666666666667", Ma = " +lat_1=41.03333333333333", Ur = " +lat_2=40.66666666666666", ki = " +lat_1=36.76666666666667", Ea = " +lat_0=33.33333333333334", co = " +lat_1=40.96666666666667", Sa = " +lat_2=39.93333333333333", As = " +lat_0=31.83333333333333", Ca = " +lat_0=31.66666666666667", Zi = " +lat_0=27.83333333333333", Pa = " +lat_2=36.76666666666667", Li = " +lat_0=45.33333333333334", vs = " +lat_0=45.16666666666666", Xo = " +lat_1=36.23333333333333", Ta = " +lat_2=34.93333333333333", Wr = " +lat_1=34.76666666666667", ys = " +lat_0=32.66666666666666", Qo = " +lat_1=43.26666666666667", Wi = " +lat_2=42.06666666666667", Aa = " +lat_2=40.61666666666667", Vi = " +lat_1=39.78333333333333", Dr = " +lat_2=38.71666666666667", $r = " +lat_1=38.56666666666667", bs = " +lat_2=37.26666666666667", Mi = " +lat_0=41.08333333333334", En = " +lat_0=42.33333333333334", Mr = " +y_0=100000", fo = " +b=6356173.508712696", br = " +y_0=5500000", Pn = " +lon_0=105", gi = " +y_0=-5000000", ii = " +k=0.9995000000000001", oi = " +k=0.9999749999999999", Jo = " +towgs84=-160,-6,-302,0,0,0,0", o = " +towgs84=307,304,-318,0,0,0,0", f = " +lon_0=-82.5", g = " +towgs84=70.995,-335.916,262.898,0,0,0,0", P = " +towgs84=-304.046,-60.576,103.64,0,0,0,0", R = " +x_0=700000", J = " +x_0=213360", dt = " +lon_0=-85.75", Lt = " +lon_0=-100.5", Rt = " +lon_0=-77.75", Vt = " +x_0=999999.9999898402", be = " +towgs84=-151.99,287.04,-147.45,0,0,0,0", Se = " +lon_0=129", qe = " +a=6378293.645208759", Vn = " +b=6356617.987679838", xn = " +x_0=5500000", mr = " +lat_1=40.78333333333333", jn = " +lat_2=39.71666666666667", ci = " +lat_1=37.93333333333333", ta = " +lat_2=36.73333333333333", Os = " +lat_1=42.68333333333333", Oa = " +lat_1=41.48333333333333", ts = " +lat_2=41.28333333333333", rl = " +lat_1=47.08333333333334", ea = " +lat_2=45.48333333333333", Tn = " +lat_0=44.78333333333333", po = " +lat_2=44.18333333333333", il = " +lat_0=43.31666666666667", Ki = " +lat_1=36.16666666666666", ol = " +lat_2=34.33333333333334", _o = " +lat_2=47.43333333333333", Is = " +lat_1=47.48333333333333", sl = " +lat_2=46.18333333333333", ju = " +lat_2=35.56666666666667", kh = " +lat_1=35.23333333333333", Fu = " +lat_2=33.93333333333333", Lh = " +lat_2=40.88333333333333", Mh = " +lat_1=34.83333333333334", Eh = " +lat_1=36.41666666666666", al = " +lat_1=36.18333333333333", Il = " +lat_1=33.96666666666667", Sh = " +lat_2=32.13333333333333", Ch = " +lat_1=31.88333333333333", Rl = " +lat_2=30.11666666666667", Dl = " +lat_1=30.28333333333333", zu = " +lat_2=28.38333333333333", Ph = " +lat_2=38.03333333333333", Th = " +lat_1=47.33333333333334", Uu = " +lat_2=45.83333333333334", qu = " +lat_1=46.76666666666667", Ah = " +lat_2=45.56666666666667", Oh = " +lat_1=44.06666666666667", Hu = " +lat_2=42.73333333333333", Ih = " +lat_1=32.66666666666666", Rh = " +lat_2=31.16666666666667", Dh = " +lat_1=48.63333333333333", Bh = " +lat_2=47.03333333333333", Nh = " +lat_2=45.61666666666667", Gh = " +lat_1=45.21666666666667", Zu = " +lat_2=43.78333333333333", Ia = " +lat_0=39.83333333333334", Bl = " +lat_2=40.43333333333333", jh = " +lat_1=40.03333333333333", Fh = " +lat_2=38.73333333333333", zh = " +lat_1=45.68333333333333", _i = " +lat_2=44.41666666666666", Rs = " +lat_2=42.83333333333334", Uh = " +lat_1=38.88333333333333", qh = " +lat_2=37.48333333333333", eu = " +lat_1=37.08333333333334", Hh = " +lat_2=38.66666666666666", Er = " +lat_0=58", si = " +lon_0=-98", v = " +lon_0=117", k = " +lon_0=135", T = " +lat_0=41.5", I = " +lat_0=42.5", G = " +y_0=3000000", tt = " +lon_0=123", it = " +lat_0=40", at = " +lat_0=54", mt = " +towgs84=-192.873,-39.382,-111.202,-0.00205,-0.0005,0.00335,0.0188", yt = " +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725", zt = " +x_0=914401.8289", Nt = " +y_0=304800.6096", ie = " +lon_0=111", pe = " +k_0=0.99878641", Oe = " +lon_0=-66.43333333333334", We = " +towgs84=61,-285,-181,0,0,0,0", un = " +towgs84=-133,-77,-51,0,0,0,0", ir = " +towgs84=-679,669,-48,0,0,0,0", Gt = " +lon_0=-71.5", Zt = " +lon_0=-78.5", Qt = " +lon_0=-93.5", ce = " +lat_0=41.75", oe = " +y_0=249999.9998983998", de = " +y_0=999999.9999898402", _t = " +to_meter=1.0000135965", xt = " +a=6377304.063", Mt = " +lat_0=36", Pt = " +towgs84=-79.9,-158,-168.9,0,0,0,0", Ot = " +towgs84=-50.9,-347.6,-231,0,0,0,0", It = " +towgs84=-106.869,52.2978,-103.724,0.3366,-0.457,1.8422,-1.2747", Yt = " +towgs84=283,682,231,0,0,0,0", Kt = " +towgs84=-206,172,-6,0,0,0,0", te = " +towgs84=-92,-93,122,0,0,0,0", ue = " +to_meter=0.9143985307444408", se = "+proj=sterea", Ce = " +lat_0=21.16666666666667", tn = " +lat_1=18.43333333333333", fn = " +lat_2=18.03333333333333", wn = " +lat_0=17.83333333333333", gr = " +gamma=323.1301023611111", Un = " +lon_0=-79.5", In = " +y_0=4500000", Kn = " +x_0=31500000", vi = " +x_0=500000.0001504", ll = " +b=6356514.96582849", Dc = " +towgs84=674.4,15.1,405.3,0,0,0,0", h0 = " +towgs84=-180.624,-225.516,173.919,-0.81,-1.898,8.336,16.7101", Ds = " +towgs84=589,76,480,0,0,0,0", nu = " +towgs84=-263,6,431,0,0,0,0", hr = " +lon_0=15", Yn = " +axis=wsu", Rn = " +lon_0=21", fi = " +lat_0=30", Nl = " +ellps=helmert", Gl = " +a=6377299.151", na = " +lon_0=-74.5", Zf = " +b=6356750.304921594", Wf = " +y_0=2000000.0001016", Vf = " +x_0=3500000.0001016", Kf = " +y_0=399999.99998984", Yf = " +x_0=200000.00001016", $f = " +b=6356098.359005156", ul = " +x_0=14500000", hl = " +x_0=29500000", D1 = " +towgs84=-117,-132,-164,0,0,0,0", Tr = " +zone=20", ws = " +lon_0=-122", Wu = " +ellps=bess_nam", op = " +lon_0=-86.15000000000001", B1 = " +towgs84=-189,-242,-91,0,0,0,0", N1 = " +towgs84=-265,120,-358,0,0,0,0", Zw = " +towgs84=-73.472,-51.66,-112.482,0.953,4.6,-2.368,0.586", jm = " +towgs84=-17.51,-108.32,-62.39,0,0,0,0", Fm = " +towgs84=-10.18,-350.43,291.37,0,0,0,0", zm = " +towgs84=-190.421,8.532,238.69,0,0,0,0", Ra = " +lon_0=-68.5", Xf = " +a=6377299.36559538", Qf = " +x_0=79999.99999968", Jf = " +x_0=50000.00001504", qr = " +lon_0=0", Ei = " +lon_0=27", Si = " +lon_0=75", Ci = " +lon_0=81", Pi = " +lon_0=93", Ti = " +lon_0=99", Bs = " +x_0=900000", jl = " +x_0=13500000", Fl = " +x_0=20500000", zl = " +x_0=22500000", G1 = " +towgs84=-166,-15,204,0,0,0,0", j1 = " +towgs84=-130,110,-13,0,0,0,0", Um = " +towgs84=-587.8,519.75,145.76,0,0,0,0", sp = " +lat_2=83.66666666666667", ap = " +lat_0=85.43711833333333", qm = " +towgs84=-273.5,110.6,-357.9,0,0,0,0", Bi = " +lon_0=87", ra = "+proj=laea", F1 = " +towgs84=-403,684,41,0,0,0,0", cl = " +lon_0=-92.5", fl = " +y_0=6000000", Vr = " +zone=19", ia = " +lat_0=29.5", oa = " +y_0=300000", sa = " +lat_2=45.5", Vu = " +k=0.999909091", Ku = " +a=6377492.018", c0 = " +b=6356751.689189189", f0 = " +b=6356100.230165384", Yi = " +lon_0=90", $i = " +lat_0=90", ru = " +x_0=18500000", iu = " +x_0=19500000", ou = " +x_0=15500000", su = " +x_0=16500000", au = " +x_0=21500000", lu = " +x_0=23500000", uu = " +x_0=25500000", hu = " +x_0=26500000", cu = " +x_0=27500000", fu = " +x_0=28500000", Xr = " +zone=18", Qr = " +zone=21", Hm = " +towgs84=-124.76,53,466.79,0,0,0,0", xs = " +lon_0=-92", eo = " +lon_0=33", no = " +lon_0=12", ro = " +lon_0=24", io = " +lat_2=77", Da = " +y_0=200000", Ul = " +lon_0=-70.5", ql = " +x_0=7500000", Hl = " +y_0=3500000", z1 = " +towgs84=31,146,47,0,0,0,0", mo = " +lat_0=45", go = " +lat_0=26", Ns = " +a=6378160", Yu = " +lon_0=-109.5", $u = " +x_0=30500000", Xu = " +x_0=32500000", U1 = " +lon_0=-85.83333333333333", q1 = " +lon_0=-118.3333333333333", H1 = " +y_0=0.003048006096012192", dl = " +lat_0=30.5", Ro = " +lat_0=44", Do = " +lon_0=30", Bo = " +lat_0=47", No = " +lat_1=77", Z1 = " +lat_0=36.16666666666666", W1 = " +lat_0=4.596200416666666", V1 = " +gamma=53.13010236111111", K1 = " +lon_0=13.33333333333333", Y1 = " +lat_0=81.31722600000001", $1 = " +lat_0=73.15574086111111", X1 = " +lat_0=65.10127088888888", yi = " +zone=17", aa = " +lon_0=132", la = " +lon_0=114", Zm = " +towgs84=-143,-90,-294,0,0,0,0", Ai = " +zone=22", es = " +lat_0=41", Zl = " +lat_0=46.5", Wl = " +lon_0=-118", Vl = " +y_0=400000", Zh = " +x_0=17500000", Wh = " +x_0=33500000", Bc = " +lon_0=-113.75", Nc = " +lon_0=-116.25", Gc = " +lon_0=-115.75", jc = " +lon_0=-106.25", Fc = " +k=0.999916667", zc = " +k=0.999964286", Uc = " +lon_0=-108.75", Wm = " +towgs84=-73,-247,227,0,0,0,0", Ww = " +towgs84=265.025,384.929,-194.046,0,0,0,0", Ba = " +k=0.99998", Qu = " +lat_1=40.65", Ju = " +lat_1=38.35", th = " +y_0=2500000", eh = " +y_0=6500000", lp = " +x_0=39999.99999984", Vw = " +towgs84=-61.702,284.488,472.052,0,0,0,0", Kw = " +towgs84=-223.237,110.193,36.649,0,0,0,0", Ni = " +zone=39", Gi = " +zone=32", Vm = " +towgs84=-125,53,467,0,0,0,0", Km = " +towgs84=198,881,317,0,0,0,0", Ym = " +towgs84=214,804,268,0,0,0,0", $m = " +towgs84=217,823,299,0,0,0,0", ks = " +lon_0=45", Ls = " +lat_1=43", du = "+proj=merc", Q1 = " +x_0=99999.99998983997", J1 = " +x_0=99999.99999960001", t_ = " +x_0=2743195.592233322", e_ = " +y_0=914398.5307444407", Xi = " +zone=38", Qi = " +zone=28", pu = " +lon_0=-114", _u = " +lat_1=45.5", Xm = " +towgs84=-73,46,-86,0,0,0,0", Qm = " +towgs84=11,72,-101,0,0,0,0", Yw = " +towgs84=287.58,177.78,-135.41,0,0,0,0", k5 = " +towgs84=-162.619,-276.959,-161.764,0.067753,-2.24365,-1.15883,-1.09425", pl = " +lon_0=-87", _l = " +lon_0=-99", ml = " +lon_0=102", gl = " +lon_0=126", vl = " +k=0.99999", yl = " +x_0=50000", Gs = " +lat_2=40", qc = " +lon_0=-84.25", Hc = " +x_0=11500000", Zc = " +lon_0=-72.75", Wc = " +lon_0=-101.5", Vc = " +lon_0=-94.25", Vh = " +x_0=6500000", Kh = " +y_0=5000000", Yh = " +x_0=1700000", $w = " +towgs84=31.95,300.99,419.19,0,0,0,0", L5 = " +towgs84=-189.681,18.3463,-42.7695,-0.33746,-3.09264,2.53861,0.4598", M5 = " +towgs84=-119.425,-303.659,-11.0006,1.1643,0.174458,1.09626,3.65706", E5 = " +towgs84=982.609,552.753,-540.873,6.68163,-31.6115,-19.8482,16.805", vo = " +zone=29", yo = " +lon_0=9", bo = " +zone=33", wo = " +zone=37", xo = " +no_uoff", Kl = " +lon_0=120", Yl = " +lon_0=177", nh = " +lon_0=-177", rh = " +lon_0=-158", ih = " +y_0=250000", oh = " +lon_0=-111", n_ = " +x_0=2500000.0001424", r_ = " +x_0=1500000.0001464", Jm = " +lon_0=-71.60561777777777", tg = " +lon_0=-156.6666666666667", eg = " +lon_0=-160.1666666666667", ng = " +lat_0=0.1166666666666667", rg = " +towgs84=0,0,0,-0,-0,-0,0", ig = " +lon_0=-117.8333333333333", og = " +lon_0=-123.1666666666667", sg = " +lon_0=-122.3333333333333", ag = " +lon_0=-119.1666666666667", lg = " +lon_0=-123.0833333333333", ug = " +lon_0=-85.84999999999999", hg = " +lon_0=-87.09999999999999", cg = " +lon_0=-86.90000000000001", fg = " +lon_0=-89.24166666666667", dg = " +lon_0=-92.63333333333334", S5 = " +towgs84=347.103,1078.12,2623.92,-33.8875,70.6773,-9.3943,186.074", C5 = " +towgs84=8.846,-4.394,-1.122,-0.00237,-0.146528,0.130428,0.783926", P5 = " +towgs84=-480.26,-438.32,-643.429,16.3119,20.1721,-4.0349,-111.7", T5 = " +towgs84=-0.293,766.95,87.713,0.195704,1.69507,3.47302,-0.039338", A5 = " +towgs84=221.525,152.948,176.768,-2.3847,-1.3896,-0.877,11.4741", O5 = " +towgs84=215.525,149.593,176.229,-3.2624,-1.692,-1.1571,10.4773", Go = " +zone=35", pg = " +lat_0=46.95240555555556", _g = " +alpha=30.28813972222222", mg = " +lat_1=10.16666666666667", gg = " +lat_0=10.16666666666667", vg = " +lat_0=18.83333333333333", yg = " +lat_0=20.33333333333333", bg = " +lat_0=21.83333333333333", wg = " +lat_0=21.66666666666667", xg = " +lat_0=45.30916666666666", kg = " +lat_1=49.83333333333334", Lg = " +lat_2=51.16666666666666", Mg = " +lonc=-133.6666666666667", Eg = " +alpha=323.1301023611111", Sg = " +lat_1=53.83333333333334", Cg = " +lat_2=51.83333333333334", Pg = " +lat_1=44.66666666666666", Tg = " +lat_0=44.66666666666666", Ag = " +lat_1=45.66666666666666", Og = " +lat_0=45.91666666666666", Ig = " +lat_0=45.08333333333334", Rg = " +lat_0=44.33333333333334", Dg = " +lat_0=44.08333333333334", Bg = " +lat_1=48.33333333333334", Ng = " +lat_0=48.33333333333334", Gg = " +lat_0=31.73409694444445", jg = " +lon_0=35.21208055555556", Fg = " +lat_0=44.03611111111111", zg = " +lat_0=4.599047222222222", Ug = " +lat_0=40.66666666666666", Na = " +lat_1=49", Ga = " +lon_0=39", Kc = " +lat_1=37.25", Yc = " +lat_1=39.75", $c = " +lat_2=38.45", Xc = " +lat_1=30.75", Qc = " +lon_0=-84.5", Jc = " +lat_0=33.75", tf = " +x_0=4000000", ef = " +y_0=4000000", nf = " +lon_0=-72.5", rf = " +x_0=5000000", td = " +x_0=10500000", ed = " +x_0=12500000", nd = " +x_0=24500000", rd = " +k=0.99999375", i_ = " +x_0=399999.9999984", mu = " +lon_0=-77", gu = " +lon_0=108", vu = " +lon_0=171", I5 = " +towgs84=-179.483,-69.379,-27.584,-7.862,8.163,6.042,-13.925", $h = " +lon_0=-171", Xh = " +lat_0=32.5", Qh = " +lon_0=-117", Jh = " +k=1.000015", tc = " +k=1.000034", ec = " +k=1.000031", nc = " +k=1.000026", d0 = " +ellps=evrstSS", p0 = " +a=6377301.243", R5 = " +towgs84=410.721,55.049,80.746,2.5779,2.3514,0.6664,17.3311", D5 = " +towgs84=72.438,345.918,79.486,1.6045,0.8823,0.5565,1.3746", bl = " +pm=ferro", wl = " +lon_0=78", xl = " +lon_0=10", kl = " +pm=paris", B5 = " +towgs84=0.055,-0.541,-0.185,0.0183,-0.0003,-0.007,-0.014", N5 = " +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489", G5 = " +towgs84=8.853,-52.644,180.304,-0.393,-2.323,2.96,-24.081", j5 = " +towgs84=572.213,85.334,461.94,4.9732,1.529,5.2484,3.5378", Ms = " +zone=58", Es = " +zone=23", qg = " +x_0=304800.6096012192", Hg = " +y_0=152400.3048006096", Zg = " +x_0=800000.0001016001", Wg = " +x_0=399999.9998983998", Vg = " +x_0=7999999.999968001", Kg = " +x_0=5999999.999976001", Yg = " +x_0=830000.0001016001", $g = " +x_0=249999.9998983998", Xg = " +x_0=350000.0001016001", Qg = " +to_meter=0.3047972654", Jg = " +x_0=99999.99989839978", tv = " +y_0=8000000.000010163", ev = " +x_0=699999.9999898402", sh = " +lon_0=-69", ah = " +lon_0=-86", Xw = " +towgs84=-3.2,-5.7,2.8,0,0,0,0", id = " +x_0=8500000", od = " +x_0=9500000", sd = " +lat_1=39.45", ad = " +lat_0=44.25", ld = " +lat_1=41.95", ud = " +lat_2=35.25", hd = " +lat_2=34.65", cd = " +lat_2=44.25", fd = " +lat_1=47.05", dd = " +lat_1=40.25", pd = " +k_0=1.00012", _d = " +lat_0=40.25", js = " +zone=40", Fs = " +zone=36", zs = " +zone=51", Us = " +zone=48", qs = " +zone=49", $l = " +lon_0=96", of = " +y_0=750000", sf = " +lat_0=36.5", af = " +lon_0=-119", lf = " +lat_0=33.5", uf = " +lat_2=41.2", hf = " +k=0.999995", cf = " +lat_2=33.3", ff = " +lat_0=38.5", df = " +lon_0=-154", pf = " +lon_0=-120", _0 = " +x_0=34500000", m0 = " +x_0=35500000", g0 = " +x_0=36500000", v0 = " +x_0=37500000", y0 = " +x_0=38500000", b0 = " +x_0=39500000", w0 = " +x_0=40500000", x0 = " +x_0=41500000", k0 = " +x_0=43500000", L0 = " +x_0=45500000", nv = " +y_0=3999999.99998984", rv = " +y_0=2000000.00001016", Qw = " +towgs84=164,138,-189,0,0,0,0", Jw = " +towgs84=-186,230,110,0,0,0,0", t3 = " +towgs84=-199,32,322,0,0,0,0", e3 = " +to_meter=0.3047997101815088", n3 = " +towgs84=-76,-138,67,0,0,0,0", r3 = " +towgs84=-43,-163,45,0,0,0,0", i3 = " +towgs84=-346,-1,224,0,0,0,0", o3 = " +towgs84=210,814,289,0,0,0,0", s3 = " +towgs84=-74,-130,42,0,0,0,0", ua = " +zone=15", ha = " +zone=16", ca = " +zone=34", fa = " +zone=50", da = " +zone=52", rc = " +lon_0=-62", ic = " +lon_0=-84", oc = " +lon_0=-79", sc = " +lon_0=131", ac = " +lon_0=153", lc = " +lon_0=165", uc = " +lon_0=-94", hc = " +lon_0=-54", up = " +a=6378300.789", hp = " +b=6356566.435", iv = " +y_0=3999999.9998984", ov = " +y_0=5000000.0001016", sv = " +x_0=150000.00001464", yu = " +lat_2=46", bu = " +lon_0=84", wu = " +lat_0=43", o_ = " +k_0=0.999625769", a3 = " +towgs84=51,391,-36,0,0,0,0", l3 = " +towgs84=-83,37,124,0,0,0,0", u3 = " +towgs84=-355,21,72,0,0,0,0", h3 = " +towgs84=-23,259,-9,0,0,0,0", F5 = " +towgs84=174.05,-25.49,112.57,-0,-0,0.554,0.2263", ja = " +zone=59", Fa = " +zone=25", za = " +zone=11", Ua = " +zone=12", qa = " +zone=13", Ha = " +zone=54", Za = " +zone=14", Wa = " +zone=24", Va = " +zone=47", md = " +lat_2=38.3", gd = " +lat_1=45.7", vd = " +lat_2=42.1", yd = " +x_0=165000", bd = " +lat_2=32.5", wd = " +x_0=609600", xd = " +lat_1=39.2", kd = " +lat_2=47.5", Ld = " +lat_1=30.7", Md = " +lat_2=29.3", Ed = " +lat_0=28.5", Sd = " +lat_1=41.7", Cd = " +lat_1=44.4", Pd = " +lat_1=27.5", Td = " +lon_0=-150", Ad = " +lat_0=44.5", Od = " +k=1.000027", Id = " +k=1.000038", Rd = " +k=1.000036", M0 = " +lon_0=-87.5", av = " +x_0=3999999.999984", lv = " +x_0=199999.9999992", c3 = " +towgs84=16,196,93,0,0,0,0", f3 = " +towgs84=-88,4,101,0,0,0,0", lh = " +lat_0=18", uh = " +lat_2=67", _f = " +lon_0=-96", mf = " +x_0=80000", gf = " +lon_0=-82", vf = " +lon_0=-74", yf = " +lon_0=147", bf = " +lon_0=150", wf = " +x_0=40000", xf = " +k=1.00002", cp = " +x_0=42500000", fp = " +x_0=44500000", dp = " +lon_0=-85.05", s_ = " +ellps=mod_airy", p3 = " +lat_0=0.1333333333333333", _3 = " +lat_1=-60.66666666666666", m3 = " +lat_2=-63.33333333333334", g3 = " +lon_0=-91.91666666666667", v3 = " +y_0=0.003352806705613411", Ll = " +zone=30", Ml = " +lon_0=3", El = " +zone=26", Sl = " +zone=53", y3 = " +lat_0=31.73439361111111", b3 = " +lon_0=35.20451694444445", w3 = " +lon_0=7.439583333333333", x3 = " +lon_0=132.1666666666667", k3 = " +lon_0=134.3333333333333", L3 = " +lon_0=137.1666666666667", M3 = " +lon_0=139.8333333333333", E3 = " +lon_0=140.8333333333333", S3 = " +lon_0=3.192280555555556", C3 = " +lat_1=49.50000000000001", P3 = " +lat_0=49.50000000000001", T3 = " +alpha=53.31582047222222", A3 = " +lon_0=10.33333333333333", O3 = " +lon_0=16.33333333333333", z5 = " +towgs84=-502.862,-247.438,312.724,0,0,0,0", U5 = " +towgs84=-381.788,-57.501,-256.673,0,0,0,0", q5 = " +towgs84=-43.685,-179.785,-267.721,0,0,0,0", Xl = " +zone=60", Ql = " +zone=55", cc = " +lon_0=36", fc = " +lon_0=42", dc = " +lat_1=46", pc = " +lat_1=44", _c = " +lat_0=42", mc = " +lon_0=51", gc = " +lat_0=33", vc = " +lat_0=52", E0 = " +ellps=airy", S0 = " +pm=jakarta", a_ = " +x_0=2743195.5", uv = " +y_0=-4354009.816", I3 = " +k_0=0.9987864078000001", H5 = " +towgs84=-106.226,166.366,-37.893,0,0,0,0", Z5 = " +towgs84=508.088,-191.042,565.223,0,0,0,0", Dd = " +k=0.99996", Bd = " +a=6378135", Nd = " +lon_0=-66", Gd = " +lon_0=141", jd = " +lon_0=159", Fd = " +k=0.99984", zd = " +lat_0=-22", pp = " +lon_0=127.5", _p = " +x_0=6000000", mp = " +x_0=3900000", gp = " +y_0=1300000", vp = " +lat_0=44.75", yp = " +lat_0=37.75", bp = " +lat_0=40.55", wp = " +lon_0=-87.3", xp = " +lon_0=-86.5", W5 = " +towgs84=195.671,332.517,274.607,0,0,0,0", V5 = " +towgs84=-204.619,140.176,55.226,0,0,0,0", l_ = "+proj=somerc", R3 = " +y_0=30480.06096012192", D3 = " +y_0=999999.9999960001", B3 = " +x_0=182880.3657607315", K5 = " +towgs84=674.374,15.056,405.346,0,0,0,0", Y5 = " +towgs84=-133.63,-157.5,-158.62,0,0,0,0", $5 = " +towgs84=-0.465,372.095,171.736,0,0,0,0", X5 = " +towgs84=-56.263,16.136,-22.856,0,0,0,0", Q5 = " +towgs84=-241.54,-163.64,396.06,0,0,0,0", xu = " +zone=31", ku = " +zone=10", Lu = " +zone=46", hv = " +x_0=304800.6096", cv = " +y_0=152400.3048", fv = " +alpha=337.25556", dv = " +x_0=2546731.496", pv = " +gamma=337.25556", _v = " +k_0=0.999625544", J5 = " +towgs84=335.47,222.58,-230.94,0,0,0,0", tL = " +towgs84=217.037,86.959,23.956,0,0,0,0", eL = " +towgs84=-128.16,-282.42,21.93,0,0,0,0", nL = " +towgs84=103.25,-100.4,-307.19,0,0,0,0", kf = " +lon_0=31", Lf = " +lon_0=18", Mf = " +lat_2=36", Ef = " +lat_0=29", Sf = " +lat_0=35", Cf = " +lat_0=34", Pf = " +lon_0=63", Tf = " +lat_0=37", Af = " +lat_2=65", u_ = " +y_0=-4000000", h_ = " +y_0=914398.5", rL = " +towgs84=-199.87,74.79,246.62,0,0,0,0", iL = " +towgs84=-11.64,-348.6,291.98,0,0,0,0", oL = " +towgs84=-254.1,-5.36,-100.29,0,0,0,0", sL = " +towgs84=-206.1,-174.7,-87.7,0,0,0,0", aL = " +towgs84=-770.1,158.4,-498.2,0,0,0,0", lL = " +towgs84=-146.21,112.63,4.05,0,0,0,0", uL = " +towgs84=-294.7,-200.1,525.5,0,0,0,0", hh = " +lat_0=4", C0 = " +a=6378300", P0 = " +lon_0=-63", T0 = " +lon_0=162", A0 = " +lat_ts=90", kp = " +y_0=600000", Lp = " +x_0=350000", Mp = " +y_0=900000", Ep = " +lat_1=32.5", Sp = " +lon_0=-147", Cp = " +k=1.000043", Pp = " +lat_0=48.5", Tp = " +lat_0=40.9", Ap = " +k=1.000028", Op = " +k=1.000025", mv = " +x_0=170251.555", N3 = " +b=6356657.142669561", G3 = " +b=6356094.667915204", j3 = " +b=6355862.933255573", F3 = " +a=6378249.144808011", z3 = " +b=6356514.966204134", hL = " +towgs84=-70.9,-151.8,-41.4,0,0,0,0", cL = " +towgs84=52.17,-71.82,-14.9,0,0,0,0", fL = " +towgs84=283.7,735.9,261.1,0,0,0,0", Ka = " +zone=5", Ya = " +zone=7", Ud = " +lon_0=19", qd = " +lon_0=25", Hd = " +lat_2=45", Zd = " +lon_0=57", Wd = " +lon_0=69", Vd = " +lat_2=39", Kd = " +lat_2=35", Yd = " +lon_0=28", c_ = " +lon_0=-61.5", f_ = " +lon_0=-64.5", d_ = " +lon_0=-90.5", p_ = " +lon_0=-94.5", __ = " +y_0=2800000", m_ = " +x_0=4321000", g_ = " +y_0=3210000", v_ = " +y_0=14743.5", U3 = " +y_0=1999999.999992", q3 = " +y_0=2999999.999988", H3 = " +y_0=50000.00001504", yc = " +zone=41", bc = " +zone=42", wc = " +k=0.994", xc = " +zone=56", gv = " +lon_0=-67.875", vv = " +lon_0=-70.375", yv = " +x_0=609601.22", bv = " +b=6356889.449", wv = " +lon_0=-69.125", xv = " +lon_0=-121.75", kv = " +lon_0=-121.25", Lv = " +lon_0=-119.75", Mv = " +lon_0=-122.75", Cl = " +zone=6", Ev = "+proj=krovak", dL = " +towgs84=-637,-549,-203,0,0,0,0", pL = " +towgs84=-20.8,11.3,2.4,0,0,0,0", Ip = " +lon_0=-93", Rp = " +lon_0=127", Dp = " +lon_0=125", Bp = " +k=0.99975", Np = " +lon_0=136", Gp = " +lon_0=138", jp = " +lon_0=180", Fp = " +y_0=50000", zp = " +lon_0=-85", Up = " +k=1.00016", qp = " +lon_0=2.7", _L = " +towgs84=27.5,14,186.4,0,0,0,0", mL = " +towgs84=-499,-249,314,0,0,0,0", gL = " +towgs84=-467,-16,-300,0,0,0,0", vL = " +towgs84=-382,-59,-262,0,0,0,0", yL = " +towgs84=253,-132,-127,0,0,0,0", bL = " +towgs84=-963,510,-359,0,0,0,0", wL = " +towgs84=94,-948,-1262,0,0,0,0", Jl = " +zone=1", Of = " +zone=27", If = " +zone=57", Rf = " +pm=oslo", Df = " +zone=43", O0 = " +lon_0=23", I0 = " +lon_0=48", R0 = " +lon_0=54", y_ = " +lat_0=49.5", b_ = " +k=0.999912", w_ = " +lon_0=-174", x_ = " +lon_0=-168", k_ = " +lon_0=-170", L_ = " +lon_0=-165", M_ = " +lat_2=40.5", E_ = " +lon_0=-115", S_ = " +lat_1=29.5", C_ = " +k=1.000045", P_ = " +lat_1=39.5", T_ = " +lat_1=33.3", A_ = " +lat_0=33.3", Sv = " +lon_0=-155.5", Cv = " +lon_0=-159.5", Pv = " +y_0=-4480000", Tv = " +lon_0=-176.5", Av = " +lon_0=-89.75", Ov = " +k_0=1.000008", Iv = " +lonc=-124.05", Rv = " +k_0=1.000002", Dv = " +lon_0=-122.5", Bv = " +lon_0=-98.25", Nv = " +lon_0=-112.5", Gv = " +lon_0=-84.95", jv = " +lon_0=-86.95", Fv = " +lon_0=-85.45", zv = " +lon_0=-87.45", Uv = " +lon_0=-87.55", xL = " +towgs84=-149,128,296,0,0,0,0", kL = " +towgs84=-425,-169,81,0,0,0,0", LL = " +towgs84=-104,167,-38,0,0,0,0", ML = " +towgs84=-106,-87,188,0,0,0,0", EL = " +towgs84=-289,-124,60,0,0,0,0", SL = " +towgs84=137,248,-430,0,0,0,0", CL = " +towgs84=-13,-348,292,0,0,0,0", PL = " +towgs84=-115,118,426,0,0,0,0", TL = " +towgs84=0,-0.15,0.68,0,0,0,0", AL = " +towgs84=145,-187,103,0,0,0,0", OL = " +towgs84=-134,229,-29,0,0,0,0", IL = " +towgs84=70,207,389.5,0,0,0,0", RL = " +towgs84=-148,51,-291,0,0,0,0", DL = " +towgs84=-255,-15,71,0,0,0,0", BL = " +towgs84=725,685,536,0,0,0,0", NL = " +towgs84=72,213.7,93,0,0,0,0", GL = " +towgs84=174,359,365,0,0,0,0", jL = " +towgs84=-173,253,27,0,0,0,0", FL = " +towgs84=-203,141,53,0,0,0,0", zL = " +towgs84=186,482,151,0,0,0,0", UL = " +towgs84=162,117,154,0,0,0,0", qL = " +towgs84=-73,213,296,0,0,0,0", HL = " +towgs84=-130,29,364,0,0,0,0", ZL = " +towgs84=-10,375,165,0,0,0,0", WL = " +towgs84=175,-38,113,0,0,0,0", VL = " +to_meter=0.9143984146160287", Mu = " +zone=2", Eu = " +zone=8", Su = " +zone=9", Cu = " +zone=4", KL = " +towgs84=30,430,368,0,0,0,0", YL = " +towgs84=185,165,42,0,0,0,0", $L = " +towgs84=-97,787,86,0,0,0,0", XL = " +towgs84=639,405,60,0,0,0,0", $d = " +zone=44", Xd = " +zone=45", qv = " +lon_0=-58.5", Hv = " +lon_0=-67.5", Zv = " +lon_0=-73.5", Wv = " +lon_0=-76.5", Vv = " +y_0=1200000", Kv = " +lon_0=133.5", Yv = " +x_0=8000000", $v = " +y_0=8000000", Xv = " +k=0.9998335", Qv = " +lon_0=-85.5", Jv = " +x_0=7000000", ty = " +lat_0=43.75", ey = " +lat_0=43.25", ny = " +lat_0=45.25", ry = " +lon_0=-86.3", iy = " +lat_0=38.15", oy = " +lat_0=39.15", sy = " +lat_0=41.25", ay = " +lat_0=40.65", ly = " +lat_0=39.25", uy = " +lat_0=40.35", hy = " +lon_0=-85.8", QL = " +towgs84=9,183,236,0,0,0,0", JL = " +towgs84=-48,55,52,0,0,0,0", t8 = " +towgs84=84,274,65,0,0,0,0", Hp = " +lon_0=17", Zp = " +lat_1=60", Wp = " +k=0.9998", Vp = " +lon_0=66", Kp = " +lon_0=20", Yp = " +lon_0=26", $p = " +lat_0=51", Xp = " +lat_1=87", Qp = " +lat_1=26", O_ = " +lon_0=144", I_ = " +lon_0=168", R_ = " +lon_0=174", D_ = " +lon_0=-72", B_ = " +lon_0=-75", N_ = " +lon_0=-60", G_ = " +lon_0=-39", cy = "+proj=poly", Z3 = " +x_0=219529.584", W3 = " +a=6378306.3696", e8 = " +lon_0=-61.33333333333334", n8 = " +lon_0=-91.86666666666666", r8 = " +lon_0=-8.131906111111112", i8 = " +lon_0=-83.66666666666667", o8 = " +lon_0=-108.4166666666667", s8 = " +lon_0=-108.3333333333333", a8 = " +lon_0=-85.40000000000001", l8 = " +lon_0=-86.65000000000001", u8 = " +lon_0=-86.40000000000001", h8 = " +lon_0=-85.59999999999999", c8 = " +lon_0=-87.15000000000001", f8 = " +lon_0=-86.59999999999999", d8 = " +lon_0=-84.90000000000001", p8 = " +lon_0=-85.65000000000001", _8 = " +lon_0=-87.65000000000001", m8 = " +lon_0=-85.34999999999999", g8 = " +lon_0=-87.40000000000001", v8 = " +lon_0=-87.34999999999999", y8 = " +lon_0=-85.90000000000001", b8 = " +lon_0=-90.62222222222222", w8 = " +lon_0=-91.84999999999999", x8 = " +lon_0=-91.15277777777779", k8 = " +lon_0=-91.79722222222222", L8 = " +lon_0=-92.45777777777778", M8 = " +lon_0=-91.29444444444444", E8 = " +lon_0=-90.70833333333334", S8 = " +lon_0=-89.39444444444445", C8 = " +lon_0=-89.42222222222223", P8 = " +lon_0=-88.77500000000001", T8 = " +lon_0=-87.27222222222223", A8 = " +lon_0=-91.89444444444445", O8 = " +lon_0=-91.28888888888889", I8 = " +lon_0=-88.14166666666668", R8 = " +lon_0=-88.63333333333334", D8 = " +lon_0=-89.83888888888889", B8 = " +lon_0=-90.16111111111111", N8 = " +lon_0=-90.25555555555556", G8 = " +lon_0=-90.84429651944444", j8 = " +lon_0=-87.89444444444445", F8 = " +lon_0=-91.31666666666666", z8 = " +lon_0=-89.03333333333333", U8 = " +lon_0=-89.73333333333333", q8 = " +lon_0=-87.71111111111111", H8 = " +lon_0=-88.41666666666667", Z8 = " +lon_0=-90.64166666666668", W8 = " +lon_0=-87.90833333333335", V8 = " +lon_0=-89.54444444444444", K8 = " +lon_0=-92.22777777777777", Y8 = " +lon_0=-90.48888888888889", $8 = " +lon_0=-90.43055555555556", X8 = " +lon_0=-89.07222222222222", Q8 = " +lon_0=-91.06666666666666", J8 = " +lon_0=-89.90000000000001", tM = " +lon_0=-91.11666666666666", eM = " +lon_0=-88.60555555555555", nM = " +lon_0=-90.48333333333333", rM = " +lon_0=-91.36666666666666", iM = " +lon_0=-90.78333333333333", oM = " +lon_0=-89.48888888888889", sM = " +lon_0=-88.54166666666667", aM = " +lon_0=-91.78333333333333", lM = " +lon_0=-88.06388888888888", uM = " +lon_0=-88.22499999999999", hM = " +lon_0=-88.81666666666666", cM = " +y_0=0.004876809753619507", fM = " +y_0=0.008534417068834137", dM = " +y_0=0.003962407924815849", pM = " +y_0=0.005791211582423164", _M = " +lon_0=-55.68333333333333", mM = " +to_meter=0.201166195164", gM = " +lat_0=4.666666666666667", vM = " +lat_0=6.666666666666667", yM = " +lon_0=6.166666666666667", bM = " +lat_0=10.44166666666667", wM = " +lat_0=22.31213333333334", xM = " +lon_0=114.1785555555556", kM = " +lon_0=51.21666666666667", LM = " +lon_0=11.30827777777778", MM = " +lon_0=13.55827777777778", EM = " +lon_0=15.80827777777778", SM = " +lon_0=18.05827777777778", CM = " +lon_0=20.30827777777778", PM = " +lon_0=22.55827777777778", TM = " +lat_1=27.41666666666667", AM = " +lat_2=34.91666666666666", OM = " +lat_0=31.16666666666667", IM = " +lat_1=59.33333333333334", RM = " +lat_0=57.51755393055556", DM = " +lon_0=4.359215833333333", BM = " +lat_1=61.66666666666666", NM = " +lat_0=29.02626833333333", GM = " +lat_1=48.66666666666666", jM = " +lat_2=53.66666666666666", FM = " +lon_0=127.0028902777778", zM = " +lon_0=89.84999999999999", UM = " +lon_0=91.56666666666666", qM = " +lon_0=24.83333333333333", HM = " +lat_2=63.66666666666666", ZM = " +lat_0=65.35103930555555", WM = " +lat_1=63.66666666666666", VM = " +lat_2=60.33333333333334", KM = " +lat_0=62.01530688888889", YM = " +lat_1=45.78333333333333", $M = " +lat_0=45.78333333333333", XM = " +lat_0=42.66666666666666", QM = " +lat_0=43.36666666666667", JM = " +lat_0=45.70611111111111", t2 = " +lat_0=45.13333333333333", e2 = " +lat_1=46.66964837722222", n2 = " +lat_0=46.66964837722222", r2 = " +lat_0=43.48138888888889", i2 = " +lat_1=45.89871486583333", o2 = " +lat_0=45.89871486583333", s2 = " +lat_0=42.71944444444445", a2 = " +lat_1=44.97785689861112", l2 = " +lat_0=44.97785689861112", u2 = " +lat_1=43.46254664583333", h2 = " +lat_0=43.46254664583333", c2 = " +lon_0=-90.9388888888889", f2 = " +lat_0=41.47222222222222", d2 = " +lat_0=45.88333333333333", p2 = " +lat_0=44.40833333333333", _2 = " +lat_1=44.87228112638889", m2 = " +lat_0=44.87228112638889", g2 = " +lat_0=45.43888888888888", v2 = " +lat_0=44.00555555555555", y2 = " +lat_0=41.41111111111111", b2 = " +lat_1=42.63756227694444", w2 = " +lat_0=42.63756227694444", x2 = " +lat_1=43.80700011777778", k2 = " +lat_0=43.80700011777778", L2 = " +lat_0=42.53888888888888", M2 = " +lat_0=45.43333333333333", E2 = " +lat_0=44.25333512777778", S2 = " +lat_0=42.21666666666667", C2 = " +lat_0=43.26666666666667", P2 = " +lat_0=43.45111111111111", T2 = " +lat_1=45.15423710527778", A2 = " +lat_0=45.15423710527778", O2 = " +lat_0=44.84444444444445", I2 = " +lat_1=44.90090442361111", R2 = " +lat_0=44.90090442361111", D2 = " +lat_0=44.69166666666666", B2 = " +lat_0=44.71666666666667", N2 = " +lat_1=44.00007392861111", G2 = " +lat_0=44.00007392861111", j2 = " +lat_0=44.39722222222222", F2 = " +lat_1=45.70422377027778", z2 = " +lat_0=45.70422377027778", U2 = " +lat_1=44.63614887194444", q2 = " +lat_0=44.63614887194444", H2 = " +lat_0=44.66111111111111", Z2 = " +lat_1=44.41682397527777", W2 = " +lat_0=44.41682397527777", V2 = " +lat_0=44.55555555555555", K2 = " +lat_0=41.94444444444444", Y2 = " +lat_0=43.91944444444444", $2 = " +lat_0=42.81944444444445", X2 = " +lat_1=45.90009913138888", Q2 = " +lat_0=45.90009913138888", J2 = " +lat_1=45.17782208583333", tE = " +lat_0=45.17782208583333", eE = " +lat_0=43.16111111111111", nE = " +lat_1=43.57503293972223", rE = " +lat_0=43.57503293972223", iE = " +lat_1=46.07784409055556", oE = " +lat_0=46.07784409055556", sE = " +lat_1=42.66946209694444", aE = " +lat_0=42.66946209694444", lE = " +lat_1=45.96121983333334", uE = " +lat_0=45.96121983333334", hE = " +lat_0=42.91805555555555", cE = " +lat_0=42.56944444444445", fE = " +lat_0=43.42027777777778", dE = " +lat_1=44.11394404583334", pE = " +lat_0=44.11394404583334", _E = " +lat_1=44.36259546944444", mE = " +lat_0=44.36259546944444", gE = " +lat_1=44.10000000000001", vE = " +lat_0=44.10000000000001", yE = " +lat_1=42.16500000000001", bE = " +lat_0=42.16500000000001", wE = " +lat_0=52.15616055555555", xE = " +lat_2=48.73333333333333", kc = " +zone=3", fy = " +lat_0=53.5", dy = " +k=0.999923", py = " +x_0=850000", _y = " +x_0=830000", my = " +lon_0=16.5", gy = " +x_0=520000", vy = " +lat_2=31.5", yy = " +lon_0=10.5", by = " +lat_1=44.5", wy = " +lon_0=-153", xy = " +lon_0=-135", ky = " +x_0=750000", Ly = " +lat_0=43.5", My = " +lon_0=-142", Ey = " +lon_0=-146", Sy = " +lon_0=-162", Cy = " +lon_0=-166", Py = " +lon_0=-176", Ty = " +lat_2=39.5", Ay = " +lon_0=-129", Oy = " +k_0=1.0002", Iy = " +k=1.000023", Ry = " +lon_0=-121", Dy = " +k=1.000175", By = " +lat_0=45.5", Ny = " +k=1.000155", Gy = " +lat_2=37.5", jy = " +lat_1=48.5", Fy = " +k=1.000029", zy = " +lat_0=39.6", Uy = " +k=1.000013", qy = " +k=1.000022", Hy = " +lat_0=40.7", Zy = " +lat_0=39.3", Wy = " +lat_0=37.8", Vy = " +lat_0=38.9", Ky = " +lon_0=-5.4", V3 = " +y_0=626907.39", K3 = " +b=6356571.996", Y3 = " +a=6377295.664", kE = " +lon_0=5.38763888888889", LE = " +y_0=-4600000.00001208", ME = " +y_0=1889763.779527559", EE = " +y_0=99999.99999960001", SE = " +x_0=120091.4401828804", j_ = " +lon_0=72", F_ = " +lat_0=50", z_ = " +lat_1=50", U_ = " +lat_1=35", q_ = " +lon_0=22", H_ = " +lat_1=34", Z_ = " +lonc=115", W_ = " +lat_0=-9", V_ = " +lat_0=23", K_ = " +lat_1=85", Y_ = " +lat_2=69", $_ = " +lat_1=69", X_ = " +lat_2=61", Q_ = " +lon_0=34", $3 = " +lon_0=140.25", X3 = " +lon_0=142.25", Q3 = " +lon_0=144.25", J3 = " +x_0=47500000", t6 = " +y_0=-3000000", CE = " +pm=2.337208333333333", PE = " +x_0=7000000.00000248", Jp = " +lon_0=6", t1 = " +k=0.997", Yy = " +lon_0=106", $y = " +lon_0=154", Xy = " +lon_0=156", Qy = " +lat_2=-36", Jy = " +lon_0=119", tb = " +lon_0=121", eb = " +lon_0=166", nb = " +a=6371228", rb = " +b=6371228", ib = " +a=6378273", ob = " +lat_0=-44", sb = " +pm=lisbon", ab = " +lon_0=-57", lb = " +lon_0=-56", ub = " +k=1.00007", hb = " +lonc=-123", cb = " +alpha=295", fb = " +gamma=295", db = " +k=1.00011", pb = " +k=1.00005", _b = " +k=1.00013", mb = " +x_0=30000", gb = " +k=1.00001", vb = " +k=1.00003", TE = " +y_0=130000.00001472", AE = " +x_0=119999.99999952", OE = " +y_0=-2999999.999988", IE = " +x_0=-299999.9999988", RE = " +lat_1=43.0695160375", DE = " +lat_0=43.0695160375", BE = " +lat_1=43.3223129275", NE = " +lat_0=43.3223129275", e6 = " +k=1.0000067", n6 = " +a=6378298.3", r6 = " +lon_0=-66.5", i6 = " +lon_0=129.5", o6 = " +lon_0=138.5", s6 = " +x_0=2300000", a6 = " +x_0=3300000", l6 = " +x_0=4300000", u6 = " +y_0=7500000", h6 = " +lonc=102.25", c6 = " +y_0=1166200", f6 = " +x_0=3000000", d6 = " +lat_1=46.25", p6 = " +ellps=WGS66", _6 = " +ellps=GRS67", m6 = " +lat_1=34.65", GE = " +y_0=59999.99999976", jE = " +y_0=30000.00001512", FE = " +x_0=59999.99999976", zE = " +x_0=30000.00001512", UE = " +lat_1=43.200055605", qE = " +lat_0=43.200055605", HE = " +y_0=65379.0134283", ZE = " +alpha=323.0257905", WE = " +alpha=53.31580995", VE = " +x_0=10000.0000152";
-  return Yx = [2e3, i + h + rc + ii + H + u + N + e + t, 1, i + h + rc + ii + H + u + N + DL + e + t, 1, i + h + rc + ii + H + u + N + BL + e + t, 1, i + h + rc + ii + H + u + N + NL + e + t, 1, i + h + rc + ii + H + u + N + GL + e + t, 1, i + h + rc + ii + H + u + N + QL + e + t, 1, i + h + rc + ii + H + u + N + xL + e + t, 1, i + h + rc + ii + H + u + N + W5 + e + t, 2, i + h + qv + m + Re + u + F + e + t, 1, i + h + c_ + m + Re + u + F + e + t, 1, i + h + f_ + m + Re + u + F + e + t, 1, i + h + Hv + m + Re + u + F + e + t, 1, i + h + Ul + m + Re + u + F + e + t, 1, i + h + Zv + m + Re + u + F + e + t, 1, i + h + Wv + m + Re + u + F + e + t, 1, i + h + Un + m + Re + u + F + e + t, 1, i + h + Zv + m + Re + u + F + e + t, 1, i + h + Wv + m + Re + u + F + e + t, 1, i + h + Un + m + Re + u + F + e + t, 1, i + h + f + m + Re + u + F + e + t, 1, i + h + zn + m + Re + u + F + e + t, 1, i + h + ic + m + Re + u + F + e + t, 1, i + h + pl + m + Re + u + F + e + t, 1, i + h + On + m + Re + u + F + e + t, 1, i + h + Ip + m + Re + u + F + e + t, 1, i + h + _f + m + Re + u + F + e + t, 1, c + ua + F + e + t, 1, c + ha + F + e + t, 1, c + yi + F + e + t, 1, c + Xr + F + e + t, 1, c + yi + F + e + t, 1, c + Xr + F + e + t, 1, c + Vr + F + e + t, 1, c + Tr + F + e + t, 1, c + Qr + F + e + t, 4, i + y3 + b3 + e6 + Z3 + V3 + n + JL + e + t, 1, c + Ll + N + Vm + e + t, 1, c + Ll + N + Hm + e + t, 1, c + vo + N + Vm + e + t, 1, c + vo + N + Hm + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + jm + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + jm + e + t, 1, i + h + hr + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + Hp + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + Ud + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + Rn + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + O0 + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + qd + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + Ei + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + " +lon_0=29 +k=1" + z + u + Yn + W + r + e + t, 1, i + h + kf + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + eo + " +k=1" + z + u + Yn + W + r + e + t, 1, l_ + pg + w3 + " +k_0=1 +x_0=2600000" + Vv + O + K5 + e + t, 1, Jn + " +lat_0=27.51882880555555 +lonc=52.60353916666667 +alpha=0.5716611944444444 +k=0.999895934 +x_0=658377.437 +y_0=3044969.194 +gamma=0.5716611944444444" + b + Y5 + e + t, 1, c + Xi + b + D1 + e + t, 1, c + Ni + b + D1 + e + t, 1, c + js + b + D1 + e + t, 1, c + yc + b + D1 + e + t, 1, a + " +lat_1=40" + it + qr + " +k_0=0.9988085293" + D + kp + n6 + N3 + " +pm=madrid" + e + t, 3, Ev + y_ + " +lon_0=42.5" + _g + m + z + u + O + Ds + bl + e + t, 1, lr + " +lat_0=11.25217861111111 +lon_0=-60.68600888888889 +x_0=37718.66159325 +y_0=36209.91512952" + qe + Vn + mM + t, 1, c + Tr + b + $5 + e + t, 1, i + h + yo + m + ot + u + b + et + e + t, 1, i + h + " +lon_0=11" + m + ot + u + b + et + e + t, 1, i + h + " +lon_0=13" + m + ot + u + b + et + e + t, 1, i + h + hr + m + ot + u + b + et + e + t, 1, i + h + Hp + m + ot + u + b + et + e + t, 1, i + h + Ud + m + ot + u + b + et + e + t, 1, i + h + Rn + m + ot + u + b + et + e + t, 1, i + h + O0 + m + ot + u + b + et + e + t, 1, i + h + qd + m + ot + u + b + et + e + t, 1, c + Gi + b + et + e + t, 1, c + bo + b + et + e + t, 1, c + ca + b + et + e + t, 1, c + Go + b + et + e + t, 1, i + K + sh + " +k=1" + Gn + u + b + e + t, 1, i + K + sh + " +k=1" + Gn + u + b + _L + e + t, 1, i + K + sh + " +k=1" + Gn + u + b + c3 + e + t, 1, c + Vr + Z + b + c3 + e + t, 3, i + h + no + Me + y + u + b + et + e + t, 1, i + h + " +lon_0=11" + Me + y + u + Ke + le + nu + e + t, 1, c + Xi + W + r + e + t, 1, c + Ni + W + r + e + t, 3, i + h + Yy + " +k=1" + y + u + _ + jm + e + t, 1, i + h + Yy + Me + y + u + x + E + e + t, 1, c + Qi + b + jL + e + t, 1, i + bn + Se + " +k=1" + ot + He + O + e + t, 1, i + bn + Rp + " +k=1" + ot + He + O + e + t, 1, i + bn + Dp + " +k=1" + ot + He + O + e + t, 1, lr + " +lat_0=25.38236111111111 +lon_0=50.76138888888889" + Be + Mr + Nl + e + t, 1, i + h + ro + Me + y + u + n + rL + e + t, 1, a + mg + gg + Jm + " +k_0=1" + z + " +y_0=-52684.972" + b + e + t, 1, a + mg + gg + Jm + " +k_0=1" + ot + " +y_0=147315.028" + b + e + t, 1, a + mg + gg + Jm + " +k_0=1" + y + " +y_0=447315.028" + b + e + t, 1, a + mg + gg + Jm + " +k_0=1 +x_0=-17044 +y_0=-23139.97" + b + e + t, 1, i + " +lat_0=-36.87972222222222 +lon_0=174.7641666666667" + m + H + _r + n + r + e + t, 1, i + " +lat_0=-37.76111111111111 +lon_0=176.4661111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-38.62444444444444 +lon_0=177.8855555555556 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-39.65083333333333 +lon_0=176.6736111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-39.13555555555556 +lon_0=174.2277777777778 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-39.51222222222222 +lon_0=175.64 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-40.24194444444444 +lon_0=175.4880555555555 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-40.92527777777777 +lon_0=175.6472222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.3011111111111 +lon_0=174.7763888888889 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-40.71472222222223 +lon_0=172.6719444444444 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.27444444444444 +lon_0=173.2991666666667 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.28972222222222 +lon_0=172.1088888888889 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.81055555555555 +lon_0=171.5811111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-42.33361111111111 +lon_0=171.5497222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-42.68888888888888 +lon_0=173.01 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.54444444444444 +lon_0=173.8019444444444 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-42.88611111111111 +lon_0=170.9797222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.11 +lon_0=170.2608333333333 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.97777777777778 +lon_0=168.6061111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.59055555555556 +lon_0=172.7269444444445 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.74861111111111 +lon_0=171.3605555555555 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-44.40194444444445 +lon_0=171.0572222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-44.735 +lon_0=169.4675 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.13277777777778 +lon_0=168.3986111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.56361111111111 +lon_0=167.7386111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.81611111111111 +lon_0=170.6283333333333 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.86138888888889 +lon_0=170.2825" + Dd + H + _r + n + r + e + t, 1, i + " +lat_0=-46.6 +lon_0=168.3427777777778 +k=1" + H + _r + n + r + e + t, 1, c + Ms + Z + n + r + e + t, 1, c + ja + Z + n + r + e + t, 1, c + Xl + Z + n + r + e + t, 1, i + gM + " +lon_0=-1" + Bp + " +x_0=274319.7391633579" + u + C0 + c0 + t3 + e3 + t, 1, i + h + " +lon_0=-1" + Me + y + u + C0 + c0 + t3 + e + t, 1, a + Zp + yu + Ro + Ra + z + u + F + e + t, 16, a + Na + " +lat_2=44" + Zl + Ml + R + " +y_0=6600000" + n + r + e + t, 3, i + fy + " +lon_0=-8 +k=0.99982" + D + of + n + r + e + t, 1, c + vo + n + r + e + t, 1, i + vM + " +lon_0=-12 +k=1 +x_0=152399.8550907544" + u + C0 + c0 + e3 + t, 1, i + vM + " +lon_0=-12 +k=1 +x_0=243839.7681452071 +y_0=182879.8261089053" + C0 + c0 + e3 + t, 1, c + Qi + N + f3 + e + t, 1, c + vo + N + f3 + e + t, 1, ra + mo + fr + z + u + " +a=6370997 +b=6370997" + e + t, 1, i + h + " +lon_0=-5" + Me + y + u + N + Vm + e + t, 1, i + h + " +lon_0=-5" + Me + y + u + N + Hm + e + t, 4, i + " +lat_0=49.83333333333334" + yM + " +k=1" + mf + Mr + b + L5 + e + t, 3, se + " +lat_0=53.00194444444445 +lon_0=21.50277777777778" + Wp + " +x_0=4603000 +y_0=5806000" + _ + U + e + t, 1, se + " +lat_0=53.58333333333334 +lon_0=17.00833333333333" + Wp + " +x_0=3501000 +y_0=5999000" + _ + U + e + t, 1, se + " +lat_0=51.67083333333333 +lon_0=16.67222222222222" + Wp + " +x_0=3703000 +y_0=5627000" + _ + U + e + t, 1, i + h + " +lon_0=18.95833333333333 +k=0.999983 +x_0=237000 +y_0=-4700000" + _ + U + e + t, 1, i + h + hr + dy + xn + u + n + r + e + t, 1, i + h + Lf + dy + Vh + u + n + r + e + t, 1, i + h + Rn + dy + ql + u + n + r + e + t, 1, i + h + ro + dy + id + u + n + r + e + t, 1, i + h + Ud + " +k=0.9993" + y + " +y_0=-5300000" + n + r + e + t, 8, c + Fa + b + kL + e + t, 1, c + El + b + LL + e + t, 1, c + El + b + FL + e + t, 3, i + h + " +lon_0=173" + Me + " +x_0=1600000" + kt + n + r + e + t, 2, c + Mu + Z + n + r + e + t, 1, i + h + " +lon_0=9.5" + Bn + ot + u + n + r + e + t, 1, i + h + no + Bn + y + u + n + r + e + t, 1, i + h + hr + " +k=1" + Bs + u + n + r + e + t, 2, se + Zl + r6 + b_ + xe + _r + Bd + Zf + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, a + " +lat_1=35.25 +lat_2=36.41666666666666 +lat_0=34.66666666666666" + ah + B + R3 + w + d + t, 1, a + Xt + ao + Zn + qc + y + u + n + r + e + t, 1, i + h + Ei + " +k=1" + od + u + b + ut + e + t, 1, i + h + Do + " +k=1" + td + u + b + ut + e + t, 1, i + h + eo + " +k=1" + Hc + u + b + ut + e + t, 1, i + h + cc + " +k=1" + ed + u + b + ut + e + t, 1, i + h + Ga + " +k=1" + jl + u + b + ut + e + t, 1, i + h + fc + " +k=1" + ul + u + b + ut + e + t, 1, i + h + ks + " +k=1" + ou + u + b + ut + e + t, 1, i + h + Do + Me + y + u + n + r + e + t, 2, c + Gi + Ke + le + hL + e + t, 1, c + Ai + b + Qw + e + t, 1, c + Es + b + Qw + e + t, 2, c + Vr + Bd + Zf + e + t, 1, c + Tr + Bd + Zf + e + t, 2, i + nn + Ir + m + J + u + n + r + ct + t, 1, i + nn + ya + m + J + u + n + r + ct + t, 1, i + nn + Bc + fe + J + u + n + r + ct + t, 1, a + Ps + Gs + Dt + ws + $e + ne + n + r + d + t, 1, a + To + lo + Ft + ws + $e + ne + n + r + d + t, 1, a + wt + Ao + sf + he + $e + ne + n + r + d + t, 1, a + Kc + Mf + uo + af + $e + ne + n + r + d + t, 1, a + xi + ho + lf + Wl + $e + ne + n + r + d + t, 1, a + Oo + $o + Qs + Nc + $e + ne + n + r + d + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + r + d + t, 1, a + Yc + $c + us + Qe + ai + pn + n + r + d + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + r + d + t, 1, a + La + uf + Io + Zc + qg + Hg + n + r + d + t, 1, i + bn + Ui + hf + Ht + u + n + r + d + t, 1, i + Et + zn + st + Ht + u + n + r + d + t, 1, i + Et + gf + st + Ht + u + n + r + d + t, 1, a + Xc + Js + Ef + Qc + D + u + n + r + d + t, 1, i + fi + dr + m + Ht + u + n + r + d + t, 1, i + fi + pi + m + ui + u + n + r + d + t, 1, i + pt + ds + Te + Ht + u + n + r + d + t, 1, i + pt + pu + Te + ge + u + n + r + d + t, 1, i + pt + Gc + fe + Zg + u + n + r + d + t, 3, a + Xt + ao + Zn + qc + ge + u + n + r + d + t, 1, a + ci + ta + Jt + dt + ge + ne + n + r + d + t, 1, a + sd + md + Ft + mu + Wg + u + n + r + d + t, 1, a + Os + Ts + es + Gt + Ht + of + n + r + d + t, 1, a + Oa + ts + es + Ul + ge + u + n + r + d + t, 1, a + rl + ea + Tn + pl + Vg + u + n + r + ct + t, 1, a + gd + po + il + $t + Kg + u + n + r + ct + t, 1, a + Ne + vd + T + $t + av + u + n + r + ct + t, 1, i + ia + ps + Bn + _e + u + n + r + d + t, 1, i + ia + ri + Bn + ui + u + n + r + d + t, 1, a + Na + Hd + ad + Yu + gs + u + n + r + ct + t, 1, i + nn + Ko + Vu + yd + u + n + r + d + t, 1, i + nn + jc + m + ge + u + n + r + d + t, 1, i + nn + hi + Fc + Yg + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, i + it + Di + an + $g + u + n + r + d + t, 1, i + it + _s + an + Xg + u + n + r + d + t, 1, a + Ma + Ur + ye + vf + _e + u + n + r + d + t, 1, a + Ki + ol + Jc + oc + B + u + n + r + d + t, 1, a + Le + _o + Bo + Lt + gs + u + n + r + ct + t, 1, a + Is + sl + Br + Lt + gs + u + n + r + ct + t, 1, a + ki + ju + Sf + si + D + u + n + r + d + t, 1, a + kh + Fu + Ea + si + D + u + n + r + d + t, 1, a + dc + Kr + rn + he + n_ + u + n + r + ct + t, 1, a + pc + hs + pt + he + r_ + u + n + r + ct + t, 1, a + ld + Lh + ye + Rt + D + u + n + r + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + d + t, 1, a + Mh + bd + As + zn + wd + u + n + r + ct + t, 1, a + Eh + ud + ke + ah + D + u + n + r + d + t, 1, a + al + hd + Cf + Wc + Ht + zi + n + r + d + t, 1, a + Il + Sh + Ca + Fr + D + Wf + n + r + d + t, 1, a + Ch + Rl + cs + gn + ui + G + n + r + d + t, 1, a + Dl + zu + Zi + _l + D + iv + n + r + d + t, 1, a + qo + Ss + Po + Fr + _e + ov + n + r + d + t, 1, a + Qn + Ho + kr + ae + vi + D3 + n + r + ct + t, 1, a + Qu + oo + kn + ae + vi + U3 + n + r + ct + t, 1, a + Ju + Co + Q + ae + vi + q3 + n + r + ct + t, 1, a + xd + Ph + Ft + Zt + Vf + Wf + n + r + d + t, 1, a + Xt + Pa + Jt + Zt + Vf + zi + n + r + d + t, 1, a + Le + kd + Bo + ms + ge + u + n + r + d + t, 1, a + Th + Uu + Li + he + ge + u + n + r + d + t, 1, a + qu + Ah + vs + On + D + u + n + r + d + t, 1, a + _u + cd + Ve + On + D + u + n + r + d + t, 1, a + Oh + Hu + _c + On + D + u + n + r + d + t, 1, se + " +lat_0=47.25" + P0 + b_ + R + Vl + Bd + Zf + e + t, 4, i + h + c_ + m + Pr + u + Bd + Zf + e + t, 1, i + h + f_ + m + xn + u + Bd + Zf + e + t, 13, i + h + " +lon_0=109" + Me + y + kt + O + va + e + t, 1, i + h + " +lon_0=116" + Me + y + kt + M + e + t, 1, i + h + aa + Me + y + kt + M + e + t, 1, i + h + Jp + Me + y + u + M + e + t, 1, c + bo + N + e + t, 1, c + bo + N + e + t, 1, lr + bM + e8 + " +x_0=86501.46392052001" + HE + qe + Vn + Vw + Qg + t, 1, c + Vr + Z + b + vn + e + t, 1, c + Tr + Z + b + vn + e + t, 1, a + " +lat_1=9 +lat_2=3 +lat_0=6" + Nd + Ye + Ee + b + wr + e + t, 1, a + " +lat_1=17 +lat_2=33 +lat_0=25.08951" + I0 + z + u + b + Ri + e + t, 1, i + h + Ei + " +k=1" + y + u + b + ut + e + t, 1, i + h + Do + " +k=1" + y + u + b + ut + e + t, 1, i + h + eo + " +k=1" + y + u + b + ut + e + t, 1, i + h + cc + " +k=1" + y + u + b + ut + e + t, 1, i + h + Ga + " +k=1" + y + u + b + ut + e + t, 1, i + h + fc + " +k=1" + y + u + b + ut + e + t, 1, i + h + ks + " +k=1" + y + u + b + ut + e + t, 1, i + wM + xM + " +k=1 +x_0=836694.05 +y_0=819069.8" + b + k5 + e + t, 1, i + h + Si + " +k=1" + jl + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + ul + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + ou + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + su + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + Zh + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + ru + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + iu + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + Fl + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + au + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + zl + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + lu + u + Ct + Y + e + t, 1, i + h + Si + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Si + " +k=1" + uu + u + Ct + Y + e + t, 1, i + h + wl + " +k=1" + hu + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + cu + u + Ct + Y + e + t, 1, i + h + bu + " +k=1" + fu + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + hl + u + Ct + Y + e + t, 1, i + h + Yi + " +k=1" + $u + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + Kn + u + Ct + Y + e + t, 1, i + h + $l + " +k=1" + Xu + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + Wh + u + Ct + Y + e + t, 1, i + h + ml + " +k=1" + _0 + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + m0 + u + Ct + Y + e + t, 1, i + h + gu + " +k=1" + g0 + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + v0 + u + Ct + Y + e + t, 1, i + h + la + " +k=1" + y0 + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + b0 + u + Ct + Y + e + t, 1, i + h + Kl + " +k=1" + w0 + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + x0 + u + Ct + Y + e + t, 1, i + h + gl + " +k=1" + cp + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + k0 + u + Ct + Y + e + t, 1, i + h + aa + " +k=1" + fp + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + L0 + u + Ct + Y + e + t, 1, i + h + Si + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + wl + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + bu + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Yi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + $l + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + ml + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + gu + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + la + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Kl + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + gl + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + aa + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Rn + " +k=1" + ze + u + b + At + e + t, 1, i + h + ro + " +k=1" + Gn + u + b + At + e + t, 1, i + h + Ei + " +k=1" + qn + u + b + At + e + t, 1, i + h + Do + " +k=1" + Pr + u + b + At + e + t, 1, i + h + ks + " +k=1" + id + u + _ + n3 + e + t, 1, i + h + mc + " +k=1" + od + u + _ + n3 + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + Bt + e + t, 2, i + h + Si + " +k=1" + uu + u + _ + C + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + C + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + C + e + t, 1, i + h + Yi + " +k=1" + $u + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + C + e + t, 1, i + h + $l + " +k=1" + Xu + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + Wh + u + _ + C + e + t, 1, i + h + ml + " +k=1" + _0 + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + m0 + u + _ + C + e + t, 1, i + h + gu + " +k=1" + g0 + u + _ + C + e + t, 1, i + h + ie + " +k=1" + v0 + u + _ + C + e + t, 1, i + h + la + " +k=1" + y0 + u + _ + C + e + t, 1, i + h + v + " +k=1" + b0 + u + _ + C + e + t, 1, i + h + Kl + " +k=1" + w0 + u + _ + C + e + t, 1, i + h + tt + " +k=1" + x0 + u + _ + C + e + t, 1, i + h + gl + " +k=1" + cp + u + _ + C + e + t, 1, i + h + Se + " +k=1" + k0 + u + _ + C + e + t, 1, i + h + aa + " +k=1" + fp + u + _ + C + e + t, 1, i + h + k + " +k=1" + L0 + u + _ + C + e + t, 1, i + h + Si + " +k=1" + y + u + _ + C + e + t, 1, i + h + wl + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + C + e + t, 1, i + h + bu + " +k=1" + y + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + C + e + t, 1, i + h + $l + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + C + e + t, 1, i + h + ml + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + C + e + t, 1, i + h + gu + " +k=1" + y + u + _ + C + e + t, 1, i + h + ie + " +k=1" + y + u + _ + C + e + t, 1, i + h + la + " +k=1" + y + u + _ + C + e + t, 1, i + h + v + " +k=1" + y + u + _ + C + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + C + e + t, 1, i + h + tt + " +k=1" + y + u + _ + C + e + t, 1, i + h + gl + " +k=1" + y + u + _ + C + e + t, 1, i + h + Se + " +k=1" + y + u + _ + C + e + t, 1, i + h + aa + " +k=1" + y + u + _ + C + e + t, 1, i + h + k + " +k=1" + y + u + _ + C + e + t, 1, i + gc + i6 + m + z + u + n + r + e + t, 1, i + gc + sc + m + z + u + n + r + e + t, 1, i + Mt + x3 + m + z + u + n + r + e + t, 1, i + gc + Kv + m + z + u + n + r + e + t, 1, i + Mt + k3 + m + z + u + n + r + e + t, 1, i + Mt + Np + m + z + u + n + r + e + t, 1, i + Mt + L3 + m + z + u + n + r + e + t, 1, i + Mt + o6 + m + z + u + n + r + e + t, 1, i + Mt + M3 + m + z + u + n + r + e + t, 1, i + it + E3 + m + z + u + n + r + e + t, 1, i + Ro + $3 + m + z + u + n + r + e + t, 1, i + Ro + X3 + m + z + u + n + r + e + t, 1, i + Ro + Q3 + m + z + u + n + r + e + t, 1, i + go + " +lon_0=142" + m + z + u + n + r + e + t, 1, i + go + pp + m + z + u + n + r + e + t, 1, i + go + " +lon_0=124" + m + z + u + n + r + e + t, 1, i + go + sc + m + z + u + n + r + e + t, 1, i + " +lat_0=20" + Np + m + z + u + n + r + e + t, 1, i + go + $y + m + z + u + n + r + e + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + l + e + t, 1, i + h + eo + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + l + e + t, 1, i + h + ks + " +k=1" + y + u + _ + l + e + t, 1, i + h + mc + " +k=1" + y + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pf + " +k=1" + y + u + _ + l + e + t, 1, i + h + Wd + " +k=1" + y + u + _ + l + e + t, 1, i + h + Si + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + l + e + t, 1, i + h + ie + " +k=1" + y + u + _ + l + e + t, 1, i + h + v + " +k=1" + y + u + _ + l + e + t, 1, i + h + tt + " +k=1" + y + u + _ + l + e + t, 1, i + h + Se + " +k=1" + y + u + _ + l + e + t, 1, i + h + k + " +k=1" + y + u + _ + l + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + l + e + t, 1, i + h + yf + " +k=1" + y + u + _ + l + e + t, 1, i + h + ac + " +k=1" + y + u + _ + l + e + t, 1, i + h + jd + " +k=1" + y + u + _ + l + e + t, 1, i + h + lc + " +k=1" + y + u + _ + l + e + t, 1, i + h + vu + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + l + e + t, 1, i + h + nh + " +k=1" + y + u + _ + l + e + t, 1, i + h + $h + " +k=1" + y + u + _ + l + e + t, 3, i + h + Rn + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + s + e + t, 1, i + h + eo + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + s + e + t, 1, i + h + ks + " +k=1" + y + u + _ + s + e + t, 1, i + h + mc + " +k=1" + y + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pf + " +k=1" + y + u + _ + s + e + t, 1, i + h + Wd + " +k=1" + y + u + _ + s + e + t, 1, i + h + Si + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + s + e + t, 1, i + h + ie + " +k=1" + y + u + _ + s + e + t, 1, i + h + v + " +k=1" + y + u + _ + s + e + t, 1, i + h + tt + " +k=1" + y + u + _ + s + e + t, 1, i + h + Se + " +k=1" + y + u + _ + s + e + t, 1, i + h + k + " +k=1" + y + u + _ + s + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + s + e + t, 1, i + h + yf + " +k=1" + y + u + _ + s + e + t, 1, i + h + ac + " +k=1" + y + u + _ + s + e + t, 1, i + h + jd + " +k=1" + y + u + _ + s + e + t, 1, i + h + lc + " +k=1" + y + u + _ + s + e + t, 1, i + h + vu + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + s + e + t, 1, i + h + nh + " +k=1" + y + u + _ + s + e + t, 1, i + h + $h + " +k=1" + y + u + _ + s + e + t, 1, i + h + Rn + " +k=1" + ql + u + _ + s + e + t, 1, i + h + ro + " +k=1" + id + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + od + u + _ + s + e + t, 1, i + h + Do + " +k=1" + td + u + _ + s + e + t, 1, i + h + eo + " +k=1" + Hc + u + _ + s + e + t, 1, i + h + cc + " +k=1" + ed + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + jl + u + _ + s + e + t, 1, i + h + fc + " +k=1" + ul + u + _ + s + e + t, 1, i + h + ks + " +k=1" + ou + u + _ + s + e + t, 1, i + h + I0 + " +k=1" + su + u + _ + s + e + t, 1, i + h + mc + " +k=1" + Zh + u + _ + s + e + t, 1, i + h + R0 + " +k=1" + ru + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + iu + u + _ + s + e + t, 1, i + h + " +lon_0=60 +k=1" + Fl + u + _ + s + e + t, 1, i + h + Pf + " +k=1" + au + u + _ + s + e + t, 1, i + h + Vp + " +k=1" + zl + u + _ + s + e + t, 1, i + h + Wd + " +k=1" + lu + u + _ + s + e + t, 1, i + h + j_ + " +k=1" + nd + u + _ + s + e + t, 1, i + h + Si + " +k=1" + uu + u + _ + s + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + s + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + s + e + t, 1, i + h + Yi + " +k=1" + $u + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + s + e + t, 1, i + h + $l + " +k=1" + Xu + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + Wh + u + _ + s + e + t, 2, i + h + ml + " +k=1" + _0 + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + m0 + u + _ + s + e + t, 1, i + h + gu + " +k=1" + g0 + u + _ + s + e + t, 1, i + h + ie + " +k=1" + v0 + u + _ + s + e + t, 1, i + h + la + " +k=1" + y0 + u + _ + s + e + t, 1, i + h + v + " +k=1" + b0 + u + _ + s + e + t, 1, i + h + Kl + " +k=1" + w0 + u + _ + s + e + t, 1, i + h + tt + " +k=1" + x0 + u + _ + s + e + t, 1, i + h + gl + " +k=1" + cp + u + _ + s + e + t, 1, i + h + Se + " +k=1" + k0 + u + _ + s + e + t, 1, i + h + aa + " +k=1" + fp + u + _ + s + e + t, 1, i + h + k + " +k=1" + L0 + u + _ + s + e + t, 1, i + h + Gp + " +k=1 +x_0=46500000" + u + _ + s + e + t, 1, i + h + Gd + " +k=1" + J3 + u + _ + s + e + t, 1, i + h + O_ + " +k=1 +x_0=48500000" + u + _ + s + e + t, 1, i + h + yf + " +k=1 +x_0=49500000" + u + _ + s + e + t, 1, i + h + bf + " +k=1 +x_0=50500000" + u + _ + s + e + t, 1, i + h + ac + " +k=1 +x_0=51500000" + u + _ + s + e + t, 1, i + h + Xy + " +k=1 +x_0=52500000" + u + _ + s + e + t, 1, i + h + jd + " +k=1 +x_0=53500000" + u + _ + s + e + t, 1, i + h + T0 + " +k=1 +x_0=54500000" + u + _ + s + e + t, 1, i + h + lc + " +k=1 +x_0=55500000" + u + _ + s + e + t, 1, i + h + I_ + " +k=1 +x_0=56500000" + u + _ + s + e + t, 1, i + h + vu + " +k=1 +x_0=57500000" + u + _ + s + e + t, 1, i + h + R_ + " +k=1 +x_0=58500000" + u + _ + s + e + t, 1, i + h + Yl + " +k=1 +x_0=59500000" + u + _ + s + e + t, 2, i + h + nh + " +k=1 +x_0=61500000" + u + _ + s + e + t, 1, i + h + w_ + " +k=1 +x_0=62500000" + u + _ + s + e + t, 1, i + h + $h + " +k=1 +x_0=63500000" + u + _ + s + e + t, 1, i + h + x_ + " +k=1 +x_0=64500000" + u + _ + s + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + s + e + t, 1, i + h + ro + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + s + e + t, 1, i + h + Do + " +k=1" + y + u + _ + s + e + t, 1, i + h + eo + " +k=1" + y + u + _ + s + e + t, 1, i + h + cc + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + s + e + t, 1, i + h + fc + " +k=1" + y + u + _ + s + e + t, 1, i + h + ks + " +k=1" + y + u + _ + s + e + t, 1, i + h + I0 + " +k=1" + y + u + _ + s + e + t, 1, i + h + mc + " +k=1" + y + u + _ + s + e + t, 1, i + h + R0 + " +k=1" + y + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + s + e + t, 1, i + h + " +lon_0=60 +k=1" + y + u + _ + s + e + t, 1, i + h + Pf + " +k=1" + y + u + _ + s + e + t, 1, i + h + Vp + " +k=1" + y + u + _ + s + e + t, 1, i + h + Wd + " +k=1" + y + u + _ + s + e + t, 1, i + h + j_ + " +k=1" + y + u + _ + s + e + t, 2, i + h + Si + " +k=1" + y + u + _ + s + e + t, 1, i + h + wl + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + s + e + t, 1, i + h + bu + " +k=1" + y + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + s + e + t, 1, i + h + $l + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + s + e + t, 1, i + h + ml + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + s + e + t, 1, i + h + gu + " +k=1" + y + u + _ + s + e + t, 1, i + h + ie + " +k=1" + y + u + _ + s + e + t, 1, i + h + la + " +k=1" + y + u + _ + s + e + t, 1, i + h + v + " +k=1" + y + u + _ + s + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + s + e + t, 1, i + h + tt + " +k=1" + y + u + _ + s + e + t, 1, i + h + gl + " +k=1" + y + u + _ + s + e + t, 1, i + h + Se + " +k=1" + y + u + _ + s + e + t, 1, i + h + aa + " +k=1" + y + u + _ + s + e + t, 1, i + h + k + " +k=1" + y + u + _ + s + e + t, 1, i + h + Gp + " +k=1" + y + u + _ + s + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + s + e + t, 1, i + h + O_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + yf + " +k=1" + y + u + _ + s + e + t, 1, i + h + bf + " +k=1" + y + u + _ + s + e + t, 1, i + h + ac + " +k=1" + y + u + _ + s + e + t, 1, i + h + Xy + " +k=1" + y + u + _ + s + e + t, 1, i + h + jd + " +k=1" + y + u + _ + s + e + t, 1, i + h + T0 + " +k=1" + y + u + _ + s + e + t, 1, i + h + lc + " +k=1" + y + u + _ + s + e + t, 1, i + h + I_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + vu + " +k=1" + y + u + _ + s + e + t, 1, i + h + R_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + s + e + t, 1, i + h + jp + " +k=1" + y + u + _ + s + e + t, 1, i + h + nh + " +k=1" + y + u + _ + s + e + t, 1, i + h + w_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + $h + " +k=1" + y + u + _ + s + e + t, 1, i + h + x_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + Rn + " +k=1" + ql + u + _ + l + e + t, 1, i + h + ro + " +k=1" + id + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + od + u + _ + l + e + t, 1, i + h + Do + " +k=1" + td + u + _ + l + e + t, 1, i + h + eo + " +k=1" + Hc + u + _ + l + e + t, 1, i + h + cc + " +k=1" + ed + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + jl + u + _ + l + e + t, 1, i + h + fc + " +k=1" + ul + u + _ + l + e + t, 1, i + h + ks + " +k=1" + ou + u + _ + l + e + t, 1, i + h + I0 + " +k=1" + su + u + _ + l + e + t, 1, i + h + mc + " +k=1" + Zh + u + _ + l + e + t, 1, i + h + R0 + " +k=1" + ru + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + iu + u + _ + l + e + t, 1, i + h + " +lon_0=60 +k=1" + Fl + u + _ + l + e + t, 1, i + h + Pf + " +k=1" + au + u + _ + l + e + t, 1, i + h + Vp + " +k=1" + zl + u + _ + l + e + t, 1, i + h + Wd + " +k=1" + lu + u + _ + l + e + t, 1, i + h + j_ + " +k=1" + nd + u + _ + l + e + t, 1, i + h + Si + " +k=1" + uu + u + _ + l + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + l + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + l + e + t, 1, i + h + Yi + " +k=1" + $u + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + l + e + t, 1, i + h + $l + " +k=1" + Xu + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + Wh + u + _ + l + e + t, 1, i + h + ml + " +k=1" + _0 + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + m0 + u + _ + l + e + t, 1, i + h + gu + " +k=1" + g0 + u + _ + l + e + t, 1, i + h + ie + " +k=1" + v0 + u + _ + l + e + t, 1, i + h + la + " +k=1" + y0 + u + _ + l + e + t, 1, i + h + v + " +k=1" + b0 + u + _ + l + e + t, 1, i + h + Kl + " +k=1" + w0 + u + _ + l + e + t, 1, i + h + tt + " +k=1" + x0 + u + _ + l + e + t, 1, i + h + gl + " +k=1" + cp + u + _ + l + e + t, 1, i + h + Se + " +k=1" + k0 + u + _ + l + e + t, 1, i + h + aa + " +k=1" + fp + u + _ + l + e + t, 1, i + h + k + " +k=1" + L0 + u + _ + l + e + t, 1, i + h + Gp + " +k=1 +x_0=46500000" + u + _ + l + e + t, 1, i + h + Gd + " +k=1" + J3 + u + _ + l + e + t, 1, i + h + O_ + " +k=1 +x_0=48500000" + u + _ + l + e + t, 1, i + h + yf + " +k=1 +x_0=49500000" + u + _ + l + e + t, 1, i + h + bf + " +k=1 +x_0=50500000" + u + _ + l + e + t, 1, i + h + ac + " +k=1 +x_0=51500000" + u + _ + l + e + t, 1, i + h + Xy + " +k=1 +x_0=52500000" + u + _ + l + e + t, 1, i + h + jd + " +k=1 +x_0=53500000" + u + _ + l + e + t, 1, i + h + T0 + " +k=1 +x_0=54500000" + u + _ + l + e + t, 1, i + h + lc + " +k=1 +x_0=55500000" + u + _ + l + e + t, 1, i + h + I_ + " +k=1 +x_0=56500000" + u + _ + l + e + t, 1, i + h + vu + " +k=1 +x_0=57500000" + u + _ + l + e + t, 1, i + h + R_ + " +k=1 +x_0=58500000" + u + _ + l + e + t, 1, i + h + Yl + " +k=1 +x_0=59500000" + u + _ + l + e + t, 2, i + h + nh + " +k=1 +x_0=61500000" + u + _ + l + e + t, 1, i + h + w_ + " +k=1 +x_0=62500000" + u + _ + l + e + t, 1, i + h + $h + " +k=1 +x_0=63500000" + u + _ + l + e + t, 1, i + h + x_ + " +k=1 +x_0=64500000" + u + _ + l + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + l + e + t, 1, i + h + ro + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + l + e + t, 1, i + h + Do + " +k=1" + y + u + _ + l + e + t, 1, i + h + eo + " +k=1" + y + u + _ + l + e + t, 1, i + h + cc + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + l + e + t, 1, i + h + fc + " +k=1" + y + u + _ + l + e + t, 1, i + h + ks + " +k=1" + y + u + _ + l + e + t, 1, i + h + I0 + " +k=1" + y + u + _ + l + e + t, 1, i + h + mc + " +k=1" + y + u + _ + l + e + t, 1, i + h + R0 + " +k=1" + y + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + l + e + t, 1, i + h + " +lon_0=60 +k=1" + y + u + _ + l + e + t, 1, i + h + Pf + " +k=1" + y + u + _ + l + e + t, 1, i + h + Vp + " +k=1" + y + u + _ + l + e + t, 1, i + h + Wd + " +k=1" + y + u + _ + l + e + t, 1, i + h + j_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + Si + " +k=1" + y + u + _ + l + e + t, 1, i + h + wl + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + l + e + t, 1, i + h + bu + " +k=1" + y + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + l + e + t, 1, i + h + $l + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + l + e + t, 1, i + h + ml + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + l + e + t, 1, i + h + gu + " +k=1" + y + u + _ + l + e + t, 1, i + h + ie + " +k=1" + y + u + _ + l + e + t, 1, i + h + la + " +k=1" + y + u + _ + l + e + t, 1, i + h + v + " +k=1" + y + u + _ + l + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + l + e + t, 1, i + h + tt + " +k=1" + y + u + _ + l + e + t, 1, i + h + gl + " +k=1" + y + u + _ + l + e + t, 1, i + h + Se + " +k=1" + y + u + _ + l + e + t, 1, c + Fs + Z + F + Zw + e + t, 1, c + wo + Z + F + Zw + e + t, 1, i + h + aa + " +k=1" + y + u + _ + l + e + t, 1, i + h + k + " +k=1" + y + u + _ + l + e + t, 1, i + h + Gp + " +k=1" + y + u + _ + l + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + l + e + t, 1, i + h + O_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + yf + " +k=1" + y + u + _ + l + e + t, 1, i + h + bf + " +k=1" + y + u + _ + l + e + t, 1, i + h + ac + " +k=1" + y + u + _ + l + e + t, 1, i + h + Xy + " +k=1" + y + u + _ + l + e + t, 1, i + h + jd + " +k=1" + y + u + _ + l + e + t, 1, i + h + T0 + " +k=1" + y + u + _ + l + e + t, 1, i + h + lc + " +k=1" + y + u + _ + l + e + t, 1, i + h + I_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + vu + " +k=1" + y + u + _ + l + e + t, 1, i + h + R_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + l + e + t, 1, i + h + jp + " +k=1" + y + u + _ + l + e + t, 1, i + h + nh + " +k=1" + y + u + _ + l + e + t, 1, i + h + w_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + $h + " +k=1" + y + u + _ + l + e + t, 1, i + h + x_ + " +k=1" + y + u + _ + l + e + t, 1, i + dl + U1 + Dd + ot + u + n + r + e + t, 1, i + fi + M0 + fe + D + u + n + r + e + t, 1, i + nn + Ir + m + J + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + e + t, 1, i + nn + Bc + fe + J + u + n + r + e + t, 1, a + Xo + Ta + ke + xs + H + u + n + r + e + t, 1, a + Wr + cf + ys + xs + H + Vl + n + r + e + t, 1, a + Ps + Gs + Dt + ws + Cn + He + n + r + e + t, 1, a + To + lo + Ft + ws + Cn + He + n + r + e + t, 1, a + wt + Ao + sf + he + Cn + He + n + r + e + t, 1, a + Kc + Mf + uo + af + Cn + He + n + r + e + t, 1, a + xi + ho + lf + Wl + Cn + He + n + r + e + t, 1, a + Oo + $o + Qs + Nc + Cn + He + n + r + e + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + r + e + t, 1, a + Yc + $c + us + Qe + zt + Nt + n + r + e + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + r + e + t, 1, a + La + uf + Io + Zc + hv + cv + n + r + e + t, 1, i + bn + Ui + hf + ot + u + n + r + e + t, 1, i + Et + zn + st + ot + u + n + r + e + t, 1, i + Et + gf + st + ot + u + n + r + e + t, 1, a + Xc + Js + Ef + Qc + D + u + n + r + e + t, 1, i + fi + dr + m + ot + u + n + r + e + t, 1, i + fi + pi + m + R + u + n + r + e + t, 1, i + vg + Sv + Pe + y + u + n + r + e + t, 1, i + yg + tg + Pe + y + u + n + r + e + t, 1, i + Ce + rh + vl + y + u + n + r + e + t, 1, i + bg + Cv + vl + y + u + n + r + e + t, 1, i + wg + eg + " +k=1" + y + u + n + r + e + t, 1, i + pt + ds + Te + ot + u + n + r + e + t, 1, i + pt + pu + Te + y + u + n + r + e + t, 1, i + pt + Gc + fe + Lr + u + n + r + e + t, 1, i + Q + Cs + oi + xe + u + n + r + e + t, 1, i + Q + pr + st + R + u + n + r + e + t, 1, i + Zn + bi + Pe + Be + ih + n + r + e + t, 1, i + Zn + ba + Pe + Bs + ih + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + r + e + t, 1, a + Qn + Aa + it + Qt + y + u + n + r + e + t, 1, a + Vi + Dr + kn + si + H + u + n + r + e + t, 1, a + $r + bs + Q + Fr + H + Vl + n + r + e + t, 1, a + Xt + ao + Zn + qc + y + u + n + r + e + t, 1, a + ci + ta + Jt + dt + y + He + n + r + e + t, 1, a + Ih + Rh + dl + cl + Ye + u + n + r + e + t, 1, a + Ld + Md + Ed + Zr + Ye + u + n + r + e + t, 1, i + rn + Ra + m + xe + u + n + r + e + t, 1, i + we + zr + Pe + Bs + u + n + r + e + t, 1, a + sd + md + Ft + mu + H + u + n + r + e + t, 1, a + Os + Ts + es + Gt + ot + of + n + r + e + t, 1, a + Oa + ts + es + Ul + y + u + n + r + e + t, 1, a + rl + ea + Tn + pl + Yv + u + n + r + e + t, 1, a + gd + po + il + $t + _p + u + n + r + e + t, 1, a + Ne + vd + T + $t + tf + u + n + r + e + t, 1, a + Dh + Bh + Zl + wa + Lr + Mr + n + r + e + t, 1, a + fd + Nh + mo + Vc + Lr + Mr + n + r + e + t, 1, a + Gh + Zu + wu + uc + Lr + Mr + n + r + e + t, 1, i + ia + ps + Bn + xe + u + n + r + e + t, 1, i + ia + ri + Bn + R + u + n + r + e + t, 1, i + Ys + d_ + fe + Hn + u + n + r + e + t, 1, i + Ys + cl + fe + y + u + n + r + e + t, 1, i + Z1 + p_ + st + py + u + n + r + e + t, 1, a + Na + Hd + ad + Yu + D + u + n + r + e + t, 1, a + Ls + Gs + Ia + fr + y + u + n + r + e + t, 1, i + jr + wi + m + ot + $v + n + r + e + t, 1, i + jr + xa + m + y + fl + n + r + e + t, 1, i + jr + qi + m + Lr + ef + n + r + e + t, 1, i + I + Yo + Pe + xe + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + nn + Ko + Vu + yd + u + n + r + e + t, 1, i + nn + jc + m + y + u + n + r + e + t, 1, i + nn + hi + Fc + _y + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + it + Di + an + Hn + u + n + r + e + t, 1, i + it + _s + an + Lp + u + n + r + e + t, 1, a + Ma + Ur + ye + vf + xe + u + n + r + e + t, 1, a + Le + _o + Bo + Lt + D + u + n + r + e + t, 1, a + Is + sl + Br + Lt + D + u + n + r + e + t, 1, a + Sd + Bl + cr + f + D + u + n + r + e + t, 1, a + jh + Fh + bn + f + D + u + n + r + e + t, 1, a + ki + ju + Sf + si + D + u + n + r + e + t, 1, a + kh + Fu + Ea + si + D + u + n + r + e + t, 1, a + dc + Kr + rn + he + Gn + u + n + r + e + t, 1, a + pc + hs + pt + he + ze + u + n + r + e + t, 1, i + Mi + Gt + rd + Be + u + n + r + e + t, 1, a + zh + _i + Ve + fr + D + u + n + r + e + t, 1, a + Cd + Rs + En + gn + D + u + n + r + e + t, 1, a + Eh + ud + ke + ah + D + u + n + r + e + t, 1, a + al + hd + Cf + Wc + ot + Ee + n + r + e + t, 1, a + Il + Sh + Ca + Fr + D + yr + n + r + e + t, 1, a + Ch + Rl + cs + gn + R + G + n + r + e + t, 1, a + Dl + zu + Zi + _l + D + ef + n + r + e + t, 1, a + qo + Ss + Po + Fr + xe + Kh + n + r + e + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + r + e + t, 1, a + Qu + oo + kn + ae + y + yr + n + r + e + t, 1, a + Ju + Co + Q + ae + y + G + n + r + e + t, 1, i + I + nf + zc + y + u + n + r + e + t, 1, a + xd + Ph + Ft + Zt + qn + yr + n + r + e + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + r + e + t, 1, a + Le + kd + Bo + ms + y + u + n + r + e + t, 1, a + Th + Uu + Li + he + y + u + n + r + e + t, 1, a + dd + Vd + ff + Un + D + u + n + r + e + t, 1, a + Uh + qh + Tf + zn + D + u + n + r + e + t, 1, a + qu + Ah + vs + On + D + u + n + r + e + t, 1, a + _u + cd + Ve + On + D + u + n + r + e + t, 1, a + Oh + Hu + _c + On + D + u + n + r + e + t, 1, i + cn + so + an + ot + u + n + r + e + t, 1, i + cn + ka + an + H + Mr + n + r + e + t, 1, i + cn + Uc + an + D + u + n + r + e + t, 1, i + cn + Yr + an + Lr + Mr + n + r + e + t, 1, a + tn + fn + wn + Oe + ot + Da + n + r + e + t, 1, i + nn + Ir + m + J + u + n + r + ct + t, 1, i + nn + ya + m + J + u + n + r + ct + t, 1, i + nn + Bc + fe + J + u + n + r + ct + t, 1, a + Ps + Gs + Dt + ws + $e + ne + n + r + d + t, 1, a + To + lo + Ft + ws + $e + ne + n + r + d + t, 1, a + wt + Ao + sf + he + $e + ne + n + r + d + t, 1, a + Kc + Mf + uo + af + $e + ne + n + r + d + t, 1, a + xi + ho + lf + Wl + $e + ne + n + r + d + t, 1, a + Oo + $o + Qs + Nc + $e + ne + n + r + d + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + r + d + t, 1, a + Yc + $c + us + Qe + ai + pn + n + r + d + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + r + d + t, 1, a + La + uf + Io + Zc + qg + Hg + n + r + d + t, 1, i + bn + Ui + hf + Ht + u + n + r + d + t, 1, i + Et + zn + st + Ht + u + n + r + d + t, 1, i + Et + gf + st + Ht + u + n + r + d + t, 1, a + Xc + Js + Ef + Qc + D + u + n + r + d + t, 1, i + fi + dr + m + Ht + u + n + r + d + t, 1, i + fi + pi + m + ui + u + n + r + d + t, 1, i + pt + ds + Te + Ht + u + n + r + d + t, 1, i + pt + pu + Te + ge + u + n + r + d + t, 1, i + pt + Gc + fe + Zg + u + n + r + d + t, 3, a + Xt + ao + Zn + qc + ge + u + n + r + d + t, 1, a + ci + ta + Jt + dt + ge + ne + n + r + d + t, 1, a + sd + md + Ft + mu + Wg + u + n + r + d + t, 1, a + Os + Ts + es + Gt + Ht + of + n + r + d + t, 1, a + Oa + ts + es + Ul + ge + u + n + r + d + t, 1, a + rl + ea + Tn + pl + Vg + u + n + r + ct + t, 1, a + gd + po + il + $t + Kg + u + n + r + ct + t, 1, a + Ne + vd + T + $t + av + u + n + r + ct + t, 1, i + ia + ps + Bn + _e + u + n + r + d + t, 1, i + ia + ri + Bn + ui + u + n + r + d + t, 1, a + Na + Hd + ad + Yu + gs + u + n + r + ct + t, 1, i + nn + Ko + Vu + yd + u + n + r + d + t, 1, i + nn + jc + m + ge + u + n + r + d + t, 1, i + nn + hi + Fc + Yg + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, i + it + Di + an + $g + u + n + r + d + t, 1, i + it + _s + an + Xg + u + n + r + d + t, 1, a + Ma + Ur + ye + vf + _e + u + n + r + d + t, 1, a + Le + _o + Bo + Lt + gs + u + n + r + ct + t, 1, a + Is + sl + Br + Lt + gs + u + n + r + ct + t, 1, a + ki + ju + Sf + si + D + u + n + r + d + t, 1, a + kh + Fu + Ea + si + D + u + n + r + d + t, 1, a + dc + Kr + rn + he + n_ + u + n + r + ct + t, 1, a + pc + hs + pt + he + r_ + u + n + r + ct + t, 1, a + Eh + ud + ke + ah + D + u + n + r + d + t, 1, a + al + hd + Cf + Wc + Ht + zi + n + r + d + t, 1, a + Il + Sh + Ca + Fr + D + Wf + n + r + d + t, 1, a + Ch + Rl + cs + gn + ui + G + n + r + d + t, 1, a + Dl + zu + Zi + _l + D + iv + n + r + d + t, 1, a + qo + Ss + Po + Fr + _e + ov + n + r + d + t, 1, a + Qn + Ho + kr + ae + vi + D3 + n + r + ct + t, 1, a + Qu + oo + kn + ae + vi + U3 + n + r + ct + t, 1, a + Ju + Co + Q + ae + vi + q3 + n + r + ct + t, 1, a + xd + Ph + Ft + Zt + Vf + Wf + n + r + d + t, 1, a + Xt + Pa + Jt + Zt + Vf + zi + n + r + d + t, 1, a + Le + kd + Bo + ms + ge + u + n + r + d + t, 1, a + Th + Uu + Li + he + ge + u + n + r + d + t, 1, a + qu + Ah + vs + On + D + u + n + r + d + t, 1, a + _u + cd + Ve + On + D + u + n + r + d + t, 1, a + Oh + Hu + _c + On + D + u + n + r + d + t, 1, i + h + " +lon_0=13" + Me + y + u + Ke + le + ML + e + t, 1, i + " +lat_0=24.45" + kM + vl + ot + oa + b + M5 + e + t, 1, c + fa + Z + O + F1 + e + t, 2, i + ng + " +lon_0=41.53333333333333 +k=1 +x_0=1300000" + u + _ + s + e + t, 1, i + ng + " +lon_0=44.53333333333333 +k=1" + s6 + u + _ + s + e + t, 1, i + ng + " +lon_0=47.53333333333333 +k=1" + a6 + u + _ + s + e + t, 1, i + ng + " +lon_0=50.53333333333333 +k=1" + l6 + u + _ + s + e + t, 1, i + p3 + " +lon_0=50.76666666666667 +k=1" + s6 + u + _ + s + e + t, 1, i + p3 + " +lon_0=53.76666666666667 +k=1" + a6 + u + _ + s + e + t, 1, i + p3 + " +lon_0=56.76666666666667 +k=1" + l6 + u + _ + s + e + t, 1, c + Qi + b + mL + e + t, 1, c + Qi + b + EL + e + t, 2, i + h + qv + m + Re + u + n + r + e + t, 1, i + h + c_ + m + Re + u + n + r + e + t, 1, i + h + f_ + m + Re + u + n + r + e + t, 1, i + h + Hv + m + Re + u + n + r + e + t, 1, i + h + Ul + m + Re + u + n + r + e + t, 1, i + h + Zv + m + Re + u + n + r + e + t, 1, i + h + Wv + m + Re + u + n + r + e + t, 1, i + h + Un + m + Re + u + n + r + e + t, 1, se + Zl + r6 + b_ + Gn + u6 + n + r + e + t, 1, se + " +lat_0=47.25" + P0 + b_ + H + _r + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 2, ur + " +lat_1=55" + Af + F_ + df + z + u + w + d + t, 1, i + Zn + bi + Pe + Jg + oe + n + r + d + t, 1, i + Zn + ba + Pe + Bs + oe + n + r + d + t, 1, i + Zn + bi + Pe + Jg + oe + n + r + d + t, 1, i + Zn + ba + Pe + Bs + oe + n + r + d + t, 1, c + Tr + b + SL + e + t, 1, c + Tr + b + gL + e + t, 1, c + Ai + b + Jw + e + t, 1, c + Ai + n + r + e + t, 1, c + Tr + b + zL + e + t, 2, c + js + Z + n + r + e + t, 1, c + Cl + Z + b + UL + e + t, 1, c + Ka + Z + b + D5 + e + t, 1, c + Ya + Z + b + t8 + e + t, 2, c + Xi + Z + b + vL + e + t, 1, c + Ms + Z + b + J5 + e + t, 6, c + Qr + F + KL + e + t, 1, c + Jl + Z + b + yL + e + t, 3, a + Ls + sa + ce + he + H + u + n + r + e + t, 1, a + Ls + sa + ce + he + i_ + u + n + r + ct + t, 1, a + Ls + sa + ce + he + H + u + n + r + e + t, 1, a + Ls + sa + ce + he + i_ + u + n + r + ct + t, 1, c + Ms + Z + b + Yw + e + t, 1, c + Ms + Z + b + CL + e + t, 1, c + Ms + Z + b + P5 + e + t, 1, c + Ms + Z + b + Fm + e + t, 1, c + Xi + Z + b + bL + e + t, 1, du + " +lon_0=110" + t1 + mp + Mp + O + F1 + e + t, 1, du + " +lon_0=110" + t1 + mp + Mp + O + va + e + t, 1, du + " +lon_0=110" + t1 + mp + Mp + O + Um + e + t, 1, i + h + yo + Me + ze + u + b + tu + e + t, 1, i + h + hr + Me + " +x_0=2520000" + u + b + tu + e + t, 1, ur + z_ + " +lat_2=58.5" + mo + " +lon_0=-126" + Ye + u + n + r + e + t, 1, c + bo + n + r + e + t, 1, i + h + no + " +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=13.5 +k=1" + Nn + u + n + r + e + t, 1, i + h + hr + " +k=1" + Nn + u + n + r + e + t, 1, i + h + my + " +k=1" + Nn + u + n + r + e + t, 1, i + h + Lf + " +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=14.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=15.75 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=17.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=18.75 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=20.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=21.75 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=23.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + LM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + MM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + EM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + SM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + CM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + PM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + LM + " +k=1" + ze + u + O + e + t, 1, i + h + MM + " +k=1" + ze + u + O + e + t, 1, i + h + EM + " +k=1" + ze + u + O + e + t, 1, i + h + SM + " +k=1" + ze + u + O + e + t, 1, i + h + CM + " +k=1" + ze + u + O + e + t, 1, i + h + PM + " +k=1" + ze + u + O + e + t, 1, _n + K + " +lat_ts=-71" + qr + " +k=1" + z + u + M + e + t, 1, _n + K + " +lat_ts=-71 +lon_0=70 +k=1" + _p + fl + M + e + t, 1, a + " +lat_1=-68.5 +lat_2=-74.5 +lat_0=-50 +lon_0=70" + _p + fl + M + e + t, 1, a + U_ + Af + vc + xl + tf + __ + n + r + e + t, 1, ra + vc + xl + m_ + g_ + n + r + e + t, 1, c + Fs + Z + W + rg + e + t, 1, c + wo + Z + W + rg + e + t, 3, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, c + Ll + n + r + e + t, 1, c + xu + n + r + e + t, 1, c + Gi + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 1, c + Go + n + r + e + t, 1, c + Fs + n + r + e + t, 1, c + wo + n + r + e + t, 5, c + El + b + Xm + e + t, 1, c + Of + b + Xm + e + t, 1, c + Qi + b + Xm + e + t, 1, a + " +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19" + y + He + n + r + e + t, 1, i + h + " +lon_0=-8.5 +k=1" + yl + " +y_0=-7800000" + b + E5 + e + t, 1, i + h + ro + Me + y + " +y_0=-6000000" + n + r + e + t, 1, c + Ms + Z + b + iL + e + t, 1, c + Qi + b + z5 + e + t, 1, c + El + b + V5 + e + t, 1, c + El + b + H5 + e + t, 1, c + Gi + W + r + e + t, 1, c + bo + W + r + e + t, 1, i + h + " +lon_0=37" + Wp + y + t6 + b + ut + e + t, 1, c + Go + n + r + e + t, 1, lr + " +lat_0=52.41864827777778 +lon_0=13.62720366666667" + wf + " +y_0=10000" + O + ve + e + t, 1, i + h + On + Me + y + " +y_0=-4500000" + w + e + t, 1, i + h + On + Me + gy + Pv + n + r + e + t, 1, i + h + On + Me + gy + Pv + n + r + e + t, 1, i + Ve + gv + Ba + R + u + n + r + e + t, 2, i + we + vv + Ba + xe + u + n + r + e + t, 1, i + Ve + gv + Ba + R + u + n + r + e + t, 2, i + we + vv + Ba + xe + u + n + r + e + t, 1, Jn + xg + " +lonc=-86" + fv + Me + dv + uv + xo + pv + n + r + e + t, 1, Jn + xg + " +lonc=-86" + fv + Me + dv + uv + xo + pv + n + r + e + t, 1, a + TM + AM + OM + fr + " +x_0=914400 +y_0=914400" + w + ct + t, 1, a + TM + AM + OM + fr + Ye + Ee + n + r + e + t, 1, a + Pd + Kd + lh + fr + ze + Kh + n + r + e + t, 1, ur + Pd + Kd + lh + fr + ze + fl + n + r + e + t, 1, a + Pd + Kd + lh + fr + ze + Kh + n + r + e + t, 1, ur + Pd + Kd + lh + fr + ze + fl + n + r + e + t, 1, ur + " +lat_1=24" + vy + " +lat_0=24" + ic + H + u + n + r + e + t, 1, ur + " +lat_1=24" + vy + " +lat_0=24" + ic + H + u + n + r + e + t, 1, a + eu + Hh + Jt + dt + ze + Ee + n + r + e + t, 1, a + eu + Hh + Jt + dt + ze + zi + n + r + d + t, 1, a + eu + Hh + Jt + dt + ze + Ee + n + r + e + t, 1, a + eu + Hh + Jt + dt + ze + zi + n + r + d + t, 1, c + zs + O + rt + e + t, 1, c + da + O + rt + e + t, 1, c + Sl + O + rt + e + t, 1, c + Ha + O + rt + e + t, 1, c + Ql + O + rt + e + t, 1, c + zs + n + r + e + t, 1, c + da + n + r + e + t, 1, c + Sl + n + r + e + t, 1, c + Ha + n + r + e + t, 1, c + Ql + n + r + e + t, 1, a + " +lat_1=-14.26666666666667 +lat_0=-14.26666666666667" + k_ + " +k_0=1" + X + " +y_0=95169.31165862332" + F + PL + d + t, 4, i + h + Yi + Me + y + u + Gr + Wt + fL + e + t, 1, a + " +lat_1=-28" + Qy + " +lat_0=-32" + k + Ye + yr + n + r + e + t, 1, i + y_ + " +lon_0=-2.416666666666667 +k=0.999997 +x_0=47000" + Fp + n + r + e + t, 1, i + " +lat_0=49.225 +lon_0=-2.135 +k=0.9999999000000001" + wf + " +y_0=70000" + n + r + e + t, 1, a + " +lat_1=-36 +lat_2=-38 +lat_0=-37 +lon_0=145" + Gn + In + bt + V + e + t, 1, a + " +lat_1=-36 +lat_2=-38 +lat_0=-37 +lon_0=145" + Gn + th + n + r + e + t, 1, a + " +lat_1=-18" + Qy + h + " +lon_0=134" + z + u + n + r + e + t, 1, i + " +lat_0=-28" + ac + vl + yl + Mr + n + r + e + t, 1, i + W1 + " +lon_0=-80.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-77.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-74.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-71.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-68.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + h + yy + " +k=0.999" + Ye + Ee + b + sL + e + t, 1, se + " +lat_0=50.625 +lon_0=21.08333333333333" + Wp + " +x_0=4637000 +y_0=5467000" + _ + U + e + t, 1, i + h + v + Bn + y + u + F + Xe + e + t, 1, i + h + Jy + Bn + y + u + F + Xe + e + t, 1, i + h + tb + Bn + y + u + F + Xe + e + t, 1, i + h + tt + Bn + y + u + F + Xe + e + t, 1, i + h + Dp + Bn + y + u + F + Xe + e + t, 1, i + h + Ud + " +k=1" + y + u + n + r + e + t, 1, i + h + Kp + " +k=1" + y + u + n + r + e + t, 1, i + h + Rn + " +k=1" + y + u + n + r + e + t, 1, i + h + q_ + " +k=1" + y + u + n + r + e + t, 1, i + h + O0 + " +k=1" + y + u + n + r + e + t, 1, i + h + ro + " +k=1" + y + u + n + r + e + t, 1, i + h + qd + " +k=1" + y + u + n + r + e + t, 1, i + h + Yp + " +k=1" + y + u + n + r + e + t, 1, i + h + Ei + " +k=1" + y + u + n + r + e + t, 1, i + h + Yd + " +k=1" + y + u + n + r + e + t, 1, i + h + " +lon_0=29 +k=1" + y + u + n + r + e + t, 1, i + h + Do + " +k=1" + y + u + n + r + e + t, 1, i + h + kf + " +k=1" + y + u + n + r + e + t, 2, lr + " +lat_0=-18 +lon_0=178 +x_0=109435.392 +y_0=141622.272" + W3 + K3 + a3 + " +to_meter=0.201168" + t, 1, c + Xl + Z + b + Ww + e + t, 1, c + Jl + Z + b + Ww + e + t, 6, c + Us + Gr + Wt + Km + e + t, 1, c + qs + Gr + Wt + Km + e + t, 3, i + h + " +lon_0=18.05779 +k=0.99999425 +x_0=100178.1808 +y_0=-6500614.7836" + n + r + e + t, 1, ur + z_ + " +lat_2=58.5" + mo + " +lon_0=-126" + Ye + u + n + r + e + t, 1, c + Ya + n + r + e + t, 1, c + Eu + n + r + e + t, 1, c + Su + n + r + e + t, 1, c + ku + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, a + by + " +lat_2=53.5" + h + zp + " +x_0=930000 +y_0=6430000" + n + r + e + t, 1, a + by + " +lat_2=53.5" + h + zp + " +x_0=930000 +y_0=6430000" + n + r + e + t, 1, a + " +lat_1=-20.66666666666667 +lat_2=-22.33333333333333 +lat_0=-21.5" + eb + H + oa + n + r + e + t, 1, c + Ms + Z + W + X5 + e + t, 1, a + " +lat_1=-22.24469175 +lat_2=-22.29469175 +lat_0=-22.26969175 +lon_0=166.44242575 +x_0=0.66 +y_0=1.02" + b + Fm + e + t, 1, a + " +lat_1=-22.24472222222222 +lat_2=-22.29472222222222 +lat_0=-22.26972222222222 +lon_0=166.4425 +x_0=8.313000000000001 +y_0=-2.354" + b + Fm + e + t, 1, Jn + hh + h6 + ZE + Fd + wf + u + xo + gr + Y3 + G3 + " +to_meter=20.116756" + t, 1, Jn + hh + h6 + ZE + Fd + " +x_0=804670.24" + u + xo + gr + Y3 + G3 + e + t, 1, c + If + Z + n + r + e + t, 1, c + Ms + Z + n + r + e + t, 1, c + ja + Z + n + r + e + t, 1, c + ja + Z + b + Yw + e + t, 2, ur + " +lat_1=42.122774 +lat_2=49.01518 +lat_0=45.568977 +lon_0=-84.455955" + Ye + Ee + n + r + e + t, 1, ur + " +lat_1=42.122774 +lat_2=49.01518 +lat_0=45.568977 +lon_0=-83.248627" + Ye + Ee + n + r + e + t, 1, i + h + Yy + Me + y + u + Gr + Wt + Km + e + t, 1, i + h + Hp + " +k=0.9965000000000001" + Ye + u + b + ft + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + Es + n + r + e + t, 1, c + Wa + n + r + e + t, 1, c + Fa + n + r + e + t, 1, c + El + n + r + e + t, 1, c + Of + n + r + e + t, 1, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, i + h + yo + Bn + ot + u + b + ft + e + t, 1, i + h + " +lon_0=11" + Bn + ot + u + b + ft + e + t, 1, i + h + " +lon_0=13" + Bn + ot + u + b + ft + e + t, 1, i + h + hr + Bn + ot + u + b + ft + e + t, 1, i + h + Hp + Bn + ot + u + b + ft + e + t, 1, i + h + Ud + Bn + ot + u + b + ft + e + t, 1, i + h + Rn + Bn + ot + u + b + ft + e + t, 1, i + h + O0 + Bn + ot + u + b + ft + e + t, 1, i + h + qd + Bn + ot + u + b + ft + e + t, 1, c + Gi + b + ft + e + t, 1, a + Ep + Xh + ks + I3 + ze + c6 + N + Q5 + e + t, 1, c + bo + b + ft + e + t, 1, c + ca + b + ft + e + t, 1, c + Go + b + ft + e + t, 1, a + _3 + m3 + K + Nd + z + u + M + e + t, 1, a + _3 + m3 + K + hc + z + u + M + e + t, 1, a + _3 + m3 + K + " +lon_0=-42" + z + u + M + e + t, 1, a + Fn + nr + K + w_ + z + u + M + e + t, 1, a + Fn + nr + K + Nd + z + u + M + e + t, 1, a + Fn + nr + K + hc + z + u + M + e + t, 1, a + Fn + nr + K + fc + z + u + M + e + t, 1, a + Fn + nr + K + R0 + z + u + M + e + t, 1, a + Fn + nr + K + Vp + z + u + M + e + t, 1, a + Fn + nr + K + wl + z + u + M + e + t, 1, a + Fn + nr + K + Yi + z + u + M + e + t, 1, a + Fn + nr + K + ml + z + u + M + e + t, 1, a + Fn + nr + K + la + z + u + M + e + t, 1, a + Fn + nr + K + gl + z + u + M + e + t, 1, a + Fn + nr + K + Gp + z + u + M + e + t, 1, a + Fn + nr + K + bf + z + u + M + e + t, 1, a + Fn + nr + K + T0 + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-102" + z + u + M + e + t, 1, a + Ue + on + K + On + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-78" + z + u + M + e + t, 1, a + Ue + on + K + Nd + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-18" + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-6" + z + u + M + e + t, 1, a + Ue + on + K + Jp + z + u + M + e + t, 1, a + Ue + on + K + Lf + z + u + M + e + t, 1, a + Ue + on + K + Do + z + u + M + e + t, 1, a + Ue + on + K + fc + z + u + M + e + t, 1, a + Ue + on + K + R0 + z + u + M + e + t, 1, a + Ue + on + K + Vp + z + u + M + e + t, 1, a + Ue + on + K + wl + z + u + M + e + t, 1, a + Ue + on + K + Yi + z + u + M + e + t, 1, a + Ue + on + K + ml + z + u + M + e + t, 1, a + Ue + on + K + la + z + u + M + e + t, 1, a + Ue + on + K + gl + z + u + M + e + t, 1, a + Ue + on + K + Gp + z + u + M + e + t, 1, a + Ue + on + K + bf + z + u + M + e + t, 1, a + Ue + on + K + T0 + z + u + M + e + t, 1, a + Ue + on + K + R_ + z + u + M + e + t, 1, a + ht + Dn + K + wy + z + u + M + e + t, 1, a + ht + Dn + K + xy + z + u + M + e + t, 1, a + ht + Dn + K + Qh + z + u + M + e + t, 1, a + ht + Dn + K + _l + z + u + M + e + t, 1, a + ht + Dn + K + zn + z + u + M + e + t, 1, a + ht + Dn + K + P0 + z + u + M + e + t, 1, a + ht + Dn + K + " +lon_0=-27" + z + u + M + e + t, 1, a + ht + Dn + K + " +lon_0=-9" + z + u + M + e + t, 1, a + ht + Dn + K + yo + z + u + M + e + t, 1, a + ht + Dn + K + Ei + z + u + M + e + t, 1, a + ht + Dn + K + ks + z + u + M + e + t, 1, a + ht + Dn + K + Pf + z + u + M + e + t, 1, a + ht + Dn + K + Ci + z + u + M + e + t, 1, a + ht + Dn + K + Ti + z + u + M + e + t, 1, a + ht + Dn + K + v + z + u + M + e + t, 1, a + ht + Dn + K + k + z + u + M + e + t, 1, a + ht + Dn + K + ac + z + u + M + e + t, 1, a + ht + Dn + K + vu + z + u + M + e + t, 1, a + gt + vt + K + x_ + z + u + M + e + t, 1, a + gt + vt + K + " +lon_0=-144" + z + u + M + e + t, 1, a + gt + vt + K + pf + z + u + M + e + t, 1, a + gt + vt + K + _f + z + u + M + e + t, 1, a + gt + vt + K + D_ + z + u + M + e + t, 1, a + gt + vt + K + " +lon_0=-48" + z + u + M + e + t, 1, a + gt + vt + K + " +lon_0=-24" + z + u + M + e + t, 1, a + gt + vt + K + qr + z + u + M + e + t, 1, a + gt + vt + K + ro + z + u + M + e + t, 1, a + gt + vt + K + I0 + z + u + M + e + t, 1, a + gt + vt + K + j_ + z + u + M + e + t, 1, a + gt + vt + K + $l + z + u + M + e + t, 1, a + gt + vt + K + Kl + z + u + M + e + t, 1, a + gt + vt + K + O_ + z + u + M + e + t, 1, a + gt + vt + K + I_ + z + u + M + e + t, 1, _n + K + An + L_ + " +k=1" + z + u + M + e + t, 1, _n + K + An + xy + " +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-105 +k=1" + z + u + M + e + t, 1, _n + K + An + B_ + " +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-45 +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-15 +k=1" + z + u + M + e + t, 1, _n + K + An + hr + " +k=1" + z + u + M + e + t, 1, _n + K + An + ks + " +k=1" + z + u + M + e + t, 1, _n + K + An + Si + " +k=1" + z + u + M + e + t, 1, _n + K + An + Pn + " +k=1" + z + u + M + e + t, 1, _n + K + An + k + " +k=1" + z + u + M + e + t, 1, _n + K + An + lc + " +k=1" + z + u + M + e + t, 1, _n + K + An + Td + " +k=1" + z + u + M + e + t, 1, _n + K + An + On + " +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-30 +k=1" + z + u + M + e + t, 1, _n + K + An + Do + " +k=1" + z + u + M + e + t, 1, _n + K + An + Yi + " +k=1" + z + u + M + e + t, 1, _n + K + An + bf + " +k=1" + z + u + M + e + t, 1, _n + K + An + qr + " +k=1" + z + u + M + e + t, 1, a + gt + vt + " +lat_0=-78" + T0 + z + u + M + e + t, 2, c + Ka + Z + n + Fi + e + t, 1, c + Cl + Z + n + Fi + e + t, 1, c + Ya + Z + n + Fi + e + t, 1, c + Eu + Z + n + Fi + e + t, 1, a + IM + " +lat_2=58" + RM + ro + y + " +y_0=6375000" + n + B5 + e + t, 1, a + IM + " +lat_2=58" + RM + ro + y + " +y_0=6375000" + n + r + e + t, 1, c + Ya + Z + b + R5 + e + t, 1, c + Ya + Z + b + S5 + e + t, 1, c + Cl + Z + b + A5 + e + t, 1, c + Cl + Z + b + O5 + e + t, 1, c + Ka + Z + b + tL + e + t, 1, c + Ni + W + TL + e + t, 1, a + " +lat_1=-30.75 +lat_2=-35.75 +lat_0=-33.25" + yf + " +x_0=9300000" + In + n + r + e + t, 1, ur + H_ + M_ + h + pf + z + u_ + w + e + t, 1, ur + H_ + M_ + h + pf + z + u_ + n + r + e + t, 1, ur + H_ + M_ + h + pf + z + u_ + n + r + e + t, 1, c + Qr + b + Jw + e + t, 1, c + Qr + n + r + e + t, 3, i + h + q_ + m + y + kt + N + e + t, 1, i + h + ro + m + y + kt + N + e + t, 1, i + h + no + m + y + kt + N + e + t, 1, i + h + " +lon_0=14" + m + y + kt + N + e + t, 1, i + h + " +lon_0=16" + m + y + kt + N + e + t, 1, i + h + Lf + m + y + kt + N + e + t, 1, i + h + Kp + m + y + kt + N + e + t, 1, i + h + q_ + m + y + kt + N + e + t, 1, i + h + ro + m + y + kt + N + e + t, 1, i + h + Yp + m + y + kt + N + e + t, 1, i + h + Yd + m + y + kt + N + e + t, 1, i + h + Do + m + y + kt + N + e + t, 1, se + " +lat_0=52.16666666666666 +lon_0=19.16666666666667 +k=0.999714" + y + He + _ + U + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + U + e + t, 1, i + h + Lf + " +k=1" + Vh + u + _ + U + e + t, 1, i + h + Rn + " +k=1" + ql + u + _ + U + e + t, 1, i + h + ro + " +k=1" + id + u + _ + U + e + t, 1, i + h + hr + " +k=1" + qn + u + _ + U + e + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + U + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + U + e + t, 1, c + bc + Z + b + AL + e + t, 1, a + " +lat_1=-20.19506944444445 +lat_0=-20.19506944444445 +lon_0=57.52182777777778 +k_0=1" + Ye + Ee + N + aL + e + t, 1, ur + " +lat_1=55" + Af + F_ + df + z + u + n + r + e + t, 1, i + h + no + m + y + kt + N + Pt + e + t, 1, i + h + " +lon_0=14" + m + y + kt + N + Pt + e + t, 1, i + h + " +lon_0=16" + m + y + kt + N + Pt + e + t, 1, c + bo + Z + N + Pt + e + t, 1, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, c + Ll + n + r + e + t, 1, i + h + ro + Wp + y + u + n + r + e + t, 1, a + Na + io + " +lat_0=63.390675" + n8 + " +x_0=6200000" + G + n + r + e + t, 1, a + Na + io + " +lat_0=63.390675" + n8 + " +x_0=6200000" + G + n + r + e + t, 2, i + " +lat_0=0.1 +lon_0=21.95 +k=1" + Hn + u + _ + s + e + t, 1, i + " +lat_0=0.1 +lon_0=24.95 +k=1 +x_0=1250000" + u + _ + s + e + t, 1, i + " +lat_0=0.1 +lon_0=27.95 +k=1 +x_0=2250000" + u + _ + s + e + t, 1, c + Gi + Z + b + e + t, 1, c + Gi + Z + b + e + t, 1, i + fi + kf + " +k=1 +x_0=615000 +y_0=810000" + Nl + lL + e + t, 3, a + Ki + ol + Jc + oc + yv + u + n + r + e + t, 2, a + Mh + bd + As + zn + wd + u + n + r + e + t, 1, a + Mh + bd + As + zn + wd + u + n + r + ct + t, 1, a + ld + Lh + ye + Rt + D + u + n + r + e + t, 1, a + ld + Lh + ye + Rt + D + u + n + r + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + d + t, 2, c + Qi + N + e + t, 1, c + vo + N + e + t, 1, c + Ll + N + e + t, 1, c + ja + w + e + t, 1, c + Xl + w + e + t, 1, c + ja + n + r + e + t, 1, c + Xl + n + r + e + t, 1, c + vo + b + e + t, 1, Jn + hh + h6 + " +alpha=323.0257964666666" + Fd + " +x_0=804671" + u + xo + gr + n + e + t, 1, Jn + hh + Z_ + WE + Fd + z + u + xo + V1 + n + e + t, 1, lr + " +lat_0=2.121679744444445 +lon_0=103.4279362361111 +x_0=-14810.562 +y_0=8758.32" + n + e + t, 1, lr + " +lat_0=2.682347636111111 +lon_0=101.9749050416667 +x_0=3673.785 +y_0=-4240.573" + n + e + t, 1, lr + " +lat_0=3.769388088888889 +lon_0=102.3682989833333 +x_0=-7368.228 +y_0=6485.858" + n + e + t, 1, lr + " +lat_0=3.68464905 +lon_0=101.3891079138889 +x_0=-34836.161 +y_0=56464.049" + n + e + t, 1, lr + " +lat_0=4.9762852 +lon_0=103.070275625 +x_0=19594.245 +y_0=3371.895" + n + e + t, 1, lr + " +lat_0=5.421517541666667 +lon_0=100.3443769638889 +x_0=-23.414 +y_0=62.283" + n + e + t, 1, lr + " +lat_0=5.964672713888889 +lon_0=100.6363711111111" + z + u + n + e + t, 1, lr + " +lat_0=4.859063022222222 +lon_0=100.8154105861111 +x_0=-1.769 +y_0=133454.779" + n + e + t, 1, lr + " +lat_0=5.972543658333334 +lon_0=102.2952416694444 +x_0=13227.851 +y_0=8739.894" + n + e + t, 1, i + h + Lf + " +k=1" + y + u + b + At + e + t, 1, i + h + eo + " +k=1" + xn + u + b + At + e + t, 1, du + mc + " +lat_ts=42" + z + u + _ + s + e + t, 1, i + h + jp + " +k=1 +x_0=60500000" + u + _ + s + e + t, 1, i + h + jp + " +k=1 +x_0=60500000" + u + _ + l + e + t, 1, c + wo + N + g + e + t, 1, c + Xi + N + g + e + t, 1, c + Ni + N + g + e + t, 1, a + Ep + Xh + ks + I3 + ze + c6 + N + e + t, 1, du + qr + " +k=1" + z + u + M + e + t, 1, i + h + yo + " +k=1" + qn + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + hr + " +k=1" + xn + u + O + e + t, 1, i + h + E_ + " +k=0.9992" + y + u + n + r + e + t, 1, i + h + E_ + " +k=0.9992" + z + u + n + r + e + t, 1, i + h + E_ + " +k=0.9992" + y + u + n + r + e + t, 1, i + h + E_ + " +k=0.9992" + z + u + n + r + e + t, 1, a + Ki + ol + Jc + oc + B + u + n + r + d + t, 1, c + Us + W + mt + e + t, 1, c + qs + W + mt + e + t, 1, lr + wM + xM + " +x_0=40243.57775604237 +y_0=19069.93351512578" + qe + Vn + Qg + t, 1, ra + $i + qr + z + u + nb + rb + e + t, 1, ra + K + qr + z + u + nb + rb + e + t, 1, "+proj=cea" + qr + " +lat_ts=30" + z + u + nb + rb + e + t, 1, _n + $i + " +lat_ts=70 +lon_0=-45 +k=1" + z + u + ib + bv + e + t, 1, _n + K + " +lat_ts=-70" + qr + " +k=1" + z + u + ib + bv + e + t, 1, _n + $i + " +lat_ts=70 +lon_0=-45 +k=1" + z + u + M + e + t, 1, i + " +lat_0=1.366666666666667 +lon_0=103.8333333333333 +k=1 +x_0=28001.642 +y_0=38744.572" + W + e + t, 1, a + " +lat_1=18 +lat_2=24 +lat_0=21" + la + y + He + x + E + e + t, 1, a + Na + yu + " +lat_0=47.5" + K1 + H + Vl + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + de + n + r + d + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + r + d + t, 1, a + Vi + Dr + kn + si + St + u + n + r + d + t, 1, a + $r + bs + Q + Fr + St + Kf + n + r + d + t, 1, i + jr + wi + m + Yf + tv + n + r + d + t, 1, i + jr + xa + m + Ie + fl + n + r + d + t, 1, i + jr + qi + m + $ + nv + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, a + Qo + Wi + T + Qt + ze + de + n + r + d + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + r + d + t, 1, a + Vi + Dr + kn + si + St + u + n + r + d + t, 1, a + $r + bs + Q + Fr + St + Kf + n + r + d + t, 1, i + jr + wi + m + Yf + tv + n + r + d + t, 1, i + jr + xa + m + Ie + fl + n + r + d + t, 1, i + jr + qi + m + $ + nv + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, a + Xo + Ta + ke + xs + St + u + n + r + d + t, 1, a + Wr + cf + ys + xs + St + Kf + n + r + d + t, 1, i + Q + Cs + oi + _e + u + n + r + d + t, 1, i + Q + pr + st + ev + u + n + r + d + t, 1, i + I + Yo + Pe + _e + u + n + r + d + t, 1, i + Mi + Gt + rd + Q1 + u + n + r + d + t, 1, c + Ni + N + h0 + e + t, 1, c + js + N + h0 + e + t, 1, a + Xo + Ta + ke + xs + St + u + n + r + d + t, 1, a + Wr + cf + ys + xs + St + Kf + n + r + d + t, 1, i + Q + Cs + oi + _e + u + n + r + d + t, 1, i + Q + pr + st + ev + u + n + r + d + t, 1, i + I + Yo + Pe + _e + u + n + r + d + t, 1, i + Mi + Gt + rd + Q1 + u + n + r + d + t, 1, a + kg + Lg + " +lat_0=50.797815" + DM + " +x_0=150328 +y_0=166262" + n + r + e + t, 1, a + " +lat_1=18" + lh + mu + " +k_0=1" + ky + " +y_0=650000" + W + r + e + t, 1, c + yi + W + r + e + t, 1, c + Xr + W + r + e + t, 1, a + Ih + Rh + dl + cl + Vt + u + n + r + d + t, 1, a + Ld + Md + Ed + Zr + Vt + u + n + r + d + t, 1, a + qo + Ss + " +lat_0=25.5" + Zr + Vt + u + n + r + d + t, 2, a + Cd + Rs + En + gn + D + u + n + r + d + t, 1, a + Ih + Rh + dl + cl + Vt + u + n + r + d + t, 1, a + Ld + Md + Ed + Zr + Vt + u + n + r + d + t, 1, a + zh + _i + Ve + fr + D + u + n + r + d + t, 1, a + Cd + Rs + En + gn + D + u + n + r + d + t, 1, i + " +lat_0=-17 +lon_0=178.75 +k=0.99985" + Cn + ef + x + A + e + t, 1, c + Qi + Ke + le + l3 + e + t, 1, c + vo + Ke + le + l3 + e + t, 1, i + Ly + wv + Ba + y + u + n + r + e + t, 1, i + Ly + wv + Ba + y + u + n + r + e + t, 1, i + dl + U1 + Dd + ot + u + n + r + e + t, 1, i + fi + M0 + fe + D + u + n + r + e + t, 1, ur + " +lat_1=55" + Af + F_ + df + z + u + n + r + e + t, 1, Jn + " +lat_0=57" + Mg + Eg + m + rf + gi + xo + gr + n + r + e + t, 1, i + at + My + m + y + u + n + r + e + t, 1, i + at + Ey + m + y + u + n + r + e + t, 1, i + at + Td + m + y + u + n + r + e + t, 1, i + at + df + m + y + u + n + r + e + t, 1, i + at + rh + m + y + u + n + r + e + t, 1, i + at + Sy + m + y + u + n + r + e + t, 1, i + at + Cy + m + y + u + n + r + e + t, 1, i + at + k_ + m + y + u + n + r + e + t, 1, a + Sg + Cg + $p + Py + Ye + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + ct + t, 1, i + nn + Ir + m + J + u + n + r + e + t, 1, i + nn + Ir + m + J + u + n + r + ct + t, 1, i + nn + Bc + fe + J + u + n + r + e + t, 1, i + nn + Bc + fe + J + u + n + r + ct + t, 1, a + Xo + Ta + ke + xs + H + u + n + r + e + t, 1, a + Xo + Ta + ke + xs + St + u + n + r + d + t, 1, a + Wr + cf + ys + xs + H + Vl + n + r + e + t, 1, a + Wr + cf + ys + xs + St + Kf + n + r + d + t, 1, ur + H_ + M_ + h + pf + z + u_ + n + r + e + t, 1, a + Ps + Gs + Dt + ws + Cn + He + n + r + e + t, 1, a + Ps + Gs + Dt + ws + $e + ne + n + r + d + t, 1, a + To + lo + Ft + ws + Cn + He + n + r + e + t, 1, a + To + lo + Ft + ws + $e + ne + n + r + d + t, 1, a + wt + Ao + sf + he + Cn + He + n + r + e + t, 1, a + wt + Ao + sf + he + $e + ne + n + r + d + t, 1, a + Kc + Mf + uo + af + Cn + He + n + r + e + t, 1, a + Kc + Mf + uo + af + $e + ne + n + r + d + t, 1, a + xi + ho + lf + Wl + Cn + He + n + r + e + t, 1, a + xi + ho + lf + Wl + $e + ne + n + r + d + t, 1, a + Oo + $o + Qs + Nc + Cn + He + n + r + e + t, 1, a + Oo + $o + Qs + Nc + $e + ne + n + r + d + t, 1, a + Yc + $c + us + Qe + zt + Nt + n + r + e + t, 1, a + Yc + $c + us + Qe + ai + pn + n + r + d + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + r + e + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + r + d + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + r + e + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + r + d + t, 1, a + La + uf + Io + Zc + hv + cv + n + r + e + t, 1, a + La + uf + Io + Zc + qg + Hg + n + r + d + t, 1, i + bn + Ui + hf + ot + u + n + r + e + t, 1, i + bn + Ui + hf + Ht + u + n + r + d + t, 1, i + Et + zn + st + ot + u + n + r + e + t, 1, i + Et + zn + st + Ht + u + n + r + d + t, 1, ur + " +lat_1=24" + vy + " +lat_0=24" + ic + H + u + n + r + e + t, 1, a + Xc + Js + Ef + Qc + D + u + n + r + e + t, 1, a + Xc + Js + Ef + Qc + D + u + n + r + d + t, 1, i + Et + gf + st + ot + u + n + r + e + t, 1, i + Et + gf + st + Ht + u + n + r + d + t, 1, i + fi + dr + m + ot + u + n + r + e + t, 1, i + fi + dr + m + Ht + u + n + r + d + t, 1, i + fi + pi + m + R + u + n + r + e + t, 1, i + fi + pi + m + ui + u + n + r + d + t, 1, i + pt + pu + Te + y + u + n + r + e + t, 1, i + pt + pu + Te + ge + u + n + r + d + t, 1, i + pt + ds + Te + ot + u + n + r + e + t, 1, i + pt + ds + Te + Ht + u + n + r + d + t, 1, i + pt + Gc + fe + Lr + u + n + r + e + t, 1, i + pt + Gc + fe + Zg + u + n + r + d + t, 1, i + Q + Cs + oi + xe + u + n + r + e + t, 1, i + Q + Cs + oi + _e + u + n + r + d + t, 1, i + Q + pr + st + R + u + n + r + e + t, 1, i + Q + pr + st + ev + u + n + r + d + t, 1, i + Zn + bi + Pe + Be + ih + n + r + e + t, 1, i + Zn + bi + Pe + Jg + oe + n + r + d + t, 1, i + Zn + ba + Pe + Bs + ih + n + r + e + t, 1, i + Zn + ba + Pe + Bs + oe + n + r + d + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + de + n + r + d + t, 1, a + Qn + Aa + it + Qt + y + u + n + r + e + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + r + d + t, 1, a + Vi + Dr + kn + si + H + u + n + r + e + t, 1, a + Vi + Dr + kn + si + St + u + n + r + d + t, 1, a + $r + bs + Q + Fr + H + Vl + n + r + e + t, 1, a + $r + bs + Q + Fr + St + Kf + n + r + d + t, 1, a + Xt + ao + Zn + qc + y + u + n + r + e + t, 1, a + Xt + ao + Zn + qc + ge + u + n + r + d + t, 1, a + eu + Hh + Jt + dt + ze + Ee + n + r + e + t, 1, a + eu + Hh + Jt + dt + ze + zi + n + r + d + t, 1, a + ci + ta + Jt + dt + y + He + n + r + e + t, 1, a + ci + ta + Jt + dt + ge + ne + n + r + d + t, 1, a + Ih + Rh + dl + cl + Ye + u + n + r + e + t, 1, a + Ih + Rh + dl + cl + Vt + u + n + r + d + t, 1, a + Ld + Md + Ed + Zr + Ye + u + n + r + e + t, 1, a + Ld + Md + Ed + Zr + Vt + u + n + r + d + t, 1, i + Ly + wv + Ba + y + u + n + r + e + t, 1, i + Ve + gv + Ba + R + u + n + r + e + t, 1, i + we + vv + Ba + xe + u + n + r + e + t, 1, i + rn + Ra + m + xe + u + n + r + e + t, 1, i + we + zr + Pe + Bs + u + n + r + e + t, 1, a + sd + md + Ft + mu + H + u + n + r + e + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + r + d + t, 1, i + vg + Sv + Pe + X + u + F + We + d + t, 1, i + yg + tg + Pe + X + u + F + We + d + t, 1, i + Ce + rh + vl + X + u + F + We + d + t, 1, i + bg + Cv + vl + X + u + F + We + d + t, 1, i + wg + eg + " +k=1" + X + u + F + We + d + t, 1, a + Qu + oo + kn + ae + Ie + rv + n + r + d + t, 1, a + Ju + Co + Q + ae + Ie + G + n + r + d + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + r + d + t, 1, a + Qu + oo + kn + ae + Ie + rv + n + r + d + t, 1, a + Ju + Co + Q + ae + Ie + G + n + r + d + t, 1, ra + $i + jp + z + u + M + e + t, 1, ra + $i + Td + z + u + M + e + t, 1, ra + $i + fr + z + u + M + e + t, 1, ra + $i + " +lon_0=-40" + z + u + M + e + t, 1, ra + $i + xl + z + u + M + e + t, 1, ra + $i + Yi + z + u + M + e + t, 1, ur + " +lat_1=-18" + Qy + h + aa + z + u + n + r + e + t, 1, ur + BM + " +lat_2=68 +lat_0=59 +lon_0=-132.5" + y + He + n + r + e + t, 1, ur + BM + " +lat_2=68 +lat_0=59 +lon_0=-132.5" + y + He + n + r + e + t, 1, a + " +lat_1=62 +lat_2=70" + h + " +lon_0=-112" + z + u + n + r + e + t, 1, a + " +lat_1=62 +lat_2=70" + h + " +lon_0=-112" + z + u + n + r + e + t, 1, a + sd + md + Ft + mu + Wg + u + n + r + d + t, 1, a + Oa + ts + es + Ul + y + u + n + r + e + t, 1, a + Oa + ts + es + Ul + ge + u + n + r + d + t, 1, a + Os + Ts + es + Gt + ot + of + n + r + e + t, 1, a + Os + Ts + es + Gt + Ht + of + n + r + d + t, 1, a + gd + po + il + $t + _p + u + n + r + e + t, 1, a + gd + po + il + $t + Kg + u + n + r + ct + t, 1, a + rl + ea + Tn + pl + Yv + u + n + r + e + t, 1, a + rl + ea + Tn + pl + Vg + u + n + r + ct + t, 1, Jn + xg + " +lonc=-86" + fv + Me + dv + uv + xo + pv + n + r + e + t, 1, a + Ne + vd + T + $t + tf + u + n + r + e + t, 1, a + Ne + vd + T + $t + av + u + n + r + ct + t, 1, a + fd + Nh + mo + Vc + Lr + Mr + n + r + e + t, 1, a + Dh + Bh + Zl + wa + Lr + Mr + n + r + e + t, 1, a + Gh + Zu + wu + uc + Lr + Mr + n + r + e + t, 1, i + ia + ps + Bn + xe + u + n + r + e + t, 1, i + ia + ps + Bn + _e + u + n + r + d + t, 1, i + ia + ri + Bn + R + u + n + r + e + t, 1, i + ia + ri + Bn + ui + u + n + r + d + t, 1, i + Ys + cl + fe + y + u + n + r + e + t, 1, i + Ys + d_ + fe + Hn + u + n + r + e + t, 1, i + Z1 + p_ + st + py + u + n + r + e + t, 1, a + Na + Hd + ad + Yu + D + u + n + r + e + t, 1, a + Na + Hd + ad + Yu + gs + u + n + r + ct + t, 1, a + Ls + Gs + Ia + fr + y + u + n + r + e + t, 1, i + jr + xa + m + y + fl + n + r + e + t, 1, i + jr + xa + m + Ie + fl + n + r + d + t, 1, i + jr + wi + m + ot + $v + n + r + e + t, 1, i + jr + wi + m + Yf + tv + n + r + d + t, 1, i + jr + qi + m + Lr + ef + n + r + e + t, 1, i + jr + qi + m + $ + nv + n + r + d + t, 1, i + I + Yo + Pe + xe + u + n + r + e + t, 1, i + I + Yo + Pe + _e + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, i + nn + jc + m + y + u + n + r + e + t, 1, i + nn + jc + m + ge + u + n + r + d + t, 1, i + nn + Ko + Vu + yd + u + n + r + e + t, 1, i + nn + Ko + Vu + yd + u + n + r + d + t, 1, i + nn + hi + Fc + _y + u + n + r + e + t, 1, i + nn + hi + Fc + Yg + u + n + r + d + t, 1, i + it + Di + an + Hn + u + n + r + e + t, 1, i + it + Di + an + $g + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, a + Ma + Ur + ye + vf + xe + u + n + r + e + t, 1, a + Ma + Ur + ye + vf + _e + u + n + r + d + t, 1, i + it + _s + an + Lp + u + n + r + e + t, 1, i + it + _s + an + Xg + u + n + r + d + t, 1, a + Ki + ol + Jc + oc + yv + u + n + r + e + t, 1, a + Ki + ol + Jc + oc + B + u + n + r + d + t, 1, a + Le + _o + Bo + Lt + D + u + n + r + e + t, 1, a + Le + _o + Bo + Lt + gs + u + n + r + ct + t, 1, a + Is + sl + Br + Lt + D + u + n + r + e + t, 1, a + Is + sl + Br + Lt + gs + u + n + r + ct + t, 1, a + Sd + Bl + cr + f + D + u + n + r + e + t, 1, a + jh + Fh + bn + f + D + u + n + r + e + t, 1, a + ki + ju + Sf + si + D + u + n + r + e + t, 1, a + ki + ju + Sf + si + D + u + n + r + d + t, 1, a + kh + Fu + Ea + si + D + u + n + r + e + t, 1, a + kh + Fu + Ea + si + D + u + n + r + d + t, 1, a + Ls + sa + ce + he + H + u + n + r + e + t, 1, a + Ls + sa + ce + he + i_ + u + n + r + ct + t, 1, a + dc + Kr + rn + he + Gn + u + n + r + e + t, 1, a + dc + Kr + rn + he + n_ + u + n + r + ct + t, 1, a + pc + hs + pt + he + ze + u + n + r + e + t, 1, a + pc + hs + pt + he + r_ + u + n + r + ct + t, 1, a + ld + Lh + ye + Rt + D + u + n + r + e + t, 1, a + ld + Lh + ye + Rt + D + u + n + r + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + d + t, 1, i + Mi + Gt + rd + Be + u + n + r + e + t, 1, i + Mi + Gt + rd + Q1 + u + n + r + d + t, 1, a + Mh + bd + As + zn + wd + u + n + r + e + t, 1, a + Mh + bd + As + zn + wd + u + n + r + ct + t, 1, a + zh + _i + Ve + fr + D + u + n + r + e + t, 1, a + zh + _i + Ve + fr + D + u + n + r + d + t, 1, a + Cd + Rs + En + gn + D + u + n + r + e + t, 1, a + Cd + Rs + En + gn + D + u + n + r + d + t, 1, a + Eh + ud + ke + ah + D + u + n + r + e + t, 1, a + Eh + ud + ke + ah + D + u + n + r + d + t, 1, a + Ch + Rl + cs + gn + R + G + n + r + e + t, 1, a + Ch + Rl + cs + gn + ui + G + n + r + d + t, 1, ur + Pd + Kd + lh + fr + ze + fl + n + r + e + t, 1, a + Pd + Kd + lh + fr + ze + Kh + n + r + e + t, 1, a + al + hd + Cf + Wc + ot + Ee + n + r + e + t, 1, a + al + hd + Cf + Wc + Ht + zi + n + r + d + t, 1, a + Il + Sh + Ca + Fr + D + yr + n + r + e + t, 1, a + Il + Sh + Ca + Fr + D + Wf + n + r + d + t, 1, a + qo + Ss + Po + Fr + xe + Kh + n + r + e + t, 1, a + qo + Ss + Po + Fr + _e + ov + n + r + d + t, 1, a + Dl + zu + Zi + _l + D + ef + n + r + e + t, 1, a + Dl + zu + Zi + _l + D + iv + n + r + d + t, 1, a + Qu + oo + kn + ae + y + yr + n + r + e + t, 1, a + Qu + oo + kn + ae + vi + U3 + n + r + ct + t, 1, a + Qu + oo + kn + ae + Ie + rv + n + r + d + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + r + e + t, 1, a + Qn + Ho + kr + ae + vi + D3 + n + r + ct + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + r + d + t, 1, a + Ju + Co + Q + ae + y + G + n + r + e + t, 1, a + Ju + Co + Q + ae + vi + q3 + n + r + ct + t, 1, a + Ju + Co + Q + ae + Ie + G + n + r + d + t, 1, i + I + nf + zc + y + u + n + r + e + t, 1, a + xd + Ph + Ft + Zt + qn + yr + n + r + e + t, 1, a + xd + Ph + Ft + Zt + Vf + Wf + n + r + d + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + r + e + t, 1, a + Xt + Pa + Jt + Zt + Vf + zi + n + r + d + t, 1, a + Le + kd + Bo + ms + y + u + n + r + e + t, 1, a + Le + kd + Bo + ms + ge + u + n + r + d + t, 1, a + Th + Uu + Li + he + y + u + n + r + e + t, 1, a + Th + Uu + Li + he + ge + u + n + r + d + t, 1, a + dd + Vd + ff + Un + D + u + n + r + e + t, 1, a + Uh + qh + Tf + zn + D + u + n + r + e + t, 1, a + _u + cd + Ve + On + D + u + n + r + e + t, 1, a + _u + cd + Ve + On + D + u + n + r + d + t, 1, a + qu + Ah + vs + On + D + u + n + r + e + t, 1, a + qu + Ah + vs + On + D + u + n + r + d + t, 1, a + Oh + Hu + _c + On + D + u + n + r + e + t, 1, a + Oh + Hu + _c + On + D + u + n + r + d + t, 1, i + h + On + Me + gy + Pv + n + r + e + t, 1, i + cn + so + an + ot + u + n + r + e + t, 1, i + cn + ka + an + H + Mr + n + r + e + t, 1, i + cn + Uc + an + D + u + n + r + e + t, 1, i + cn + Yr + an + Lr + Mr + n + r + e + t, 1, c + ja + n + r + e + t, 1, c + Xl + n + r + e + t, 1, c + Jl + n + r + e + t, 1, c + Mu + n + r + e + t, 1, c + kc + n + r + e + t, 1, c + Cu + n + r + e + t, 1, c + Ka + n + r + e + t, 1, c + Cl + n + r + e + t, 1, c + Ya + n + r + e + t, 1, c + Eu + n + r + e + t, 1, c + Su + n + r + e + t, 1, c + ku + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, i + " +lat_0=-21.11666666666667 +lon_0=55.53333333333333 +k=1 +x_0=160000" + Fp + b + wL + e + t, 1, a + Sd + Bl + cr + f + D + u + n + r + d + t, 1, a + jh + Fh + bn + f + D + u + n + r + d + t, 1, i + cn + so + an + Yf + u + n + r + d + t, 1, i + cn + ka + an + St + lt + n + r + d + t, 1, i + cn + Uc + an + D + u + n + r + d + t, 1, i + cn + Yr + an + $ + lt + n + r + d + t, 1, a + Sd + Bl + cr + f + D + u + n + r + d + t, 1, a + jh + Fh + bn + f + D + u + n + r + d + t, 1, i + cn + so + an + Yf + u + n + r + d + t, 1, i + cn + ka + an + St + lt + n + r + d + t, 1, i + cn + Uc + an + D + u + n + r + d + t, 1, i + cn + Yr + an + $ + lt + n + r + d + t, 1, c + ku + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Cu + n + r + e + t, 1, c + Ka + n + r + e + t, 2, a + Sd + Bl + cr + f + D + u + n + r + d + t, 1, a + jh + Fh + bn + f + D + u + n + r + d + t, 1, i + cn + so + an + Yf + u + n + r + d + t, 1, i + cn + ka + an + St + lt + n + r + d + t, 1, i + cn + Uc + an + D + u + n + r + d + t, 1, i + cn + Yr + an + $ + lt + n + r + d + t, 1, i + Ce + rh + vl + Ie + u + n + r + d + t, 1, i + Ce + rh + vl + Ie + u + n + r + d + t, 1, c + Ai + n + r + e + t, 1, a + " +lat_1=-54 +lat_2=-54.75 +lat_0=-55 +lon_0=-37" + z + u + M + e + t, 1, i + " +lat_0=39.66825833333333 +lon_0=-8.133108333333334 +k=1" + z + u + n + r + e + t, 1, i + ob + Tv + " +k=1" + H + _r + n + r + e + t, 1, i + h + my + m + y + u + n + r + e + t, 1, a + " +lat_1=45.91666666666666 +lat_2=43.08333333333334" + h + my + z + u + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 1, c + Tr + F + qL + e + t, 1, i + " +lat_0=32 +lon_0=-64.75 +k=1 +x_0=550000" + Mr + W + r + e + t, 1, i + h + oh + m + z + u + w + e + t, 1, i + h + pu + m + z + u + w + e + t, 1, i + h + Qh + m + z + u + w + e + t, 2, i + h + oh + m + z + u + n + r + e + t, 1, i + h + pu + m + z + u + n + r + e + t, 1, i + h + Qh + m + z + u + n + r + e + t, 2, i + h + oh + m + z + u + n + r + e + t, 1, i + h + pu + m + z + u + n + r + e + t, 1, i + h + Qh + m + z + u + n + r + e + t, 2, i + " +lat_0=-25.06855261111111 +lon_0=-130.1129671111111 +k=1 +x_0=14200 +y_0=15500" + W + r + e + t, 1, c + Su + Z + b + YL + e + t, 4, i + h + eb + " +k=1" + qn + kt + n + r + e + t, 1, i + h + " +lon_0=169 +k=1" + qn + kt + n + r + e + t, 1, i + h + " +lon_0=179 +k=1" + qn + kt + n + r + e + t, 1, i + h + " +lon_0=-178 +k=1" + qn + kt + n + r + e + t, 2, i + h + Tv + " +k=1" + qn + kt + n + r + e + t, 1, i + h + hr + m + y + gi + n + r + e + t, 1, a + " +lat_1=23 +lat_2=21.7 +lat_0=22.35" + zn + y + " +y_0=280296.016" + w + e + t, 1, a + " +lat_1=21.3 +lat_2=20.13333333333333 +lat_0=20.71666666666667 +lon_0=-76.83333333333333" + y + " +y_0=229126.939" + w + e + t, 1, a + z_ + yu + Ro + " +lon_0=-70" + Lr + u + w + e + t, 1, a + z_ + yu + Ro + " +lon_0=-70" + Lr + u + n + r + e + t, 1, a + z_ + yu + Ro + " +lon_0=-70" + Lr + u + n + r + e + t, 1, i + h + pf + m + z + u + w + e + t, 1, i + h + pf + m + z + u + n + r + e + t, 1, i + h + pf + m + z + u + n + r + e + t, 10, a + kg + Lg + " +lat_0=50.797815" + DM + " +x_0=649328 +y_0=665262" + n + r + e + t, 2, i + Xh + Av + Xv + y + gp + n + r + e + t, 1, i + Xh + Av + Xv + y + gp + n + r + e + t, 1, i + Xh + Av + Xv + y + gp + n + r + e + t, 3, p + O + " +towgs84=595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408" + t, 2, p + bt + t, 3, p + n + r + t, 1, i + h + Jy + m + Hn + u + n + r + e + t, 1, i + h + tb + m + Hn + u + n + r + e + t, 1, i + h + Jy + m + Hn + u + bt + e + t, 1, i + h + tb + m + Hn + u + bt + e + t, 1, c + zs + b + dL + e + t, 3, du + bf + " +k=1" + z + u + M + e + t, 1, i + h + yo + " +k=1" + Gn + u + _ + U + e + t, 1, i + h + yo + " +k=1" + Gn + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + Bt + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + U + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + U + e + t, 1, i + h + Ei + " +k=1" + od + u + _ + U + e + t, 1, i + h + Do + " +k=1" + td + u + _ + U + e + t, 1, i + h + Lf + " +k=1" + Vh + u + _ + Bt + e + t, 3, se + " +lat_0=46" + qd + Bp + y + He + _ + U + e + t, 1, i + h + " +lon_0=11.30625 +k=1.000006 +x_0=1500025.141 +y_0=-667.282" + n + r + e + t, 1, i + h + " +lon_0=13.55626666666667 +k=1.0000058 +x_0=1500044.695 +y_0=-667.13" + n + r + e + t, 1, i + h + " +lon_0=15.80628452944445 +k=1.00000561024 +x_0=1500064.274 +y_0=-667.711" + n + r + e + t, 1, i + h + " +lon_0=18.0563 +k=1.0000054 +x_0=1500083.521 +y_0=-668.8440000000001" + n + r + e + t, 1, i + h + " +lon_0=20.30631666666667 +k=1.0000052 +x_0=1500102.765 +y_0=-670.706" + n + r + e + t, 1, i + h + " +lon_0=22.55633333333333 +k=1.0000049 +x_0=1500121.846 +y_0=-672.557" + n + r + e + t, 1, a + " +lat_1=-37.5 +lat_2=-44.5 +lat_0=-41 +lon_0=173" + f6 + " +y_0=7000000" + n + r + e + t, 1, a + gt + vt + K + " +lon_0=157" + y + u + n + r + e + t, 2, i + h + " +lon_0=18.05787 +k=0.99999506 +x_0=100182.7406 +y_0=-6500620.1207" + n + r + e + t, 3, du + " +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0" + u + " +k=1.0" + e + " +nadgrids=@null +wktext " + t, 16, i + h + Ud + " +k=1" + iu + u + n + r + e + t, 1, i + h + Kp + " +k=1" + Fl + u + n + r + e + t, 1, i + h + Rn + " +k=1" + au + u + n + r + e + t, 1, i + h + q_ + " +k=1" + zl + u + n + r + e + t, 1, i + h + O0 + " +k=1" + lu + u + n + r + e + t, 1, i + h + ro + " +k=1" + nd + u + n + r + e + t, 1, i + h + qd + " +k=1" + uu + u + n + r + e + t, 1, i + h + Yp + " +k=1" + hu + u + n + r + e + t, 1, i + h + Ei + " +k=1" + cu + u + n + r + e + t, 1, i + h + Yd + " +k=1" + fu + u + n + r + e + t, 1, i + h + " +lon_0=29 +k=1" + hl + u + n + r + e + t, 1, i + h + Do + " +k=1" + $u + u + n + r + e + t, 1, i + h + kf + " +k=1" + Kn + u + n + r + e + t, 4, p + n + r + t, 1, c + wo + n + r + e + t, 1, c + Xi + n + r + e + t, 1, c + Ni + n + r + e + t, 1, i + NM + " +lon_0=46.5 +k=0.9994" + Lr + u + b + ut + e + t, 13, p + O + Ut + t, 6, i + h + hr + m + y + gi + O + Ut + e + t, 8, c + Tr + F + Qm + e + t, 22, a + " +lat_1=41.25 +lat_2=42.75" + _c + Ml + Yh + Vv + n + r + e + t, 1, a + " +lat_1=42.25 +lat_2=43.75" + wu + Ml + Yh + " +y_0=2200000" + n + r + e + t, 1, a + " +lat_1=43.25 +lat_2=44.75" + Ro + Ml + Yh + " +y_0=3200000" + n + r + e + t, 1, a + " +lat_1=44.25 +lat_2=45.75" + mo + Ml + Yh + " +y_0=4200000" + n + r + e + t, 1, a + " +lat_1=45.25 +lat_2=46.75 +lat_0=46" + Ml + Yh + " +y_0=5200000" + n + r + e + t, 1, a + d6 + " +lat_2=47.75" + Bo + Ml + Yh + " +y_0=6200000" + n + r + e + t, 1, a + " +lat_1=47.25 +lat_2=48.75 +lat_0=48" + Ml + Yh + " +y_0=7200000" + n + r + e + t, 1, a + " +lat_1=48.25 +lat_2=49.75 +lat_0=49" + Ml + Yh + " +y_0=8200000" + n + r + e + t, 1, a + " +lat_1=49.25 +lat_2=50.75" + F_ + Ml + Yh + " +y_0=9200000" + n + r + e + t, 18, a + " +lat_1=37" + Ty + Mt + Un + z + u + n + r + e + t, 1, a + " +lat_1=37" + Ty + Mt + Un + z + u + n + r + e + t, 1, a + " +lat_1=37" + Ty + Mt + Un + z + u + n + r + e + t, 6, _n + K + " +lat_ts=-70" + qr + " +k=1" + z + u + M + e + t, 2, a + Na + io + " +lat_0=49 +lon_0=-95" + z + u + n + r + e + t, 1, a + Na + io + " +lat_0=49 +lon_0=-95" + z + u + n + r + e + t, 7, i + W_ + Do + " +k=1" + ot + He + F + Cr + e + t, 1, i + W_ + Yd + " +k=1" + ot + He + F + Cr + e + t, 1, i + W_ + Yp + " +k=1" + ot + He + F + Cr + e + t, 1, i + W_ + ro + " +k=1" + ot + He + F + Cr + e + t, 2, a + tn + fn + wn + Oe + X + u + F + Qm + d + t, 1, a + tn + fn + wn + Oe + X + R3 + F + Qm + d + t, 2, du + " +lon_0=100 +lat_ts=-41" + z + u + M + e + t, 1, _n + $i + " +lat_ts=71" + qr + " +k=1" + z + u + M + e + t, 1, _n + $i + " +lat_ts=75" + qr + " +k=1" + z + u + M + e + t, 1, i + h + " +lon_0=55.33333333333334 +k=1" + y + u + M + e + t, 4, p + E0 + t, 1, p + s_ + t, 1, p + bt + t, 1, p + O + t, 1, p + Ku + fo + t, 1, p + Wu + t, 1, p + qe + Vn + t, 1, p + F + t, 2, p + up + hp + t, 1, p + Ke + le + t, 1, p + N + t, 1, p + Mn + ar + t, 1, p + Ke + " +b=6356514.996941779" + t, 1, p + Gr + Wt + t, 1, p + d0 + t, 2, p + xt + li + t, 1, p + n + t, 1, p + Nl + t, 1, p + Ns + Nr + t, 1, p + b + t, 1, p + n + r + t, 0, p + n + r + t, 1, p + _ + t, 1, p + p6 + t, 1, i + h + " +lon_0=28.4 +k=0.9999400000000001" + ot + gi + n + r + e + t, 1, p + " +a=6376523" + j3 + t, 1, p + n6 + N3 + t, 1, p + C0 + c0 + t, 1, p + W + t, 1, p + W + t, 1, p + " +a=6378136.2 +b=6356751.516927429" + t, 1, p + " +a=6378136.3 +b=6356751.616592146" + t, 1, p + F3 + z3 + t, 2, p + _6 + t, 1, c + Go + M + e + t, 1, c + Fs + M + e + t, 3, p + Bd + Zf + t, 1, p + Xf + $f + t, 1, p + x + t, 1, p + p0 + f0 + t, 1, p + Gl + Wo + t, 1, p + n + r + t, 1, p + " +a=6371007 +b=6371007" + t, 1, i + h + no + m + y + kt + n + r + e + t, 1, i + h + " +lon_0=14" + m + y + kt + n + r + e + t, 1, i + h + " +lon_0=16" + m + y + kt + n + r + e + t, 1, i + h + Lf + m + y + kt + n + r + e + t, 1, p + " +a=6370997 +b=6370997" + t, 1, p + nb + rb + t, 1, p + ib + bv + t, 2, i + h + Kp + m + y + kt + n + r + e + t, 1, i + h + q_ + m + y + kt + n + r + e + t, 1, i + h + ro + m + y + kt + n + r + e + t, 1, i + h + Yp + m + y + kt + n + r + e + t, 1, i + h + Yd + m + y + kt + n + r + e + t, 1, c + bo + Z + n + r + e + t, 1, c + ca + Z + n + r + e + t, 1, c + Go + Z + n + r + e + t, 8, c + Es + Z + b + OL + e + t, 4, p + n + r + t, 6, p + n + r + t, 1, c + Of + n + r + e + t, 1, c + Qi + n + r + e + t, 4, "+proj=eqc +lat_ts=0" + h + qr + z + u + M + e + t, 1, "+proj=eqc +lat_ts=0" + h + qr + z + u + " +a=6371007 +b=6371007" + e + t, 5, i + h + yo + Ba + ot + gi + n + r + e + t, 1, i + h + xl + Ba + H + gi + n + r + e + t, 1, i + h + " +lon_0=11.75" + Ba + D + gi + n + r + e + t, 1, i + h + hr + " +k=1" + Lr + gi + n + r + e + t, 24, p + O + t, 1, p + n + rL + t, 1, p + Bd + Zf + t, 1, p + b + At + t, 1, p + O + yn + t, 3, p + F + Zw + t, 1, p + F + t, 1, p + F + t, 1, p + W + rg + t, 1, p + Gr + Wt + Km + t, 1, p + N + Q5 + t, 1, p + n + B5 + t, 1, p + N + h0 + t, 1, p + F + We + t, 1, p + F + t, 1, p + F + t, 1, p + F + t, 1, p + F + Qm + t, 2, p + n + JL + t, 1, p + N + Vm + t, 1, p + N + Hm + t, 1, p + Gr + Wt + Ym + t, 1, p + p0 + f0 + Yt + t, 1, p + Gl + Wo + Ae + t, 1, p + _ + jm + t, 1, p + W + r + t, 1, p + O + Dc + t, 1, p + O + K5 + t, 1, p + n + r + t, 1, p + n + r + t, 1, p + b + Y5 + t, 1, p + b + D1 + t, 1, p + Ke + le + l3 + t, 1, p + O + Ds + t, 1, p + qe + Vn + t, 1, p + b + $5 + t, 1, p + b + et + t, 1, p + b + t, 1, p + b + _L + t, 1, p + O + t, 1, p + W + r + t, 1, p + _ + n3 + t, 1, p + b + jL + t, 1, p + W + r + t, 1, p + n + r + t, 1, p + C0 + c0 + t3 + t, 1, p + F + PL + t, 1, p + n + r + t, 1, p + n + r + t, 2, p + n + r + t, 1, p + C0 + c0 + t, 1, p + N + f3 + t, 1, p + n + r + t, 2, p + _ + Bt + t, 1, p + _ + U + t, 1, p + n + r + t, 1, p + b + L5 + t, 1, p + b + kL + t, 1, p + b + LL + t, 1, p + b + FL + t, 4, p + E0 + dn + t, 1, p + n + r + t, 1, p + n + r + t, 1, p + _ + t, 1, p + b + sL + t, 1, p + Ke + le + hL + t, 1, p + b + Qw + t, 1, p + b + " +towgs84=105,326,-102.5,0,0,0.814,-0.6" + t, 1, p + b + " +towgs84=-45,417,-3.5,0,0,0.814,-0.6" + t, 1, p + N + t, 1, p + N + t, 1, p + b + t, 1, p + _ + l + t, 1, p + N + G1 + t, 1, p + bt + V + t, 1, p + bt + di + t, 1, p + b + Ri + t, 1, p + _ + r3 + t, 1, p + Ke + le + t, 1, p + b + P + t, 1, p + b + be + t, 1, p + Mn + ar + Zm + t, 1, p + N + Jo + t, 1, p + O + va + t, 1, p + N + $w + t, 1, p + Ke + le + ML + t, 1, p + _ + C + t, 1, p + b + t, 1, p + F + qL + t, 1, i + h + vu + Me + q + u + n + r + d + t, 0, i + h + vu + Me + q + u + n + r + d + t, 1, p + b + o + t, 1, p + O + " +towgs84=-384,664,-48,0,0,0,0" + t, 1, p + N + Ot + t, 1, p + b + vn + t, 1, p + Mn + ar + re + t, 1, p + Ke + le + nu + t, 1, p + b + OL + t, 1, p + b + Kt + t, 2, p + Ke + le + zm + t, 2, p + Nl + j1 + t, 1, p + b + ut + t, 1, p + b + " +towgs84=-83.11,-97.38,-117.22,0.00569291,-0.0446976,0.0442851,0.1218" + t, 1, p + N + i3 + t, 4, p + b + dL + t, 1, p + _6 + cL + t, 1, p + Ns + Nr + jt + t, 1, p + Gr + Wt + $m + t, 1, p + Gr + Wt + o3 + t, 1, p + F3 + z3 + t, 1, p + F + IL + t, 1, p + Xf + $f + t, 1, p + Gr + Wt + $L + t, 1, p + xt + li + mn + t, 1, p + N + uL + t, 1, p + b + qm + t, 1, p + b + wr + t, 1, p + b + t, 1, p + N + HL + t, 1, p + N + " +towgs84=-90,40,88,0,0,0,0" + t, 1, p + Ke + le + t, 1, p + F + un + t, 1, p + b + c3 + t, 1, p + b + " +towgs84=-333,-222,114,0,0,0,0" + t, 1, p + N + " +towgs84=41,-220,-134,0,0,0,0" + t, 1, p + O + Um + t, 1, p + n + r + t, 1, p + b + oL + t, 2, p + Ke + le + z1 + t, 1, p + O + XL + t, 1, p + N + te + t, 2, p + b + tu + t, 1, p + Ke + le + s3 + t, 1, p + w + t, 2, p + n + r + t, 1, p + N + Xs + t, 1, p + b + ZL + t, 1, p + b + S + t, 1, p + Ku + fo + xr + t, 1, p + b + Kw + t, 1, p + Ke + le + ji + t, 1, p + p6 + t, 1, p + E0 + N5 + t, 1, p + E0 + t, 1, p + E0 + t, 1, p + O + t, 1, p + up + hp + to + t, 1, p + Ke + le + RL + t, 1, p + n + r + t, 1, p + _ + s + t, 1, p + b + eL + t, 1, p + Nl + t, 2, p + b + t, 1, p + O + yt + t, 3, p + b + u3 + t, 1, p + Wu + ls + t, 2, p + O + t, 2, p + b + B1 + t, 1, p + d0 + ir + t, 1, p + s_ + dn + t, 1, p + s_ + dn + t, 1, p + O + rt + t, 1, p + qe + Vn + Vw + t, 1, p + Nl + t, 1, p + Ke + le + Wm + t, 2, p + O + t, 1, p + N + De + t, 1, p + O + t, 1, p + b + " +towgs84=-155,171,37,0,0,0,0" + t, 1, p + Ke + le + t, 1, p + b + N1 + t, 1, p + O + qt + t, 1, p + b + It + t, 1, p + O + ve + t, 1, p + Ke + le + h3 + t, 1, p + b + nL + t, 2, p + W + Xw + t, 1, p + n + pL + t, 3, p + x + A + t, 2, p + x + E + t, 2, p + M + t, 64, lr + " +lat_0=2.042583333333333 +lon_0=103.5627583333333" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=2.712283333333334 +lon_0=101.9411666666667 +x_0=-242.005 +y_0=-948.547" + xt + li + mn + e + t, 1, lr + " +lat_0=3.710972222222222 +lon_0=102.4361777777778" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=3.680344444444444 +lon_0=101.5082444444444 +x_0=-21759.438 +y_0=55960.906" + xt + li + mn + e + t, 1, lr + " +lat_0=4.946141666666667 +lon_0=102.8952083333333" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=5.421325 +lon_0=100.3458694444444" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=5.965147222222223 +lon_0=100.6375944444444" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=4.859380555555555 +lon_0=100.8167666666667" + z + " +y_0=133453.669" + xt + li + mn + e + t, 1, lr + " +lat_0=5.893922222222222 +lon_0=102.1772916666667" + z + u + xt + li + mn + e + t, 1, i + h + vu + Me + q + u + w + d + t, 1, i + h + Yl + Me + q + u + w + d + t, 1, i + h + nh + Me + q + u + w + d + t, 1, i + h + $h + Me + q + u + w + d + t, 1, i + h + L_ + Me + q + u + w + d + t, 1, i + h + " +lon_0=-159" + Me + q + u + w + d + t, 0, i + h + " +lon_0=-159" + Me + q + u + w + d + t, 1, i + h + wy + Me + q + u + w + d + t, 1, i + h + Sp + Me + q + u + w + d + t, 1, i + h + " +lon_0=-141" + Me + q + u + w + d + t, 1, i + h + xy + Me + q + u + w + d + t, 1, i + h + Ay + Me + q + u + w + d + t, 1, i + h + " +lon_0=-123" + Me + q + u + w + d + t, 1, i + h + Qh + Me + q + u + w + d + t, 1, i + h + oh + Me + q + u + w + d + t, 1, i + h + " +lon_0=-105" + Me + q + u + w + d + t, 1, i + " +lat_0=13.5 +lon_0=144.75 +k=1" + Be + Da + n + r + e + t, 1, a + " +lat_1=-6.5 +lat_2=-11.5" + W_ + Yp + y + He + F + Cr + e + t, 2, i + h + Rn + " +k=1" + ql + u + _ + Bt + e + t, 1, i + h + B_ + Me + q + u + w + d + t, 1, i + h + sh + Me + q + u + w + d + t, 1, i + h + Yl + Me + q + u + n + r + d + t, 1, i + h + nh + Me + q + u + n + r + d + t, 1, i + h + $h + Me + q + u + n + r + d + t, 1, i + h + L_ + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-159" + Me + q + u + n + r + d + t, 1, i + h + wy + Me + q + u + n + r + d + t, 1, i + h + Sp + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-141" + Me + q + u + n + r + d + t, 1, i + h + xy + Me + q + u + n + r + d + t, 1, i + h + Ay + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-123" + Me + q + u + n + r + d + t, 1, i + h + Qh + Me + q + u + n + r + d + t, 1, i + h + oh + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-105" + Me + q + u + n + r + d + t, 1, i + h + ro + " +k=1" + id + u + _ + Bt + e + t, 3, a + tn + fn + wn + Oe + ot + Da + n + r + e + t, 1, i + h + B_ + Me + q + u + n + r + d + t, 1, i + h + sh + Me + q + u + n + r + d + t, 16, a + co + Sa + Dt + Rt + B + u + w + d + t, 1, a + Ma + Ur + cn + vf + B + R3 + w + d + t, 1, a + zh + _i + Ve + fr + D + u + n + r + d + t, 5, a + " +lat_1=-18" + Qy + " +lat_0=-27" + aa + z + u + M + e + t, 1, p + n + r + t, 4, c + Qr + n + r + e + t, 3, p + n + r + t, 1, c + Xi + Z + n + r + e + t, 4, p + b + U5 + t, 8, p + n + r + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, p + n + t, 1, i + h + Si + " +k=1" + jl + u + n + e + t, 1, i + h + Ci + " +k=1" + ul + u + n + e + t, 1, i + h + Bi + " +k=1" + ou + u + n + e + t, 1, i + h + Pi + " +k=1" + su + u + n + e + t, 1, i + h + Ti + " +k=1" + Zh + u + n + e + t, 1, i + h + Pn + " +k=1" + ru + u + n + e + t, 1, i + h + ie + " +k=1" + iu + u + n + e + t, 1, i + h + v + " +k=1" + Fl + u + n + e + t, 1, i + h + tt + " +k=1" + au + u + n + e + t, 1, i + h + Se + " +k=1" + zl + u + n + e + t, 1, i + h + k + " +k=1" + lu + u + n + e + t, 1, i + h + Si + " +k=1" + y + u + n + e + t, 1, i + h + Ci + " +k=1" + y + u + n + e + t, 1, i + h + Bi + " +k=1" + y + u + n + e + t, 1, i + h + Pi + " +k=1" + y + u + n + e + t, 1, i + h + Ti + " +k=1" + y + u + n + e + t, 1, i + h + Pn + " +k=1" + y + u + n + e + t, 1, i + h + ie + " +k=1" + y + u + n + e + t, 1, i + h + v + " +k=1" + y + u + n + e + t, 1, i + h + tt + " +k=1" + y + u + n + e + t, 1, i + h + Se + " +k=1" + y + u + n + e + t, 1, i + h + k + " +k=1" + y + u + n + e + t, 1, i + h + Si + " +k=1" + uu + u + n + e + t, 1, i + h + wl + " +k=1" + hu + u + n + e + t, 1, i + h + Ci + " +k=1" + cu + u + n + e + t, 1, i + h + bu + " +k=1" + fu + u + n + e + t, 1, i + h + Bi + " +k=1" + hl + u + n + e + t, 1, i + h + Yi + " +k=1" + $u + u + n + e + t, 1, i + h + Pi + " +k=1" + Kn + u + n + e + t, 1, i + h + $l + " +k=1" + Xu + u + n + e + t, 1, i + h + Ti + " +k=1" + Wh + u + n + e + t, 1, i + h + ml + " +k=1" + _0 + u + n + e + t, 1, i + h + Pn + " +k=1" + m0 + u + n + e + t, 1, i + h + gu + " +k=1" + g0 + u + n + e + t, 1, i + h + ie + " +k=1" + v0 + u + n + e + t, 1, i + h + la + " +k=1" + y0 + u + n + e + t, 1, i + h + v + " +k=1" + b0 + u + n + e + t, 1, i + h + Kl + " +k=1" + w0 + u + n + e + t, 1, i + h + tt + " +k=1" + x0 + u + n + e + t, 1, i + h + gl + " +k=1" + cp + u + n + e + t, 1, i + h + Se + " +k=1" + k0 + u + n + e + t, 1, i + h + aa + " +k=1" + fp + u + n + e + t, 1, i + h + k + " +k=1" + L0 + u + n + e + t, 1, i + h + Si + " +k=1" + y + u + n + e + t, 1, i + h + wl + " +k=1" + y + u + n + e + t, 1, i + h + Ci + " +k=1" + y + u + n + e + t, 1, i + h + bu + " +k=1" + y + u + n + e + t, 1, i + h + Bi + " +k=1" + y + u + n + e + t, 1, i + h + Yi + " +k=1" + y + u + n + e + t, 1, i + h + Pi + " +k=1" + y + u + n + e + t, 1, i + h + $l + " +k=1" + y + u + n + e + t, 1, i + h + Ti + " +k=1" + y + u + n + e + t, 1, i + h + ml + " +k=1" + y + u + n + e + t, 1, i + h + Pn + " +k=1" + y + u + n + e + t, 1, i + h + gu + " +k=1" + y + u + n + e + t, 1, i + h + ie + " +k=1" + y + u + n + e + t, 1, i + h + la + " +k=1" + y + u + n + e + t, 1, i + h + v + " +k=1" + y + u + n + e + t, 1, i + h + Kl + " +k=1" + y + u + n + e + t, 1, i + h + tt + " +k=1" + y + u + n + e + t, 1, i + h + gl + " +k=1" + y + u + n + e + t, 1, i + h + Se + " +k=1" + y + u + n + e + t, 1, i + h + aa + " +k=1" + y + u + n + e + t, 1, i + h + k + " +k=1" + y + u + n + e + t, 1, p + _ + t, 3, p + n + r + t, 1, c + Tr + n + r + e + t, 9, i + h + Si + " +k=1" + jl + u + _ + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + e + t, 1, i + h + tt + " +k=1" + au + u + _ + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + e + t, 1, i + h + k + " +k=1" + lu + u + _ + e + t, 1, i + h + Si + " +k=1" + y + u + _ + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + e + t, 1, i + h + ie + " +k=1" + y + u + _ + e + t, 1, i + h + v + " +k=1" + y + u + _ + e + t, 1, i + h + tt + " +k=1" + y + u + _ + e + t, 1, i + h + Se + " +k=1" + y + u + _ + e + t, 1, i + h + k + " +k=1" + y + u + _ + e + t, 11, p + N + t, 1, p + N + DL + t, 1, p + N + BL + t, 1, p + N + NL + t, 1, p + N + GL + t, 1, p + N + QL + t, 1, p + N + xL + t, 1, p + N + W5 + t, 1, p + F + t, 1, p + F + t, 1, p + Ct + Y + t, 1, p + b + k5 + t, 1, p + n + r + t, 1, p + O + F1 + t, 1, p + b + M5 + t, 1, p + b + mL + t, 1, p + b + EL + t, 1, p + n + r + t, 1, p + bt + Tt + t, 1, p + n + r + t, 1, p + N + " +towgs84=-106,-129,165,0,0,0,0" + t, 1, p + b + SL + t, 1, p + b + gL + t, 1, p + b + Jw + t, 1, p + n + r + t, 1, p + b + zL + t, 1, p + b + wL + t, 1, p + n + r + t, 1, p + b + UL + t, 1, p + b + D5 + t, 1, p + b + t8 + t, 2, p + b + vL + t, 1, p + b + J5 + t, 3, p + b + " +towgs84=365,194,166,0,0,0,0" + t, 1, p + b + " +towgs84=325,154,172,0,0,0,0" + t, 1, p + F + KL + t, 1, p + b + yL + t, 2, p + b + Yw + t, 1, p + b + CL + t, 1, p + b + P5 + t, 1, p + b + Fm + t, 2, p + b + bL + t, 1, i + h + yo + Me + Xu + u + n + r + e + t, 5, i + h + Si + " +k=1" + uu + u + _ + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + e + t, 1, p + " +a=6377019.27 +b=6355762.5391 +towgs84=-28,199,5,0,0,0,0" + t, 1, p + b + Xm + t, 1, p + n + r + t, 1, p + b + E5 + t, 1, p + n + r + t, 1, p + b + iL + t, 1, p + b + z5 + t, 1, p + b + V5 + t, 1, p + b + H5 + t, 1, p + O + Z5 + t, 1, p + W + r + t, 1, p + b + " +towgs84=-86,-98,-119,0,0,0,0" + t, 1, p + n + r + t, 1, p + W + r + t, 1, p + Ke + le + t, 1, p + b + WL + t, 1, p + b + F5 + t, 1, p + n + r + t, 1, p + F + " +towgs84=-100,-248,259,0,0,0,0" + t, 1, p + _ + t, 1, p + _ + t, 1, p + _ + " +towgs84=44.585,-131.212,-39.544,0,0,0,0" + t, 1, p + N + " +towgs84=-80.01,253.26,291.19,0,0,0,0" + t, 1, p + N + " +towgs84=124.5,-63.5,-281,0,0,0,0" + t, 2, p + Gr + Wt + fL + t, 1, p + F + Xe + t, 1, p + b + " +towgs84=-133,-321,50,0,0,0,0" + t, 2, p + n + r + t, 1, p + n + Fi + t, 1, p + b + S5 + t, 1, p + b + R5 + t, 1, p + b + A5 + t, 1, p + b + O5 + t, 1, p + b + tL + t, 1, p + W + TL + t, 1, p + W + r + t, 1, p + F + Cr + t, 1, p + N + t, 1, p + N + t, 1, p + b + AL + t, 1, p + N + aL + t, 1, p + N + t, 1, p + N + Pt + t, 1, p + n + r + t, 1, p + N + t, 1, p + b + t, 1, p + b + t, 1, p + Nl + lL + t, 1, p + b + " +towgs84=114,-116,-333,0,0,0,0" + t, 1, p + bt + " +towgs84=-491,-22,435,0,0,0,0" + t, 1, p + b + " +towgs84=145,75,-272,0,0,0,0" + t, 1, p + b + " +towgs84=-320,550,-494,0,0,0,0" + t, 1, p + b + " +towgs84=124,-234,-25,0,0,0,0" + t, 1, p + b + " +towgs84=-205,107,53,0,0,0,0" + t, 1, p + N + " +towgs84=-79,-129,145,0,0,0,0" + t, 1, p + b + " +towgs84=-127,-769,472,0,0,0,0" + t, 1, p + b + " +towgs84=-104,-129,239,0,0,0,0" + t, 1, p + b + " +towgs84=298,-304,-375,0,0,0,0" + t, 1, p + F + " +towgs84=-2,151,181,0,0,0,0" + t, 1, p + b + " +towgs84=230,-199,-752,0,0,0,0" + t, 1, p + b + " +towgs84=211,147,111,0,0,0,0" + t, 1, p + x + A + t, 1, p + b + Ww + t, 1, p + b + " +towgs84=-794,119,-298,0,0,0,0" + t, 1, p + F + I5 + t, 1, p + b + " +towgs84=208,-435,-229,0,0,0,0" + t, 1, p + b + " +towgs84=189,-79,-202,0,0,0,0" + t, 1, p + F + G5 + t, 1, p + b + " +towgs84=403,-81,277,0,0,0,0" + t, 1, p + b + " +towgs84=-307,-92,127,0,0,0,0" + t, 1, p + b + YL + t, 1, p + b + " +towgs84=170,42,84,0,0,0,0" + t, 2, p + " +a=6378270 +b=6356794.343434343 +towgs84=102,52,-38,0,0,0,0" + t, 1, p + b + " +towgs84=276,-57,149,0,0,0,0" + t, 1, p + b + " +towgs84=-632,438,-609,0,0,0,0" + t, 1, p + b + " +towgs84=647,1777,-1124,0,0,0,0" + t, 1, p + N + " +towgs84=260,12,-147,0,0,0,0" + t, 1, p + n + r + t, 1, p + qe + Vn + t, 1, p + b + " +towgs84=-156,-271,-189,0,0,0,0" + t, 1, p + " +a=6378136 +b=6356751.361745712 +towgs84=0,0,1.5,-0,-0,0.076,0" + t, 1, p + b + t, 1, p + n + t, 1, p + N + g + t, 1, p + N + t, 1, p + O + t, 1, p + O + t, 1, p + n + r + t, 1, p + W3 + K3 + a3 + t, 1, p + n + r + t, 1, p + W + X5 + t, 1, p + Y3 + G3 + t, 1, p + W3 + K3 + a3 + t, 1, p + b + t, 1, p + b + ft + t, 1, p + W + r + t, 1, p + W + mt + t, 1, p + W + t, 1, p + W + r + t, 1, p + n + r + t, 1, p + p6 + t, 1, p + n + r + t, 1, p + W + r + t, 1, p + W + r + t, 1, p + n + r + t, 1, p + n + r + t, 1, i + h + Yi + " +k=1" + $u + u + _ + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + e + t, 1, i + h + $l + " +k=1" + Xu + u + _ + e + t, 1, i + h + Ti + " +k=1" + Wh + u + _ + e + t, 1, i + h + ml + " +k=1" + _0 + u + _ + e + t, 1, i + h + Pn + " +k=1" + m0 + u + _ + e + t, 1, i + h + gu + " +k=1" + g0 + u + _ + e + t, 1, i + h + ie + " +k=1" + v0 + u + _ + e + t, 1, i + h + la + " +k=1" + y0 + u + _ + e + t, 1, i + h + v + " +k=1" + b0 + u + _ + e + t, 1, i + h + Kl + " +k=1" + w0 + u + _ + e + t, 1, i + h + tt + " +k=1" + x0 + u + _ + e + t, 1, i + h + gl + " +k=1" + cp + u + _ + e + t, 1, i + h + Se + " +k=1" + k0 + u + _ + e + t, 1, i + h + aa + " +k=1" + fp + u + _ + e + t, 1, i + h + k + " +k=1" + L0 + u + _ + e + t, 1, i + h + Si + " +k=1" + y + u + _ + e + t, 1, i + h + wl + " +k=1" + y + u + _ + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + e + t, 1, i + h + bu + " +k=1" + y + u + _ + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + e + t, 1, i + h + $l + " +k=1" + y + u + _ + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + e + t, 1, i + h + ml + " +k=1" + y + u + _ + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + e + t, 1, i + h + gu + " +k=1" + y + u + _ + e + t, 1, i + h + ie + " +k=1" + y + u + _ + e + t, 1, i + h + la + " +k=1" + y + u + _ + e + t, 1, i + h + v + " +k=1" + y + u + _ + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + e + t, 1, i + h + tt + " +k=1" + y + u + _ + e + t, 1, i + h + gl + " +k=1" + y + u + _ + e + t, 1, i + h + Se + " +k=1" + y + u + _ + e + t, 1, p + O + Dc + " +pm=bern" + t, 1, p + b + o + " +pm=bogota" + t, 1, p + b + P + sb + t, 1, p + O + Um + S0 + t, 1, p + O + Ut + bl + t, 1, p + b + tu + " +pm=rome" + t, 1, p + Ke + le + ji + kl + t, 1, p + O + S0 + t, 1, p + b + " +pm=brussels" + t, 1, p + b + B1 + kl + t, 1, p + Ke + le + Wm + kl + t, 1, i + h + aa + " +k=1" + y + u + _ + e + t, 0, i + h + aa + " +k=1" + y + u + _ + e + t, 1, p + O + va + S0 + t, 1, p + O + " +pm=stockholm" + t, 1, p + O + " +pm=athens" + t, 1, p + Ke + le + nu + kl + t, 1, p + Ku + fo + xr + Rf + t, 1, p + O + Ds + bl + t, 2, p + O + F1 + S0 + t, 1, p + Ke + le + kl + t, 1, i + h + k + " +k=1" + y + u + _ + e + t, 1, p + b + t, 1, p + b + t, 2, a + " +lat_1=15 +lat_2=16.66666666666667 +lat_0=15.83333333333333 +lon_0=-24 +x_0=161587.83 +y_0=128511.202" + M + e + t, 13, a + GM + jM + $p + yy + z + u + n + r + e + t, 62, p + " +a=6376523" + j3 + CE + t, 2, p + n6 + N3 + " +pm=madrid" + t, 1, p + O + Z5 + sb + t, 109, p + n + r + t, 1, c + Fa + n + r + e + t, 1, c + El + n + r + e + t, 1, c + Qi + n + r + e + t, 2, i + cr + r8 + " +k=1" + z + u + b + P + e + t, 23, _n + $i + A0 + qr + wc + Cn + yr + M + e + t, 1, _n + K + " +lat_ts=-90" + qr + wc + Cn + yr + M + e + t, 6, c + Go + n + r + e + t, 21, ur + S_ + sa + V_ + _f + z + u + w + e + t, 1, ur + S_ + sa + V_ + _f + z + u + n + r + e + t, 1, ur + S_ + sa + V_ + _f + z + u + n + r + e + t, 1, ur + S_ + sa + V_ + _f + z + u + n + r + e + t, 33, i + Er + " +lon_0=5.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=6.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=7.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=8.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=9.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + yy + " +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=11.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=12.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=13.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=14.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=15.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + my + " +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=17.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=18.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=19.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=20.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=21.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=22.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=23.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=24.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=25.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=26.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=27.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=28.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=29.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=30.5 +k=1" + Be + Ee + n + r + e + t, 2, p + O + t, 35, i + bn + sc + " +k=1" + ot + He + O + e + t, 1, i + bn + Rp + " +k=1" + ot + " +y_0=550000" + O + e + t, 1, i + bn + Dp + " +k=1" + ot + He + O + e + t, 1, i + bn + Rp + " +k=1" + ot + He + O + e + t, 1, i + bn + Se + " +k=1" + ot + He + O + e + t, 1, i + bn + sc + " +k=1" + ot + He + O + e + t, 1, i + bn + " +lon_0=125.0028902777778 +k=1" + ot + He + O + e + t, 1, i + bn + FM + " +k=1" + ot + He + O + e + t, 1, i + bn + FM + " +k=1" + ot + " +y_0=550000" + O + e + t, 1, i + bn + " +lon_0=129.0028902777778 +k=1" + ot + He + O + e + t, 1, i + bn + " +lon_0=131.0028902777778 +k=1" + ot + He + O + e + t, 1, i + bn + pp + Me + Ye + yr + O + e + t, 1, i + bn + pp + Me + Ye + yr + n + r + e + t, 1, i + bn + Dp + " +k=1" + ot + He + n + r + e + t, 1, i + bn + Rp + " +k=1" + ot + He + n + r + e + t, 1, i + bn + Rp + " +k=1" + ot + " +y_0=550000" + n + r + e + t, 1, i + bn + Se + " +k=1" + ot + He + n + r + e + t, 1, i + bn + sc + " +k=1" + ot + He + n + r + e + t, 1, i + bn + Dp + " +k=1" + ot + kp + n + r + e + t, 1, i + bn + Rp + " +k=1" + ot + kp + n + r + e + t, 1, i + bn + Se + " +k=1" + ot + kp + n + r + e + t, 1, i + bn + sc + " +k=1" + ot + kp + n + r + e + t, 33, Ev + y_ + " +lon_0=42.5" + _g + m + z + u + O + Ds + bl + e + t, 2, i + h + no + Me + y + He + M + e + t, 5, p + O + j5 + t, 1, p + O + j5 + bl + t, 4, p + Gr + Wt + T5 + t, 1, i + " +lat_0=7.000480277777778 +lon_0=80.77171111111112 +k=0.9999238418" + ot + Da + Gr + Wt + $L + e + t, 1, i + " +lat_0=7.000471527777778 +lon_0=80.77171308333334 +k=0.9999238418" + y + He + Gr + Wt + T5 + e + t, 8, a + GM + jM + $p + yy + z + u + n + r + e + t, 3, p + n + t, 1, Jn + hh + Z_ + WE + Fd + z + u + xo + V1 + n + e + t, 5, p + n + r + t, 1, i + h + Ei + " +k=1" + y + u + n + r + e + t, 1, i + h + Do + " +k=1" + y + u + n + r + e + t, 1, i + h + eo + " +k=1" + y + u + n + r + e + t, 1, i + h + cc + " +k=1" + y + u + n + r + e + t, 1, i + h + Ga + " +k=1" + y + u + n + r + e + t, 1, i + h + fc + " +k=1" + y + u + n + r + e + t, 1, i + h + ks + " +k=1" + y + u + n + r + e + t, 5, p + n + r + t, 2, i + h + Yi + " +k=1" + Hn + u + n + r + e + t, 3, i + h + Ei + " +k=1" + od + u + n + r + e + t, 1, i + h + Do + " +k=1" + td + u + n + r + e + t, 1, i + h + eo + " +k=1" + Hc + u + n + r + e + t, 1, i + h + cc + " +k=1" + ed + u + n + r + e + t, 1, i + h + Ga + " +k=1" + jl + u + n + r + e + t, 1, i + h + fc + " +k=1" + ul + u + n + r + e + t, 1, i + h + ks + " +k=1" + ou + u + n + r + e + t, 17, i + h + " +lon_0=90.73333333333333 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.55 +k=1" + Hn + rr + n + r + e + t, 1, i + h + zM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.03333333333333 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.15000000000001 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.13333333333334 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.23333333333333 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.34999999999999 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.34999999999999 +k=1" + Hn + rr + n + r + e + t, 1, i + h + zM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + UM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.06666666666666 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.26666666666667 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.55 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.75 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.5 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.16666666666667 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.11666666666666 +k=1" + Hn + rr + n + r + e + t, 1, i + h + UM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.86666666666666 +k=1" + Hn + rr + n + r + e + t, 5, i + h + " +lon_0=-7 +k=0.999997" + ot + " +y_0=-6000000" + n + r + e + t, 4, a + by + " +lat_2=54.5" + h + ic + Ye + u + n + r + e + t, 1, a + by + " +lat_2=54.5" + h + ic + Ye + u + n + r + e + t, 3, p + n + r + t, 1, a + " +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19" + Yh + oa + n + r + e + t, 4, du + S3 + t1 + mp + Mp + O + F1 + S0 + e + t, 1, du + S3 + t1 + mp + Mp + O + va + S0 + e + t, 1, du + S3 + t1 + mp + Mp + O + Um + S0 + e + t, 6, c + Fa + Z + b + be + e + t, 3, p + n + r + t, 3, i + K + D_ + " +k=1" + ze + u + n + r + e + t, 1, i + K + sh + " +k=1" + Gn + u + n + r + e + t, 1, i + K + Nd + " +k=1" + qn + u + n + r + e + t, 1, i + K + P0 + " +k=1" + Pr + u + n + r + e + t, 1, i + K + N_ + " +k=1" + xn + u + n + r + e + t, 1, i + K + ab + " +k=1" + Vh + u + n + r + e + t, 1, i + K + hc + " +k=1" + ql + u + n + r + e + t, 5, p + n + r + t, 1, c + Tr + Z + n + r + e + t, 1, c + Vr + Z + n + r + e + t, 1, c + Qr + Z + n + r + e + t, 3, p + n + r + t, 1, c + Vr + Z + n + r + e + t, 1, c + Xr + Z + n + r + e + t, 3, p + W + r + t, 2, i + h + ic + m + y + u + W + r + e + t, 4, p + n + r + t, 2, p + n + r + t, 8, p + W + r + t, 1, c + Qr + Z + W + r + e + t, 1, c + Ai + Z + W + r + e + t, 4, c + Xr + Z + n + r + e + t, 2, c + Vr + Z + n + r + e + t, 4, p + n + r + t, 3, c + El + Z + n + r + e + t, 55, p + F + nl + t, 5, a + " +lat_1=10.46666666666667 +lat_0=10.46666666666667 +lon_0=-84.33333333333333 +k_0=0.99995696" + y + " +y_0=271820.522" + F + nl + e + t, 1, a + " +lat_1=9 +lat_0=9" + i8 + " +k_0=0.99995696" + y + " +y_0=327987.436" + F + nl + e + t, 2, a + " +lat_1=14.9 +lat_0=14.9" + ri + " +k_0=0.99989906" + y + " +y_0=325992.681" + F + nl + e + t, 1, a + " +lat_1=13.78333333333333 +lat_0=13.78333333333333 +lon_0=-89 +k_0=0.99996704" + y + " +y_0=295809.184" + F + nl + e + t, 1, a + " +lat_1=13.86666666666667 +lat_0=13.86666666666667" + Qv + " +k_0=0.99990314" + y + " +y_0=359891.816" + F + nl + e + t, 1, a + " +lat_1=11.73333333333333 +lat_0=11.73333333333333" + Qv + " +k_0=0.9999222800000001" + y + " +y_0=288876.327" + F + nl + e + t, 1, c + yi + bt + Tt + e + t, 1, p + qe + Vn + t, 3, p + F + t, 2, a + " +lat_1=8.416666666666666 +lat_0=8.416666666666666 +lon_0=-80 +k_0=0.99989909" + y + " +y_0=294865.303" + F + e + t, 3, cy + " +lat_0=8.25" + zn + " +x_0=914391.7962 +y_0=999404.7217154861" + F + " +to_meter=0.9143917962" + t, 7, a + gt + vt + " +lat_0=-78 +lon_0=163" + Jv + Kh + n + r + e + t, 1, a + " +lat_1=-73.66666666666667" + Dn + " +lat_0=-74.5" + lc + rf + G + n + r + e + t, 1, a + " +lat_1=-70.66666666666667 +lat_2=-72.33333333333333 +lat_0=-71.5" + eb + f6 + Ee + n + r + e + t, 1, _n + K + " +lat_ts=-90" + jp + wc + rf + Ee + n + r + e + t, 7, p + n + r + t, 1, c + Tr + n + r + e + t, 23, Ev + y_ + qM + _g + m + z + u + O + Ds + e + t, 1, Ev + y_ + qM + _g + m + z + u + O + Ds + e + t, 4, i + ob + Tv + " +k=1" + Lp + " +y_0=650000" + b + WL + e + t, 1, i + ob + Tv + " +k=1" + Lp + " +y_0=650000" + b + F5 + e + t, 1, i + h + Ml + " +k=1" + ze + u + O + ve + e + t, 3, i + h + " +lon_0=11.5" + Me + ze + br + M + e + t, 1, p + b + t, 3, p + bt + me + t, 3, cy + h + hc + rf + kt + bt + me + e + t, 1, c + Qr + Z + bt + me + e + t, 2, c + Es + Z + bt + me + e + t, 1, c + Wa + Z + bt + me + e + t, 1, c + Fa + Z + bt + me + e + t, 1, c + Qr + Z + b + e + t, 1, c + Ai + Z + b + e + t, 1, c + Es + Z + b + e + t, 1, c + Wa + Z + b + e + t, 7, p + n + r + t, 4, c + Ha + Z + n + r + e + t, 1, c + Ql + Z + n + r + e + t, 1, c + xc + Z + n + r + e + t, 7, a + " +lat_1=16.81666666666667 +lat_0=16.81666666666667" + ri + " +k_0=0.99992226" + y + " +y_0=292209.579" + F + nl + e + t, 2, p + _ + je + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + je + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + je + e + t, 1, i + h + eo + " +k=1" + Vh + u + _ + je + e + t, 1, i + h + Ga + " +k=1" + ql + u + _ + je + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + je + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + je + e + t, 1, i + h + eo + " +k=1" + y + u + _ + je + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + je + e + t, 19, se + Zl + r6 + b_ + Re + " +y_0=304800" + w + ct + t, 1, i + " +lat_0=17.06124194444444 +lon_0=-88.6318575 +k=1 +x_0=66220.02833082761 +y_0=135779.5099885299" + qe + Vn + Qg + t, 4, p + n + r + t, 3, i + h + " +lon_0=11.33333333333333 +k=1" + Ye + u + n + r + e + t, 27, i + T + i8 + " +k=0.999942857" + X + u + w + d + t, 1, i + T + dt + Vu + X + u + w + d + t, 1, i + T + " +lon_0=-88.75" + Vu + X + u + w + d + t, 2, i + h + Jp + Me + y + u + b + ut + e + t, 2, c + Xi + Z + W + rg + e + t, 2, i + h + yo + " +k=1" + Gn + u + _ + U + e + t, 1, a + U_ + Af + vc + xl + tf + __ + n + r + e + t, 1, ra + vc + xl + m_ + g_ + n + r + e + t, 1, a + U_ + Af + vc + xl + tf + __ + n + r + e + t, 1, ra + vc + xl + m_ + g_ + n + r + e + t, 1, ra + vc + xl + m_ + g_ + n + r + e + t, 1, a + U_ + Af + vc + xl + tf + __ + n + r + e + t, 1, ra + vc + xl + m_ + g_ + n + r + e + t, 1, a + U_ + Af + vc + xl + tf + __ + n + r + e + t, 2, du + " +lon_0=-43 +lat_ts=-2" + rf + kt + n + r + e + t, 2, a + " +lat_1=52.66666666666666 +lat_2=54.33333333333334 +lat_0=48" + xl + " +x_0=815000" + u + b + ut + e + t, 1, c + Ni + Z + n + r + e + t, 2, i + I + nf + zc + Ie + u + n + r + d + t, 3, i + h + Ml + Me + Kn + u + n + r + e + t, 1, i + h + hr + Me + Wh + u + n + r + e + t, 1, i + h + Ml + Me + Kn + u + n + r + e + t, 1, i + h + yo + Me + Xu + u + n + r + e + t, 1, i + h + hr + Me + Wh + u + n + r + e + t, 1, i + I + nf + zc + Ie + u + n + r + d + t, 1, i + I + nf + zc + Ie + u + n + r + d + t, 4, i + h + yo + Me + " +x_0=500053 +y_0=-3999820" + b + tu + e + t, 4, i + h + hr + " +k=1" + qn + u + _ + U + e + t, 1, i + h + yo + " +k=1" + Gn + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + yo + " +k=1" + qn + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + hr + " +k=1" + xn + u + O + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + U + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + U + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + U + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + Bt + e + t, 1, i + h + Jp + " +k=1" + Gn + u + O + ve + e + t, 1, i + h + yo + " +k=1" + qn + u + O + ve + e + t, 1, i + h + no + " +k=1" + Pr + u + O + ve + e + t, 1, i + h + hr + " +k=1" + xn + u + O + ve + e + t, 1, i + h + Ml + " +k=1" + ze + u + O + ve + e + t, 1, p + O + t, 1, i + h + Jp + " +k=1" + Gn + u + O + e + t, 1, i + h + yo + " +k=1" + qn + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + hr + " +k=1" + xn + u + O + e + t, 15, c + Jl + Z + n + r + e + t, 125, i + " +lat_0=-35.31773627777778 +lon_0=149.0092948305555 +k=1.000086" + ot + kp + bt + V + e + t, 11, c + wo + W + r + e + t, 1, c + js + W + r + e + t, 2, c + yi + Z + n + r + e + t, 3, i + h + no + Me + y + kt + M + e + t, 2, i + h + Do + m + y + kt + n + r + e + t, 14, c + Ai + Z + bt + me + e + t, 17, c + Xr + Z + bt + me + e + t, 1, c + Vr + Z + bt + me + e + t, 1, c + Tr + Z + bt + me + e + t, 2, c + Xi + Z + b + U5 + e + t, 1, cy + h + hc + rf + kt + n + r + e + t, 6, p + n + t, 1, i + h + nh + Me + ze + Kh + n + e + t, 3, _n + $i + " +lat_ts=70" + Yi + " +k=1" + z + u + ib + bv + e + t, 31, a + K_ + io + Y1 + oh + z + u + M + e + t, 1, a + K_ + io + Y1 + G_ + z + u + M + e + t, 1, a + K_ + io + Y1 + eo + z + u + M + e + t, 1, a + K_ + io + Y1 + Pn + z + u + M + e + t, 1, a + K_ + io + Y1 + Yl + z + u + M + e + t, 1, a + No + Y_ + $1 + oh + z + u + M + e + t, 1, a + No + Y_ + $1 + G_ + z + u + M + e + t, 1, a + No + Y_ + $1 + eo + z + u + M + e + t, 1, a + No + Y_ + $1 + Pn + z + u + M + e + t, 1, a + No + Y_ + $1 + Yl + z + u + M + e + t, 1, a + $_ + X_ + X1 + oh + z + u + M + e + t, 1, a + $_ + X_ + X1 + G_ + z + u + M + e + t, 1, a + $_ + X_ + X1 + eo + z + u + M + e + t, 1, a + $_ + X_ + X1 + Pn + z + u + M + e + t, 1, a + $_ + X_ + X1 + Yl + z + u + M + e + t, 1, _n + $i + A0 + Td + wc + Cn + yr + M + e + t, 1, _n + $i + A0 + fr + wc + Cn + yr + M + e + t, 1, _n + $i + A0 + " +lon_0=-33" + wc + Cn + yr + M + e + t, 1, _n + $i + A0 + Lf + wc + Cn + yr + M + e + t, 1, _n + $i + A0 + Pn + wc + Cn + yr + M + e + t, 110, a + Xp + sp + ap + " +lon_0=-30" + uu + Wn + n + r + e + t, 1, a + fs + Vo + $s + " +lon_0=-52" + ru + th + n + r + e + t, 1, a + fs + Vo + $s + " +lon_0=-12" + Fl + th + n + r + e + t, 1, a + ei + io + Or + sh + hl + Hl + n + r + e + t, 1, a + ei + io + Or + G_ + Kn + Hl + n + r + e + t, 1, a + ei + io + Or + " +lon_0=-10" + Wh + Hl + n + r + e + t, 1, a + No + en + ln + " +lon_0=-64" + Fl + In + n + r + e + t, 1, a + No + en + ln + G_ + zl + In + n + r + e + t, 1, a + No + en + ln + " +lon_0=-14" + nd + In + n + r + e + t, 1, a + Sn + Ln + sn + rc + x0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-42" + k0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-22" + L0 + br + n + r + e + t, 1, a + Zo + uh + Ze + lb + hu + eh + n + r + e + t, 1, a + Zo + uh + Ze + " +lon_0=-38" + fu + eh + n + r + e + t, 1, a + Zo + uh + Ze + " +lon_0=-20" + $u + eh + n + r + e + t, 1, a + " +lat_1=67" + HM + ZM + " +lon_0=-51" + Hc + u6 + n + r + e + t, 1, a + " +lat_1=67" + HM + ZM + " +lon_0=-34" + jl + u6 + n + r + e + t, 1, a + WM + VM + KM + " +lon_0=-52" + Fl + " +y_0=8500000" + n + r + e + t, 1, a + WM + VM + KM + " +lon_0=-37" + zl + " +y_0=8500000" + n + r + e + t, 1, a + fs + Vo + $s + " +lon_0=16" + zl + th + n + r + e + t, 1, a + ei + io + Or + Rn + Hc + Hl + n + r + e + t, 1, a + No + en + ln + xl + hu + In + n + r + e + t, 1, a + No + en + ln + Q_ + fu + In + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=14" + Hc + br + n + r + e + t, 1, a + Sn + Ln + sn + Q_ + jl + br + n + r + e + t, 1, a + fs + Vo + $s + " +lon_0=53" + nd + th + M + e + t, 1, a + fs + Vo + $s + Pi + hu + th + M + e + t, 1, a + ei + io + Or + " +lon_0=52" + jl + Hl + M + e + t, 1, a + ei + io + Or + " +lon_0=83" + ou + Hl + M + e + t, 1, a + ei + io + Or + la + Zh + Hl + M + e + t, 1, a + ei + io + Or + " +lon_0=145" + iu + Hl + M + e + t, 1, a + No + en + ln + " +lon_0=58" + $u + In + M + e + t, 1, a + No + en + ln + " +lon_0=82" + Xu + In + M + e + t, 1, a + No + en + ln + Yy + _0 + In + M + e + t, 1, a + No + en + ln + " +lon_0=130" + g0 + In + M + e + t, 1, a + No + en + ln + $y + y0 + In + M + e + t, 1, a + No + en + ln + " +lon_0=179" + w0 + In + M + e + t, 1, a + Sn + Ln + sn + R0 + ou + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=74" + Zh + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=95" + iu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=116" + au + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=137" + lu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=158" + uu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=179" + cu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=-163" + hl + br + n + r + e + t, 1, a + Sn + Ln + sn + Sp + Kn + br + n + r + e + t, 1, a + Zo + uh + Ze + L_ + ul + eh + n + r + e + t, 1, a + Zo + uh + Ze + Sp + su + eh + n + r + e + t, 1, a + Xp + sp + ap + On + lu + Wn + n + r + e + t, 1, a + fs + Vo + $s + E_ + ul + th + n + r + e + t, 1, a + fs + Vo + $s + B_ + su + th + n + r + e + t, 1, a + ei + io + Or + Ay + uu + Hl + n + r + e + t, 1, a + ei + io + Or + _l + cu + Hl + n + r + e + t, 1, a + ei + io + Or + sh + hl + Hl + n + r + e + t, 1, a + No + en + ln + Ay + ul + In + n + r + e + t, 1, a + No + en + ln + " +lon_0=-104" + su + In + n + r + e + t, 1, a + No + en + ln + oc + ru + In + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-131" + Wh + br + n + r + e + t, 1, a + Sn + Ln + sn + oh + m0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-91" + v0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-71" + b0 + br + n + r + e + t, 1, a + Zo + uh + Ze + " +lon_0=-132" + ru + eh + n + r + e + t, 1, a + Zo + uh + Ze + " +lon_0=-113" + Fl + eh + n + r + e + t, 1, a + Zo + uh + Ze + uc + zl + eh + n + r + e + t, 1, a + Zo + uh + Ze + B_ + nd + eh + n + r + e + t, 1, a + Xp + sp + ap + Do + cu + Wn + M + e + t, 1, a + Xp + sp + ap + Yi + hl + Wn + M + e + t, 1, a + Xp + sp + ap + bf + Kn + Wn + M + e + t, 1, a + Xp + sp + ap + Td + au + Wn + M + e + t, 1, a + fs + Vo + $s + " +lon_0=133" + fu + th + M + e + t, 1, a + fs + Vo + $s + eb + td + th + M + e + t, 1, a + fs + Vo + $s + df + ed + th + M + e + t, 1, a + ei + io + Or + " +lon_0=176" + au + Hl + M + e + t, 1, a + ei + io + Or + wy + lu + Hl + M + e + t, 1, a + No + en + ln + " +lon_0=-155" + ed + In + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=-5" + J3 + br + n + r + e + t, 3, c + yi + F + I5 + ct + t, 1, c + yi + F + G5 + ct + t, 6, p + n + r + t, 69, i + h + Rn + m + y + u + O + Ut + e + t, 3, p + Gr + Wt + " +towgs84=293.17,726.18,245.36,0,0,0,0" + t, 3, c + Es + n + r + e + t, 1, c + Wa + n + r + e + t, 96, a + tn + fn + wn + Oe + ot + Da + n + e + t, 4, p + W + C5 + t, 1, i + h + eo + Bn + ot + " +y_0=-3500000" + W + C5 + e + t, 4, i + h + Rn + m + ql + u + O + Ut + e + t, 2, p + n + t, 4, p + n + t, 3, p + n + t, 3, c + ja + n + e + t, 1, c + Xl + n + e + t, 1, c + Jl + n + e + t, 1, c + Mu + n + e + t, 1, c + kc + n + e + t, 1, c + Cu + n + e + t, 1, c + Ka + n + e + t, 1, c + Cl + n + e + t, 1, c + Ya + n + e + t, 1, c + Eu + n + e + t, 1, c + Su + n + e + t, 1, c + ku + n + e + t, 1, c + za + n + e + t, 1, c + Ua + n + e + t, 1, c + qa + n + e + t, 1, c + Za + n + e + t, 1, c + ua + n + e + t, 1, c + ha + n + e + t, 1, c + yi + n + e + t, 1, c + Xr + n + e + t, 1, c + Vr + n + e + t, 2, ur + S_ + sa + V_ + _f + z + u + n + e + t, 1, a + Sn + Ln + sn + " +lon_0=-163" + hl + br + n + e + t, 1, a + Sn + Ln + sn + Sp + Kn + br + n + e + t, 1, a + Zo + uh + Ze + L_ + ul + eh + n + e + t, 1, a + Zo + uh + Ze + Sp + su + eh + n + e + t, 1, i + dl + U1 + Dd + ot + u + n + e + t, 1, i + fi + M0 + fe + D + u + n + e + t, 6, a + " +lat_1=17.5 +lat_2=29.5 +lat_0=12 +lon_0=-102" + Gn + u + n + r + e + t, 3, p + n + r + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, a + " +lat_1=17.5 +lat_2=29.5 +lat_0=12 +lon_0=-102" + Gn + u + n + r + e + t, 9, i + h + Rn + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + ro + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + Ei + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + Do + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + eo + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + cc + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + Ga + " +k=1" + xe + u + _ + ga + e + t, 4, a + " +lat_1=19.33333333333333 +lat_2=19.7 +lat_0=19.33333333333333 +lon_0=-80.56666666666666 +x_0=899160 +y_0=579120" + n + r + ct + t, 2, ur + " +lat_1=55" + Af + F_ + df + z + u + n + e + t, 1, Jn + " +lat_0=57" + Mg + Eg + m + rf + gi + xo + gr + n + e + t, 1, i + at + My + m + y + u + n + e + t, 1, i + at + Ey + m + y + u + n + e + t, 1, i + at + Td + m + y + u + n + e + t, 1, i + at + df + m + y + u + n + e + t, 1, i + at + rh + m + y + u + n + e + t, 1, i + at + Sy + m + y + u + n + e + t, 1, i + at + Cy + m + y + u + n + e + t, 1, i + at + k_ + m + y + u + n + e + t, 1, a + Sg + Cg + $p + Py + Ye + u + n + e + t, 1, i + nn + ya + m + J + u + n + e + t, 1, i + nn + ya + m + J + u + n + ct + t, 1, i + nn + Ir + m + J + u + n + e + t, 1, i + nn + Ir + m + J + u + n + ct + t, 1, i + nn + Bc + fe + J + u + n + e + t, 1, i + nn + Bc + fe + J + u + n + ct + t, 1, a + Xo + Ta + ke + xs + H + u + n + e + t, 1, a + Xo + Ta + ke + xs + St + u + n + d + t, 1, a + Wr + cf + ys + xs + H + Vl + n + e + t, 1, a + Wr + cf + ys + xs + St + Kf + n + d + t, 1, ur + H_ + M_ + h + pf + z + u_ + n + e + t, 1, a + Ps + Gs + Dt + ws + Cn + He + n + e + t, 1, a + Ps + Gs + Dt + ws + $e + ne + n + d + t, 1, a + To + lo + Ft + ws + Cn + He + n + e + t, 1, a + To + lo + Ft + ws + $e + ne + n + d + t, 1, a + wt + Ao + sf + he + Cn + He + n + e + t, 1, a + wt + Ao + sf + he + $e + ne + n + d + t, 1, a + Kc + Mf + uo + af + Cn + He + n + e + t, 1, a + Kc + Mf + uo + af + $e + ne + n + d + t, 1, a + xi + ho + lf + Wl + Cn + He + n + e + t, 1, a + xi + ho + lf + Wl + $e + ne + n + d + t, 1, a + Oo + $o + Qs + Nc + Cn + He + n + e + t, 1, a + Oo + $o + Qs + Nc + $e + ne + n + d + t, 1, a + Yc + $c + us + Qe + zt + Nt + n + e + t, 1, a + Yc + $c + us + Qe + ai + pn + n + d + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + e + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + d + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + e + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + d + t, 1, a + La + uf + Io + Zc + hv + cv + n + e + t, 1, a + La + uf + Io + Zc + qg + Hg + n + d + t, 1, i + bn + Ui + hf + ot + u + n + e + t, 1, i + bn + Ui + hf + Ht + u + n + d + t, 1, i + Et + zn + st + ot + u + n + e + t, 1, i + Et + zn + st + Ht + u + n + d + t, 1, ur + " +lat_1=24" + vy + " +lat_0=24" + ic + H + u + n + e + t, 1, a + Xc + Js + Ef + Qc + D + u + n + e + t, 1, a + Xc + Js + Ef + Qc + D + u + n + d + t, 1, i + Et + gf + st + ot + u + n + e + t, 1, i + Et + gf + st + Ht + u + n + d + t, 1, i + fi + dr + m + ot + u + n + e + t, 1, i + fi + dr + m + Ht + u + n + d + t, 1, i + fi + pi + m + R + u + n + e + t, 1, i + fi + pi + m + ui + u + n + d + t, 1, i + pt + pu + Te + y + u + n + e + t, 1, i + pt + pu + Te + ge + u + n + d + t, 1, i + pt + ds + Te + ot + u + n + e + t, 1, i + pt + ds + Te + Ht + u + n + d + t, 1, i + pt + Gc + fe + Lr + u + n + e + t, 1, i + pt + Gc + fe + Zg + u + n + d + t, 1, i + Q + Cs + oi + xe + u + n + e + t, 1, i + Q + Cs + oi + xe + u + n + d + t, 1, i + Q + pr + st + R + u + n + e + t, 1, i + Q + pr + st + ev + u + n + d + t, 1, i + Zn + bi + Pe + Be + ih + n + e + t, 1, i + Zn + bi + Pe + Jg + oe + n + d + t, 1, i + Zn + ba + Pe + Bs + ih + n + e + t, 1, i + Zn + ba + Pe + Bs + oe + n + d + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + e + t, 1, a + Qo + Wi + T + Qt + ze + de + n + d + t, 1, a + Qn + Aa + it + Qt + y + u + n + e + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + d + t, 1, a + Vi + Dr + kn + si + H + u + n + e + t, 1, a + Vi + Dr + kn + si + St + u + n + d + t, 1, a + $r + bs + Q + Fr + H + Vl + n + e + t, 1, a + $r + bs + Q + Fr + St + Kf + n + d + t, 1, a + Xt + ao + Zn + qc + y + u + n + e + t, 1, a + Xt + ao + Zn + qc + ge + u + n + d + t, 1, a + eu + Hh + Jt + dt + ze + Ee + n + e + t, 1, a + eu + Hh + Jt + dt + ze + zi + n + d + t, 1, a + ci + ta + Jt + dt + y + He + n + e + t, 1, a + ci + ta + Jt + dt + ge + ne + n + d + t, 1, a + Ih + Rh + dl + cl + Ye + u + n + e + t, 1, a + Ih + Rh + dl + cl + Vt + u + n + d + t, 1, a + Ld + Md + Ed + Zr + Ye + u + n + e + t, 1, a + Ld + Md + Ed + Zr + Vt + u + n + d + t, 1, i + Ly + wv + Ba + y + u + n + e + t, 1, i + Ve + gv + Ba + R + u + n + e + t, 1, i + we + vv + Ba + xe + u + n + e + t, 1, i + rn + Ra + m + xe + u + n + e + t, 1, i + rn + Ra + m + xe + u + n + d + t, 1, i + we + zr + Pe + Bs + u + n + e + t, 1, i + we + zr + Pe + Bs + u + n + d + t, 1, a + sd + md + Ft + mu + H + u + n + e + t, 1, a + sd + md + Ft + mu + Wg + u + n + d + t, 1, a + Oa + ts + es + Ul + y + u + n + e + t, 1, a + Oa + ts + es + Ul + ge + u + n + d + t, 1, a + Os + Ts + es + Gt + ot + of + n + e + t, 1, a + Os + Ts + es + Gt + Ht + of + n + d + t, 1, a + gd + po + il + $t + _p + u + n + e + t, 1, a + gd + po + il + $t + Kg + u + n + ct + t, 1, a + rl + ea + Tn + pl + Yv + u + n + e + t, 1, a + rl + ea + Tn + pl + Vg + u + n + ct + t, 1, Jn + xg + " +lonc=-86" + fv + Me + dv + uv + xo + pv + n + e + t, 1, a + Ne + vd + T + $t + tf + u + n + e + t, 1, a + Ne + vd + T + $t + av + u + n + ct + t, 1, a + fd + Nh + mo + Vc + Lr + Mr + n + e + t, 1, a + fd + Nh + mo + Vc + $ + lt + n + d + t, 1, a + Dh + Bh + Zl + wa + Lr + Mr + n + e + t, 1, a + Dh + Bh + Zl + wa + $ + lt + n + d + t, 1, a + Gh + Zu + wu + uc + Lr + Mr + n + e + t, 1, a + Gh + Zu + wu + uc + $ + lt + n + d + t, 1, i + ia + ps + Bn + xe + u + n + e + t, 1, i + ia + ps + Bn + xe + u + n + d + t, 1, i + Xh + Av + Xv + y + gp + n + e + t, 1, i + ia + ri + Bn + R + u + n + e + t, 1, i + ia + ri + Bn + ui + u + n + d + t, 1, i + Ys + cl + fe + y + u + n + e + t, 1, i + Ys + d_ + fe + Hn + u + n + e + t, 1, i + Z1 + p_ + st + py + u + n + e + t, 1, a + Na + Hd + ad + Yu + D + u + n + e + t, 1, a + Na + Hd + ad + Yu + gs + u + n + ct + t, 1, a + Ls + Gs + Ia + fr + y + u + n + e + t, 2, i + jr + xa + m + y + fl + n + e + t, 1, i + jr + xa + m + Ie + fl + n + d + t, 1, i + jr + wi + m + ot + $v + n + e + t, 1, i + jr + wi + m + Yf + tv + n + d + t, 1, i + jr + qi + m + Lr + ef + n + e + t, 1, i + jr + qi + m + $ + nv + n + d + t, 1, i + I + Yo + Pe + xe + u + n + e + t, 1, i + I + Yo + Pe + xe + u + n + d + t, 1, i + ee + na + m + Nn + u + n + e + t, 1, i + ee + na + m + Nn + u + n + d + t, 1, i + nn + jc + m + y + u + n + e + t, 1, i + nn + jc + m + ge + u + n + d + t, 1, i + nn + Ko + Vu + yd + u + n + e + t, 1, i + nn + Ko + Vu + yd + u + n + d + t, 1, i + nn + hi + Fc + _y + u + n + e + t, 1, i + nn + hi + Fc + Yg + u + n + d + t, 1, i + it + Di + an + Hn + u + n + e + t, 1, i + it + Di + an + $g + u + n + d + t, 1, i + ee + na + m + Nn + u + n + e + t, 1, i + ee + na + m + Nn + u + n + d + t, 1, a + Ma + Ur + ye + vf + xe + u + n + e + t, 1, a + Ma + Ur + ye + vf + xe + u + n + d + t, 1, i + it + _s + an + Lp + u + n + e + t, 1, i + it + _s + an + Xg + u + n + d + t, 1, a + Ki + ol + Jc + oc + yv + u + n + e + t, 1, a + Ki + ol + Jc + oc + B + u + n + d + t, 1, a + Le + _o + Bo + Lt + D + u + n + e + t, 1, a + Le + _o + Bo + Lt + gs + u + n + ct + t, 1, a + Is + sl + Br + Lt + D + u + n + e + t, 1, a + Is + sl + Br + Lt + gs + u + n + ct + t, 1, a + Sd + Bl + cr + f + D + u + n + e + t, 1, a + Sd + Bl + cr + f + D + u + n + d + t, 1, a + jh + Fh + bn + f + D + u + n + e + t, 1, a + jh + Fh + bn + f + D + u + n + d + t, 1, a + ki + ju + Sf + si + D + u + n + e + t, 1, a + ki + ju + Sf + si + D + u + n + d + t, 1, a + kh + Fu + Ea + si + D + u + n + e + t, 1, a + kh + Fu + Ea + si + D + u + n + d + t, 1, a + Ls + sa + ce + he + H + u + n + e + t, 1, a + Ls + sa + ce + he + i_ + u + n + ct + t, 1, a + dc + Kr + rn + he + Gn + u + n + e + t, 1, a + dc + Kr + rn + he + n_ + u + n + ct + t, 1, a + pc + hs + pt + he + ze + u + n + e + t, 1, a + pc + hs + pt + he + r_ + u + n + ct + t, 1, a + ld + Lh + ye + Rt + D + u + n + e + t, 1, a + ld + Lh + ye + Rt + D + u + n + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + d + t, 1, a + tn + fn + wn + Oe + ot + Da + n + e + t, 1, i + Mi + Gt + rd + Be + u + n + e + t, 1, i + Mi + Gt + rd + Q1 + u + n + d + t, 1, a + Mh + bd + As + zn + wd + u + n + e + t, 1, a + Mh + bd + As + zn + wd + u + n + ct + t, 1, a + zh + _i + Ve + fr + D + u + n + e + t, 1, a + zh + _i + Ve + fr + D + u + n + d + t, 1, a + Cd + Rs + En + gn + D + u + n + e + t, 1, a + Cd + Rs + En + gn + D + u + n + d + t, 1, a + Eh + ud + ke + ah + D + u + n + e + t, 1, a + Eh + ud + ke + ah + D + u + n + d + t, 1, a + Ch + Rl + cs + gn + R + G + n + e + t, 1, a + Ch + Rl + cs + gn + ui + G + n + d + t, 1, ur + Pd + Kd + lh + fr + ze + fl + n + e + t, 1, a + Pd + Kd + lh + fr + ze + Kh + n + e + t, 1, a + al + hd + Cf + Wc + ot + Ee + n + e + t, 1, a + al + hd + Cf + Wc + Ht + zi + n + d + t, 1, a + Il + Sh + Ca + Fr + D + yr + n + e + t, 1, a + Il + Sh + Ca + Fr + D + Wf + n + d + t, 1, a + qo + Ss + Po + Fr + xe + Kh + n + e + t, 1, a + qo + Ss + Po + Fr + xe + ov + n + d + t, 1, a + Dl + zu + Zi + _l + D + ef + n + e + t, 1, a + Dl + zu + Zi + _l + D + iv + n + d + t, 1, i + I + nf + zc + y + u + n + e + t, 1, i + I + nf + zc + Ie + u + n + d + t, 1, a + " +lat_1=37" + Ty + Mt + Un + z + u + n + e + t, 1, a + xd + Ph + Ft + Zt + qn + yr + n + e + t, 1, a + xd + Ph + Ft + Zt + Vf + Wf + n + d + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + e + t, 1, a + Xt + Pa + Jt + Zt + Vf + zi + n + d + t, 1, a + Le + kd + Bo + ms + y + u + n + e + t, 1, a + Le + kd + Bo + ms + ge + u + n + d + t, 1, a + Th + Uu + Li + he + y + u + n + e + t, 1, a + Th + Uu + Li + he + ge + u + n + d + t, 1, a + dd + Vd + ff + Un + D + u + n + e + t, 1, a + dd + Vd + ff + Un + D + u + n + d + t, 1, a + Uh + qh + Tf + zn + D + u + n + e + t, 1, a + Uh + qh + Tf + zn + D + u + n + d + t, 2, a + _u + cd + Ve + On + D + u + n + d + t, 1, a + qu + Ah + vs + On + D + u + n + e + t, 1, a + qu + Ah + vs + On + D + u + n + d + t, 1, a + Oh + Hu + _c + On + D + u + n + e + t, 1, a + Oh + Hu + _c + On + D + u + n + d + t, 1, i + h + On + Me + gy + Pv + n + e + t, 1, i + cn + so + an + ot + u + n + e + t, 1, i + cn + so + an + Yf + u + n + d + t, 1, i + cn + ka + an + H + Mr + n + e + t, 1, i + cn + ka + an + St + lt + n + d + t, 1, i + cn + Yr + an + Lr + Mr + n + e + t, 1, i + cn + Yr + an + $ + lt + n + d + t, 1, i + cn + Uc + an + D + u + n + e + t, 1, i + cn + Uc + an + D + u + n + d + t, 1, a + Qu + oo + kn + ae + y + yr + n + e + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + e + t, 1, a + Ju + Co + Q + ae + y + G + n + e + t, 1, a + Zp + yu + Ro + Ra + z + u + n + r + e + t, 1, ur + Zp + yu + Ro + Ra + z + u + n + r + e + t, 1, ur + Zp + yu + Ro + Ra + z + u + n + r + e + t, 1, a + Qu + oo + kn + ae + Ie + rv + n + d + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + d + t, 1, a + Ju + Co + Q + ae + Ie + G + n + d + t, 1, i + vg + Sv + Pe + y + u + n + e + t, 1, i + yg + tg + Pe + y + u + n + e + t, 1, i + Ce + rh + vl + y + u + n + e + t, 1, i + bg + Cv + vl + y + u + n + e + t, 1, i + wg + eg + " +k=1" + y + u + n + e + t, 1, i + Ce + rh + vl + Ie + u + n + d + t, 1, c + Cu + n + e + t, 1, c + Ka + n + e + t, 1, c + Mu + Z + n + e + t, 1, i + " +lat_0=13.5 +lon_0=144.75 +k=1" + Be + Da + n + e + t, 9, i + NM + " +lon_0=46.5 +k=0.9994" + Lr + u + Mn + ll + g + e + t, 22, p + n + t, 1, i + gc + i6 + m + z + u + n + e + t, 1, i + gc + sc + m + z + u + n + e + t, 1, i + Mt + x3 + m + z + u + n + e + t, 1, i + gc + Kv + m + z + u + n + e + t, 1, i + Mt + k3 + m + z + u + n + e + t, 1, i + Mt + Np + m + z + u + n + e + t, 1, i + Mt + L3 + m + z + u + n + e + t, 1, i + Mt + o6 + m + z + u + n + e + t, 1, i + Mt + M3 + m + z + u + n + e + t, 1, i + it + E3 + m + z + u + n + e + t, 1, i + Ro + $3 + m + z + u + n + e + t, 1, i + Ro + X3 + m + z + u + n + e + t, 1, i + Ro + Q3 + m + z + u + n + e + t, 1, i + go + " +lon_0=142" + m + z + u + n + e + t, 1, i + go + pp + m + z + u + n + e + t, 1, i + go + " +lon_0=124" + m + z + u + n + e + t, 1, i + go + sc + m + z + u + n + e + t, 1, i + " +lat_0=20" + Np + m + z + u + n + e + t, 1, i + go + $y + m + z + u + n + e + t, 1, c + zs + n + e + t, 1, c + da + n + e + t, 1, c + Sl + n + e + t, 1, c + Ha + n + e + t, 1, c + Ql + n + e + t, 11, i + h + N_ + Me + y + kt + W + r + e + t, 3, p + n + r + t, 1, c + Gi + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 11, i + h + " +lon_0=105.625 +k=1.000024" + yl + gp + W + r + e + t, 1, i + h + " +lon_0=105.625 +k=1.00002514" + yl + gp + n + r + e + t, 1, i + h + " +lon_0=96.875 +k=1" + yl + " +y_0=1400000" + W + r + e + t, 1, i + h + " +lon_0=96.875 +k=0.99999387" + yl + Wn + n + r + e + t, 13, c + Lu + Z + n + r + e + t, 1, c + Va + Z + n + r + e + t, 1, c + ja + Z + n + r + e + t, 45, p + n + t, 1, i + Ad + ig + Up + wf + u + n + e + t, 1, i + Ad + ig + Up + lp + u + n + ct + t, 1, i + Ad + ig + Up + wf + u + n + e + t, 1, i + Ad + ig + Up + lp + u + n + ct + t, 1, i + ce + xv + " +k=1.0002" + mf + u + n + e + t, 1, i + ce + xv + " +k=1.0002" + Qf + u + n + ct + t, 1, i + ce + xv + " +k=1.0002" + mf + u + n + e + t, 1, i + ce + xv + " +k=1.0002" + Qf + u + n + ct + t, 1, a + Pg + Tg + kv + pd + mf + " +y_0=130000" + n + e + t, 1, a + Pg + Tg + kv + pd + Qf + TE + n + ct + t, 1, a + Pg + Tg + kv + pd + mf + " +y_0=130000" + n + e + t, 1, a + Pg + Tg + kv + pd + Qf + TE + n + ct + t, 1, a + Ne + rn + Lv + Oy + " +x_0=120000 +y_0=60000" + n + e + t, 1, a + Ne + rn + Lv + Oy + AE + GE + n + ct + t, 1, a + Ne + rn + Lv + Oy + " +x_0=120000 +y_0=60000" + n + e + t, 1, a + Ne + rn + Lv + Oy + AE + GE + n + ct + t, 1, i + I + ni + ub + wf + u + n + e + t, 1, i + I + ni + ub + lp + u + n + ct + t, 1, i + I + ni + ub + wf + u + n + e + t, 1, i + I + ni + ub + lp + u + n + ct + t, 1, a + Ag + Br + he + Ov + Nn + " +y_0=30000" + n + e + t, 1, a + Ag + Br + he + Ov + sv + jE + n + ct + t, 1, a + Ag + Br + he + Ov + Nn + " +y_0=30000" + n + e + t, 1, a + Ag + Br + he + Ov + sv + jE + n + ct + t, 1, Jn + Og + hb + cb + " +k=1" + Jv + t6 + xo + fb + n + e + t, 1, Jn + Og + hb + cb + " +k=1" + PE + OE + xo + fb + n + ct + t, 1, Jn + Og + hb + cb + " +k=1" + Jv + t6 + xo + fb + n + e + t, 1, Jn + Og + hb + cb + " +k=1" + PE + OE + xo + fb + n + ct + t, 1, i + we + ni + Iy + yl + u + n + e + t, 1, i + we + ni + Iy + Jf + u + n + ct + t, 1, i + we + ni + Iy + yl + u + n + e + t, 1, i + we + ni + Iy + Jf + u + n + ct + t, 1, i + Ad + Ry + db + mf + u + n + e + t, 1, i + Ad + Ry + db + Qf + u + n + ct + t, 1, i + Ad + Ry + db + mf + u + n + e + t, 1, i + Ad + Ry + db + Qf + u + n + ct + t, 1, i + ty + og + Jh + yl + u + n + e + t, 1, i + ty + og + Jh + Jf + u + n + ct + t, 1, i + ty + og + Jh + yl + u + n + e + t, 1, i + ty + og + Jh + Jf + u + n + ct + t, 1, i + ce + ni + Cp + yl + u + n + e + t, 1, i + ce + ni + Cp + Jf + u + n + ct + t, 1, i + ce + ni + Cp + yl + u + n + e + t, 1, i + ce + ni + Cp + Jf + u + n + ct + t, 1, i + mo + sg + pb + " +x_0=10000" + u + n + e + t, 1, i + mo + sg + pb + VE + u + n + ct + t, 1, i + mo + sg + pb + " +x_0=10000" + u + n + e + t, 1, i + mo + sg + pb + VE + u + n + ct + t, 1, i + mo + Wl + _b + wf + u + n + e + t, 1, i + mo + Wl + _b + lp + u + n + ct + t, 1, i + mo + Wl + _b + wf + u + n + e + t, 1, i + mo + Wl + _b + lp + u + n + ct + t, 1, i + ey + Qh + " +k=1.0001" + mf + u + n + e + t, 1, i + ey + Qh + " +k=1.0001" + Qf + u + n + ct + t, 1, i + ey + Qh + " +k=1.0001" + mf + u + n + e + t, 1, i + ey + Qh + " +k=1.0001" + Qf + u + n + ct + t, 1, Jn + vp + Iv + " +alpha=5 +k=1 +x_0=-300000 +y_0=-4600000" + xo + " +gamma=5" + n + e + t, 1, Jn + vp + Iv + " +alpha=5 +k=1" + IE + LE + xo + " +gamma=5" + n + ct + t, 1, Jn + vp + Iv + " +alpha=5 +k=1 +x_0=-300000 +y_0=-4600000" + xo + " +gamma=5" + n + e + t, 1, Jn + vp + Iv + " +alpha=5 +k=1" + IE + LE + xo + " +gamma=5" + n + ct + t, 1, i + ny + ag + C_ + " +x_0=60000" + u + n + e + t, 1, i + ny + ag + C_ + FE + u + n + ct + t, 1, i + ny + ag + C_ + " +x_0=60000" + u + n + e + t, 1, i + ny + ag + C_ + FE + u + n + ct + t, 1, i + Ig + q1 + Dy + mb + u + n + e + t, 1, i + Ig + q1 + Dy + zE + u + n + ct + t, 1, i + Ig + q1 + Dy + mb + u + n + e + t, 1, i + Ig + q1 + Dy + zE + u + n + ct + t, 1, a + _u + By + Mv + Rv + Be + Fp + n + e + t, 1, a + _u + By + Mv + Rv + J1 + H3 + n + ct + t, 1, a + _u + By + Mv + Rv + Be + Fp + n + e + t, 1, a + _u + By + Mv + Rv + J1 + H3 + n + ct + t, 1, i + Rg + lg + gb + yl + u + n + e + t, 1, i + Rg + lg + gb + Jf + u + n + ct + t, 1, i + Rg + lg + gb + yl + u + n + e + t, 1, i + Rg + lg + gb + Jf + u + n + ct + t, 1, i + Dg + Dv + Ny + z + u + n + e + t, 1, i + Dg + Dv + Ny + z + u + n + ct + t, 1, i + Dg + Dv + Ny + z + u + n + e + t, 1, i + Dg + Dv + Ny + z + u + n + ct + t, 4, a + Ls + sa + ce + he + H + u + n + e + t, 1, a + Ls + sa + ce + he + i_ + u + n + ct + t, 2, i + h + Kp + " +k=1" + y + u + n + r + e + t, 5, i + h + no + " +k=0.9985000000000001" + Jv + u + n + r + e + t, 1, i + h + no + " +k=1" + f6 + u + n + r + e + t, 3, a + _u + cd + Ve + On + D + u + n + e + t, 1, a + Ls + Gs + Ia + fr + Ie + u + n + d + t, 1, p + Mn + ll + " +towgs84=-24,-203,268,0,0,0,0" + t, 1, p + Mn + ll + " +towgs84=-183,-15,273,0,0,0,0" + t, 1, p + b + " +towgs84=-235,-110,393,0,0,0,0" + t, 1, a + dc + Kr + rn + he + Gn + u + n + e + t, 1, a + dc + Kr + rn + he + n_ + u + n + ct + t, 1, a + pc + hs + pt + he + ze + u + n + e + t, 1, a + pc + hs + pt + he + r_ + u + n + ct + t, 5, p + Mn + ll + q5 + t, 2, p + Mn + ll + " +towgs84=-63,176,185,0,0,0,0" + t, 21, c + js + Mn + ll + q5 + e + t, 7, a + P_ + Gy + Mt + Bv + H + u + n + r + e + t, 1, a + P_ + Gy + Mt + Bv + St + u + n + r + d + t, 1, a + P_ + Gy + Mt + Bv + H + u + n + e + t, 1, a + P_ + Gy + Mt + Bv + St + u + n + d + t, 6, ra + $i + qr + z + u + W + r + e + t, 1, ra + K + qr + z + u + W + r + e + t, 1, "+proj=cea" + qr + " +lat_ts=30" + z + u + W + r + e + t, 29, a + " +lat_1=39 +lat_2=43" + es + Kp + z + u + n + r + e + t, 21, p + n + t, 1, i + y3 + b3 + e6 + Z3 + V3 + n + e + t, 6, p + n + t, 1, i + y3 + b3 + e6 + Z3 + V3 + n + e + t, 14, c + wo + Mn + ll + Xs + e + t, 1, c + Xi + Mn + ll + Xs + e + t, 1, c + Ni + Mn + ll + Xs + e + t, 28, p + n + t, 2, p + n + t, 2, p + n + t, 2, p + n + t, 16, a + " +lat_1=43.2 +lat_0=43.2 +lon_0=-95.25 +k_0=1.000052 +x_0=3505207.010414021 +y_0=2926085.852171705" + n + d + t, 1, a + " +lat_1=43.16666666666666 +lat_0=43.16666666666666 +lon_0=-92.75 +k_0=1.000043 +x_0=3810007.62001524 +y_0=2987045.974091948" + n + d + t, 1, i + _d + " +lon_0=-91.2 +k=1.000035 +x_0=4114808.229616459 +y_0=2529845.05969012" + n + d + t, 1, a + " +lat_1=42.53333333333333 +lat_0=42.53333333333333 +lon_0=-94.83333333333333 +k_0=1.000045 +x_0=4419608.839217679 +y_0=2621285.242570485" + n + d + t, 1, a + " +lat_1=42.65 +lat_0=42.65 +lon_0=-92.25 +k_0=1.000032 +x_0=4724409.448818898 +y_0=2712725.425450851" + n + d + t, 1, i + _d + " +lon_0=-95.73333333333333 +k=1.000039 +x_0=5029210.058420117 +y_0=2011684.023368047" + n + d + t, 1, i + _d + " +lon_0=-94.63333333333334" + C_ + " +x_0=5334010.668021336 +y_0=2072644.145288291" + n + d + t, 1, i + _d + " +lon_0=-93.71666666666667 +k=1.000033 +x_0=5638811.277622555 +y_0=2133604.267208535" + n + d + t, 1, i + _d + " +lon_0=-92.81666666666666" + Od + " +x_0=5943611.887223775 +y_0=2194564.389128779" + n + d + t, 1, a + " +lat_1=41.83333333333334 +lat_0=41.83333333333334 +lon_0=-91.66666666666667 +k_0=1.00002 +x_0=6248412.496824994 +y_0=2438404.876809754" + n + d + t, 1, i + _d + " +lon_0=-90.53333333333333" + Od + " +x_0=6553213.106426213 +y_0=2316484.632969266" + n + d + t, 1, a + " +lat_1=40.91666666666666 +lat_0=40.91666666666666 +lon_0=-93.75 +k_0=1.000037 +x_0=6858013.716027432" + ME + n + d + t, 1, i + _d + g3 + xf + " +x_0=7162814.325628651 +y_0=1950723.901447803" + n + d + t, 1, i + _d + " +lon_0=-91.25 +k=1.000018 +x_0=7467614.93522987" + ME + n + d + t, 3, p + n + t, 1, c + wo + Z + n + e + t, 1, c + Xi + Z + n + e + t, 1, c + Ni + Z + n + e + t, 1, c + js + Z + n + e + t, 1, c + yc + Z + n + e + t, 1, c + bc + Z + n + e + t, 1, c + Df + Z + n + e + t, 1, c + $d + Z + n + e + t, 3, p + n + t, 2, p + n + t, 23, i + Pp + Nv + Up + Nn + u + n + e + t, 1, i + " +lat_0=48" + Nv + " +k=1.00019" + Be + u + n + e + t, 1, a + jy + Pp + oh + " +k_0=1.000145" + Nn + Da + n + e + t, 1, a + jy + Pp + " +lon_0=-108.5" + pd + ot + " +y_0=150000" + n + e + t, 1, a + Bg + Ng + Qe + pd + ot + Mr + n + e + t, 1, a + Bg + Ng + Qe + " +k_0=1.00009" + Be + Fp + n + e + t, 1, i + vp + " +lon_0=-107.75 +k=1.000148" + ot + u + n + e + t, 1, a + d6 + " +lat_0=46.25 +lon_0=-111.25 +k_0=1.000185" + Be + Mr + n + e + t, 1, a + YM + $M + o8 + " +k_0=1.0001515" + ot + Fp + n + e + t, 1, i + XM + s8 + " +k=1.00024" + Be + u + n + e + t, 1, i + Pp + Nv + Up + sv + u + n + ct + t, 1, i + " +lat_0=48" + Nv + " +k=1.00019" + J1 + u + n + ct + t, 1, a + jy + Pp + oh + " +k_0=1.000145" + sv + " +y_0=199999.9999992" + n + ct + t, 1, a + jy + Pp + " +lon_0=-108.5" + pd + lv + " +y_0=150000.00001464" + n + ct + t, 1, a + Bg + Ng + Qe + pd + lv + EE + n + ct + t, 1, a + Bg + Ng + Qe + " +k_0=1.00009" + J1 + " +y_0=49999.99971024" + n + ct + t, 1, i + vp + " +lon_0=-107.75 +k=1.000148" + lv + u + n + ct + t, 1, a + d6 + " +lat_0=46.25 +lon_0=-111.25 +k_0=1.000185" + J1 + EE + n + ct + t, 1, a + YM + $M + o8 + " +k_0=1.0001515" + lv + H3 + n + ct + t, 1, i + XM + s8 + " +k=1.00024" + Q1 + u + n + d + t, 3, i + yp + " +lon_0=-122.45 +k=1.000007 +x_0=48000 +y_0=24000" + n + e + t, 1, i + yp + " +lon_0=-122.45 +k=1.000007 +x_0=48000 +y_0=24000" + n + d + t, 1, p + n + t, 3, p + W + t, 3, p + W + t, 3, i + Gg + jg + " +k=1" + mv + " +y_0=126867.909" + up + hp + " +towgs84=-275.7224,94.7824,340.8944,-8.001,-4.42,-11.821,1" + e + t, 115, i + bp + Gv + tc + j + nt + n + e + t, 1, i + bp + Gv + tc + j + nt + n + d + t, 1, i + Tp + dp + ec + j + nt + n + e + t, 1, i + Tp + dp + ec + j + nt + n + d + t, 1, i + " +lat_0=39" + ug + nc + j + nt + n + e + t, 1, i + " +lat_0=39" + ug + nc + j + nt + n + d + t, 1, i + " +lat_0=40.45" + wp + Fy + j + nt + n + e + t, 1, i + " +lat_0=40.45" + wp + Fy + j + nt + n + d + t, 1, i + " +lat_0=40.05" + a8 + Id + j + nt + n + e + t, 1, i + " +lat_0=40.05" + a8 + Id + j + nt + n + d + t, 1, i + zy + xp + Rd + j + nt + n + e + t, 1, i + zy + xp + Rd + j + nt + n + d + t, 1, i + " +lat_0=39" + ry + vb + j + nt + n + e + t, 1, i + " +lat_0=39" + ry + vb + j + nt + n + d + t, 1, i + " +lat_0=40.4" + l8 + nc + j + nt + n + e + t, 1, i + " +lat_0=40.4" + l8 + nc + j + nt + n + d + t, 1, i + bp + u8 + Ap + j + nt + n + e + t, 1, i + bp + u8 + Ap + j + nt + n + d + t, 1, i + iy + h8 + " +k=1.000021" + j + nt + n + e + t, 1, i + iy + h8 + " +k=1.000021" + j + nt + n + d + t, 1, i + oy + c8 + " +k=1.000024" + j + nt + n + e + t, 1, i + oy + c8 + " +k=1.000024" + j + nt + n + d + t, 1, i + " +lat_0=40.15" + f8 + " +k=1.000032" + j + nt + n + e + t, 1, i + " +lat_0=40.15" + f8 + " +k=1.000032" + j + nt + n + d + t, 1, i + " +lat_0=38.1" + xp + Op + j + nt + n + e + t, 1, i + " +lat_0=38.1" + xp + Op + j + nt + n + d + t, 1, i + " +lat_0=38.45" + hg + " +k=1.000018" + j + nt + n + e + t, 1, i + " +lat_0=38.45" + hg + " +k=1.000018" + j + nt + n + d + t, 1, i + " +lat_0=38.65" + d8 + Fy + j + nt + n + e + t, 1, i + " +lat_0=38.65" + d8 + Fy + j + nt + n + d + t, 1, i + " +lat_0=39.1" + p8 + Rd + j + nt + n + e + t, 1, i + " +lat_0=39.1" + p8 + Rd + j + nt + n + d + t, 1, i + sy + Gv + Rd + j + nt + n + e + t, 1, i + sy + Gv + Rd + j + nt + n + d + t, 1, i + " +lat_0=38.2" + jv + xf + j + nt + n + e + t, 1, i + " +lat_0=38.2" + jv + xf + j + nt + n + d + t, 1, i + ay + ug + " +k=1.000033" + j + nt + n + e + t, 1, i + ay + ug + " +k=1.000033" + j + nt + n + d + t, 1, i + ly + dp + Id + j + nt + n + e + t, 1, i + ly + dp + Id + j + nt + n + d + t, 1, i + " +lat_0=39.95" + wp + Op + j + nt + n + e + t, 1, i + " +lat_0=39.95" + wp + Op + j + nt + n + d + t, 1, i + Tp + ry + ec + j + nt + n + e + t, 1, i + Tp + ry + ec + j + nt + n + d + t, 1, i + iy + _8 + Uy + j + nt + n + e + t, 1, i + iy + _8 + Uy + j + nt + n + d + t, 1, i + uy + " +lon_0=-85.7" + tc + j + nt + n + e + t, 1, i + uy + " +lon_0=-85.7" + tc + j + nt + n + d + t, 1, i + " +lat_0=39.9" + ah + tc + j + nt + n + e + t, 1, i + " +lat_0=39.9" + ah + tc + j + nt + n + d + t, 1, i + " +lat_0=39.65" + hy + Rd + j + nt + n + e + t, 1, i + " +lat_0=39.65" + hy + Rd + j + nt + n + d + t, 1, i + " +lat_0=37.95" + op + Od + j + nt + n + e + t, 1, i + " +lat_0=37.95" + op + Od + j + nt + n + d + t, 1, i + " +lat_0=39.75" + Fv + Cp + j + nt + n + e + t, 1, i + " +lat_0=39.75" + Fv + Cp + j + nt + n + d + t, 1, i + uy + op + ec + j + nt + n + e + t, 1, i + uy + op + ec + j + nt + n + d + t, 1, i + ay + Qv + tc + j + nt + n + e + t, 1, i + ay + Qv + tc + j + nt + n + d + t, 1, i + " +lat_0=38.7 +lon_0=-85.95" + qy + j + nt + n + e + t, 1, i + " +lat_0=38.7 +lon_0=-85.95" + qy + j + nt + n + d + t, 1, i + Hy + hg + Od + j + nt + n + e + t, 1, i + Hy + hg + Od + j + nt + n + d + t, 1, i + " +lat_0=40.3" + zp + Id + j + nt + n + e + t, 1, i + " +lat_0=40.3" + zp + Id + j + nt + n + d + t, 1, i + " +lat_0=38.55" + m8 + Ap + j + nt + n + e + t, 1, i + " +lat_0=38.55" + m8 + Ap + j + nt + n + d + t, 1, i + " +lat_0=38.8" + hy + Op + j + nt + n + e + t, 1, i + " +lat_0=38.8" + hy + Op + j + nt + n + d + t, 1, i + Zy + op + ec + j + nt + n + e + t, 1, i + Zy + op + ec + j + nt + n + d + t, 1, i + " +lat_0=38.4" + zv + Jh + j + nt + n + e + t, 1, i + " +lat_0=38.4" + zv + Jh + j + nt + n + d + t, 1, i + sy + Fv + " +k=1.000037" + j + nt + n + e + t, 1, i + sy + Fv + " +k=1.000037" + j + nt + n + d + t, 1, i + Hy + g8 + nc + j + nt + n + e + t, 1, i + Hy + g8 + nc + j + nt + n + d + t, 1, i + Tp + " +lon_0=-86.75" + Od + j + nt + n + e + t, 1, i + Tp + " +lon_0=-86.75" + Od + j + nt + n + d + t, 1, i + " +lat_0=38.95" + xp + Ap + j + nt + n + e + t, 1, i + " +lat_0=38.95" + xp + Ap + j + nt + n + d + t, 1, i + " +lat_0=39.45" + jv + ec + j + nt + n + e + t, 1, i + " +lat_0=39.45" + jv + ec + j + nt + n + d + t, 1, i + oy + cg + nc + j + nt + n + e + t, 1, i + oy + cg + nc + j + nt + n + d + t, 1, i + zy + v8 + qy + j + nt + n + e + t, 1, i + zy + v8 + qy + j + nt + n + d + t, 1, i + Wy + " +lon_0=-86.7" + xf + j + nt + n + e + t, 1, i + Wy + " +lon_0=-86.7" + xf + j + nt + n + d + t, 1, i + " +lat_0=37.85" + wp + Jh + j + nt + n + e + t, 1, i + " +lat_0=37.85" + wp + Jh + j + nt + n + d + t, 1, i + yp + " +lon_0=-87.95" + Uy + j + nt + n + e + t, 1, i + yp + " +lon_0=-87.95" + Uy + j + nt + n + d + t, 1, i + " +lat_0=39.7" + dp + " +k=1.000044" + j + nt + n + e + t, 1, i + " +lat_0=39.7" + dp + " +k=1.000044" + j + nt + n + d + t, 1, i + Vy + " +lon_0=-85.3" + Id + j + nt + n + e + t, 1, i + Vy + " +lon_0=-85.3" + Id + j + nt + n + d + t, 1, i + Zy + y8 + vb + j + nt + n + e + t, 1, i + Zy + y8 + vb + j + nt + n + d + t, 1, i + yp + " +lon_0=-87.05 +k=1.000014" + j + nt + n + e + t, 1, i + yp + " +lon_0=-87.05 +k=1.000014" + j + nt + n + d + t, 1, i + T + zp + " +k=1.000041" + j + nt + n + e + t, 1, i + T + zp + " +k=1.000041" + j + nt + n + d + t, 1, i + Vy + M0 + " +k=1.000017" + j + nt + n + e + t, 1, i + Vy + M0 + " +k=1.000017" + j + nt + n + d + t, 1, i + " +lat_0=40.2" + cg + nc + j + nt + n + e + t, 1, i + " +lat_0=40.2" + cg + nc + j + nt + n + d + t, 1, i + Wy + Uv + Jh + j + nt + n + e + t, 1, i + Wy + Uv + Jh + j + nt + n + d + t, 1, i + ly + zv + xf + j + nt + n + e + t, 1, i + ly + zv + xf + j + nt + n + d + t, 1, i + bp + " +lon_0=-85.25" + tc + j + nt + n + e + t, 1, i + bp + " +lon_0=-85.25" + tc + j + nt + n + d + t, 3, p + n + r + t, 1, c + Ni + n + r + e + t, 1, c + js + n + r + e + t, 1, c + yc + n + r + e + t, 152, i + QM + On + " +k=1.0000365285 +x_0=147218.6942 +y_0=0.0037" + n + e + t, 1, i + JM + b8 + " +k=1.0000495683 +x_0=172821.9461 +y_0=0.0017" + n + e + t, 1, i + t2 + w8 + " +k=1.0000486665 +x_0=93150 +y_0=0.0029" + n + e + t, 1, a + e2 + n2 + x8 + " +k_0=1.0000331195 +x_0=228600.4575 +y_0=148551.4837" + n + e + t, 1, i + wu + " +lon_0=-88" + xf + " +x_0=31600 +y_0=4600" + n + e + t, 1, i + r2 + k8 + " +k=1.0000382778 +x_0=175260.3502 +y_0=0.0048" + n + e + t, 1, a + i2 + o2 + L8 + " +k_0=1.0000383841 +x_0=64008.1276 +y_0=59445.9043" + n + e + t, 1, i + s2 + " +lon_0=-88.5 +k=1.0000286569 +x_0=244754.8893 +y_0=0.0049" + n + e + t, 1, a + a2 + l2 + M8 + " +k_0=1.0000391127 +x_0=60045.72 +y_0=44091.4346" + n + e + t, 1, i + " +lat_0=43.6" + E8 + " +k=1.0000463003 +x_0=199949.1989 +y_0=0.0086" + n + e + t, 1, a + u2 + h2 + S8 + " +k_0=1.00003498 +x_0=169164.3381 +y_0=111569.6134" + n + e + t, 1, a + UE + qE + c2 + " +k_0=1.0000349151 +x_0=113690.6274 +y_0=53703.1201" + n + e + t, 1, a + RE + DE + C8 + " +k_0=1.0000384786 +x_0=247193.2944 +y_0=146591.9896" + n + e + t, 1, i + f2 + P8 + " +k=1.0000346418 +x_0=263347.7263 +y_0=0.0076" + n + e + t, 1, i + " +lat_0=44.4" + T8 + " +k=1.0000187521 +x_0=158801.1176 +y_0=0.0023" + n + e + t, 1, i + d2 + g3 + " +k=1.0000385418 +x_0=59131.3183 +y_0=0.0041" + n + e + t, 1, i + p2 + A8 + " +k=1.0000410324 +x_0=51816.104 +y_0=0.003" + n + e + t, 1, a + _2 + m2 + O8 + " +k_0=1.000035079 +x_0=120091.4402 +y_0=91687.92389999999" + n + e + t, 1, i + g2 + I8 + " +k=1.0000552095 +x_0=133502.6683 +y_0=0.0063" + n + e + t, 1, i + v2 + R8 + " +k=1.0000673004 +x_0=275844.5533 +y_0=0.0157" + n + e + t, 1, i + y2 + " +lon_0=-90.8 +k=1.0000349452 +x_0=242316.4841 +y_0=0.01" + n + e + t, 1, a + b2 + w2 + D8 + " +k_0=1.0000390487 +x_0=170078.7403 +y_0=45830.2947" + n + e + t, 1, a + x2 + k2 + fg + " +k_0=1.0000344057 +x_0=150876.3018 +y_0=79170.7795" + n + e + t, 1, i + L2 + B8 + " +k=1.0000394961 +x_0=113081.0261 +y_0=0.0045" + n + e + t, 1, i + M2 + N8 + " +k=1.0000677153 +x_0=220980.4419 +y_0=0.008500000000000001" + n + e + t, 1, i + E2 + G8 + " +k=1.0000353 +x_0=27000 +y_0=25000" + n + e + t, 1, i + S2 + j8 + " +k=1.0000260649 +x_0=185928.3728 +y_0=0.0009" + n + e + t, 1, i + C2 + Uv + " +k=1.0000233704 +x_0=79857.7614 +y_0=0.0012" + n + e + t, 1, i + P2 + F8 + " +k=1.0000319985 +x_0=130454.6598 +y_0=0.0033" + n + e + t, 1, a + T2 + A2 + z8 + " +k_0=1.0000627024 +x_0=198425.197 +y_0=105279.7829" + n + e + t, 1, i + O2 + U8 + " +k=1.0000599003 +x_0=116129.0323 +y_0=0.0058" + n + e + t, 1, a + I2 + R2 + " +lon_0=-89.77 +k_0=1.000053289 +x_0=74676.1493 +y_0=55049.2669" + n + e + t, 1, i + D2 + q8 + " +k=1.0000234982 +x_0=238658.8794 +y_0=0.0032" + n + e + t, 1, i + B2 + H8 + " +k=1.0000362499 +x_0=105461.0121 +y_0=0.0029" + n + e + t, 1, a + N2 + G2 + Z8 + " +k_0=1.0000434122 +x_0=204521.209 +y_0=121923.9861" + n + e + t, 1, i + j2 + W8 + " +k=1.0000236869 +x_0=182880.3676 +y_0=0.0033" + n + e + t, 1, a + F2 + z2 + V8 + " +k_0=1.0000686968 +x_0=70104.1401 +y_0=57588.0346" + n + e + t, 1, a + U2 + q2 + K8 + " +k_0=1.0000362977 +x_0=167640.3354 +y_0=86033.0876" + n + e + t, 1, i + H2 + dg + " +k=1.0000433849 +x_0=141732.2823 +y_0=0.0059" + n + e + t, 1, a + Z2 + W2 + " +lon_0=-89.5 +k_0=1.000039936 +x_0=56388.1128 +y_0=50022.1874" + n + e + t, 1, i + V2 + Y8 + " +k=1.0000649554 +x_0=227990.8546 +y_0=0.0109" + n + e + t, 1, a + BE + NE + $8 + " +k_0=1.0000375653 +x_0=202387.6048 +y_0=134255.4253" + n + e + t, 1, i + K2 + X8 + " +k=1.0000337311 +x_0=146304.2926 +y_0=0.0068" + n + e + t, 1, i + Y2 + Q8 + " +k=1.0000495976 +x_0=250546.1013 +y_0=0.0234" + n + e + t, 1, i + $2 + J8 + " +k=1.0000373868 +x_0=185623.5716 +y_0=0.0051" + n + e + t, 1, a + X2 + Q2 + tM + " +k_0=1.0000573461 +x_0=216713.2336 +y_0=120734.1631" + n + e + t, 1, i + Fg + eM + " +k=1.000032144 +x_0=262433.3253 +y_0=0.009599999999999999" + n + e + t, 1, i + Fg + dg + " +k=1.0000381803 +x_0=165506.7302 +y_0=0.0103" + n + e + t, 1, a + J2 + tE + nM + " +k_0=1.0000597566 +x_0=187147.5744 +y_0=107746.7522" + n + e + t, 1, i + eE + rM + " +k=1.0000361538 +x_0=256946.9138 +y_0=0.0041" + n + e + t, 1, a + nE + rE + iM + " +k_0=1.0000408158 +x_0=222504.4451 +y_0=47532.0602" + n + e + t, 1, a + iE + oE + oM + " +k_0=1.0000730142 +x_0=134417.0689 +y_0=50337.1092" + n + e + t, 1, a + sE + aE + sM + " +k_0=1.0000367192 +x_0=232562.8651 +y_0=111088.2224" + n + e + t, 1, a + lE + uE + aM + " +k_0=1.0000475376 +x_0=234086.8682 +y_0=188358.6058" + n + e + t, 1, i + hE + lM + " +k=1.00003738 +x_0=120091.4415 +y_0=0.003" + n + e + t, 1, i + cE + uM + " +k=1.0000346179 +x_0=208788.418 +y_0=0.0034" + n + e + t, 1, i + fE + hM + " +k=1.0000333645 +x_0=185013.9709 +y_0=0.007" + n + e + t, 1, a + dE + pE + fg + " +k_0=1.0000392096 +x_0=120091.4402 +y_0=45069.7587" + n + e + t, 1, a + _E + mE + On + " +k_0=1.0000421209 +x_0=208483.6173 +y_0=134589.754" + n + e + t, 1, i + QM + On + " +k=1.0000365285 +x_0=147218.6941325883 +y_0=0.00365760731521463" + n + d + t, 1, i + JM + b8 + " +k=1.0000495683 +x_0=172821.945948692 +y_0=0.001828803657607315" + n + d + t, 1, i + t2 + w8 + " +k=1.0000486665 +x_0=93150" + H1 + n + d + t, 1, a + e2 + n2 + x8 + " +k_0=1.0000331195 +x_0=228600.4575057151 +y_0=148551.4835661671" + n + d + t, 1, i + wu + " +lon_0=-88" + xf + " +x_0=31599.99989839979 +y_0=4599.999898399797" + n + d + t, 1, i + r2 + k8 + " +k=1.0000382778 +x_0=175260.3502159004" + cM + n + d + t, 1, a + i2 + o2 + L8 + " +k_0=1.0000383841 +x_0=64008.12771145543 +y_0=59445.90419100838" + n + d + t, 1, i + s2 + " +lon_0=-88.5 +k=1.0000286569 +x_0=244754.8892049784" + cM + n + d + t, 1, a + a2 + l2 + M8 + " +k_0=1.0000391127 +x_0=60045.72009144018 +y_0=44091.43449326898" + n + d + t, 1, i + " +lat_0=43.6" + E8 + " +k=1.0000463003 +x_0=199949.198983998" + fM + n + d + t, 1, a + u2 + h2 + S8 + " +k_0=1.00003498 +x_0=169164.338023876 +y_0=111569.613512827" + n + d + t, 1, a + UE + qE + c2 + " +k_0=1.0000349151 +x_0=113690.6273812548 +y_0=53703.12024384048" + n + d + t, 1, a + RE + DE + C8 + " +k_0=1.0000384786 +x_0=247193.2943865888 +y_0=146591.9896367793" + n + d + t, 1, i + f2 + P8 + " +k=1.0000346418 +x_0=263347.7263906528 +y_0=0.00762001524003048" + n + d + t, 1, i + " +lat_0=44.4" + T8 + " +k=1.0000187521 +x_0=158801.1176022352 +y_0=0.002438404876809754" + n + d + t, 1, i + d2 + g3 + " +k=1.0000385418 +x_0=59131.31826263652" + dM + n + d + t, 1, i + p2 + A8 + " +k=1.0000410324 +x_0=51816.10393700787" + H1 + n + d + t, 1, a + _2 + m2 + O8 + " +k_0=1.000035079" + SE + " +y_0=91687.92390144781" + n + d + t, 1, i + g2 + I8 + " +k=1.0000552095 +x_0=133502.6682245364 +y_0=0.006400812801625603" + n + d + t, 1, i + v2 + R8 + " +k=1.0000673004 +x_0=275844.5532131065 +y_0=0.0158496316992634" + n + d + t, 1, i + y2 + " +lon_0=-90.8 +k=1.0000349452 +x_0=242316.484023368 +y_0=0.01005842011684023" + n + d + t, 1, a + b2 + w2 + D8 + " +k_0=1.0000390487 +x_0=170078.7401574803 +y_0=45830.29484378968" + n + d + t, 1, a + x2 + k2 + fg + " +k_0=1.0000344057 +x_0=150876.3017526035 +y_0=79170.77937515875" + n + d + t, 1, i + L2 + B8 + " +k=1.0000394961 +x_0=113081.0261620523 +y_0=0.004572009144018288" + n + d + t, 1, i + M2 + N8 + " +k=1.0000677153 +x_0=220980.4419608839" + fM + n + d + t, 1, i + E2 + G8 + " +k=1.0000353 +x_0=27000 +y_0=24999.99989839979" + n + d + t, 1, i + S2 + j8 + " +k=1.0000260649 +x_0=185928.3727711455 +y_0=0.0009144018288036576" + n + d + t, 1, i + C2 + Uv + " +k=1.0000233704 +x_0=79857.76154432308 +y_0=0.001219202438404877" + n + d + t, 1, i + P2 + F8 + " +k=1.0000319985 +x_0=130454.6596901194" + v3 + n + d + t, 1, a + T2 + A2 + z8 + " +k_0=1.0000627024 +x_0=198425.1968503937 +y_0=105279.7828803657" + n + d + t, 1, i + O2 + U8 + " +k=1.0000599003 +x_0=116129.0322580645" + pM + n + d + t, 1, a + I2 + R2 + " +lon_0=-89.77 +k_0=1.000053289 +x_0=74676.1493522987 +y_0=55049.26695453391" + n + d + t, 1, i + D2 + q8 + " +k=1.0000234982 +x_0=238658.8794513589" + H1 + n + d + t, 1, i + B2 + H8 + " +k=1.0000362499 +x_0=105461.0121412243" + H1 + n + d + t, 1, a + N2 + G2 + Z8 + " +k_0=1.0000434122 +x_0=204521.2090424181 +y_0=121923.9861823724" + n + d + t, 1, i + j2 + W8 + " +k=1.0000236869 +x_0=182880.3675895352" + v3 + n + d + t, 1, a + F2 + z2 + V8 + " +k_0=1.0000686968 +x_0=70104.14020828041 +y_0=57588.03474726949" + n + d + t, 1, a + U2 + q2 + K8 + " +k_0=1.0000362977 +x_0=167640.3352806706 +y_0=86033.08773177546" + n + d + t, 1, i + H2 + dg + " +k=1.0000433849 +x_0=141732.2822453645" + pM + n + d + t, 1, a + Z2 + W2 + " +lon_0=-89.5 +k_0=1.000039936 +x_0=56388.11277622555 +y_0=50022.1874523749" + n + d + t, 1, i + V2 + Y8 + " +k=1.0000649554 +x_0=227990.8544577089 +y_0=0.01097282194564389" + n + d + t, 1, a + BE + NE + $8 + " +k_0=1.0000375653 +x_0=202387.6047752095 +y_0=134255.4254508509" + n + d + t, 1, i + K2 + X8 + " +k=1.0000337311 +x_0=146304.2926085852 +y_0=0.006705613411226822" + n + d + t, 1, i + Y2 + Q8 + " +k=1.0000495976 +x_0=250546.1013970028 +y_0=0.02346964693929388" + n + d + t, 1, i + $2 + J8 + " +k=1.0000373868 +x_0=185623.5715519431 +y_0=0.005181610363220727" + n + d + t, 1, a + X2 + Q2 + tM + " +k_0=1.0000573461 +x_0=216713.2337312675 +y_0=120734.1631699263" + n + d + t, 1, i + Fg + eM + " +k=1.000032144 +x_0=262433.3251714504 +y_0=0.009448818897637795" + n + d + t, 1, i + Fg + dg + " +k=1.0000381803 +x_0=165506.7300990602 +y_0=0.01036322072644145" + n + d + t, 1, a + J2 + tE + nM + " +k_0=1.0000597566 +x_0=187147.5742951486 +y_0=107746.7521463043" + n + d + t, 1, i + eE + rM + " +k=1.0000361538 +x_0=256946.9138938278" + dM + n + d + t, 1, a + nE + rE + iM + " +k_0=1.0000408158 +x_0=222504.44500889 +y_0=47532.0603505207" + n + d + t, 1, a + iE + oE + oM + " +k_0=1.0000730142 +x_0=134417.0688341377 +y_0=50337.10927101854" + n + d + t, 1, a + sE + aE + sM + " +k_0=1.0000367192 +x_0=232562.8651257302 +y_0=111088.2224028448" + n + d + t, 1, a + lE + uE + aM + " +k_0=1.0000475376 +x_0=234086.8681737363 +y_0=188358.6059436119" + n + d + t, 1, i + hE + lM + " +k=1.00003738 +x_0=120091.4414020828" + H1 + n + d + t, 1, i + cE + uM + " +k=1.0000346179 +x_0=208788.4178816358" + v3 + n + d + t, 1, i + fE + hM + " +k=1.0000333645 +x_0=185013.9709423419 +y_0=0.007010414020828041" + n + d + t, 1, a + dE + pE + fg + " +k_0=1.0000392096" + SE + " +y_0=45069.7588011176" + n + d + t, 1, a + _E + mE + On + " +k_0=1.0000421209 +x_0=208483.6172720346 +y_0=134589.7539243078" + n + d + t, 41, p + n + t, 6, i + h + " +lon_0=68.51666666666667 +k=1 +x_0=1300000" + v_ + n + e + t, 1, i + h + " +lon_0=71.51666666666667 +k=1" + s6 + v_ + n + e + t, 1, i + h + " +lon_0=74.51666666666667 +k=1" + a6 + v_ + n + e + t, 1, i + h + " +lon_0=77.51666666666667 +k=1" + l6 + v_ + n + e + t, 1, i + h + " +lon_0=80.51666666666667 +k=1 +x_0=5300000" + v_ + n + e + t, 12308, i + h + Rn + " +k=1" + Pr + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + l + e + t, 1, i + h + eo + " +k=1" + Vh + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + ql + u + _ + l + e + t, 1, i + h + ks + " +k=1" + id + u + _ + l + e + t, 1, i + h + mc + " +k=1" + od + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + td + u + _ + l + e + t, 1, i + h + Pf + " +k=1" + Hc + u + _ + l + e + t, 1, i + h + Wd + " +k=1" + ed + u + _ + l + e + t, 1, i + h + Si + " +k=1" + jl + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + l + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + l + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + l + e + t, 1, i + h + tt + " +k=1" + au + u + _ + l + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + l + e + t, 1, i + h + k + " +k=1" + lu + u + _ + l + e + t, 1, i + h + Gd + " +k=1" + nd + u + _ + l + e + t, 1, i + h + yf + " +k=1" + uu + u + _ + l + e + t, 1, i + h + ac + " +k=1" + hu + u + _ + l + e + t, 1, i + h + jd + " +k=1" + cu + u + _ + l + e + t, 1, i + h + lc + " +k=1" + fu + u + _ + l + e + t, 1, i + h + vu + " +k=1" + hl + u + _ + l + e + t, 1, i + h + Yl + " +k=1" + $u + u + _ + l + e + t, 1, i + h + nh + " +k=1" + Kn + u + _ + l + e + t, 1, i + h + $h + " +k=1" + Xu + u + _ + l + e + t, 103, c + Go + N + G1 + e + t, 1, c + Fs + N + G1 + e + t, 1, c + wo + N + G1 + e + t, 1, c + Xi + N + G1 + e + t, 111, c + qs + Z + bt + V + e + t, 1, c + fa + Z + bt + V + e + t, 1, c + zs + Z + bt + V + e + t, 1, c + da + Z + bt + V + e + t, 1, c + Sl + Z + bt + V + e + t, 1, c + Ha + Z + bt + V + e + t, 1, c + Ql + Z + bt + V + e + t, 1, c + xc + Z + bt + V + e + t, 1, c + If + Z + bt + V + e + t, 1, c + Ms + Z + bt + V + e + t, 91, c + qs + Z + bt + di + e + t, 1, c + fa + Z + bt + di + e + t, 1, c + zs + Z + bt + di + e + t, 1, c + da + Z + bt + di + e + t, 1, c + Sl + Z + bt + di + e + t, 1, c + Ha + Z + bt + di + e + t, 1, c + Ql + Z + bt + di + e + t, 1, c + xc + Z + bt + di + e + t, 80, c + Fs + b + Ri + e + t, 1, c + wo + b + Ri + e + t, 1, c + Xi + b + Ri + e + t, 1, c + Ni + b + Ri + e + t, 1, c + js + b + Ri + e + t, 59, c + Ni + b + Ri + e + t, 39, c + Xi + _ + r3 + e + t, 1, c + Ni + _ + r3 + e + t, 251, i + cr + " +lon_0=1 +k=1" + ot + oa + b + P + sb + e + t, 1, i + cr + " +lon_0=1 +k=1" + z + u + b + P + sb + e + t, 31, c + Ai + Z + b + be + e + t, 1, c + Es + Z + b + be + e + t, 1, c + Wa + Z + b + be + e + t, 110, c + ca + Z + Mn + ar + Zm + e + t, 1, c + Go + Z + Mn + ar + Zm + e + t, 1, c + Fs + Z + Mn + ar + Zm + e + t, 99, c + Go + Z + N + Jo + e + t, 1, c + Fs + Z + N + Jo + e + t, 1, c + wo + Z + N + Jo + e + t, 58, c + Go + N + Jo + e + t, 1, c + Fs + N + Jo + e + t, 1, c + wo + N + Jo + e + t, 51, c + Us + Z + O + va + e + t, 1, c + qs + Z + O + va + e + t, 1, c + fa + Z + O + va + e + t, 141, i + h + rc + ii + H + u + N + $w + e + t, 1, i + " +lat_0=13.17638888888889 +lon_0=-59.55972222222222 +k=0.9999986" + mb + " +y_0=75000" + N + $w + e + t, 121, i + h + Si + " +k=1" + jl + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + C + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + C + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + C + e + t, 1, i + h + tt + " +k=1" + au + u + _ + C + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + C + e + t, 1, i + h + k + " +k=1" + lu + u + _ + C + e + t, 30, i + h + Si + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + C + e + t, 1, i + h + ie + " +k=1" + y + u + _ + C + e + t, 1, i + h + v + " +k=1" + y + u + _ + C + e + t, 1, i + h + tt + " +k=1" + y + u + _ + C + e + t, 1, i + h + Se + " +k=1" + y + u + _ + C + e + t, 1, i + h + k + " +k=1" + y + u + _ + C + e + t, 37, a + kg + Lg + $i + qr + Nn + " +y_0=5400000" + b + " +pm=brussels" + e + t, 280, l_ + pg + qr + " +k_0=1" + z + u + O + Dc + " +pm=bern" + e + t, 1, l_ + pg + w3 + " +k_0=1" + D + Da + O + Dc + e + t, 1, l_ + pg + w3 + " +k_0=1" + z + u + O + Dc + e + t, 36, c + Xr + b + o + e + t, 78, i + zg + " +lon_0=-77.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 1, i + zg + " +lon_0=-74.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 1, i + zg + " +lon_0=-71.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 1, i + zg + " +lon_0=-68.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 133, c + Gi + Z + N + Ot + e + t, 1, c + bo + Z + N + Ot + e + t, 58, i + h + " +lon_0=11.5" + Me + y + kt + N + Ot + e + t, 1, i + h + no + Me + y + kt + N + Ot + e + t, 79, i + K + D_ + " +k=1" + ze + u + n + r + e + t, 1, i + K + sh + " +k=1" + Gn + u + n + r + e + t, 1, i + K + Nd + " +k=1" + qn + u + n + r + e + t, 1, i + K + P0 + " +k=1" + Pr + u + n + r + e + t, 1, i + K + N_ + " +k=1" + xn + u + n + r + e + t, 1, i + K + ab + " +k=1" + Vh + u + n + r + e + t, 1, i + K + hc + " +k=1" + ql + u + n + r + e + t, 4, i + K + D_ + " +k=1" + ze + u + W + r + e + t, 1, i + K + sh + " +k=1" + Gn + u + W + r + e + t, 1, i + K + Nd + " +k=1" + qn + u + W + r + e + t, 1, i + K + P0 + " +k=1" + Pr + u + W + r + e + t, 1, i + K + N_ + " +k=1" + xn + u + W + r + e + t, 1, i + K + ab + " +k=1" + Vh + u + W + r + e + t, 1, i + K + hc + " +k=1" + ql + u + W + r + e + t, 4, i + K + D_ + " +k=1" + ze + u + b + vn + e + t, 1, i + K + sh + " +k=1" + Gn + u + b + vn + e + t, 1, i + K + Nd + " +k=1" + qn + u + b + vn + e + t, 1, i + K + P0 + " +k=1" + Pr + u + b + vn + e + t, 1, i + K + N_ + " +k=1" + xn + u + b + vn + e + t, 1, i + K + ab + " +k=1" + Vh + u + b + vn + e + t, 1, i + K + hc + " +k=1" + ql + u + b + vn + e + t, 37, c + ca + Z + Mn + ar + re + e + t, 1, c + Go + Z + Mn + ar + re + e + t, 40, i + h + hr + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + Hp + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + Ud + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + Rn + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + O0 + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + qd + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + Ei + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + " +lon_0=29 +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + kf + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + eo + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 39, c + Gi + Ke + le + nu + e + t, 59, a + " +lat_1=36" + Mt + " +lon_0=9.9" + _v + y + oa + Ke + le + nu + e + t, 1, a + T_ + A_ + " +lon_0=9.9" + o_ + y + oa + Ke + le + nu + e + t, 129, c + Qr + Z + b + Kt + e + t, 1, c + Ai + Z + b + Kt + e + t, 1, c + Es + Z + b + Kt + e + t, 1, c + Wa + Z + b + Kt + e + t, 1, c + Fa + Z + b + Kt + e + t, 175, a + m6 + " +lat_0=34.65 +lon_0=37.35 +k_0=0.9996256" + xe + oa + Ke + le + zm + e + t, 70, a + m6 + " +lat_0=34.65 +lon_0=37.35 +k_0=0.9996256" + xe + oa + Ke + le + zm + e + t, 10, se + " +lat_0=34.2 +lon_0=39.15 +k=0.9995341" + z + u + Ke + le + zm + e + t, 211, i + fi + " +lon_0=35 +k=1" + xe + " +y_0=1100000" + Nl + j1 + e + t, 1, i + fi + kf + " +k=1 +x_0=615000 +y_0=810000" + Nl + j1 + e + t, 1, i + fi + Ei + " +k=1" + R + Da + Nl + j1 + e + t, 1, i + fi + Ei + " +k=1" + R + Vv + Nl + j1 + e + t, 34, c + Qi + b + ut + e + t, 1, c + vo + b + ut + e + t, 1, c + Ll + b + ut + e + t, 1, c + xu + b + ut + e + t, 1, c + Gi + b + ut + e + t, 1, c + bo + b + ut + e + t, 1, c + ca + b + ut + e + t, 1, c + Go + b + ut + e + t, 1, c + Fs + b + ut + e + t, 1, c + wo + b + ut + e + t, 1, c + Xi + b + ut + e + t, 52, i + h + qr + Me + y + u + b + ut + e + t, 5, i + h + " +lon_0=5" + Me + y + u + b + ut + e + t, 144, c + Ni + N + i3 + e + t, 1, c + js + N + i3 + e + t, 460, l_ + " +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000" + Da + _6 + cL + e + t, 130, i + h + " +lon_0=94.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=97.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=100.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=103.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=106.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=109.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=112.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=115.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=118.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=121.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=124.5" + m + ot + Wn + W + r + e + t, 1, i + h + pp + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=130.5" + m + ot + Wn + W + r + e + t, 1, i + h + Kv + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=136.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=139.5" + m + ot + Wn + W + r + e + t, 1, c + Lu + Ns + Nr + jt + e + t, 1, c + Va + Ns + Nr + jt + e + t, 1, c + Us + Ns + Nr + jt + e + t, 1, c + qs + Ns + Nr + jt + e + t, 1, c + fa + Ns + Nr + jt + e + t, 1, c + zs + Ns + Nr + jt + e + t, 1, c + da + Ns + Nr + jt + e + t, 14, c + Lu + W + r + e + t, 1, c + Va + W + r + e + t, 1, c + Us + W + r + e + t, 1, c + qs + W + r + e + t, 1, c + fa + W + r + e + t, 1, c + zs + W + r + e + t, 1, c + da + W + r + e + t, 5, c + Va + Z + W + r + e + t, 1, c + Us + Z + W + r + e + t, 1, c + qs + Z + W + r + e + t, 1, c + fa + Z + W + r + e + t, 1, c + zs + Z + W + r + e + t, 1, c + da + Z + W + r + e + t, 1, c + Sl + Z + W + r + e + t, 1, c + Ha + Z + W + r + e + t, 3, c + Va + Z + Ns + Nr + jt + e + t, 1, c + Us + Z + Ns + Nr + jt + e + t, 1, c + qs + Z + Ns + Nr + jt + e + t, 1, c + fa + Z + Ns + Nr + jt + e + t, 1, c + zs + Z + Ns + Nr + jt + e + t, 1, c + da + Z + Ns + Nr + jt + e + t, 1, c + Sl + Z + Ns + Nr + jt + e + t, 1, c + Ha + Z + Ns + Nr + jt + e + t, 52, c + Lu + Gr + Wt + $m + e + t, 1, c + Va + Gr + Wt + $m + e + t, 1, c + Us + Gr + Wt + $m + e + t, 99, c + Va + Gr + Wt + o3 + e + t, 1, c + Us + Gr + Wt + o3 + e + t, 52, a + " +lat_1=18" + lh + mu + " +k_0=1 +x_0=167638.49597 +y_0=121918.90616" + F3 + z3 + Qg + t, 100, a + " +lat_1=18" + lh + mu + " +k_0=1" + Hn + " +y_0=150000" + F + IL + e + t, 105, c + Xd + Gr + Wt + Ym + e + t, 1, c + Lu + Gr + Wt + Ym + e + t, 5, c + yc + p0 + f0 + Yt + e + t, 1, c + bc + p0 + f0 + Yt + e + t, 1, c + Df + p0 + f0 + Yt + e + t, 29, c + bc + Gl + Wo + Ae + e + t, 1, c + Df + Gl + Wo + Ae + e + t, 1, c + $d + Gl + Wo + Ae + e + t, 1, c + Xd + Gl + Wo + Ae + e + t, 1, c + Lu + Gl + Wo + Ae + e + t, 1, c + Va + Gl + Wo + Ae + e + t, 23, a + P_ + " +lat_0=39.5 +lon_0=68 +k_0=0.99846154 +x_0=2153865.73916853 +y_0=2368292.194628102" + Xf + $f + ue + t, 1, a + Ep + Xh + " +lon_0=68" + pe + t_ + e_ + Xf + $f + ue + t, 1, a + Qp + go + " +lon_0=74" + pe + t_ + e_ + Xf + $f + ue + t, 1, a + " +lat_1=19 +lat_0=19 +lon_0=80" + pe + t_ + e_ + Xf + $f + ue + t, 1, a + " +lat_1=12 +lat_0=12 +lon_0=80" + pe + t_ + e_ + Xf + $f + ue + t, 1, a + Qp + go + Yi + pe + " +x_0=2743185.69 +y_0=914395.23" + Gr + Wt + Ym + e + t, 1, a + Ep + Xh + " +lon_0=68" + pe + " +x_0=2743196.4 +y_0=914398.8" + p0 + f0 + Yt + e + t, 1, a + Qp + go + " +lon_0=74" + pe + " +x_0=2743196.4 +y_0=914398.8" + p0 + f0 + Yt + e + t, 1, a + Ep + Xh + " +lon_0=68" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + Qp + go + " +lon_0=74" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + Qp + go + Yi + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + " +lat_1=19 +lat_0=19 +lon_0=80" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + Qp + go + Yi + pe + t_ + e_ + Xf + $f + ue + t, 1, a + " +lat_1=12 +lat_0=12 +lon_0=80" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 117, lr + " +lat_0=1.287646666666667 +lon_0=103.8530022222222" + mb + " +y_0=30000" + xt + li + mn + e + t, 47, c + Va + xt + li + mn + e + t, 1, c + Us + xt + li + mn + e + t, 52, a + Ep + Xh + ks + I3 + ze + c6 + N + uL + e + t, 118, c + Xr + b + qm + e + t, 1, c + Vr + b + qm + e + t, 1, c + Tr + b + qm + e + t, 97, c + yi + b + wr + e + t, 1, c + Xr + b + wr + e + t, 1, c + Vr + b + wr + e + t, 1, c + Tr + b + wr + e + t, 1, c + Qr + b + wr + e + t, 56, c + yi + Z + b + wr + e + t, 1, c + Xr + Z + b + wr + e + t, 1, c + Vr + Z + b + wr + e + t, 1, c + Tr + Z + b + wr + e + t, 1, c + Qr + Z + b + wr + e + t, 1, c + Ai + Z + b + wr + e + t, 9, i + " +lat_0=-6 +lon_0=-80.5 +k=0.99983008 +x_0=222000 +y_0=1426834.743" + b + wr + e + t, 1, i + " +lat_0=-9.5 +lon_0=-76 +k=0.99932994 +x_0=720000 +y_0=1039979.159" + b + wr + e + t, 1, i + " +lat_0=-9.5" + Ul + " +k=0.99952992 +x_0=1324000 +y_0=1040084.558" + b + wr + e + t, 107, i + gM + " +lon_0=-1" + Bp + " +x_0=274319.51" + u + N + HL + e + t, 231, c + xu + Ke + le + e + t, 160, i + h + v + Bn + y + u + F + un + e + t, 1, i + h + Jy + Bn + y + u + F + un + e + t, 1, i + h + tb + Bn + y + u + F + un + e + t, 1, i + h + tt + Bn + y + u + F + un + e + t, 1, i + h + Dp + Bn + y + u + F + un + e + t, 433, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, c + Ll + n + r + e + t, 1, c + xu + n + r + e + t, 1, c + Gi + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 1, c + Go + n + r + e + t, 1, c + Fs + n + r + e + t, 1, c + wo + n + r + e + t, 47, i + h + ro + Me + y + u + n + r + e + t, 48, c + Gi + Z + b + oL + e + t, 259, a + T_ + A_ + Ky + o_ + y + oa + Ke + le + z1 + e + t, 1, a + " +lat_1=29.7 +lat_0=29.7" + Ky + " +k_0=0.9996155960000001" + y + oa + Ke + le + z1 + e + t, 2, a + " +lat_1=26.1 +lat_0=26.1" + Ky + " +k_0=0.999616304 +x_0=1200000" + Vl + Ke + le + z1 + e + t, 1, a + " +lat_1=22.5 +lat_0=22.5" + Ky + " +k_0=0.999616437" + ze + Vl + Ke + le + z1 + e + t, 42, c + wo + O + XL + e + t, 94, c + xu + N + te + e + t, 1, c + Gi + N + te + e + t, 59, i + hh + " +lon_0=4.5" + Bp + " +x_0=230738.26" + u + N + te + e + t, 1, i + hh + " +lon_0=8.5" + Bp + " +x_0=670553.98" + u + N + te + e + t, 1, i + hh + " +lon_0=12.5" + Bp + " +x_0=1110369.7" + u + N + te + e + t, 239, c + Gi + Ke + le + s3 + e + t, 60, c + Gi + Z + Ke + le + s3 + e + t, 9, c + Jl + w + e + t, 1, c + Mu + w + e + t, 1, c + kc + w + e + t, 1, c + Cu + w + e + t, 1, c + Ka + w + e + t, 1, c + Cl + w + e + t, 1, c + Ya + w + e + t, 1, c + Eu + w + e + t, 1, c + Su + w + e + t, 1, c + ku + w + e + t, 1, c + za + w + e + t, 1, c + Ua + w + e + t, 1, c + qa + w + e + t, 1, c + Za + w + e + t, 1, c + ua + w + e + t, 1, c + ha + w + e + t, 1, c + yi + w + e + t, 1, c + Xr + w + e + t, 1, c + Vr + w + e + t, 1, c + Tr + w + e + t, 1, c + Qr + w + e + t, 1, c + Ai + w + e + t, 7, i + dl + U1 + Dd + X + u + w + d + t, 1, i + fi + M0 + fe + X + u + w + d + t, 1, Jn + " +lat_0=57" + Mg + Eg + m + " +x_0=5000000.001016002 +y_0=-5000000.001016002" + xo + gr + w + d + t, 1, i + at + My + m + X + u + w + d + t, 1, i + at + Ey + m + X + u + w + d + t, 1, i + at + Td + m + X + u + w + d + t, 1, i + at + df + m + X + u + w + d + t, 1, i + at + rh + m + X + u + w + d + t, 1, i + at + Sy + m + " +x_0=213360.4267208534" + u + w + d + t, 1, i + at + Cy + m + X + u + w + d + t, 1, i + at + k_ + m + B3 + u + w + d + t, 1, a + Sg + Cg + $p + Py + ai + u + w + d + t, 1, a + Ps + Gs + Dt + ws + B + u + w + d + t, 1, a + To + lo + Ft + ws + B + u + w + d + t, 1, a + wt + Ao + sf + he + B + u + w + d + t, 1, a + Kc + Mf + uo + af + B + u + w + d + t, 1, a + xi + ho + lf + Wl + B + u + w + d + t, 1, a + Oo + $o + Qs + Nc + B + u + w + d + t, 2, i + nn + Ir + m + X + u + w + d + t, 1, i + nn + ya + m + X + u + w + d + t, 1, i + nn + Bc + fe + X + u + w + d + t, 1, a + Xo + Ta + ke + xs + B + u + w + d + t, 1, a + Wr + cf + ys + xs + B + u + w + d + t, 1, a + " +lat_1=39.71666666666667 +lat_2=40.78333333333333" + Dt + Qe + B + u + w + d + t, 1, a + Yc + $c + us + Qe + B + u + w + d + t, 1, a + wt + Hi + Q + Qe + B + u + w + d + t, 1, a + La + uf + Io + Zc + B3 + u + w + d + t, 1, i + bn + Ui + hf + X + u + w + d + t, 1, i + Et + zn + st + X + u + w + d + t, 1, i + Et + gf + st + X + u + w + d + t, 1, a + Xc + Js + Ef + Qc + B + u + w + d + t, 6, i + fi + dr + m + X + u + w + d + t, 1, i + fi + pi + m + X + u + w + d + t, 1, i + pt + ds + Te + X + u + w + d + t, 1, i + pt + pu + Te + X + u + w + d + t, 1, i + pt + Gc + fe + X + u + w + d + t, 1, i + Q + Cs + oi + X + u + w + d + t, 1, i + Q + pr + st + X + u + w + d + t, 1, i + Zn + bi + Pe + X + u + w + d + t, 1, i + Zn + ba + Pe + X + u + w + d + t, 1, a + Qo + Wi + T + Qt + B + u + w + d + t, 1, a + Qn + Aa + it + Qt + B + u + w + d + t, 1, a + Vi + Dr + kn + si + B + u + w + d + t, 1, a + $r + bs + Q + Fr + B + u + w + d + t, 1, a + Xt + ao + Zn + qc + B + u + w + d + t, 1, a + " +lat_1=36.73333333333333 +lat_2=37.93333333333333" + Jt + dt + B + u + w + d + t, 1, a + " +lat_1=31.16666666666667 +lat_2=32.66666666666666 +lat_0=30.66666666666667" + cl + B + u + w + d + t, 1, a + " +lat_1=29.3 +lat_2=30.7 +lat_0=28.66666666666667" + Zr + B + u + w + d + t, 1, i + Ve + Ra + m + X + u + w + d + t, 1, i + we + zr + Pe + X + u + w + d + t, 1, a + " +lat_1=38.3 +lat_2=39.45" + us + mu + " +x_0=243840.4876809754" + u + w + d + t, 1, a + " +lat_1=41.71666666666667 +lat_2=42.68333333333333" + es + Gt + B3 + u + w + d + t, 1, a + " +lat_1=41.28333333333333 +lat_2=41.48333333333333" + es + Ul + " +x_0=60960.12192024384" + u + w + d + t, 4, a + " +lat_1=47.03333333333333 +lat_2=48.63333333333333" + Zl + wa + B + u + w + d + t, 1, a + " +lat_1=45.61666666666667 +lat_2=47.05" + mo + Vc + B + u + w + d + t, 1, a + " +lat_1=43.78333333333333 +lat_2=45.21666666666667" + wu + uc + B + u + w + d + t, 1, i + cs + ps + Dd + X + u + w + d + t, 1, i + dl + ri + st + X + u + w + d + t, 1, i + Ys + d_ + fe + X + u + w + d + t, 1, i + Ys + cl + fe + X + u + w + d + t, 1, i + Z1 + p_ + st + X + u + w + d + t, 1, a + " +lat_1=34.41666666666666 +lat_2=33.86666666666667 +lat_0=34.13333333333333" + q1 + " +x_0=1276106.450596901 +y_0=1268253.006858014" + w + d + t, 48, i + rn + Ra + m + _e + u + n + r + d + t, 1, i + we + zr + Pe + Bs + u + n + r + d + t, 1, a + Dh + Bh + Zl + wa + $ + lt + n + r + d + t, 1, a + fd + Nh + mo + Vc + $ + lt + n + r + d + t, 1, a + Gh + Zu + wu + uc + $ + lt + n + r + d + t, 1, a + Ls + Gs + Ia + fr + Ie + u + n + r + d + t, 1, a + dd + Vd + ff + Un + D + u + n + r + d + t, 1, a + Uh + qh + Tf + zn + D + u + n + r + d + t, 1, i + rn + Ra + m + _e + u + n + r + d + t, 1, i + we + zr + Pe + Bs + u + n + r + d + t, 1, a + Dh + Bh + Zl + wa + $ + lt + n + r + d + t, 1, a + fd + Nh + mo + Vc + $ + lt + n + r + d + t, 1, a + Gh + Zu + wu + uc + $ + lt + n + r + d + t, 1, a + Ls + Gs + Ia + fr + Ie + u + n + r + d + t, 1, a + dd + Vd + ff + Un + D + u + n + r + d + t, 1, a + Uh + qh + Tf + zn + D + u + n + r + d + t, 1, i + rn + Ra + m + _e + u + n + r + d + t, 1, i + we + zr + Pe + Bs + u + n + r + d + t, 1, a + Dh + Bh + Zl + wa + $ + lt + n + r + d + t, 1, a + fd + Nh + mo + Vc + $ + lt + n + r + d + t, 1, a + Gh + Zu + wu + uc + $ + lt + n + r + d + t, 1, a + Ls + Gs + Ia + fr + Ie + u + n + r + d + t, 1, a + dd + Vd + ff + Un + D + u + n + r + d + t, 1, a + Uh + qh + Tf + zn + D + u + n + r + d + t, 21, i + h + f + m + Re + u + n + r + e + t, 1, i + h + zn + m + Re + u + n + r + e + t, 1, i + h + ic + m + Re + u + n + r + e + t, 1, i + h + pl + m + Re + u + n + r + e + t, 1, i + h + On + m + Re + u + n + r + e + t, 1, i + h + Ip + m + Re + u + n + r + e + t, 1, i + h + _f + m + Re + u + n + r + e + t, 1, i + h + " +lon_0=-53" + m + Re + u + n + r + e + t, 1, i + h + lb + m + Re + u + n + r + e + t, 2, c + Jl + n + r + e + t, 1, c + Mu + n + r + e + t, 1, c + kc + n + r + e + t, 1, c + Cu + n + r + e + t, 1, c + Ka + n + r + e + t, 1, c + Cl + n + r + e + t, 1, c + Ya + n + r + e + t, 1, c + Eu + n + r + e + t, 1, c + Su + n + r + e + t, 1, c + ku + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + Es + n + r + e + t, 6, i + dl + U1 + Dd + ot + u + n + r + e + t, 1, i + fi + M0 + fe + D + u + n + r + e + t, 1, Jn + " +lat_0=57" + Mg + Eg + m + rf + gi + xo + gr + n + r + e + t, 1, i + at + My + m + y + u + n + r + e + t, 1, i + at + Ey + m + y + u + n + r + e + t, 1, i + at + Td + m + y + u + n + r + e + t, 1, i + at + df + m + y + u + n + r + e + t, 1, i + at + rh + m + y + u + n + r + e + t, 1, i + at + Sy + m + y + u + n + r + e + t, 1, i + at + Cy + m + y + u + n + r + e + t, 1, i + at + k_ + m + y + u + n + r + e + t, 1, a + Sg + Cg + $p + Py + Ye + u + n + r + e + t, 1, a + Ps + Gs + Dt + ws + Cn + He + n + r + e + t, 1, a + To + lo + Ft + ws + Cn + He + n + r + e + t, 1, a + wt + Ao + sf + he + Cn + He + n + r + e + t, 1, a + Kc + Mf + uo + af + Cn + He + n + r + e + t, 1, a + xi + ho + lf + Wl + Cn + He + n + r + e + t, 1, a + Oo + $o + Qs + Nc + Cn + He + n + r + e + t, 2, i + nn + Ir + m + J + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + e + t, 1, i + nn + Bc + fe + J + u + n + r + e + t, 1, a + Xo + Ta + ke + xs + H + u + n + r + e + t, 1, a + Wr + cf + ys + xs + H + Vl + n + r + e + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + r + e + t, 1, a + Yc + $c + us + Qe + zt + Nt + n + r + e + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + r + e + t, 1, a + La + uf + Io + Zc + hv + cv + n + r + e + t, 1, i + bn + Ui + hf + ot + u + n + r + e + t, 1, i + Et + zn + st + ot + u + n + r + e + t, 1, i + Et + gf + st + ot + u + n + r + e + t, 1, a + Xc + Js + Ef + Qc + D + u + n + r + e + t, 1, i + vg + Sv + Pe + y + u + n + r + e + t, 1, i + yg + tg + Pe + y + u + n + r + e + t, 1, i + Ce + rh + vl + y + u + n + r + e + t, 1, i + bg + Cv + vl + y + u + n + r + e + t, 1, i + wg + eg + " +k=1" + y + u + n + r + e + t, 1, i + fi + dr + m + ot + u + n + r + e + t, 1, i + fi + pi + m + R + u + n + r + e + t, 1, i + pt + ds + Te + ot + u + n + r + e + t, 1, i + pt + pu + Te + y + u + n + r + e + t, 1, i + pt + Gc + fe + Lr + u + n + r + e + t, 1, i + Q + Cs + oi + xe + u + n + r + e + t, 1, i + Q + pr + st + R + u + n + r + e + t, 1, i + Zn + bi + Pe + Be + ih + n + r + e + t, 1, i + Zn + ba + Pe + Bs + ih + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + r + e + t, 1, a + Qn + Aa + it + Qt + y + u + n + r + e + t, 1, a + Vi + Dr + kn + si + H + u + n + r + e + t, 1, a + $r + bs + Q + Fr + H + Vl + n + r + e + t, 2, a + ci + ta + Jt + dt + y + He + n + r + e + t, 1, a + Ih + Rh + dl + cl + Ye + u + n + r + e + t, 1, a + Ld + Md + Ed + Zr + Ye + u + n + r + e + t, 1, i + rn + Ra + m + xe + u + n + r + e + t, 1, i + we + zr + Pe + Bs + u + n + r + e + t, 1, a + sd + md + Ft + mu + H + u + n + r + e + t, 1, a + Os + Ts + es + Gt + ot + of + n + r + e + t, 1, a + Oa + ts + es + Ul + y + u + n + r + e + t, 1, a + rl + ea + Tn + pl + Yv + u + n + r + e + t, 1, a + gd + po + il + $t + _p + u + n + r + e + t, 1, a + Ne + vd + T + $t + tf + u + n + r + e + t, 1, a + Dh + Bh + Zl + wa + Lr + Mr + n + r + e + t, 1, a + fd + Nh + mo + Vc + Lr + Mr + n + r + e + t, 1, a + Gh + Zu + wu + uc + Lr + Mr + n + r + e + t, 1, i + ia + ps + Bn + xe + u + n + r + e + t, 1, i + ia + ri + Bn + R + u + n + r + e + t, 1, i + Ys + d_ + fe + Hn + u + n + r + e + t, 1, i + Ys + cl + fe + y + u + n + r + e + t, 1, i + Z1 + p_ + st + py + u + n + r + e + t, 41, c + Ni + N + Xs + e + t, 1, c + js + N + Xs + e + t, 80, c + Tr + b + ZL + e + t, 80, "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150" + b + S + e + t, 5, i + " +lat_0=-36.87986527777778 +lon_0=174.7643393611111" + m + xe + Rr + b + S + e + t, 1, i + " +lat_0=-37.76124980555556 +lon_0=176.46619725 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-38.62470277777778 +lon_0=177.8856362777778 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-39.65092930555556 +lon_0=176.6736805277778 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-39.13575830555556 +lon_0=174.22801175 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-39.51247038888889 +lon_0=175.6400368055556 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-40.24194713888889 +lon_0=175.4880996111111 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-40.92553263888889 +lon_0=175.6473496666667 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.30131963888888 +lon_0=174.7766231111111 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-40.71475905555556 +lon_0=172.6720465 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.27454472222222 +lon_0=173.2993168055555 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.28991152777778 +lon_0=172.1090281944444 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.81080286111111 +lon_0=171.5812600555556 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-42.33369427777778 +lon_0=171.5497713055556 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-42.68911658333333 +lon_0=173.0101333888889 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.54448666666666 +lon_0=173.8020741111111 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-42.88632236111111 +lon_0=170.9799935 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.11012813888889 +lon_0=170.2609258333333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.97780288888889 +lon_0=168.606267 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.59063758333333 +lon_0=172.7271935833333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.74871155555556 +lon_0=171.3607484722222 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-44.40222036111111 +lon_0=171.0572508333333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-44.73526797222222 +lon_0=169.4677550833333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.13290258333333 +lon_0=168.3986411944444 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.56372616666666 +lon_0=167.7388617777778 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.81619661111111 +lon_0=170.6285951666667 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.86151336111111 +lon_0=170.2825891111111" + Dd + xe + Rr + b + S + e + t, 1, i + " +lat_0=-46.60000961111111 +lon_0=168.342872 +k=1 +x_0=300002.66 +y_0=699999.58" + b + S + e + t, 26, c + Ms + Z + b + S + e + t, 1, c + ja + Z + b + S + e + t, 1, c + Xl + Z + b + S + e + t, 31, i + " +lat_0=-39 +lon_0=175.5 +k=1 +x_0=274319.5243848086 +y_0=365759.3658464114" + b + S + VL + t, 1, i + ob + " +lon_0=171.5 +k=1 +x_0=457199.2073080143 +y_0=457199.2073080143" + b + S + VL + t, 99, i + Er + " +lon_0=-4.666666666666667 +k=1" + z + u + Ku + fo + xr + Rf + e + t, 1, i + Er + " +lon_0=-2.333333333333333 +k=1" + z + u + Ku + fo + xr + Rf + e + t, 1, i + Er + qr + " +k=1" + z + u + Ku + fo + xr + Rf + e + t, 1, i + Er + " +lon_0=2.5 +k=1" + z + u + Ku + fo + xr + Rf + e + t, 1, i + Er + yM + " +k=1" + z + u + Ku + fo + xr + Rf + e + t, 1, i + Er + " +lon_0=10.16666666666667 +k=1" + z + u + Ku + fo + xr + Rf + e + t, 1, i + Er + " +lon_0=14.16666666666667 +k=1" + z + u + Ku + fo + xr + Rf + e + t, 1, i + Er + " +lon_0=18.33333333333333 +k=1" + z + u + Ku + fo + xr + Rf + e + t, 31, c + vo + b + Kw + e + t, 64, i + cr + r8 + " +k=1 +x_0=180.598 +y_0=-86.98999999999999" + b + Kw + e + t, 7, a + C3 + P3 + " +lon_0=5.399999999999999 +k_0=0.99950908" + y + oa + " +a=6376523" + j3 + CE + e + t, 61, a + C3 + P3 + qr + " +k_0=0.999877341" + D + Da + Ke + le + ji + kl + e + t, 1, a + " +lat_1=46.8 +lat_0=46.8" + qr + " +k_0=0.99987742" + D + Da + Ke + le + ji + kl + e + t, 1, a + gE + vE + qr + " +k_0=0.999877499" + D + Da + Ke + le + ji + kl + e + t, 1, a + yE + bE + qr + " +k_0=0.99994471 +x_0=234.358 +y_0=185861.369" + Ke + le + ji + kl + e + t, 7, a + C3 + P3 + qr + " +k_0=0.999877341" + D + Vv + Ke + le + ji + kl + e + t, 1, a + " +lat_1=46.8 +lat_0=46.8" + qr + " +k_0=0.99987742" + D + " +y_0=2200000" + Ke + le + ji + kl + e + t, 1, a + gE + vE + qr + " +k_0=0.999877499" + D + " +y_0=3200000" + Ke + le + ji + kl + e + t, 1, a + yE + bE + qr + " +k_0=0.99994471 +x_0=234.358 +y_0=4185861.369" + Ke + le + ji + kl + e + t, 126, i + " +lat_0=49 +lon_0=-2 +k=0.9996012717" + H + " +y_0=-100000" + E0 + N5 + e + t, 491, lr + Gg + jg + mv + " +y_0=126867.909" + up + hp + to + e + t, 1, i + Gg + jg + " +k=1" + mv + " +y_0=1126867.909" + up + hp + to + e + t, 1, lr + Gg + jg + mv + " +y_0=1126867.909" + up + hp + to + e + t, 39, c + Gi + Z + Ke + le + RL + e + t, 116, c + Us + Z + n + r + e + t, 1, c + qs + Z + n + r + e + t, 1, c + fa + Z + n + r + e + t, 1, c + zs + Z + n + r + e + t, 1, c + da + Z + n + r + e + t, 1, c + Sl + Z + n + r + e + t, 1, c + Ha + Z + n + r + e + t, 1, c + Ql + Z + n + r + e + t, 1, c + xc + Z + n + r + e + t, 1, c + If + Z + n + r + e + t, 1, c + Ms + Z + n + r + e + t, 46, i + h + Rn + " +k=1" + Pr + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + s + e + t, 1, i + h + eo + " +k=1" + Vh + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + ql + u + _ + s + e + t, 1, i + h + ks + " +k=1" + id + u + _ + s + e + t, 1, i + h + mc + " +k=1" + od + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + td + u + _ + s + e + t, 1, i + h + Pf + " +k=1" + Hc + u + _ + s + e + t, 1, i + h + Wd + " +k=1" + ed + u + _ + s + e + t, 1, i + h + Si + " +k=1" + jl + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + s + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + s + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + s + e + t, 1, i + h + tt + " +k=1" + au + u + _ + s + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + s + e + t, 1, i + h + k + " +k=1" + lu + u + _ + s + e + t, 1, i + h + Gd + " +k=1" + nd + u + _ + s + e + t, 1, i + h + yf + " +k=1" + uu + u + _ + s + e + t, 1, i + h + ac + " +k=1" + hu + u + _ + s + e + t, 1, i + h + jd + " +k=1" + cu + u + _ + s + e + t, 1, i + h + lc + " +k=1" + fu + u + _ + s + e + t, 1, i + h + vu + " +k=1" + hl + u + _ + s + e + t, 1, i + h + Yl + " +k=1" + $u + u + _ + s + e + t, 1, i + h + nh + " +k=1" + Kn + u + _ + s + e + t, 1, i + h + $h + " +k=1" + Xu + u + _ + s + e + t, 168, i + " +lat_0=24.45" + kM + vl + ot + oa + b + eL + e + t, 391, se + wE + kE + " +k=0.9999079" + z + u + O + yt + e + t, 1, se + wE + kE + " +k=0.9999079 +x_0=155000 +y_0=463000" + O + yt + e + t, 109, cy + h + hc + rf + kt + bt + Tt + e + t, 67, c + Xr + bt + Tt + e + t, 1, c + Vr + bt + Tt + e + t, 1, c + Tr + bt + Tt + e + t, 1, c + Qr + bt + Tt + e + t, 1, c + Ai + bt + Tt + e + t, 15, c + yi + Z + bt + Tt + e + t, 1, c + Xr + Z + bt + Tt + e + t, 1, c + Vr + Z + bt + Tt + e + t, 1, c + Tr + Z + bt + Tt + e + t, 1, c + Qr + Z + bt + Tt + e + t, 1, c + Ai + Z + bt + Tt + e + t, 1, c + Es + Z + bt + Tt + e + t, 1, c + Wa + Z + bt + Tt + e + t, 1, c + Fa + Z + bt + Tt + e + t, 25, c + Tr + Z + b + u3 + e + t, 1, c + Qr + Z + b + u3 + e + t, 112, c + bo + Z + Wu + ls + e + t, 38, i + zd + " +lon_0=11 +k=1" + z + u + Yn + Wu + ls + _t + t, 2, i + zd + " +lon_0=13 +k=1" + z + u + Yn + Wu + ls + _t + t, 2, i + zd + hr + " +k=1" + z + u + Yn + Wu + ls + _t + t, 2, i + zd + Hp + " +k=1" + z + u + Yn + Wu + ls + _t + t, 2, i + zd + Ud + " +k=1" + z + u + Yn + Wu + ls + _t + t, 2, i + zd + Rn + " +k=1" + z + u + Yn + Wu + ls + _t + t, 2, i + zd + O0 + " +k=1" + z + u + Yn + Wu + ls + _t + t, 2, i + zd + qd + " +k=1" + z + u + Yn + Wu + ls + _t + t, 317, Jn + " +lat_0=-18.9 +lonc=44.10000000000001 +alpha=18.9" + ii + H + _r + " +gamma=18.9" + b + B1 + kl + e + t, 36, c + Xi + Z + b + B1 + e + t, 1, c + Ni + Z + b + B1 + e + t, 110, c + qs + d0 + ir + e + t, 1, c + fa + d0 + ir + e + t, 21, Jn + hh + Z_ + T3 + Fd + " +x_0=590476.8714630401 +y_0=442857.653094361" + V1 + d0 + ir + " +to_meter=20.11676512155263" + t, 1, Jn + hh + Z_ + T3 + Fd + " +x_0=590476.8727431979 +y_0=442857.6545573985" + V1 + d0 + ir + " +to_meter=0.3047994715386762" + t, 1, Jn + hh + Z_ + T3 + Fd + " +x_0=590476.87 +y_0=442857.65" + V1 + d0 + ir + e + t, 28, i + fy + " +lon_0=-8 +k=1" + ot + ih + E0 + dn + e + t, 1, i + fy + " +lon_0=-8 +k=1.000035" + ot + ih + s_ + dn + e + t, 1, i + fy + " +lon_0=-8 +k=1.000035" + ot + ih + s_ + dn + e + t, 258, i + gc + i6 + m + z + u + O + rt + e + t, 1, i + gc + sc + m + z + u + O + rt + e + t, 1, i + Mt + x3 + m + z + u + O + rt + e + t, 1, i + gc + Kv + m + z + u + O + rt + e + t, 1, i + Mt + k3 + m + z + u + O + rt + e + t, 1, i + Mt + Np + m + z + u + O + rt + e + t, 1, i + Mt + L3 + m + z + u + O + rt + e + t, 1, i + Mt + o6 + m + z + u + O + rt + e + t, 1, i + Mt + M3 + m + z + u + O + rt + e + t, 1, i + it + E3 + m + z + u + O + rt + e + t, 1, i + Ro + $3 + m + z + u + O + rt + e + t, 1, i + Ro + X3 + m + z + u + O + rt + e + t, 1, i + Ro + Q3 + m + z + u + O + rt + e + t, 1, i + go + " +lon_0=142" + m + z + u + O + rt + e + t, 1, i + go + pp + m + z + u + O + rt + e + t, 1, i + go + " +lon_0=124" + m + z + u + O + rt + e + t, 1, i + go + sc + m + z + u + O + rt + e + t, 1, i + " +lat_0=20" + Np + m + z + u + O + rt + e + t, 1, i + go + $y + m + z + u + O + rt + e + t, 21, lr + bM + e8 + " +x_0=86501.46392051999" + HE + qe + Vn + Vw + mM + t, 139, c + Ni + Nl + e + t, 1, c + js + Nl + e + t, 151, a + " +lat_1=36" + Mt + qp + _v + y + oa + Ke + le + Wm + e + t, 1, a + T_ + A_ + qp + o_ + y + oa + Ke + le + Wm + e + t, 1, a + " +lat_1=36" + Mt + qp + _v + y + oa + Ke + le + e + t, 1, a + T_ + A_ + qp + o_ + y + oa + Ke + le + e + t, 235, c + vo + N + De + e + t, 1, c + Ll + N + De + e + t, 1, c + xu + N + De + e + t, 1, c + Gi + N + De + e + t, 59, a + " +lat_1=36" + Mt + qp + _v + " +x_0=500135 +y_0=300090" + N + De + e + t, 1, a + T_ + A_ + qp + o_ + " +x_0=500135 +y_0=300090" + N + De + e + t, 236, c + Qi + Ke + le + e + t, 93, c + Qr + b + N1 + e + t, 33, i + h + hc + Me + y + u + b + N1 + e + t, 16, i + h + _M + Me + y + u + b + N1 + e + t, 1, i + h + _M + m + y + u + b + N1 + e + t, 80, i + h + Yd + " +k=1" + z + gi + O + Ut + bl + e + t, 1, i + h + kf + " +k=1" + z + gi + O + Ut + bl + e + t, 1, i + h + Q_ + " +k=1" + z + gi + O + Ut + bl + e + t, 1, i + h + A3 + " +k=1" + z + gi + O + qt + e + t, 1, i + h + K1 + " +k=1" + z + gi + O + qt + e + t, 1, i + h + O3 + " +k=1" + z + gi + O + qt + e + t, 1, i + h + A3 + " +k=1" + Nn + gi + O + qt + e + t, 1, i + h + K1 + " +k=1 +x_0=450000" + gi + O + qt + e + t, 1, i + h + O3 + " +k=1" + ky + gi + O + qt + e + t, 22, i + h + Yd + " +k=1" + z + u + O + Ut + bl + e + t, 1, i + h + kf + " +k=1" + z + u + O + Ut + bl + e + t, 1, i + h + Q_ + " +k=1" + z + u + O + Ut + bl + e + t, 1, i + h + A3 + " +k=1" + Nn + u + O + qt + e + t, 1, i + h + K1 + " +k=1 +x_0=450000" + u + O + qt + e + t, 1, i + h + O3 + " +k=1" + ky + u + O + qt + e + t, 1, a + Na + yu + " +lat_0=47.5" + K1 + H + Vl + O + qt + e + t, 1, i + h + Yd + " +k=1" + Nn + u + O + Ut + bl + e + t, 1, i + h + kf + " +k=1 +x_0=450000" + u + O + Ut + bl + e + t, 1, i + h + Q_ + " +k=1" + ky + u + O + Ut + bl + e + t, 10, a + kg + Lg + $i + " +lon_0=4.356939722222222 +x_0=150000.01256 +y_0=5400088.4378" + b + It + e + t, 70, a + " +lat_1=51.16666723333333 +lat_2=49.8333339" + $i + " +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438" + b + It + e + t, 96, i + h + Jp + " +k=1" + Gn + u + O + ve + e + t, 1, i + h + yo + " +k=1" + qn + u + O + ve + e + t, 1, i + h + no + " +k=1" + Pr + u + O + ve + e + t, 1, i + h + hr + " +k=1" + xn + u + O + ve + e + t, 59, c + Qi + Ke + le + h3 + e + t, 1, c + vo + Ke + le + h3 + e + t, 71, se + " +lat_0=45.9 +lon_0=25.39246588888889 +k=0.9996667" + y + He + b + nL + e + t, 238, c + Xi + W + Xw + e + t, 1, c + Ni + W + Xw + e + t, 62, i + h + I0 + " +k=1" + y + u + n + pL + e + t, 64, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + yi + Z + n + r + e + t, 1, c + Xr + Z + n + r + e + t, 1, c + Vr + Z + n + r + e + t, 1, c + Tr + Z + n + r + e + t, 1, c + Qr + Z + n + r + e + t, 1, c + Ai + Z + n + r + e + t, 1, c + Es + Z + n + r + e + t, 1, c + Wa + Z + n + r + e + t, 1, c + Fa + Z + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + yi + Z + n + r + e + t, 1, c + Xr + Z + n + r + e + t, 1, c + Vr + Z + n + r + e + t, 1, c + Tr + Z + n + r + e + t, 1, c + Qr + Z + n + r + e + t, 1, c + Ai + Z + n + r + e + t, 1, c + Es + Z + n + r + e + t, 1, c + Wa + Z + n + r + e + t, 1, c + Fa + Z + n + r + e + t, 1, a + " +lat_1=48.71666666666667 +lat_2=47.85" + Bo + Yu + B + u + w + d + t, 1, a + " +lat_1=47.88333333333333 +lat_2=46.45 +lat_0=45.83333333333334" + Yu + B + u + w + d + t, 1, a + " +lat_1=46.4 +lat_2=44.86666666666667" + Ro + Yu + B + u + w + d + t, 2, a + " +lat_1=41.85 +lat_2=42.81666666666667 +lat_0=41.33333333333334" + fr + B + u + w + d + t, 1, a + " +lat_1=40.28333333333333" + Ts + cr + " +lon_0=-99.5" + B + u + w + d + t, 1, i + jr + wi + m + X + u + w + d + t, 1, i + jr + xa + m + X + u + w + d + t, 1, i + jr + qi + m + X + u + w + d + t, 1, i + I + Yo + Pe + X + u + w + d + t, 1, i + ee + " +lon_0=-74.66666666666667" + oi + B + u + w + d + t, 1, i + nn + Ko + Vu + X + u + w + d + t, 1, i + nn + jc + m + X + u + w + d + t, 1, i + nn + hi + Fc + X + u + w + d + t, 1, i + it + " +lon_0=-74.33333333333333" + Pe + X + u + w + d + t, 1, i + it + Di + an + X + u + w + d + t, 1, i + it + _s + an + X + u + w + d + t, 2, a + " +lat_1=34.33333333333334 +lat_2=36.16666666666666" + Jc + oc + B + u + w + d + t, 1, a + " +lat_1=47.43333333333333" + xE + Bo + Lt + B + u + w + d + t, 1, a + " +lat_1=46.18333333333333 +lat_2=47.48333333333333" + Br + Lt + B + u + w + d + t, 1, a + " +lat_1=40.43333333333333 +lat_2=41.7" + cr + f + B + u + w + d + t, 1, a + " +lat_1=38.73333333333333 +lat_2=40.03333333333333" + bn + f + B + u + w + d + t, 1, a + " +lat_1=35.56666666666667" + Pa + Sf + si + B + u + w + d + t, 1, a + " +lat_1=33.93333333333333 +lat_2=35.23333333333333" + Ea + si + B + u + w + d + t, 1, a + " +lat_1=44.33333333333334" + yu + rn + he + B + u + w + d + t, 1, a + " +lat_1=42.33333333333334 +lat_2=44" + pt + he + B + u + w + d + t, 1, a + " +lat_1=40.88333333333333 +lat_2=41.95" + ye + Rt + B + u + w + d + t, 2, i + Mi + Gt + " +k=0.9999938" + X + u + w + d + t, 1, a + " +lat_1=33.76666666666667 +lat_2=34.96666666666667" + gc + zn + B + u + w + d + t, 2, a + " +lat_1=32.33333333333334 +lat_2=33.66666666666666" + As + zn + B + u + w + d + t, 1, a + " +lat_1=44.41666666666666 +lat_2=45.68333333333333" + Ve + fr + B + u + w + d + t, 1, a + " +lat_1=42.83333333333334 +lat_2=44.4" + En + gn + B + u + w + d + t, 2, a + m6 + " +lat_2=36.18333333333333" + Cf + Wc + B + u + w + d + t, 1, a + " +lat_1=32.13333333333333 +lat_2=33.96666666666667" + Ca + " +lon_0=-97.5" + B + u + w + d + t, 1, a + " +lat_1=30.11666666666667 +lat_2=31.88333333333333" + cs + gn + B + u + w + d + t, 1, a + " +lat_1=28.38333333333333 +lat_2=30.28333333333333" + Zi + _l + B + u + w + d + t, 1, a + " +lat_1=26.16666666666667 +lat_2=27.83333333333333" + Po + Fr + B + u + w + d + t, 1, a + " +lat_1=40.71666666666667 +lat_2=41.78333333333333" + kr + ae + B + u + w + d + t, 1, a + " +lat_1=39.01666666666667 +lat_2=40.65" + kn + ae + B + u + w + d + t, 1, a + " +lat_1=37.21666666666667 +lat_2=38.35" + Q + ae + B + u + w + d + t, 1, i + I + nf + zc + X + u + w + d + t, 1, a + " +lat_1=38.03333333333333 +lat_2=39.2" + Ft + Zt + B + u + w + d + t, 1, a + ki + " +lat_2=37.96666666666667" + Jt + Zt + B + u + w + d + t, 1, a + " +lat_1=47.5" + xE + Bo + ms + B + u + w + d + t, 1, a + " +lat_1=45.83333333333334 +lat_2=47.33333333333334" + Li + he + B + u + w + d + t, 1, a + " +lat_1=39 +lat_2=40.25" + ff + Un + B + u + w + d + t, 1, a + " +lat_1=37.48333333333333 +lat_2=38.88333333333333" + Tf + zn + B + u + w + d + t, 1, a + " +lat_1=45.56666666666667 +lat_2=46.76666666666667" + vs + On + B + u + w + d + t, 1, a + " +lat_1=44.25" + sa + Ve + On + B + u + w + d + t, 1, a + " +lat_1=42.73333333333333 +lat_2=44.06666666666667" + _c + On + B + u + w + d + t, 1, i + Ug + so + st + X + u + w + d + t, 1, i + Ug + ka + st + X + u + w + d + t, 1, i + Ug + Uc + st + X + u + w + d + t, 1, i + Ug + Yr + st + X + u + w + d + t, 6, i + h + _l + Me + q + u + w + d + t, 1, i + h + Ip + Me + q + u + w + d + t, 1, i + h + pl + Me + q + u + w + d + t, 1, i + h + zn + Me + q + u + w + d + t, 14, i + h + " +lon_0=-53" + m + Re + u + w + e + t, 1, i + h + lb + m + Re + u + w + e + t, 1, i + h + qv + m + Re + u + w + e + t, 1, i + h + c_ + m + Re + u + w + e + t, 1, i + h + f_ + m + Re + u + w + e + t, 1, i + h + Hv + m + Re + u + w + e + t, 12, a + Zp + yu + Ro + Ra + z + u + w + e + t, 1, a + qo + Ss + Po + Zr + B + u + w + d + t, 1, a + Na + Hd + ad + Yu + D + u + n + r + e + t, 4, a + Ls + Gs + Ia + fr + y + u + n + r + e + t, 3, i + jr + wi + m + ot + $v + n + r + e + t, 1, i + jr + xa + m + y + fl + n + r + e + t, 1, i + jr + qi + m + Lr + ef + n + r + e + t, 1, i + I + Yo + Pe + xe + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + nn + Ko + Vu + yd + u + n + r + e + t, 1, i + nn + jc + m + y + u + n + r + e + t, 1, i + nn + hi + Fc + _y + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + it + Di + an + Hn + u + n + r + e + t, 1, i + it + _s + an + Lp + u + n + r + e + t, 1, a + Ma + Ur + ye + vf + xe + u + n + r + e + t, 1, a + Ki + ol + Jc + oc + yv + u + n + r + e + t, 1, a + Le + _o + Bo + Lt + D + u + n + r + e + t, 1, a + Is + sl + Br + Lt + D + u + n + r + e + t, 1, a + Sd + Bl + cr + f + D + u + n + r + e + t, 1, a + jh + Fh + bn + f + D + u + n + r + e + t, 1, a + ki + ju + Sf + si + D + u + n + r + e + t, 1, a + kh + Fu + Ea + si + D + u + n + r + e + t, 1, a + dc + Kr + rn + he + Gn + u + n + r + e + t, 1, a + pc + hs + pt + he + ze + u + n + r + e + t, 1, a + ld + Lh + ye + Rt + D + u + n + r + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + e + t, 1, i + Mi + Gt + rd + Be + u + n + r + e + t, 3, a + Mh + bd + As + zn + wd + u + n + r + e + t, 1, a + zh + _i + Ve + fr + D + u + n + r + e + t, 1, a + Cd + Rs + En + gn + D + u + n + r + e + t, 1, a + Eh + ud + ke + ah + D + u + n + r + e + t, 1, a + al + hd + Cf + Wc + ot + Ee + n + r + e + t, 1, a + Il + Sh + Ca + Fr + D + yr + n + r + e + t, 1, a + Ch + Rl + cs + gn + R + G + n + r + e + t, 1, a + Dl + zu + Zi + _l + D + ef + n + r + e + t, 1, a + qo + Ss + Po + Fr + xe + Kh + n + r + e + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + r + e + t, 1, a + Qu + oo + kn + ae + y + yr + n + r + e + t, 1, a + Ju + Co + Q + ae + y + G + n + r + e + t, 1, i + I + nf + zc + y + u + n + r + e + t, 1, a + xd + Ph + Ft + Zt + qn + yr + n + r + e + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + r + e + t, 1, a + Le + kd + Bo + ms + y + u + n + r + e + t, 1, a + Th + Uu + Li + he + y + u + n + r + e + t, 1, a + dd + Vd + ff + Un + D + u + n + r + e + t, 1, a + Uh + qh + Tf + zn + D + u + n + r + e + t, 1, a + qu + Ah + vs + On + D + u + n + r + e + t, 1, a + _u + cd + Ve + On + D + u + n + r + e + t, 1, a + Oh + Hu + _c + On + D + u + n + r + e + t, 1, i + cn + so + an + ot + u + n + r + e + t, 1, i + cn + ka + an + H + Mr + n + r + e + t, 1, i + cn + Uc + an + D + u + n + r + e + t, 1, i + cn + Yr + an + Lr + Mr + n + r + e + t, 3, a + tn + fn + wn + Oe + ot + Da + n + r + e + t, 3, i + h + _l + Me + q + u + n + r + d + t, 1, i + h + Ip + Me + q + u + n + r + d + t, 1, i + h + pl + Me + q + u + n + r + d + t, 1, i + h + zn + Me + q + u + n + r + d + t, 14, i + h + " +lon_0=-53" + m + Re + u + n + r + e + t, 1, i + h + lb + m + Re + u + n + r + e + t, 1, i + h + qv + m + Re + u + n + r + e + t, 1, i + h + c_ + m + Re + u + n + r + e + t, 1, i + h + f_ + m + Re + u + n + r + e + t, 1, i + h + Hv + m + Re + u + n + r + e + t, 1, i + h + Ul + m + Re + u + n + r + e + t, 1, i + h + Zv + m + Re + u + n + r + e + t, 1, i + h + Wv + m + Re + u + n + r + e + t, 1, i + h + Un + m + Re + u + n + r + e + t, 1, i + h + f + m + Re + u + n + r + e + t, 1, i + h + zn + m + Re + u + n + r + e + t, 1, i + h + ic + m + Re + u + n + r + e + t, 1, i + h + pl + m + Re + u + n + r + e + t, 1, i + h + On + m + Re + u + n + r + e + t, 1, i + h + Ip + m + Re + u + n + r + e + t, 1, i + h + _f + m + Re + u + n + r + e + t, 1, a + Zp + yu + Ro + Ra + z + u + n + r + e + t, 1, a + qo + Ss + " +lat_0=25.5" + Zr + Ye + u + n + r + e + t, 2, c + Jl + x + A + e + t, 1, c + Mu + x + A + e + t, 1, c + kc + x + A + e + t, 1, c + Cu + x + A + e + t, 1, c + Ka + x + A + e + t, 1, c + Cl + x + A + e + t, 1, c + Ya + x + A + e + t, 1, c + Eu + x + A + e + t, 1, c + Su + x + A + e + t, 1, c + ku + x + A + e + t, 1, c + za + x + A + e + t, 1, c + Ua + x + A + e + t, 1, c + qa + x + A + e + t, 1, c + Za + x + A + e + t, 1, c + ua + x + A + e + t, 1, c + ha + x + A + e + t, 1, c + yi + x + A + e + t, 1, c + Xr + x + A + e + t, 1, c + Vr + x + A + e + t, 1, c + Tr + x + A + e + t, 1, c + Qr + x + A + e + t, 1, c + Ai + x + A + e + t, 1, c + Es + x + A + e + t, 1, c + Wa + x + A + e + t, 1, c + Fa + x + A + e + t, 1, c + El + x + A + e + t, 1, c + Of + x + A + e + t, 1, c + Qi + x + A + e + t, 1, c + vo + x + A + e + t, 1, c + Ll + x + A + e + t, 1, c + xu + x + A + e + t, 1, c + Gi + x + A + e + t, 1, c + bo + x + A + e + t, 1, c + ca + x + A + e + t, 1, c + Go + x + A + e + t, 1, c + Fs + x + A + e + t, 1, c + wo + x + A + e + t, 1, c + Xi + x + A + e + t, 1, c + Ni + x + A + e + t, 1, c + js + x + A + e + t, 1, c + yc + x + A + e + t, 1, c + bc + x + A + e + t, 1, c + Df + x + A + e + t, 1, c + $d + x + A + e + t, 1, c + Xd + x + A + e + t, 1, c + Lu + x + A + e + t, 1, c + Va + x + A + e + t, 1, c + Us + x + A + e + t, 1, c + qs + x + A + e + t, 1, c + fa + x + A + e + t, 1, c + zs + x + A + e + t, 1, c + da + x + A + e + t, 1, c + Sl + x + A + e + t, 1, c + Ha + x + A + e + t, 1, c + Ql + x + A + e + t, 1, c + xc + x + A + e + t, 1, c + If + x + A + e + t, 1, c + Ms + x + A + e + t, 1, c + ja + x + A + e + t, 1, c + Xl + x + A + e + t, 41, c + Jl + Z + x + A + e + t, 1, c + Mu + Z + x + A + e + t, 1, c + kc + Z + x + A + e + t, 1, c + Cu + Z + x + A + e + t, 1, c + Ka + Z + x + A + e + t, 1, c + Cl + Z + x + A + e + t, 1, c + Ya + Z + x + A + e + t, 1, c + Eu + Z + x + A + e + t, 1, c + Su + Z + x + A + e + t, 1, c + ku + Z + x + A + e + t, 1, c + za + Z + x + A + e + t, 1, c + Ua + Z + x + A + e + t, 1, c + qa + Z + x + A + e + t, 1, c + Za + Z + x + A + e + t, 1, c + ua + Z + x + A + e + t, 1, c + ha + Z + x + A + e + t, 1, c + yi + Z + x + A + e + t, 1, c + Xr + Z + x + A + e + t, 1, c + Vr + Z + x + A + e + t, 1, c + Tr + Z + x + A + e + t, 1, c + Qr + Z + x + A + e + t, 1, c + Ai + Z + x + A + e + t, 1, c + Es + Z + x + A + e + t, 1, c + Wa + Z + x + A + e + t, 1, c + Fa + Z + x + A + e + t, 1, c + El + Z + x + A + e + t, 1, c + Of + Z + x + A + e + t, 1, c + Qi + Z + x + A + e + t, 1, c + vo + Z + x + A + e + t, 1, c + Ll + Z + x + A + e + t, 1, c + xu + Z + x + A + e + t, 1, c + Gi + Z + x + A + e + t, 1, c + bo + Z + x + A + e + t, 1, c + ca + Z + x + A + e + t, 1, c + Go + Z + x + A + e + t, 1, c + Fs + Z + x + A + e + t, 1, c + wo + Z + x + A + e + t, 1, c + Xi + Z + x + A + e + t, 1, c + Ni + Z + x + A + e + t, 1, c + js + Z + x + A + e + t, 1, c + yc + Z + x + A + e + t, 1, c + bc + Z + x + A + e + t, 1, c + Df + Z + x + A + e + t, 1, c + $d + Z + x + A + e + t, 1, c + Xd + Z + x + A + e + t, 1, c + Lu + Z + x + A + e + t, 1, c + Va + Z + x + A + e + t, 1, c + Us + Z + x + A + e + t, 1, c + qs + Z + x + A + e + t, 1, c + fa + Z + x + A + e + t, 1, c + zs + Z + x + A + e + t, 1, c + da + Z + x + A + e + t, 1, c + Sl + Z + x + A + e + t, 1, c + Ha + Z + x + A + e + t, 1, c + Ql + Z + x + A + e + t, 1, c + xc + Z + x + A + e + t, 1, c + If + Z + x + A + e + t, 1, c + Ms + Z + x + A + e + t, 1, c + ja + Z + x + A + e + t, 1, c + Xl + Z + x + A + e + t, 41, c + Jl + x + E + e + t, 1, c + Mu + x + E + e + t, 1, c + kc + x + E + e + t, 1, c + Cu + x + E + e + t, 1, c + Ka + x + E + e + t, 1, c + Cl + x + E + e + t, 1, c + Ya + x + E + e + t, 1, c + Eu + x + E + e + t, 1, c + Su + x + E + e + t, 1, c + ku + x + E + e + t, 1, c + za + x + E + e + t, 1, c + Ua + x + E + e + t, 1, c + qa + x + E + e + t, 1, c + Za + x + E + e + t, 1, c + ua + x + E + e + t, 1, c + ha + x + E + e + t, 1, c + yi + x + E + e + t, 1, c + Xr + x + E + e + t, 1, c + Vr + x + E + e + t, 1, c + Tr + x + E + e + t, 1, c + Qr + x + E + e + t, 1, c + Ai + x + E + e + t, 1, c + Es + x + E + e + t, 1, c + Wa + x + E + e + t, 1, c + Fa + x + E + e + t, 1, c + El + x + E + e + t, 1, c + Of + x + E + e + t, 1, c + Qi + x + E + e + t, 1, c + vo + x + E + e + t, 1, c + Ll + x + E + e + t, 1, c + xu + x + E + e + t, 1, c + Gi + x + E + e + t, 1, c + bo + x + E + e + t, 1, c + ca + x + E + e + t, 1, c + Go + x + E + e + t, 1, c + Fs + x + E + e + t, 1, c + wo + x + E + e + t, 1, c + Xi + x + E + e + t, 1, c + Ni + x + E + e + t, 1, c + js + x + E + e + t, 1, c + yc + x + E + e + t, 1, c + bc + x + E + e + t, 1, c + Df + x + E + e + t, 1, c + $d + x + E + e + t, 1, c + Xd + x + E + e + t, 1, c + Lu + x + E + e + t, 1, c + Va + x + E + e + t, 1, c + Us + x + E + e + t, 1, c + qs + x + E + e + t, 1, c + fa + x + E + e + t, 1, c + zs + x + E + e + t, 1, c + da + x + E + e + t, 1, c + Sl + x + E + e + t, 1, c + Ha + x + E + e + t, 1, c + Ql + x + E + e + t, 1, c + xc + x + E + e + t, 1, c + If + x + E + e + t, 1, c + Ms + x + E + e + t, 1, c + ja + x + E + e + t, 1, c + Xl + x + E + e + t, 41, c + Jl + Z + x + E + e + t, 1, c + Mu + Z + x + E + e + t, 1, c + kc + Z + x + E + e + t, 1, c + Cu + Z + x + E + e + t, 1, c + Ka + Z + x + E + e + t, 1, c + Cl + Z + x + E + e + t, 1, c + Ya + Z + x + E + e + t, 1, c + Eu + Z + x + E + e + t, 1, c + Su + Z + x + E + e + t, 1, c + ku + Z + x + E + e + t, 1, c + za + Z + x + E + e + t, 1, c + Ua + Z + x + E + e + t, 1, c + qa + Z + x + E + e + t, 1, c + Za + Z + x + E + e + t, 1, c + ua + Z + x + E + e + t, 1, c + ha + Z + x + E + e + t, 1, c + yi + Z + x + E + e + t, 1, c + Xr + Z + x + E + e + t, 1, c + Vr + Z + x + E + e + t, 1, c + Tr + Z + x + E + e + t, 1, c + Qr + Z + x + E + e + t, 1, c + Ai + Z + x + E + e + t, 1, c + Es + Z + x + E + e + t, 1, c + Wa + Z + x + E + e + t, 1, c + Fa + Z + x + E + e + t, 1, c + El + Z + x + E + e + t, 1, c + Of + Z + x + E + e + t, 1, c + Qi + Z + x + E + e + t, 1, c + vo + Z + x + E + e + t, 1, c + Ll + Z + x + E + e + t, 1, c + xu + Z + x + E + e + t, 1, c + Gi + Z + x + E + e + t, 1, c + bo + Z + x + E + e + t, 1, c + ca + Z + x + E + e + t, 1, c + Go + Z + x + E + e + t, 1, c + Fs + Z + x + E + e + t, 1, c + wo + Z + x + E + e + t, 1, c + Xi + Z + x + E + e + t, 1, c + Ni + Z + x + E + e + t, 1, c + js + Z + x + E + e + t, 1, c + yc + Z + x + E + e + t, 1, c + bc + Z + x + E + e + t, 1, c + Df + Z + x + E + e + t, 1, c + $d + Z + x + E + e + t, 1, c + Xd + Z + x + E + e + t, 1, c + Lu + Z + x + E + e + t, 1, c + Va + Z + x + E + e + t, 1, c + Us + Z + x + E + e + t, 1, c + qs + Z + x + E + e + t, 1, c + fa + Z + x + E + e + t, 1, c + zs + Z + x + E + e + t, 1, c + da + Z + x + E + e + t, 1, c + Sl + Z + x + E + e + t, 1, c + Ha + Z + x + E + e + t, 1, c + Ql + Z + x + E + e + t, 1, c + xc + Z + x + E + e + t, 1, c + If + Z + x + E + e + t, 1, c + Ms + Z + x + E + e + t, 1, c + ja + Z + x + E + e + t, 1, c + Xl + Z + x + E + e + t, 41, c + Jl + M + e + t, 1, c + Mu + M + e + t, 1, c + kc + M + e + t, 1, c + Cu + M + e + t, 1, c + Ka + M + e + t, 1, c + Cl + M + e + t, 1, c + Ya + M + e + t, 1, c + Eu + M + e + t, 1, c + Su + M + e + t, 1, c + ku + M + e + t, 1, c + za + M + e + t, 1, c + Ua + M + e + t, 1, c + qa + M + e + t, 1, c + Za + M + e + t, 1, c + ua + M + e + t, 1, c + ha + M + e + t, 1, c + yi + M + e + t, 1, c + Xr + M + e + t, 1, c + Vr + M + e + t, 1, c + Tr + M + e + t, 1, c + Qr + M + e + t, 1, c + Ai + M + e + t, 1, c + Es + M + e + t, 1, c + Wa + M + e + t, 1, c + Fa + M + e + t, 1, c + El + M + e + t, 1, c + Of + M + e + t, 1, c + Qi + M + e + t, 1, c + vo + M + e + t, 1, c + Ll + M + e + t, 1, c + xu + M + e + t, 1, c + Gi + M + e + t, 1, c + bo + M + e + t, 1, c + ca + M + e + t, 1, c + Go + M + e + t, 1, c + Fs + M + e + t, 1, c + wo + M + e + t, 1, c + Xi + M + e + t, 1, c + Ni + M + e + t, 1, c + js + M + e + t, 1, c + yc + M + e + t, 1, c + bc + M + e + t, 1, c + Df + M + e + t, 1, c + $d + M + e + t, 1, c + Xd + M + e + t, 1, c + Lu + M + e + t, 1, c + Va + M + e + t, 1, c + Us + M + e + t, 1, c + qs + M + e + t, 1, c + fa + M + e + t, 1, c + zs + M + e + t, 1, c + da + M + e + t, 1, c + Sl + M + e + t, 1, c + Ha + M + e + t, 1, c + Ql + M + e + t, 1, c + xc + M + e + t, 1, c + If + M + e + t, 1, c + Ms + M + e + t, 1, c + ja + M + e + t, 1, c + Xl + M + e + t, 1, _n + $i + A0 + qr + wc + Cn + yr + M + e + t, 3, i + h + _l + Me + q + u + M + d + t, 1, i + h + Ip + Me + q + u + M + d + t, 1, i + h + pl + Me + q + u + M + d + t, 1, i + h + zn + Me + q + u + M + d + t, 34, c + Jl + Z + M + e + t, 1, c + Mu + Z + M + e + t, 1, c + kc + Z + M + e + t, 1, c + Cu + Z + M + e + t, 1, c + Ka + Z + M + e + t, 1, c + Cl + Z + M + e + t, 1, c + Ya + Z + M + e + t, 1, c + Eu + Z + M + e + t, 1, c + Su + Z + M + e + t, 1, c + ku + Z + M + e + t, 1, c + za + Z + M + e + t, 1, c + Ua + Z + M + e + t, 1, c + qa + Z + M + e + t, 1, c + Za + Z + M + e + t, 1, c + ua + Z + M + e + t, 1, c + ha + Z + M + e + t, 1, c + yi + Z + M + e + t, 1, c + Xr + Z + M + e + t, 1, c + Vr + Z + M + e + t, 1, c + Tr + Z + M + e + t, 1, c + Qr + Z + M + e + t, 1, c + Ai + Z + M + e + t, 1, c + Es + Z + M + e + t, 1, c + Wa + Z + M + e + t, 1, c + Fa + Z + M + e + t, 1, c + El + Z + M + e + t, 1, c + Of + Z + M + e + t, 1, c + Qi + Z + M + e + t, 1, c + vo + Z + M + e + t, 1, c + Ll + Z + M + e + t, 1, c + xu + Z + M + e + t, 1, c + Gi + Z + M + e + t, 1, c + bo + Z + M + e + t, 1, c + ca + Z + M + e + t, 1, c + Go + Z + M + e + t, 1, c + Fs + Z + M + e + t, 1, c + wo + Z + M + e + t, 1, c + Xi + Z + M + e + t, 1, c + Ni + Z + M + e + t, 1, c + js + Z + M + e + t, 1, c + yc + Z + M + e + t, 1, c + bc + Z + M + e + t, 1, c + Df + Z + M + e + t, 1, c + $d + Z + M + e + t, 1, c + Xd + Z + M + e + t, 1, c + Lu + Z + M + e + t, 1, c + Va + Z + M + e + t, 1, c + Us + Z + M + e + t, 1, c + qs + Z + M + e + t, 1, c + fa + Z + M + e + t, 1, c + zs + Z + M + e + t, 1, c + da + Z + M + e + t, 1, c + Sl + Z + M + e + t, 1, c + Ha + Z + M + e + t, 1, c + Ql + Z + M + e + t, 1, c + xc + Z + M + e + t, 1, c + If + Z + M + e + t, 1, c + Ms + Z + M + e + t, 1, c + ja + Z + M + e + t, 1, c + Xl + Z + M + e + t, 1, _n + K + " +lat_ts=-90" + qr + wc + Cn + yr + M + e + t, 5, i + h + cc + Me + y + kt + M + e + t].reduce((e1, KE, UA) => {
+  const t = " +no_defs", r = " +towgs84=0,0,0,0,0,0,0", n = " +ellps=GRS80", i = "+proj=tmerc", e = " +units=m", s = " +towgs84=23.92,-141.27,-80.9,-0,0.35,0.82,-0.12", l = " +towgs84=24.47,-130.89,-81.56,-0,-0,0.13,-0.22", a = "+proj=lcc", c = "+proj=utm", d = " +units=us-ft", p = "+proj=longlat", h = " +lat_0=0", _ = " +ellps=krass", u = " +y_0=0", y = " +x_0=500000", A = " +towgs84=0,0,4.5,0,0,0.554,0.2263", E = " +towgs84=0,0,1.9,0,0,0.814,-0.38", b = " +ellps=intl", M = " +datum=WGS84", x = " +ellps=WGS72", C = " +towgs84=15.8,-154.4,-82.3,0,0,0,0", m = " +k=0.9999", S = " +towgs84=59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993", w = " +datum=NAD27", O = " +ellps=bessel", B = " +x_0=609601.2192024384", D = " +x_0=600000", U = " +towgs84=33.4,-146.6,-76.3,-0.359,-0.053,0.844,-0.84", N = " +ellps=clrk80", Y = " +b=6356755.288157528", X = " +x_0=152400.3048006096", Q = " +lat_0=36.66666666666666", rt = " +towgs84=-146.414,507.337,680.507,0,0,0,0", ot = " +x_0=200000", F = " +ellps=clrk66", W = " +ellps=WGS84", q = " +x_0=500000.001016002", j = " +x_0=240000", K = " +lat_0=-90", ut = " +towgs84=-87,-98,-121,0,0,0,0", Z = " +south", pt = " +lat_0=41.66666666666666", nt = " +y_0=36000", V = " +towgs84=-117.808,-51.536,137.784,0.303,0.446,0.234,-0.29", z = " +x_0=0", ct = " +units=ft", H = " +x_0=400000", et = " +towgs84=-115.854,-99.0583,-152.462,0,0,0,0", ft = " +towgs84=-208.406,-109.878,-2.5764,0,0,0,0", bt = " +ellps=aust_SA", Dt = " +lat_0=39.33333333333334", qt = " +towgs84=577.326,90.129,463.919,5.137,1.474,5.297,2.4232", Ft = " +lat_0=37.66666666666666", Jt = " +lat_0=36.33333333333334", ve = " +towgs84=598.1,73.7,418.2,0.202,0.045,-2.455,6.7", ne = " +y_0=500000.0001016001", Ht = " +x_0=200000.0001016002", ge = " +x_0=500000.0001016001", Ie = " +x_0=500000.00001016", Ee = " +y_0=1000000", xe = " +x_0=300000", he = " +lon_0=-120.5", rn = " +lat_0=43.66666666666666", Ve = " +lat_0=43.83333333333334", Ue = " +lat_1=-68.66666666666667", on = " +lat_2=-71.33333333333333", Pe = " +k=0.999966667", Me = " +k=0.9996", kn = " +lat_0=38.33333333333334", Sn = " +lat_1=73.66666666666667", Ln = " +lat_2=70.33333333333333", sn = " +lat_0=72.02500919444445", Ke = " +a=6378249.2", ze = " +x_0=1500000", An = " +lat_ts=-80.23861111111111", wr = " +towgs84=-288,175,-376,0,0,0,0", Qn = " +lat_1=41.78333333333333", Dn = " +lat_2=-75.33333333333333", xr = " +towgs84=278.3,93,474.5,7.889,0.05,-6.61,6.21", Re = " +x_0=304800", $e = " +x_0=2000000.0001016", an = " +k=0.9999375", He = " +y_0=500000", De = " +towgs84=-209.362,-87.8162,404.62,0.0046,3.4784,0.5805,-1.4547", gn = " +lon_0=-100.3333333333333", ht = " +lat_1=-72.66666666666667", gt = " +lat_1=-76.66666666666667", vt = " +lat_2=-79.33333333333333", kt = " +y_0=10000000", Tt = " +towgs84=-57,1,-41,0,0,0,0", st = " +k=0.999941177", $ = " +x_0=800000.0000101599", lt = " +y_0=99999.99998983997", wt = " +lat_1=38.43333333333333", Et = " +lat_0=24.33333333333333", Bt = " +towgs84=26,-121,-78,0,0,0,0", Ct = " +a=6378140", At = " +towgs84=-96.062,-82.428,-121.753,4.801,0.345,-1.376,1.496", St = " +x_0=399999.99998984", jt = " +towgs84=-24,-15,5,0,0,0,0", Ut = " +towgs84=682,-203,480,0,0,0,0", re = " +towgs84=-136,-108,-292,0,0,0,0", Wt = " +b=6356075.41314024", Xt = " +lat_1=37.96666666666667", ee = " +lat_0=38.83333333333334", ye = " +lat_0=40.16666666666666", ke = " +lat_0=34.33333333333334", we = " +lat_0=42.83333333333334", $t = " +lon_0=-84.36666666666666", _e = " +x_0=300000.0000000001", fe = " +k=0.999933333", Le = " +lat_1=48.73333333333333", ae = " +lon_0=-111.5", Te = " +k=0.9999473679999999", me = " +towgs84=-67.35,3.88,-38.22,0,0,0,0", en = " +lat_2=73.66666666666667", ln = " +lat_0=75.36440330555556", le = " +b=6356515", je = " +towgs84=25,-141,-78.5,-0,0.35,0.736,0", _n = "+proj=stere", Fn = " +lat_1=-64.66666666666667", nr = " +lat_2=-67.33333333333333", ar = " +b=6356514.966398753", Ae = " +towgs84=295,736,257,0,0,0,0", Be = " +x_0=100000", mn = " +towgs84=-11,851,5,0,0,0,0", yn = " +towgs84=414.1,41.3,603.1,-0.855,2.141,-7.023,0", Xe = " +towgs84=-127.62,-67.24,-47.04,-3.068,4.903,1.578,-1.06", cr = " +lat_0=39.66666666666666", Ye = " +x_0=1000000", Qe = " +lon_0=-105.5", dn = " +towgs84=482.5,-130.6,564.6,-1.042,-0.214,-0.631,8.15", Mn = " +a=6378249.145", Cn = " +x_0=2000000", Br = " +lat_0=45.66666666666666", ei = " +lat_1=80.33333333333333", Or = " +lat_0=78.70733752777778", Nr = " +b=6356774.50408554", Zr = " +lon_0=-91.33333333333333", ni = " +lon_0=-123.3333333333333", ji = " +towgs84=-168,-60,320,0,0,0,0", nn = " +lat_0=31", Fi = " +towgs84=0.072,-0.507,-0.245,-0.0183,0.0003,-0.007,-0.0093", Nn = " +x_0=150000", qn = " +x_0=3500000", nl = " +towgs84=213.11,9.37,-74.95,0,0,0,0", Ne = " +lat_1=43.66666666666666", kr = " +lat_0=40.33333333333334", vn = " +towgs84=-148,136,90,0,0,0,0", as = " +towgs84=616,97,-251,0,0,0,0", On = " +lon_0=-90", Hn = " +x_0=250000", ai = " +x_0=914401.8288036576", ri = " +lon_0=-90.33333333333333", Gr = " +a=6377276.345", li = " +b=6356103.038993155", cn = " +lat_0=40.5", di = " +towgs84=-134,-48,149,0,0,0,0", ga = " +towgs84=25,-141,-78.5,0,0.35,0.736,0", qo = " +lat_1=27.83333333333333", Es = " +lat_2=26.16666666666667", Ho = " +lat_2=40.71666666666667", oo = " +lat_2=39.01666666666667", Co = " +lat_2=37.21666666666667", Zo = " +lat_1=70.33333333333333", Ze = " +lat_0=68.68747555555557", tu = " +towgs84=-104.1,-49.1,-9.9,0.971,-2.917,0.714,-11.68", pn = " +y_0=304800.6096012192", ui = " +x_0=699999.9998983998", zi = " +y_0=999999.9998983998", _r = " +y_0=800000", Bn = " +k=0.99995", jr = " +lat_0=34.75", zn = " +lon_0=-81", fr = " +lon_0=-100", Wo = " +b=6356098.145120132", Jn = "+proj=omerc", Fr = " +lon_0=-98.5", Cr = " +towgs84=-103.746,-9.614,-255.95,0,0,0,0", Lr = " +x_0=800000", ls = " +lat_0=37.83333333333334", Kr = " +lat_2=44.33333333333334", us = " +lat_2=42.33333333333334", hs = " +lat_0=29.66666666666667", Po = " +lat_0=25.66666666666667", Ys = " +lat_0=35.83333333333334", cs = " +lat_1=83.66666666666667", Vo = " +lat_2=80.33333333333333", $s = " +lat_0=82.05842488888888", bn = " +lat_0=38", Gn = " +x_0=2500000", va = " +towgs84=-377,681,-50,0,0,0,0", lr = "+proj=cass", yr = " +y_0=2000000", Ri = " +towgs84=-143,-236,7,0,0,0,0", Ir = " +lon_0=-110.1666666666667", ya = " +lon_0=-111.9166666666667", Ui = " +lon_0=-75.41666666666667", dr = " +lon_0=-82.16666666666667", pi = " +lon_0=-84.16666666666667", fs = " +lon_0=-112.1666666666667", ds = " +lon_0=-88.83333333333333", Ko = " +lon_0=-104.3333333333333", hi = " +lon_0=-107.8333333333333", Di = " +lon_0=-76.58333333333333", ps = " +lon_0=-78.58333333333333", _s = " +lon_0=-120.8333333333333", Ss = " +lon_0=-88.33333333333333", pr = " +lon_0=-90.16666666666667", bi = " +lon_0=-85.66666666666667", ba = " +lon_0=-87.08333333333333", zr = " +lon_0=-70.16666666666667", wa = " +lon_0=-93.09999999999999", wi = " +lon_0=-115.5833333333333", xa = " +lon_0=-116.6666666666667", qi = " +lon_0=-118.5833333333333", Yo = " +lon_0=-71.66666666666667", so = " +lon_0=-105.1666666666667", ka = " +lon_0=-107.3333333333333", Yr = " +lon_0=-110.0833333333333", Zn = " +lat_0=37.5", Rr = " +y_0=700000", Xs = " +towgs84=-242.2,-144.9,370.3,0,0,0,0", Pr = " +x_0=4500000", Wn = " +y_0=1500000", ms = " +x_0=599999.9999976", to = " +towgs84=-275.722,94.7824,340.894,-8.001,-4.42,-11.821,1", ur = "+proj=aea", rr = " +y_0=-2500000", ao = " +lat_2=38.96666666666667", Cs = " +lat_1=41.66666666666666", To = " +lat_1=39.83333333333334", lo = " +lat_2=38.33333333333334", Ao = " +lat_2=37.06666666666667", uo = " +lat_0=35.33333333333334", xi = " +lat_1=35.46666666666667", ho = " +lat_2=34.03333333333333", Oo = " +lat_1=33.88333333333333", $o = " +lat_2=32.78333333333333", Qs = " +lat_0=32.16666666666666", Hi = " +lat_2=37.23333333333333", La = " +lat_1=41.86666666666667", Io = " +lat_0=40.83333333333334", Js = " +lat_2=29.58333333333333", Ps = " +lat_2=41.71666666666667", Ma = " +lat_1=41.03333333333333", Ur = " +lat_2=40.66666666666666", ki = " +lat_1=36.76666666666667", Ea = " +lat_0=33.33333333333334", co = " +lat_1=40.96666666666667", Sa = " +lat_2=39.93333333333333", Ts = " +lat_0=31.83333333333333", Ca = " +lat_0=31.66666666666667", Zi = " +lat_0=27.83333333333333", Pa = " +lat_2=36.76666666666667", Li = " +lat_0=45.33333333333334", gs = " +lat_0=45.16666666666666", Xo = " +lat_1=36.23333333333333", Ta = " +lat_2=34.93333333333333", Wr = " +lat_1=34.76666666666667", vs = " +lat_0=32.66666666666666", Qo = " +lat_1=43.26666666666667", Wi = " +lat_2=42.06666666666667", Aa = " +lat_2=40.61666666666667", Vi = " +lat_1=39.78333333333333", Dr = " +lat_2=38.71666666666667", $r = " +lat_1=38.56666666666667", ys = " +lat_2=37.26666666666667", Mi = " +lat_0=41.08333333333334", En = " +lat_0=42.33333333333334", Mr = " +y_0=100000", fo = " +b=6356173.508712696", br = " +y_0=5500000", Pn = " +lon_0=105", gi = " +y_0=-5000000", ii = " +k=0.9995000000000001", oi = " +k=0.9999749999999999", Jo = " +towgs84=-160,-6,-302,0,0,0,0", o = " +towgs84=307,304,-318,0,0,0,0", f = " +lon_0=-82.5", g = " +towgs84=70.995,-335.916,262.898,0,0,0,0", P = " +towgs84=-304.046,-60.576,103.64,0,0,0,0", R = " +x_0=700000", J = " +x_0=213360", dt = " +lon_0=-85.75", Lt = " +lon_0=-100.5", Rt = " +lon_0=-77.75", Vt = " +x_0=999999.9999898402", be = " +towgs84=-151.99,287.04,-147.45,0,0,0,0", Se = " +lon_0=129", qe = " +a=6378293.645208759", Vn = " +b=6356617.987679838", xn = " +x_0=5500000", mr = " +lat_1=40.78333333333333", jn = " +lat_2=39.71666666666667", ci = " +lat_1=37.93333333333333", ta = " +lat_2=36.73333333333333", As = " +lat_1=42.68333333333333", Oa = " +lat_1=41.48333333333333", ts = " +lat_2=41.28333333333333", rl = " +lat_1=47.08333333333334", ea = " +lat_2=45.48333333333333", Tn = " +lat_0=44.78333333333333", po = " +lat_2=44.18333333333333", il = " +lat_0=43.31666666666667", Ki = " +lat_1=36.16666666666666", ol = " +lat_2=34.33333333333334", _o = " +lat_2=47.43333333333333", Os = " +lat_1=47.48333333333333", sl = " +lat_2=46.18333333333333", Gu = " +lat_2=35.56666666666667", xh = " +lat_1=35.23333333333333", ju = " +lat_2=33.93333333333333", kh = " +lat_2=40.88333333333333", Lh = " +lat_1=34.83333333333334", Mh = " +lat_1=36.41666666666666", al = " +lat_1=36.18333333333333", Il = " +lat_1=33.96666666666667", Eh = " +lat_2=32.13333333333333", Sh = " +lat_1=31.88333333333333", Rl = " +lat_2=30.11666666666667", Dl = " +lat_1=30.28333333333333", Fu = " +lat_2=28.38333333333333", Ch = " +lat_2=38.03333333333333", Ph = " +lat_1=47.33333333333334", zu = " +lat_2=45.83333333333334", Uu = " +lat_1=46.76666666666667", Th = " +lat_2=45.56666666666667", Ah = " +lat_1=44.06666666666667", qu = " +lat_2=42.73333333333333", Oh = " +lat_1=32.66666666666666", Ih = " +lat_2=31.16666666666667", Rh = " +lat_1=48.63333333333333", Dh = " +lat_2=47.03333333333333", Bh = " +lat_2=45.61666666666667", Nh = " +lat_1=45.21666666666667", Hu = " +lat_2=43.78333333333333", Ia = " +lat_0=39.83333333333334", Bl = " +lat_2=40.43333333333333", Gh = " +lat_1=40.03333333333333", jh = " +lat_2=38.73333333333333", Fh = " +lat_1=45.68333333333333", _i = " +lat_2=44.41666666666666", Is = " +lat_2=42.83333333333334", zh = " +lat_1=38.88333333333333", Uh = " +lat_2=37.48333333333333", eu = " +lat_1=37.08333333333334", qh = " +lat_2=38.66666666666666", Er = " +lat_0=58", si = " +lon_0=-98", v = " +lon_0=117", k = " +lon_0=135", T = " +lat_0=41.5", I = " +lat_0=42.5", G = " +y_0=3000000", tt = " +lon_0=123", it = " +lat_0=40", at = " +lat_0=54", mt = " +towgs84=-192.873,-39.382,-111.202,-0.00205,-0.0005,0.00335,0.0188", yt = " +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725", zt = " +x_0=914401.8289", Nt = " +y_0=304800.6096", ie = " +lon_0=111", pe = " +k_0=0.99878641", Oe = " +lon_0=-66.43333333333334", We = " +towgs84=61,-285,-181,0,0,0,0", un = " +towgs84=-133,-77,-51,0,0,0,0", ir = " +towgs84=-679,669,-48,0,0,0,0", Gt = " +lon_0=-71.5", Zt = " +lon_0=-78.5", Qt = " +lon_0=-93.5", ce = " +lat_0=41.75", oe = " +y_0=249999.9998983998", de = " +y_0=999999.9999898402", _t = " +to_meter=1.0000135965", xt = " +a=6377304.063", Mt = " +lat_0=36", Pt = " +towgs84=-79.9,-158,-168.9,0,0,0,0", Ot = " +towgs84=-50.9,-347.6,-231,0,0,0,0", It = " +towgs84=-106.869,52.2978,-103.724,0.3366,-0.457,1.8422,-1.2747", Yt = " +towgs84=283,682,231,0,0,0,0", Kt = " +towgs84=-206,172,-6,0,0,0,0", te = " +towgs84=-92,-93,122,0,0,0,0", ue = " +to_meter=0.9143985307444408", se = "+proj=sterea", Ce = " +lat_0=21.16666666666667", tn = " +lat_1=18.43333333333333", fn = " +lat_2=18.03333333333333", wn = " +lat_0=17.83333333333333", gr = " +gamma=323.1301023611111", Un = " +lon_0=-79.5", In = " +y_0=4500000", Kn = " +x_0=31500000", vi = " +x_0=500000.0001504", ll = " +b=6356514.96582849", Rc = " +towgs84=674.4,15.1,405.3,0,0,0,0", u0 = " +towgs84=-180.624,-225.516,173.919,-0.81,-1.898,8.336,16.7101", Rs = " +towgs84=589,76,480,0,0,0,0", nu = " +towgs84=-263,6,431,0,0,0,0", hr = " +lon_0=15", Yn = " +axis=wsu", Rn = " +lon_0=21", fi = " +lat_0=30", Nl = " +ellps=helmert", Gl = " +a=6377299.151", na = " +lon_0=-74.5", Hf = " +b=6356750.304921594", Zf = " +y_0=2000000.0001016", Wf = " +x_0=3500000.0001016", Vf = " +y_0=399999.99998984", Kf = " +x_0=200000.00001016", Yf = " +b=6356098.359005156", ul = " +x_0=14500000", hl = " +x_0=29500000", D1 = " +towgs84=-117,-132,-164,0,0,0,0", Tr = " +zone=20", bs = " +lon_0=-122", Zu = " +ellps=bess_nam", ip = " +lon_0=-86.15000000000001", B1 = " +towgs84=-189,-242,-91,0,0,0,0", N1 = " +towgs84=-265,120,-358,0,0,0,0", Zw = " +towgs84=-73.472,-51.66,-112.482,0.953,4.6,-2.368,0.586", Gm = " +towgs84=-17.51,-108.32,-62.39,0,0,0,0", jm = " +towgs84=-10.18,-350.43,291.37,0,0,0,0", Fm = " +towgs84=-190.421,8.532,238.69,0,0,0,0", Ra = " +lon_0=-68.5", $f = " +a=6377299.36559538", Xf = " +x_0=79999.99999968", Qf = " +x_0=50000.00001504", qr = " +lon_0=0", Ei = " +lon_0=27", Si = " +lon_0=75", Ci = " +lon_0=81", Pi = " +lon_0=93", Ti = " +lon_0=99", Ds = " +x_0=900000", jl = " +x_0=13500000", Fl = " +x_0=20500000", zl = " +x_0=22500000", G1 = " +towgs84=-166,-15,204,0,0,0,0", j1 = " +towgs84=-130,110,-13,0,0,0,0", zm = " +towgs84=-587.8,519.75,145.76,0,0,0,0", op = " +lat_2=83.66666666666667", sp = " +lat_0=85.43711833333333", Um = " +towgs84=-273.5,110.6,-357.9,0,0,0,0", Bi = " +lon_0=87", ra = "+proj=laea", F1 = " +towgs84=-403,684,41,0,0,0,0", cl = " +lon_0=-92.5", fl = " +y_0=6000000", Vr = " +zone=19", ia = " +lat_0=29.5", oa = " +y_0=300000", sa = " +lat_2=45.5", Wu = " +k=0.999909091", Vu = " +a=6377492.018", h0 = " +b=6356751.689189189", c0 = " +b=6356100.230165384", Yi = " +lon_0=90", $i = " +lat_0=90", ru = " +x_0=18500000", iu = " +x_0=19500000", ou = " +x_0=15500000", su = " +x_0=16500000", au = " +x_0=21500000", lu = " +x_0=23500000", uu = " +x_0=25500000", hu = " +x_0=26500000", cu = " +x_0=27500000", fu = " +x_0=28500000", Xr = " +zone=18", Qr = " +zone=21", qm = " +towgs84=-124.76,53,466.79,0,0,0,0", ws = " +lon_0=-92", eo = " +lon_0=33", no = " +lon_0=12", ro = " +lon_0=24", io = " +lat_2=77", Da = " +y_0=200000", Ul = " +lon_0=-70.5", ql = " +x_0=7500000", Hl = " +y_0=3500000", z1 = " +towgs84=31,146,47,0,0,0,0", mo = " +lat_0=45", go = " +lat_0=26", Bs = " +a=6378160", Ku = " +lon_0=-109.5", Yu = " +x_0=30500000", $u = " +x_0=32500000", U1 = " +lon_0=-85.83333333333333", q1 = " +lon_0=-118.3333333333333", H1 = " +y_0=0.003048006096012192", dl = " +lat_0=30.5", Ro = " +lat_0=44", Do = " +lon_0=30", Bo = " +lat_0=47", No = " +lat_1=77", Z1 = " +lat_0=36.16666666666666", W1 = " +lat_0=4.596200416666666", V1 = " +gamma=53.13010236111111", K1 = " +lon_0=13.33333333333333", Y1 = " +lat_0=81.31722600000001", $1 = " +lat_0=73.15574086111111", X1 = " +lat_0=65.10127088888888", yi = " +zone=17", aa = " +lon_0=132", la = " +lon_0=114", Hm = " +towgs84=-143,-90,-294,0,0,0,0", Ai = " +zone=22", es = " +lat_0=41", Zl = " +lat_0=46.5", Wl = " +lon_0=-118", Vl = " +y_0=400000", Hh = " +x_0=17500000", Zh = " +x_0=33500000", Dc = " +lon_0=-113.75", Bc = " +lon_0=-116.25", Nc = " +lon_0=-115.75", Gc = " +lon_0=-106.25", jc = " +k=0.999916667", Fc = " +k=0.999964286", zc = " +lon_0=-108.75", Zm = " +towgs84=-73,-247,227,0,0,0,0", Ww = " +towgs84=265.025,384.929,-194.046,0,0,0,0", Ba = " +k=0.99998", Xu = " +lat_1=40.65", Qu = " +lat_1=38.35", Ju = " +y_0=2500000", th = " +y_0=6500000", ap = " +x_0=39999.99999984", Vw = " +towgs84=-61.702,284.488,472.052,0,0,0,0", Kw = " +towgs84=-223.237,110.193,36.649,0,0,0,0", Ni = " +zone=39", Gi = " +zone=32", Wm = " +towgs84=-125,53,467,0,0,0,0", Vm = " +towgs84=198,881,317,0,0,0,0", Km = " +towgs84=214,804,268,0,0,0,0", Ym = " +towgs84=217,823,299,0,0,0,0", xs = " +lon_0=45", ks = " +lat_1=43", du = "+proj=merc", Q1 = " +x_0=99999.99998983997", J1 = " +x_0=99999.99999960001", t_ = " +x_0=2743195.592233322", e_ = " +y_0=914398.5307444407", Xi = " +zone=38", Qi = " +zone=28", pu = " +lon_0=-114", _u = " +lat_1=45.5", $m = " +towgs84=-73,46,-86,0,0,0,0", Xm = " +towgs84=11,72,-101,0,0,0,0", Yw = " +towgs84=287.58,177.78,-135.41,0,0,0,0", k5 = " +towgs84=-162.619,-276.959,-161.764,0.067753,-2.24365,-1.15883,-1.09425", pl = " +lon_0=-87", _l = " +lon_0=-99", ml = " +lon_0=102", gl = " +lon_0=126", vl = " +k=0.99999", yl = " +x_0=50000", Ns = " +lat_2=40", Uc = " +lon_0=-84.25", qc = " +x_0=11500000", Hc = " +lon_0=-72.75", Zc = " +lon_0=-101.5", Wc = " +lon_0=-94.25", Wh = " +x_0=6500000", Vh = " +y_0=5000000", Kh = " +x_0=1700000", $w = " +towgs84=31.95,300.99,419.19,0,0,0,0", L5 = " +towgs84=-189.681,18.3463,-42.7695,-0.33746,-3.09264,2.53861,0.4598", M5 = " +towgs84=-119.425,-303.659,-11.0006,1.1643,0.174458,1.09626,3.65706", E5 = " +towgs84=982.609,552.753,-540.873,6.68163,-31.6115,-19.8482,16.805", vo = " +zone=29", yo = " +lon_0=9", bo = " +zone=33", wo = " +zone=37", xo = " +no_uoff", Kl = " +lon_0=120", Yl = " +lon_0=177", eh = " +lon_0=-177", nh = " +lon_0=-158", rh = " +y_0=250000", ih = " +lon_0=-111", n_ = " +x_0=2500000.0001424", r_ = " +x_0=1500000.0001464", Qm = " +lon_0=-71.60561777777777", Jm = " +lon_0=-156.6666666666667", tg = " +lon_0=-160.1666666666667", eg = " +lat_0=0.1166666666666667", ng = " +towgs84=0,0,0,-0,-0,-0,0", rg = " +lon_0=-117.8333333333333", ig = " +lon_0=-123.1666666666667", og = " +lon_0=-122.3333333333333", sg = " +lon_0=-119.1666666666667", ag = " +lon_0=-123.0833333333333", lg = " +lon_0=-85.84999999999999", ug = " +lon_0=-87.09999999999999", hg = " +lon_0=-86.90000000000001", cg = " +lon_0=-89.24166666666667", fg = " +lon_0=-92.63333333333334", S5 = " +towgs84=347.103,1078.12,2623.92,-33.8875,70.6773,-9.3943,186.074", C5 = " +towgs84=8.846,-4.394,-1.122,-0.00237,-0.146528,0.130428,0.783926", P5 = " +towgs84=-480.26,-438.32,-643.429,16.3119,20.1721,-4.0349,-111.7", T5 = " +towgs84=-0.293,766.95,87.713,0.195704,1.69507,3.47302,-0.039338", A5 = " +towgs84=221.525,152.948,176.768,-2.3847,-1.3896,-0.877,11.4741", O5 = " +towgs84=215.525,149.593,176.229,-3.2624,-1.692,-1.1571,10.4773", Go = " +zone=35", dg = " +lat_0=46.95240555555556", pg = " +alpha=30.28813972222222", _g = " +lat_1=10.16666666666667", mg = " +lat_0=10.16666666666667", gg = " +lat_0=18.83333333333333", vg = " +lat_0=20.33333333333333", yg = " +lat_0=21.83333333333333", bg = " +lat_0=21.66666666666667", wg = " +lat_0=45.30916666666666", xg = " +lat_1=49.83333333333334", kg = " +lat_2=51.16666666666666", Lg = " +lonc=-133.6666666666667", Mg = " +alpha=323.1301023611111", Eg = " +lat_1=53.83333333333334", Sg = " +lat_2=51.83333333333334", Cg = " +lat_1=44.66666666666666", Pg = " +lat_0=44.66666666666666", Tg = " +lat_1=45.66666666666666", Ag = " +lat_0=45.91666666666666", Og = " +lat_0=45.08333333333334", Ig = " +lat_0=44.33333333333334", Rg = " +lat_0=44.08333333333334", Dg = " +lat_1=48.33333333333334", Bg = " +lat_0=48.33333333333334", Ng = " +lat_0=31.73409694444445", Gg = " +lon_0=35.21208055555556", jg = " +lat_0=44.03611111111111", Fg = " +lat_0=4.599047222222222", zg = " +lat_0=40.66666666666666", Na = " +lat_1=49", Ga = " +lon_0=39", Vc = " +lat_1=37.25", Kc = " +lat_1=39.75", Yc = " +lat_2=38.45", $c = " +lat_1=30.75", Xc = " +lon_0=-84.5", Qc = " +lat_0=33.75", Jc = " +x_0=4000000", tf = " +y_0=4000000", ef = " +lon_0=-72.5", nf = " +x_0=5000000", Jf = " +x_0=10500000", td = " +x_0=12500000", ed = " +x_0=24500000", nd = " +k=0.99999375", i_ = " +x_0=399999.9999984", mu = " +lon_0=-77", gu = " +lon_0=108", vu = " +lon_0=171", I5 = " +towgs84=-179.483,-69.379,-27.584,-7.862,8.163,6.042,-13.925", Yh = " +lon_0=-171", $h = " +lat_0=32.5", Xh = " +lon_0=-117", Qh = " +k=1.000015", Jh = " +k=1.000034", tc = " +k=1.000031", ec = " +k=1.000026", f0 = " +ellps=evrstSS", d0 = " +a=6377301.243", R5 = " +towgs84=410.721,55.049,80.746,2.5779,2.3514,0.6664,17.3311", D5 = " +towgs84=72.438,345.918,79.486,1.6045,0.8823,0.5565,1.3746", bl = " +pm=ferro", wl = " +lon_0=78", xl = " +lon_0=10", kl = " +pm=paris", B5 = " +towgs84=0.055,-0.541,-0.185,0.0183,-0.0003,-0.007,-0.014", N5 = " +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489", G5 = " +towgs84=8.853,-52.644,180.304,-0.393,-2.323,2.96,-24.081", j5 = " +towgs84=572.213,85.334,461.94,4.9732,1.529,5.2484,3.5378", Ls = " +zone=58", Ms = " +zone=23", Ug = " +x_0=304800.6096012192", qg = " +y_0=152400.3048006096", Hg = " +x_0=800000.0001016001", Zg = " +x_0=399999.9998983998", Wg = " +x_0=7999999.999968001", Vg = " +x_0=5999999.999976001", Kg = " +x_0=830000.0001016001", Yg = " +x_0=249999.9998983998", $g = " +x_0=350000.0001016001", Xg = " +to_meter=0.3047972654", Qg = " +x_0=99999.99989839978", Jg = " +y_0=8000000.000010163", tv = " +x_0=699999.9999898402", oh = " +lon_0=-69", sh = " +lon_0=-86", Xw = " +towgs84=-3.2,-5.7,2.8,0,0,0,0", rd = " +x_0=8500000", id = " +x_0=9500000", od = " +lat_1=39.45", sd = " +lat_0=44.25", ad = " +lat_1=41.95", ld = " +lat_2=35.25", ud = " +lat_2=34.65", hd = " +lat_2=44.25", cd = " +lat_1=47.05", fd = " +lat_1=40.25", dd = " +k_0=1.00012", pd = " +lat_0=40.25", Gs = " +zone=40", js = " +zone=36", Fs = " +zone=51", zs = " +zone=48", Us = " +zone=49", $l = " +lon_0=96", rf = " +y_0=750000", of = " +lat_0=36.5", sf = " +lon_0=-119", af = " +lat_0=33.5", lf = " +lat_2=41.2", uf = " +k=0.999995", hf = " +lat_2=33.3", cf = " +lat_0=38.5", ff = " +lon_0=-154", df = " +lon_0=-120", p0 = " +x_0=34500000", _0 = " +x_0=35500000", m0 = " +x_0=36500000", g0 = " +x_0=37500000", v0 = " +x_0=38500000", y0 = " +x_0=39500000", b0 = " +x_0=40500000", w0 = " +x_0=41500000", x0 = " +x_0=43500000", k0 = " +x_0=45500000", ev = " +y_0=3999999.99998984", nv = " +y_0=2000000.00001016", Qw = " +towgs84=164,138,-189,0,0,0,0", Jw = " +towgs84=-186,230,110,0,0,0,0", t3 = " +towgs84=-199,32,322,0,0,0,0", e3 = " +to_meter=0.3047997101815088", n3 = " +towgs84=-76,-138,67,0,0,0,0", r3 = " +towgs84=-43,-163,45,0,0,0,0", i3 = " +towgs84=-346,-1,224,0,0,0,0", o3 = " +towgs84=210,814,289,0,0,0,0", s3 = " +towgs84=-74,-130,42,0,0,0,0", ua = " +zone=15", ha = " +zone=16", ca = " +zone=34", fa = " +zone=50", da = " +zone=52", nc = " +lon_0=-62", rc = " +lon_0=-84", ic = " +lon_0=-79", oc = " +lon_0=131", sc = " +lon_0=153", ac = " +lon_0=165", lc = " +lon_0=-94", uc = " +lon_0=-54", lp = " +a=6378300.789", up = " +b=6356566.435", rv = " +y_0=3999999.9998984", iv = " +y_0=5000000.0001016", ov = " +x_0=150000.00001464", yu = " +lat_2=46", bu = " +lon_0=84", wu = " +lat_0=43", o_ = " +k_0=0.999625769", a3 = " +towgs84=51,391,-36,0,0,0,0", l3 = " +towgs84=-83,37,124,0,0,0,0", u3 = " +towgs84=-355,21,72,0,0,0,0", h3 = " +towgs84=-23,259,-9,0,0,0,0", F5 = " +towgs84=174.05,-25.49,112.57,-0,-0,0.554,0.2263", ja = " +zone=59", Fa = " +zone=25", za = " +zone=11", Ua = " +zone=12", qa = " +zone=13", Ha = " +zone=54", Za = " +zone=14", Wa = " +zone=24", Va = " +zone=47", _d = " +lat_2=38.3", md = " +lat_1=45.7", gd = " +lat_2=42.1", vd = " +x_0=165000", yd = " +lat_2=32.5", bd = " +x_0=609600", wd = " +lat_1=39.2", xd = " +lat_2=47.5", kd = " +lat_1=30.7", Ld = " +lat_2=29.3", Md = " +lat_0=28.5", Ed = " +lat_1=41.7", Sd = " +lat_1=44.4", Cd = " +lat_1=27.5", Pd = " +lon_0=-150", Td = " +lat_0=44.5", Ad = " +k=1.000027", Od = " +k=1.000038", Id = " +k=1.000036", L0 = " +lon_0=-87.5", sv = " +x_0=3999999.999984", av = " +x_0=199999.9999992", c3 = " +towgs84=16,196,93,0,0,0,0", f3 = " +towgs84=-88,4,101,0,0,0,0", ah = " +lat_0=18", lh = " +lat_2=67", pf = " +lon_0=-96", _f = " +x_0=80000", mf = " +lon_0=-82", gf = " +lon_0=-74", vf = " +lon_0=147", yf = " +lon_0=150", bf = " +x_0=40000", wf = " +k=1.00002", hp = " +x_0=42500000", cp = " +x_0=44500000", fp = " +lon_0=-85.05", s_ = " +ellps=mod_airy", p3 = " +lat_0=0.1333333333333333", _3 = " +lat_1=-60.66666666666666", m3 = " +lat_2=-63.33333333333334", g3 = " +lon_0=-91.91666666666667", v3 = " +y_0=0.003352806705613411", Ll = " +zone=30", Ml = " +lon_0=3", El = " +zone=26", Sl = " +zone=53", y3 = " +lat_0=31.73439361111111", b3 = " +lon_0=35.20451694444445", w3 = " +lon_0=7.439583333333333", x3 = " +lon_0=132.1666666666667", k3 = " +lon_0=134.3333333333333", L3 = " +lon_0=137.1666666666667", M3 = " +lon_0=139.8333333333333", E3 = " +lon_0=140.8333333333333", S3 = " +lon_0=3.192280555555556", C3 = " +lat_1=49.50000000000001", P3 = " +lat_0=49.50000000000001", T3 = " +alpha=53.31582047222222", A3 = " +lon_0=10.33333333333333", O3 = " +lon_0=16.33333333333333", z5 = " +towgs84=-502.862,-247.438,312.724,0,0,0,0", U5 = " +towgs84=-381.788,-57.501,-256.673,0,0,0,0", q5 = " +towgs84=-43.685,-179.785,-267.721,0,0,0,0", Xl = " +zone=60", Ql = " +zone=55", hc = " +lon_0=36", cc = " +lon_0=42", fc = " +lat_1=46", dc = " +lat_1=44", pc = " +lat_0=42", _c = " +lon_0=51", mc = " +lat_0=33", gc = " +lat_0=52", M0 = " +ellps=airy", E0 = " +pm=jakarta", a_ = " +x_0=2743195.5", lv = " +y_0=-4354009.816", I3 = " +k_0=0.9987864078000001", H5 = " +towgs84=-106.226,166.366,-37.893,0,0,0,0", Z5 = " +towgs84=508.088,-191.042,565.223,0,0,0,0", Rd = " +k=0.99996", Dd = " +a=6378135", Bd = " +lon_0=-66", Nd = " +lon_0=141", Gd = " +lon_0=159", jd = " +k=0.99984", Fd = " +lat_0=-22", dp = " +lon_0=127.5", pp = " +x_0=6000000", _p = " +x_0=3900000", mp = " +y_0=1300000", gp = " +lat_0=44.75", vp = " +lat_0=37.75", yp = " +lat_0=40.55", bp = " +lon_0=-87.3", wp = " +lon_0=-86.5", W5 = " +towgs84=195.671,332.517,274.607,0,0,0,0", V5 = " +towgs84=-204.619,140.176,55.226,0,0,0,0", l_ = "+proj=somerc", R3 = " +y_0=30480.06096012192", D3 = " +y_0=999999.9999960001", B3 = " +x_0=182880.3657607315", K5 = " +towgs84=674.374,15.056,405.346,0,0,0,0", Y5 = " +towgs84=-133.63,-157.5,-158.62,0,0,0,0", $5 = " +towgs84=-0.465,372.095,171.736,0,0,0,0", X5 = " +towgs84=-56.263,16.136,-22.856,0,0,0,0", Q5 = " +towgs84=-241.54,-163.64,396.06,0,0,0,0", xu = " +zone=31", ku = " +zone=10", Lu = " +zone=46", uv = " +x_0=304800.6096", hv = " +y_0=152400.3048", cv = " +alpha=337.25556", fv = " +x_0=2546731.496", dv = " +gamma=337.25556", pv = " +k_0=0.999625544", J5 = " +towgs84=335.47,222.58,-230.94,0,0,0,0", tL = " +towgs84=217.037,86.959,23.956,0,0,0,0", eL = " +towgs84=-128.16,-282.42,21.93,0,0,0,0", nL = " +towgs84=103.25,-100.4,-307.19,0,0,0,0", xf = " +lon_0=31", kf = " +lon_0=18", Lf = " +lat_2=36", Mf = " +lat_0=29", Ef = " +lat_0=35", Sf = " +lat_0=34", Cf = " +lon_0=63", Pf = " +lat_0=37", Tf = " +lat_2=65", u_ = " +y_0=-4000000", h_ = " +y_0=914398.5", rL = " +towgs84=-199.87,74.79,246.62,0,0,0,0", iL = " +towgs84=-11.64,-348.6,291.98,0,0,0,0", oL = " +towgs84=-254.1,-5.36,-100.29,0,0,0,0", sL = " +towgs84=-206.1,-174.7,-87.7,0,0,0,0", aL = " +towgs84=-770.1,158.4,-498.2,0,0,0,0", lL = " +towgs84=-146.21,112.63,4.05,0,0,0,0", uL = " +towgs84=-294.7,-200.1,525.5,0,0,0,0", uh = " +lat_0=4", S0 = " +a=6378300", C0 = " +lon_0=-63", P0 = " +lon_0=162", T0 = " +lat_ts=90", xp = " +y_0=600000", kp = " +x_0=350000", Lp = " +y_0=900000", Mp = " +lat_1=32.5", Ep = " +lon_0=-147", Sp = " +k=1.000043", Cp = " +lat_0=48.5", Pp = " +lat_0=40.9", Tp = " +k=1.000028", Ap = " +k=1.000025", _v = " +x_0=170251.555", N3 = " +b=6356657.142669561", G3 = " +b=6356094.667915204", j3 = " +b=6355862.933255573", F3 = " +a=6378249.144808011", z3 = " +b=6356514.966204134", hL = " +towgs84=-70.9,-151.8,-41.4,0,0,0,0", cL = " +towgs84=52.17,-71.82,-14.9,0,0,0,0", fL = " +towgs84=283.7,735.9,261.1,0,0,0,0", Ka = " +zone=5", Ya = " +zone=7", zd = " +lon_0=19", Ud = " +lon_0=25", qd = " +lat_2=45", Hd = " +lon_0=57", Zd = " +lon_0=69", Wd = " +lat_2=39", Vd = " +lat_2=35", Kd = " +lon_0=28", c_ = " +lon_0=-61.5", f_ = " +lon_0=-64.5", d_ = " +lon_0=-90.5", p_ = " +lon_0=-94.5", __ = " +y_0=2800000", m_ = " +x_0=4321000", g_ = " +y_0=3210000", v_ = " +y_0=14743.5", U3 = " +y_0=1999999.999992", q3 = " +y_0=2999999.999988", H3 = " +y_0=50000.00001504", vc = " +zone=41", yc = " +zone=42", bc = " +k=0.994", wc = " +zone=56", mv = " +lon_0=-67.875", gv = " +lon_0=-70.375", vv = " +x_0=609601.22", yv = " +b=6356889.449", bv = " +lon_0=-69.125", wv = " +lon_0=-121.75", xv = " +lon_0=-121.25", kv = " +lon_0=-119.75", Lv = " +lon_0=-122.75", Cl = " +zone=6", Mv = "+proj=krovak", dL = " +towgs84=-637,-549,-203,0,0,0,0", pL = " +towgs84=-20.8,11.3,2.4,0,0,0,0", Op = " +lon_0=-93", Ip = " +lon_0=127", Rp = " +lon_0=125", Dp = " +k=0.99975", Bp = " +lon_0=136", Np = " +lon_0=138", Gp = " +lon_0=180", jp = " +y_0=50000", Fp = " +lon_0=-85", zp = " +k=1.00016", Up = " +lon_0=2.7", _L = " +towgs84=27.5,14,186.4,0,0,0,0", mL = " +towgs84=-499,-249,314,0,0,0,0", gL = " +towgs84=-467,-16,-300,0,0,0,0", vL = " +towgs84=-382,-59,-262,0,0,0,0", yL = " +towgs84=253,-132,-127,0,0,0,0", bL = " +towgs84=-963,510,-359,0,0,0,0", wL = " +towgs84=94,-948,-1262,0,0,0,0", Jl = " +zone=1", Af = " +zone=27", Of = " +zone=57", If = " +pm=oslo", Rf = " +zone=43", A0 = " +lon_0=23", O0 = " +lon_0=48", I0 = " +lon_0=54", y_ = " +lat_0=49.5", b_ = " +k=0.999912", w_ = " +lon_0=-174", x_ = " +lon_0=-168", k_ = " +lon_0=-170", L_ = " +lon_0=-165", M_ = " +lat_2=40.5", E_ = " +lon_0=-115", S_ = " +lat_1=29.5", C_ = " +k=1.000045", P_ = " +lat_1=39.5", T_ = " +lat_1=33.3", A_ = " +lat_0=33.3", Ev = " +lon_0=-155.5", Sv = " +lon_0=-159.5", Cv = " +y_0=-4480000", Pv = " +lon_0=-176.5", Tv = " +lon_0=-89.75", Av = " +k_0=1.000008", Ov = " +lonc=-124.05", Iv = " +k_0=1.000002", Rv = " +lon_0=-122.5", Dv = " +lon_0=-98.25", Bv = " +lon_0=-112.5", Nv = " +lon_0=-84.95", Gv = " +lon_0=-86.95", jv = " +lon_0=-85.45", Fv = " +lon_0=-87.45", zv = " +lon_0=-87.55", xL = " +towgs84=-149,128,296,0,0,0,0", kL = " +towgs84=-425,-169,81,0,0,0,0", LL = " +towgs84=-104,167,-38,0,0,0,0", ML = " +towgs84=-106,-87,188,0,0,0,0", EL = " +towgs84=-289,-124,60,0,0,0,0", SL = " +towgs84=137,248,-430,0,0,0,0", CL = " +towgs84=-13,-348,292,0,0,0,0", PL = " +towgs84=-115,118,426,0,0,0,0", TL = " +towgs84=0,-0.15,0.68,0,0,0,0", AL = " +towgs84=145,-187,103,0,0,0,0", OL = " +towgs84=-134,229,-29,0,0,0,0", IL = " +towgs84=70,207,389.5,0,0,0,0", RL = " +towgs84=-148,51,-291,0,0,0,0", DL = " +towgs84=-255,-15,71,0,0,0,0", BL = " +towgs84=725,685,536,0,0,0,0", NL = " +towgs84=72,213.7,93,0,0,0,0", GL = " +towgs84=174,359,365,0,0,0,0", jL = " +towgs84=-173,253,27,0,0,0,0", FL = " +towgs84=-203,141,53,0,0,0,0", zL = " +towgs84=186,482,151,0,0,0,0", UL = " +towgs84=162,117,154,0,0,0,0", qL = " +towgs84=-73,213,296,0,0,0,0", HL = " +towgs84=-130,29,364,0,0,0,0", ZL = " +towgs84=-10,375,165,0,0,0,0", WL = " +towgs84=175,-38,113,0,0,0,0", VL = " +to_meter=0.9143984146160287", Mu = " +zone=2", Eu = " +zone=8", Su = " +zone=9", Cu = " +zone=4", KL = " +towgs84=30,430,368,0,0,0,0", YL = " +towgs84=185,165,42,0,0,0,0", $L = " +towgs84=-97,787,86,0,0,0,0", XL = " +towgs84=639,405,60,0,0,0,0", Yd = " +zone=44", $d = " +zone=45", Uv = " +lon_0=-58.5", qv = " +lon_0=-67.5", Hv = " +lon_0=-73.5", Zv = " +lon_0=-76.5", Wv = " +y_0=1200000", Vv = " +lon_0=133.5", Kv = " +x_0=8000000", Yv = " +y_0=8000000", $v = " +k=0.9998335", Xv = " +lon_0=-85.5", Qv = " +x_0=7000000", Jv = " +lat_0=43.75", ty = " +lat_0=43.25", ey = " +lat_0=45.25", ny = " +lon_0=-86.3", ry = " +lat_0=38.15", iy = " +lat_0=39.15", oy = " +lat_0=41.25", sy = " +lat_0=40.65", ay = " +lat_0=39.25", ly = " +lat_0=40.35", uy = " +lon_0=-85.8", QL = " +towgs84=9,183,236,0,0,0,0", JL = " +towgs84=-48,55,52,0,0,0,0", t8 = " +towgs84=84,274,65,0,0,0,0", qp = " +lon_0=17", Hp = " +lat_1=60", Zp = " +k=0.9998", Wp = " +lon_0=66", Vp = " +lon_0=20", Kp = " +lon_0=26", Yp = " +lat_0=51", $p = " +lat_1=87", Xp = " +lat_1=26", O_ = " +lon_0=144", I_ = " +lon_0=168", R_ = " +lon_0=174", D_ = " +lon_0=-72", B_ = " +lon_0=-75", N_ = " +lon_0=-60", G_ = " +lon_0=-39", hy = "+proj=poly", Z3 = " +x_0=219529.584", W3 = " +a=6378306.3696", e8 = " +lon_0=-61.33333333333334", n8 = " +lon_0=-91.86666666666666", r8 = " +lon_0=-8.131906111111112", i8 = " +lon_0=-83.66666666666667", o8 = " +lon_0=-108.4166666666667", s8 = " +lon_0=-108.3333333333333", a8 = " +lon_0=-85.40000000000001", l8 = " +lon_0=-86.65000000000001", u8 = " +lon_0=-86.40000000000001", h8 = " +lon_0=-85.59999999999999", c8 = " +lon_0=-87.15000000000001", f8 = " +lon_0=-86.59999999999999", d8 = " +lon_0=-84.90000000000001", p8 = " +lon_0=-85.65000000000001", _8 = " +lon_0=-87.65000000000001", m8 = " +lon_0=-85.34999999999999", g8 = " +lon_0=-87.40000000000001", v8 = " +lon_0=-87.34999999999999", y8 = " +lon_0=-85.90000000000001", b8 = " +lon_0=-90.62222222222222", w8 = " +lon_0=-91.84999999999999", x8 = " +lon_0=-91.15277777777779", k8 = " +lon_0=-91.79722222222222", L8 = " +lon_0=-92.45777777777778", M8 = " +lon_0=-91.29444444444444", E8 = " +lon_0=-90.70833333333334", S8 = " +lon_0=-89.39444444444445", C8 = " +lon_0=-89.42222222222223", P8 = " +lon_0=-88.77500000000001", T8 = " +lon_0=-87.27222222222223", A8 = " +lon_0=-91.89444444444445", O8 = " +lon_0=-91.28888888888889", I8 = " +lon_0=-88.14166666666668", R8 = " +lon_0=-88.63333333333334", D8 = " +lon_0=-89.83888888888889", B8 = " +lon_0=-90.16111111111111", N8 = " +lon_0=-90.25555555555556", G8 = " +lon_0=-90.84429651944444", j8 = " +lon_0=-87.89444444444445", F8 = " +lon_0=-91.31666666666666", z8 = " +lon_0=-89.03333333333333", U8 = " +lon_0=-89.73333333333333", q8 = " +lon_0=-87.71111111111111", H8 = " +lon_0=-88.41666666666667", Z8 = " +lon_0=-90.64166666666668", W8 = " +lon_0=-87.90833333333335", V8 = " +lon_0=-89.54444444444444", K8 = " +lon_0=-92.22777777777777", Y8 = " +lon_0=-90.48888888888889", $8 = " +lon_0=-90.43055555555556", X8 = " +lon_0=-89.07222222222222", Q8 = " +lon_0=-91.06666666666666", J8 = " +lon_0=-89.90000000000001", tM = " +lon_0=-91.11666666666666", eM = " +lon_0=-88.60555555555555", nM = " +lon_0=-90.48333333333333", rM = " +lon_0=-91.36666666666666", iM = " +lon_0=-90.78333333333333", oM = " +lon_0=-89.48888888888889", sM = " +lon_0=-88.54166666666667", aM = " +lon_0=-91.78333333333333", lM = " +lon_0=-88.06388888888888", uM = " +lon_0=-88.22499999999999", hM = " +lon_0=-88.81666666666666", cM = " +y_0=0.004876809753619507", fM = " +y_0=0.008534417068834137", dM = " +y_0=0.003962407924815849", pM = " +y_0=0.005791211582423164", _M = " +lon_0=-55.68333333333333", mM = " +to_meter=0.201166195164", gM = " +lat_0=4.666666666666667", vM = " +lat_0=6.666666666666667", yM = " +lon_0=6.166666666666667", bM = " +lat_0=10.44166666666667", wM = " +lat_0=22.31213333333334", xM = " +lon_0=114.1785555555556", kM = " +lon_0=51.21666666666667", LM = " +lon_0=11.30827777777778", MM = " +lon_0=13.55827777777778", EM = " +lon_0=15.80827777777778", SM = " +lon_0=18.05827777777778", CM = " +lon_0=20.30827777777778", PM = " +lon_0=22.55827777777778", TM = " +lat_1=27.41666666666667", AM = " +lat_2=34.91666666666666", OM = " +lat_0=31.16666666666667", IM = " +lat_1=59.33333333333334", RM = " +lat_0=57.51755393055556", DM = " +lon_0=4.359215833333333", BM = " +lat_1=61.66666666666666", NM = " +lat_0=29.02626833333333", GM = " +lat_1=48.66666666666666", jM = " +lat_2=53.66666666666666", FM = " +lon_0=127.0028902777778", zM = " +lon_0=89.84999999999999", UM = " +lon_0=91.56666666666666", qM = " +lon_0=24.83333333333333", HM = " +lat_2=63.66666666666666", ZM = " +lat_0=65.35103930555555", WM = " +lat_1=63.66666666666666", VM = " +lat_2=60.33333333333334", KM = " +lat_0=62.01530688888889", YM = " +lat_1=45.78333333333333", $M = " +lat_0=45.78333333333333", XM = " +lat_0=42.66666666666666", QM = " +lat_0=43.36666666666667", JM = " +lat_0=45.70611111111111", t2 = " +lat_0=45.13333333333333", e2 = " +lat_1=46.66964837722222", n2 = " +lat_0=46.66964837722222", r2 = " +lat_0=43.48138888888889", i2 = " +lat_1=45.89871486583333", o2 = " +lat_0=45.89871486583333", s2 = " +lat_0=42.71944444444445", a2 = " +lat_1=44.97785689861112", l2 = " +lat_0=44.97785689861112", u2 = " +lat_1=43.46254664583333", h2 = " +lat_0=43.46254664583333", c2 = " +lon_0=-90.9388888888889", f2 = " +lat_0=41.47222222222222", d2 = " +lat_0=45.88333333333333", p2 = " +lat_0=44.40833333333333", _2 = " +lat_1=44.87228112638889", m2 = " +lat_0=44.87228112638889", g2 = " +lat_0=45.43888888888888", v2 = " +lat_0=44.00555555555555", y2 = " +lat_0=41.41111111111111", b2 = " +lat_1=42.63756227694444", w2 = " +lat_0=42.63756227694444", x2 = " +lat_1=43.80700011777778", k2 = " +lat_0=43.80700011777778", L2 = " +lat_0=42.53888888888888", M2 = " +lat_0=45.43333333333333", E2 = " +lat_0=44.25333512777778", S2 = " +lat_0=42.21666666666667", C2 = " +lat_0=43.26666666666667", P2 = " +lat_0=43.45111111111111", T2 = " +lat_1=45.15423710527778", A2 = " +lat_0=45.15423710527778", O2 = " +lat_0=44.84444444444445", I2 = " +lat_1=44.90090442361111", R2 = " +lat_0=44.90090442361111", D2 = " +lat_0=44.69166666666666", B2 = " +lat_0=44.71666666666667", N2 = " +lat_1=44.00007392861111", G2 = " +lat_0=44.00007392861111", j2 = " +lat_0=44.39722222222222", F2 = " +lat_1=45.70422377027778", z2 = " +lat_0=45.70422377027778", U2 = " +lat_1=44.63614887194444", q2 = " +lat_0=44.63614887194444", H2 = " +lat_0=44.66111111111111", Z2 = " +lat_1=44.41682397527777", W2 = " +lat_0=44.41682397527777", V2 = " +lat_0=44.55555555555555", K2 = " +lat_0=41.94444444444444", Y2 = " +lat_0=43.91944444444444", $2 = " +lat_0=42.81944444444445", X2 = " +lat_1=45.90009913138888", Q2 = " +lat_0=45.90009913138888", J2 = " +lat_1=45.17782208583333", tE = " +lat_0=45.17782208583333", eE = " +lat_0=43.16111111111111", nE = " +lat_1=43.57503293972223", rE = " +lat_0=43.57503293972223", iE = " +lat_1=46.07784409055556", oE = " +lat_0=46.07784409055556", sE = " +lat_1=42.66946209694444", aE = " +lat_0=42.66946209694444", lE = " +lat_1=45.96121983333334", uE = " +lat_0=45.96121983333334", hE = " +lat_0=42.91805555555555", cE = " +lat_0=42.56944444444445", fE = " +lat_0=43.42027777777778", dE = " +lat_1=44.11394404583334", pE = " +lat_0=44.11394404583334", _E = " +lat_1=44.36259546944444", mE = " +lat_0=44.36259546944444", gE = " +lat_1=44.10000000000001", vE = " +lat_0=44.10000000000001", yE = " +lat_1=42.16500000000001", bE = " +lat_0=42.16500000000001", wE = " +lat_0=52.15616055555555", xE = " +lat_2=48.73333333333333", xc = " +zone=3", cy = " +lat_0=53.5", fy = " +k=0.999923", dy = " +x_0=850000", py = " +x_0=830000", _y = " +lon_0=16.5", my = " +x_0=520000", gy = " +lat_2=31.5", vy = " +lon_0=10.5", yy = " +lat_1=44.5", by = " +lon_0=-153", wy = " +lon_0=-135", xy = " +x_0=750000", ky = " +lat_0=43.5", Ly = " +lon_0=-142", My = " +lon_0=-146", Ey = " +lon_0=-162", Sy = " +lon_0=-166", Cy = " +lon_0=-176", Py = " +lat_2=39.5", Ty = " +lon_0=-129", Ay = " +k_0=1.0002", Oy = " +k=1.000023", Iy = " +lon_0=-121", Ry = " +k=1.000175", Dy = " +lat_0=45.5", By = " +k=1.000155", Ny = " +lat_2=37.5", Gy = " +lat_1=48.5", jy = " +k=1.000029", Fy = " +lat_0=39.6", zy = " +k=1.000013", Uy = " +k=1.000022", qy = " +lat_0=40.7", Hy = " +lat_0=39.3", Zy = " +lat_0=37.8", Wy = " +lat_0=38.9", Vy = " +lon_0=-5.4", V3 = " +y_0=626907.39", K3 = " +b=6356571.996", Y3 = " +a=6377295.664", kE = " +lon_0=5.38763888888889", LE = " +y_0=-4600000.00001208", ME = " +y_0=1889763.779527559", EE = " +y_0=99999.99999960001", SE = " +x_0=120091.4401828804", j_ = " +lon_0=72", F_ = " +lat_0=50", z_ = " +lat_1=50", U_ = " +lat_1=35", q_ = " +lon_0=22", H_ = " +lat_1=34", Z_ = " +lonc=115", W_ = " +lat_0=-9", V_ = " +lat_0=23", K_ = " +lat_1=85", Y_ = " +lat_2=69", $_ = " +lat_1=69", X_ = " +lat_2=61", Q_ = " +lon_0=34", $3 = " +lon_0=140.25", X3 = " +lon_0=142.25", Q3 = " +lon_0=144.25", J3 = " +x_0=47500000", t6 = " +y_0=-3000000", CE = " +pm=2.337208333333333", PE = " +x_0=7000000.00000248", Qp = " +lon_0=6", Jp = " +k=0.997", Ky = " +lon_0=106", Yy = " +lon_0=154", $y = " +lon_0=156", Xy = " +lat_2=-36", Qy = " +lon_0=119", Jy = " +lon_0=121", tb = " +lon_0=166", eb = " +a=6371228", nb = " +b=6371228", rb = " +a=6378273", ib = " +lat_0=-44", ob = " +pm=lisbon", sb = " +lon_0=-57", ab = " +lon_0=-56", lb = " +k=1.00007", ub = " +lonc=-123", hb = " +alpha=295", cb = " +gamma=295", fb = " +k=1.00011", db = " +k=1.00005", pb = " +k=1.00013", _b = " +x_0=30000", mb = " +k=1.00001", gb = " +k=1.00003", TE = " +y_0=130000.00001472", AE = " +x_0=119999.99999952", OE = " +y_0=-2999999.999988", IE = " +x_0=-299999.9999988", RE = " +lat_1=43.0695160375", DE = " +lat_0=43.0695160375", BE = " +lat_1=43.3223129275", NE = " +lat_0=43.3223129275", e6 = " +k=1.0000067", n6 = " +a=6378298.3", r6 = " +lon_0=-66.5", i6 = " +lon_0=129.5", o6 = " +lon_0=138.5", s6 = " +x_0=2300000", a6 = " +x_0=3300000", l6 = " +x_0=4300000", u6 = " +y_0=7500000", h6 = " +lonc=102.25", c6 = " +y_0=1166200", f6 = " +x_0=3000000", d6 = " +lat_1=46.25", p6 = " +ellps=WGS66", _6 = " +ellps=GRS67", m6 = " +lat_1=34.65", GE = " +y_0=59999.99999976", jE = " +y_0=30000.00001512", FE = " +x_0=59999.99999976", zE = " +x_0=30000.00001512", UE = " +lat_1=43.200055605", qE = " +lat_0=43.200055605", HE = " +y_0=65379.0134283", ZE = " +alpha=323.0257905", WE = " +alpha=53.31580995", VE = " +x_0=10000.0000152";
+  return Yx = [2e3, i + h + nc + ii + H + u + N + e + t, 1, i + h + nc + ii + H + u + N + DL + e + t, 1, i + h + nc + ii + H + u + N + BL + e + t, 1, i + h + nc + ii + H + u + N + NL + e + t, 1, i + h + nc + ii + H + u + N + GL + e + t, 1, i + h + nc + ii + H + u + N + QL + e + t, 1, i + h + nc + ii + H + u + N + xL + e + t, 1, i + h + nc + ii + H + u + N + W5 + e + t, 2, i + h + Uv + m + Re + u + F + e + t, 1, i + h + c_ + m + Re + u + F + e + t, 1, i + h + f_ + m + Re + u + F + e + t, 1, i + h + qv + m + Re + u + F + e + t, 1, i + h + Ul + m + Re + u + F + e + t, 1, i + h + Hv + m + Re + u + F + e + t, 1, i + h + Zv + m + Re + u + F + e + t, 1, i + h + Un + m + Re + u + F + e + t, 1, i + h + Hv + m + Re + u + F + e + t, 1, i + h + Zv + m + Re + u + F + e + t, 1, i + h + Un + m + Re + u + F + e + t, 1, i + h + f + m + Re + u + F + e + t, 1, i + h + zn + m + Re + u + F + e + t, 1, i + h + rc + m + Re + u + F + e + t, 1, i + h + pl + m + Re + u + F + e + t, 1, i + h + On + m + Re + u + F + e + t, 1, i + h + Op + m + Re + u + F + e + t, 1, i + h + pf + m + Re + u + F + e + t, 1, c + ua + F + e + t, 1, c + ha + F + e + t, 1, c + yi + F + e + t, 1, c + Xr + F + e + t, 1, c + yi + F + e + t, 1, c + Xr + F + e + t, 1, c + Vr + F + e + t, 1, c + Tr + F + e + t, 1, c + Qr + F + e + t, 4, i + y3 + b3 + e6 + Z3 + V3 + n + JL + e + t, 1, c + Ll + N + Wm + e + t, 1, c + Ll + N + qm + e + t, 1, c + vo + N + Wm + e + t, 1, c + vo + N + qm + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + Gm + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + Gm + e + t, 1, i + h + hr + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + qp + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + zd + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + Rn + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + A0 + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + Ud + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + Ei + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + " +lon_0=29 +k=1" + z + u + Yn + W + r + e + t, 1, i + h + xf + " +k=1" + z + u + Yn + W + r + e + t, 1, i + h + eo + " +k=1" + z + u + Yn + W + r + e + t, 1, l_ + dg + w3 + " +k_0=1 +x_0=2600000" + Wv + O + K5 + e + t, 1, Jn + " +lat_0=27.51882880555555 +lonc=52.60353916666667 +alpha=0.5716611944444444 +k=0.999895934 +x_0=658377.437 +y_0=3044969.194 +gamma=0.5716611944444444" + b + Y5 + e + t, 1, c + Xi + b + D1 + e + t, 1, c + Ni + b + D1 + e + t, 1, c + Gs + b + D1 + e + t, 1, c + vc + b + D1 + e + t, 1, a + " +lat_1=40" + it + qr + " +k_0=0.9988085293" + D + xp + n6 + N3 + " +pm=madrid" + e + t, 3, Mv + y_ + " +lon_0=42.5" + pg + m + z + u + O + Rs + bl + e + t, 1, lr + " +lat_0=11.25217861111111 +lon_0=-60.68600888888889 +x_0=37718.66159325 +y_0=36209.91512952" + qe + Vn + mM + t, 1, c + Tr + b + $5 + e + t, 1, i + h + yo + m + ot + u + b + et + e + t, 1, i + h + " +lon_0=11" + m + ot + u + b + et + e + t, 1, i + h + " +lon_0=13" + m + ot + u + b + et + e + t, 1, i + h + hr + m + ot + u + b + et + e + t, 1, i + h + qp + m + ot + u + b + et + e + t, 1, i + h + zd + m + ot + u + b + et + e + t, 1, i + h + Rn + m + ot + u + b + et + e + t, 1, i + h + A0 + m + ot + u + b + et + e + t, 1, i + h + Ud + m + ot + u + b + et + e + t, 1, c + Gi + b + et + e + t, 1, c + bo + b + et + e + t, 1, c + ca + b + et + e + t, 1, c + Go + b + et + e + t, 1, i + K + oh + " +k=1" + Gn + u + b + e + t, 1, i + K + oh + " +k=1" + Gn + u + b + _L + e + t, 1, i + K + oh + " +k=1" + Gn + u + b + c3 + e + t, 1, c + Vr + Z + b + c3 + e + t, 3, i + h + no + Me + y + u + b + et + e + t, 1, i + h + " +lon_0=11" + Me + y + u + Ke + le + nu + e + t, 1, c + Xi + W + r + e + t, 1, c + Ni + W + r + e + t, 3, i + h + Ky + " +k=1" + y + u + _ + Gm + e + t, 1, i + h + Ky + Me + y + u + x + E + e + t, 1, c + Qi + b + jL + e + t, 1, i + bn + Se + " +k=1" + ot + He + O + e + t, 1, i + bn + Ip + " +k=1" + ot + He + O + e + t, 1, i + bn + Rp + " +k=1" + ot + He + O + e + t, 1, lr + " +lat_0=25.38236111111111 +lon_0=50.76138888888889" + Be + Mr + Nl + e + t, 1, i + h + ro + Me + y + u + n + rL + e + t, 1, a + _g + mg + Qm + " +k_0=1" + z + " +y_0=-52684.972" + b + e + t, 1, a + _g + mg + Qm + " +k_0=1" + ot + " +y_0=147315.028" + b + e + t, 1, a + _g + mg + Qm + " +k_0=1" + y + " +y_0=447315.028" + b + e + t, 1, a + _g + mg + Qm + " +k_0=1 +x_0=-17044 +y_0=-23139.97" + b + e + t, 1, i + " +lat_0=-36.87972222222222 +lon_0=174.7641666666667" + m + H + _r + n + r + e + t, 1, i + " +lat_0=-37.76111111111111 +lon_0=176.4661111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-38.62444444444444 +lon_0=177.8855555555556 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-39.65083333333333 +lon_0=176.6736111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-39.13555555555556 +lon_0=174.2277777777778 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-39.51222222222222 +lon_0=175.64 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-40.24194444444444 +lon_0=175.4880555555555 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-40.92527777777777 +lon_0=175.6472222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.3011111111111 +lon_0=174.7763888888889 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-40.71472222222223 +lon_0=172.6719444444444 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.27444444444444 +lon_0=173.2991666666667 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.28972222222222 +lon_0=172.1088888888889 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.81055555555555 +lon_0=171.5811111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-42.33361111111111 +lon_0=171.5497222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-42.68888888888888 +lon_0=173.01 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-41.54444444444444 +lon_0=173.8019444444444 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-42.88611111111111 +lon_0=170.9797222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.11 +lon_0=170.2608333333333 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.97777777777778 +lon_0=168.6061111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.59055555555556 +lon_0=172.7269444444445 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-43.74861111111111 +lon_0=171.3605555555555 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-44.40194444444445 +lon_0=171.0572222222222 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-44.735 +lon_0=169.4675 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.13277777777778 +lon_0=168.3986111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.56361111111111 +lon_0=167.7386111111111 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.81611111111111 +lon_0=170.6283333333333 +k=1" + H + _r + n + r + e + t, 1, i + " +lat_0=-45.86138888888889 +lon_0=170.2825" + Rd + H + _r + n + r + e + t, 1, i + " +lat_0=-46.6 +lon_0=168.3427777777778 +k=1" + H + _r + n + r + e + t, 1, c + Ls + Z + n + r + e + t, 1, c + ja + Z + n + r + e + t, 1, c + Xl + Z + n + r + e + t, 1, i + gM + " +lon_0=-1" + Dp + " +x_0=274319.7391633579" + u + S0 + h0 + t3 + e3 + t, 1, i + h + " +lon_0=-1" + Me + y + u + S0 + h0 + t3 + e + t, 1, a + Hp + yu + Ro + Ra + z + u + F + e + t, 16, a + Na + " +lat_2=44" + Zl + Ml + R + " +y_0=6600000" + n + r + e + t, 3, i + cy + " +lon_0=-8 +k=0.99982" + D + rf + n + r + e + t, 1, c + vo + n + r + e + t, 1, i + vM + " +lon_0=-12 +k=1 +x_0=152399.8550907544" + u + S0 + h0 + e3 + t, 1, i + vM + " +lon_0=-12 +k=1 +x_0=243839.7681452071 +y_0=182879.8261089053" + S0 + h0 + e3 + t, 1, c + Qi + N + f3 + e + t, 1, c + vo + N + f3 + e + t, 1, ra + mo + fr + z + u + " +a=6370997 +b=6370997" + e + t, 1, i + h + " +lon_0=-5" + Me + y + u + N + Wm + e + t, 1, i + h + " +lon_0=-5" + Me + y + u + N + qm + e + t, 4, i + " +lat_0=49.83333333333334" + yM + " +k=1" + _f + Mr + b + L5 + e + t, 3, se + " +lat_0=53.00194444444445 +lon_0=21.50277777777778" + Zp + " +x_0=4603000 +y_0=5806000" + _ + U + e + t, 1, se + " +lat_0=53.58333333333334 +lon_0=17.00833333333333" + Zp + " +x_0=3501000 +y_0=5999000" + _ + U + e + t, 1, se + " +lat_0=51.67083333333333 +lon_0=16.67222222222222" + Zp + " +x_0=3703000 +y_0=5627000" + _ + U + e + t, 1, i + h + " +lon_0=18.95833333333333 +k=0.999983 +x_0=237000 +y_0=-4700000" + _ + U + e + t, 1, i + h + hr + fy + xn + u + n + r + e + t, 1, i + h + kf + fy + Wh + u + n + r + e + t, 1, i + h + Rn + fy + ql + u + n + r + e + t, 1, i + h + ro + fy + rd + u + n + r + e + t, 1, i + h + zd + " +k=0.9993" + y + " +y_0=-5300000" + n + r + e + t, 8, c + Fa + b + kL + e + t, 1, c + El + b + LL + e + t, 1, c + El + b + FL + e + t, 3, i + h + " +lon_0=173" + Me + " +x_0=1600000" + kt + n + r + e + t, 2, c + Mu + Z + n + r + e + t, 1, i + h + " +lon_0=9.5" + Bn + ot + u + n + r + e + t, 1, i + h + no + Bn + y + u + n + r + e + t, 1, i + h + hr + " +k=1" + Ds + u + n + r + e + t, 2, se + Zl + r6 + b_ + xe + _r + Dd + Hf + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, a + " +lat_1=35.25 +lat_2=36.41666666666666 +lat_0=34.66666666666666" + sh + B + R3 + w + d + t, 1, a + Xt + ao + Zn + Uc + y + u + n + r + e + t, 1, i + h + Ei + " +k=1" + id + u + b + ut + e + t, 1, i + h + Do + " +k=1" + Jf + u + b + ut + e + t, 1, i + h + eo + " +k=1" + qc + u + b + ut + e + t, 1, i + h + hc + " +k=1" + td + u + b + ut + e + t, 1, i + h + Ga + " +k=1" + jl + u + b + ut + e + t, 1, i + h + cc + " +k=1" + ul + u + b + ut + e + t, 1, i + h + xs + " +k=1" + ou + u + b + ut + e + t, 1, i + h + Do + Me + y + u + n + r + e + t, 2, c + Gi + Ke + le + hL + e + t, 1, c + Ai + b + Qw + e + t, 1, c + Ms + b + Qw + e + t, 2, c + Vr + Dd + Hf + e + t, 1, c + Tr + Dd + Hf + e + t, 2, i + nn + Ir + m + J + u + n + r + ct + t, 1, i + nn + ya + m + J + u + n + r + ct + t, 1, i + nn + Dc + fe + J + u + n + r + ct + t, 1, a + Cs + Ns + Dt + bs + $e + ne + n + r + d + t, 1, a + To + lo + Ft + bs + $e + ne + n + r + d + t, 1, a + wt + Ao + of + he + $e + ne + n + r + d + t, 1, a + Vc + Lf + uo + sf + $e + ne + n + r + d + t, 1, a + xi + ho + af + Wl + $e + ne + n + r + d + t, 1, a + Oo + $o + Qs + Bc + $e + ne + n + r + d + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + r + d + t, 1, a + Kc + Yc + ls + Qe + ai + pn + n + r + d + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + r + d + t, 1, a + La + lf + Io + Hc + Ug + qg + n + r + d + t, 1, i + bn + Ui + uf + Ht + u + n + r + d + t, 1, i + Et + zn + st + Ht + u + n + r + d + t, 1, i + Et + mf + st + Ht + u + n + r + d + t, 1, a + $c + Js + Mf + Xc + D + u + n + r + d + t, 1, i + fi + dr + m + Ht + u + n + r + d + t, 1, i + fi + pi + m + ui + u + n + r + d + t, 1, i + pt + fs + Te + Ht + u + n + r + d + t, 1, i + pt + pu + Te + ge + u + n + r + d + t, 1, i + pt + Nc + fe + Hg + u + n + r + d + t, 3, a + Xt + ao + Zn + Uc + ge + u + n + r + d + t, 1, a + ci + ta + Jt + dt + ge + ne + n + r + d + t, 1, a + od + _d + Ft + mu + Zg + u + n + r + d + t, 1, a + As + Ps + es + Gt + Ht + rf + n + r + d + t, 1, a + Oa + ts + es + Ul + ge + u + n + r + d + t, 1, a + rl + ea + Tn + pl + Wg + u + n + r + ct + t, 1, a + md + po + il + $t + Vg + u + n + r + ct + t, 1, a + Ne + gd + T + $t + sv + u + n + r + ct + t, 1, i + ia + ds + Bn + _e + u + n + r + d + t, 1, i + ia + ri + Bn + ui + u + n + r + d + t, 1, a + Na + qd + sd + Ku + ms + u + n + r + ct + t, 1, i + nn + Ko + Wu + vd + u + n + r + d + t, 1, i + nn + Gc + m + ge + u + n + r + d + t, 1, i + nn + hi + jc + Kg + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, i + it + Di + an + Yg + u + n + r + d + t, 1, i + it + ps + an + $g + u + n + r + d + t, 1, a + Ma + Ur + ye + gf + _e + u + n + r + d + t, 1, a + Ki + ol + Qc + ic + B + u + n + r + d + t, 1, a + Le + _o + Bo + Lt + ms + u + n + r + ct + t, 1, a + Os + sl + Br + Lt + ms + u + n + r + ct + t, 1, a + ki + Gu + Ef + si + D + u + n + r + d + t, 1, a + xh + ju + Ea + si + D + u + n + r + d + t, 1, a + fc + Kr + rn + he + n_ + u + n + r + ct + t, 1, a + dc + us + pt + he + r_ + u + n + r + ct + t, 1, a + ad + kh + ye + Rt + D + u + n + r + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + d + t, 1, a + Lh + yd + Ts + zn + bd + u + n + r + ct + t, 1, a + Mh + ld + ke + sh + D + u + n + r + d + t, 1, a + al + ud + Sf + Zc + Ht + zi + n + r + d + t, 1, a + Il + Eh + Ca + Fr + D + Zf + n + r + d + t, 1, a + Sh + Rl + hs + gn + ui + G + n + r + d + t, 1, a + Dl + Fu + Zi + _l + D + rv + n + r + d + t, 1, a + qo + Es + Po + Fr + _e + iv + n + r + d + t, 1, a + Qn + Ho + kr + ae + vi + D3 + n + r + ct + t, 1, a + Xu + oo + kn + ae + vi + U3 + n + r + ct + t, 1, a + Qu + Co + Q + ae + vi + q3 + n + r + ct + t, 1, a + wd + Ch + Ft + Zt + Wf + Zf + n + r + d + t, 1, a + Xt + Pa + Jt + Zt + Wf + zi + n + r + d + t, 1, a + Le + xd + Bo + _s + ge + u + n + r + d + t, 1, a + Ph + zu + Li + he + ge + u + n + r + d + t, 1, a + Uu + Th + gs + On + D + u + n + r + d + t, 1, a + _u + hd + Ve + On + D + u + n + r + d + t, 1, a + Ah + qu + pc + On + D + u + n + r + d + t, 1, se + " +lat_0=47.25" + C0 + b_ + R + Vl + Dd + Hf + e + t, 4, i + h + c_ + m + Pr + u + Dd + Hf + e + t, 1, i + h + f_ + m + xn + u + Dd + Hf + e + t, 13, i + h + " +lon_0=109" + Me + y + kt + O + va + e + t, 1, i + h + " +lon_0=116" + Me + y + kt + M + e + t, 1, i + h + aa + Me + y + kt + M + e + t, 1, i + h + Qp + Me + y + u + M + e + t, 1, c + bo + N + e + t, 1, c + bo + N + e + t, 1, lr + bM + e8 + " +x_0=86501.46392052001" + HE + qe + Vn + Vw + Xg + t, 1, c + Vr + Z + b + vn + e + t, 1, c + Tr + Z + b + vn + e + t, 1, a + " +lat_1=9 +lat_2=3 +lat_0=6" + Bd + Ye + Ee + b + wr + e + t, 1, a + " +lat_1=17 +lat_2=33 +lat_0=25.08951" + O0 + z + u + b + Ri + e + t, 1, i + h + Ei + " +k=1" + y + u + b + ut + e + t, 1, i + h + Do + " +k=1" + y + u + b + ut + e + t, 1, i + h + eo + " +k=1" + y + u + b + ut + e + t, 1, i + h + hc + " +k=1" + y + u + b + ut + e + t, 1, i + h + Ga + " +k=1" + y + u + b + ut + e + t, 1, i + h + cc + " +k=1" + y + u + b + ut + e + t, 1, i + h + xs + " +k=1" + y + u + b + ut + e + t, 1, i + wM + xM + " +k=1 +x_0=836694.05 +y_0=819069.8" + b + k5 + e + t, 1, i + h + Si + " +k=1" + jl + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + ul + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + ou + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + su + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + Hh + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + ru + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + iu + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + Fl + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + au + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + zl + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + lu + u + Ct + Y + e + t, 1, i + h + Si + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Si + " +k=1" + uu + u + Ct + Y + e + t, 1, i + h + wl + " +k=1" + hu + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + cu + u + Ct + Y + e + t, 1, i + h + bu + " +k=1" + fu + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + hl + u + Ct + Y + e + t, 1, i + h + Yi + " +k=1" + Yu + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + Kn + u + Ct + Y + e + t, 1, i + h + $l + " +k=1" + $u + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + Zh + u + Ct + Y + e + t, 1, i + h + ml + " +k=1" + p0 + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + _0 + u + Ct + Y + e + t, 1, i + h + gu + " +k=1" + m0 + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + g0 + u + Ct + Y + e + t, 1, i + h + la + " +k=1" + v0 + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + y0 + u + Ct + Y + e + t, 1, i + h + Kl + " +k=1" + b0 + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + w0 + u + Ct + Y + e + t, 1, i + h + gl + " +k=1" + hp + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + x0 + u + Ct + Y + e + t, 1, i + h + aa + " +k=1" + cp + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + k0 + u + Ct + Y + e + t, 1, i + h + Si + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + wl + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ci + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + bu + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Bi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Yi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pi + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + $l + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Ti + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + ml + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Pn + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + gu + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + ie + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + la + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + v + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Kl + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + tt + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + gl + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Se + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + aa + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + k + " +k=1" + y + u + Ct + Y + e + t, 1, i + h + Rn + " +k=1" + ze + u + b + At + e + t, 1, i + h + ro + " +k=1" + Gn + u + b + At + e + t, 1, i + h + Ei + " +k=1" + qn + u + b + At + e + t, 1, i + h + Do + " +k=1" + Pr + u + b + At + e + t, 1, i + h + xs + " +k=1" + rd + u + _ + n3 + e + t, 1, i + h + _c + " +k=1" + id + u + _ + n3 + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + Bt + e + t, 2, i + h + Si + " +k=1" + uu + u + _ + C + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + C + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + C + e + t, 1, i + h + Yi + " +k=1" + Yu + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + C + e + t, 1, i + h + $l + " +k=1" + $u + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + C + e + t, 1, i + h + ml + " +k=1" + p0 + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + _0 + u + _ + C + e + t, 1, i + h + gu + " +k=1" + m0 + u + _ + C + e + t, 1, i + h + ie + " +k=1" + g0 + u + _ + C + e + t, 1, i + h + la + " +k=1" + v0 + u + _ + C + e + t, 1, i + h + v + " +k=1" + y0 + u + _ + C + e + t, 1, i + h + Kl + " +k=1" + b0 + u + _ + C + e + t, 1, i + h + tt + " +k=1" + w0 + u + _ + C + e + t, 1, i + h + gl + " +k=1" + hp + u + _ + C + e + t, 1, i + h + Se + " +k=1" + x0 + u + _ + C + e + t, 1, i + h + aa + " +k=1" + cp + u + _ + C + e + t, 1, i + h + k + " +k=1" + k0 + u + _ + C + e + t, 1, i + h + Si + " +k=1" + y + u + _ + C + e + t, 1, i + h + wl + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + C + e + t, 1, i + h + bu + " +k=1" + y + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + C + e + t, 1, i + h + $l + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + C + e + t, 1, i + h + ml + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + C + e + t, 1, i + h + gu + " +k=1" + y + u + _ + C + e + t, 1, i + h + ie + " +k=1" + y + u + _ + C + e + t, 1, i + h + la + " +k=1" + y + u + _ + C + e + t, 1, i + h + v + " +k=1" + y + u + _ + C + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + C + e + t, 1, i + h + tt + " +k=1" + y + u + _ + C + e + t, 1, i + h + gl + " +k=1" + y + u + _ + C + e + t, 1, i + h + Se + " +k=1" + y + u + _ + C + e + t, 1, i + h + aa + " +k=1" + y + u + _ + C + e + t, 1, i + h + k + " +k=1" + y + u + _ + C + e + t, 1, i + mc + i6 + m + z + u + n + r + e + t, 1, i + mc + oc + m + z + u + n + r + e + t, 1, i + Mt + x3 + m + z + u + n + r + e + t, 1, i + mc + Vv + m + z + u + n + r + e + t, 1, i + Mt + k3 + m + z + u + n + r + e + t, 1, i + Mt + Bp + m + z + u + n + r + e + t, 1, i + Mt + L3 + m + z + u + n + r + e + t, 1, i + Mt + o6 + m + z + u + n + r + e + t, 1, i + Mt + M3 + m + z + u + n + r + e + t, 1, i + it + E3 + m + z + u + n + r + e + t, 1, i + Ro + $3 + m + z + u + n + r + e + t, 1, i + Ro + X3 + m + z + u + n + r + e + t, 1, i + Ro + Q3 + m + z + u + n + r + e + t, 1, i + go + " +lon_0=142" + m + z + u + n + r + e + t, 1, i + go + dp + m + z + u + n + r + e + t, 1, i + go + " +lon_0=124" + m + z + u + n + r + e + t, 1, i + go + oc + m + z + u + n + r + e + t, 1, i + " +lat_0=20" + Bp + m + z + u + n + r + e + t, 1, i + go + Yy + m + z + u + n + r + e + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + l + e + t, 1, i + h + eo + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + l + e + t, 1, i + h + xs + " +k=1" + y + u + _ + l + e + t, 1, i + h + _c + " +k=1" + y + u + _ + l + e + t, 1, i + h + Hd + " +k=1" + y + u + _ + l + e + t, 1, i + h + Cf + " +k=1" + y + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + l + e + t, 1, i + h + Si + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + l + e + t, 1, i + h + ie + " +k=1" + y + u + _ + l + e + t, 1, i + h + v + " +k=1" + y + u + _ + l + e + t, 1, i + h + tt + " +k=1" + y + u + _ + l + e + t, 1, i + h + Se + " +k=1" + y + u + _ + l + e + t, 1, i + h + k + " +k=1" + y + u + _ + l + e + t, 1, i + h + Nd + " +k=1" + y + u + _ + l + e + t, 1, i + h + vf + " +k=1" + y + u + _ + l + e + t, 1, i + h + sc + " +k=1" + y + u + _ + l + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + l + e + t, 1, i + h + ac + " +k=1" + y + u + _ + l + e + t, 1, i + h + vu + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + l + e + t, 1, i + h + eh + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yh + " +k=1" + y + u + _ + l + e + t, 3, i + h + Rn + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + s + e + t, 1, i + h + eo + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + s + e + t, 1, i + h + xs + " +k=1" + y + u + _ + s + e + t, 1, i + h + _c + " +k=1" + y + u + _ + s + e + t, 1, i + h + Hd + " +k=1" + y + u + _ + s + e + t, 1, i + h + Cf + " +k=1" + y + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + s + e + t, 1, i + h + Si + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + s + e + t, 1, i + h + ie + " +k=1" + y + u + _ + s + e + t, 1, i + h + v + " +k=1" + y + u + _ + s + e + t, 1, i + h + tt + " +k=1" + y + u + _ + s + e + t, 1, i + h + Se + " +k=1" + y + u + _ + s + e + t, 1, i + h + k + " +k=1" + y + u + _ + s + e + t, 1, i + h + Nd + " +k=1" + y + u + _ + s + e + t, 1, i + h + vf + " +k=1" + y + u + _ + s + e + t, 1, i + h + sc + " +k=1" + y + u + _ + s + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + s + e + t, 1, i + h + ac + " +k=1" + y + u + _ + s + e + t, 1, i + h + vu + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + s + e + t, 1, i + h + eh + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yh + " +k=1" + y + u + _ + s + e + t, 1, i + h + Rn + " +k=1" + ql + u + _ + s + e + t, 1, i + h + ro + " +k=1" + rd + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + id + u + _ + s + e + t, 1, i + h + Do + " +k=1" + Jf + u + _ + s + e + t, 1, i + h + eo + " +k=1" + qc + u + _ + s + e + t, 1, i + h + hc + " +k=1" + td + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + jl + u + _ + s + e + t, 1, i + h + cc + " +k=1" + ul + u + _ + s + e + t, 1, i + h + xs + " +k=1" + ou + u + _ + s + e + t, 1, i + h + O0 + " +k=1" + su + u + _ + s + e + t, 1, i + h + _c + " +k=1" + Hh + u + _ + s + e + t, 1, i + h + I0 + " +k=1" + ru + u + _ + s + e + t, 1, i + h + Hd + " +k=1" + iu + u + _ + s + e + t, 1, i + h + " +lon_0=60 +k=1" + Fl + u + _ + s + e + t, 1, i + h + Cf + " +k=1" + au + u + _ + s + e + t, 1, i + h + Wp + " +k=1" + zl + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + lu + u + _ + s + e + t, 1, i + h + j_ + " +k=1" + ed + u + _ + s + e + t, 1, i + h + Si + " +k=1" + uu + u + _ + s + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + s + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + s + e + t, 1, i + h + Yi + " +k=1" + Yu + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + s + e + t, 1, i + h + $l + " +k=1" + $u + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + s + e + t, 2, i + h + ml + " +k=1" + p0 + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + _0 + u + _ + s + e + t, 1, i + h + gu + " +k=1" + m0 + u + _ + s + e + t, 1, i + h + ie + " +k=1" + g0 + u + _ + s + e + t, 1, i + h + la + " +k=1" + v0 + u + _ + s + e + t, 1, i + h + v + " +k=1" + y0 + u + _ + s + e + t, 1, i + h + Kl + " +k=1" + b0 + u + _ + s + e + t, 1, i + h + tt + " +k=1" + w0 + u + _ + s + e + t, 1, i + h + gl + " +k=1" + hp + u + _ + s + e + t, 1, i + h + Se + " +k=1" + x0 + u + _ + s + e + t, 1, i + h + aa + " +k=1" + cp + u + _ + s + e + t, 1, i + h + k + " +k=1" + k0 + u + _ + s + e + t, 1, i + h + Np + " +k=1 +x_0=46500000" + u + _ + s + e + t, 1, i + h + Nd + " +k=1" + J3 + u + _ + s + e + t, 1, i + h + O_ + " +k=1 +x_0=48500000" + u + _ + s + e + t, 1, i + h + vf + " +k=1 +x_0=49500000" + u + _ + s + e + t, 1, i + h + yf + " +k=1 +x_0=50500000" + u + _ + s + e + t, 1, i + h + sc + " +k=1 +x_0=51500000" + u + _ + s + e + t, 1, i + h + $y + " +k=1 +x_0=52500000" + u + _ + s + e + t, 1, i + h + Gd + " +k=1 +x_0=53500000" + u + _ + s + e + t, 1, i + h + P0 + " +k=1 +x_0=54500000" + u + _ + s + e + t, 1, i + h + ac + " +k=1 +x_0=55500000" + u + _ + s + e + t, 1, i + h + I_ + " +k=1 +x_0=56500000" + u + _ + s + e + t, 1, i + h + vu + " +k=1 +x_0=57500000" + u + _ + s + e + t, 1, i + h + R_ + " +k=1 +x_0=58500000" + u + _ + s + e + t, 1, i + h + Yl + " +k=1 +x_0=59500000" + u + _ + s + e + t, 2, i + h + eh + " +k=1 +x_0=61500000" + u + _ + s + e + t, 1, i + h + w_ + " +k=1 +x_0=62500000" + u + _ + s + e + t, 1, i + h + Yh + " +k=1 +x_0=63500000" + u + _ + s + e + t, 1, i + h + x_ + " +k=1 +x_0=64500000" + u + _ + s + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + s + e + t, 1, i + h + ro + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + s + e + t, 1, i + h + Do + " +k=1" + y + u + _ + s + e + t, 1, i + h + eo + " +k=1" + y + u + _ + s + e + t, 1, i + h + hc + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + s + e + t, 1, i + h + cc + " +k=1" + y + u + _ + s + e + t, 1, i + h + xs + " +k=1" + y + u + _ + s + e + t, 1, i + h + O0 + " +k=1" + y + u + _ + s + e + t, 1, i + h + _c + " +k=1" + y + u + _ + s + e + t, 1, i + h + I0 + " +k=1" + y + u + _ + s + e + t, 1, i + h + Hd + " +k=1" + y + u + _ + s + e + t, 1, i + h + " +lon_0=60 +k=1" + y + u + _ + s + e + t, 1, i + h + Cf + " +k=1" + y + u + _ + s + e + t, 1, i + h + Wp + " +k=1" + y + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + s + e + t, 1, i + h + j_ + " +k=1" + y + u + _ + s + e + t, 2, i + h + Si + " +k=1" + y + u + _ + s + e + t, 1, i + h + wl + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + s + e + t, 1, i + h + bu + " +k=1" + y + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + s + e + t, 1, i + h + $l + " +k=1" + y + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + s + e + t, 1, i + h + ml + " +k=1" + y + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + s + e + t, 1, i + h + gu + " +k=1" + y + u + _ + s + e + t, 1, i + h + ie + " +k=1" + y + u + _ + s + e + t, 1, i + h + la + " +k=1" + y + u + _ + s + e + t, 1, i + h + v + " +k=1" + y + u + _ + s + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + s + e + t, 1, i + h + tt + " +k=1" + y + u + _ + s + e + t, 1, i + h + gl + " +k=1" + y + u + _ + s + e + t, 1, i + h + Se + " +k=1" + y + u + _ + s + e + t, 1, i + h + aa + " +k=1" + y + u + _ + s + e + t, 1, i + h + k + " +k=1" + y + u + _ + s + e + t, 1, i + h + Np + " +k=1" + y + u + _ + s + e + t, 1, i + h + Nd + " +k=1" + y + u + _ + s + e + t, 1, i + h + O_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + vf + " +k=1" + y + u + _ + s + e + t, 1, i + h + yf + " +k=1" + y + u + _ + s + e + t, 1, i + h + sc + " +k=1" + y + u + _ + s + e + t, 1, i + h + $y + " +k=1" + y + u + _ + s + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + s + e + t, 1, i + h + P0 + " +k=1" + y + u + _ + s + e + t, 1, i + h + ac + " +k=1" + y + u + _ + s + e + t, 1, i + h + I_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + vu + " +k=1" + y + u + _ + s + e + t, 1, i + h + R_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + s + e + t, 1, i + h + Gp + " +k=1" + y + u + _ + s + e + t, 1, i + h + eh + " +k=1" + y + u + _ + s + e + t, 1, i + h + w_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + Yh + " +k=1" + y + u + _ + s + e + t, 1, i + h + x_ + " +k=1" + y + u + _ + s + e + t, 1, i + h + Rn + " +k=1" + ql + u + _ + l + e + t, 1, i + h + ro + " +k=1" + rd + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + id + u + _ + l + e + t, 1, i + h + Do + " +k=1" + Jf + u + _ + l + e + t, 1, i + h + eo + " +k=1" + qc + u + _ + l + e + t, 1, i + h + hc + " +k=1" + td + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + jl + u + _ + l + e + t, 1, i + h + cc + " +k=1" + ul + u + _ + l + e + t, 1, i + h + xs + " +k=1" + ou + u + _ + l + e + t, 1, i + h + O0 + " +k=1" + su + u + _ + l + e + t, 1, i + h + _c + " +k=1" + Hh + u + _ + l + e + t, 1, i + h + I0 + " +k=1" + ru + u + _ + l + e + t, 1, i + h + Hd + " +k=1" + iu + u + _ + l + e + t, 1, i + h + " +lon_0=60 +k=1" + Fl + u + _ + l + e + t, 1, i + h + Cf + " +k=1" + au + u + _ + l + e + t, 1, i + h + Wp + " +k=1" + zl + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + lu + u + _ + l + e + t, 1, i + h + j_ + " +k=1" + ed + u + _ + l + e + t, 1, i + h + Si + " +k=1" + uu + u + _ + l + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + l + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + l + e + t, 1, i + h + Yi + " +k=1" + Yu + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + l + e + t, 1, i + h + $l + " +k=1" + $u + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + l + e + t, 1, i + h + ml + " +k=1" + p0 + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + _0 + u + _ + l + e + t, 1, i + h + gu + " +k=1" + m0 + u + _ + l + e + t, 1, i + h + ie + " +k=1" + g0 + u + _ + l + e + t, 1, i + h + la + " +k=1" + v0 + u + _ + l + e + t, 1, i + h + v + " +k=1" + y0 + u + _ + l + e + t, 1, i + h + Kl + " +k=1" + b0 + u + _ + l + e + t, 1, i + h + tt + " +k=1" + w0 + u + _ + l + e + t, 1, i + h + gl + " +k=1" + hp + u + _ + l + e + t, 1, i + h + Se + " +k=1" + x0 + u + _ + l + e + t, 1, i + h + aa + " +k=1" + cp + u + _ + l + e + t, 1, i + h + k + " +k=1" + k0 + u + _ + l + e + t, 1, i + h + Np + " +k=1 +x_0=46500000" + u + _ + l + e + t, 1, i + h + Nd + " +k=1" + J3 + u + _ + l + e + t, 1, i + h + O_ + " +k=1 +x_0=48500000" + u + _ + l + e + t, 1, i + h + vf + " +k=1 +x_0=49500000" + u + _ + l + e + t, 1, i + h + yf + " +k=1 +x_0=50500000" + u + _ + l + e + t, 1, i + h + sc + " +k=1 +x_0=51500000" + u + _ + l + e + t, 1, i + h + $y + " +k=1 +x_0=52500000" + u + _ + l + e + t, 1, i + h + Gd + " +k=1 +x_0=53500000" + u + _ + l + e + t, 1, i + h + P0 + " +k=1 +x_0=54500000" + u + _ + l + e + t, 1, i + h + ac + " +k=1 +x_0=55500000" + u + _ + l + e + t, 1, i + h + I_ + " +k=1 +x_0=56500000" + u + _ + l + e + t, 1, i + h + vu + " +k=1 +x_0=57500000" + u + _ + l + e + t, 1, i + h + R_ + " +k=1 +x_0=58500000" + u + _ + l + e + t, 1, i + h + Yl + " +k=1 +x_0=59500000" + u + _ + l + e + t, 2, i + h + eh + " +k=1 +x_0=61500000" + u + _ + l + e + t, 1, i + h + w_ + " +k=1 +x_0=62500000" + u + _ + l + e + t, 1, i + h + Yh + " +k=1 +x_0=63500000" + u + _ + l + e + t, 1, i + h + x_ + " +k=1 +x_0=64500000" + u + _ + l + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + l + e + t, 1, i + h + ro + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + l + e + t, 1, i + h + Do + " +k=1" + y + u + _ + l + e + t, 1, i + h + eo + " +k=1" + y + u + _ + l + e + t, 1, i + h + hc + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + l + e + t, 1, i + h + cc + " +k=1" + y + u + _ + l + e + t, 1, i + h + xs + " +k=1" + y + u + _ + l + e + t, 1, i + h + O0 + " +k=1" + y + u + _ + l + e + t, 1, i + h + _c + " +k=1" + y + u + _ + l + e + t, 1, i + h + I0 + " +k=1" + y + u + _ + l + e + t, 1, i + h + Hd + " +k=1" + y + u + _ + l + e + t, 1, i + h + " +lon_0=60 +k=1" + y + u + _ + l + e + t, 1, i + h + Cf + " +k=1" + y + u + _ + l + e + t, 1, i + h + Wp + " +k=1" + y + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + y + u + _ + l + e + t, 1, i + h + j_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + Si + " +k=1" + y + u + _ + l + e + t, 1, i + h + wl + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + l + e + t, 1, i + h + bu + " +k=1" + y + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + l + e + t, 1, i + h + $l + " +k=1" + y + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + l + e + t, 1, i + h + ml + " +k=1" + y + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + l + e + t, 1, i + h + gu + " +k=1" + y + u + _ + l + e + t, 1, i + h + ie + " +k=1" + y + u + _ + l + e + t, 1, i + h + la + " +k=1" + y + u + _ + l + e + t, 1, i + h + v + " +k=1" + y + u + _ + l + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + l + e + t, 1, i + h + tt + " +k=1" + y + u + _ + l + e + t, 1, i + h + gl + " +k=1" + y + u + _ + l + e + t, 1, i + h + Se + " +k=1" + y + u + _ + l + e + t, 1, c + js + Z + F + Zw + e + t, 1, c + wo + Z + F + Zw + e + t, 1, i + h + aa + " +k=1" + y + u + _ + l + e + t, 1, i + h + k + " +k=1" + y + u + _ + l + e + t, 1, i + h + Np + " +k=1" + y + u + _ + l + e + t, 1, i + h + Nd + " +k=1" + y + u + _ + l + e + t, 1, i + h + O_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + vf + " +k=1" + y + u + _ + l + e + t, 1, i + h + yf + " +k=1" + y + u + _ + l + e + t, 1, i + h + sc + " +k=1" + y + u + _ + l + e + t, 1, i + h + $y + " +k=1" + y + u + _ + l + e + t, 1, i + h + Gd + " +k=1" + y + u + _ + l + e + t, 1, i + h + P0 + " +k=1" + y + u + _ + l + e + t, 1, i + h + ac + " +k=1" + y + u + _ + l + e + t, 1, i + h + I_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + vu + " +k=1" + y + u + _ + l + e + t, 1, i + h + R_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yl + " +k=1" + y + u + _ + l + e + t, 1, i + h + Gp + " +k=1" + y + u + _ + l + e + t, 1, i + h + eh + " +k=1" + y + u + _ + l + e + t, 1, i + h + w_ + " +k=1" + y + u + _ + l + e + t, 1, i + h + Yh + " +k=1" + y + u + _ + l + e + t, 1, i + h + x_ + " +k=1" + y + u + _ + l + e + t, 1, i + dl + U1 + Rd + ot + u + n + r + e + t, 1, i + fi + L0 + fe + D + u + n + r + e + t, 1, i + nn + Ir + m + J + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + e + t, 1, i + nn + Dc + fe + J + u + n + r + e + t, 1, a + Xo + Ta + ke + ws + H + u + n + r + e + t, 1, a + Wr + hf + vs + ws + H + Vl + n + r + e + t, 1, a + Cs + Ns + Dt + bs + Cn + He + n + r + e + t, 1, a + To + lo + Ft + bs + Cn + He + n + r + e + t, 1, a + wt + Ao + of + he + Cn + He + n + r + e + t, 1, a + Vc + Lf + uo + sf + Cn + He + n + r + e + t, 1, a + xi + ho + af + Wl + Cn + He + n + r + e + t, 1, a + Oo + $o + Qs + Bc + Cn + He + n + r + e + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + r + e + t, 1, a + Kc + Yc + ls + Qe + zt + Nt + n + r + e + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + r + e + t, 1, a + La + lf + Io + Hc + uv + hv + n + r + e + t, 1, i + bn + Ui + uf + ot + u + n + r + e + t, 1, i + Et + zn + st + ot + u + n + r + e + t, 1, i + Et + mf + st + ot + u + n + r + e + t, 1, a + $c + Js + Mf + Xc + D + u + n + r + e + t, 1, i + fi + dr + m + ot + u + n + r + e + t, 1, i + fi + pi + m + R + u + n + r + e + t, 1, i + gg + Ev + Pe + y + u + n + r + e + t, 1, i + vg + Jm + Pe + y + u + n + r + e + t, 1, i + Ce + nh + vl + y + u + n + r + e + t, 1, i + yg + Sv + vl + y + u + n + r + e + t, 1, i + bg + tg + " +k=1" + y + u + n + r + e + t, 1, i + pt + fs + Te + ot + u + n + r + e + t, 1, i + pt + pu + Te + y + u + n + r + e + t, 1, i + pt + Nc + fe + Lr + u + n + r + e + t, 1, i + Q + Ss + oi + xe + u + n + r + e + t, 1, i + Q + pr + st + R + u + n + r + e + t, 1, i + Zn + bi + Pe + Be + rh + n + r + e + t, 1, i + Zn + ba + Pe + Ds + rh + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + r + e + t, 1, a + Qn + Aa + it + Qt + y + u + n + r + e + t, 1, a + Vi + Dr + kn + si + H + u + n + r + e + t, 1, a + $r + ys + Q + Fr + H + Vl + n + r + e + t, 1, a + Xt + ao + Zn + Uc + y + u + n + r + e + t, 1, a + ci + ta + Jt + dt + y + He + n + r + e + t, 1, a + Oh + Ih + dl + cl + Ye + u + n + r + e + t, 1, a + kd + Ld + Md + Zr + Ye + u + n + r + e + t, 1, i + rn + Ra + m + xe + u + n + r + e + t, 1, i + we + zr + Pe + Ds + u + n + r + e + t, 1, a + od + _d + Ft + mu + H + u + n + r + e + t, 1, a + As + Ps + es + Gt + ot + rf + n + r + e + t, 1, a + Oa + ts + es + Ul + y + u + n + r + e + t, 1, a + rl + ea + Tn + pl + Kv + u + n + r + e + t, 1, a + md + po + il + $t + pp + u + n + r + e + t, 1, a + Ne + gd + T + $t + Jc + u + n + r + e + t, 1, a + Rh + Dh + Zl + wa + Lr + Mr + n + r + e + t, 1, a + cd + Bh + mo + Wc + Lr + Mr + n + r + e + t, 1, a + Nh + Hu + wu + lc + Lr + Mr + n + r + e + t, 1, i + ia + ds + Bn + xe + u + n + r + e + t, 1, i + ia + ri + Bn + R + u + n + r + e + t, 1, i + Ys + d_ + fe + Hn + u + n + r + e + t, 1, i + Ys + cl + fe + y + u + n + r + e + t, 1, i + Z1 + p_ + st + dy + u + n + r + e + t, 1, a + Na + qd + sd + Ku + D + u + n + r + e + t, 1, a + ks + Ns + Ia + fr + y + u + n + r + e + t, 1, i + jr + wi + m + ot + Yv + n + r + e + t, 1, i + jr + xa + m + y + fl + n + r + e + t, 1, i + jr + qi + m + Lr + tf + n + r + e + t, 1, i + I + Yo + Pe + xe + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + nn + Ko + Wu + vd + u + n + r + e + t, 1, i + nn + Gc + m + y + u + n + r + e + t, 1, i + nn + hi + jc + py + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + it + Di + an + Hn + u + n + r + e + t, 1, i + it + ps + an + kp + u + n + r + e + t, 1, a + Ma + Ur + ye + gf + xe + u + n + r + e + t, 1, a + Le + _o + Bo + Lt + D + u + n + r + e + t, 1, a + Os + sl + Br + Lt + D + u + n + r + e + t, 1, a + Ed + Bl + cr + f + D + u + n + r + e + t, 1, a + Gh + jh + bn + f + D + u + n + r + e + t, 1, a + ki + Gu + Ef + si + D + u + n + r + e + t, 1, a + xh + ju + Ea + si + D + u + n + r + e + t, 1, a + fc + Kr + rn + he + Gn + u + n + r + e + t, 1, a + dc + us + pt + he + ze + u + n + r + e + t, 1, i + Mi + Gt + nd + Be + u + n + r + e + t, 1, a + Fh + _i + Ve + fr + D + u + n + r + e + t, 1, a + Sd + Is + En + gn + D + u + n + r + e + t, 1, a + Mh + ld + ke + sh + D + u + n + r + e + t, 1, a + al + ud + Sf + Zc + ot + Ee + n + r + e + t, 1, a + Il + Eh + Ca + Fr + D + yr + n + r + e + t, 1, a + Sh + Rl + hs + gn + R + G + n + r + e + t, 1, a + Dl + Fu + Zi + _l + D + tf + n + r + e + t, 1, a + qo + Es + Po + Fr + xe + Vh + n + r + e + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + r + e + t, 1, a + Xu + oo + kn + ae + y + yr + n + r + e + t, 1, a + Qu + Co + Q + ae + y + G + n + r + e + t, 1, i + I + ef + Fc + y + u + n + r + e + t, 1, a + wd + Ch + Ft + Zt + qn + yr + n + r + e + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + r + e + t, 1, a + Le + xd + Bo + _s + y + u + n + r + e + t, 1, a + Ph + zu + Li + he + y + u + n + r + e + t, 1, a + fd + Wd + cf + Un + D + u + n + r + e + t, 1, a + zh + Uh + Pf + zn + D + u + n + r + e + t, 1, a + Uu + Th + gs + On + D + u + n + r + e + t, 1, a + _u + hd + Ve + On + D + u + n + r + e + t, 1, a + Ah + qu + pc + On + D + u + n + r + e + t, 1, i + cn + so + an + ot + u + n + r + e + t, 1, i + cn + ka + an + H + Mr + n + r + e + t, 1, i + cn + zc + an + D + u + n + r + e + t, 1, i + cn + Yr + an + Lr + Mr + n + r + e + t, 1, a + tn + fn + wn + Oe + ot + Da + n + r + e + t, 1, i + nn + Ir + m + J + u + n + r + ct + t, 1, i + nn + ya + m + J + u + n + r + ct + t, 1, i + nn + Dc + fe + J + u + n + r + ct + t, 1, a + Cs + Ns + Dt + bs + $e + ne + n + r + d + t, 1, a + To + lo + Ft + bs + $e + ne + n + r + d + t, 1, a + wt + Ao + of + he + $e + ne + n + r + d + t, 1, a + Vc + Lf + uo + sf + $e + ne + n + r + d + t, 1, a + xi + ho + af + Wl + $e + ne + n + r + d + t, 1, a + Oo + $o + Qs + Bc + $e + ne + n + r + d + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + r + d + t, 1, a + Kc + Yc + ls + Qe + ai + pn + n + r + d + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + r + d + t, 1, a + La + lf + Io + Hc + Ug + qg + n + r + d + t, 1, i + bn + Ui + uf + Ht + u + n + r + d + t, 1, i + Et + zn + st + Ht + u + n + r + d + t, 1, i + Et + mf + st + Ht + u + n + r + d + t, 1, a + $c + Js + Mf + Xc + D + u + n + r + d + t, 1, i + fi + dr + m + Ht + u + n + r + d + t, 1, i + fi + pi + m + ui + u + n + r + d + t, 1, i + pt + fs + Te + Ht + u + n + r + d + t, 1, i + pt + pu + Te + ge + u + n + r + d + t, 1, i + pt + Nc + fe + Hg + u + n + r + d + t, 3, a + Xt + ao + Zn + Uc + ge + u + n + r + d + t, 1, a + ci + ta + Jt + dt + ge + ne + n + r + d + t, 1, a + od + _d + Ft + mu + Zg + u + n + r + d + t, 1, a + As + Ps + es + Gt + Ht + rf + n + r + d + t, 1, a + Oa + ts + es + Ul + ge + u + n + r + d + t, 1, a + rl + ea + Tn + pl + Wg + u + n + r + ct + t, 1, a + md + po + il + $t + Vg + u + n + r + ct + t, 1, a + Ne + gd + T + $t + sv + u + n + r + ct + t, 1, i + ia + ds + Bn + _e + u + n + r + d + t, 1, i + ia + ri + Bn + ui + u + n + r + d + t, 1, a + Na + qd + sd + Ku + ms + u + n + r + ct + t, 1, i + nn + Ko + Wu + vd + u + n + r + d + t, 1, i + nn + Gc + m + ge + u + n + r + d + t, 1, i + nn + hi + jc + Kg + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, i + it + Di + an + Yg + u + n + r + d + t, 1, i + it + ps + an + $g + u + n + r + d + t, 1, a + Ma + Ur + ye + gf + _e + u + n + r + d + t, 1, a + Le + _o + Bo + Lt + ms + u + n + r + ct + t, 1, a + Os + sl + Br + Lt + ms + u + n + r + ct + t, 1, a + ki + Gu + Ef + si + D + u + n + r + d + t, 1, a + xh + ju + Ea + si + D + u + n + r + d + t, 1, a + fc + Kr + rn + he + n_ + u + n + r + ct + t, 1, a + dc + us + pt + he + r_ + u + n + r + ct + t, 1, a + Mh + ld + ke + sh + D + u + n + r + d + t, 1, a + al + ud + Sf + Zc + Ht + zi + n + r + d + t, 1, a + Il + Eh + Ca + Fr + D + Zf + n + r + d + t, 1, a + Sh + Rl + hs + gn + ui + G + n + r + d + t, 1, a + Dl + Fu + Zi + _l + D + rv + n + r + d + t, 1, a + qo + Es + Po + Fr + _e + iv + n + r + d + t, 1, a + Qn + Ho + kr + ae + vi + D3 + n + r + ct + t, 1, a + Xu + oo + kn + ae + vi + U3 + n + r + ct + t, 1, a + Qu + Co + Q + ae + vi + q3 + n + r + ct + t, 1, a + wd + Ch + Ft + Zt + Wf + Zf + n + r + d + t, 1, a + Xt + Pa + Jt + Zt + Wf + zi + n + r + d + t, 1, a + Le + xd + Bo + _s + ge + u + n + r + d + t, 1, a + Ph + zu + Li + he + ge + u + n + r + d + t, 1, a + Uu + Th + gs + On + D + u + n + r + d + t, 1, a + _u + hd + Ve + On + D + u + n + r + d + t, 1, a + Ah + qu + pc + On + D + u + n + r + d + t, 1, i + h + " +lon_0=13" + Me + y + u + Ke + le + ML + e + t, 1, i + " +lat_0=24.45" + kM + vl + ot + oa + b + M5 + e + t, 1, c + fa + Z + O + F1 + e + t, 2, i + eg + " +lon_0=41.53333333333333 +k=1 +x_0=1300000" + u + _ + s + e + t, 1, i + eg + " +lon_0=44.53333333333333 +k=1" + s6 + u + _ + s + e + t, 1, i + eg + " +lon_0=47.53333333333333 +k=1" + a6 + u + _ + s + e + t, 1, i + eg + " +lon_0=50.53333333333333 +k=1" + l6 + u + _ + s + e + t, 1, i + p3 + " +lon_0=50.76666666666667 +k=1" + s6 + u + _ + s + e + t, 1, i + p3 + " +lon_0=53.76666666666667 +k=1" + a6 + u + _ + s + e + t, 1, i + p3 + " +lon_0=56.76666666666667 +k=1" + l6 + u + _ + s + e + t, 1, c + Qi + b + mL + e + t, 1, c + Qi + b + EL + e + t, 2, i + h + Uv + m + Re + u + n + r + e + t, 1, i + h + c_ + m + Re + u + n + r + e + t, 1, i + h + f_ + m + Re + u + n + r + e + t, 1, i + h + qv + m + Re + u + n + r + e + t, 1, i + h + Ul + m + Re + u + n + r + e + t, 1, i + h + Hv + m + Re + u + n + r + e + t, 1, i + h + Zv + m + Re + u + n + r + e + t, 1, i + h + Un + m + Re + u + n + r + e + t, 1, se + Zl + r6 + b_ + Gn + u6 + n + r + e + t, 1, se + " +lat_0=47.25" + C0 + b_ + H + _r + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 2, ur + " +lat_1=55" + Tf + F_ + ff + z + u + w + d + t, 1, i + Zn + bi + Pe + Qg + oe + n + r + d + t, 1, i + Zn + ba + Pe + Ds + oe + n + r + d + t, 1, i + Zn + bi + Pe + Qg + oe + n + r + d + t, 1, i + Zn + ba + Pe + Ds + oe + n + r + d + t, 1, c + Tr + b + SL + e + t, 1, c + Tr + b + gL + e + t, 1, c + Ai + b + Jw + e + t, 1, c + Ai + n + r + e + t, 1, c + Tr + b + zL + e + t, 2, c + Gs + Z + n + r + e + t, 1, c + Cl + Z + b + UL + e + t, 1, c + Ka + Z + b + D5 + e + t, 1, c + Ya + Z + b + t8 + e + t, 2, c + Xi + Z + b + vL + e + t, 1, c + Ls + Z + b + J5 + e + t, 6, c + Qr + F + KL + e + t, 1, c + Jl + Z + b + yL + e + t, 3, a + ks + sa + ce + he + H + u + n + r + e + t, 1, a + ks + sa + ce + he + i_ + u + n + r + ct + t, 1, a + ks + sa + ce + he + H + u + n + r + e + t, 1, a + ks + sa + ce + he + i_ + u + n + r + ct + t, 1, c + Ls + Z + b + Yw + e + t, 1, c + Ls + Z + b + CL + e + t, 1, c + Ls + Z + b + P5 + e + t, 1, c + Ls + Z + b + jm + e + t, 1, c + Xi + Z + b + bL + e + t, 1, du + " +lon_0=110" + Jp + _p + Lp + O + F1 + e + t, 1, du + " +lon_0=110" + Jp + _p + Lp + O + va + e + t, 1, du + " +lon_0=110" + Jp + _p + Lp + O + zm + e + t, 1, i + h + yo + Me + ze + u + b + tu + e + t, 1, i + h + hr + Me + " +x_0=2520000" + u + b + tu + e + t, 1, ur + z_ + " +lat_2=58.5" + mo + " +lon_0=-126" + Ye + u + n + r + e + t, 1, c + bo + n + r + e + t, 1, i + h + no + " +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=13.5 +k=1" + Nn + u + n + r + e + t, 1, i + h + hr + " +k=1" + Nn + u + n + r + e + t, 1, i + h + _y + " +k=1" + Nn + u + n + r + e + t, 1, i + h + kf + " +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=14.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=15.75 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=17.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=18.75 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=20.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=21.75 +k=1" + Nn + u + n + r + e + t, 1, i + h + " +lon_0=23.25 +k=1" + Nn + u + n + r + e + t, 1, i + h + LM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + MM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + EM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + SM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + CM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + PM + " +k=1" + ze + u + O + yn + e + t, 1, i + h + LM + " +k=1" + ze + u + O + e + t, 1, i + h + MM + " +k=1" + ze + u + O + e + t, 1, i + h + EM + " +k=1" + ze + u + O + e + t, 1, i + h + SM + " +k=1" + ze + u + O + e + t, 1, i + h + CM + " +k=1" + ze + u + O + e + t, 1, i + h + PM + " +k=1" + ze + u + O + e + t, 1, _n + K + " +lat_ts=-71" + qr + " +k=1" + z + u + M + e + t, 1, _n + K + " +lat_ts=-71 +lon_0=70 +k=1" + pp + fl + M + e + t, 1, a + " +lat_1=-68.5 +lat_2=-74.5 +lat_0=-50 +lon_0=70" + pp + fl + M + e + t, 1, a + U_ + Tf + gc + xl + Jc + __ + n + r + e + t, 1, ra + gc + xl + m_ + g_ + n + r + e + t, 1, c + js + Z + W + ng + e + t, 1, c + wo + Z + W + ng + e + t, 3, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, c + Ll + n + r + e + t, 1, c + xu + n + r + e + t, 1, c + Gi + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 1, c + Go + n + r + e + t, 1, c + js + n + r + e + t, 1, c + wo + n + r + e + t, 5, c + El + b + $m + e + t, 1, c + Af + b + $m + e + t, 1, c + Qi + b + $m + e + t, 1, a + " +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19" + y + He + n + r + e + t, 1, i + h + " +lon_0=-8.5 +k=1" + yl + " +y_0=-7800000" + b + E5 + e + t, 1, i + h + ro + Me + y + " +y_0=-6000000" + n + r + e + t, 1, c + Ls + Z + b + iL + e + t, 1, c + Qi + b + z5 + e + t, 1, c + El + b + V5 + e + t, 1, c + El + b + H5 + e + t, 1, c + Gi + W + r + e + t, 1, c + bo + W + r + e + t, 1, i + h + " +lon_0=37" + Zp + y + t6 + b + ut + e + t, 1, c + Go + n + r + e + t, 1, lr + " +lat_0=52.41864827777778 +lon_0=13.62720366666667" + bf + " +y_0=10000" + O + ve + e + t, 1, i + h + On + Me + y + " +y_0=-4500000" + w + e + t, 1, i + h + On + Me + my + Cv + n + r + e + t, 1, i + h + On + Me + my + Cv + n + r + e + t, 1, i + Ve + mv + Ba + R + u + n + r + e + t, 2, i + we + gv + Ba + xe + u + n + r + e + t, 1, i + Ve + mv + Ba + R + u + n + r + e + t, 2, i + we + gv + Ba + xe + u + n + r + e + t, 1, Jn + wg + " +lonc=-86" + cv + Me + fv + lv + xo + dv + n + r + e + t, 1, Jn + wg + " +lonc=-86" + cv + Me + fv + lv + xo + dv + n + r + e + t, 1, a + TM + AM + OM + fr + " +x_0=914400 +y_0=914400" + w + ct + t, 1, a + TM + AM + OM + fr + Ye + Ee + n + r + e + t, 1, a + Cd + Vd + ah + fr + ze + Vh + n + r + e + t, 1, ur + Cd + Vd + ah + fr + ze + fl + n + r + e + t, 1, a + Cd + Vd + ah + fr + ze + Vh + n + r + e + t, 1, ur + Cd + Vd + ah + fr + ze + fl + n + r + e + t, 1, ur + " +lat_1=24" + gy + " +lat_0=24" + rc + H + u + n + r + e + t, 1, ur + " +lat_1=24" + gy + " +lat_0=24" + rc + H + u + n + r + e + t, 1, a + eu + qh + Jt + dt + ze + Ee + n + r + e + t, 1, a + eu + qh + Jt + dt + ze + zi + n + r + d + t, 1, a + eu + qh + Jt + dt + ze + Ee + n + r + e + t, 1, a + eu + qh + Jt + dt + ze + zi + n + r + d + t, 1, c + Fs + O + rt + e + t, 1, c + da + O + rt + e + t, 1, c + Sl + O + rt + e + t, 1, c + Ha + O + rt + e + t, 1, c + Ql + O + rt + e + t, 1, c + Fs + n + r + e + t, 1, c + da + n + r + e + t, 1, c + Sl + n + r + e + t, 1, c + Ha + n + r + e + t, 1, c + Ql + n + r + e + t, 1, a + " +lat_1=-14.26666666666667 +lat_0=-14.26666666666667" + k_ + " +k_0=1" + X + " +y_0=95169.31165862332" + F + PL + d + t, 4, i + h + Yi + Me + y + u + Gr + Wt + fL + e + t, 1, a + " +lat_1=-28" + Xy + " +lat_0=-32" + k + Ye + yr + n + r + e + t, 1, i + y_ + " +lon_0=-2.416666666666667 +k=0.999997 +x_0=47000" + jp + n + r + e + t, 1, i + " +lat_0=49.225 +lon_0=-2.135 +k=0.9999999000000001" + bf + " +y_0=70000" + n + r + e + t, 1, a + " +lat_1=-36 +lat_2=-38 +lat_0=-37 +lon_0=145" + Gn + In + bt + V + e + t, 1, a + " +lat_1=-36 +lat_2=-38 +lat_0=-37 +lon_0=145" + Gn + Ju + n + r + e + t, 1, a + " +lat_1=-18" + Xy + h + " +lon_0=134" + z + u + n + r + e + t, 1, i + " +lat_0=-28" + sc + vl + yl + Mr + n + r + e + t, 1, i + W1 + " +lon_0=-80.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-77.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-74.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-71.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + W1 + " +lon_0=-68.07750791666666 +k=1" + Ye + Ee + n + r + e + t, 1, i + h + vy + " +k=0.999" + Ye + Ee + b + sL + e + t, 1, se + " +lat_0=50.625 +lon_0=21.08333333333333" + Zp + " +x_0=4637000 +y_0=5467000" + _ + U + e + t, 1, i + h + v + Bn + y + u + F + Xe + e + t, 1, i + h + Qy + Bn + y + u + F + Xe + e + t, 1, i + h + Jy + Bn + y + u + F + Xe + e + t, 1, i + h + tt + Bn + y + u + F + Xe + e + t, 1, i + h + Rp + Bn + y + u + F + Xe + e + t, 1, i + h + zd + " +k=1" + y + u + n + r + e + t, 1, i + h + Vp + " +k=1" + y + u + n + r + e + t, 1, i + h + Rn + " +k=1" + y + u + n + r + e + t, 1, i + h + q_ + " +k=1" + y + u + n + r + e + t, 1, i + h + A0 + " +k=1" + y + u + n + r + e + t, 1, i + h + ro + " +k=1" + y + u + n + r + e + t, 1, i + h + Ud + " +k=1" + y + u + n + r + e + t, 1, i + h + Kp + " +k=1" + y + u + n + r + e + t, 1, i + h + Ei + " +k=1" + y + u + n + r + e + t, 1, i + h + Kd + " +k=1" + y + u + n + r + e + t, 1, i + h + " +lon_0=29 +k=1" + y + u + n + r + e + t, 1, i + h + Do + " +k=1" + y + u + n + r + e + t, 1, i + h + xf + " +k=1" + y + u + n + r + e + t, 2, lr + " +lat_0=-18 +lon_0=178 +x_0=109435.392 +y_0=141622.272" + W3 + K3 + a3 + " +to_meter=0.201168" + t, 1, c + Xl + Z + b + Ww + e + t, 1, c + Jl + Z + b + Ww + e + t, 6, c + zs + Gr + Wt + Vm + e + t, 1, c + Us + Gr + Wt + Vm + e + t, 3, i + h + " +lon_0=18.05779 +k=0.99999425 +x_0=100178.1808 +y_0=-6500614.7836" + n + r + e + t, 1, ur + z_ + " +lat_2=58.5" + mo + " +lon_0=-126" + Ye + u + n + r + e + t, 1, c + Ya + n + r + e + t, 1, c + Eu + n + r + e + t, 1, c + Su + n + r + e + t, 1, c + ku + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, a + yy + " +lat_2=53.5" + h + Fp + " +x_0=930000 +y_0=6430000" + n + r + e + t, 1, a + yy + " +lat_2=53.5" + h + Fp + " +x_0=930000 +y_0=6430000" + n + r + e + t, 1, a + " +lat_1=-20.66666666666667 +lat_2=-22.33333333333333 +lat_0=-21.5" + tb + H + oa + n + r + e + t, 1, c + Ls + Z + W + X5 + e + t, 1, a + " +lat_1=-22.24469175 +lat_2=-22.29469175 +lat_0=-22.26969175 +lon_0=166.44242575 +x_0=0.66 +y_0=1.02" + b + jm + e + t, 1, a + " +lat_1=-22.24472222222222 +lat_2=-22.29472222222222 +lat_0=-22.26972222222222 +lon_0=166.4425 +x_0=8.313000000000001 +y_0=-2.354" + b + jm + e + t, 1, Jn + uh + h6 + ZE + jd + bf + u + xo + gr + Y3 + G3 + " +to_meter=20.116756" + t, 1, Jn + uh + h6 + ZE + jd + " +x_0=804670.24" + u + xo + gr + Y3 + G3 + e + t, 1, c + Of + Z + n + r + e + t, 1, c + Ls + Z + n + r + e + t, 1, c + ja + Z + n + r + e + t, 1, c + ja + Z + b + Yw + e + t, 2, ur + " +lat_1=42.122774 +lat_2=49.01518 +lat_0=45.568977 +lon_0=-84.455955" + Ye + Ee + n + r + e + t, 1, ur + " +lat_1=42.122774 +lat_2=49.01518 +lat_0=45.568977 +lon_0=-83.248627" + Ye + Ee + n + r + e + t, 1, i + h + Ky + Me + y + u + Gr + Wt + Vm + e + t, 1, i + h + qp + " +k=0.9965000000000001" + Ye + u + b + ft + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + Ms + n + r + e + t, 1, c + Wa + n + r + e + t, 1, c + Fa + n + r + e + t, 1, c + El + n + r + e + t, 1, c + Af + n + r + e + t, 1, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, i + h + yo + Bn + ot + u + b + ft + e + t, 1, i + h + " +lon_0=11" + Bn + ot + u + b + ft + e + t, 1, i + h + " +lon_0=13" + Bn + ot + u + b + ft + e + t, 1, i + h + hr + Bn + ot + u + b + ft + e + t, 1, i + h + qp + Bn + ot + u + b + ft + e + t, 1, i + h + zd + Bn + ot + u + b + ft + e + t, 1, i + h + Rn + Bn + ot + u + b + ft + e + t, 1, i + h + A0 + Bn + ot + u + b + ft + e + t, 1, i + h + Ud + Bn + ot + u + b + ft + e + t, 1, c + Gi + b + ft + e + t, 1, a + Mp + $h + xs + I3 + ze + c6 + N + Q5 + e + t, 1, c + bo + b + ft + e + t, 1, c + ca + b + ft + e + t, 1, c + Go + b + ft + e + t, 1, a + _3 + m3 + K + Bd + z + u + M + e + t, 1, a + _3 + m3 + K + uc + z + u + M + e + t, 1, a + _3 + m3 + K + " +lon_0=-42" + z + u + M + e + t, 1, a + Fn + nr + K + w_ + z + u + M + e + t, 1, a + Fn + nr + K + Bd + z + u + M + e + t, 1, a + Fn + nr + K + uc + z + u + M + e + t, 1, a + Fn + nr + K + cc + z + u + M + e + t, 1, a + Fn + nr + K + I0 + z + u + M + e + t, 1, a + Fn + nr + K + Wp + z + u + M + e + t, 1, a + Fn + nr + K + wl + z + u + M + e + t, 1, a + Fn + nr + K + Yi + z + u + M + e + t, 1, a + Fn + nr + K + ml + z + u + M + e + t, 1, a + Fn + nr + K + la + z + u + M + e + t, 1, a + Fn + nr + K + gl + z + u + M + e + t, 1, a + Fn + nr + K + Np + z + u + M + e + t, 1, a + Fn + nr + K + yf + z + u + M + e + t, 1, a + Fn + nr + K + P0 + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-102" + z + u + M + e + t, 1, a + Ue + on + K + On + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-78" + z + u + M + e + t, 1, a + Ue + on + K + Bd + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-18" + z + u + M + e + t, 1, a + Ue + on + K + " +lon_0=-6" + z + u + M + e + t, 1, a + Ue + on + K + Qp + z + u + M + e + t, 1, a + Ue + on + K + kf + z + u + M + e + t, 1, a + Ue + on + K + Do + z + u + M + e + t, 1, a + Ue + on + K + cc + z + u + M + e + t, 1, a + Ue + on + K + I0 + z + u + M + e + t, 1, a + Ue + on + K + Wp + z + u + M + e + t, 1, a + Ue + on + K + wl + z + u + M + e + t, 1, a + Ue + on + K + Yi + z + u + M + e + t, 1, a + Ue + on + K + ml + z + u + M + e + t, 1, a + Ue + on + K + la + z + u + M + e + t, 1, a + Ue + on + K + gl + z + u + M + e + t, 1, a + Ue + on + K + Np + z + u + M + e + t, 1, a + Ue + on + K + yf + z + u + M + e + t, 1, a + Ue + on + K + P0 + z + u + M + e + t, 1, a + Ue + on + K + R_ + z + u + M + e + t, 1, a + ht + Dn + K + by + z + u + M + e + t, 1, a + ht + Dn + K + wy + z + u + M + e + t, 1, a + ht + Dn + K + Xh + z + u + M + e + t, 1, a + ht + Dn + K + _l + z + u + M + e + t, 1, a + ht + Dn + K + zn + z + u + M + e + t, 1, a + ht + Dn + K + C0 + z + u + M + e + t, 1, a + ht + Dn + K + " +lon_0=-27" + z + u + M + e + t, 1, a + ht + Dn + K + " +lon_0=-9" + z + u + M + e + t, 1, a + ht + Dn + K + yo + z + u + M + e + t, 1, a + ht + Dn + K + Ei + z + u + M + e + t, 1, a + ht + Dn + K + xs + z + u + M + e + t, 1, a + ht + Dn + K + Cf + z + u + M + e + t, 1, a + ht + Dn + K + Ci + z + u + M + e + t, 1, a + ht + Dn + K + Ti + z + u + M + e + t, 1, a + ht + Dn + K + v + z + u + M + e + t, 1, a + ht + Dn + K + k + z + u + M + e + t, 1, a + ht + Dn + K + sc + z + u + M + e + t, 1, a + ht + Dn + K + vu + z + u + M + e + t, 1, a + gt + vt + K + x_ + z + u + M + e + t, 1, a + gt + vt + K + " +lon_0=-144" + z + u + M + e + t, 1, a + gt + vt + K + df + z + u + M + e + t, 1, a + gt + vt + K + pf + z + u + M + e + t, 1, a + gt + vt + K + D_ + z + u + M + e + t, 1, a + gt + vt + K + " +lon_0=-48" + z + u + M + e + t, 1, a + gt + vt + K + " +lon_0=-24" + z + u + M + e + t, 1, a + gt + vt + K + qr + z + u + M + e + t, 1, a + gt + vt + K + ro + z + u + M + e + t, 1, a + gt + vt + K + O0 + z + u + M + e + t, 1, a + gt + vt + K + j_ + z + u + M + e + t, 1, a + gt + vt + K + $l + z + u + M + e + t, 1, a + gt + vt + K + Kl + z + u + M + e + t, 1, a + gt + vt + K + O_ + z + u + M + e + t, 1, a + gt + vt + K + I_ + z + u + M + e + t, 1, _n + K + An + L_ + " +k=1" + z + u + M + e + t, 1, _n + K + An + wy + " +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-105 +k=1" + z + u + M + e + t, 1, _n + K + An + B_ + " +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-45 +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-15 +k=1" + z + u + M + e + t, 1, _n + K + An + hr + " +k=1" + z + u + M + e + t, 1, _n + K + An + xs + " +k=1" + z + u + M + e + t, 1, _n + K + An + Si + " +k=1" + z + u + M + e + t, 1, _n + K + An + Pn + " +k=1" + z + u + M + e + t, 1, _n + K + An + k + " +k=1" + z + u + M + e + t, 1, _n + K + An + ac + " +k=1" + z + u + M + e + t, 1, _n + K + An + Pd + " +k=1" + z + u + M + e + t, 1, _n + K + An + On + " +k=1" + z + u + M + e + t, 1, _n + K + An + " +lon_0=-30 +k=1" + z + u + M + e + t, 1, _n + K + An + Do + " +k=1" + z + u + M + e + t, 1, _n + K + An + Yi + " +k=1" + z + u + M + e + t, 1, _n + K + An + yf + " +k=1" + z + u + M + e + t, 1, _n + K + An + qr + " +k=1" + z + u + M + e + t, 1, a + gt + vt + " +lat_0=-78" + P0 + z + u + M + e + t, 2, c + Ka + Z + n + Fi + e + t, 1, c + Cl + Z + n + Fi + e + t, 1, c + Ya + Z + n + Fi + e + t, 1, c + Eu + Z + n + Fi + e + t, 1, a + IM + " +lat_2=58" + RM + ro + y + " +y_0=6375000" + n + B5 + e + t, 1, a + IM + " +lat_2=58" + RM + ro + y + " +y_0=6375000" + n + r + e + t, 1, c + Ya + Z + b + R5 + e + t, 1, c + Ya + Z + b + S5 + e + t, 1, c + Cl + Z + b + A5 + e + t, 1, c + Cl + Z + b + O5 + e + t, 1, c + Ka + Z + b + tL + e + t, 1, c + Ni + W + TL + e + t, 1, a + " +lat_1=-30.75 +lat_2=-35.75 +lat_0=-33.25" + vf + " +x_0=9300000" + In + n + r + e + t, 1, ur + H_ + M_ + h + df + z + u_ + w + e + t, 1, ur + H_ + M_ + h + df + z + u_ + n + r + e + t, 1, ur + H_ + M_ + h + df + z + u_ + n + r + e + t, 1, c + Qr + b + Jw + e + t, 1, c + Qr + n + r + e + t, 3, i + h + q_ + m + y + kt + N + e + t, 1, i + h + ro + m + y + kt + N + e + t, 1, i + h + no + m + y + kt + N + e + t, 1, i + h + " +lon_0=14" + m + y + kt + N + e + t, 1, i + h + " +lon_0=16" + m + y + kt + N + e + t, 1, i + h + kf + m + y + kt + N + e + t, 1, i + h + Vp + m + y + kt + N + e + t, 1, i + h + q_ + m + y + kt + N + e + t, 1, i + h + ro + m + y + kt + N + e + t, 1, i + h + Kp + m + y + kt + N + e + t, 1, i + h + Kd + m + y + kt + N + e + t, 1, i + h + Do + m + y + kt + N + e + t, 1, se + " +lat_0=52.16666666666666 +lon_0=19.16666666666667 +k=0.999714" + y + He + _ + U + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + U + e + t, 1, i + h + kf + " +k=1" + Wh + u + _ + U + e + t, 1, i + h + Rn + " +k=1" + ql + u + _ + U + e + t, 1, i + h + ro + " +k=1" + rd + u + _ + U + e + t, 1, i + h + hr + " +k=1" + qn + u + _ + U + e + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + U + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + U + e + t, 1, c + yc + Z + b + AL + e + t, 1, a + " +lat_1=-20.19506944444445 +lat_0=-20.19506944444445 +lon_0=57.52182777777778 +k_0=1" + Ye + Ee + N + aL + e + t, 1, ur + " +lat_1=55" + Tf + F_ + ff + z + u + n + r + e + t, 1, i + h + no + m + y + kt + N + Pt + e + t, 1, i + h + " +lon_0=14" + m + y + kt + N + Pt + e + t, 1, i + h + " +lon_0=16" + m + y + kt + N + Pt + e + t, 1, c + bo + Z + N + Pt + e + t, 1, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, c + Ll + n + r + e + t, 1, i + h + ro + Zp + y + u + n + r + e + t, 1, a + Na + io + " +lat_0=63.390675" + n8 + " +x_0=6200000" + G + n + r + e + t, 1, a + Na + io + " +lat_0=63.390675" + n8 + " +x_0=6200000" + G + n + r + e + t, 2, i + " +lat_0=0.1 +lon_0=21.95 +k=1" + Hn + u + _ + s + e + t, 1, i + " +lat_0=0.1 +lon_0=24.95 +k=1 +x_0=1250000" + u + _ + s + e + t, 1, i + " +lat_0=0.1 +lon_0=27.95 +k=1 +x_0=2250000" + u + _ + s + e + t, 1, c + Gi + Z + b + e + t, 1, c + Gi + Z + b + e + t, 1, i + fi + xf + " +k=1 +x_0=615000 +y_0=810000" + Nl + lL + e + t, 3, a + Ki + ol + Qc + ic + vv + u + n + r + e + t, 2, a + Lh + yd + Ts + zn + bd + u + n + r + e + t, 1, a + Lh + yd + Ts + zn + bd + u + n + r + ct + t, 1, a + ad + kh + ye + Rt + D + u + n + r + e + t, 1, a + ad + kh + ye + Rt + D + u + n + r + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + d + t, 2, c + Qi + N + e + t, 1, c + vo + N + e + t, 1, c + Ll + N + e + t, 1, c + ja + w + e + t, 1, c + Xl + w + e + t, 1, c + ja + n + r + e + t, 1, c + Xl + n + r + e + t, 1, c + vo + b + e + t, 1, Jn + uh + h6 + " +alpha=323.0257964666666" + jd + " +x_0=804671" + u + xo + gr + n + e + t, 1, Jn + uh + Z_ + WE + jd + z + u + xo + V1 + n + e + t, 1, lr + " +lat_0=2.121679744444445 +lon_0=103.4279362361111 +x_0=-14810.562 +y_0=8758.32" + n + e + t, 1, lr + " +lat_0=2.682347636111111 +lon_0=101.9749050416667 +x_0=3673.785 +y_0=-4240.573" + n + e + t, 1, lr + " +lat_0=3.769388088888889 +lon_0=102.3682989833333 +x_0=-7368.228 +y_0=6485.858" + n + e + t, 1, lr + " +lat_0=3.68464905 +lon_0=101.3891079138889 +x_0=-34836.161 +y_0=56464.049" + n + e + t, 1, lr + " +lat_0=4.9762852 +lon_0=103.070275625 +x_0=19594.245 +y_0=3371.895" + n + e + t, 1, lr + " +lat_0=5.421517541666667 +lon_0=100.3443769638889 +x_0=-23.414 +y_0=62.283" + n + e + t, 1, lr + " +lat_0=5.964672713888889 +lon_0=100.6363711111111" + z + u + n + e + t, 1, lr + " +lat_0=4.859063022222222 +lon_0=100.8154105861111 +x_0=-1.769 +y_0=133454.779" + n + e + t, 1, lr + " +lat_0=5.972543658333334 +lon_0=102.2952416694444 +x_0=13227.851 +y_0=8739.894" + n + e + t, 1, i + h + kf + " +k=1" + y + u + b + At + e + t, 1, i + h + eo + " +k=1" + xn + u + b + At + e + t, 1, du + _c + " +lat_ts=42" + z + u + _ + s + e + t, 1, i + h + Gp + " +k=1 +x_0=60500000" + u + _ + s + e + t, 1, i + h + Gp + " +k=1 +x_0=60500000" + u + _ + l + e + t, 1, c + wo + N + g + e + t, 1, c + Xi + N + g + e + t, 1, c + Ni + N + g + e + t, 1, a + Mp + $h + xs + I3 + ze + c6 + N + e + t, 1, du + qr + " +k=1" + z + u + M + e + t, 1, i + h + yo + " +k=1" + qn + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + hr + " +k=1" + xn + u + O + e + t, 1, i + h + E_ + " +k=0.9992" + y + u + n + r + e + t, 1, i + h + E_ + " +k=0.9992" + z + u + n + r + e + t, 1, i + h + E_ + " +k=0.9992" + y + u + n + r + e + t, 1, i + h + E_ + " +k=0.9992" + z + u + n + r + e + t, 1, a + Ki + ol + Qc + ic + B + u + n + r + d + t, 1, c + zs + W + mt + e + t, 1, c + Us + W + mt + e + t, 1, lr + wM + xM + " +x_0=40243.57775604237 +y_0=19069.93351512578" + qe + Vn + Xg + t, 1, ra + $i + qr + z + u + eb + nb + e + t, 1, ra + K + qr + z + u + eb + nb + e + t, 1, "+proj=cea" + qr + " +lat_ts=30" + z + u + eb + nb + e + t, 1, _n + $i + " +lat_ts=70 +lon_0=-45 +k=1" + z + u + rb + yv + e + t, 1, _n + K + " +lat_ts=-70" + qr + " +k=1" + z + u + rb + yv + e + t, 1, _n + $i + " +lat_ts=70 +lon_0=-45 +k=1" + z + u + M + e + t, 1, i + " +lat_0=1.366666666666667 +lon_0=103.8333333333333 +k=1 +x_0=28001.642 +y_0=38744.572" + W + e + t, 1, a + " +lat_1=18 +lat_2=24 +lat_0=21" + la + y + He + x + E + e + t, 1, a + Na + yu + " +lat_0=47.5" + K1 + H + Vl + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + de + n + r + d + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + r + d + t, 1, a + Vi + Dr + kn + si + St + u + n + r + d + t, 1, a + $r + ys + Q + Fr + St + Vf + n + r + d + t, 1, i + jr + wi + m + Kf + Jg + n + r + d + t, 1, i + jr + xa + m + Ie + fl + n + r + d + t, 1, i + jr + qi + m + $ + ev + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, a + Qo + Wi + T + Qt + ze + de + n + r + d + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + r + d + t, 1, a + Vi + Dr + kn + si + St + u + n + r + d + t, 1, a + $r + ys + Q + Fr + St + Vf + n + r + d + t, 1, i + jr + wi + m + Kf + Jg + n + r + d + t, 1, i + jr + xa + m + Ie + fl + n + r + d + t, 1, i + jr + qi + m + $ + ev + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, a + Xo + Ta + ke + ws + St + u + n + r + d + t, 1, a + Wr + hf + vs + ws + St + Vf + n + r + d + t, 1, i + Q + Ss + oi + _e + u + n + r + d + t, 1, i + Q + pr + st + tv + u + n + r + d + t, 1, i + I + Yo + Pe + _e + u + n + r + d + t, 1, i + Mi + Gt + nd + Q1 + u + n + r + d + t, 1, c + Ni + N + u0 + e + t, 1, c + Gs + N + u0 + e + t, 1, a + Xo + Ta + ke + ws + St + u + n + r + d + t, 1, a + Wr + hf + vs + ws + St + Vf + n + r + d + t, 1, i + Q + Ss + oi + _e + u + n + r + d + t, 1, i + Q + pr + st + tv + u + n + r + d + t, 1, i + I + Yo + Pe + _e + u + n + r + d + t, 1, i + Mi + Gt + nd + Q1 + u + n + r + d + t, 1, a + xg + kg + " +lat_0=50.797815" + DM + " +x_0=150328 +y_0=166262" + n + r + e + t, 1, a + " +lat_1=18" + ah + mu + " +k_0=1" + xy + " +y_0=650000" + W + r + e + t, 1, c + yi + W + r + e + t, 1, c + Xr + W + r + e + t, 1, a + Oh + Ih + dl + cl + Vt + u + n + r + d + t, 1, a + kd + Ld + Md + Zr + Vt + u + n + r + d + t, 1, a + qo + Es + " +lat_0=25.5" + Zr + Vt + u + n + r + d + t, 2, a + Sd + Is + En + gn + D + u + n + r + d + t, 1, a + Oh + Ih + dl + cl + Vt + u + n + r + d + t, 1, a + kd + Ld + Md + Zr + Vt + u + n + r + d + t, 1, a + Fh + _i + Ve + fr + D + u + n + r + d + t, 1, a + Sd + Is + En + gn + D + u + n + r + d + t, 1, i + " +lat_0=-17 +lon_0=178.75 +k=0.99985" + Cn + tf + x + A + e + t, 1, c + Qi + Ke + le + l3 + e + t, 1, c + vo + Ke + le + l3 + e + t, 1, i + ky + bv + Ba + y + u + n + r + e + t, 1, i + ky + bv + Ba + y + u + n + r + e + t, 1, i + dl + U1 + Rd + ot + u + n + r + e + t, 1, i + fi + L0 + fe + D + u + n + r + e + t, 1, ur + " +lat_1=55" + Tf + F_ + ff + z + u + n + r + e + t, 1, Jn + " +lat_0=57" + Lg + Mg + m + nf + gi + xo + gr + n + r + e + t, 1, i + at + Ly + m + y + u + n + r + e + t, 1, i + at + My + m + y + u + n + r + e + t, 1, i + at + Pd + m + y + u + n + r + e + t, 1, i + at + ff + m + y + u + n + r + e + t, 1, i + at + nh + m + y + u + n + r + e + t, 1, i + at + Ey + m + y + u + n + r + e + t, 1, i + at + Sy + m + y + u + n + r + e + t, 1, i + at + k_ + m + y + u + n + r + e + t, 1, a + Eg + Sg + Yp + Cy + Ye + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + ct + t, 1, i + nn + Ir + m + J + u + n + r + e + t, 1, i + nn + Ir + m + J + u + n + r + ct + t, 1, i + nn + Dc + fe + J + u + n + r + e + t, 1, i + nn + Dc + fe + J + u + n + r + ct + t, 1, a + Xo + Ta + ke + ws + H + u + n + r + e + t, 1, a + Xo + Ta + ke + ws + St + u + n + r + d + t, 1, a + Wr + hf + vs + ws + H + Vl + n + r + e + t, 1, a + Wr + hf + vs + ws + St + Vf + n + r + d + t, 1, ur + H_ + M_ + h + df + z + u_ + n + r + e + t, 1, a + Cs + Ns + Dt + bs + Cn + He + n + r + e + t, 1, a + Cs + Ns + Dt + bs + $e + ne + n + r + d + t, 1, a + To + lo + Ft + bs + Cn + He + n + r + e + t, 1, a + To + lo + Ft + bs + $e + ne + n + r + d + t, 1, a + wt + Ao + of + he + Cn + He + n + r + e + t, 1, a + wt + Ao + of + he + $e + ne + n + r + d + t, 1, a + Vc + Lf + uo + sf + Cn + He + n + r + e + t, 1, a + Vc + Lf + uo + sf + $e + ne + n + r + d + t, 1, a + xi + ho + af + Wl + Cn + He + n + r + e + t, 1, a + xi + ho + af + Wl + $e + ne + n + r + d + t, 1, a + Oo + $o + Qs + Bc + Cn + He + n + r + e + t, 1, a + Oo + $o + Qs + Bc + $e + ne + n + r + d + t, 1, a + Kc + Yc + ls + Qe + zt + Nt + n + r + e + t, 1, a + Kc + Yc + ls + Qe + ai + pn + n + r + d + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + r + e + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + r + d + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + r + e + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + r + d + t, 1, a + La + lf + Io + Hc + uv + hv + n + r + e + t, 1, a + La + lf + Io + Hc + Ug + qg + n + r + d + t, 1, i + bn + Ui + uf + ot + u + n + r + e + t, 1, i + bn + Ui + uf + Ht + u + n + r + d + t, 1, i + Et + zn + st + ot + u + n + r + e + t, 1, i + Et + zn + st + Ht + u + n + r + d + t, 1, ur + " +lat_1=24" + gy + " +lat_0=24" + rc + H + u + n + r + e + t, 1, a + $c + Js + Mf + Xc + D + u + n + r + e + t, 1, a + $c + Js + Mf + Xc + D + u + n + r + d + t, 1, i + Et + mf + st + ot + u + n + r + e + t, 1, i + Et + mf + st + Ht + u + n + r + d + t, 1, i + fi + dr + m + ot + u + n + r + e + t, 1, i + fi + dr + m + Ht + u + n + r + d + t, 1, i + fi + pi + m + R + u + n + r + e + t, 1, i + fi + pi + m + ui + u + n + r + d + t, 1, i + pt + pu + Te + y + u + n + r + e + t, 1, i + pt + pu + Te + ge + u + n + r + d + t, 1, i + pt + fs + Te + ot + u + n + r + e + t, 1, i + pt + fs + Te + Ht + u + n + r + d + t, 1, i + pt + Nc + fe + Lr + u + n + r + e + t, 1, i + pt + Nc + fe + Hg + u + n + r + d + t, 1, i + Q + Ss + oi + xe + u + n + r + e + t, 1, i + Q + Ss + oi + _e + u + n + r + d + t, 1, i + Q + pr + st + R + u + n + r + e + t, 1, i + Q + pr + st + tv + u + n + r + d + t, 1, i + Zn + bi + Pe + Be + rh + n + r + e + t, 1, i + Zn + bi + Pe + Qg + oe + n + r + d + t, 1, i + Zn + ba + Pe + Ds + rh + n + r + e + t, 1, i + Zn + ba + Pe + Ds + oe + n + r + d + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + de + n + r + d + t, 1, a + Qn + Aa + it + Qt + y + u + n + r + e + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + r + d + t, 1, a + Vi + Dr + kn + si + H + u + n + r + e + t, 1, a + Vi + Dr + kn + si + St + u + n + r + d + t, 1, a + $r + ys + Q + Fr + H + Vl + n + r + e + t, 1, a + $r + ys + Q + Fr + St + Vf + n + r + d + t, 1, a + Xt + ao + Zn + Uc + y + u + n + r + e + t, 1, a + Xt + ao + Zn + Uc + ge + u + n + r + d + t, 1, a + eu + qh + Jt + dt + ze + Ee + n + r + e + t, 1, a + eu + qh + Jt + dt + ze + zi + n + r + d + t, 1, a + ci + ta + Jt + dt + y + He + n + r + e + t, 1, a + ci + ta + Jt + dt + ge + ne + n + r + d + t, 1, a + Oh + Ih + dl + cl + Ye + u + n + r + e + t, 1, a + Oh + Ih + dl + cl + Vt + u + n + r + d + t, 1, a + kd + Ld + Md + Zr + Ye + u + n + r + e + t, 1, a + kd + Ld + Md + Zr + Vt + u + n + r + d + t, 1, i + ky + bv + Ba + y + u + n + r + e + t, 1, i + Ve + mv + Ba + R + u + n + r + e + t, 1, i + we + gv + Ba + xe + u + n + r + e + t, 1, i + rn + Ra + m + xe + u + n + r + e + t, 1, i + we + zr + Pe + Ds + u + n + r + e + t, 1, a + od + _d + Ft + mu + H + u + n + r + e + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + r + d + t, 1, i + gg + Ev + Pe + X + u + F + We + d + t, 1, i + vg + Jm + Pe + X + u + F + We + d + t, 1, i + Ce + nh + vl + X + u + F + We + d + t, 1, i + yg + Sv + vl + X + u + F + We + d + t, 1, i + bg + tg + " +k=1" + X + u + F + We + d + t, 1, a + Xu + oo + kn + ae + Ie + nv + n + r + d + t, 1, a + Qu + Co + Q + ae + Ie + G + n + r + d + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + r + d + t, 1, a + Xu + oo + kn + ae + Ie + nv + n + r + d + t, 1, a + Qu + Co + Q + ae + Ie + G + n + r + d + t, 1, ra + $i + Gp + z + u + M + e + t, 1, ra + $i + Pd + z + u + M + e + t, 1, ra + $i + fr + z + u + M + e + t, 1, ra + $i + " +lon_0=-40" + z + u + M + e + t, 1, ra + $i + xl + z + u + M + e + t, 1, ra + $i + Yi + z + u + M + e + t, 1, ur + " +lat_1=-18" + Xy + h + aa + z + u + n + r + e + t, 1, ur + BM + " +lat_2=68 +lat_0=59 +lon_0=-132.5" + y + He + n + r + e + t, 1, ur + BM + " +lat_2=68 +lat_0=59 +lon_0=-132.5" + y + He + n + r + e + t, 1, a + " +lat_1=62 +lat_2=70" + h + " +lon_0=-112" + z + u + n + r + e + t, 1, a + " +lat_1=62 +lat_2=70" + h + " +lon_0=-112" + z + u + n + r + e + t, 1, a + od + _d + Ft + mu + Zg + u + n + r + d + t, 1, a + Oa + ts + es + Ul + y + u + n + r + e + t, 1, a + Oa + ts + es + Ul + ge + u + n + r + d + t, 1, a + As + Ps + es + Gt + ot + rf + n + r + e + t, 1, a + As + Ps + es + Gt + Ht + rf + n + r + d + t, 1, a + md + po + il + $t + pp + u + n + r + e + t, 1, a + md + po + il + $t + Vg + u + n + r + ct + t, 1, a + rl + ea + Tn + pl + Kv + u + n + r + e + t, 1, a + rl + ea + Tn + pl + Wg + u + n + r + ct + t, 1, Jn + wg + " +lonc=-86" + cv + Me + fv + lv + xo + dv + n + r + e + t, 1, a + Ne + gd + T + $t + Jc + u + n + r + e + t, 1, a + Ne + gd + T + $t + sv + u + n + r + ct + t, 1, a + cd + Bh + mo + Wc + Lr + Mr + n + r + e + t, 1, a + Rh + Dh + Zl + wa + Lr + Mr + n + r + e + t, 1, a + Nh + Hu + wu + lc + Lr + Mr + n + r + e + t, 1, i + ia + ds + Bn + xe + u + n + r + e + t, 1, i + ia + ds + Bn + _e + u + n + r + d + t, 1, i + ia + ri + Bn + R + u + n + r + e + t, 1, i + ia + ri + Bn + ui + u + n + r + d + t, 1, i + Ys + cl + fe + y + u + n + r + e + t, 1, i + Ys + d_ + fe + Hn + u + n + r + e + t, 1, i + Z1 + p_ + st + dy + u + n + r + e + t, 1, a + Na + qd + sd + Ku + D + u + n + r + e + t, 1, a + Na + qd + sd + Ku + ms + u + n + r + ct + t, 1, a + ks + Ns + Ia + fr + y + u + n + r + e + t, 1, i + jr + xa + m + y + fl + n + r + e + t, 1, i + jr + xa + m + Ie + fl + n + r + d + t, 1, i + jr + wi + m + ot + Yv + n + r + e + t, 1, i + jr + wi + m + Kf + Jg + n + r + d + t, 1, i + jr + qi + m + Lr + tf + n + r + e + t, 1, i + jr + qi + m + $ + ev + n + r + d + t, 1, i + I + Yo + Pe + xe + u + n + r + e + t, 1, i + I + Yo + Pe + _e + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, i + nn + Gc + m + y + u + n + r + e + t, 1, i + nn + Gc + m + ge + u + n + r + d + t, 1, i + nn + Ko + Wu + vd + u + n + r + e + t, 1, i + nn + Ko + Wu + vd + u + n + r + d + t, 1, i + nn + hi + jc + py + u + n + r + e + t, 1, i + nn + hi + jc + Kg + u + n + r + d + t, 1, i + it + Di + an + Hn + u + n + r + e + t, 1, i + it + Di + an + Yg + u + n + r + d + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + d + t, 1, a + Ma + Ur + ye + gf + xe + u + n + r + e + t, 1, a + Ma + Ur + ye + gf + _e + u + n + r + d + t, 1, i + it + ps + an + kp + u + n + r + e + t, 1, i + it + ps + an + $g + u + n + r + d + t, 1, a + Ki + ol + Qc + ic + vv + u + n + r + e + t, 1, a + Ki + ol + Qc + ic + B + u + n + r + d + t, 1, a + Le + _o + Bo + Lt + D + u + n + r + e + t, 1, a + Le + _o + Bo + Lt + ms + u + n + r + ct + t, 1, a + Os + sl + Br + Lt + D + u + n + r + e + t, 1, a + Os + sl + Br + Lt + ms + u + n + r + ct + t, 1, a + Ed + Bl + cr + f + D + u + n + r + e + t, 1, a + Gh + jh + bn + f + D + u + n + r + e + t, 1, a + ki + Gu + Ef + si + D + u + n + r + e + t, 1, a + ki + Gu + Ef + si + D + u + n + r + d + t, 1, a + xh + ju + Ea + si + D + u + n + r + e + t, 1, a + xh + ju + Ea + si + D + u + n + r + d + t, 1, a + ks + sa + ce + he + H + u + n + r + e + t, 1, a + ks + sa + ce + he + i_ + u + n + r + ct + t, 1, a + fc + Kr + rn + he + Gn + u + n + r + e + t, 1, a + fc + Kr + rn + he + n_ + u + n + r + ct + t, 1, a + dc + us + pt + he + ze + u + n + r + e + t, 1, a + dc + us + pt + he + r_ + u + n + r + ct + t, 1, a + ad + kh + ye + Rt + D + u + n + r + e + t, 1, a + ad + kh + ye + Rt + D + u + n + r + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + d + t, 1, i + Mi + Gt + nd + Be + u + n + r + e + t, 1, i + Mi + Gt + nd + Q1 + u + n + r + d + t, 1, a + Lh + yd + Ts + zn + bd + u + n + r + e + t, 1, a + Lh + yd + Ts + zn + bd + u + n + r + ct + t, 1, a + Fh + _i + Ve + fr + D + u + n + r + e + t, 1, a + Fh + _i + Ve + fr + D + u + n + r + d + t, 1, a + Sd + Is + En + gn + D + u + n + r + e + t, 1, a + Sd + Is + En + gn + D + u + n + r + d + t, 1, a + Mh + ld + ke + sh + D + u + n + r + e + t, 1, a + Mh + ld + ke + sh + D + u + n + r + d + t, 1, a + Sh + Rl + hs + gn + R + G + n + r + e + t, 1, a + Sh + Rl + hs + gn + ui + G + n + r + d + t, 1, ur + Cd + Vd + ah + fr + ze + fl + n + r + e + t, 1, a + Cd + Vd + ah + fr + ze + Vh + n + r + e + t, 1, a + al + ud + Sf + Zc + ot + Ee + n + r + e + t, 1, a + al + ud + Sf + Zc + Ht + zi + n + r + d + t, 1, a + Il + Eh + Ca + Fr + D + yr + n + r + e + t, 1, a + Il + Eh + Ca + Fr + D + Zf + n + r + d + t, 1, a + qo + Es + Po + Fr + xe + Vh + n + r + e + t, 1, a + qo + Es + Po + Fr + _e + iv + n + r + d + t, 1, a + Dl + Fu + Zi + _l + D + tf + n + r + e + t, 1, a + Dl + Fu + Zi + _l + D + rv + n + r + d + t, 1, a + Xu + oo + kn + ae + y + yr + n + r + e + t, 1, a + Xu + oo + kn + ae + vi + U3 + n + r + ct + t, 1, a + Xu + oo + kn + ae + Ie + nv + n + r + d + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + r + e + t, 1, a + Qn + Ho + kr + ae + vi + D3 + n + r + ct + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + r + d + t, 1, a + Qu + Co + Q + ae + y + G + n + r + e + t, 1, a + Qu + Co + Q + ae + vi + q3 + n + r + ct + t, 1, a + Qu + Co + Q + ae + Ie + G + n + r + d + t, 1, i + I + ef + Fc + y + u + n + r + e + t, 1, a + wd + Ch + Ft + Zt + qn + yr + n + r + e + t, 1, a + wd + Ch + Ft + Zt + Wf + Zf + n + r + d + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + r + e + t, 1, a + Xt + Pa + Jt + Zt + Wf + zi + n + r + d + t, 1, a + Le + xd + Bo + _s + y + u + n + r + e + t, 1, a + Le + xd + Bo + _s + ge + u + n + r + d + t, 1, a + Ph + zu + Li + he + y + u + n + r + e + t, 1, a + Ph + zu + Li + he + ge + u + n + r + d + t, 1, a + fd + Wd + cf + Un + D + u + n + r + e + t, 1, a + zh + Uh + Pf + zn + D + u + n + r + e + t, 1, a + _u + hd + Ve + On + D + u + n + r + e + t, 1, a + _u + hd + Ve + On + D + u + n + r + d + t, 1, a + Uu + Th + gs + On + D + u + n + r + e + t, 1, a + Uu + Th + gs + On + D + u + n + r + d + t, 1, a + Ah + qu + pc + On + D + u + n + r + e + t, 1, a + Ah + qu + pc + On + D + u + n + r + d + t, 1, i + h + On + Me + my + Cv + n + r + e + t, 1, i + cn + so + an + ot + u + n + r + e + t, 1, i + cn + ka + an + H + Mr + n + r + e + t, 1, i + cn + zc + an + D + u + n + r + e + t, 1, i + cn + Yr + an + Lr + Mr + n + r + e + t, 1, c + ja + n + r + e + t, 1, c + Xl + n + r + e + t, 1, c + Jl + n + r + e + t, 1, c + Mu + n + r + e + t, 1, c + xc + n + r + e + t, 1, c + Cu + n + r + e + t, 1, c + Ka + n + r + e + t, 1, c + Cl + n + r + e + t, 1, c + Ya + n + r + e + t, 1, c + Eu + n + r + e + t, 1, c + Su + n + r + e + t, 1, c + ku + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, i + " +lat_0=-21.11666666666667 +lon_0=55.53333333333333 +k=1 +x_0=160000" + jp + b + wL + e + t, 1, a + Ed + Bl + cr + f + D + u + n + r + d + t, 1, a + Gh + jh + bn + f + D + u + n + r + d + t, 1, i + cn + so + an + Kf + u + n + r + d + t, 1, i + cn + ka + an + St + lt + n + r + d + t, 1, i + cn + zc + an + D + u + n + r + d + t, 1, i + cn + Yr + an + $ + lt + n + r + d + t, 1, a + Ed + Bl + cr + f + D + u + n + r + d + t, 1, a + Gh + jh + bn + f + D + u + n + r + d + t, 1, i + cn + so + an + Kf + u + n + r + d + t, 1, i + cn + ka + an + St + lt + n + r + d + t, 1, i + cn + zc + an + D + u + n + r + d + t, 1, i + cn + Yr + an + $ + lt + n + r + d + t, 1, c + ku + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Cu + n + r + e + t, 1, c + Ka + n + r + e + t, 2, a + Ed + Bl + cr + f + D + u + n + r + d + t, 1, a + Gh + jh + bn + f + D + u + n + r + d + t, 1, i + cn + so + an + Kf + u + n + r + d + t, 1, i + cn + ka + an + St + lt + n + r + d + t, 1, i + cn + zc + an + D + u + n + r + d + t, 1, i + cn + Yr + an + $ + lt + n + r + d + t, 1, i + Ce + nh + vl + Ie + u + n + r + d + t, 1, i + Ce + nh + vl + Ie + u + n + r + d + t, 1, c + Ai + n + r + e + t, 1, a + " +lat_1=-54 +lat_2=-54.75 +lat_0=-55 +lon_0=-37" + z + u + M + e + t, 1, i + " +lat_0=39.66825833333333 +lon_0=-8.133108333333334 +k=1" + z + u + n + r + e + t, 1, i + ib + Pv + " +k=1" + H + _r + n + r + e + t, 1, i + h + _y + m + y + u + n + r + e + t, 1, a + " +lat_1=45.91666666666666 +lat_2=43.08333333333334" + h + _y + z + u + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 1, c + Tr + F + qL + e + t, 1, i + " +lat_0=32 +lon_0=-64.75 +k=1 +x_0=550000" + Mr + W + r + e + t, 1, i + h + ih + m + z + u + w + e + t, 1, i + h + pu + m + z + u + w + e + t, 1, i + h + Xh + m + z + u + w + e + t, 2, i + h + ih + m + z + u + n + r + e + t, 1, i + h + pu + m + z + u + n + r + e + t, 1, i + h + Xh + m + z + u + n + r + e + t, 2, i + h + ih + m + z + u + n + r + e + t, 1, i + h + pu + m + z + u + n + r + e + t, 1, i + h + Xh + m + z + u + n + r + e + t, 2, i + " +lat_0=-25.06855261111111 +lon_0=-130.1129671111111 +k=1 +x_0=14200 +y_0=15500" + W + r + e + t, 1, c + Su + Z + b + YL + e + t, 4, i + h + tb + " +k=1" + qn + kt + n + r + e + t, 1, i + h + " +lon_0=169 +k=1" + qn + kt + n + r + e + t, 1, i + h + " +lon_0=179 +k=1" + qn + kt + n + r + e + t, 1, i + h + " +lon_0=-178 +k=1" + qn + kt + n + r + e + t, 2, i + h + Pv + " +k=1" + qn + kt + n + r + e + t, 1, i + h + hr + m + y + gi + n + r + e + t, 1, a + " +lat_1=23 +lat_2=21.7 +lat_0=22.35" + zn + y + " +y_0=280296.016" + w + e + t, 1, a + " +lat_1=21.3 +lat_2=20.13333333333333 +lat_0=20.71666666666667 +lon_0=-76.83333333333333" + y + " +y_0=229126.939" + w + e + t, 1, a + z_ + yu + Ro + " +lon_0=-70" + Lr + u + w + e + t, 1, a + z_ + yu + Ro + " +lon_0=-70" + Lr + u + n + r + e + t, 1, a + z_ + yu + Ro + " +lon_0=-70" + Lr + u + n + r + e + t, 1, i + h + df + m + z + u + w + e + t, 1, i + h + df + m + z + u + n + r + e + t, 1, i + h + df + m + z + u + n + r + e + t, 10, a + xg + kg + " +lat_0=50.797815" + DM + " +x_0=649328 +y_0=665262" + n + r + e + t, 2, i + $h + Tv + $v + y + mp + n + r + e + t, 1, i + $h + Tv + $v + y + mp + n + r + e + t, 1, i + $h + Tv + $v + y + mp + n + r + e + t, 3, p + O + " +towgs84=595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408" + t, 2, p + bt + t, 3, p + n + r + t, 1, i + h + Qy + m + Hn + u + n + r + e + t, 1, i + h + Jy + m + Hn + u + n + r + e + t, 1, i + h + Qy + m + Hn + u + bt + e + t, 1, i + h + Jy + m + Hn + u + bt + e + t, 1, c + Fs + b + dL + e + t, 3, du + yf + " +k=1" + z + u + M + e + t, 1, i + h + yo + " +k=1" + Gn + u + _ + U + e + t, 1, i + h + yo + " +k=1" + Gn + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + Bt + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + U + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + U + e + t, 1, i + h + Ei + " +k=1" + id + u + _ + U + e + t, 1, i + h + Do + " +k=1" + Jf + u + _ + U + e + t, 1, i + h + kf + " +k=1" + Wh + u + _ + Bt + e + t, 3, se + " +lat_0=46" + Ud + Dp + y + He + _ + U + e + t, 1, i + h + " +lon_0=11.30625 +k=1.000006 +x_0=1500025.141 +y_0=-667.282" + n + r + e + t, 1, i + h + " +lon_0=13.55626666666667 +k=1.0000058 +x_0=1500044.695 +y_0=-667.13" + n + r + e + t, 1, i + h + " +lon_0=15.80628452944445 +k=1.00000561024 +x_0=1500064.274 +y_0=-667.711" + n + r + e + t, 1, i + h + " +lon_0=18.0563 +k=1.0000054 +x_0=1500083.521 +y_0=-668.8440000000001" + n + r + e + t, 1, i + h + " +lon_0=20.30631666666667 +k=1.0000052 +x_0=1500102.765 +y_0=-670.706" + n + r + e + t, 1, i + h + " +lon_0=22.55633333333333 +k=1.0000049 +x_0=1500121.846 +y_0=-672.557" + n + r + e + t, 1, a + " +lat_1=-37.5 +lat_2=-44.5 +lat_0=-41 +lon_0=173" + f6 + " +y_0=7000000" + n + r + e + t, 1, a + gt + vt + K + " +lon_0=157" + y + u + n + r + e + t, 2, i + h + " +lon_0=18.05787 +k=0.99999506 +x_0=100182.7406 +y_0=-6500620.1207" + n + r + e + t, 3, du + " +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0" + u + " +k=1.0" + e + " +nadgrids=@null +wktext " + t, 16, i + h + zd + " +k=1" + iu + u + n + r + e + t, 1, i + h + Vp + " +k=1" + Fl + u + n + r + e + t, 1, i + h + Rn + " +k=1" + au + u + n + r + e + t, 1, i + h + q_ + " +k=1" + zl + u + n + r + e + t, 1, i + h + A0 + " +k=1" + lu + u + n + r + e + t, 1, i + h + ro + " +k=1" + ed + u + n + r + e + t, 1, i + h + Ud + " +k=1" + uu + u + n + r + e + t, 1, i + h + Kp + " +k=1" + hu + u + n + r + e + t, 1, i + h + Ei + " +k=1" + cu + u + n + r + e + t, 1, i + h + Kd + " +k=1" + fu + u + n + r + e + t, 1, i + h + " +lon_0=29 +k=1" + hl + u + n + r + e + t, 1, i + h + Do + " +k=1" + Yu + u + n + r + e + t, 1, i + h + xf + " +k=1" + Kn + u + n + r + e + t, 4, p + n + r + t, 1, c + wo + n + r + e + t, 1, c + Xi + n + r + e + t, 1, c + Ni + n + r + e + t, 1, i + NM + " +lon_0=46.5 +k=0.9994" + Lr + u + b + ut + e + t, 13, p + O + Ut + t, 6, i + h + hr + m + y + gi + O + Ut + e + t, 8, c + Tr + F + Xm + e + t, 22, a + " +lat_1=41.25 +lat_2=42.75" + pc + Ml + Kh + Wv + n + r + e + t, 1, a + " +lat_1=42.25 +lat_2=43.75" + wu + Ml + Kh + " +y_0=2200000" + n + r + e + t, 1, a + " +lat_1=43.25 +lat_2=44.75" + Ro + Ml + Kh + " +y_0=3200000" + n + r + e + t, 1, a + " +lat_1=44.25 +lat_2=45.75" + mo + Ml + Kh + " +y_0=4200000" + n + r + e + t, 1, a + " +lat_1=45.25 +lat_2=46.75 +lat_0=46" + Ml + Kh + " +y_0=5200000" + n + r + e + t, 1, a + d6 + " +lat_2=47.75" + Bo + Ml + Kh + " +y_0=6200000" + n + r + e + t, 1, a + " +lat_1=47.25 +lat_2=48.75 +lat_0=48" + Ml + Kh + " +y_0=7200000" + n + r + e + t, 1, a + " +lat_1=48.25 +lat_2=49.75 +lat_0=49" + Ml + Kh + " +y_0=8200000" + n + r + e + t, 1, a + " +lat_1=49.25 +lat_2=50.75" + F_ + Ml + Kh + " +y_0=9200000" + n + r + e + t, 18, a + " +lat_1=37" + Py + Mt + Un + z + u + n + r + e + t, 1, a + " +lat_1=37" + Py + Mt + Un + z + u + n + r + e + t, 1, a + " +lat_1=37" + Py + Mt + Un + z + u + n + r + e + t, 6, _n + K + " +lat_ts=-70" + qr + " +k=1" + z + u + M + e + t, 2, a + Na + io + " +lat_0=49 +lon_0=-95" + z + u + n + r + e + t, 1, a + Na + io + " +lat_0=49 +lon_0=-95" + z + u + n + r + e + t, 7, i + W_ + Do + " +k=1" + ot + He + F + Cr + e + t, 1, i + W_ + Kd + " +k=1" + ot + He + F + Cr + e + t, 1, i + W_ + Kp + " +k=1" + ot + He + F + Cr + e + t, 1, i + W_ + ro + " +k=1" + ot + He + F + Cr + e + t, 2, a + tn + fn + wn + Oe + X + u + F + Xm + d + t, 1, a + tn + fn + wn + Oe + X + R3 + F + Xm + d + t, 2, du + " +lon_0=100 +lat_ts=-41" + z + u + M + e + t, 1, _n + $i + " +lat_ts=71" + qr + " +k=1" + z + u + M + e + t, 1, _n + $i + " +lat_ts=75" + qr + " +k=1" + z + u + M + e + t, 1, i + h + " +lon_0=55.33333333333334 +k=1" + y + u + M + e + t, 4, p + M0 + t, 1, p + s_ + t, 1, p + bt + t, 1, p + O + t, 1, p + Vu + fo + t, 1, p + Zu + t, 1, p + qe + Vn + t, 1, p + F + t, 2, p + lp + up + t, 1, p + Ke + le + t, 1, p + N + t, 1, p + Mn + ar + t, 1, p + Ke + " +b=6356514.996941779" + t, 1, p + Gr + Wt + t, 1, p + f0 + t, 2, p + xt + li + t, 1, p + n + t, 1, p + Nl + t, 1, p + Bs + Nr + t, 1, p + b + t, 1, p + n + r + t, 0, p + n + r + t, 1, p + _ + t, 1, p + p6 + t, 1, i + h + " +lon_0=28.4 +k=0.9999400000000001" + ot + gi + n + r + e + t, 1, p + " +a=6376523" + j3 + t, 1, p + n6 + N3 + t, 1, p + S0 + h0 + t, 1, p + W + t, 1, p + W + t, 1, p + " +a=6378136.2 +b=6356751.516927429" + t, 1, p + " +a=6378136.3 +b=6356751.616592146" + t, 1, p + F3 + z3 + t, 2, p + _6 + t, 1, c + Go + M + e + t, 1, c + js + M + e + t, 3, p + Dd + Hf + t, 1, p + $f + Yf + t, 1, p + x + t, 1, p + d0 + c0 + t, 1, p + Gl + Wo + t, 1, p + n + r + t, 1, p + " +a=6371007 +b=6371007" + t, 1, i + h + no + m + y + kt + n + r + e + t, 1, i + h + " +lon_0=14" + m + y + kt + n + r + e + t, 1, i + h + " +lon_0=16" + m + y + kt + n + r + e + t, 1, i + h + kf + m + y + kt + n + r + e + t, 1, p + " +a=6370997 +b=6370997" + t, 1, p + eb + nb + t, 1, p + rb + yv + t, 2, i + h + Vp + m + y + kt + n + r + e + t, 1, i + h + q_ + m + y + kt + n + r + e + t, 1, i + h + ro + m + y + kt + n + r + e + t, 1, i + h + Kp + m + y + kt + n + r + e + t, 1, i + h + Kd + m + y + kt + n + r + e + t, 1, c + bo + Z + n + r + e + t, 1, c + ca + Z + n + r + e + t, 1, c + Go + Z + n + r + e + t, 8, c + Ms + Z + b + OL + e + t, 4, p + n + r + t, 6, p + n + r + t, 1, c + Af + n + r + e + t, 1, c + Qi + n + r + e + t, 4, "+proj=eqc +lat_ts=0" + h + qr + z + u + M + e + t, 1, "+proj=eqc +lat_ts=0" + h + qr + z + u + " +a=6371007 +b=6371007" + e + t, 5, i + h + yo + Ba + ot + gi + n + r + e + t, 1, i + h + xl + Ba + H + gi + n + r + e + t, 1, i + h + " +lon_0=11.75" + Ba + D + gi + n + r + e + t, 1, i + h + hr + " +k=1" + Lr + gi + n + r + e + t, 24, p + O + t, 1, p + n + rL + t, 1, p + Dd + Hf + t, 1, p + b + At + t, 1, p + O + yn + t, 3, p + F + Zw + t, 1, p + F + t, 1, p + F + t, 1, p + W + ng + t, 1, p + Gr + Wt + Vm + t, 1, p + N + Q5 + t, 1, p + n + B5 + t, 1, p + N + u0 + t, 1, p + F + We + t, 1, p + F + t, 1, p + F + t, 1, p + F + t, 1, p + F + Xm + t, 2, p + n + JL + t, 1, p + N + Wm + t, 1, p + N + qm + t, 1, p + Gr + Wt + Km + t, 1, p + d0 + c0 + Yt + t, 1, p + Gl + Wo + Ae + t, 1, p + _ + Gm + t, 1, p + W + r + t, 1, p + O + Rc + t, 1, p + O + K5 + t, 1, p + n + r + t, 1, p + n + r + t, 1, p + b + Y5 + t, 1, p + b + D1 + t, 1, p + Ke + le + l3 + t, 1, p + O + Rs + t, 1, p + qe + Vn + t, 1, p + b + $5 + t, 1, p + b + et + t, 1, p + b + t, 1, p + b + _L + t, 1, p + O + t, 1, p + W + r + t, 1, p + _ + n3 + t, 1, p + b + jL + t, 1, p + W + r + t, 1, p + n + r + t, 1, p + S0 + h0 + t3 + t, 1, p + F + PL + t, 1, p + n + r + t, 1, p + n + r + t, 2, p + n + r + t, 1, p + S0 + h0 + t, 1, p + N + f3 + t, 1, p + n + r + t, 2, p + _ + Bt + t, 1, p + _ + U + t, 1, p + n + r + t, 1, p + b + L5 + t, 1, p + b + kL + t, 1, p + b + LL + t, 1, p + b + FL + t, 4, p + M0 + dn + t, 1, p + n + r + t, 1, p + n + r + t, 1, p + _ + t, 1, p + b + sL + t, 1, p + Ke + le + hL + t, 1, p + b + Qw + t, 1, p + b + " +towgs84=105,326,-102.5,0,0,0.814,-0.6" + t, 1, p + b + " +towgs84=-45,417,-3.5,0,0,0.814,-0.6" + t, 1, p + N + t, 1, p + N + t, 1, p + b + t, 1, p + _ + l + t, 1, p + N + G1 + t, 1, p + bt + V + t, 1, p + bt + di + t, 1, p + b + Ri + t, 1, p + _ + r3 + t, 1, p + Ke + le + t, 1, p + b + P + t, 1, p + b + be + t, 1, p + Mn + ar + Hm + t, 1, p + N + Jo + t, 1, p + O + va + t, 1, p + N + $w + t, 1, p + Ke + le + ML + t, 1, p + _ + C + t, 1, p + b + t, 1, p + F + qL + t, 1, i + h + vu + Me + q + u + n + r + d + t, 0, i + h + vu + Me + q + u + n + r + d + t, 1, p + b + o + t, 1, p + O + " +towgs84=-384,664,-48,0,0,0,0" + t, 1, p + N + Ot + t, 1, p + b + vn + t, 1, p + Mn + ar + re + t, 1, p + Ke + le + nu + t, 1, p + b + OL + t, 1, p + b + Kt + t, 2, p + Ke + le + Fm + t, 2, p + Nl + j1 + t, 1, p + b + ut + t, 1, p + b + " +towgs84=-83.11,-97.38,-117.22,0.00569291,-0.0446976,0.0442851,0.1218" + t, 1, p + N + i3 + t, 4, p + b + dL + t, 1, p + _6 + cL + t, 1, p + Bs + Nr + jt + t, 1, p + Gr + Wt + Ym + t, 1, p + Gr + Wt + o3 + t, 1, p + F3 + z3 + t, 1, p + F + IL + t, 1, p + $f + Yf + t, 1, p + Gr + Wt + $L + t, 1, p + xt + li + mn + t, 1, p + N + uL + t, 1, p + b + Um + t, 1, p + b + wr + t, 1, p + b + t, 1, p + N + HL + t, 1, p + N + " +towgs84=-90,40,88,0,0,0,0" + t, 1, p + Ke + le + t, 1, p + F + un + t, 1, p + b + c3 + t, 1, p + b + " +towgs84=-333,-222,114,0,0,0,0" + t, 1, p + N + " +towgs84=41,-220,-134,0,0,0,0" + t, 1, p + O + zm + t, 1, p + n + r + t, 1, p + b + oL + t, 2, p + Ke + le + z1 + t, 1, p + O + XL + t, 1, p + N + te + t, 2, p + b + tu + t, 1, p + Ke + le + s3 + t, 1, p + w + t, 2, p + n + r + t, 1, p + N + Xs + t, 1, p + b + ZL + t, 1, p + b + S + t, 1, p + Vu + fo + xr + t, 1, p + b + Kw + t, 1, p + Ke + le + ji + t, 1, p + p6 + t, 1, p + M0 + N5 + t, 1, p + M0 + t, 1, p + M0 + t, 1, p + O + t, 1, p + lp + up + to + t, 1, p + Ke + le + RL + t, 1, p + n + r + t, 1, p + _ + s + t, 1, p + b + eL + t, 1, p + Nl + t, 2, p + b + t, 1, p + O + yt + t, 3, p + b + u3 + t, 1, p + Zu + as + t, 2, p + O + t, 2, p + b + B1 + t, 1, p + f0 + ir + t, 1, p + s_ + dn + t, 1, p + s_ + dn + t, 1, p + O + rt + t, 1, p + qe + Vn + Vw + t, 1, p + Nl + t, 1, p + Ke + le + Zm + t, 2, p + O + t, 1, p + N + De + t, 1, p + O + t, 1, p + b + " +towgs84=-155,171,37,0,0,0,0" + t, 1, p + Ke + le + t, 1, p + b + N1 + t, 1, p + O + qt + t, 1, p + b + It + t, 1, p + O + ve + t, 1, p + Ke + le + h3 + t, 1, p + b + nL + t, 2, p + W + Xw + t, 1, p + n + pL + t, 3, p + x + A + t, 2, p + x + E + t, 2, p + M + t, 64, lr + " +lat_0=2.042583333333333 +lon_0=103.5627583333333" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=2.712283333333334 +lon_0=101.9411666666667 +x_0=-242.005 +y_0=-948.547" + xt + li + mn + e + t, 1, lr + " +lat_0=3.710972222222222 +lon_0=102.4361777777778" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=3.680344444444444 +lon_0=101.5082444444444 +x_0=-21759.438 +y_0=55960.906" + xt + li + mn + e + t, 1, lr + " +lat_0=4.946141666666667 +lon_0=102.8952083333333" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=5.421325 +lon_0=100.3458694444444" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=5.965147222222223 +lon_0=100.6375944444444" + z + u + xt + li + mn + e + t, 1, lr + " +lat_0=4.859380555555555 +lon_0=100.8167666666667" + z + " +y_0=133453.669" + xt + li + mn + e + t, 1, lr + " +lat_0=5.893922222222222 +lon_0=102.1772916666667" + z + u + xt + li + mn + e + t, 1, i + h + vu + Me + q + u + w + d + t, 1, i + h + Yl + Me + q + u + w + d + t, 1, i + h + eh + Me + q + u + w + d + t, 1, i + h + Yh + Me + q + u + w + d + t, 1, i + h + L_ + Me + q + u + w + d + t, 1, i + h + " +lon_0=-159" + Me + q + u + w + d + t, 0, i + h + " +lon_0=-159" + Me + q + u + w + d + t, 1, i + h + by + Me + q + u + w + d + t, 1, i + h + Ep + Me + q + u + w + d + t, 1, i + h + " +lon_0=-141" + Me + q + u + w + d + t, 1, i + h + wy + Me + q + u + w + d + t, 1, i + h + Ty + Me + q + u + w + d + t, 1, i + h + " +lon_0=-123" + Me + q + u + w + d + t, 1, i + h + Xh + Me + q + u + w + d + t, 1, i + h + ih + Me + q + u + w + d + t, 1, i + h + " +lon_0=-105" + Me + q + u + w + d + t, 1, i + " +lat_0=13.5 +lon_0=144.75 +k=1" + Be + Da + n + r + e + t, 1, a + " +lat_1=-6.5 +lat_2=-11.5" + W_ + Kp + y + He + F + Cr + e + t, 2, i + h + Rn + " +k=1" + ql + u + _ + Bt + e + t, 1, i + h + B_ + Me + q + u + w + d + t, 1, i + h + oh + Me + q + u + w + d + t, 1, i + h + Yl + Me + q + u + n + r + d + t, 1, i + h + eh + Me + q + u + n + r + d + t, 1, i + h + Yh + Me + q + u + n + r + d + t, 1, i + h + L_ + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-159" + Me + q + u + n + r + d + t, 1, i + h + by + Me + q + u + n + r + d + t, 1, i + h + Ep + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-141" + Me + q + u + n + r + d + t, 1, i + h + wy + Me + q + u + n + r + d + t, 1, i + h + Ty + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-123" + Me + q + u + n + r + d + t, 1, i + h + Xh + Me + q + u + n + r + d + t, 1, i + h + ih + Me + q + u + n + r + d + t, 1, i + h + " +lon_0=-105" + Me + q + u + n + r + d + t, 1, i + h + ro + " +k=1" + rd + u + _ + Bt + e + t, 3, a + tn + fn + wn + Oe + ot + Da + n + r + e + t, 1, i + h + B_ + Me + q + u + n + r + d + t, 1, i + h + oh + Me + q + u + n + r + d + t, 16, a + co + Sa + Dt + Rt + B + u + w + d + t, 1, a + Ma + Ur + cn + gf + B + R3 + w + d + t, 1, a + Fh + _i + Ve + fr + D + u + n + r + d + t, 5, a + " +lat_1=-18" + Xy + " +lat_0=-27" + aa + z + u + M + e + t, 1, p + n + r + t, 4, c + Qr + n + r + e + t, 3, p + n + r + t, 1, c + Xi + Z + n + r + e + t, 4, p + b + U5 + t, 8, p + n + r + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, p + n + t, 1, i + h + Si + " +k=1" + jl + u + n + e + t, 1, i + h + Ci + " +k=1" + ul + u + n + e + t, 1, i + h + Bi + " +k=1" + ou + u + n + e + t, 1, i + h + Pi + " +k=1" + su + u + n + e + t, 1, i + h + Ti + " +k=1" + Hh + u + n + e + t, 1, i + h + Pn + " +k=1" + ru + u + n + e + t, 1, i + h + ie + " +k=1" + iu + u + n + e + t, 1, i + h + v + " +k=1" + Fl + u + n + e + t, 1, i + h + tt + " +k=1" + au + u + n + e + t, 1, i + h + Se + " +k=1" + zl + u + n + e + t, 1, i + h + k + " +k=1" + lu + u + n + e + t, 1, i + h + Si + " +k=1" + y + u + n + e + t, 1, i + h + Ci + " +k=1" + y + u + n + e + t, 1, i + h + Bi + " +k=1" + y + u + n + e + t, 1, i + h + Pi + " +k=1" + y + u + n + e + t, 1, i + h + Ti + " +k=1" + y + u + n + e + t, 1, i + h + Pn + " +k=1" + y + u + n + e + t, 1, i + h + ie + " +k=1" + y + u + n + e + t, 1, i + h + v + " +k=1" + y + u + n + e + t, 1, i + h + tt + " +k=1" + y + u + n + e + t, 1, i + h + Se + " +k=1" + y + u + n + e + t, 1, i + h + k + " +k=1" + y + u + n + e + t, 1, i + h + Si + " +k=1" + uu + u + n + e + t, 1, i + h + wl + " +k=1" + hu + u + n + e + t, 1, i + h + Ci + " +k=1" + cu + u + n + e + t, 1, i + h + bu + " +k=1" + fu + u + n + e + t, 1, i + h + Bi + " +k=1" + hl + u + n + e + t, 1, i + h + Yi + " +k=1" + Yu + u + n + e + t, 1, i + h + Pi + " +k=1" + Kn + u + n + e + t, 1, i + h + $l + " +k=1" + $u + u + n + e + t, 1, i + h + Ti + " +k=1" + Zh + u + n + e + t, 1, i + h + ml + " +k=1" + p0 + u + n + e + t, 1, i + h + Pn + " +k=1" + _0 + u + n + e + t, 1, i + h + gu + " +k=1" + m0 + u + n + e + t, 1, i + h + ie + " +k=1" + g0 + u + n + e + t, 1, i + h + la + " +k=1" + v0 + u + n + e + t, 1, i + h + v + " +k=1" + y0 + u + n + e + t, 1, i + h + Kl + " +k=1" + b0 + u + n + e + t, 1, i + h + tt + " +k=1" + w0 + u + n + e + t, 1, i + h + gl + " +k=1" + hp + u + n + e + t, 1, i + h + Se + " +k=1" + x0 + u + n + e + t, 1, i + h + aa + " +k=1" + cp + u + n + e + t, 1, i + h + k + " +k=1" + k0 + u + n + e + t, 1, i + h + Si + " +k=1" + y + u + n + e + t, 1, i + h + wl + " +k=1" + y + u + n + e + t, 1, i + h + Ci + " +k=1" + y + u + n + e + t, 1, i + h + bu + " +k=1" + y + u + n + e + t, 1, i + h + Bi + " +k=1" + y + u + n + e + t, 1, i + h + Yi + " +k=1" + y + u + n + e + t, 1, i + h + Pi + " +k=1" + y + u + n + e + t, 1, i + h + $l + " +k=1" + y + u + n + e + t, 1, i + h + Ti + " +k=1" + y + u + n + e + t, 1, i + h + ml + " +k=1" + y + u + n + e + t, 1, i + h + Pn + " +k=1" + y + u + n + e + t, 1, i + h + gu + " +k=1" + y + u + n + e + t, 1, i + h + ie + " +k=1" + y + u + n + e + t, 1, i + h + la + " +k=1" + y + u + n + e + t, 1, i + h + v + " +k=1" + y + u + n + e + t, 1, i + h + Kl + " +k=1" + y + u + n + e + t, 1, i + h + tt + " +k=1" + y + u + n + e + t, 1, i + h + gl + " +k=1" + y + u + n + e + t, 1, i + h + Se + " +k=1" + y + u + n + e + t, 1, i + h + aa + " +k=1" + y + u + n + e + t, 1, i + h + k + " +k=1" + y + u + n + e + t, 1, p + _ + t, 3, p + n + r + t, 1, c + Tr + n + r + e + t, 9, i + h + Si + " +k=1" + jl + u + _ + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + e + t, 1, i + h + Ti + " +k=1" + Hh + u + _ + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + e + t, 1, i + h + tt + " +k=1" + au + u + _ + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + e + t, 1, i + h + k + " +k=1" + lu + u + _ + e + t, 1, i + h + Si + " +k=1" + y + u + _ + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + e + t, 1, i + h + ie + " +k=1" + y + u + _ + e + t, 1, i + h + v + " +k=1" + y + u + _ + e + t, 1, i + h + tt + " +k=1" + y + u + _ + e + t, 1, i + h + Se + " +k=1" + y + u + _ + e + t, 1, i + h + k + " +k=1" + y + u + _ + e + t, 11, p + N + t, 1, p + N + DL + t, 1, p + N + BL + t, 1, p + N + NL + t, 1, p + N + GL + t, 1, p + N + QL + t, 1, p + N + xL + t, 1, p + N + W5 + t, 1, p + F + t, 1, p + F + t, 1, p + Ct + Y + t, 1, p + b + k5 + t, 1, p + n + r + t, 1, p + O + F1 + t, 1, p + b + M5 + t, 1, p + b + mL + t, 1, p + b + EL + t, 1, p + n + r + t, 1, p + bt + Tt + t, 1, p + n + r + t, 1, p + N + " +towgs84=-106,-129,165,0,0,0,0" + t, 1, p + b + SL + t, 1, p + b + gL + t, 1, p + b + Jw + t, 1, p + n + r + t, 1, p + b + zL + t, 1, p + b + wL + t, 1, p + n + r + t, 1, p + b + UL + t, 1, p + b + D5 + t, 1, p + b + t8 + t, 2, p + b + vL + t, 1, p + b + J5 + t, 3, p + b + " +towgs84=365,194,166,0,0,0,0" + t, 1, p + b + " +towgs84=325,154,172,0,0,0,0" + t, 1, p + F + KL + t, 1, p + b + yL + t, 2, p + b + Yw + t, 1, p + b + CL + t, 1, p + b + P5 + t, 1, p + b + jm + t, 2, p + b + bL + t, 1, i + h + yo + Me + $u + u + n + r + e + t, 5, i + h + Si + " +k=1" + uu + u + _ + e + t, 1, i + h + wl + " +k=1" + hu + u + _ + e + t, 1, i + h + Ci + " +k=1" + cu + u + _ + e + t, 1, i + h + bu + " +k=1" + fu + u + _ + e + t, 1, i + h + Bi + " +k=1" + hl + u + _ + e + t, 1, p + " +a=6377019.27 +b=6355762.5391 +towgs84=-28,199,5,0,0,0,0" + t, 1, p + b + $m + t, 1, p + n + r + t, 1, p + b + E5 + t, 1, p + n + r + t, 1, p + b + iL + t, 1, p + b + z5 + t, 1, p + b + V5 + t, 1, p + b + H5 + t, 1, p + O + Z5 + t, 1, p + W + r + t, 1, p + b + " +towgs84=-86,-98,-119,0,0,0,0" + t, 1, p + n + r + t, 1, p + W + r + t, 1, p + Ke + le + t, 1, p + b + WL + t, 1, p + b + F5 + t, 1, p + n + r + t, 1, p + F + " +towgs84=-100,-248,259,0,0,0,0" + t, 1, p + _ + t, 1, p + _ + t, 1, p + _ + " +towgs84=44.585,-131.212,-39.544,0,0,0,0" + t, 1, p + N + " +towgs84=-80.01,253.26,291.19,0,0,0,0" + t, 1, p + N + " +towgs84=124.5,-63.5,-281,0,0,0,0" + t, 2, p + Gr + Wt + fL + t, 1, p + F + Xe + t, 1, p + b + " +towgs84=-133,-321,50,0,0,0,0" + t, 2, p + n + r + t, 1, p + n + Fi + t, 1, p + b + S5 + t, 1, p + b + R5 + t, 1, p + b + A5 + t, 1, p + b + O5 + t, 1, p + b + tL + t, 1, p + W + TL + t, 1, p + W + r + t, 1, p + F + Cr + t, 1, p + N + t, 1, p + N + t, 1, p + b + AL + t, 1, p + N + aL + t, 1, p + N + t, 1, p + N + Pt + t, 1, p + n + r + t, 1, p + N + t, 1, p + b + t, 1, p + b + t, 1, p + Nl + lL + t, 1, p + b + " +towgs84=114,-116,-333,0,0,0,0" + t, 1, p + bt + " +towgs84=-491,-22,435,0,0,0,0" + t, 1, p + b + " +towgs84=145,75,-272,0,0,0,0" + t, 1, p + b + " +towgs84=-320,550,-494,0,0,0,0" + t, 1, p + b + " +towgs84=124,-234,-25,0,0,0,0" + t, 1, p + b + " +towgs84=-205,107,53,0,0,0,0" + t, 1, p + N + " +towgs84=-79,-129,145,0,0,0,0" + t, 1, p + b + " +towgs84=-127,-769,472,0,0,0,0" + t, 1, p + b + " +towgs84=-104,-129,239,0,0,0,0" + t, 1, p + b + " +towgs84=298,-304,-375,0,0,0,0" + t, 1, p + F + " +towgs84=-2,151,181,0,0,0,0" + t, 1, p + b + " +towgs84=230,-199,-752,0,0,0,0" + t, 1, p + b + " +towgs84=211,147,111,0,0,0,0" + t, 1, p + x + A + t, 1, p + b + Ww + t, 1, p + b + " +towgs84=-794,119,-298,0,0,0,0" + t, 1, p + F + I5 + t, 1, p + b + " +towgs84=208,-435,-229,0,0,0,0" + t, 1, p + b + " +towgs84=189,-79,-202,0,0,0,0" + t, 1, p + F + G5 + t, 1, p + b + " +towgs84=403,-81,277,0,0,0,0" + t, 1, p + b + " +towgs84=-307,-92,127,0,0,0,0" + t, 1, p + b + YL + t, 1, p + b + " +towgs84=170,42,84,0,0,0,0" + t, 2, p + " +a=6378270 +b=6356794.343434343 +towgs84=102,52,-38,0,0,0,0" + t, 1, p + b + " +towgs84=276,-57,149,0,0,0,0" + t, 1, p + b + " +towgs84=-632,438,-609,0,0,0,0" + t, 1, p + b + " +towgs84=647,1777,-1124,0,0,0,0" + t, 1, p + N + " +towgs84=260,12,-147,0,0,0,0" + t, 1, p + n + r + t, 1, p + qe + Vn + t, 1, p + b + " +towgs84=-156,-271,-189,0,0,0,0" + t, 1, p + " +a=6378136 +b=6356751.361745712 +towgs84=0,0,1.5,-0,-0,0.076,0" + t, 1, p + b + t, 1, p + n + t, 1, p + N + g + t, 1, p + N + t, 1, p + O + t, 1, p + O + t, 1, p + n + r + t, 1, p + W3 + K3 + a3 + t, 1, p + n + r + t, 1, p + W + X5 + t, 1, p + Y3 + G3 + t, 1, p + W3 + K3 + a3 + t, 1, p + b + t, 1, p + b + ft + t, 1, p + W + r + t, 1, p + W + mt + t, 1, p + W + t, 1, p + W + r + t, 1, p + n + r + t, 1, p + p6 + t, 1, p + n + r + t, 1, p + W + r + t, 1, p + W + r + t, 1, p + n + r + t, 1, p + n + r + t, 1, i + h + Yi + " +k=1" + Yu + u + _ + e + t, 1, i + h + Pi + " +k=1" + Kn + u + _ + e + t, 1, i + h + $l + " +k=1" + $u + u + _ + e + t, 1, i + h + Ti + " +k=1" + Zh + u + _ + e + t, 1, i + h + ml + " +k=1" + p0 + u + _ + e + t, 1, i + h + Pn + " +k=1" + _0 + u + _ + e + t, 1, i + h + gu + " +k=1" + m0 + u + _ + e + t, 1, i + h + ie + " +k=1" + g0 + u + _ + e + t, 1, i + h + la + " +k=1" + v0 + u + _ + e + t, 1, i + h + v + " +k=1" + y0 + u + _ + e + t, 1, i + h + Kl + " +k=1" + b0 + u + _ + e + t, 1, i + h + tt + " +k=1" + w0 + u + _ + e + t, 1, i + h + gl + " +k=1" + hp + u + _ + e + t, 1, i + h + Se + " +k=1" + x0 + u + _ + e + t, 1, i + h + aa + " +k=1" + cp + u + _ + e + t, 1, i + h + k + " +k=1" + k0 + u + _ + e + t, 1, i + h + Si + " +k=1" + y + u + _ + e + t, 1, i + h + wl + " +k=1" + y + u + _ + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + e + t, 1, i + h + bu + " +k=1" + y + u + _ + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + e + t, 1, i + h + Yi + " +k=1" + y + u + _ + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + e + t, 1, i + h + $l + " +k=1" + y + u + _ + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + e + t, 1, i + h + ml + " +k=1" + y + u + _ + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + e + t, 1, i + h + gu + " +k=1" + y + u + _ + e + t, 1, i + h + ie + " +k=1" + y + u + _ + e + t, 1, i + h + la + " +k=1" + y + u + _ + e + t, 1, i + h + v + " +k=1" + y + u + _ + e + t, 1, i + h + Kl + " +k=1" + y + u + _ + e + t, 1, i + h + tt + " +k=1" + y + u + _ + e + t, 1, i + h + gl + " +k=1" + y + u + _ + e + t, 1, i + h + Se + " +k=1" + y + u + _ + e + t, 1, p + O + Rc + " +pm=bern" + t, 1, p + b + o + " +pm=bogota" + t, 1, p + b + P + ob + t, 1, p + O + zm + E0 + t, 1, p + O + Ut + bl + t, 1, p + b + tu + " +pm=rome" + t, 1, p + Ke + le + ji + kl + t, 1, p + O + E0 + t, 1, p + b + " +pm=brussels" + t, 1, p + b + B1 + kl + t, 1, p + Ke + le + Zm + kl + t, 1, i + h + aa + " +k=1" + y + u + _ + e + t, 0, i + h + aa + " +k=1" + y + u + _ + e + t, 1, p + O + va + E0 + t, 1, p + O + " +pm=stockholm" + t, 1, p + O + " +pm=athens" + t, 1, p + Ke + le + nu + kl + t, 1, p + Vu + fo + xr + If + t, 1, p + O + Rs + bl + t, 2, p + O + F1 + E0 + t, 1, p + Ke + le + kl + t, 1, i + h + k + " +k=1" + y + u + _ + e + t, 1, p + b + t, 1, p + b + t, 2, a + " +lat_1=15 +lat_2=16.66666666666667 +lat_0=15.83333333333333 +lon_0=-24 +x_0=161587.83 +y_0=128511.202" + M + e + t, 13, a + GM + jM + Yp + vy + z + u + n + r + e + t, 62, p + " +a=6376523" + j3 + CE + t, 2, p + n6 + N3 + " +pm=madrid" + t, 1, p + O + Z5 + ob + t, 109, p + n + r + t, 1, c + Fa + n + r + e + t, 1, c + El + n + r + e + t, 1, c + Qi + n + r + e + t, 2, i + cr + r8 + " +k=1" + z + u + b + P + e + t, 23, _n + $i + T0 + qr + bc + Cn + yr + M + e + t, 1, _n + K + " +lat_ts=-90" + qr + bc + Cn + yr + M + e + t, 6, c + Go + n + r + e + t, 21, ur + S_ + sa + V_ + pf + z + u + w + e + t, 1, ur + S_ + sa + V_ + pf + z + u + n + r + e + t, 1, ur + S_ + sa + V_ + pf + z + u + n + r + e + t, 1, ur + S_ + sa + V_ + pf + z + u + n + r + e + t, 33, i + Er + " +lon_0=5.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=6.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=7.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=8.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=9.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + vy + " +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=11.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=12.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=13.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=14.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=15.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + _y + " +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=17.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=18.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=19.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=20.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=21.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=22.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=23.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=24.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=25.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=26.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=27.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=28.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=29.5 +k=1" + Be + Ee + n + r + e + t, 1, i + Er + " +lon_0=30.5 +k=1" + Be + Ee + n + r + e + t, 2, p + O + t, 35, i + bn + oc + " +k=1" + ot + He + O + e + t, 1, i + bn + Ip + " +k=1" + ot + " +y_0=550000" + O + e + t, 1, i + bn + Rp + " +k=1" + ot + He + O + e + t, 1, i + bn + Ip + " +k=1" + ot + He + O + e + t, 1, i + bn + Se + " +k=1" + ot + He + O + e + t, 1, i + bn + oc + " +k=1" + ot + He + O + e + t, 1, i + bn + " +lon_0=125.0028902777778 +k=1" + ot + He + O + e + t, 1, i + bn + FM + " +k=1" + ot + He + O + e + t, 1, i + bn + FM + " +k=1" + ot + " +y_0=550000" + O + e + t, 1, i + bn + " +lon_0=129.0028902777778 +k=1" + ot + He + O + e + t, 1, i + bn + " +lon_0=131.0028902777778 +k=1" + ot + He + O + e + t, 1, i + bn + dp + Me + Ye + yr + O + e + t, 1, i + bn + dp + Me + Ye + yr + n + r + e + t, 1, i + bn + Rp + " +k=1" + ot + He + n + r + e + t, 1, i + bn + Ip + " +k=1" + ot + He + n + r + e + t, 1, i + bn + Ip + " +k=1" + ot + " +y_0=550000" + n + r + e + t, 1, i + bn + Se + " +k=1" + ot + He + n + r + e + t, 1, i + bn + oc + " +k=1" + ot + He + n + r + e + t, 1, i + bn + Rp + " +k=1" + ot + xp + n + r + e + t, 1, i + bn + Ip + " +k=1" + ot + xp + n + r + e + t, 1, i + bn + Se + " +k=1" + ot + xp + n + r + e + t, 1, i + bn + oc + " +k=1" + ot + xp + n + r + e + t, 33, Mv + y_ + " +lon_0=42.5" + pg + m + z + u + O + Rs + bl + e + t, 2, i + h + no + Me + y + He + M + e + t, 5, p + O + j5 + t, 1, p + O + j5 + bl + t, 4, p + Gr + Wt + T5 + t, 1, i + " +lat_0=7.000480277777778 +lon_0=80.77171111111112 +k=0.9999238418" + ot + Da + Gr + Wt + $L + e + t, 1, i + " +lat_0=7.000471527777778 +lon_0=80.77171308333334 +k=0.9999238418" + y + He + Gr + Wt + T5 + e + t, 8, a + GM + jM + Yp + vy + z + u + n + r + e + t, 3, p + n + t, 1, Jn + uh + Z_ + WE + jd + z + u + xo + V1 + n + e + t, 5, p + n + r + t, 1, i + h + Ei + " +k=1" + y + u + n + r + e + t, 1, i + h + Do + " +k=1" + y + u + n + r + e + t, 1, i + h + eo + " +k=1" + y + u + n + r + e + t, 1, i + h + hc + " +k=1" + y + u + n + r + e + t, 1, i + h + Ga + " +k=1" + y + u + n + r + e + t, 1, i + h + cc + " +k=1" + y + u + n + r + e + t, 1, i + h + xs + " +k=1" + y + u + n + r + e + t, 5, p + n + r + t, 2, i + h + Yi + " +k=1" + Hn + u + n + r + e + t, 3, i + h + Ei + " +k=1" + id + u + n + r + e + t, 1, i + h + Do + " +k=1" + Jf + u + n + r + e + t, 1, i + h + eo + " +k=1" + qc + u + n + r + e + t, 1, i + h + hc + " +k=1" + td + u + n + r + e + t, 1, i + h + Ga + " +k=1" + jl + u + n + r + e + t, 1, i + h + cc + " +k=1" + ul + u + n + r + e + t, 1, i + h + xs + " +k=1" + ou + u + n + r + e + t, 17, i + h + " +lon_0=90.73333333333333 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.55 +k=1" + Hn + rr + n + r + e + t, 1, i + h + zM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.03333333333333 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.15000000000001 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.13333333333334 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.23333333333333 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.34999999999999 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.34999999999999 +k=1" + Hn + rr + n + r + e + t, 1, i + h + zM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + UM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.06666666666666 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.26666666666667 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=89.55 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=91.75 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.5 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.16666666666667 +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.11666666666666 +k=1" + Hn + rr + n + r + e + t, 1, i + h + UM + " +k=1" + Hn + rr + n + r + e + t, 1, i + h + " +lon_0=90.86666666666666 +k=1" + Hn + rr + n + r + e + t, 5, i + h + " +lon_0=-7 +k=0.999997" + ot + " +y_0=-6000000" + n + r + e + t, 4, a + yy + " +lat_2=54.5" + h + rc + Ye + u + n + r + e + t, 1, a + yy + " +lat_2=54.5" + h + rc + Ye + u + n + r + e + t, 3, p + n + r + t, 1, a + " +lat_1=64.25 +lat_2=65.75 +lat_0=65 +lon_0=-19" + Kh + oa + n + r + e + t, 4, du + S3 + Jp + _p + Lp + O + F1 + E0 + e + t, 1, du + S3 + Jp + _p + Lp + O + va + E0 + e + t, 1, du + S3 + Jp + _p + Lp + O + zm + E0 + e + t, 6, c + Fa + Z + b + be + e + t, 3, p + n + r + t, 3, i + K + D_ + " +k=1" + ze + u + n + r + e + t, 1, i + K + oh + " +k=1" + Gn + u + n + r + e + t, 1, i + K + Bd + " +k=1" + qn + u + n + r + e + t, 1, i + K + C0 + " +k=1" + Pr + u + n + r + e + t, 1, i + K + N_ + " +k=1" + xn + u + n + r + e + t, 1, i + K + sb + " +k=1" + Wh + u + n + r + e + t, 1, i + K + uc + " +k=1" + ql + u + n + r + e + t, 5, p + n + r + t, 1, c + Tr + Z + n + r + e + t, 1, c + Vr + Z + n + r + e + t, 1, c + Qr + Z + n + r + e + t, 3, p + n + r + t, 1, c + Vr + Z + n + r + e + t, 1, c + Xr + Z + n + r + e + t, 3, p + W + r + t, 2, i + h + rc + m + y + u + W + r + e + t, 4, p + n + r + t, 2, p + n + r + t, 8, p + W + r + t, 1, c + Qr + Z + W + r + e + t, 1, c + Ai + Z + W + r + e + t, 4, c + Xr + Z + n + r + e + t, 2, c + Vr + Z + n + r + e + t, 4, p + n + r + t, 3, c + El + Z + n + r + e + t, 55, p + F + nl + t, 5, a + " +lat_1=10.46666666666667 +lat_0=10.46666666666667 +lon_0=-84.33333333333333 +k_0=0.99995696" + y + " +y_0=271820.522" + F + nl + e + t, 1, a + " +lat_1=9 +lat_0=9" + i8 + " +k_0=0.99995696" + y + " +y_0=327987.436" + F + nl + e + t, 2, a + " +lat_1=14.9 +lat_0=14.9" + ri + " +k_0=0.99989906" + y + " +y_0=325992.681" + F + nl + e + t, 1, a + " +lat_1=13.78333333333333 +lat_0=13.78333333333333 +lon_0=-89 +k_0=0.99996704" + y + " +y_0=295809.184" + F + nl + e + t, 1, a + " +lat_1=13.86666666666667 +lat_0=13.86666666666667" + Xv + " +k_0=0.99990314" + y + " +y_0=359891.816" + F + nl + e + t, 1, a + " +lat_1=11.73333333333333 +lat_0=11.73333333333333" + Xv + " +k_0=0.9999222800000001" + y + " +y_0=288876.327" + F + nl + e + t, 1, c + yi + bt + Tt + e + t, 1, p + qe + Vn + t, 3, p + F + t, 2, a + " +lat_1=8.416666666666666 +lat_0=8.416666666666666 +lon_0=-80 +k_0=0.99989909" + y + " +y_0=294865.303" + F + e + t, 3, hy + " +lat_0=8.25" + zn + " +x_0=914391.7962 +y_0=999404.7217154861" + F + " +to_meter=0.9143917962" + t, 7, a + gt + vt + " +lat_0=-78 +lon_0=163" + Qv + Vh + n + r + e + t, 1, a + " +lat_1=-73.66666666666667" + Dn + " +lat_0=-74.5" + ac + nf + G + n + r + e + t, 1, a + " +lat_1=-70.66666666666667 +lat_2=-72.33333333333333 +lat_0=-71.5" + tb + f6 + Ee + n + r + e + t, 1, _n + K + " +lat_ts=-90" + Gp + bc + nf + Ee + n + r + e + t, 7, p + n + r + t, 1, c + Tr + n + r + e + t, 23, Mv + y_ + qM + pg + m + z + u + O + Rs + e + t, 1, Mv + y_ + qM + pg + m + z + u + O + Rs + e + t, 4, i + ib + Pv + " +k=1" + kp + " +y_0=650000" + b + WL + e + t, 1, i + ib + Pv + " +k=1" + kp + " +y_0=650000" + b + F5 + e + t, 1, i + h + Ml + " +k=1" + ze + u + O + ve + e + t, 3, i + h + " +lon_0=11.5" + Me + ze + br + M + e + t, 1, p + b + t, 3, p + bt + me + t, 3, hy + h + uc + nf + kt + bt + me + e + t, 1, c + Qr + Z + bt + me + e + t, 2, c + Ms + Z + bt + me + e + t, 1, c + Wa + Z + bt + me + e + t, 1, c + Fa + Z + bt + me + e + t, 1, c + Qr + Z + b + e + t, 1, c + Ai + Z + b + e + t, 1, c + Ms + Z + b + e + t, 1, c + Wa + Z + b + e + t, 7, p + n + r + t, 4, c + Ha + Z + n + r + e + t, 1, c + Ql + Z + n + r + e + t, 1, c + wc + Z + n + r + e + t, 7, a + " +lat_1=16.81666666666667 +lat_0=16.81666666666667" + ri + " +k_0=0.99992226" + y + " +y_0=292209.579" + F + nl + e + t, 2, p + _ + je + t, 1, i + h + Rn + " +k=1" + Pr + u + _ + je + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + je + e + t, 1, i + h + eo + " +k=1" + Wh + u + _ + je + e + t, 1, i + h + Ga + " +k=1" + ql + u + _ + je + e + t, 1, i + h + Rn + " +k=1" + y + u + _ + je + e + t, 1, i + h + Ei + " +k=1" + y + u + _ + je + e + t, 1, i + h + eo + " +k=1" + y + u + _ + je + e + t, 1, i + h + Ga + " +k=1" + y + u + _ + je + e + t, 19, se + Zl + r6 + b_ + Re + " +y_0=304800" + w + ct + t, 1, i + " +lat_0=17.06124194444444 +lon_0=-88.6318575 +k=1 +x_0=66220.02833082761 +y_0=135779.5099885299" + qe + Vn + Xg + t, 4, p + n + r + t, 3, i + h + " +lon_0=11.33333333333333 +k=1" + Ye + u + n + r + e + t, 27, i + T + i8 + " +k=0.999942857" + X + u + w + d + t, 1, i + T + dt + Wu + X + u + w + d + t, 1, i + T + " +lon_0=-88.75" + Wu + X + u + w + d + t, 2, i + h + Qp + Me + y + u + b + ut + e + t, 2, c + Xi + Z + W + ng + e + t, 2, i + h + yo + " +k=1" + Gn + u + _ + U + e + t, 1, a + U_ + Tf + gc + xl + Jc + __ + n + r + e + t, 1, ra + gc + xl + m_ + g_ + n + r + e + t, 1, a + U_ + Tf + gc + xl + Jc + __ + n + r + e + t, 1, ra + gc + xl + m_ + g_ + n + r + e + t, 1, ra + gc + xl + m_ + g_ + n + r + e + t, 1, a + U_ + Tf + gc + xl + Jc + __ + n + r + e + t, 1, ra + gc + xl + m_ + g_ + n + r + e + t, 1, a + U_ + Tf + gc + xl + Jc + __ + n + r + e + t, 2, du + " +lon_0=-43 +lat_ts=-2" + nf + kt + n + r + e + t, 2, a + " +lat_1=52.66666666666666 +lat_2=54.33333333333334 +lat_0=48" + xl + " +x_0=815000" + u + b + ut + e + t, 1, c + Ni + Z + n + r + e + t, 2, i + I + ef + Fc + Ie + u + n + r + d + t, 3, i + h + Ml + Me + Kn + u + n + r + e + t, 1, i + h + hr + Me + Zh + u + n + r + e + t, 1, i + h + Ml + Me + Kn + u + n + r + e + t, 1, i + h + yo + Me + $u + u + n + r + e + t, 1, i + h + hr + Me + Zh + u + n + r + e + t, 1, i + I + ef + Fc + Ie + u + n + r + d + t, 1, i + I + ef + Fc + Ie + u + n + r + d + t, 4, i + h + yo + Me + " +x_0=500053 +y_0=-3999820" + b + tu + e + t, 4, i + h + hr + " +k=1" + qn + u + _ + U + e + t, 1, i + h + yo + " +k=1" + Gn + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + yo + " +k=1" + qn + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + hr + " +k=1" + xn + u + O + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + U + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + U + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + U + e + t, 1, i + h + yo + " +k=1" + qn + u + _ + Bt + e + t, 1, i + h + no + " +k=1" + Pr + u + _ + Bt + e + t, 1, i + h + hr + " +k=1" + xn + u + _ + Bt + e + t, 1, i + h + Qp + " +k=1" + Gn + u + O + ve + e + t, 1, i + h + yo + " +k=1" + qn + u + O + ve + e + t, 1, i + h + no + " +k=1" + Pr + u + O + ve + e + t, 1, i + h + hr + " +k=1" + xn + u + O + ve + e + t, 1, i + h + Ml + " +k=1" + ze + u + O + ve + e + t, 1, p + O + t, 1, i + h + Qp + " +k=1" + Gn + u + O + e + t, 1, i + h + yo + " +k=1" + qn + u + O + e + t, 1, i + h + no + " +k=1" + Pr + u + O + e + t, 1, i + h + hr + " +k=1" + xn + u + O + e + t, 15, c + Jl + Z + n + r + e + t, 125, i + " +lat_0=-35.31773627777778 +lon_0=149.0092948305555 +k=1.000086" + ot + xp + bt + V + e + t, 11, c + wo + W + r + e + t, 1, c + Gs + W + r + e + t, 2, c + yi + Z + n + r + e + t, 3, i + h + no + Me + y + kt + M + e + t, 2, i + h + Do + m + y + kt + n + r + e + t, 14, c + Ai + Z + bt + me + e + t, 17, c + Xr + Z + bt + me + e + t, 1, c + Vr + Z + bt + me + e + t, 1, c + Tr + Z + bt + me + e + t, 2, c + Xi + Z + b + U5 + e + t, 1, hy + h + uc + nf + kt + n + r + e + t, 6, p + n + t, 1, i + h + eh + Me + ze + Vh + n + e + t, 3, _n + $i + " +lat_ts=70" + Yi + " +k=1" + z + u + rb + yv + e + t, 31, a + K_ + io + Y1 + ih + z + u + M + e + t, 1, a + K_ + io + Y1 + G_ + z + u + M + e + t, 1, a + K_ + io + Y1 + eo + z + u + M + e + t, 1, a + K_ + io + Y1 + Pn + z + u + M + e + t, 1, a + K_ + io + Y1 + Yl + z + u + M + e + t, 1, a + No + Y_ + $1 + ih + z + u + M + e + t, 1, a + No + Y_ + $1 + G_ + z + u + M + e + t, 1, a + No + Y_ + $1 + eo + z + u + M + e + t, 1, a + No + Y_ + $1 + Pn + z + u + M + e + t, 1, a + No + Y_ + $1 + Yl + z + u + M + e + t, 1, a + $_ + X_ + X1 + ih + z + u + M + e + t, 1, a + $_ + X_ + X1 + G_ + z + u + M + e + t, 1, a + $_ + X_ + X1 + eo + z + u + M + e + t, 1, a + $_ + X_ + X1 + Pn + z + u + M + e + t, 1, a + $_ + X_ + X1 + Yl + z + u + M + e + t, 1, _n + $i + T0 + Pd + bc + Cn + yr + M + e + t, 1, _n + $i + T0 + fr + bc + Cn + yr + M + e + t, 1, _n + $i + T0 + " +lon_0=-33" + bc + Cn + yr + M + e + t, 1, _n + $i + T0 + kf + bc + Cn + yr + M + e + t, 1, _n + $i + T0 + Pn + bc + Cn + yr + M + e + t, 110, a + $p + op + sp + " +lon_0=-30" + uu + Wn + n + r + e + t, 1, a + cs + Vo + $s + " +lon_0=-52" + ru + Ju + n + r + e + t, 1, a + cs + Vo + $s + " +lon_0=-12" + Fl + Ju + n + r + e + t, 1, a + ei + io + Or + oh + hl + Hl + n + r + e + t, 1, a + ei + io + Or + G_ + Kn + Hl + n + r + e + t, 1, a + ei + io + Or + " +lon_0=-10" + Zh + Hl + n + r + e + t, 1, a + No + en + ln + " +lon_0=-64" + Fl + In + n + r + e + t, 1, a + No + en + ln + G_ + zl + In + n + r + e + t, 1, a + No + en + ln + " +lon_0=-14" + ed + In + n + r + e + t, 1, a + Sn + Ln + sn + nc + w0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-42" + x0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-22" + k0 + br + n + r + e + t, 1, a + Zo + lh + Ze + ab + hu + th + n + r + e + t, 1, a + Zo + lh + Ze + " +lon_0=-38" + fu + th + n + r + e + t, 1, a + Zo + lh + Ze + " +lon_0=-20" + Yu + th + n + r + e + t, 1, a + " +lat_1=67" + HM + ZM + " +lon_0=-51" + qc + u6 + n + r + e + t, 1, a + " +lat_1=67" + HM + ZM + " +lon_0=-34" + jl + u6 + n + r + e + t, 1, a + WM + VM + KM + " +lon_0=-52" + Fl + " +y_0=8500000" + n + r + e + t, 1, a + WM + VM + KM + " +lon_0=-37" + zl + " +y_0=8500000" + n + r + e + t, 1, a + cs + Vo + $s + " +lon_0=16" + zl + Ju + n + r + e + t, 1, a + ei + io + Or + Rn + qc + Hl + n + r + e + t, 1, a + No + en + ln + xl + hu + In + n + r + e + t, 1, a + No + en + ln + Q_ + fu + In + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=14" + qc + br + n + r + e + t, 1, a + Sn + Ln + sn + Q_ + jl + br + n + r + e + t, 1, a + cs + Vo + $s + " +lon_0=53" + ed + Ju + M + e + t, 1, a + cs + Vo + $s + Pi + hu + Ju + M + e + t, 1, a + ei + io + Or + " +lon_0=52" + jl + Hl + M + e + t, 1, a + ei + io + Or + " +lon_0=83" + ou + Hl + M + e + t, 1, a + ei + io + Or + la + Hh + Hl + M + e + t, 1, a + ei + io + Or + " +lon_0=145" + iu + Hl + M + e + t, 1, a + No + en + ln + " +lon_0=58" + Yu + In + M + e + t, 1, a + No + en + ln + " +lon_0=82" + $u + In + M + e + t, 1, a + No + en + ln + Ky + p0 + In + M + e + t, 1, a + No + en + ln + " +lon_0=130" + m0 + In + M + e + t, 1, a + No + en + ln + Yy + v0 + In + M + e + t, 1, a + No + en + ln + " +lon_0=179" + b0 + In + M + e + t, 1, a + Sn + Ln + sn + I0 + ou + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=74" + Hh + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=95" + iu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=116" + au + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=137" + lu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=158" + uu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=179" + cu + br + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=-163" + hl + br + n + r + e + t, 1, a + Sn + Ln + sn + Ep + Kn + br + n + r + e + t, 1, a + Zo + lh + Ze + L_ + ul + th + n + r + e + t, 1, a + Zo + lh + Ze + Ep + su + th + n + r + e + t, 1, a + $p + op + sp + On + lu + Wn + n + r + e + t, 1, a + cs + Vo + $s + E_ + ul + Ju + n + r + e + t, 1, a + cs + Vo + $s + B_ + su + Ju + n + r + e + t, 1, a + ei + io + Or + Ty + uu + Hl + n + r + e + t, 1, a + ei + io + Or + _l + cu + Hl + n + r + e + t, 1, a + ei + io + Or + oh + hl + Hl + n + r + e + t, 1, a + No + en + ln + Ty + ul + In + n + r + e + t, 1, a + No + en + ln + " +lon_0=-104" + su + In + n + r + e + t, 1, a + No + en + ln + ic + ru + In + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-131" + Zh + br + n + r + e + t, 1, a + Sn + Ln + sn + ih + _0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-91" + g0 + br + n + r + e + t, 1, a + Sn + Ln + sn + " +lon_0=-71" + y0 + br + n + r + e + t, 1, a + Zo + lh + Ze + " +lon_0=-132" + ru + th + n + r + e + t, 1, a + Zo + lh + Ze + " +lon_0=-113" + Fl + th + n + r + e + t, 1, a + Zo + lh + Ze + lc + zl + th + n + r + e + t, 1, a + Zo + lh + Ze + B_ + ed + th + n + r + e + t, 1, a + $p + op + sp + Do + cu + Wn + M + e + t, 1, a + $p + op + sp + Yi + hl + Wn + M + e + t, 1, a + $p + op + sp + yf + Kn + Wn + M + e + t, 1, a + $p + op + sp + Pd + au + Wn + M + e + t, 1, a + cs + Vo + $s + " +lon_0=133" + fu + Ju + M + e + t, 1, a + cs + Vo + $s + tb + Jf + Ju + M + e + t, 1, a + cs + Vo + $s + ff + td + Ju + M + e + t, 1, a + ei + io + Or + " +lon_0=176" + au + Hl + M + e + t, 1, a + ei + io + Or + by + lu + Hl + M + e + t, 1, a + No + en + ln + " +lon_0=-155" + td + In + M + e + t, 1, a + Sn + Ln + sn + " +lon_0=-5" + J3 + br + n + r + e + t, 3, c + yi + F + I5 + ct + t, 1, c + yi + F + G5 + ct + t, 6, p + n + r + t, 69, i + h + Rn + m + y + u + O + Ut + e + t, 3, p + Gr + Wt + " +towgs84=293.17,726.18,245.36,0,0,0,0" + t, 3, c + Ms + n + r + e + t, 1, c + Wa + n + r + e + t, 96, a + tn + fn + wn + Oe + ot + Da + n + e + t, 4, p + W + C5 + t, 1, i + h + eo + Bn + ot + " +y_0=-3500000" + W + C5 + e + t, 4, i + h + Rn + m + ql + u + O + Ut + e + t, 2, p + n + t, 4, p + n + t, 3, p + n + t, 3, c + ja + n + e + t, 1, c + Xl + n + e + t, 1, c + Jl + n + e + t, 1, c + Mu + n + e + t, 1, c + xc + n + e + t, 1, c + Cu + n + e + t, 1, c + Ka + n + e + t, 1, c + Cl + n + e + t, 1, c + Ya + n + e + t, 1, c + Eu + n + e + t, 1, c + Su + n + e + t, 1, c + ku + n + e + t, 1, c + za + n + e + t, 1, c + Ua + n + e + t, 1, c + qa + n + e + t, 1, c + Za + n + e + t, 1, c + ua + n + e + t, 1, c + ha + n + e + t, 1, c + yi + n + e + t, 1, c + Xr + n + e + t, 1, c + Vr + n + e + t, 2, ur + S_ + sa + V_ + pf + z + u + n + e + t, 1, a + Sn + Ln + sn + " +lon_0=-163" + hl + br + n + e + t, 1, a + Sn + Ln + sn + Ep + Kn + br + n + e + t, 1, a + Zo + lh + Ze + L_ + ul + th + n + e + t, 1, a + Zo + lh + Ze + Ep + su + th + n + e + t, 1, i + dl + U1 + Rd + ot + u + n + e + t, 1, i + fi + L0 + fe + D + u + n + e + t, 6, a + " +lat_1=17.5 +lat_2=29.5 +lat_0=12 +lon_0=-102" + Gn + u + n + r + e + t, 3, p + n + r + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, a + " +lat_1=17.5 +lat_2=29.5 +lat_0=12 +lon_0=-102" + Gn + u + n + r + e + t, 9, i + h + Rn + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + ro + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + Ei + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + Do + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + eo + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + hc + " +k=1" + xe + u + _ + ga + e + t, 1, i + h + Ga + " +k=1" + xe + u + _ + ga + e + t, 4, a + " +lat_1=19.33333333333333 +lat_2=19.7 +lat_0=19.33333333333333 +lon_0=-80.56666666666666 +x_0=899160 +y_0=579120" + n + r + ct + t, 2, ur + " +lat_1=55" + Tf + F_ + ff + z + u + n + e + t, 1, Jn + " +lat_0=57" + Lg + Mg + m + nf + gi + xo + gr + n + e + t, 1, i + at + Ly + m + y + u + n + e + t, 1, i + at + My + m + y + u + n + e + t, 1, i + at + Pd + m + y + u + n + e + t, 1, i + at + ff + m + y + u + n + e + t, 1, i + at + nh + m + y + u + n + e + t, 1, i + at + Ey + m + y + u + n + e + t, 1, i + at + Sy + m + y + u + n + e + t, 1, i + at + k_ + m + y + u + n + e + t, 1, a + Eg + Sg + Yp + Cy + Ye + u + n + e + t, 1, i + nn + ya + m + J + u + n + e + t, 1, i + nn + ya + m + J + u + n + ct + t, 1, i + nn + Ir + m + J + u + n + e + t, 1, i + nn + Ir + m + J + u + n + ct + t, 1, i + nn + Dc + fe + J + u + n + e + t, 1, i + nn + Dc + fe + J + u + n + ct + t, 1, a + Xo + Ta + ke + ws + H + u + n + e + t, 1, a + Xo + Ta + ke + ws + St + u + n + d + t, 1, a + Wr + hf + vs + ws + H + Vl + n + e + t, 1, a + Wr + hf + vs + ws + St + Vf + n + d + t, 1, ur + H_ + M_ + h + df + z + u_ + n + e + t, 1, a + Cs + Ns + Dt + bs + Cn + He + n + e + t, 1, a + Cs + Ns + Dt + bs + $e + ne + n + d + t, 1, a + To + lo + Ft + bs + Cn + He + n + e + t, 1, a + To + lo + Ft + bs + $e + ne + n + d + t, 1, a + wt + Ao + of + he + Cn + He + n + e + t, 1, a + wt + Ao + of + he + $e + ne + n + d + t, 1, a + Vc + Lf + uo + sf + Cn + He + n + e + t, 1, a + Vc + Lf + uo + sf + $e + ne + n + d + t, 1, a + xi + ho + af + Wl + Cn + He + n + e + t, 1, a + xi + ho + af + Wl + $e + ne + n + d + t, 1, a + Oo + $o + Qs + Bc + Cn + He + n + e + t, 1, a + Oo + $o + Qs + Bc + $e + ne + n + d + t, 1, a + Kc + Yc + ls + Qe + zt + Nt + n + e + t, 1, a + Kc + Yc + ls + Qe + ai + pn + n + d + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + e + t, 1, a + mr + jn + Dt + Qe + ai + pn + n + d + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + e + t, 1, a + wt + Hi + Q + Qe + ai + pn + n + d + t, 1, a + La + lf + Io + Hc + uv + hv + n + e + t, 1, a + La + lf + Io + Hc + Ug + qg + n + d + t, 1, i + bn + Ui + uf + ot + u + n + e + t, 1, i + bn + Ui + uf + Ht + u + n + d + t, 1, i + Et + zn + st + ot + u + n + e + t, 1, i + Et + zn + st + Ht + u + n + d + t, 1, ur + " +lat_1=24" + gy + " +lat_0=24" + rc + H + u + n + e + t, 1, a + $c + Js + Mf + Xc + D + u + n + e + t, 1, a + $c + Js + Mf + Xc + D + u + n + d + t, 1, i + Et + mf + st + ot + u + n + e + t, 1, i + Et + mf + st + Ht + u + n + d + t, 1, i + fi + dr + m + ot + u + n + e + t, 1, i + fi + dr + m + Ht + u + n + d + t, 1, i + fi + pi + m + R + u + n + e + t, 1, i + fi + pi + m + ui + u + n + d + t, 1, i + pt + pu + Te + y + u + n + e + t, 1, i + pt + pu + Te + ge + u + n + d + t, 1, i + pt + fs + Te + ot + u + n + e + t, 1, i + pt + fs + Te + Ht + u + n + d + t, 1, i + pt + Nc + fe + Lr + u + n + e + t, 1, i + pt + Nc + fe + Hg + u + n + d + t, 1, i + Q + Ss + oi + xe + u + n + e + t, 1, i + Q + Ss + oi + xe + u + n + d + t, 1, i + Q + pr + st + R + u + n + e + t, 1, i + Q + pr + st + tv + u + n + d + t, 1, i + Zn + bi + Pe + Be + rh + n + e + t, 1, i + Zn + bi + Pe + Qg + oe + n + d + t, 1, i + Zn + ba + Pe + Ds + rh + n + e + t, 1, i + Zn + ba + Pe + Ds + oe + n + d + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + e + t, 1, a + Qo + Wi + T + Qt + ze + de + n + d + t, 1, a + Qn + Aa + it + Qt + y + u + n + e + t, 1, a + Qn + Aa + it + Qt + Ie + u + n + d + t, 1, a + Vi + Dr + kn + si + H + u + n + e + t, 1, a + Vi + Dr + kn + si + St + u + n + d + t, 1, a + $r + ys + Q + Fr + H + Vl + n + e + t, 1, a + $r + ys + Q + Fr + St + Vf + n + d + t, 1, a + Xt + ao + Zn + Uc + y + u + n + e + t, 1, a + Xt + ao + Zn + Uc + ge + u + n + d + t, 1, a + eu + qh + Jt + dt + ze + Ee + n + e + t, 1, a + eu + qh + Jt + dt + ze + zi + n + d + t, 1, a + ci + ta + Jt + dt + y + He + n + e + t, 1, a + ci + ta + Jt + dt + ge + ne + n + d + t, 1, a + Oh + Ih + dl + cl + Ye + u + n + e + t, 1, a + Oh + Ih + dl + cl + Vt + u + n + d + t, 1, a + kd + Ld + Md + Zr + Ye + u + n + e + t, 1, a + kd + Ld + Md + Zr + Vt + u + n + d + t, 1, i + ky + bv + Ba + y + u + n + e + t, 1, i + Ve + mv + Ba + R + u + n + e + t, 1, i + we + gv + Ba + xe + u + n + e + t, 1, i + rn + Ra + m + xe + u + n + e + t, 1, i + rn + Ra + m + xe + u + n + d + t, 1, i + we + zr + Pe + Ds + u + n + e + t, 1, i + we + zr + Pe + Ds + u + n + d + t, 1, a + od + _d + Ft + mu + H + u + n + e + t, 1, a + od + _d + Ft + mu + Zg + u + n + d + t, 1, a + Oa + ts + es + Ul + y + u + n + e + t, 1, a + Oa + ts + es + Ul + ge + u + n + d + t, 1, a + As + Ps + es + Gt + ot + rf + n + e + t, 1, a + As + Ps + es + Gt + Ht + rf + n + d + t, 1, a + md + po + il + $t + pp + u + n + e + t, 1, a + md + po + il + $t + Vg + u + n + ct + t, 1, a + rl + ea + Tn + pl + Kv + u + n + e + t, 1, a + rl + ea + Tn + pl + Wg + u + n + ct + t, 1, Jn + wg + " +lonc=-86" + cv + Me + fv + lv + xo + dv + n + e + t, 1, a + Ne + gd + T + $t + Jc + u + n + e + t, 1, a + Ne + gd + T + $t + sv + u + n + ct + t, 1, a + cd + Bh + mo + Wc + Lr + Mr + n + e + t, 1, a + cd + Bh + mo + Wc + $ + lt + n + d + t, 1, a + Rh + Dh + Zl + wa + Lr + Mr + n + e + t, 1, a + Rh + Dh + Zl + wa + $ + lt + n + d + t, 1, a + Nh + Hu + wu + lc + Lr + Mr + n + e + t, 1, a + Nh + Hu + wu + lc + $ + lt + n + d + t, 1, i + ia + ds + Bn + xe + u + n + e + t, 1, i + ia + ds + Bn + xe + u + n + d + t, 1, i + $h + Tv + $v + y + mp + n + e + t, 1, i + ia + ri + Bn + R + u + n + e + t, 1, i + ia + ri + Bn + ui + u + n + d + t, 1, i + Ys + cl + fe + y + u + n + e + t, 1, i + Ys + d_ + fe + Hn + u + n + e + t, 1, i + Z1 + p_ + st + dy + u + n + e + t, 1, a + Na + qd + sd + Ku + D + u + n + e + t, 1, a + Na + qd + sd + Ku + ms + u + n + ct + t, 1, a + ks + Ns + Ia + fr + y + u + n + e + t, 2, i + jr + xa + m + y + fl + n + e + t, 1, i + jr + xa + m + Ie + fl + n + d + t, 1, i + jr + wi + m + ot + Yv + n + e + t, 1, i + jr + wi + m + Kf + Jg + n + d + t, 1, i + jr + qi + m + Lr + tf + n + e + t, 1, i + jr + qi + m + $ + ev + n + d + t, 1, i + I + Yo + Pe + xe + u + n + e + t, 1, i + I + Yo + Pe + xe + u + n + d + t, 1, i + ee + na + m + Nn + u + n + e + t, 1, i + ee + na + m + Nn + u + n + d + t, 1, i + nn + Gc + m + y + u + n + e + t, 1, i + nn + Gc + m + ge + u + n + d + t, 1, i + nn + Ko + Wu + vd + u + n + e + t, 1, i + nn + Ko + Wu + vd + u + n + d + t, 1, i + nn + hi + jc + py + u + n + e + t, 1, i + nn + hi + jc + Kg + u + n + d + t, 1, i + it + Di + an + Hn + u + n + e + t, 1, i + it + Di + an + Yg + u + n + d + t, 1, i + ee + na + m + Nn + u + n + e + t, 1, i + ee + na + m + Nn + u + n + d + t, 1, a + Ma + Ur + ye + gf + xe + u + n + e + t, 1, a + Ma + Ur + ye + gf + xe + u + n + d + t, 1, i + it + ps + an + kp + u + n + e + t, 1, i + it + ps + an + $g + u + n + d + t, 1, a + Ki + ol + Qc + ic + vv + u + n + e + t, 1, a + Ki + ol + Qc + ic + B + u + n + d + t, 1, a + Le + _o + Bo + Lt + D + u + n + e + t, 1, a + Le + _o + Bo + Lt + ms + u + n + ct + t, 1, a + Os + sl + Br + Lt + D + u + n + e + t, 1, a + Os + sl + Br + Lt + ms + u + n + ct + t, 1, a + Ed + Bl + cr + f + D + u + n + e + t, 1, a + Ed + Bl + cr + f + D + u + n + d + t, 1, a + Gh + jh + bn + f + D + u + n + e + t, 1, a + Gh + jh + bn + f + D + u + n + d + t, 1, a + ki + Gu + Ef + si + D + u + n + e + t, 1, a + ki + Gu + Ef + si + D + u + n + d + t, 1, a + xh + ju + Ea + si + D + u + n + e + t, 1, a + xh + ju + Ea + si + D + u + n + d + t, 1, a + ks + sa + ce + he + H + u + n + e + t, 1, a + ks + sa + ce + he + i_ + u + n + ct + t, 1, a + fc + Kr + rn + he + Gn + u + n + e + t, 1, a + fc + Kr + rn + he + n_ + u + n + ct + t, 1, a + dc + us + pt + he + ze + u + n + e + t, 1, a + dc + us + pt + he + r_ + u + n + ct + t, 1, a + ad + kh + ye + Rt + D + u + n + e + t, 1, a + ad + kh + ye + Rt + D + u + n + d + t, 1, a + co + Sa + Dt + Rt + D + u + n + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + d + t, 1, a + tn + fn + wn + Oe + ot + Da + n + e + t, 1, i + Mi + Gt + nd + Be + u + n + e + t, 1, i + Mi + Gt + nd + Q1 + u + n + d + t, 1, a + Lh + yd + Ts + zn + bd + u + n + e + t, 1, a + Lh + yd + Ts + zn + bd + u + n + ct + t, 1, a + Fh + _i + Ve + fr + D + u + n + e + t, 1, a + Fh + _i + Ve + fr + D + u + n + d + t, 1, a + Sd + Is + En + gn + D + u + n + e + t, 1, a + Sd + Is + En + gn + D + u + n + d + t, 1, a + Mh + ld + ke + sh + D + u + n + e + t, 1, a + Mh + ld + ke + sh + D + u + n + d + t, 1, a + Sh + Rl + hs + gn + R + G + n + e + t, 1, a + Sh + Rl + hs + gn + ui + G + n + d + t, 1, ur + Cd + Vd + ah + fr + ze + fl + n + e + t, 1, a + Cd + Vd + ah + fr + ze + Vh + n + e + t, 1, a + al + ud + Sf + Zc + ot + Ee + n + e + t, 1, a + al + ud + Sf + Zc + Ht + zi + n + d + t, 1, a + Il + Eh + Ca + Fr + D + yr + n + e + t, 1, a + Il + Eh + Ca + Fr + D + Zf + n + d + t, 1, a + qo + Es + Po + Fr + xe + Vh + n + e + t, 1, a + qo + Es + Po + Fr + xe + iv + n + d + t, 1, a + Dl + Fu + Zi + _l + D + tf + n + e + t, 1, a + Dl + Fu + Zi + _l + D + rv + n + d + t, 1, i + I + ef + Fc + y + u + n + e + t, 1, i + I + ef + Fc + Ie + u + n + d + t, 1, a + " +lat_1=37" + Py + Mt + Un + z + u + n + e + t, 1, a + wd + Ch + Ft + Zt + qn + yr + n + e + t, 1, a + wd + Ch + Ft + Zt + Wf + Zf + n + d + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + e + t, 1, a + Xt + Pa + Jt + Zt + Wf + zi + n + d + t, 1, a + Le + xd + Bo + _s + y + u + n + e + t, 1, a + Le + xd + Bo + _s + ge + u + n + d + t, 1, a + Ph + zu + Li + he + y + u + n + e + t, 1, a + Ph + zu + Li + he + ge + u + n + d + t, 1, a + fd + Wd + cf + Un + D + u + n + e + t, 1, a + fd + Wd + cf + Un + D + u + n + d + t, 1, a + zh + Uh + Pf + zn + D + u + n + e + t, 1, a + zh + Uh + Pf + zn + D + u + n + d + t, 2, a + _u + hd + Ve + On + D + u + n + d + t, 1, a + Uu + Th + gs + On + D + u + n + e + t, 1, a + Uu + Th + gs + On + D + u + n + d + t, 1, a + Ah + qu + pc + On + D + u + n + e + t, 1, a + Ah + qu + pc + On + D + u + n + d + t, 1, i + h + On + Me + my + Cv + n + e + t, 1, i + cn + so + an + ot + u + n + e + t, 1, i + cn + so + an + Kf + u + n + d + t, 1, i + cn + ka + an + H + Mr + n + e + t, 1, i + cn + ka + an + St + lt + n + d + t, 1, i + cn + Yr + an + Lr + Mr + n + e + t, 1, i + cn + Yr + an + $ + lt + n + d + t, 1, i + cn + zc + an + D + u + n + e + t, 1, i + cn + zc + an + D + u + n + d + t, 1, a + Xu + oo + kn + ae + y + yr + n + e + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + e + t, 1, a + Qu + Co + Q + ae + y + G + n + e + t, 1, a + Hp + yu + Ro + Ra + z + u + n + r + e + t, 1, ur + Hp + yu + Ro + Ra + z + u + n + r + e + t, 1, ur + Hp + yu + Ro + Ra + z + u + n + r + e + t, 1, a + Xu + oo + kn + ae + Ie + nv + n + d + t, 1, a + Qn + Ho + kr + ae + Ie + de + n + d + t, 1, a + Qu + Co + Q + ae + Ie + G + n + d + t, 1, i + gg + Ev + Pe + y + u + n + e + t, 1, i + vg + Jm + Pe + y + u + n + e + t, 1, i + Ce + nh + vl + y + u + n + e + t, 1, i + yg + Sv + vl + y + u + n + e + t, 1, i + bg + tg + " +k=1" + y + u + n + e + t, 1, i + Ce + nh + vl + Ie + u + n + d + t, 1, c + Cu + n + e + t, 1, c + Ka + n + e + t, 1, c + Mu + Z + n + e + t, 1, i + " +lat_0=13.5 +lon_0=144.75 +k=1" + Be + Da + n + e + t, 9, i + NM + " +lon_0=46.5 +k=0.9994" + Lr + u + Mn + ll + g + e + t, 22, p + n + t, 1, i + mc + i6 + m + z + u + n + e + t, 1, i + mc + oc + m + z + u + n + e + t, 1, i + Mt + x3 + m + z + u + n + e + t, 1, i + mc + Vv + m + z + u + n + e + t, 1, i + Mt + k3 + m + z + u + n + e + t, 1, i + Mt + Bp + m + z + u + n + e + t, 1, i + Mt + L3 + m + z + u + n + e + t, 1, i + Mt + o6 + m + z + u + n + e + t, 1, i + Mt + M3 + m + z + u + n + e + t, 1, i + it + E3 + m + z + u + n + e + t, 1, i + Ro + $3 + m + z + u + n + e + t, 1, i + Ro + X3 + m + z + u + n + e + t, 1, i + Ro + Q3 + m + z + u + n + e + t, 1, i + go + " +lon_0=142" + m + z + u + n + e + t, 1, i + go + dp + m + z + u + n + e + t, 1, i + go + " +lon_0=124" + m + z + u + n + e + t, 1, i + go + oc + m + z + u + n + e + t, 1, i + " +lat_0=20" + Bp + m + z + u + n + e + t, 1, i + go + Yy + m + z + u + n + e + t, 1, c + Fs + n + e + t, 1, c + da + n + e + t, 1, c + Sl + n + e + t, 1, c + Ha + n + e + t, 1, c + Ql + n + e + t, 11, i + h + N_ + Me + y + kt + W + r + e + t, 3, p + n + r + t, 1, c + Gi + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 11, i + h + " +lon_0=105.625 +k=1.000024" + yl + mp + W + r + e + t, 1, i + h + " +lon_0=105.625 +k=1.00002514" + yl + mp + n + r + e + t, 1, i + h + " +lon_0=96.875 +k=1" + yl + " +y_0=1400000" + W + r + e + t, 1, i + h + " +lon_0=96.875 +k=0.99999387" + yl + Wn + n + r + e + t, 13, c + Lu + Z + n + r + e + t, 1, c + Va + Z + n + r + e + t, 1, c + ja + Z + n + r + e + t, 45, p + n + t, 1, i + Td + rg + zp + bf + u + n + e + t, 1, i + Td + rg + zp + ap + u + n + ct + t, 1, i + Td + rg + zp + bf + u + n + e + t, 1, i + Td + rg + zp + ap + u + n + ct + t, 1, i + ce + wv + " +k=1.0002" + _f + u + n + e + t, 1, i + ce + wv + " +k=1.0002" + Xf + u + n + ct + t, 1, i + ce + wv + " +k=1.0002" + _f + u + n + e + t, 1, i + ce + wv + " +k=1.0002" + Xf + u + n + ct + t, 1, a + Cg + Pg + xv + dd + _f + " +y_0=130000" + n + e + t, 1, a + Cg + Pg + xv + dd + Xf + TE + n + ct + t, 1, a + Cg + Pg + xv + dd + _f + " +y_0=130000" + n + e + t, 1, a + Cg + Pg + xv + dd + Xf + TE + n + ct + t, 1, a + Ne + rn + kv + Ay + " +x_0=120000 +y_0=60000" + n + e + t, 1, a + Ne + rn + kv + Ay + AE + GE + n + ct + t, 1, a + Ne + rn + kv + Ay + " +x_0=120000 +y_0=60000" + n + e + t, 1, a + Ne + rn + kv + Ay + AE + GE + n + ct + t, 1, i + I + ni + lb + bf + u + n + e + t, 1, i + I + ni + lb + ap + u + n + ct + t, 1, i + I + ni + lb + bf + u + n + e + t, 1, i + I + ni + lb + ap + u + n + ct + t, 1, a + Tg + Br + he + Av + Nn + " +y_0=30000" + n + e + t, 1, a + Tg + Br + he + Av + ov + jE + n + ct + t, 1, a + Tg + Br + he + Av + Nn + " +y_0=30000" + n + e + t, 1, a + Tg + Br + he + Av + ov + jE + n + ct + t, 1, Jn + Ag + ub + hb + " +k=1" + Qv + t6 + xo + cb + n + e + t, 1, Jn + Ag + ub + hb + " +k=1" + PE + OE + xo + cb + n + ct + t, 1, Jn + Ag + ub + hb + " +k=1" + Qv + t6 + xo + cb + n + e + t, 1, Jn + Ag + ub + hb + " +k=1" + PE + OE + xo + cb + n + ct + t, 1, i + we + ni + Oy + yl + u + n + e + t, 1, i + we + ni + Oy + Qf + u + n + ct + t, 1, i + we + ni + Oy + yl + u + n + e + t, 1, i + we + ni + Oy + Qf + u + n + ct + t, 1, i + Td + Iy + fb + _f + u + n + e + t, 1, i + Td + Iy + fb + Xf + u + n + ct + t, 1, i + Td + Iy + fb + _f + u + n + e + t, 1, i + Td + Iy + fb + Xf + u + n + ct + t, 1, i + Jv + ig + Qh + yl + u + n + e + t, 1, i + Jv + ig + Qh + Qf + u + n + ct + t, 1, i + Jv + ig + Qh + yl + u + n + e + t, 1, i + Jv + ig + Qh + Qf + u + n + ct + t, 1, i + ce + ni + Sp + yl + u + n + e + t, 1, i + ce + ni + Sp + Qf + u + n + ct + t, 1, i + ce + ni + Sp + yl + u + n + e + t, 1, i + ce + ni + Sp + Qf + u + n + ct + t, 1, i + mo + og + db + " +x_0=10000" + u + n + e + t, 1, i + mo + og + db + VE + u + n + ct + t, 1, i + mo + og + db + " +x_0=10000" + u + n + e + t, 1, i + mo + og + db + VE + u + n + ct + t, 1, i + mo + Wl + pb + bf + u + n + e + t, 1, i + mo + Wl + pb + ap + u + n + ct + t, 1, i + mo + Wl + pb + bf + u + n + e + t, 1, i + mo + Wl + pb + ap + u + n + ct + t, 1, i + ty + Xh + " +k=1.0001" + _f + u + n + e + t, 1, i + ty + Xh + " +k=1.0001" + Xf + u + n + ct + t, 1, i + ty + Xh + " +k=1.0001" + _f + u + n + e + t, 1, i + ty + Xh + " +k=1.0001" + Xf + u + n + ct + t, 1, Jn + gp + Ov + " +alpha=5 +k=1 +x_0=-300000 +y_0=-4600000" + xo + " +gamma=5" + n + e + t, 1, Jn + gp + Ov + " +alpha=5 +k=1" + IE + LE + xo + " +gamma=5" + n + ct + t, 1, Jn + gp + Ov + " +alpha=5 +k=1 +x_0=-300000 +y_0=-4600000" + xo + " +gamma=5" + n + e + t, 1, Jn + gp + Ov + " +alpha=5 +k=1" + IE + LE + xo + " +gamma=5" + n + ct + t, 1, i + ey + sg + C_ + " +x_0=60000" + u + n + e + t, 1, i + ey + sg + C_ + FE + u + n + ct + t, 1, i + ey + sg + C_ + " +x_0=60000" + u + n + e + t, 1, i + ey + sg + C_ + FE + u + n + ct + t, 1, i + Og + q1 + Ry + _b + u + n + e + t, 1, i + Og + q1 + Ry + zE + u + n + ct + t, 1, i + Og + q1 + Ry + _b + u + n + e + t, 1, i + Og + q1 + Ry + zE + u + n + ct + t, 1, a + _u + Dy + Lv + Iv + Be + jp + n + e + t, 1, a + _u + Dy + Lv + Iv + J1 + H3 + n + ct + t, 1, a + _u + Dy + Lv + Iv + Be + jp + n + e + t, 1, a + _u + Dy + Lv + Iv + J1 + H3 + n + ct + t, 1, i + Ig + ag + mb + yl + u + n + e + t, 1, i + Ig + ag + mb + Qf + u + n + ct + t, 1, i + Ig + ag + mb + yl + u + n + e + t, 1, i + Ig + ag + mb + Qf + u + n + ct + t, 1, i + Rg + Rv + By + z + u + n + e + t, 1, i + Rg + Rv + By + z + u + n + ct + t, 1, i + Rg + Rv + By + z + u + n + e + t, 1, i + Rg + Rv + By + z + u + n + ct + t, 4, a + ks + sa + ce + he + H + u + n + e + t, 1, a + ks + sa + ce + he + i_ + u + n + ct + t, 2, i + h + Vp + " +k=1" + y + u + n + r + e + t, 5, i + h + no + " +k=0.9985000000000001" + Qv + u + n + r + e + t, 1, i + h + no + " +k=1" + f6 + u + n + r + e + t, 3, a + _u + hd + Ve + On + D + u + n + e + t, 1, a + ks + Ns + Ia + fr + Ie + u + n + d + t, 1, p + Mn + ll + " +towgs84=-24,-203,268,0,0,0,0" + t, 1, p + Mn + ll + " +towgs84=-183,-15,273,0,0,0,0" + t, 1, p + b + " +towgs84=-235,-110,393,0,0,0,0" + t, 1, a + fc + Kr + rn + he + Gn + u + n + e + t, 1, a + fc + Kr + rn + he + n_ + u + n + ct + t, 1, a + dc + us + pt + he + ze + u + n + e + t, 1, a + dc + us + pt + he + r_ + u + n + ct + t, 5, p + Mn + ll + q5 + t, 2, p + Mn + ll + " +towgs84=-63,176,185,0,0,0,0" + t, 21, c + Gs + Mn + ll + q5 + e + t, 7, a + P_ + Ny + Mt + Dv + H + u + n + r + e + t, 1, a + P_ + Ny + Mt + Dv + St + u + n + r + d + t, 1, a + P_ + Ny + Mt + Dv + H + u + n + e + t, 1, a + P_ + Ny + Mt + Dv + St + u + n + d + t, 6, ra + $i + qr + z + u + W + r + e + t, 1, ra + K + qr + z + u + W + r + e + t, 1, "+proj=cea" + qr + " +lat_ts=30" + z + u + W + r + e + t, 29, a + " +lat_1=39 +lat_2=43" + es + Vp + z + u + n + r + e + t, 21, p + n + t, 1, i + y3 + b3 + e6 + Z3 + V3 + n + e + t, 6, p + n + t, 1, i + y3 + b3 + e6 + Z3 + V3 + n + e + t, 14, c + wo + Mn + ll + Xs + e + t, 1, c + Xi + Mn + ll + Xs + e + t, 1, c + Ni + Mn + ll + Xs + e + t, 28, p + n + t, 2, p + n + t, 2, p + n + t, 2, p + n + t, 16, a + " +lat_1=43.2 +lat_0=43.2 +lon_0=-95.25 +k_0=1.000052 +x_0=3505207.010414021 +y_0=2926085.852171705" + n + d + t, 1, a + " +lat_1=43.16666666666666 +lat_0=43.16666666666666 +lon_0=-92.75 +k_0=1.000043 +x_0=3810007.62001524 +y_0=2987045.974091948" + n + d + t, 1, i + pd + " +lon_0=-91.2 +k=1.000035 +x_0=4114808.229616459 +y_0=2529845.05969012" + n + d + t, 1, a + " +lat_1=42.53333333333333 +lat_0=42.53333333333333 +lon_0=-94.83333333333333 +k_0=1.000045 +x_0=4419608.839217679 +y_0=2621285.242570485" + n + d + t, 1, a + " +lat_1=42.65 +lat_0=42.65 +lon_0=-92.25 +k_0=1.000032 +x_0=4724409.448818898 +y_0=2712725.425450851" + n + d + t, 1, i + pd + " +lon_0=-95.73333333333333 +k=1.000039 +x_0=5029210.058420117 +y_0=2011684.023368047" + n + d + t, 1, i + pd + " +lon_0=-94.63333333333334" + C_ + " +x_0=5334010.668021336 +y_0=2072644.145288291" + n + d + t, 1, i + pd + " +lon_0=-93.71666666666667 +k=1.000033 +x_0=5638811.277622555 +y_0=2133604.267208535" + n + d + t, 1, i + pd + " +lon_0=-92.81666666666666" + Ad + " +x_0=5943611.887223775 +y_0=2194564.389128779" + n + d + t, 1, a + " +lat_1=41.83333333333334 +lat_0=41.83333333333334 +lon_0=-91.66666666666667 +k_0=1.00002 +x_0=6248412.496824994 +y_0=2438404.876809754" + n + d + t, 1, i + pd + " +lon_0=-90.53333333333333" + Ad + " +x_0=6553213.106426213 +y_0=2316484.632969266" + n + d + t, 1, a + " +lat_1=40.91666666666666 +lat_0=40.91666666666666 +lon_0=-93.75 +k_0=1.000037 +x_0=6858013.716027432" + ME + n + d + t, 1, i + pd + g3 + wf + " +x_0=7162814.325628651 +y_0=1950723.901447803" + n + d + t, 1, i + pd + " +lon_0=-91.25 +k=1.000018 +x_0=7467614.93522987" + ME + n + d + t, 3, p + n + t, 1, c + wo + Z + n + e + t, 1, c + Xi + Z + n + e + t, 1, c + Ni + Z + n + e + t, 1, c + Gs + Z + n + e + t, 1, c + vc + Z + n + e + t, 1, c + yc + Z + n + e + t, 1, c + Rf + Z + n + e + t, 1, c + Yd + Z + n + e + t, 3, p + n + t, 2, p + n + t, 23, i + Cp + Bv + zp + Nn + u + n + e + t, 1, i + " +lat_0=48" + Bv + " +k=1.00019" + Be + u + n + e + t, 1, a + Gy + Cp + ih + " +k_0=1.000145" + Nn + Da + n + e + t, 1, a + Gy + Cp + " +lon_0=-108.5" + dd + ot + " +y_0=150000" + n + e + t, 1, a + Dg + Bg + Qe + dd + ot + Mr + n + e + t, 1, a + Dg + Bg + Qe + " +k_0=1.00009" + Be + jp + n + e + t, 1, i + gp + " +lon_0=-107.75 +k=1.000148" + ot + u + n + e + t, 1, a + d6 + " +lat_0=46.25 +lon_0=-111.25 +k_0=1.000185" + Be + Mr + n + e + t, 1, a + YM + $M + o8 + " +k_0=1.0001515" + ot + jp + n + e + t, 1, i + XM + s8 + " +k=1.00024" + Be + u + n + e + t, 1, i + Cp + Bv + zp + ov + u + n + ct + t, 1, i + " +lat_0=48" + Bv + " +k=1.00019" + J1 + u + n + ct + t, 1, a + Gy + Cp + ih + " +k_0=1.000145" + ov + " +y_0=199999.9999992" + n + ct + t, 1, a + Gy + Cp + " +lon_0=-108.5" + dd + av + " +y_0=150000.00001464" + n + ct + t, 1, a + Dg + Bg + Qe + dd + av + EE + n + ct + t, 1, a + Dg + Bg + Qe + " +k_0=1.00009" + J1 + " +y_0=49999.99971024" + n + ct + t, 1, i + gp + " +lon_0=-107.75 +k=1.000148" + av + u + n + ct + t, 1, a + d6 + " +lat_0=46.25 +lon_0=-111.25 +k_0=1.000185" + J1 + EE + n + ct + t, 1, a + YM + $M + o8 + " +k_0=1.0001515" + av + H3 + n + ct + t, 1, i + XM + s8 + " +k=1.00024" + Q1 + u + n + d + t, 3, i + vp + " +lon_0=-122.45 +k=1.000007 +x_0=48000 +y_0=24000" + n + e + t, 1, i + vp + " +lon_0=-122.45 +k=1.000007 +x_0=48000 +y_0=24000" + n + d + t, 1, p + n + t, 3, p + W + t, 3, p + W + t, 3, i + Ng + Gg + " +k=1" + _v + " +y_0=126867.909" + lp + up + " +towgs84=-275.7224,94.7824,340.8944,-8.001,-4.42,-11.821,1" + e + t, 115, i + yp + Nv + Jh + j + nt + n + e + t, 1, i + yp + Nv + Jh + j + nt + n + d + t, 1, i + Pp + fp + tc + j + nt + n + e + t, 1, i + Pp + fp + tc + j + nt + n + d + t, 1, i + " +lat_0=39" + lg + ec + j + nt + n + e + t, 1, i + " +lat_0=39" + lg + ec + j + nt + n + d + t, 1, i + " +lat_0=40.45" + bp + jy + j + nt + n + e + t, 1, i + " +lat_0=40.45" + bp + jy + j + nt + n + d + t, 1, i + " +lat_0=40.05" + a8 + Od + j + nt + n + e + t, 1, i + " +lat_0=40.05" + a8 + Od + j + nt + n + d + t, 1, i + Fy + wp + Id + j + nt + n + e + t, 1, i + Fy + wp + Id + j + nt + n + d + t, 1, i + " +lat_0=39" + ny + gb + j + nt + n + e + t, 1, i + " +lat_0=39" + ny + gb + j + nt + n + d + t, 1, i + " +lat_0=40.4" + l8 + ec + j + nt + n + e + t, 1, i + " +lat_0=40.4" + l8 + ec + j + nt + n + d + t, 1, i + yp + u8 + Tp + j + nt + n + e + t, 1, i + yp + u8 + Tp + j + nt + n + d + t, 1, i + ry + h8 + " +k=1.000021" + j + nt + n + e + t, 1, i + ry + h8 + " +k=1.000021" + j + nt + n + d + t, 1, i + iy + c8 + " +k=1.000024" + j + nt + n + e + t, 1, i + iy + c8 + " +k=1.000024" + j + nt + n + d + t, 1, i + " +lat_0=40.15" + f8 + " +k=1.000032" + j + nt + n + e + t, 1, i + " +lat_0=40.15" + f8 + " +k=1.000032" + j + nt + n + d + t, 1, i + " +lat_0=38.1" + wp + Ap + j + nt + n + e + t, 1, i + " +lat_0=38.1" + wp + Ap + j + nt + n + d + t, 1, i + " +lat_0=38.45" + ug + " +k=1.000018" + j + nt + n + e + t, 1, i + " +lat_0=38.45" + ug + " +k=1.000018" + j + nt + n + d + t, 1, i + " +lat_0=38.65" + d8 + jy + j + nt + n + e + t, 1, i + " +lat_0=38.65" + d8 + jy + j + nt + n + d + t, 1, i + " +lat_0=39.1" + p8 + Id + j + nt + n + e + t, 1, i + " +lat_0=39.1" + p8 + Id + j + nt + n + d + t, 1, i + oy + Nv + Id + j + nt + n + e + t, 1, i + oy + Nv + Id + j + nt + n + d + t, 1, i + " +lat_0=38.2" + Gv + wf + j + nt + n + e + t, 1, i + " +lat_0=38.2" + Gv + wf + j + nt + n + d + t, 1, i + sy + lg + " +k=1.000033" + j + nt + n + e + t, 1, i + sy + lg + " +k=1.000033" + j + nt + n + d + t, 1, i + ay + fp + Od + j + nt + n + e + t, 1, i + ay + fp + Od + j + nt + n + d + t, 1, i + " +lat_0=39.95" + bp + Ap + j + nt + n + e + t, 1, i + " +lat_0=39.95" + bp + Ap + j + nt + n + d + t, 1, i + Pp + ny + tc + j + nt + n + e + t, 1, i + Pp + ny + tc + j + nt + n + d + t, 1, i + ry + _8 + zy + j + nt + n + e + t, 1, i + ry + _8 + zy + j + nt + n + d + t, 1, i + ly + " +lon_0=-85.7" + Jh + j + nt + n + e + t, 1, i + ly + " +lon_0=-85.7" + Jh + j + nt + n + d + t, 1, i + " +lat_0=39.9" + sh + Jh + j + nt + n + e + t, 1, i + " +lat_0=39.9" + sh + Jh + j + nt + n + d + t, 1, i + " +lat_0=39.65" + uy + Id + j + nt + n + e + t, 1, i + " +lat_0=39.65" + uy + Id + j + nt + n + d + t, 1, i + " +lat_0=37.95" + ip + Ad + j + nt + n + e + t, 1, i + " +lat_0=37.95" + ip + Ad + j + nt + n + d + t, 1, i + " +lat_0=39.75" + jv + Sp + j + nt + n + e + t, 1, i + " +lat_0=39.75" + jv + Sp + j + nt + n + d + t, 1, i + ly + ip + tc + j + nt + n + e + t, 1, i + ly + ip + tc + j + nt + n + d + t, 1, i + sy + Xv + Jh + j + nt + n + e + t, 1, i + sy + Xv + Jh + j + nt + n + d + t, 1, i + " +lat_0=38.7 +lon_0=-85.95" + Uy + j + nt + n + e + t, 1, i + " +lat_0=38.7 +lon_0=-85.95" + Uy + j + nt + n + d + t, 1, i + qy + ug + Ad + j + nt + n + e + t, 1, i + qy + ug + Ad + j + nt + n + d + t, 1, i + " +lat_0=40.3" + Fp + Od + j + nt + n + e + t, 1, i + " +lat_0=40.3" + Fp + Od + j + nt + n + d + t, 1, i + " +lat_0=38.55" + m8 + Tp + j + nt + n + e + t, 1, i + " +lat_0=38.55" + m8 + Tp + j + nt + n + d + t, 1, i + " +lat_0=38.8" + uy + Ap + j + nt + n + e + t, 1, i + " +lat_0=38.8" + uy + Ap + j + nt + n + d + t, 1, i + Hy + ip + tc + j + nt + n + e + t, 1, i + Hy + ip + tc + j + nt + n + d + t, 1, i + " +lat_0=38.4" + Fv + Qh + j + nt + n + e + t, 1, i + " +lat_0=38.4" + Fv + Qh + j + nt + n + d + t, 1, i + oy + jv + " +k=1.000037" + j + nt + n + e + t, 1, i + oy + jv + " +k=1.000037" + j + nt + n + d + t, 1, i + qy + g8 + ec + j + nt + n + e + t, 1, i + qy + g8 + ec + j + nt + n + d + t, 1, i + Pp + " +lon_0=-86.75" + Ad + j + nt + n + e + t, 1, i + Pp + " +lon_0=-86.75" + Ad + j + nt + n + d + t, 1, i + " +lat_0=38.95" + wp + Tp + j + nt + n + e + t, 1, i + " +lat_0=38.95" + wp + Tp + j + nt + n + d + t, 1, i + " +lat_0=39.45" + Gv + tc + j + nt + n + e + t, 1, i + " +lat_0=39.45" + Gv + tc + j + nt + n + d + t, 1, i + iy + hg + ec + j + nt + n + e + t, 1, i + iy + hg + ec + j + nt + n + d + t, 1, i + Fy + v8 + Uy + j + nt + n + e + t, 1, i + Fy + v8 + Uy + j + nt + n + d + t, 1, i + Zy + " +lon_0=-86.7" + wf + j + nt + n + e + t, 1, i + Zy + " +lon_0=-86.7" + wf + j + nt + n + d + t, 1, i + " +lat_0=37.85" + bp + Qh + j + nt + n + e + t, 1, i + " +lat_0=37.85" + bp + Qh + j + nt + n + d + t, 1, i + vp + " +lon_0=-87.95" + zy + j + nt + n + e + t, 1, i + vp + " +lon_0=-87.95" + zy + j + nt + n + d + t, 1, i + " +lat_0=39.7" + fp + " +k=1.000044" + j + nt + n + e + t, 1, i + " +lat_0=39.7" + fp + " +k=1.000044" + j + nt + n + d + t, 1, i + Wy + " +lon_0=-85.3" + Od + j + nt + n + e + t, 1, i + Wy + " +lon_0=-85.3" + Od + j + nt + n + d + t, 1, i + Hy + y8 + gb + j + nt + n + e + t, 1, i + Hy + y8 + gb + j + nt + n + d + t, 1, i + vp + " +lon_0=-87.05 +k=1.000014" + j + nt + n + e + t, 1, i + vp + " +lon_0=-87.05 +k=1.000014" + j + nt + n + d + t, 1, i + T + Fp + " +k=1.000041" + j + nt + n + e + t, 1, i + T + Fp + " +k=1.000041" + j + nt + n + d + t, 1, i + Wy + L0 + " +k=1.000017" + j + nt + n + e + t, 1, i + Wy + L0 + " +k=1.000017" + j + nt + n + d + t, 1, i + " +lat_0=40.2" + hg + ec + j + nt + n + e + t, 1, i + " +lat_0=40.2" + hg + ec + j + nt + n + d + t, 1, i + Zy + zv + Qh + j + nt + n + e + t, 1, i + Zy + zv + Qh + j + nt + n + d + t, 1, i + ay + Fv + wf + j + nt + n + e + t, 1, i + ay + Fv + wf + j + nt + n + d + t, 1, i + yp + " +lon_0=-85.25" + Jh + j + nt + n + e + t, 1, i + yp + " +lon_0=-85.25" + Jh + j + nt + n + d + t, 3, p + n + r + t, 1, c + Ni + n + r + e + t, 1, c + Gs + n + r + e + t, 1, c + vc + n + r + e + t, 152, i + QM + On + " +k=1.0000365285 +x_0=147218.6942 +y_0=0.0037" + n + e + t, 1, i + JM + b8 + " +k=1.0000495683 +x_0=172821.9461 +y_0=0.0017" + n + e + t, 1, i + t2 + w8 + " +k=1.0000486665 +x_0=93150 +y_0=0.0029" + n + e + t, 1, a + e2 + n2 + x8 + " +k_0=1.0000331195 +x_0=228600.4575 +y_0=148551.4837" + n + e + t, 1, i + wu + " +lon_0=-88" + wf + " +x_0=31600 +y_0=4600" + n + e + t, 1, i + r2 + k8 + " +k=1.0000382778 +x_0=175260.3502 +y_0=0.0048" + n + e + t, 1, a + i2 + o2 + L8 + " +k_0=1.0000383841 +x_0=64008.1276 +y_0=59445.9043" + n + e + t, 1, i + s2 + " +lon_0=-88.5 +k=1.0000286569 +x_0=244754.8893 +y_0=0.0049" + n + e + t, 1, a + a2 + l2 + M8 + " +k_0=1.0000391127 +x_0=60045.72 +y_0=44091.4346" + n + e + t, 1, i + " +lat_0=43.6" + E8 + " +k=1.0000463003 +x_0=199949.1989 +y_0=0.0086" + n + e + t, 1, a + u2 + h2 + S8 + " +k_0=1.00003498 +x_0=169164.3381 +y_0=111569.6134" + n + e + t, 1, a + UE + qE + c2 + " +k_0=1.0000349151 +x_0=113690.6274 +y_0=53703.1201" + n + e + t, 1, a + RE + DE + C8 + " +k_0=1.0000384786 +x_0=247193.2944 +y_0=146591.9896" + n + e + t, 1, i + f2 + P8 + " +k=1.0000346418 +x_0=263347.7263 +y_0=0.0076" + n + e + t, 1, i + " +lat_0=44.4" + T8 + " +k=1.0000187521 +x_0=158801.1176 +y_0=0.0023" + n + e + t, 1, i + d2 + g3 + " +k=1.0000385418 +x_0=59131.3183 +y_0=0.0041" + n + e + t, 1, i + p2 + A8 + " +k=1.0000410324 +x_0=51816.104 +y_0=0.003" + n + e + t, 1, a + _2 + m2 + O8 + " +k_0=1.000035079 +x_0=120091.4402 +y_0=91687.92389999999" + n + e + t, 1, i + g2 + I8 + " +k=1.0000552095 +x_0=133502.6683 +y_0=0.0063" + n + e + t, 1, i + v2 + R8 + " +k=1.0000673004 +x_0=275844.5533 +y_0=0.0157" + n + e + t, 1, i + y2 + " +lon_0=-90.8 +k=1.0000349452 +x_0=242316.4841 +y_0=0.01" + n + e + t, 1, a + b2 + w2 + D8 + " +k_0=1.0000390487 +x_0=170078.7403 +y_0=45830.2947" + n + e + t, 1, a + x2 + k2 + cg + " +k_0=1.0000344057 +x_0=150876.3018 +y_0=79170.7795" + n + e + t, 1, i + L2 + B8 + " +k=1.0000394961 +x_0=113081.0261 +y_0=0.0045" + n + e + t, 1, i + M2 + N8 + " +k=1.0000677153 +x_0=220980.4419 +y_0=0.008500000000000001" + n + e + t, 1, i + E2 + G8 + " +k=1.0000353 +x_0=27000 +y_0=25000" + n + e + t, 1, i + S2 + j8 + " +k=1.0000260649 +x_0=185928.3728 +y_0=0.0009" + n + e + t, 1, i + C2 + zv + " +k=1.0000233704 +x_0=79857.7614 +y_0=0.0012" + n + e + t, 1, i + P2 + F8 + " +k=1.0000319985 +x_0=130454.6598 +y_0=0.0033" + n + e + t, 1, a + T2 + A2 + z8 + " +k_0=1.0000627024 +x_0=198425.197 +y_0=105279.7829" + n + e + t, 1, i + O2 + U8 + " +k=1.0000599003 +x_0=116129.0323 +y_0=0.0058" + n + e + t, 1, a + I2 + R2 + " +lon_0=-89.77 +k_0=1.000053289 +x_0=74676.1493 +y_0=55049.2669" + n + e + t, 1, i + D2 + q8 + " +k=1.0000234982 +x_0=238658.8794 +y_0=0.0032" + n + e + t, 1, i + B2 + H8 + " +k=1.0000362499 +x_0=105461.0121 +y_0=0.0029" + n + e + t, 1, a + N2 + G2 + Z8 + " +k_0=1.0000434122 +x_0=204521.209 +y_0=121923.9861" + n + e + t, 1, i + j2 + W8 + " +k=1.0000236869 +x_0=182880.3676 +y_0=0.0033" + n + e + t, 1, a + F2 + z2 + V8 + " +k_0=1.0000686968 +x_0=70104.1401 +y_0=57588.0346" + n + e + t, 1, a + U2 + q2 + K8 + " +k_0=1.0000362977 +x_0=167640.3354 +y_0=86033.0876" + n + e + t, 1, i + H2 + fg + " +k=1.0000433849 +x_0=141732.2823 +y_0=0.0059" + n + e + t, 1, a + Z2 + W2 + " +lon_0=-89.5 +k_0=1.000039936 +x_0=56388.1128 +y_0=50022.1874" + n + e + t, 1, i + V2 + Y8 + " +k=1.0000649554 +x_0=227990.8546 +y_0=0.0109" + n + e + t, 1, a + BE + NE + $8 + " +k_0=1.0000375653 +x_0=202387.6048 +y_0=134255.4253" + n + e + t, 1, i + K2 + X8 + " +k=1.0000337311 +x_0=146304.2926 +y_0=0.0068" + n + e + t, 1, i + Y2 + Q8 + " +k=1.0000495976 +x_0=250546.1013 +y_0=0.0234" + n + e + t, 1, i + $2 + J8 + " +k=1.0000373868 +x_0=185623.5716 +y_0=0.0051" + n + e + t, 1, a + X2 + Q2 + tM + " +k_0=1.0000573461 +x_0=216713.2336 +y_0=120734.1631" + n + e + t, 1, i + jg + eM + " +k=1.000032144 +x_0=262433.3253 +y_0=0.009599999999999999" + n + e + t, 1, i + jg + fg + " +k=1.0000381803 +x_0=165506.7302 +y_0=0.0103" + n + e + t, 1, a + J2 + tE + nM + " +k_0=1.0000597566 +x_0=187147.5744 +y_0=107746.7522" + n + e + t, 1, i + eE + rM + " +k=1.0000361538 +x_0=256946.9138 +y_0=0.0041" + n + e + t, 1, a + nE + rE + iM + " +k_0=1.0000408158 +x_0=222504.4451 +y_0=47532.0602" + n + e + t, 1, a + iE + oE + oM + " +k_0=1.0000730142 +x_0=134417.0689 +y_0=50337.1092" + n + e + t, 1, a + sE + aE + sM + " +k_0=1.0000367192 +x_0=232562.8651 +y_0=111088.2224" + n + e + t, 1, a + lE + uE + aM + " +k_0=1.0000475376 +x_0=234086.8682 +y_0=188358.6058" + n + e + t, 1, i + hE + lM + " +k=1.00003738 +x_0=120091.4415 +y_0=0.003" + n + e + t, 1, i + cE + uM + " +k=1.0000346179 +x_0=208788.418 +y_0=0.0034" + n + e + t, 1, i + fE + hM + " +k=1.0000333645 +x_0=185013.9709 +y_0=0.007" + n + e + t, 1, a + dE + pE + cg + " +k_0=1.0000392096 +x_0=120091.4402 +y_0=45069.7587" + n + e + t, 1, a + _E + mE + On + " +k_0=1.0000421209 +x_0=208483.6173 +y_0=134589.754" + n + e + t, 1, i + QM + On + " +k=1.0000365285 +x_0=147218.6941325883 +y_0=0.00365760731521463" + n + d + t, 1, i + JM + b8 + " +k=1.0000495683 +x_0=172821.945948692 +y_0=0.001828803657607315" + n + d + t, 1, i + t2 + w8 + " +k=1.0000486665 +x_0=93150" + H1 + n + d + t, 1, a + e2 + n2 + x8 + " +k_0=1.0000331195 +x_0=228600.4575057151 +y_0=148551.4835661671" + n + d + t, 1, i + wu + " +lon_0=-88" + wf + " +x_0=31599.99989839979 +y_0=4599.999898399797" + n + d + t, 1, i + r2 + k8 + " +k=1.0000382778 +x_0=175260.3502159004" + cM + n + d + t, 1, a + i2 + o2 + L8 + " +k_0=1.0000383841 +x_0=64008.12771145543 +y_0=59445.90419100838" + n + d + t, 1, i + s2 + " +lon_0=-88.5 +k=1.0000286569 +x_0=244754.8892049784" + cM + n + d + t, 1, a + a2 + l2 + M8 + " +k_0=1.0000391127 +x_0=60045.72009144018 +y_0=44091.43449326898" + n + d + t, 1, i + " +lat_0=43.6" + E8 + " +k=1.0000463003 +x_0=199949.198983998" + fM + n + d + t, 1, a + u2 + h2 + S8 + " +k_0=1.00003498 +x_0=169164.338023876 +y_0=111569.613512827" + n + d + t, 1, a + UE + qE + c2 + " +k_0=1.0000349151 +x_0=113690.6273812548 +y_0=53703.12024384048" + n + d + t, 1, a + RE + DE + C8 + " +k_0=1.0000384786 +x_0=247193.2943865888 +y_0=146591.9896367793" + n + d + t, 1, i + f2 + P8 + " +k=1.0000346418 +x_0=263347.7263906528 +y_0=0.00762001524003048" + n + d + t, 1, i + " +lat_0=44.4" + T8 + " +k=1.0000187521 +x_0=158801.1176022352 +y_0=0.002438404876809754" + n + d + t, 1, i + d2 + g3 + " +k=1.0000385418 +x_0=59131.31826263652" + dM + n + d + t, 1, i + p2 + A8 + " +k=1.0000410324 +x_0=51816.10393700787" + H1 + n + d + t, 1, a + _2 + m2 + O8 + " +k_0=1.000035079" + SE + " +y_0=91687.92390144781" + n + d + t, 1, i + g2 + I8 + " +k=1.0000552095 +x_0=133502.6682245364 +y_0=0.006400812801625603" + n + d + t, 1, i + v2 + R8 + " +k=1.0000673004 +x_0=275844.5532131065 +y_0=0.0158496316992634" + n + d + t, 1, i + y2 + " +lon_0=-90.8 +k=1.0000349452 +x_0=242316.484023368 +y_0=0.01005842011684023" + n + d + t, 1, a + b2 + w2 + D8 + " +k_0=1.0000390487 +x_0=170078.7401574803 +y_0=45830.29484378968" + n + d + t, 1, a + x2 + k2 + cg + " +k_0=1.0000344057 +x_0=150876.3017526035 +y_0=79170.77937515875" + n + d + t, 1, i + L2 + B8 + " +k=1.0000394961 +x_0=113081.0261620523 +y_0=0.004572009144018288" + n + d + t, 1, i + M2 + N8 + " +k=1.0000677153 +x_0=220980.4419608839" + fM + n + d + t, 1, i + E2 + G8 + " +k=1.0000353 +x_0=27000 +y_0=24999.99989839979" + n + d + t, 1, i + S2 + j8 + " +k=1.0000260649 +x_0=185928.3727711455 +y_0=0.0009144018288036576" + n + d + t, 1, i + C2 + zv + " +k=1.0000233704 +x_0=79857.76154432308 +y_0=0.001219202438404877" + n + d + t, 1, i + P2 + F8 + " +k=1.0000319985 +x_0=130454.6596901194" + v3 + n + d + t, 1, a + T2 + A2 + z8 + " +k_0=1.0000627024 +x_0=198425.1968503937 +y_0=105279.7828803657" + n + d + t, 1, i + O2 + U8 + " +k=1.0000599003 +x_0=116129.0322580645" + pM + n + d + t, 1, a + I2 + R2 + " +lon_0=-89.77 +k_0=1.000053289 +x_0=74676.1493522987 +y_0=55049.26695453391" + n + d + t, 1, i + D2 + q8 + " +k=1.0000234982 +x_0=238658.8794513589" + H1 + n + d + t, 1, i + B2 + H8 + " +k=1.0000362499 +x_0=105461.0121412243" + H1 + n + d + t, 1, a + N2 + G2 + Z8 + " +k_0=1.0000434122 +x_0=204521.2090424181 +y_0=121923.9861823724" + n + d + t, 1, i + j2 + W8 + " +k=1.0000236869 +x_0=182880.3675895352" + v3 + n + d + t, 1, a + F2 + z2 + V8 + " +k_0=1.0000686968 +x_0=70104.14020828041 +y_0=57588.03474726949" + n + d + t, 1, a + U2 + q2 + K8 + " +k_0=1.0000362977 +x_0=167640.3352806706 +y_0=86033.08773177546" + n + d + t, 1, i + H2 + fg + " +k=1.0000433849 +x_0=141732.2822453645" + pM + n + d + t, 1, a + Z2 + W2 + " +lon_0=-89.5 +k_0=1.000039936 +x_0=56388.11277622555 +y_0=50022.1874523749" + n + d + t, 1, i + V2 + Y8 + " +k=1.0000649554 +x_0=227990.8544577089 +y_0=0.01097282194564389" + n + d + t, 1, a + BE + NE + $8 + " +k_0=1.0000375653 +x_0=202387.6047752095 +y_0=134255.4254508509" + n + d + t, 1, i + K2 + X8 + " +k=1.0000337311 +x_0=146304.2926085852 +y_0=0.006705613411226822" + n + d + t, 1, i + Y2 + Q8 + " +k=1.0000495976 +x_0=250546.1013970028 +y_0=0.02346964693929388" + n + d + t, 1, i + $2 + J8 + " +k=1.0000373868 +x_0=185623.5715519431 +y_0=0.005181610363220727" + n + d + t, 1, a + X2 + Q2 + tM + " +k_0=1.0000573461 +x_0=216713.2337312675 +y_0=120734.1631699263" + n + d + t, 1, i + jg + eM + " +k=1.000032144 +x_0=262433.3251714504 +y_0=0.009448818897637795" + n + d + t, 1, i + jg + fg + " +k=1.0000381803 +x_0=165506.7300990602 +y_0=0.01036322072644145" + n + d + t, 1, a + J2 + tE + nM + " +k_0=1.0000597566 +x_0=187147.5742951486 +y_0=107746.7521463043" + n + d + t, 1, i + eE + rM + " +k=1.0000361538 +x_0=256946.9138938278" + dM + n + d + t, 1, a + nE + rE + iM + " +k_0=1.0000408158 +x_0=222504.44500889 +y_0=47532.0603505207" + n + d + t, 1, a + iE + oE + oM + " +k_0=1.0000730142 +x_0=134417.0688341377 +y_0=50337.10927101854" + n + d + t, 1, a + sE + aE + sM + " +k_0=1.0000367192 +x_0=232562.8651257302 +y_0=111088.2224028448" + n + d + t, 1, a + lE + uE + aM + " +k_0=1.0000475376 +x_0=234086.8681737363 +y_0=188358.6059436119" + n + d + t, 1, i + hE + lM + " +k=1.00003738 +x_0=120091.4414020828" + H1 + n + d + t, 1, i + cE + uM + " +k=1.0000346179 +x_0=208788.4178816358" + v3 + n + d + t, 1, i + fE + hM + " +k=1.0000333645 +x_0=185013.9709423419 +y_0=0.007010414020828041" + n + d + t, 1, a + dE + pE + cg + " +k_0=1.0000392096" + SE + " +y_0=45069.7588011176" + n + d + t, 1, a + _E + mE + On + " +k_0=1.0000421209 +x_0=208483.6172720346 +y_0=134589.7539243078" + n + d + t, 41, p + n + t, 6, i + h + " +lon_0=68.51666666666667 +k=1 +x_0=1300000" + v_ + n + e + t, 1, i + h + " +lon_0=71.51666666666667 +k=1" + s6 + v_ + n + e + t, 1, i + h + " +lon_0=74.51666666666667 +k=1" + a6 + v_ + n + e + t, 1, i + h + " +lon_0=77.51666666666667 +k=1" + l6 + v_ + n + e + t, 1, i + h + " +lon_0=80.51666666666667 +k=1 +x_0=5300000" + v_ + n + e + t, 12308, i + h + Rn + " +k=1" + Pr + u + _ + l + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + l + e + t, 1, i + h + eo + " +k=1" + Wh + u + _ + l + e + t, 1, i + h + Ga + " +k=1" + ql + u + _ + l + e + t, 1, i + h + xs + " +k=1" + rd + u + _ + l + e + t, 1, i + h + _c + " +k=1" + id + u + _ + l + e + t, 1, i + h + Hd + " +k=1" + Jf + u + _ + l + e + t, 1, i + h + Cf + " +k=1" + qc + u + _ + l + e + t, 1, i + h + Zd + " +k=1" + td + u + _ + l + e + t, 1, i + h + Si + " +k=1" + jl + u + _ + l + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + l + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + l + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + l + e + t, 1, i + h + Ti + " +k=1" + Hh + u + _ + l + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + l + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + l + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + l + e + t, 1, i + h + tt + " +k=1" + au + u + _ + l + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + l + e + t, 1, i + h + k + " +k=1" + lu + u + _ + l + e + t, 1, i + h + Nd + " +k=1" + ed + u + _ + l + e + t, 1, i + h + vf + " +k=1" + uu + u + _ + l + e + t, 1, i + h + sc + " +k=1" + hu + u + _ + l + e + t, 1, i + h + Gd + " +k=1" + cu + u + _ + l + e + t, 1, i + h + ac + " +k=1" + fu + u + _ + l + e + t, 1, i + h + vu + " +k=1" + hl + u + _ + l + e + t, 1, i + h + Yl + " +k=1" + Yu + u + _ + l + e + t, 1, i + h + eh + " +k=1" + Kn + u + _ + l + e + t, 1, i + h + Yh + " +k=1" + $u + u + _ + l + e + t, 103, c + Go + N + G1 + e + t, 1, c + js + N + G1 + e + t, 1, c + wo + N + G1 + e + t, 1, c + Xi + N + G1 + e + t, 111, c + Us + Z + bt + V + e + t, 1, c + fa + Z + bt + V + e + t, 1, c + Fs + Z + bt + V + e + t, 1, c + da + Z + bt + V + e + t, 1, c + Sl + Z + bt + V + e + t, 1, c + Ha + Z + bt + V + e + t, 1, c + Ql + Z + bt + V + e + t, 1, c + wc + Z + bt + V + e + t, 1, c + Of + Z + bt + V + e + t, 1, c + Ls + Z + bt + V + e + t, 91, c + Us + Z + bt + di + e + t, 1, c + fa + Z + bt + di + e + t, 1, c + Fs + Z + bt + di + e + t, 1, c + da + Z + bt + di + e + t, 1, c + Sl + Z + bt + di + e + t, 1, c + Ha + Z + bt + di + e + t, 1, c + Ql + Z + bt + di + e + t, 1, c + wc + Z + bt + di + e + t, 80, c + js + b + Ri + e + t, 1, c + wo + b + Ri + e + t, 1, c + Xi + b + Ri + e + t, 1, c + Ni + b + Ri + e + t, 1, c + Gs + b + Ri + e + t, 59, c + Ni + b + Ri + e + t, 39, c + Xi + _ + r3 + e + t, 1, c + Ni + _ + r3 + e + t, 251, i + cr + " +lon_0=1 +k=1" + ot + oa + b + P + ob + e + t, 1, i + cr + " +lon_0=1 +k=1" + z + u + b + P + ob + e + t, 31, c + Ai + Z + b + be + e + t, 1, c + Ms + Z + b + be + e + t, 1, c + Wa + Z + b + be + e + t, 110, c + ca + Z + Mn + ar + Hm + e + t, 1, c + Go + Z + Mn + ar + Hm + e + t, 1, c + js + Z + Mn + ar + Hm + e + t, 99, c + Go + Z + N + Jo + e + t, 1, c + js + Z + N + Jo + e + t, 1, c + wo + Z + N + Jo + e + t, 58, c + Go + N + Jo + e + t, 1, c + js + N + Jo + e + t, 1, c + wo + N + Jo + e + t, 51, c + zs + Z + O + va + e + t, 1, c + Us + Z + O + va + e + t, 1, c + fa + Z + O + va + e + t, 141, i + h + nc + ii + H + u + N + $w + e + t, 1, i + " +lat_0=13.17638888888889 +lon_0=-59.55972222222222 +k=0.9999986" + _b + " +y_0=75000" + N + $w + e + t, 121, i + h + Si + " +k=1" + jl + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + Hh + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + C + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + C + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + C + e + t, 1, i + h + tt + " +k=1" + au + u + _ + C + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + C + e + t, 1, i + h + k + " +k=1" + lu + u + _ + C + e + t, 30, i + h + Si + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ci + " +k=1" + y + u + _ + C + e + t, 1, i + h + Bi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pi + " +k=1" + y + u + _ + C + e + t, 1, i + h + Ti + " +k=1" + y + u + _ + C + e + t, 1, i + h + Pn + " +k=1" + y + u + _ + C + e + t, 1, i + h + ie + " +k=1" + y + u + _ + C + e + t, 1, i + h + v + " +k=1" + y + u + _ + C + e + t, 1, i + h + tt + " +k=1" + y + u + _ + C + e + t, 1, i + h + Se + " +k=1" + y + u + _ + C + e + t, 1, i + h + k + " +k=1" + y + u + _ + C + e + t, 37, a + xg + kg + $i + qr + Nn + " +y_0=5400000" + b + " +pm=brussels" + e + t, 280, l_ + dg + qr + " +k_0=1" + z + u + O + Rc + " +pm=bern" + e + t, 1, l_ + dg + w3 + " +k_0=1" + D + Da + O + Rc + e + t, 1, l_ + dg + w3 + " +k_0=1" + z + u + O + Rc + e + t, 36, c + Xr + b + o + e + t, 78, i + Fg + " +lon_0=-77.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 1, i + Fg + " +lon_0=-74.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 1, i + Fg + " +lon_0=-71.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 1, i + Fg + " +lon_0=-68.08091666666667 +k=1" + Ye + Ee + b + o + e + t, 133, c + Gi + Z + N + Ot + e + t, 1, c + bo + Z + N + Ot + e + t, 58, i + h + " +lon_0=11.5" + Me + y + kt + N + Ot + e + t, 1, i + h + no + Me + y + kt + N + Ot + e + t, 79, i + K + D_ + " +k=1" + ze + u + n + r + e + t, 1, i + K + oh + " +k=1" + Gn + u + n + r + e + t, 1, i + K + Bd + " +k=1" + qn + u + n + r + e + t, 1, i + K + C0 + " +k=1" + Pr + u + n + r + e + t, 1, i + K + N_ + " +k=1" + xn + u + n + r + e + t, 1, i + K + sb + " +k=1" + Wh + u + n + r + e + t, 1, i + K + uc + " +k=1" + ql + u + n + r + e + t, 4, i + K + D_ + " +k=1" + ze + u + W + r + e + t, 1, i + K + oh + " +k=1" + Gn + u + W + r + e + t, 1, i + K + Bd + " +k=1" + qn + u + W + r + e + t, 1, i + K + C0 + " +k=1" + Pr + u + W + r + e + t, 1, i + K + N_ + " +k=1" + xn + u + W + r + e + t, 1, i + K + sb + " +k=1" + Wh + u + W + r + e + t, 1, i + K + uc + " +k=1" + ql + u + W + r + e + t, 4, i + K + D_ + " +k=1" + ze + u + b + vn + e + t, 1, i + K + oh + " +k=1" + Gn + u + b + vn + e + t, 1, i + K + Bd + " +k=1" + qn + u + b + vn + e + t, 1, i + K + C0 + " +k=1" + Pr + u + b + vn + e + t, 1, i + K + N_ + " +k=1" + xn + u + b + vn + e + t, 1, i + K + sb + " +k=1" + Wh + u + b + vn + e + t, 1, i + K + uc + " +k=1" + ql + u + b + vn + e + t, 37, c + ca + Z + Mn + ar + re + e + t, 1, c + Go + Z + Mn + ar + re + e + t, 40, i + h + hr + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + qp + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + zd + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + Rn + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + A0 + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + Ud + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + Ei + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + " +lon_0=29 +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + xf + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 2, i + h + eo + " +k=1" + z + u + Yn + Mn + ar + re + e + t, 39, c + Gi + Ke + le + nu + e + t, 59, a + " +lat_1=36" + Mt + " +lon_0=9.9" + pv + y + oa + Ke + le + nu + e + t, 1, a + T_ + A_ + " +lon_0=9.9" + o_ + y + oa + Ke + le + nu + e + t, 129, c + Qr + Z + b + Kt + e + t, 1, c + Ai + Z + b + Kt + e + t, 1, c + Ms + Z + b + Kt + e + t, 1, c + Wa + Z + b + Kt + e + t, 1, c + Fa + Z + b + Kt + e + t, 175, a + m6 + " +lat_0=34.65 +lon_0=37.35 +k_0=0.9996256" + xe + oa + Ke + le + Fm + e + t, 70, a + m6 + " +lat_0=34.65 +lon_0=37.35 +k_0=0.9996256" + xe + oa + Ke + le + Fm + e + t, 10, se + " +lat_0=34.2 +lon_0=39.15 +k=0.9995341" + z + u + Ke + le + Fm + e + t, 211, i + fi + " +lon_0=35 +k=1" + xe + " +y_0=1100000" + Nl + j1 + e + t, 1, i + fi + xf + " +k=1 +x_0=615000 +y_0=810000" + Nl + j1 + e + t, 1, i + fi + Ei + " +k=1" + R + Da + Nl + j1 + e + t, 1, i + fi + Ei + " +k=1" + R + Wv + Nl + j1 + e + t, 34, c + Qi + b + ut + e + t, 1, c + vo + b + ut + e + t, 1, c + Ll + b + ut + e + t, 1, c + xu + b + ut + e + t, 1, c + Gi + b + ut + e + t, 1, c + bo + b + ut + e + t, 1, c + ca + b + ut + e + t, 1, c + Go + b + ut + e + t, 1, c + js + b + ut + e + t, 1, c + wo + b + ut + e + t, 1, c + Xi + b + ut + e + t, 52, i + h + qr + Me + y + u + b + ut + e + t, 5, i + h + " +lon_0=5" + Me + y + u + b + ut + e + t, 144, c + Ni + N + i3 + e + t, 1, c + Gs + N + i3 + e + t, 460, l_ + " +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000" + Da + _6 + cL + e + t, 130, i + h + " +lon_0=94.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=97.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=100.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=103.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=106.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=109.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=112.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=115.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=118.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=121.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=124.5" + m + ot + Wn + W + r + e + t, 1, i + h + dp + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=130.5" + m + ot + Wn + W + r + e + t, 1, i + h + Vv + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=136.5" + m + ot + Wn + W + r + e + t, 1, i + h + " +lon_0=139.5" + m + ot + Wn + W + r + e + t, 1, c + Lu + Bs + Nr + jt + e + t, 1, c + Va + Bs + Nr + jt + e + t, 1, c + zs + Bs + Nr + jt + e + t, 1, c + Us + Bs + Nr + jt + e + t, 1, c + fa + Bs + Nr + jt + e + t, 1, c + Fs + Bs + Nr + jt + e + t, 1, c + da + Bs + Nr + jt + e + t, 14, c + Lu + W + r + e + t, 1, c + Va + W + r + e + t, 1, c + zs + W + r + e + t, 1, c + Us + W + r + e + t, 1, c + fa + W + r + e + t, 1, c + Fs + W + r + e + t, 1, c + da + W + r + e + t, 5, c + Va + Z + W + r + e + t, 1, c + zs + Z + W + r + e + t, 1, c + Us + Z + W + r + e + t, 1, c + fa + Z + W + r + e + t, 1, c + Fs + Z + W + r + e + t, 1, c + da + Z + W + r + e + t, 1, c + Sl + Z + W + r + e + t, 1, c + Ha + Z + W + r + e + t, 3, c + Va + Z + Bs + Nr + jt + e + t, 1, c + zs + Z + Bs + Nr + jt + e + t, 1, c + Us + Z + Bs + Nr + jt + e + t, 1, c + fa + Z + Bs + Nr + jt + e + t, 1, c + Fs + Z + Bs + Nr + jt + e + t, 1, c + da + Z + Bs + Nr + jt + e + t, 1, c + Sl + Z + Bs + Nr + jt + e + t, 1, c + Ha + Z + Bs + Nr + jt + e + t, 52, c + Lu + Gr + Wt + Ym + e + t, 1, c + Va + Gr + Wt + Ym + e + t, 1, c + zs + Gr + Wt + Ym + e + t, 99, c + Va + Gr + Wt + o3 + e + t, 1, c + zs + Gr + Wt + o3 + e + t, 52, a + " +lat_1=18" + ah + mu + " +k_0=1 +x_0=167638.49597 +y_0=121918.90616" + F3 + z3 + Xg + t, 100, a + " +lat_1=18" + ah + mu + " +k_0=1" + Hn + " +y_0=150000" + F + IL + e + t, 105, c + $d + Gr + Wt + Km + e + t, 1, c + Lu + Gr + Wt + Km + e + t, 5, c + vc + d0 + c0 + Yt + e + t, 1, c + yc + d0 + c0 + Yt + e + t, 1, c + Rf + d0 + c0 + Yt + e + t, 29, c + yc + Gl + Wo + Ae + e + t, 1, c + Rf + Gl + Wo + Ae + e + t, 1, c + Yd + Gl + Wo + Ae + e + t, 1, c + $d + Gl + Wo + Ae + e + t, 1, c + Lu + Gl + Wo + Ae + e + t, 1, c + Va + Gl + Wo + Ae + e + t, 23, a + P_ + " +lat_0=39.5 +lon_0=68 +k_0=0.99846154 +x_0=2153865.73916853 +y_0=2368292.194628102" + $f + Yf + ue + t, 1, a + Mp + $h + " +lon_0=68" + pe + t_ + e_ + $f + Yf + ue + t, 1, a + Xp + go + " +lon_0=74" + pe + t_ + e_ + $f + Yf + ue + t, 1, a + " +lat_1=19 +lat_0=19 +lon_0=80" + pe + t_ + e_ + $f + Yf + ue + t, 1, a + " +lat_1=12 +lat_0=12 +lon_0=80" + pe + t_ + e_ + $f + Yf + ue + t, 1, a + Xp + go + Yi + pe + " +x_0=2743185.69 +y_0=914395.23" + Gr + Wt + Km + e + t, 1, a + Mp + $h + " +lon_0=68" + pe + " +x_0=2743196.4 +y_0=914398.8" + d0 + c0 + Yt + e + t, 1, a + Xp + go + " +lon_0=74" + pe + " +x_0=2743196.4 +y_0=914398.8" + d0 + c0 + Yt + e + t, 1, a + Mp + $h + " +lon_0=68" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + Xp + go + " +lon_0=74" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + Xp + go + Yi + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + " +lat_1=19 +lat_0=19 +lon_0=80" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 1, a + Xp + go + Yi + pe + t_ + e_ + $f + Yf + ue + t, 1, a + " +lat_1=12 +lat_0=12 +lon_0=80" + pe + a_ + h_ + Gl + Wo + Ae + e + t, 117, lr + " +lat_0=1.287646666666667 +lon_0=103.8530022222222" + _b + " +y_0=30000" + xt + li + mn + e + t, 47, c + Va + xt + li + mn + e + t, 1, c + zs + xt + li + mn + e + t, 52, a + Mp + $h + xs + I3 + ze + c6 + N + uL + e + t, 118, c + Xr + b + Um + e + t, 1, c + Vr + b + Um + e + t, 1, c + Tr + b + Um + e + t, 97, c + yi + b + wr + e + t, 1, c + Xr + b + wr + e + t, 1, c + Vr + b + wr + e + t, 1, c + Tr + b + wr + e + t, 1, c + Qr + b + wr + e + t, 56, c + yi + Z + b + wr + e + t, 1, c + Xr + Z + b + wr + e + t, 1, c + Vr + Z + b + wr + e + t, 1, c + Tr + Z + b + wr + e + t, 1, c + Qr + Z + b + wr + e + t, 1, c + Ai + Z + b + wr + e + t, 9, i + " +lat_0=-6 +lon_0=-80.5 +k=0.99983008 +x_0=222000 +y_0=1426834.743" + b + wr + e + t, 1, i + " +lat_0=-9.5 +lon_0=-76 +k=0.99932994 +x_0=720000 +y_0=1039979.159" + b + wr + e + t, 1, i + " +lat_0=-9.5" + Ul + " +k=0.99952992 +x_0=1324000 +y_0=1040084.558" + b + wr + e + t, 107, i + gM + " +lon_0=-1" + Dp + " +x_0=274319.51" + u + N + HL + e + t, 231, c + xu + Ke + le + e + t, 160, i + h + v + Bn + y + u + F + un + e + t, 1, i + h + Qy + Bn + y + u + F + un + e + t, 1, i + h + Jy + Bn + y + u + F + un + e + t, 1, i + h + tt + Bn + y + u + F + un + e + t, 1, i + h + Rp + Bn + y + u + F + un + e + t, 433, c + Qi + n + r + e + t, 1, c + vo + n + r + e + t, 1, c + Ll + n + r + e + t, 1, c + xu + n + r + e + t, 1, c + Gi + n + r + e + t, 1, c + bo + n + r + e + t, 1, c + ca + n + r + e + t, 1, c + Go + n + r + e + t, 1, c + js + n + r + e + t, 1, c + wo + n + r + e + t, 47, i + h + ro + Me + y + u + n + r + e + t, 48, c + Gi + Z + b + oL + e + t, 259, a + T_ + A_ + Vy + o_ + y + oa + Ke + le + z1 + e + t, 1, a + " +lat_1=29.7 +lat_0=29.7" + Vy + " +k_0=0.9996155960000001" + y + oa + Ke + le + z1 + e + t, 2, a + " +lat_1=26.1 +lat_0=26.1" + Vy + " +k_0=0.999616304 +x_0=1200000" + Vl + Ke + le + z1 + e + t, 1, a + " +lat_1=22.5 +lat_0=22.5" + Vy + " +k_0=0.999616437" + ze + Vl + Ke + le + z1 + e + t, 42, c + wo + O + XL + e + t, 94, c + xu + N + te + e + t, 1, c + Gi + N + te + e + t, 59, i + uh + " +lon_0=4.5" + Dp + " +x_0=230738.26" + u + N + te + e + t, 1, i + uh + " +lon_0=8.5" + Dp + " +x_0=670553.98" + u + N + te + e + t, 1, i + uh + " +lon_0=12.5" + Dp + " +x_0=1110369.7" + u + N + te + e + t, 239, c + Gi + Ke + le + s3 + e + t, 60, c + Gi + Z + Ke + le + s3 + e + t, 9, c + Jl + w + e + t, 1, c + Mu + w + e + t, 1, c + xc + w + e + t, 1, c + Cu + w + e + t, 1, c + Ka + w + e + t, 1, c + Cl + w + e + t, 1, c + Ya + w + e + t, 1, c + Eu + w + e + t, 1, c + Su + w + e + t, 1, c + ku + w + e + t, 1, c + za + w + e + t, 1, c + Ua + w + e + t, 1, c + qa + w + e + t, 1, c + Za + w + e + t, 1, c + ua + w + e + t, 1, c + ha + w + e + t, 1, c + yi + w + e + t, 1, c + Xr + w + e + t, 1, c + Vr + w + e + t, 1, c + Tr + w + e + t, 1, c + Qr + w + e + t, 1, c + Ai + w + e + t, 7, i + dl + U1 + Rd + X + u + w + d + t, 1, i + fi + L0 + fe + X + u + w + d + t, 1, Jn + " +lat_0=57" + Lg + Mg + m + " +x_0=5000000.001016002 +y_0=-5000000.001016002" + xo + gr + w + d + t, 1, i + at + Ly + m + X + u + w + d + t, 1, i + at + My + m + X + u + w + d + t, 1, i + at + Pd + m + X + u + w + d + t, 1, i + at + ff + m + X + u + w + d + t, 1, i + at + nh + m + X + u + w + d + t, 1, i + at + Ey + m + " +x_0=213360.4267208534" + u + w + d + t, 1, i + at + Sy + m + X + u + w + d + t, 1, i + at + k_ + m + B3 + u + w + d + t, 1, a + Eg + Sg + Yp + Cy + ai + u + w + d + t, 1, a + Cs + Ns + Dt + bs + B + u + w + d + t, 1, a + To + lo + Ft + bs + B + u + w + d + t, 1, a + wt + Ao + of + he + B + u + w + d + t, 1, a + Vc + Lf + uo + sf + B + u + w + d + t, 1, a + xi + ho + af + Wl + B + u + w + d + t, 1, a + Oo + $o + Qs + Bc + B + u + w + d + t, 2, i + nn + Ir + m + X + u + w + d + t, 1, i + nn + ya + m + X + u + w + d + t, 1, i + nn + Dc + fe + X + u + w + d + t, 1, a + Xo + Ta + ke + ws + B + u + w + d + t, 1, a + Wr + hf + vs + ws + B + u + w + d + t, 1, a + " +lat_1=39.71666666666667 +lat_2=40.78333333333333" + Dt + Qe + B + u + w + d + t, 1, a + Kc + Yc + ls + Qe + B + u + w + d + t, 1, a + wt + Hi + Q + Qe + B + u + w + d + t, 1, a + La + lf + Io + Hc + B3 + u + w + d + t, 1, i + bn + Ui + uf + X + u + w + d + t, 1, i + Et + zn + st + X + u + w + d + t, 1, i + Et + mf + st + X + u + w + d + t, 1, a + $c + Js + Mf + Xc + B + u + w + d + t, 6, i + fi + dr + m + X + u + w + d + t, 1, i + fi + pi + m + X + u + w + d + t, 1, i + pt + fs + Te + X + u + w + d + t, 1, i + pt + pu + Te + X + u + w + d + t, 1, i + pt + Nc + fe + X + u + w + d + t, 1, i + Q + Ss + oi + X + u + w + d + t, 1, i + Q + pr + st + X + u + w + d + t, 1, i + Zn + bi + Pe + X + u + w + d + t, 1, i + Zn + ba + Pe + X + u + w + d + t, 1, a + Qo + Wi + T + Qt + B + u + w + d + t, 1, a + Qn + Aa + it + Qt + B + u + w + d + t, 1, a + Vi + Dr + kn + si + B + u + w + d + t, 1, a + $r + ys + Q + Fr + B + u + w + d + t, 1, a + Xt + ao + Zn + Uc + B + u + w + d + t, 1, a + " +lat_1=36.73333333333333 +lat_2=37.93333333333333" + Jt + dt + B + u + w + d + t, 1, a + " +lat_1=31.16666666666667 +lat_2=32.66666666666666 +lat_0=30.66666666666667" + cl + B + u + w + d + t, 1, a + " +lat_1=29.3 +lat_2=30.7 +lat_0=28.66666666666667" + Zr + B + u + w + d + t, 1, i + Ve + Ra + m + X + u + w + d + t, 1, i + we + zr + Pe + X + u + w + d + t, 1, a + " +lat_1=38.3 +lat_2=39.45" + ls + mu + " +x_0=243840.4876809754" + u + w + d + t, 1, a + " +lat_1=41.71666666666667 +lat_2=42.68333333333333" + es + Gt + B3 + u + w + d + t, 1, a + " +lat_1=41.28333333333333 +lat_2=41.48333333333333" + es + Ul + " +x_0=60960.12192024384" + u + w + d + t, 4, a + " +lat_1=47.03333333333333 +lat_2=48.63333333333333" + Zl + wa + B + u + w + d + t, 1, a + " +lat_1=45.61666666666667 +lat_2=47.05" + mo + Wc + B + u + w + d + t, 1, a + " +lat_1=43.78333333333333 +lat_2=45.21666666666667" + wu + lc + B + u + w + d + t, 1, i + hs + ds + Rd + X + u + w + d + t, 1, i + dl + ri + st + X + u + w + d + t, 1, i + Ys + d_ + fe + X + u + w + d + t, 1, i + Ys + cl + fe + X + u + w + d + t, 1, i + Z1 + p_ + st + X + u + w + d + t, 1, a + " +lat_1=34.41666666666666 +lat_2=33.86666666666667 +lat_0=34.13333333333333" + q1 + " +x_0=1276106.450596901 +y_0=1268253.006858014" + w + d + t, 48, i + rn + Ra + m + _e + u + n + r + d + t, 1, i + we + zr + Pe + Ds + u + n + r + d + t, 1, a + Rh + Dh + Zl + wa + $ + lt + n + r + d + t, 1, a + cd + Bh + mo + Wc + $ + lt + n + r + d + t, 1, a + Nh + Hu + wu + lc + $ + lt + n + r + d + t, 1, a + ks + Ns + Ia + fr + Ie + u + n + r + d + t, 1, a + fd + Wd + cf + Un + D + u + n + r + d + t, 1, a + zh + Uh + Pf + zn + D + u + n + r + d + t, 1, i + rn + Ra + m + _e + u + n + r + d + t, 1, i + we + zr + Pe + Ds + u + n + r + d + t, 1, a + Rh + Dh + Zl + wa + $ + lt + n + r + d + t, 1, a + cd + Bh + mo + Wc + $ + lt + n + r + d + t, 1, a + Nh + Hu + wu + lc + $ + lt + n + r + d + t, 1, a + ks + Ns + Ia + fr + Ie + u + n + r + d + t, 1, a + fd + Wd + cf + Un + D + u + n + r + d + t, 1, a + zh + Uh + Pf + zn + D + u + n + r + d + t, 1, i + rn + Ra + m + _e + u + n + r + d + t, 1, i + we + zr + Pe + Ds + u + n + r + d + t, 1, a + Rh + Dh + Zl + wa + $ + lt + n + r + d + t, 1, a + cd + Bh + mo + Wc + $ + lt + n + r + d + t, 1, a + Nh + Hu + wu + lc + $ + lt + n + r + d + t, 1, a + ks + Ns + Ia + fr + Ie + u + n + r + d + t, 1, a + fd + Wd + cf + Un + D + u + n + r + d + t, 1, a + zh + Uh + Pf + zn + D + u + n + r + d + t, 21, i + h + f + m + Re + u + n + r + e + t, 1, i + h + zn + m + Re + u + n + r + e + t, 1, i + h + rc + m + Re + u + n + r + e + t, 1, i + h + pl + m + Re + u + n + r + e + t, 1, i + h + On + m + Re + u + n + r + e + t, 1, i + h + Op + m + Re + u + n + r + e + t, 1, i + h + pf + m + Re + u + n + r + e + t, 1, i + h + " +lon_0=-53" + m + Re + u + n + r + e + t, 1, i + h + ab + m + Re + u + n + r + e + t, 2, c + Jl + n + r + e + t, 1, c + Mu + n + r + e + t, 1, c + xc + n + r + e + t, 1, c + Cu + n + r + e + t, 1, c + Ka + n + r + e + t, 1, c + Cl + n + r + e + t, 1, c + Ya + n + r + e + t, 1, c + Eu + n + r + e + t, 1, c + Su + n + r + e + t, 1, c + ku + n + r + e + t, 1, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + Ms + n + r + e + t, 6, i + dl + U1 + Rd + ot + u + n + r + e + t, 1, i + fi + L0 + fe + D + u + n + r + e + t, 1, Jn + " +lat_0=57" + Lg + Mg + m + nf + gi + xo + gr + n + r + e + t, 1, i + at + Ly + m + y + u + n + r + e + t, 1, i + at + My + m + y + u + n + r + e + t, 1, i + at + Pd + m + y + u + n + r + e + t, 1, i + at + ff + m + y + u + n + r + e + t, 1, i + at + nh + m + y + u + n + r + e + t, 1, i + at + Ey + m + y + u + n + r + e + t, 1, i + at + Sy + m + y + u + n + r + e + t, 1, i + at + k_ + m + y + u + n + r + e + t, 1, a + Eg + Sg + Yp + Cy + Ye + u + n + r + e + t, 1, a + Cs + Ns + Dt + bs + Cn + He + n + r + e + t, 1, a + To + lo + Ft + bs + Cn + He + n + r + e + t, 1, a + wt + Ao + of + he + Cn + He + n + r + e + t, 1, a + Vc + Lf + uo + sf + Cn + He + n + r + e + t, 1, a + xi + ho + af + Wl + Cn + He + n + r + e + t, 1, a + Oo + $o + Qs + Bc + Cn + He + n + r + e + t, 2, i + nn + Ir + m + J + u + n + r + e + t, 1, i + nn + ya + m + J + u + n + r + e + t, 1, i + nn + Dc + fe + J + u + n + r + e + t, 1, a + Xo + Ta + ke + ws + H + u + n + r + e + t, 1, a + Wr + hf + vs + ws + H + Vl + n + r + e + t, 1, a + mr + jn + Dt + Qe + zt + Nt + n + r + e + t, 1, a + Kc + Yc + ls + Qe + zt + Nt + n + r + e + t, 1, a + wt + Hi + Q + Qe + zt + Nt + n + r + e + t, 1, a + La + lf + Io + Hc + uv + hv + n + r + e + t, 1, i + bn + Ui + uf + ot + u + n + r + e + t, 1, i + Et + zn + st + ot + u + n + r + e + t, 1, i + Et + mf + st + ot + u + n + r + e + t, 1, a + $c + Js + Mf + Xc + D + u + n + r + e + t, 1, i + gg + Ev + Pe + y + u + n + r + e + t, 1, i + vg + Jm + Pe + y + u + n + r + e + t, 1, i + Ce + nh + vl + y + u + n + r + e + t, 1, i + yg + Sv + vl + y + u + n + r + e + t, 1, i + bg + tg + " +k=1" + y + u + n + r + e + t, 1, i + fi + dr + m + ot + u + n + r + e + t, 1, i + fi + pi + m + R + u + n + r + e + t, 1, i + pt + fs + Te + ot + u + n + r + e + t, 1, i + pt + pu + Te + y + u + n + r + e + t, 1, i + pt + Nc + fe + Lr + u + n + r + e + t, 1, i + Q + Ss + oi + xe + u + n + r + e + t, 1, i + Q + pr + st + R + u + n + r + e + t, 1, i + Zn + bi + Pe + Be + rh + n + r + e + t, 1, i + Zn + ba + Pe + Ds + rh + n + r + e + t, 1, a + Qo + Wi + T + Qt + ze + Ee + n + r + e + t, 1, a + Qn + Aa + it + Qt + y + u + n + r + e + t, 1, a + Vi + Dr + kn + si + H + u + n + r + e + t, 1, a + $r + ys + Q + Fr + H + Vl + n + r + e + t, 2, a + ci + ta + Jt + dt + y + He + n + r + e + t, 1, a + Oh + Ih + dl + cl + Ye + u + n + r + e + t, 1, a + kd + Ld + Md + Zr + Ye + u + n + r + e + t, 1, i + rn + Ra + m + xe + u + n + r + e + t, 1, i + we + zr + Pe + Ds + u + n + r + e + t, 1, a + od + _d + Ft + mu + H + u + n + r + e + t, 1, a + As + Ps + es + Gt + ot + rf + n + r + e + t, 1, a + Oa + ts + es + Ul + y + u + n + r + e + t, 1, a + rl + ea + Tn + pl + Kv + u + n + r + e + t, 1, a + md + po + il + $t + pp + u + n + r + e + t, 1, a + Ne + gd + T + $t + Jc + u + n + r + e + t, 1, a + Rh + Dh + Zl + wa + Lr + Mr + n + r + e + t, 1, a + cd + Bh + mo + Wc + Lr + Mr + n + r + e + t, 1, a + Nh + Hu + wu + lc + Lr + Mr + n + r + e + t, 1, i + ia + ds + Bn + xe + u + n + r + e + t, 1, i + ia + ri + Bn + R + u + n + r + e + t, 1, i + Ys + d_ + fe + Hn + u + n + r + e + t, 1, i + Ys + cl + fe + y + u + n + r + e + t, 1, i + Z1 + p_ + st + dy + u + n + r + e + t, 41, c + Ni + N + Xs + e + t, 1, c + Gs + N + Xs + e + t, 80, c + Tr + b + ZL + e + t, 80, "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150" + b + S + e + t, 5, i + " +lat_0=-36.87986527777778 +lon_0=174.7643393611111" + m + xe + Rr + b + S + e + t, 1, i + " +lat_0=-37.76124980555556 +lon_0=176.46619725 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-38.62470277777778 +lon_0=177.8856362777778 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-39.65092930555556 +lon_0=176.6736805277778 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-39.13575830555556 +lon_0=174.22801175 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-39.51247038888889 +lon_0=175.6400368055556 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-40.24194713888889 +lon_0=175.4880996111111 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-40.92553263888889 +lon_0=175.6473496666667 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.30131963888888 +lon_0=174.7766231111111 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-40.71475905555556 +lon_0=172.6720465 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.27454472222222 +lon_0=173.2993168055555 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.28991152777778 +lon_0=172.1090281944444 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.81080286111111 +lon_0=171.5812600555556 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-42.33369427777778 +lon_0=171.5497713055556 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-42.68911658333333 +lon_0=173.0101333888889 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-41.54448666666666 +lon_0=173.8020741111111 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-42.88632236111111 +lon_0=170.9799935 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.11012813888889 +lon_0=170.2609258333333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.97780288888889 +lon_0=168.606267 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.59063758333333 +lon_0=172.7271935833333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-43.74871155555556 +lon_0=171.3607484722222 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-44.40222036111111 +lon_0=171.0572508333333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-44.73526797222222 +lon_0=169.4677550833333 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.13290258333333 +lon_0=168.3986411944444 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.56372616666666 +lon_0=167.7388617777778 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.81619661111111 +lon_0=170.6285951666667 +k=1" + xe + Rr + b + S + e + t, 1, i + " +lat_0=-45.86151336111111 +lon_0=170.2825891111111" + Rd + xe + Rr + b + S + e + t, 1, i + " +lat_0=-46.60000961111111 +lon_0=168.342872 +k=1 +x_0=300002.66 +y_0=699999.58" + b + S + e + t, 26, c + Ls + Z + b + S + e + t, 1, c + ja + Z + b + S + e + t, 1, c + Xl + Z + b + S + e + t, 31, i + " +lat_0=-39 +lon_0=175.5 +k=1 +x_0=274319.5243848086 +y_0=365759.3658464114" + b + S + VL + t, 1, i + ib + " +lon_0=171.5 +k=1 +x_0=457199.2073080143 +y_0=457199.2073080143" + b + S + VL + t, 99, i + Er + " +lon_0=-4.666666666666667 +k=1" + z + u + Vu + fo + xr + If + e + t, 1, i + Er + " +lon_0=-2.333333333333333 +k=1" + z + u + Vu + fo + xr + If + e + t, 1, i + Er + qr + " +k=1" + z + u + Vu + fo + xr + If + e + t, 1, i + Er + " +lon_0=2.5 +k=1" + z + u + Vu + fo + xr + If + e + t, 1, i + Er + yM + " +k=1" + z + u + Vu + fo + xr + If + e + t, 1, i + Er + " +lon_0=10.16666666666667 +k=1" + z + u + Vu + fo + xr + If + e + t, 1, i + Er + " +lon_0=14.16666666666667 +k=1" + z + u + Vu + fo + xr + If + e + t, 1, i + Er + " +lon_0=18.33333333333333 +k=1" + z + u + Vu + fo + xr + If + e + t, 31, c + vo + b + Kw + e + t, 64, i + cr + r8 + " +k=1 +x_0=180.598 +y_0=-86.98999999999999" + b + Kw + e + t, 7, a + C3 + P3 + " +lon_0=5.399999999999999 +k_0=0.99950908" + y + oa + " +a=6376523" + j3 + CE + e + t, 61, a + C3 + P3 + qr + " +k_0=0.999877341" + D + Da + Ke + le + ji + kl + e + t, 1, a + " +lat_1=46.8 +lat_0=46.8" + qr + " +k_0=0.99987742" + D + Da + Ke + le + ji + kl + e + t, 1, a + gE + vE + qr + " +k_0=0.999877499" + D + Da + Ke + le + ji + kl + e + t, 1, a + yE + bE + qr + " +k_0=0.99994471 +x_0=234.358 +y_0=185861.369" + Ke + le + ji + kl + e + t, 7, a + C3 + P3 + qr + " +k_0=0.999877341" + D + Wv + Ke + le + ji + kl + e + t, 1, a + " +lat_1=46.8 +lat_0=46.8" + qr + " +k_0=0.99987742" + D + " +y_0=2200000" + Ke + le + ji + kl + e + t, 1, a + gE + vE + qr + " +k_0=0.999877499" + D + " +y_0=3200000" + Ke + le + ji + kl + e + t, 1, a + yE + bE + qr + " +k_0=0.99994471 +x_0=234.358 +y_0=4185861.369" + Ke + le + ji + kl + e + t, 126, i + " +lat_0=49 +lon_0=-2 +k=0.9996012717" + H + " +y_0=-100000" + M0 + N5 + e + t, 491, lr + Ng + Gg + _v + " +y_0=126867.909" + lp + up + to + e + t, 1, i + Ng + Gg + " +k=1" + _v + " +y_0=1126867.909" + lp + up + to + e + t, 1, lr + Ng + Gg + _v + " +y_0=1126867.909" + lp + up + to + e + t, 39, c + Gi + Z + Ke + le + RL + e + t, 116, c + zs + Z + n + r + e + t, 1, c + Us + Z + n + r + e + t, 1, c + fa + Z + n + r + e + t, 1, c + Fs + Z + n + r + e + t, 1, c + da + Z + n + r + e + t, 1, c + Sl + Z + n + r + e + t, 1, c + Ha + Z + n + r + e + t, 1, c + Ql + Z + n + r + e + t, 1, c + wc + Z + n + r + e + t, 1, c + Of + Z + n + r + e + t, 1, c + Ls + Z + n + r + e + t, 46, i + h + Rn + " +k=1" + Pr + u + _ + s + e + t, 1, i + h + Ei + " +k=1" + xn + u + _ + s + e + t, 1, i + h + eo + " +k=1" + Wh + u + _ + s + e + t, 1, i + h + Ga + " +k=1" + ql + u + _ + s + e + t, 1, i + h + xs + " +k=1" + rd + u + _ + s + e + t, 1, i + h + _c + " +k=1" + id + u + _ + s + e + t, 1, i + h + Hd + " +k=1" + Jf + u + _ + s + e + t, 1, i + h + Cf + " +k=1" + qc + u + _ + s + e + t, 1, i + h + Zd + " +k=1" + td + u + _ + s + e + t, 1, i + h + Si + " +k=1" + jl + u + _ + s + e + t, 1, i + h + Ci + " +k=1" + ul + u + _ + s + e + t, 1, i + h + Bi + " +k=1" + ou + u + _ + s + e + t, 1, i + h + Pi + " +k=1" + su + u + _ + s + e + t, 1, i + h + Ti + " +k=1" + Hh + u + _ + s + e + t, 1, i + h + Pn + " +k=1" + ru + u + _ + s + e + t, 1, i + h + ie + " +k=1" + iu + u + _ + s + e + t, 1, i + h + v + " +k=1" + Fl + u + _ + s + e + t, 1, i + h + tt + " +k=1" + au + u + _ + s + e + t, 1, i + h + Se + " +k=1" + zl + u + _ + s + e + t, 1, i + h + k + " +k=1" + lu + u + _ + s + e + t, 1, i + h + Nd + " +k=1" + ed + u + _ + s + e + t, 1, i + h + vf + " +k=1" + uu + u + _ + s + e + t, 1, i + h + sc + " +k=1" + hu + u + _ + s + e + t, 1, i + h + Gd + " +k=1" + cu + u + _ + s + e + t, 1, i + h + ac + " +k=1" + fu + u + _ + s + e + t, 1, i + h + vu + " +k=1" + hl + u + _ + s + e + t, 1, i + h + Yl + " +k=1" + Yu + u + _ + s + e + t, 1, i + h + eh + " +k=1" + Kn + u + _ + s + e + t, 1, i + h + Yh + " +k=1" + $u + u + _ + s + e + t, 168, i + " +lat_0=24.45" + kM + vl + ot + oa + b + eL + e + t, 391, se + wE + kE + " +k=0.9999079" + z + u + O + yt + e + t, 1, se + wE + kE + " +k=0.9999079 +x_0=155000 +y_0=463000" + O + yt + e + t, 109, hy + h + uc + nf + kt + bt + Tt + e + t, 67, c + Xr + bt + Tt + e + t, 1, c + Vr + bt + Tt + e + t, 1, c + Tr + bt + Tt + e + t, 1, c + Qr + bt + Tt + e + t, 1, c + Ai + bt + Tt + e + t, 15, c + yi + Z + bt + Tt + e + t, 1, c + Xr + Z + bt + Tt + e + t, 1, c + Vr + Z + bt + Tt + e + t, 1, c + Tr + Z + bt + Tt + e + t, 1, c + Qr + Z + bt + Tt + e + t, 1, c + Ai + Z + bt + Tt + e + t, 1, c + Ms + Z + bt + Tt + e + t, 1, c + Wa + Z + bt + Tt + e + t, 1, c + Fa + Z + bt + Tt + e + t, 25, c + Tr + Z + b + u3 + e + t, 1, c + Qr + Z + b + u3 + e + t, 112, c + bo + Z + Zu + as + e + t, 38, i + Fd + " +lon_0=11 +k=1" + z + u + Yn + Zu + as + _t + t, 2, i + Fd + " +lon_0=13 +k=1" + z + u + Yn + Zu + as + _t + t, 2, i + Fd + hr + " +k=1" + z + u + Yn + Zu + as + _t + t, 2, i + Fd + qp + " +k=1" + z + u + Yn + Zu + as + _t + t, 2, i + Fd + zd + " +k=1" + z + u + Yn + Zu + as + _t + t, 2, i + Fd + Rn + " +k=1" + z + u + Yn + Zu + as + _t + t, 2, i + Fd + A0 + " +k=1" + z + u + Yn + Zu + as + _t + t, 2, i + Fd + Ud + " +k=1" + z + u + Yn + Zu + as + _t + t, 317, Jn + " +lat_0=-18.9 +lonc=44.10000000000001 +alpha=18.9" + ii + H + _r + " +gamma=18.9" + b + B1 + kl + e + t, 36, c + Xi + Z + b + B1 + e + t, 1, c + Ni + Z + b + B1 + e + t, 110, c + Us + f0 + ir + e + t, 1, c + fa + f0 + ir + e + t, 21, Jn + uh + Z_ + T3 + jd + " +x_0=590476.8714630401 +y_0=442857.653094361" + V1 + f0 + ir + " +to_meter=20.11676512155263" + t, 1, Jn + uh + Z_ + T3 + jd + " +x_0=590476.8727431979 +y_0=442857.6545573985" + V1 + f0 + ir + " +to_meter=0.3047994715386762" + t, 1, Jn + uh + Z_ + T3 + jd + " +x_0=590476.87 +y_0=442857.65" + V1 + f0 + ir + e + t, 28, i + cy + " +lon_0=-8 +k=1" + ot + rh + M0 + dn + e + t, 1, i + cy + " +lon_0=-8 +k=1.000035" + ot + rh + s_ + dn + e + t, 1, i + cy + " +lon_0=-8 +k=1.000035" + ot + rh + s_ + dn + e + t, 258, i + mc + i6 + m + z + u + O + rt + e + t, 1, i + mc + oc + m + z + u + O + rt + e + t, 1, i + Mt + x3 + m + z + u + O + rt + e + t, 1, i + mc + Vv + m + z + u + O + rt + e + t, 1, i + Mt + k3 + m + z + u + O + rt + e + t, 1, i + Mt + Bp + m + z + u + O + rt + e + t, 1, i + Mt + L3 + m + z + u + O + rt + e + t, 1, i + Mt + o6 + m + z + u + O + rt + e + t, 1, i + Mt + M3 + m + z + u + O + rt + e + t, 1, i + it + E3 + m + z + u + O + rt + e + t, 1, i + Ro + $3 + m + z + u + O + rt + e + t, 1, i + Ro + X3 + m + z + u + O + rt + e + t, 1, i + Ro + Q3 + m + z + u + O + rt + e + t, 1, i + go + " +lon_0=142" + m + z + u + O + rt + e + t, 1, i + go + dp + m + z + u + O + rt + e + t, 1, i + go + " +lon_0=124" + m + z + u + O + rt + e + t, 1, i + go + oc + m + z + u + O + rt + e + t, 1, i + " +lat_0=20" + Bp + m + z + u + O + rt + e + t, 1, i + go + Yy + m + z + u + O + rt + e + t, 21, lr + bM + e8 + " +x_0=86501.46392051999" + HE + qe + Vn + Vw + mM + t, 139, c + Ni + Nl + e + t, 1, c + Gs + Nl + e + t, 151, a + " +lat_1=36" + Mt + Up + pv + y + oa + Ke + le + Zm + e + t, 1, a + T_ + A_ + Up + o_ + y + oa + Ke + le + Zm + e + t, 1, a + " +lat_1=36" + Mt + Up + pv + y + oa + Ke + le + e + t, 1, a + T_ + A_ + Up + o_ + y + oa + Ke + le + e + t, 235, c + vo + N + De + e + t, 1, c + Ll + N + De + e + t, 1, c + xu + N + De + e + t, 1, c + Gi + N + De + e + t, 59, a + " +lat_1=36" + Mt + Up + pv + " +x_0=500135 +y_0=300090" + N + De + e + t, 1, a + T_ + A_ + Up + o_ + " +x_0=500135 +y_0=300090" + N + De + e + t, 236, c + Qi + Ke + le + e + t, 93, c + Qr + b + N1 + e + t, 33, i + h + uc + Me + y + u + b + N1 + e + t, 16, i + h + _M + Me + y + u + b + N1 + e + t, 1, i + h + _M + m + y + u + b + N1 + e + t, 80, i + h + Kd + " +k=1" + z + gi + O + Ut + bl + e + t, 1, i + h + xf + " +k=1" + z + gi + O + Ut + bl + e + t, 1, i + h + Q_ + " +k=1" + z + gi + O + Ut + bl + e + t, 1, i + h + A3 + " +k=1" + z + gi + O + qt + e + t, 1, i + h + K1 + " +k=1" + z + gi + O + qt + e + t, 1, i + h + O3 + " +k=1" + z + gi + O + qt + e + t, 1, i + h + A3 + " +k=1" + Nn + gi + O + qt + e + t, 1, i + h + K1 + " +k=1 +x_0=450000" + gi + O + qt + e + t, 1, i + h + O3 + " +k=1" + xy + gi + O + qt + e + t, 22, i + h + Kd + " +k=1" + z + u + O + Ut + bl + e + t, 1, i + h + xf + " +k=1" + z + u + O + Ut + bl + e + t, 1, i + h + Q_ + " +k=1" + z + u + O + Ut + bl + e + t, 1, i + h + A3 + " +k=1" + Nn + u + O + qt + e + t, 1, i + h + K1 + " +k=1 +x_0=450000" + u + O + qt + e + t, 1, i + h + O3 + " +k=1" + xy + u + O + qt + e + t, 1, a + Na + yu + " +lat_0=47.5" + K1 + H + Vl + O + qt + e + t, 1, i + h + Kd + " +k=1" + Nn + u + O + Ut + bl + e + t, 1, i + h + xf + " +k=1 +x_0=450000" + u + O + Ut + bl + e + t, 1, i + h + Q_ + " +k=1" + xy + u + O + Ut + bl + e + t, 10, a + xg + kg + $i + " +lon_0=4.356939722222222 +x_0=150000.01256 +y_0=5400088.4378" + b + It + e + t, 70, a + " +lat_1=51.16666723333333 +lat_2=49.8333339" + $i + " +lon_0=4.367486666666666 +x_0=150000.013 +y_0=5400088.438" + b + It + e + t, 96, i + h + Qp + " +k=1" + Gn + u + O + ve + e + t, 1, i + h + yo + " +k=1" + qn + u + O + ve + e + t, 1, i + h + no + " +k=1" + Pr + u + O + ve + e + t, 1, i + h + hr + " +k=1" + xn + u + O + ve + e + t, 59, c + Qi + Ke + le + h3 + e + t, 1, c + vo + Ke + le + h3 + e + t, 71, se + " +lat_0=45.9 +lon_0=25.39246588888889 +k=0.9996667" + y + He + b + nL + e + t, 238, c + Xi + W + Xw + e + t, 1, c + Ni + W + Xw + e + t, 62, i + h + O0 + " +k=1" + y + u + n + pL + e + t, 64, c + za + n + r + e + t, 1, c + Ua + n + r + e + t, 1, c + qa + n + r + e + t, 1, c + Za + n + r + e + t, 1, c + ua + n + r + e + t, 1, c + ha + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + yi + Z + n + r + e + t, 1, c + Xr + Z + n + r + e + t, 1, c + Vr + Z + n + r + e + t, 1, c + Tr + Z + n + r + e + t, 1, c + Qr + Z + n + r + e + t, 1, c + Ai + Z + n + r + e + t, 1, c + Ms + Z + n + r + e + t, 1, c + Wa + Z + n + r + e + t, 1, c + Fa + Z + n + r + e + t, 1, c + yi + n + r + e + t, 1, c + Xr + n + r + e + t, 1, c + Vr + n + r + e + t, 1, c + Tr + n + r + e + t, 1, c + Qr + n + r + e + t, 1, c + Ai + n + r + e + t, 1, c + yi + Z + n + r + e + t, 1, c + Xr + Z + n + r + e + t, 1, c + Vr + Z + n + r + e + t, 1, c + Tr + Z + n + r + e + t, 1, c + Qr + Z + n + r + e + t, 1, c + Ai + Z + n + r + e + t, 1, c + Ms + Z + n + r + e + t, 1, c + Wa + Z + n + r + e + t, 1, c + Fa + Z + n + r + e + t, 1, a + " +lat_1=48.71666666666667 +lat_2=47.85" + Bo + Ku + B + u + w + d + t, 1, a + " +lat_1=47.88333333333333 +lat_2=46.45 +lat_0=45.83333333333334" + Ku + B + u + w + d + t, 1, a + " +lat_1=46.4 +lat_2=44.86666666666667" + Ro + Ku + B + u + w + d + t, 2, a + " +lat_1=41.85 +lat_2=42.81666666666667 +lat_0=41.33333333333334" + fr + B + u + w + d + t, 1, a + " +lat_1=40.28333333333333" + Ps + cr + " +lon_0=-99.5" + B + u + w + d + t, 1, i + jr + wi + m + X + u + w + d + t, 1, i + jr + xa + m + X + u + w + d + t, 1, i + jr + qi + m + X + u + w + d + t, 1, i + I + Yo + Pe + X + u + w + d + t, 1, i + ee + " +lon_0=-74.66666666666667" + oi + B + u + w + d + t, 1, i + nn + Ko + Wu + X + u + w + d + t, 1, i + nn + Gc + m + X + u + w + d + t, 1, i + nn + hi + jc + X + u + w + d + t, 1, i + it + " +lon_0=-74.33333333333333" + Pe + X + u + w + d + t, 1, i + it + Di + an + X + u + w + d + t, 1, i + it + ps + an + X + u + w + d + t, 2, a + " +lat_1=34.33333333333334 +lat_2=36.16666666666666" + Qc + ic + B + u + w + d + t, 1, a + " +lat_1=47.43333333333333" + xE + Bo + Lt + B + u + w + d + t, 1, a + " +lat_1=46.18333333333333 +lat_2=47.48333333333333" + Br + Lt + B + u + w + d + t, 1, a + " +lat_1=40.43333333333333 +lat_2=41.7" + cr + f + B + u + w + d + t, 1, a + " +lat_1=38.73333333333333 +lat_2=40.03333333333333" + bn + f + B + u + w + d + t, 1, a + " +lat_1=35.56666666666667" + Pa + Ef + si + B + u + w + d + t, 1, a + " +lat_1=33.93333333333333 +lat_2=35.23333333333333" + Ea + si + B + u + w + d + t, 1, a + " +lat_1=44.33333333333334" + yu + rn + he + B + u + w + d + t, 1, a + " +lat_1=42.33333333333334 +lat_2=44" + pt + he + B + u + w + d + t, 1, a + " +lat_1=40.88333333333333 +lat_2=41.95" + ye + Rt + B + u + w + d + t, 2, i + Mi + Gt + " +k=0.9999938" + X + u + w + d + t, 1, a + " +lat_1=33.76666666666667 +lat_2=34.96666666666667" + mc + zn + B + u + w + d + t, 2, a + " +lat_1=32.33333333333334 +lat_2=33.66666666666666" + Ts + zn + B + u + w + d + t, 1, a + " +lat_1=44.41666666666666 +lat_2=45.68333333333333" + Ve + fr + B + u + w + d + t, 1, a + " +lat_1=42.83333333333334 +lat_2=44.4" + En + gn + B + u + w + d + t, 2, a + m6 + " +lat_2=36.18333333333333" + Sf + Zc + B + u + w + d + t, 1, a + " +lat_1=32.13333333333333 +lat_2=33.96666666666667" + Ca + " +lon_0=-97.5" + B + u + w + d + t, 1, a + " +lat_1=30.11666666666667 +lat_2=31.88333333333333" + hs + gn + B + u + w + d + t, 1, a + " +lat_1=28.38333333333333 +lat_2=30.28333333333333" + Zi + _l + B + u + w + d + t, 1, a + " +lat_1=26.16666666666667 +lat_2=27.83333333333333" + Po + Fr + B + u + w + d + t, 1, a + " +lat_1=40.71666666666667 +lat_2=41.78333333333333" + kr + ae + B + u + w + d + t, 1, a + " +lat_1=39.01666666666667 +lat_2=40.65" + kn + ae + B + u + w + d + t, 1, a + " +lat_1=37.21666666666667 +lat_2=38.35" + Q + ae + B + u + w + d + t, 1, i + I + ef + Fc + X + u + w + d + t, 1, a + " +lat_1=38.03333333333333 +lat_2=39.2" + Ft + Zt + B + u + w + d + t, 1, a + ki + " +lat_2=37.96666666666667" + Jt + Zt + B + u + w + d + t, 1, a + " +lat_1=47.5" + xE + Bo + _s + B + u + w + d + t, 1, a + " +lat_1=45.83333333333334 +lat_2=47.33333333333334" + Li + he + B + u + w + d + t, 1, a + " +lat_1=39 +lat_2=40.25" + cf + Un + B + u + w + d + t, 1, a + " +lat_1=37.48333333333333 +lat_2=38.88333333333333" + Pf + zn + B + u + w + d + t, 1, a + " +lat_1=45.56666666666667 +lat_2=46.76666666666667" + gs + On + B + u + w + d + t, 1, a + " +lat_1=44.25" + sa + Ve + On + B + u + w + d + t, 1, a + " +lat_1=42.73333333333333 +lat_2=44.06666666666667" + pc + On + B + u + w + d + t, 1, i + zg + so + st + X + u + w + d + t, 1, i + zg + ka + st + X + u + w + d + t, 1, i + zg + zc + st + X + u + w + d + t, 1, i + zg + Yr + st + X + u + w + d + t, 6, i + h + _l + Me + q + u + w + d + t, 1, i + h + Op + Me + q + u + w + d + t, 1, i + h + pl + Me + q + u + w + d + t, 1, i + h + zn + Me + q + u + w + d + t, 14, i + h + " +lon_0=-53" + m + Re + u + w + e + t, 1, i + h + ab + m + Re + u + w + e + t, 1, i + h + Uv + m + Re + u + w + e + t, 1, i + h + c_ + m + Re + u + w + e + t, 1, i + h + f_ + m + Re + u + w + e + t, 1, i + h + qv + m + Re + u + w + e + t, 12, a + Hp + yu + Ro + Ra + z + u + w + e + t, 1, a + qo + Es + Po + Zr + B + u + w + d + t, 1, a + Na + qd + sd + Ku + D + u + n + r + e + t, 4, a + ks + Ns + Ia + fr + y + u + n + r + e + t, 3, i + jr + wi + m + ot + Yv + n + r + e + t, 1, i + jr + xa + m + y + fl + n + r + e + t, 1, i + jr + qi + m + Lr + tf + n + r + e + t, 1, i + I + Yo + Pe + xe + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + nn + Ko + Wu + vd + u + n + r + e + t, 1, i + nn + Gc + m + y + u + n + r + e + t, 1, i + nn + hi + jc + py + u + n + r + e + t, 1, i + ee + na + m + Nn + u + n + r + e + t, 1, i + it + Di + an + Hn + u + n + r + e + t, 1, i + it + ps + an + kp + u + n + r + e + t, 1, a + Ma + Ur + ye + gf + xe + u + n + r + e + t, 1, a + Ki + ol + Qc + ic + vv + u + n + r + e + t, 1, a + Le + _o + Bo + Lt + D + u + n + r + e + t, 1, a + Os + sl + Br + Lt + D + u + n + r + e + t, 1, a + Ed + Bl + cr + f + D + u + n + r + e + t, 1, a + Gh + jh + bn + f + D + u + n + r + e + t, 1, a + ki + Gu + Ef + si + D + u + n + r + e + t, 1, a + xh + ju + Ea + si + D + u + n + r + e + t, 1, a + fc + Kr + rn + he + Gn + u + n + r + e + t, 1, a + dc + us + pt + he + ze + u + n + r + e + t, 1, a + ad + kh + ye + Rt + D + u + n + r + e + t, 1, a + co + Sa + Dt + Rt + D + u + n + r + e + t, 1, i + Mi + Gt + nd + Be + u + n + r + e + t, 3, a + Lh + yd + Ts + zn + bd + u + n + r + e + t, 1, a + Fh + _i + Ve + fr + D + u + n + r + e + t, 1, a + Sd + Is + En + gn + D + u + n + r + e + t, 1, a + Mh + ld + ke + sh + D + u + n + r + e + t, 1, a + al + ud + Sf + Zc + ot + Ee + n + r + e + t, 1, a + Il + Eh + Ca + Fr + D + yr + n + r + e + t, 1, a + Sh + Rl + hs + gn + R + G + n + r + e + t, 1, a + Dl + Fu + Zi + _l + D + tf + n + r + e + t, 1, a + qo + Es + Po + Fr + xe + Vh + n + r + e + t, 1, a + Qn + Ho + kr + ae + y + Ee + n + r + e + t, 1, a + Xu + oo + kn + ae + y + yr + n + r + e + t, 1, a + Qu + Co + Q + ae + y + G + n + r + e + t, 1, i + I + ef + Fc + y + u + n + r + e + t, 1, a + wd + Ch + Ft + Zt + qn + yr + n + r + e + t, 1, a + Xt + Pa + Jt + Zt + qn + Ee + n + r + e + t, 1, a + Le + xd + Bo + _s + y + u + n + r + e + t, 1, a + Ph + zu + Li + he + y + u + n + r + e + t, 1, a + fd + Wd + cf + Un + D + u + n + r + e + t, 1, a + zh + Uh + Pf + zn + D + u + n + r + e + t, 1, a + Uu + Th + gs + On + D + u + n + r + e + t, 1, a + _u + hd + Ve + On + D + u + n + r + e + t, 1, a + Ah + qu + pc + On + D + u + n + r + e + t, 1, i + cn + so + an + ot + u + n + r + e + t, 1, i + cn + ka + an + H + Mr + n + r + e + t, 1, i + cn + zc + an + D + u + n + r + e + t, 1, i + cn + Yr + an + Lr + Mr + n + r + e + t, 3, a + tn + fn + wn + Oe + ot + Da + n + r + e + t, 3, i + h + _l + Me + q + u + n + r + d + t, 1, i + h + Op + Me + q + u + n + r + d + t, 1, i + h + pl + Me + q + u + n + r + d + t, 1, i + h + zn + Me + q + u + n + r + d + t, 14, i + h + " +lon_0=-53" + m + Re + u + n + r + e + t, 1, i + h + ab + m + Re + u + n + r + e + t, 1, i + h + Uv + m + Re + u + n + r + e + t, 1, i + h + c_ + m + Re + u + n + r + e + t, 1, i + h + f_ + m + Re + u + n + r + e + t, 1, i + h + qv + m + Re + u + n + r + e + t, 1, i + h + Ul + m + Re + u + n + r + e + t, 1, i + h + Hv + m + Re + u + n + r + e + t, 1, i + h + Zv + m + Re + u + n + r + e + t, 1, i + h + Un + m + Re + u + n + r + e + t, 1, i + h + f + m + Re + u + n + r + e + t, 1, i + h + zn + m + Re + u + n + r + e + t, 1, i + h + rc + m + Re + u + n + r + e + t, 1, i + h + pl + m + Re + u + n + r + e + t, 1, i + h + On + m + Re + u + n + r + e + t, 1, i + h + Op + m + Re + u + n + r + e + t, 1, i + h + pf + m + Re + u + n + r + e + t, 1, a + Hp + yu + Ro + Ra + z + u + n + r + e + t, 1, a + qo + Es + " +lat_0=25.5" + Zr + Ye + u + n + r + e + t, 2, c + Jl + x + A + e + t, 1, c + Mu + x + A + e + t, 1, c + xc + x + A + e + t, 1, c + Cu + x + A + e + t, 1, c + Ka + x + A + e + t, 1, c + Cl + x + A + e + t, 1, c + Ya + x + A + e + t, 1, c + Eu + x + A + e + t, 1, c + Su + x + A + e + t, 1, c + ku + x + A + e + t, 1, c + za + x + A + e + t, 1, c + Ua + x + A + e + t, 1, c + qa + x + A + e + t, 1, c + Za + x + A + e + t, 1, c + ua + x + A + e + t, 1, c + ha + x + A + e + t, 1, c + yi + x + A + e + t, 1, c + Xr + x + A + e + t, 1, c + Vr + x + A + e + t, 1, c + Tr + x + A + e + t, 1, c + Qr + x + A + e + t, 1, c + Ai + x + A + e + t, 1, c + Ms + x + A + e + t, 1, c + Wa + x + A + e + t, 1, c + Fa + x + A + e + t, 1, c + El + x + A + e + t, 1, c + Af + x + A + e + t, 1, c + Qi + x + A + e + t, 1, c + vo + x + A + e + t, 1, c + Ll + x + A + e + t, 1, c + xu + x + A + e + t, 1, c + Gi + x + A + e + t, 1, c + bo + x + A + e + t, 1, c + ca + x + A + e + t, 1, c + Go + x + A + e + t, 1, c + js + x + A + e + t, 1, c + wo + x + A + e + t, 1, c + Xi + x + A + e + t, 1, c + Ni + x + A + e + t, 1, c + Gs + x + A + e + t, 1, c + vc + x + A + e + t, 1, c + yc + x + A + e + t, 1, c + Rf + x + A + e + t, 1, c + Yd + x + A + e + t, 1, c + $d + x + A + e + t, 1, c + Lu + x + A + e + t, 1, c + Va + x + A + e + t, 1, c + zs + x + A + e + t, 1, c + Us + x + A + e + t, 1, c + fa + x + A + e + t, 1, c + Fs + x + A + e + t, 1, c + da + x + A + e + t, 1, c + Sl + x + A + e + t, 1, c + Ha + x + A + e + t, 1, c + Ql + x + A + e + t, 1, c + wc + x + A + e + t, 1, c + Of + x + A + e + t, 1, c + Ls + x + A + e + t, 1, c + ja + x + A + e + t, 1, c + Xl + x + A + e + t, 41, c + Jl + Z + x + A + e + t, 1, c + Mu + Z + x + A + e + t, 1, c + xc + Z + x + A + e + t, 1, c + Cu + Z + x + A + e + t, 1, c + Ka + Z + x + A + e + t, 1, c + Cl + Z + x + A + e + t, 1, c + Ya + Z + x + A + e + t, 1, c + Eu + Z + x + A + e + t, 1, c + Su + Z + x + A + e + t, 1, c + ku + Z + x + A + e + t, 1, c + za + Z + x + A + e + t, 1, c + Ua + Z + x + A + e + t, 1, c + qa + Z + x + A + e + t, 1, c + Za + Z + x + A + e + t, 1, c + ua + Z + x + A + e + t, 1, c + ha + Z + x + A + e + t, 1, c + yi + Z + x + A + e + t, 1, c + Xr + Z + x + A + e + t, 1, c + Vr + Z + x + A + e + t, 1, c + Tr + Z + x + A + e + t, 1, c + Qr + Z + x + A + e + t, 1, c + Ai + Z + x + A + e + t, 1, c + Ms + Z + x + A + e + t, 1, c + Wa + Z + x + A + e + t, 1, c + Fa + Z + x + A + e + t, 1, c + El + Z + x + A + e + t, 1, c + Af + Z + x + A + e + t, 1, c + Qi + Z + x + A + e + t, 1, c + vo + Z + x + A + e + t, 1, c + Ll + Z + x + A + e + t, 1, c + xu + Z + x + A + e + t, 1, c + Gi + Z + x + A + e + t, 1, c + bo + Z + x + A + e + t, 1, c + ca + Z + x + A + e + t, 1, c + Go + Z + x + A + e + t, 1, c + js + Z + x + A + e + t, 1, c + wo + Z + x + A + e + t, 1, c + Xi + Z + x + A + e + t, 1, c + Ni + Z + x + A + e + t, 1, c + Gs + Z + x + A + e + t, 1, c + vc + Z + x + A + e + t, 1, c + yc + Z + x + A + e + t, 1, c + Rf + Z + x + A + e + t, 1, c + Yd + Z + x + A + e + t, 1, c + $d + Z + x + A + e + t, 1, c + Lu + Z + x + A + e + t, 1, c + Va + Z + x + A + e + t, 1, c + zs + Z + x + A + e + t, 1, c + Us + Z + x + A + e + t, 1, c + fa + Z + x + A + e + t, 1, c + Fs + Z + x + A + e + t, 1, c + da + Z + x + A + e + t, 1, c + Sl + Z + x + A + e + t, 1, c + Ha + Z + x + A + e + t, 1, c + Ql + Z + x + A + e + t, 1, c + wc + Z + x + A + e + t, 1, c + Of + Z + x + A + e + t, 1, c + Ls + Z + x + A + e + t, 1, c + ja + Z + x + A + e + t, 1, c + Xl + Z + x + A + e + t, 41, c + Jl + x + E + e + t, 1, c + Mu + x + E + e + t, 1, c + xc + x + E + e + t, 1, c + Cu + x + E + e + t, 1, c + Ka + x + E + e + t, 1, c + Cl + x + E + e + t, 1, c + Ya + x + E + e + t, 1, c + Eu + x + E + e + t, 1, c + Su + x + E + e + t, 1, c + ku + x + E + e + t, 1, c + za + x + E + e + t, 1, c + Ua + x + E + e + t, 1, c + qa + x + E + e + t, 1, c + Za + x + E + e + t, 1, c + ua + x + E + e + t, 1, c + ha + x + E + e + t, 1, c + yi + x + E + e + t, 1, c + Xr + x + E + e + t, 1, c + Vr + x + E + e + t, 1, c + Tr + x + E + e + t, 1, c + Qr + x + E + e + t, 1, c + Ai + x + E + e + t, 1, c + Ms + x + E + e + t, 1, c + Wa + x + E + e + t, 1, c + Fa + x + E + e + t, 1, c + El + x + E + e + t, 1, c + Af + x + E + e + t, 1, c + Qi + x + E + e + t, 1, c + vo + x + E + e + t, 1, c + Ll + x + E + e + t, 1, c + xu + x + E + e + t, 1, c + Gi + x + E + e + t, 1, c + bo + x + E + e + t, 1, c + ca + x + E + e + t, 1, c + Go + x + E + e + t, 1, c + js + x + E + e + t, 1, c + wo + x + E + e + t, 1, c + Xi + x + E + e + t, 1, c + Ni + x + E + e + t, 1, c + Gs + x + E + e + t, 1, c + vc + x + E + e + t, 1, c + yc + x + E + e + t, 1, c + Rf + x + E + e + t, 1, c + Yd + x + E + e + t, 1, c + $d + x + E + e + t, 1, c + Lu + x + E + e + t, 1, c + Va + x + E + e + t, 1, c + zs + x + E + e + t, 1, c + Us + x + E + e + t, 1, c + fa + x + E + e + t, 1, c + Fs + x + E + e + t, 1, c + da + x + E + e + t, 1, c + Sl + x + E + e + t, 1, c + Ha + x + E + e + t, 1, c + Ql + x + E + e + t, 1, c + wc + x + E + e + t, 1, c + Of + x + E + e + t, 1, c + Ls + x + E + e + t, 1, c + ja + x + E + e + t, 1, c + Xl + x + E + e + t, 41, c + Jl + Z + x + E + e + t, 1, c + Mu + Z + x + E + e + t, 1, c + xc + Z + x + E + e + t, 1, c + Cu + Z + x + E + e + t, 1, c + Ka + Z + x + E + e + t, 1, c + Cl + Z + x + E + e + t, 1, c + Ya + Z + x + E + e + t, 1, c + Eu + Z + x + E + e + t, 1, c + Su + Z + x + E + e + t, 1, c + ku + Z + x + E + e + t, 1, c + za + Z + x + E + e + t, 1, c + Ua + Z + x + E + e + t, 1, c + qa + Z + x + E + e + t, 1, c + Za + Z + x + E + e + t, 1, c + ua + Z + x + E + e + t, 1, c + ha + Z + x + E + e + t, 1, c + yi + Z + x + E + e + t, 1, c + Xr + Z + x + E + e + t, 1, c + Vr + Z + x + E + e + t, 1, c + Tr + Z + x + E + e + t, 1, c + Qr + Z + x + E + e + t, 1, c + Ai + Z + x + E + e + t, 1, c + Ms + Z + x + E + e + t, 1, c + Wa + Z + x + E + e + t, 1, c + Fa + Z + x + E + e + t, 1, c + El + Z + x + E + e + t, 1, c + Af + Z + x + E + e + t, 1, c + Qi + Z + x + E + e + t, 1, c + vo + Z + x + E + e + t, 1, c + Ll + Z + x + E + e + t, 1, c + xu + Z + x + E + e + t, 1, c + Gi + Z + x + E + e + t, 1, c + bo + Z + x + E + e + t, 1, c + ca + Z + x + E + e + t, 1, c + Go + Z + x + E + e + t, 1, c + js + Z + x + E + e + t, 1, c + wo + Z + x + E + e + t, 1, c + Xi + Z + x + E + e + t, 1, c + Ni + Z + x + E + e + t, 1, c + Gs + Z + x + E + e + t, 1, c + vc + Z + x + E + e + t, 1, c + yc + Z + x + E + e + t, 1, c + Rf + Z + x + E + e + t, 1, c + Yd + Z + x + E + e + t, 1, c + $d + Z + x + E + e + t, 1, c + Lu + Z + x + E + e + t, 1, c + Va + Z + x + E + e + t, 1, c + zs + Z + x + E + e + t, 1, c + Us + Z + x + E + e + t, 1, c + fa + Z + x + E + e + t, 1, c + Fs + Z + x + E + e + t, 1, c + da + Z + x + E + e + t, 1, c + Sl + Z + x + E + e + t, 1, c + Ha + Z + x + E + e + t, 1, c + Ql + Z + x + E + e + t, 1, c + wc + Z + x + E + e + t, 1, c + Of + Z + x + E + e + t, 1, c + Ls + Z + x + E + e + t, 1, c + ja + Z + x + E + e + t, 1, c + Xl + Z + x + E + e + t, 41, c + Jl + M + e + t, 1, c + Mu + M + e + t, 1, c + xc + M + e + t, 1, c + Cu + M + e + t, 1, c + Ka + M + e + t, 1, c + Cl + M + e + t, 1, c + Ya + M + e + t, 1, c + Eu + M + e + t, 1, c + Su + M + e + t, 1, c + ku + M + e + t, 1, c + za + M + e + t, 1, c + Ua + M + e + t, 1, c + qa + M + e + t, 1, c + Za + M + e + t, 1, c + ua + M + e + t, 1, c + ha + M + e + t, 1, c + yi + M + e + t, 1, c + Xr + M + e + t, 1, c + Vr + M + e + t, 1, c + Tr + M + e + t, 1, c + Qr + M + e + t, 1, c + Ai + M + e + t, 1, c + Ms + M + e + t, 1, c + Wa + M + e + t, 1, c + Fa + M + e + t, 1, c + El + M + e + t, 1, c + Af + M + e + t, 1, c + Qi + M + e + t, 1, c + vo + M + e + t, 1, c + Ll + M + e + t, 1, c + xu + M + e + t, 1, c + Gi + M + e + t, 1, c + bo + M + e + t, 1, c + ca + M + e + t, 1, c + Go + M + e + t, 1, c + js + M + e + t, 1, c + wo + M + e + t, 1, c + Xi + M + e + t, 1, c + Ni + M + e + t, 1, c + Gs + M + e + t, 1, c + vc + M + e + t, 1, c + yc + M + e + t, 1, c + Rf + M + e + t, 1, c + Yd + M + e + t, 1, c + $d + M + e + t, 1, c + Lu + M + e + t, 1, c + Va + M + e + t, 1, c + zs + M + e + t, 1, c + Us + M + e + t, 1, c + fa + M + e + t, 1, c + Fs + M + e + t, 1, c + da + M + e + t, 1, c + Sl + M + e + t, 1, c + Ha + M + e + t, 1, c + Ql + M + e + t, 1, c + wc + M + e + t, 1, c + Of + M + e + t, 1, c + Ls + M + e + t, 1, c + ja + M + e + t, 1, c + Xl + M + e + t, 1, _n + $i + T0 + qr + bc + Cn + yr + M + e + t, 3, i + h + _l + Me + q + u + M + d + t, 1, i + h + Op + Me + q + u + M + d + t, 1, i + h + pl + Me + q + u + M + d + t, 1, i + h + zn + Me + q + u + M + d + t, 34, c + Jl + Z + M + e + t, 1, c + Mu + Z + M + e + t, 1, c + xc + Z + M + e + t, 1, c + Cu + Z + M + e + t, 1, c + Ka + Z + M + e + t, 1, c + Cl + Z + M + e + t, 1, c + Ya + Z + M + e + t, 1, c + Eu + Z + M + e + t, 1, c + Su + Z + M + e + t, 1, c + ku + Z + M + e + t, 1, c + za + Z + M + e + t, 1, c + Ua + Z + M + e + t, 1, c + qa + Z + M + e + t, 1, c + Za + Z + M + e + t, 1, c + ua + Z + M + e + t, 1, c + ha + Z + M + e + t, 1, c + yi + Z + M + e + t, 1, c + Xr + Z + M + e + t, 1, c + Vr + Z + M + e + t, 1, c + Tr + Z + M + e + t, 1, c + Qr + Z + M + e + t, 1, c + Ai + Z + M + e + t, 1, c + Ms + Z + M + e + t, 1, c + Wa + Z + M + e + t, 1, c + Fa + Z + M + e + t, 1, c + El + Z + M + e + t, 1, c + Af + Z + M + e + t, 1, c + Qi + Z + M + e + t, 1, c + vo + Z + M + e + t, 1, c + Ll + Z + M + e + t, 1, c + xu + Z + M + e + t, 1, c + Gi + Z + M + e + t, 1, c + bo + Z + M + e + t, 1, c + ca + Z + M + e + t, 1, c + Go + Z + M + e + t, 1, c + js + Z + M + e + t, 1, c + wo + Z + M + e + t, 1, c + Xi + Z + M + e + t, 1, c + Ni + Z + M + e + t, 1, c + Gs + Z + M + e + t, 1, c + vc + Z + M + e + t, 1, c + yc + Z + M + e + t, 1, c + Rf + Z + M + e + t, 1, c + Yd + Z + M + e + t, 1, c + $d + Z + M + e + t, 1, c + Lu + Z + M + e + t, 1, c + Va + Z + M + e + t, 1, c + zs + Z + M + e + t, 1, c + Us + Z + M + e + t, 1, c + fa + Z + M + e + t, 1, c + Fs + Z + M + e + t, 1, c + da + Z + M + e + t, 1, c + Sl + Z + M + e + t, 1, c + Ha + Z + M + e + t, 1, c + Ql + Z + M + e + t, 1, c + wc + Z + M + e + t, 1, c + Of + Z + M + e + t, 1, c + Ls + Z + M + e + t, 1, c + ja + Z + M + e + t, 1, c + Xl + Z + M + e + t, 1, _n + K + " +lat_ts=-90" + qr + bc + Cn + yr + M + e + t, 5, i + h + hc + Me + y + kt + M + e + t].reduce((t1, KE, UA) => {
     if (UA % 2 === 0) {
-      const YE = e1.prev + KE, qA = "EPSG:" + YE;
-      e1.defs.push([qA]), e1.prev = YE;
+      const YE = t1.prev + KE, qA = "EPSG:" + YE;
+      t1.defs.push([qA]), t1.prev = YE;
     } else
-      e1.defs[e1.defs.length - 1].push(KE);
-    return e1;
+      t1.defs[t1.defs.length - 1].push(KE);
+    return t1;
   }, { defs: [], prev: 0 }).defs, Yx;
 }
 var S9;
@@ -32918,7 +32918,7 @@ function qH(t, r, n, i, e, s) {
 function HH(t, r, n, i, e, s) {
   return s = s.slice(0, 3), s.includes(t) ? r : "rgb(" + n(s[0]) + ", " + i(s[1]) + ", " + e(s[2]) + ")";
 }
-function Ib([t, r, n]) {
+function Ob([t, r, n]) {
   return "rgb(" + t + ", " + r + ", " + n + ")";
 }
 function R9({
@@ -32943,13 +32943,13 @@ function R9({
     round: c
   }, _ = r.slice(0, 3).map((u) => eA(u, p, h));
   if (d === 1)
-    return t === "string" ? GH.bind(null, a, Ib(i), ..._) : NH.bind(null, a, i, ..._);
+    return t === "string" ? GH.bind(null, a, Ob(i), ..._) : NH.bind(null, a, i, ..._);
   if (d === 2)
-    return t === "string" ? FH.bind(null, a, Ib(i), ..._) : jH.bind(null, a, i, ..._);
+    return t === "string" ? FH.bind(null, a, Ob(i), ..._) : jH.bind(null, a, i, ..._);
   if (d === 3)
-    return t === "string" ? UH.bind(null, a, Ib(i), ..._) : zH.bind(null, a, i, ..._);
+    return t === "string" ? UH.bind(null, a, Ob(i), ..._) : zH.bind(null, a, i, ..._);
   if (d >= 4)
-    return t === "string" ? HH.bind(null, a, Ib(i), ..._) : qH.bind(null, a, i, ..._);
+    return t === "string" ? HH.bind(null, a, Ob(i), ..._) : qH.bind(null, a, i, ..._);
   throw new Error("[pixel-utils/raw-to-rgb] invalid number of bands: " + d);
 }
 var Qx, D9;
@@ -32991,9 +32991,9 @@ var $H = YH();
 const XH = /* @__PURE__ */ ma($H);
 var QH = h5();
 const Qa = /* @__PURE__ */ ma(QH);
-var Rb = { exports: {} }, Db = { exports: {} }, F9;
+var Ib = { exports: {} }, Rb = { exports: {} }, F9;
 function Uw() {
-  if (F9) return Db.exports;
+  if (F9) return Rb.exports;
   F9 = 1;
   function t(r, n) {
     const i = r.length, e = n.length, s = r.indexOf("."), l = n.indexOf("."), a = s === -1 ? i : s, c = l === -1 ? e : l, d = a - c;
@@ -33008,11 +33008,11 @@ function Uw() {
     }
     return "=";
   }
-  return Db.exports = t, Db.exports.default = t, Db.exports;
+  return Rb.exports = t, Rb.exports.default = t, Rb.exports;
 }
-var Bb = { exports: {} }, z9;
+var Db = { exports: {} }, z9;
 function JH() {
-  if (z9) return Bb.exports;
+  if (z9) return Db.exports;
   z9 = 1;
   function t(r) {
     r[0] === "+" && (r = r.substring(1));
@@ -33035,10 +33035,10 @@ function JH() {
     } else
       return n + l.substring(0, a) + "." + l.substring(a);
   }
-  return Bb.exports = t, Bb.exports.default = t, Bb.exports;
+  return Db.exports = t, Db.exports.default = t, Db.exports;
 }
 var n4, U9;
-function Nm() {
+function Bm() {
   if (U9) return n4;
   U9 = 1;
   const t = JH();
@@ -33046,7 +33046,7 @@ function Nm() {
     return n[0] === "+" && (n = n.substring(1)), n = t(n), n = n.replace(/^0+(?=\d)/, ""), n.includes(".") && (n = n.replace(/\.?0+$/, "")), n === "" && (n = "0"), n === "-0" && (n = "0"), n;
   }, n4;
 }
-var Nb = { exports: {} }, r4, q9;
+var Bb = { exports: {} }, r4, q9;
 function c5() {
   if (q9) return r4;
   q9 = 1;
@@ -33058,7 +33058,7 @@ function c5() {
 }
 var H9;
 function nA() {
-  if (H9) return Nb.exports;
+  if (H9) return Bb.exports;
   H9 = 1;
   const { MAX_SAFE_INTEGER_LENGTH: t } = c5();
   function r(n, i) {
@@ -33083,11 +33083,11 @@ function nA() {
       }
     return b === 1 && (E = b + E), E[0] === "." && (E = "0" + E), E;
   }
-  return Nb.exports = r, Nb.exports.default = r, Nb.exports;
+  return Bb.exports = r, Bb.exports.default = r, Bb.exports;
 }
-var Gb = { exports: {} }, Z9;
+var Nb = { exports: {} }, Z9;
 function rA() {
-  if (Z9) return Gb.exports;
+  if (Z9) return Nb.exports;
   Z9 = 1;
   const { MAX_SAFE_INTEGER_LENGTH: t } = c5();
   function r(n, i) {
@@ -33126,13 +33126,13 @@ function rA() {
     }
     return E[0] === "." && (E = "0" + E), E;
   }
-  return Gb.exports = r, Gb.exports.default = r, Gb.exports;
+  return Nb.exports = r, Nb.exports.default = r, Nb.exports;
 }
 var W9;
 function f5() {
-  if (W9) return Rb.exports;
+  if (W9) return Ib.exports;
   W9 = 1;
-  const t = Uw(), r = Nm(), n = nA(), i = rA();
+  const t = Uw(), r = Bm(), n = nA(), i = rA();
   function e(s, l) {
     s = r(s), l = r(l);
     const a = s[0] !== "-", c = l[0] !== "-";
@@ -33159,25 +33159,25 @@ function f5() {
           return i(s, l);
       }
   }
-  return Rb.exports = e, Rb.exports.default = e, Rb.exports;
+  return Ib.exports = e, Ib.exports.default = e, Ib.exports;
 }
 var tZ = f5();
 const iA = /* @__PURE__ */ ma(tZ);
-var jb = { exports: {} }, Fb = { exports: {} }, V9;
+var Gb = { exports: {} }, jb = { exports: {} }, V9;
 function oA() {
-  if (V9) return Fb.exports;
+  if (V9) return jb.exports;
   V9 = 1;
-  const t = Nm();
+  const t = Bm();
   function r(n) {
     return n = t(n), n[0] === "-" ? n.substring(1) : n;
   }
-  return Fb.exports = r, Fb.exports.default = r, Fb.exports;
+  return jb.exports = r, jb.exports.default = r, jb.exports;
 }
-var zb = { exports: {} }, Ub = { exports: {} }, K9;
+var Fb = { exports: {} }, zb = { exports: {} }, K9;
 function sA() {
-  if (K9) return Ub.exports;
+  if (K9) return zb.exports;
   K9 = 1;
-  const t = Nm(), r = Uw(), n = nA(), i = rA();
+  const t = Bm(), r = Uw(), n = nA(), i = rA();
   function e(s, l) {
     s = t(s), l = t(l);
     const a = s[0] !== "-", c = l[0] !== "-";
@@ -33197,20 +33197,20 @@ function sA() {
       }
     }
   }
-  return Ub.exports = e, Ub.exports.default = e, Ub.exports;
+  return zb.exports = e, zb.exports.default = e, zb.exports;
 }
-var qb = { exports: {} }, Hb = { exports: {} }, Y9;
+var Ub = { exports: {} }, qb = { exports: {} }, Y9;
 function eZ() {
-  if (Y9) return Hb.exports;
+  if (Y9) return qb.exports;
   Y9 = 1;
   function t(r) {
     return r.substring(0, r.indexOf("."));
   }
-  return Hb.exports = t, Hb.exports.default = t, Hb.exports;
+  return qb.exports = t, qb.exports.default = t, qb.exports;
 }
 var $9;
 function nZ() {
-  if ($9) return qb.exports;
+  if ($9) return Ub.exports;
   $9 = 1;
   const t = f5(), r = eZ(), n = ["5", "6", "7", "8", "9"];
   function i(e) {
@@ -33238,11 +33238,11 @@ function nZ() {
       l = e.substring(0, s - 1);
     return l[l.length - 1] === "." && (l = l.substring(0, l.length - 1)), l.indexOf(".") > -1 && (l = l.replace(/0+$/, "")), l;
   }
-  return qb.exports = i, qb.exports.default = i, qb.exports;
+  return Ub.exports = i, Ub.exports.default = i, Ub.exports;
 }
 var X9;
 function rZ() {
-  if (X9) return zb.exports;
+  if (X9) return Fb.exports;
   X9 = 1;
   const t = Uw(), r = f5(), n = sA(), i = nZ();
   function e(s, l, { max_decimal_digits: a = 100, ellipsis: c = !1 } = {}) {
@@ -33320,26 +33320,26 @@ function rZ() {
     }
     return E[0] === "." && (E = "0" + E), E;
   }
-  return zb.exports = e, zb.exports.default = e, zb.exports;
+  return Fb.exports = e, Fb.exports.default = e, Fb.exports;
 }
 var Q9;
 function iZ() {
-  if (Q9) return jb.exports;
+  if (Q9) return Gb.exports;
   Q9 = 1;
-  const t = oA(), r = Nm(), n = rZ();
+  const t = oA(), r = Bm(), n = rZ();
   function i(e, s, l) {
     if (e = r(e), s = r(s), s === "0") throw new Error("[preciso] division by zero");
     if (e === "" || e === "0") return "0";
     const a = e[0] !== "-", c = s[0] !== "-", d = a !== c ? "-" : "";
     return a || (e = t(e)), c || (s = t(s)), d + n(e, s, l);
   }
-  return jb.exports = i, jb.exports.default = i, jb.exports;
+  return Gb.exports = i, Gb.exports.default = i, Gb.exports;
 }
 var oZ = iZ();
 const sZ = /* @__PURE__ */ ma(oZ);
-var Zb = { exports: {} }, Wb = { exports: {} }, J9;
+var Hb = { exports: {} }, Zb = { exports: {} }, J9;
 function aZ() {
-  if (J9) return Wb.exports;
+  if (J9) return Zb.exports;
   J9 = 1;
   const { MAX_SAFE_INTEGER_LENGTH: t } = c5(), r = 15;
   function n(i, e) {
@@ -33391,13 +33391,13 @@ function aZ() {
     }
     return w;
   }
-  return Wb.exports = n, Wb.exports.default = n, Wb.exports;
+  return Zb.exports = n, Zb.exports.default = n, Zb.exports;
 }
 var tP;
 function lZ() {
-  if (tP) return Zb.exports;
+  if (tP) return Hb.exports;
   tP = 1;
-  const t = oA(), r = Nm(), n = Uw(), i = aZ();
+  const t = oA(), r = Bm(), n = Uw(), i = aZ();
   function e(s, l) {
     s = r(s), l = r(l);
     const a = s[0] !== "-", c = l[0] !== "-", d = a !== c ? "-" : "";
@@ -33407,13 +33407,13 @@ function lZ() {
     }
     return d + i(s, l);
   }
-  return Zb.exports = e, Zb.exports.default = e, Zb.exports;
+  return Hb.exports = e, Hb.exports.default = e, Hb.exports;
 }
 var uZ = lZ();
 const i4 = /* @__PURE__ */ ma(uZ);
 var hZ = sA();
 const eP = /* @__PURE__ */ ma(hZ);
-var uw = { exports: {} }, cZ = uw.exports, nP;
+var lw = { exports: {} }, cZ = lw.exports, nP;
 function fZ() {
   return nP || (nP = 1, function(t, r) {
     var n = ["buffer", "Buffer"];
@@ -33737,7 +33737,7 @@ function fZ() {
         };
       }]);
     });
-  }(uw)), uw.exports;
+  }(lw)), lw.exports;
 }
 var dZ = fZ();
 const pZ = /* @__PURE__ */ ma(dZ);
@@ -33786,51 +33786,51 @@ function gZ() {
   }(o4)), o4.exports;
 }
 var vZ = gZ();
-const yZ = /* @__PURE__ */ ma(vZ), sP = (t, r) => sZ(iA(t.toString(), r.toString()), "2"), e0 = (t) => Array.isArray(t), mi = (t) => t != null && t !== "", aA = (t) => typeof t == "function", vh = (t) => typeof t == "object", Cw = (t) => typeof t == "string", Mm = (t) => typeof t == "number", bZ = (t) => Cw(t) && !!t.match(/^[-|+]?[\d\.]+(, ?[-|+]?[\d\.]+){3}$/), aP = (t) => vh(t) && uA(t, ["getEast", "getNorth", "getSouth", "getWest"]), wZ = (t, r) => vh(t) && aA(t[r]), lA = (t, r) => vh(t) && vh(t[r]), uA = (t, r) => r.every((n) => wZ(t, n)), xZ = (t, r) => r.every((n) => lA(t, n)), hw = (t, r) => vh(t) && t[r] !== void 0 && t[r] !== null, l4 = (t, r) => r.every((n) => hw(t, n)), Vb = (t) => e0(t) && t.every(Mm), kZ = (t) => e0(t) && t.every(Cw), LZ = (t) => typeof obj == "object" && typeof obj.constructor == "function" || void 0, i1 = (t) => {
+const yZ = /* @__PURE__ */ ma(vZ), sP = (t, r) => sZ(iA(t.toString(), r.toString()), "2"), t0 = (t) => Array.isArray(t), mi = (t) => t != null && t !== "", aA = (t) => typeof t == "function", gh = (t) => typeof t == "object", Cw = (t) => typeof t == "string", Lm = (t) => typeof t == "number", bZ = (t) => Cw(t) && !!t.match(/^[-|+]?[\d\.]+(, ?[-|+]?[\d\.]+){3}$/), aP = (t) => gh(t) && uA(t, ["getEast", "getNorth", "getSouth", "getWest"]), wZ = (t, r) => gh(t) && aA(t[r]), lA = (t, r) => gh(t) && gh(t[r]), uA = (t, r) => r.every((n) => wZ(t, n)), xZ = (t, r) => r.every((n) => lA(t, n)), uw = (t, r) => gh(t) && t[r] !== void 0 && t[r] !== null, l4 = (t, r) => r.every((n) => uw(t, n)), Wb = (t) => t0(t) && t.every(Lm), kZ = (t) => t0(t) && t.every(Cw), LZ = (t) => typeof obj == "object" && typeof obj.constructor == "function" || void 0, r1 = (t) => {
   if (!t || Cw(t) && t.startsWith("EPSG:")) return t;
   if (Cw(t) && t.match(/^\d+$/)) return "EPSG:" + t;
-  if (Mm(t)) return "EPSG:" + t;
+  if (Lm(t)) return "EPSG:" + t;
   const r = pZ(t);
-  return Mm(r) ? "EPSG:" + r : t;
+  return Lm(r) ? "EPSG:" + r : t;
 };
 class Tl {
   constructor(r, { srs: n } = {}) {
-    this.srs = i1(n);
+    this.srs = r1(n);
     let i, e, s, l, a, c, d, p;
-    if (LZ() === this.constructor && ({ xmin: i, xmax: e, ymin: s, ymax: l } = r, mi(r.srs) && (this.srs = i1(r.srs))), bZ(r) && (r = r.split(/, ?/)), e0(r) && r.length === 4 && Vb(r))
+    if (LZ() === this.constructor && ({ xmin: i, xmax: e, ymin: s, ymax: l } = r, mi(r.srs) && (this.srs = r1(r.srs))), bZ(r) && (r = r.split(/, ?/)), t0(r) && r.length === 4 && Wb(r))
       [i, s, e, l] = r;
-    else if (e0(r) && r.length === 4 && kZ(r))
+    else if (t0(r) && r.length === 4 && kZ(r))
       [a, d, c, p] = r, [i, s, e, l] = r.map((h) => Number(h));
-    else if (e0(r) && r.length === 2 && r.every(e0) && r.every((h) => h.length === 2 && Vb(h)))
+    else if (t0(r) && r.length === 2 && r.every(t0) && r.every((h) => h.length === 2 && Wb(h)))
       [[s, i], [l, e]] = r;
     else if (aP(r))
       i = r.getWest(), e = r.getEast(), s = r.getSouth(), l = r.getNorth(), mi(this.srs) || (this.srs = "EPSG:4326");
-    else if (e0(r) && r.length === 2 && r.every((h) => l4(h, ["x", "y"])))
+    else if (t0(r) && r.length === 2 && r.every((h) => l4(h, ["x", "y"])))
       [{ x: i, y: s }, { x: e, y: l }] = r;
-    else if (vh(r) && l4(r, ["x", "y"]) && Mm(r.x) && Mm(r.y))
-      i = e = r.x, s = l = r.y, hw(r, "spatialReference") && hw(r.spatialReference, "wkid") && (mi(this.srs) || (this.srs = i1(r.spatialReference.wkid)));
-    else if (vh(r) && l4(r, ["xmin", "xmax", "ymin", "ymax"])) {
+    else if (gh(r) && l4(r, ["x", "y"]) && Lm(r.x) && Lm(r.y))
+      i = e = r.x, s = l = r.y, uw(r, "spatialReference") && uw(r.spatialReference, "wkid") && (mi(this.srs) || (this.srs = r1(r.spatialReference.wkid)));
+    else if (gh(r) && l4(r, ["xmin", "xmax", "ymin", "ymax"])) {
       ({ xmin: i, xmax: e, ymin: s, ymax: l } = r);
       const h = ["srs", "crs", "proj", "projection"];
       for (let _ = 0; _ < h.length; _++) {
-        const u = h[_], y = r[u], A = i1(y);
+        const u = h[_], y = r[u], A = r1(y);
         if (A) {
           this.srs = A;
           break;
         }
       }
       !this.srs && mi(r.srs) && (this.srs = r.srs);
-    } else if (e0(r) && r.length === 2 && Vb(r))
+    } else if (t0(r) && r.length === 2 && Wb(r))
       i = e = r[0], s = l = r[1];
-    else if (vh(r) && uA(r, ["getCoordinates"])) {
+    else if (gh(r) && uA(r, ["getCoordinates"])) {
       const h = r.getCoordinates();
       i = e = h[0], s = l = h[1];
-    } else if (vh(r) && hw(r, "bbox") && r.bbox.length === 4 && Vb(r))
+    } else if (gh(r) && uw(r, "bbox") && r.bbox.length === 4 && Wb(r))
       [i, s, e, l] = r.bbox;
     else if (lA(r, "_bounds") && aP(r._bounds)) {
       const { _bounds: h } = r;
       i = h.getWest(), e = h.getEast(), s = h.getSouth(), l = h.getNorth(), this.srs || (this.srs = "EPSG:4326");
-    } else if (vh(r) && vh(r._bounds) && xZ(r._bounds, ["_southWest", "_northEast"]))
+    } else if (gh(r) && gh(r._bounds) && xZ(r._bounds, ["_southWest", "_northEast"]))
       ({ lat: s, lng: i } = r._bounds._southWest), { lat: l, lng: e } = r._bounds._northEast, mi(this.srs) || (this.srs = "EPSG:4326");
     else
       throw new Error("[geo-extent] unknown format");
@@ -33914,7 +33914,7 @@ class Tl {
     }
   }
   reproj(r, { quiet: n = !1 } = { quiet: !1 }) {
-    if (r = i1(r), mi(this.srs) && this.srs === i1(r)) return this.clone();
+    if (r = r1(r), mi(this.srs) && this.srs === r1(r)) return this.clone();
     if (!mi(this.srs)) {
       if (n) return;
       throw new Error(`[geo-extent] cannot reproject ${this.bbox} without a projection set`);
@@ -34035,7 +34035,7 @@ function MZ() {
   }), u4;
 }
 var EZ = MZ();
-const SZ = /* @__PURE__ */ ma(EZ), o1 = 4326, CZ = /* @__PURE__ */ new Set([3785, 3857, 4269, 4326, 900913, 102113]), h4 = 1e3, c4 = 1e3, f4 = [0, 0], is = (t) => console.log("[georaster-layer-for-leaflet] ", t), d4 = (t) => {
+const SZ = /* @__PURE__ */ ma(EZ), i1 = 4326, CZ = /* @__PURE__ */ new Set([3785, 3857, 4269, 4326, 900913, 102113]), h4 = 1e3, c4 = 1e3, f4 = [0, 0], is = (t) => console.log("[georaster-layer-for-leaflet] ", t), d4 = (t) => {
   var r, n, i, e;
   return t === Hr.CRS.Simple || !t.code && t.infinite && (t == null || (r = t.transformation) === null || r === void 0 ? void 0 : r._a) === 1 && (t == null || (n = t.transformation) === null || n === void 0 ? void 0 : n._b) === 0 && (t == null || (i = t.transformation) === null || i === void 0 ? void 0 : i._c) === -1 && (t == null || (e = t.transformation) === null || e === void 0 ? void 0 : e._d) === 0;
 };
@@ -34129,7 +34129,7 @@ const PZ = (t, r) => t.map((n, i) => [n, r[i]]), hA = Hr.GridLayer.extend({
         lat: M,
         lng: x
       } = this.getMap().unproject(b, e);
-      if (this.projection === o1)
+      if (this.projection === i1)
         return {
           y: Math.round((a - M) / this.pixelHeight),
           x: Math.round((x - c) / this.pixelWidth)
@@ -34395,14 +34395,14 @@ const PZ = (t, r) => t.map((n, i) => [n, r[i]]), hA = Hr.GridLayer.extend({
             if (kn > S && kn < w) {
               const Sn = Math.round(on * ve) + Math.min(ft.top, 0);
               let Ln = 0;
-              (d || this.projection === o1) && (Ln = Math.floor((w - kn) / M));
+              (d || this.projection === i1) && (Ln = Math.floor((w - kn) / M));
               for (let sn = 0; sn < H; sn++) {
                 const Ke = Hr.point(he + (sn + 0.5) * Ht, Pe), {
                   lng: ze
                 } = Ie.unproject(Ke, l);
                 if (ze > C && ze < m) {
                   let An = 0;
-                  if (d || this.projection === o1)
+                  if (d || this.projection === i1)
                     An = Math.floor((ze - C) / x);
                   else if (this.getProjector()) {
                     const $e = this.getProjector().inverse({
@@ -34615,8 +34615,8 @@ const PZ = (t, r) => t.map((n, i) => [n, r[i]]), hA = Hr.GridLayer.extend({
       } = this;
       if (d4(this.getMapCRS()))
         n === i ? this._bounds = Hr.latLngBounds([f4, [h4, c4]]) : n > i ? this._bounds = Hr.latLngBounds([f4, [h4, c4 / this.ratio]]) : i > n && (this._bounds = Hr.latLngBounds([f4, [h4 * this.ratio, c4]]));
-      else if (e === o1) {
-        r >= 1 && console.log(`georaster projection is in ${o1}`);
+      else if (e === i1) {
+        r >= 1 && console.log(`georaster projection is in ${i1}`);
         const d = Hr.latLng(a, s), p = Hr.latLng(c, l);
         this._bounds = Hr.latLngBounds(d, p);
       } else if (this.getProjector()) {
@@ -34657,7 +34657,7 @@ const PZ = (t, r) => t.map((n, i) => [n, r[i]]), hA = Hr.GridLayer.extend({
           r = Qa;
         else
           throw "[georaster-layer-for-leaflet] projection not found in proj4 instance";
-        this._projector = r(t, `EPSG:${o1}`), this.debugLevel >= 1 && console.log("projector set");
+        this._projector = r(t, `EPSG:${i1}`), this.debugLevel >= 1 && console.log("projector set");
       }
       return this._projector;
     }
@@ -34668,7 +34668,7 @@ const PZ = (t, r) => t.map((n, i) => [n, r[i]]), hA = Hr.GridLayer.extend({
 });
 typeof window == "object" && (window.GeoRasterLayer = hA);
 typeof self < "u" && (self.GeoRasterLayer = hA);
-var cw = { exports: {} }, TZ = cw.exports, uP;
+var hw = { exports: {} }, TZ = hw.exports, uP;
 function AZ() {
   return uP || (uP = 1, function(t, r) {
     (function(n, i) {
@@ -43666,7 +43666,7 @@ This usually happens for one of two reasons: We are either at peak workload righ
         };
       }]);
     });
-  }(cw)), cw.exports;
+  }(hw)), hw.exports;
 }
 AZ();
 (function(t) {
@@ -44560,7 +44560,7 @@ AZ();
   var i = n(3), e = n(0), s = n(1), l = n(2), a = n(4);
   window.L.Vector = i.a, window.L.Cell = e.a, window.L.Field = s.a, window.L.ScalarField = l.a, window.L.VectorField = a.a, n(10), n(8), n(6), n(7), n(9), n(5), console.log("leaflet.canvaslayer.field v1.4.1");
 }]);
-/*! LeafletContextMenu v1.6.0 */
+/*! LeafletContextMenu v1.6.1 */
 var OZ = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : {};
 function IZ(t) {
   return t && t.__esModule && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
@@ -45801,12 +45801,12 @@ var gk = { exports: {} };
     var kr = "_leaflet_events";
     function vn(o, f, g, P) {
       if (arguments.length === 1)
-        ls(o), delete o[kr];
+        as(o), delete o[kr];
       else if (f && typeof f == "object")
         for (var R in f)
           ai(o, R, f[R], g);
       else if (f = y(f), arguments.length === 2)
-        ls(o, function(Lt) {
+        as(o, function(Lt) {
           return C(f, Lt) !== -1;
         });
       else
@@ -45814,7 +45814,7 @@ var gk = { exports: {} };
           ai(o, f[J], g, P);
       return this;
     }
-    function ls(o, f) {
+    function as(o, f) {
       for (var g in o[kr]) {
         var P = g.split(/\d/)[0];
         (!f || f(P)) && ai(o, P, null, null, g);
@@ -45876,11 +45876,11 @@ var gk = { exports: {} };
         (o.clientY - P.top) / g.y - f.clientTop
       );
     }
-    var Ss = $.linux && $.chrome ? window.devicePixelRatio : $.mac ? window.devicePixelRatio * 3 : window.devicePixelRatio > 0 ? 2 * window.devicePixelRatio : 1;
+    var Es = $.linux && $.chrome ? window.devicePixelRatio : $.mac ? window.devicePixelRatio * 3 : window.devicePixelRatio > 0 ? 2 * window.devicePixelRatio : 1;
     function Ho(o) {
       return $.edge ? o.wheelDeltaY / 2 : (
         // Don't trust window-geometry-based delta
-        o.deltaY && o.deltaMode === 0 ? -o.deltaY / Ss : (
+        o.deltaY && o.deltaMode === 0 ? -o.deltaY / Es : (
           // Pixels
           o.deltaY && o.deltaMode === 1 ? -o.deltaY * 20 : (
             // Lines
@@ -46143,7 +46143,7 @@ var gk = { exports: {} };
         o = nt(o), f = f === void 0 ? dt : f;
         var Lt = Math.max(J.x, J.y), Rt = Lt * this.getZoomScale(dt, f), Vt = R.distanceTo(P) || 1, be = 1.42, Se = be * be;
         function qe(Tn) {
-          var po = Tn ? -1 : 1, il = Tn ? Rt : Lt, Ki = Rt * Rt - Lt * Lt + po * Se * Se * Vt * Vt, ol = 2 * il * Se * Vt, _o = Ki / ol, Is = Math.sqrt(_o * _o + 1) - _o, sl = Is < 1e-9 ? -18 : Math.log(Is);
+          var po = Tn ? -1 : 1, il = Tn ? Rt : Lt, Ki = Rt * Rt - Lt * Lt + po * Se * Se * Vt * Vt, ol = 2 * il * Se * Vt, _o = Ki / ol, Os = Math.sqrt(_o * _o + 1) - _o, sl = Os < 1e-9 ? -18 : Math.log(Os);
           return sl;
         }
         function Vn(Tn) {
@@ -46162,12 +46162,12 @@ var gk = { exports: {} };
         function ta(Tn) {
           return Lt * (xn(jn) * mr(jn + be * Tn) - Vn(jn)) / Se;
         }
-        function Os(Tn) {
+        function As(Tn) {
           return 1 - Math.pow(1 - Tn, 1.5);
         }
         var Oa = Date.now(), ts = (qe(1) - jn) / be, rl = g.duration ? 1e3 * g.duration : 1e3 * ts * 0.8;
         function ea() {
-          var Tn = (Date.now() - Oa) / rl, po = Os(Tn) * ts;
+          var Tn = (Date.now() - Oa) / rl, po = As(Tn) * ts;
           Tn <= 1 ? (this._flyToFrame = U(ea, this), this._move(
             this.unproject(P.add(R.subtract(P).multiplyBy(ta(po) / Vt)), dt),
             this.getScaleZoom(Lt / ci(po), dt),
@@ -47263,7 +47263,7 @@ var gk = { exports: {} };
     Cr.addTo = function(o, f) {
       return o.addHandler(f, this), this;
     };
-    var Lr = { Events: rt }, us = $.touch ? "touchstart mousedown" : "mousedown", Kr = ot.extend({
+    var Lr = { Events: rt }, ls = $.touch ? "touchstart mousedown" : "mousedown", Kr = ot.extend({
       options: {
         // @section
         // @aka Draggable options
@@ -47280,12 +47280,12 @@ var gk = { exports: {} };
       // @method enable()
       // Enables the dragging ability
       enable: function() {
-        this._enabled || (Ne(this._dragStartTarget, us, this._onDown, this), this._enabled = !0);
+        this._enabled || (Ne(this._dragStartTarget, ls, this._onDown, this), this._enabled = !0);
       },
       // @method disable()
       // Disables the dragging ability
       disable: function() {
-        this._enabled && (Kr._dragging === this && this.finishDrag(!0), vn(this._dragStartTarget, us, this._onDown, this), this._enabled = !1, this._moved = !1);
+        this._enabled && (Kr._dragging === this && this.finishDrag(!0), vn(this._dragStartTarget, ls, this._onDown, this), this._enabled = !1, this._moved = !1);
       },
       _onDown: function(o) {
         if (this._enabled && (this._moved = !1, !ar(this._element, "leaflet-zoom-anim"))) {
@@ -47328,7 +47328,7 @@ var gk = { exports: {} };
         });
       }
     });
-    function hs(o, f, g) {
+    function us(o, f, g) {
       var P, R = [1, 4, 2, 8], J, dt, Lt, Rt, Vt, be, Se, qe;
       for (J = 0, be = o.length; J < be; J++)
         o[J]._code = Ir(o[J], f);
@@ -47339,7 +47339,7 @@ var gk = { exports: {} };
       }
       return o;
     }
-    function cs(o, f) {
+    function hs(o, f) {
       var g, P, R, J, dt, Lt, Rt, Vt, be;
       if (!o || o.length === 0)
         throw new Error("latlngs not passed");
@@ -47366,11 +47366,11 @@ var gk = { exports: {} };
     }
     var Ys = {
       __proto__: null,
-      clipPolygon: hs,
-      polygonCenter: cs,
+      clipPolygon: us,
+      polygonCenter: hs,
       centroid: Po
     };
-    function fs(o, f) {
+    function cs(o, f) {
       if (!f || !o.length)
         return o.slice();
       var g = f * f;
@@ -47434,7 +47434,7 @@ var gk = { exports: {} };
     function pi(o) {
       return console.warn("Deprecated use of _flat, please use L.LineUtil.isFlat instead."), dr(o);
     }
-    function ds(o, f) {
+    function fs(o, f) {
       var g, P, R, J, dt, Lt, Rt, Vt;
       if (!o || o.length === 0)
         throw new Error("latlngs not passed");
@@ -47462,9 +47462,9 @@ var gk = { exports: {} };
       var jn = f.unproject(q(Vt));
       return nt([jn.lat + be.lat, jn.lng + be.lng]);
     }
-    var ps = {
+    var ds = {
       __proto__: null,
-      simplify: fs,
+      simplify: cs,
       pointToSegmentDistance: Vo,
       closestPointOnSegment: $s,
       clipSegment: yr,
@@ -47473,7 +47473,7 @@ var gk = { exports: {} };
       _sqClosestPointOnSegment: Ui,
       isFlat: dr,
       _flat: pi,
-      polylineCenter: ds
+      polylineCenter: fs
     }, Ko = {
       project: function(o) {
         return new F(o.lng, o.lat);
@@ -47500,18 +47500,18 @@ var gk = { exports: {} };
       LonLat: Ko,
       Mercator: hi,
       SphericalMercator: H
-    }, _s = e({}, z, {
+    }, ps = e({}, z, {
       code: "EPSG:3395",
       projection: hi,
       transformation: function() {
         var o = 0.5 / (Math.PI * hi.R);
         return ft(o, 0.5, -o, 0.5);
       }()
-    }), ms = e({}, z, {
+    }), _s = e({}, z, {
       code: "EPSG:4326",
       projection: Ko,
       transformation: ft(1 / 180, 1, -1 / 180, 0.5)
-    }), Cs = e({}, V, {
+    }), Ss = e({}, V, {
       projection: Ko,
       transformation: ft(1, 0, -1, 0),
       scale: function(o) {
@@ -47526,7 +47526,7 @@ var gk = { exports: {} };
       },
       infinite: !0
     });
-    V.Earth = z, V.EPSG3395 = _s, V.EPSG3857 = bt, V.EPSG900913 = Dt, V.EPSG4326 = ms, V.Simple = Cs;
+    V.Earth = z, V.EPSG3395 = ps, V.EPSG3857 = bt, V.EPSG900913 = Dt, V.EPSG4326 = _s, V.Simple = Ss;
     var pr = ot.extend({
       // Classes extending `L.Layer` will inherit the following options:
       options: {
@@ -48355,7 +48355,7 @@ var gk = { exports: {} };
       getCenter: function() {
         if (!this._map)
           throw new Error("Must add layer to map before using getCenter()");
-        return ds(this._defaultShape(), this._map.options.crs);
+        return fs(this._defaultShape(), this._map.options.crs);
       },
       // @method getBounds(): LatLngBounds
       // Returns the `LatLngBounds` of the path.
@@ -48420,7 +48420,7 @@ var gk = { exports: {} };
       // simplify each clipped part of the polyline for performance
       _simplifyPoints: function() {
         for (var o = this._parts, f = this.options.smoothFactor, g = 0, P = o.length; g < P; g++)
-          o[g] = fs(o[g], f);
+          o[g] = cs(o[g], f);
       },
       _update: function() {
         this._map && (this._clipPoints(), this._simplifyPoints(), this._updatePath());
@@ -48440,7 +48440,7 @@ var gk = { exports: {} };
         return !1;
       }
     });
-    function gs(o, f) {
+    function ms(o, f) {
       return new Wn(o, f);
     }
     Wn._flat = pi;
@@ -48456,7 +48456,7 @@ var gk = { exports: {} };
       getCenter: function() {
         if (!this._map)
           throw new Error("Must add layer to map before using getCenter()");
-        return cs(this._defaultShape(), this._map.options.crs);
+        return hs(this._defaultShape(), this._map.options.crs);
       },
       _convertLatLngs: function(o) {
         var f = Wn.prototype._convertLatLngs.call(this, o), g = f.length;
@@ -48476,7 +48476,7 @@ var gk = { exports: {} };
             return;
           }
           for (var P = 0, R = this._rings.length, J; P < R; P++)
-            J = hs(this._rings[P], o, !0), J.length && this._parts.push(J);
+            J = us(this._rings[P], o, !0), J.length && this._parts.push(J);
         }
       },
       _updatePath: function() {
@@ -48587,10 +48587,10 @@ var gk = { exports: {} };
         return null;
       switch (g.type) {
         case "Point":
-          return Lt = dt(P), Ps(J, o, Lt, f);
+          return Lt = dt(P), Cs(J, o, Lt, f);
         case "MultiPoint":
           for (Vt = 0, be = P.length; Vt < be; Vt++)
-            Lt = dt(P[Vt]), R.push(Ps(J, o, Lt, f));
+            Lt = dt(P[Vt]), R.push(Cs(J, o, Lt, f));
           return new zr(R);
         case "LineString":
         case "MultiLineString":
@@ -48618,7 +48618,7 @@ var gk = { exports: {} };
           throw new Error("Invalid GeoJSON object.");
       }
     }
-    function Ps(o, f, g, P) {
+    function Cs(o, f, g, P) {
       return o ? o(f, g) : new so(g, P && P.markersInheritOptions && P);
     }
     function To(o) {
@@ -48879,7 +48879,7 @@ var gk = { exports: {} };
     function Js(o, f, g) {
       return new Io(o, f, g);
     }
-    var Ts = Hi.extend({
+    var Ps = Hi.extend({
       _initImage: function() {
         var o = this._image = this._url;
         Ae(o, "leaflet-image-layer"), this._zoomAnimated && Ae(o, "leaflet-zoom-animated"), this.options.className && Ae(o, this.options.className), o.onselectstart = h, o.onmousemove = h;
@@ -48889,7 +48889,7 @@ var gk = { exports: {} };
       // used by this overlay.
     });
     function Ma(o, f, g) {
-      return new Ts(o, f, g);
+      return new Ps(o, f, g);
     }
     var Ur = pr.extend({
       // @section
@@ -49427,7 +49427,7 @@ var gk = { exports: {} };
         this._tooltip.options.sticky && o.originalEvent && (g = this._map.mouseEventToContainerPoint(o.originalEvent), P = this._map.containerPointToLayerPoint(g), f = this._map.layerPointToLatLng(P)), this._tooltip.setLatLng(f);
       }
     });
-    var As = wi.extend({
+    var Ts = wi.extend({
       options: {
         // @section
         // @aka DivIcon options
@@ -49457,7 +49457,7 @@ var gk = { exports: {} };
       }
     });
     function Ca(o) {
-      return new As(o);
+      return new Ts(o);
     }
     wi.Default = qi;
     var Zi = pr.extend({
@@ -49983,7 +49983,7 @@ var gk = { exports: {} };
           return Zi.prototype._tileReady.call(this, o, f, g);
       }
     });
-    function vs(o, f) {
+    function gs(o, f) {
       return new Li(o, f);
     }
     var Xo = Li.extend({
@@ -50035,7 +50035,7 @@ var gk = { exports: {} };
         this.wmsParams[f] = this._crs.code, Li.prototype.onAdd.call(this, o);
       },
       getTileUrl: function(o) {
-        var f = this._tileCoordsToNwSe(o), g = this._crs, P = K(g.project(f[0]), g.project(f[1])), R = P.min, J = P.max, dt = (this._wmsVersion >= 1.3 && this._crs === ms ? [R.y, R.x, J.y, J.x] : [R.x, R.y, J.x, J.y]).join(","), Lt = Li.prototype.getTileUrl.call(this, o);
+        var f = this._tileCoordsToNwSe(o), g = this._crs, P = K(g.project(f[0]), g.project(f[1])), R = P.min, J = P.max, dt = (this._wmsVersion >= 1.3 && this._crs === _s ? [R.y, R.x, J.y, J.x] : [R.x, R.y, J.x, J.y]).join(","), Lt = Li.prototype.getTileUrl.call(this, o);
         return Lt + E(this.wmsParams, Lt, this.options.uppercase) + (this.options.uppercase ? "&BBOX=" : "&bbox=") + dt;
       },
       // @method setParams(params: Object, noRedraw?: Boolean): this
@@ -50047,7 +50047,7 @@ var gk = { exports: {} };
     function Ta(o, f) {
       return new Xo(o, f);
     }
-    Li.WMS = Xo, vs.wms = Ta;
+    Li.WMS = Xo, gs.wms = Ta;
     var Wr = pr.extend({
       // @section
       // @aka Renderer options
@@ -50102,7 +50102,7 @@ var gk = { exports: {} };
         var o = this.options.padding, f = this._map.getSize(), g = this._map.containerPointToLayerPoint(f.multiplyBy(-o)).round();
         this._bounds = new j(g, g.add(f.multiplyBy(1 + o * 2)).round()), this._center = this._map.getCenter(), this._zoom = this._map.getZoom();
       }
-    }), ys = Wr.extend({
+    }), vs = Wr.extend({
       // @section
       // @aka Canvas options
       options: {
@@ -50287,7 +50287,7 @@ var gk = { exports: {} };
       }
     });
     function Qo(o) {
-      return $.canvas ? new ys(o) : null;
+      return $.canvas ? new vs(o) : null;
     }
     var Wi = function() {
       try {
@@ -50408,7 +50408,7 @@ var gk = { exports: {} };
         return this.options.preferCanvas && Qo(o) || $r(o);
       }
     });
-    var bs = to.extend({
+    var ys = to.extend({
       initialize: function(o, f) {
         to.prototype.initialize.call(this, this._boundsToLatLngs(o), f);
       },
@@ -50427,7 +50427,7 @@ var gk = { exports: {} };
       }
     });
     function Mi(o, f) {
-      return new bs(o, f);
+      return new ys(o, f);
     }
     Dr.create = Vi, Dr.pointsToPath = Ft, rr.geometryToLayer = ao, rr.coordsToLatLng = To, rr.coordsToLatLngs = lo, rr.latLngToCoords = Ao, rr.latLngsToCoords = uo, rr.getFeature = xi, rr.asFeature = ho, Ze.mergeOptions({
       // @option boxZoom: Boolean = true
@@ -50870,34 +50870,42 @@ var gk = { exports: {} };
         this._zooming = !1, N(this._animRequest), vn(document, "touchmove", this._onTouchMove, this), vn(document, "touchend touchcancel", this._onTouchEnd, this), this._map.options.zoomAnimation ? this._map._animateZoom(this._center, this._map._limitZoom(this._zoom), !0, this._map.options.zoomSnap) : this._map._resetView(this._center, this._map._limitZoom(this._zoom));
       }
     });
-    Ze.addInitHook("addHandler", "touchZoom", oi), Ze.BoxZoom = En, Ze.DoubleClickZoom = Mr, Ze.Drag = fo, Ze.Keyboard = br, Ze.ScrollWheelZoom = Pn, Ze.TapHold = ii, Ze.TouchZoom = oi, n.Bounds = j, n.Browser = $, n.CRS = V, n.Canvas = ys, n.Circle = Xs, n.CircleMarker = Zn, n.Class = X, n.Control = pn, n.DivIcon = As, n.DivOverlay = Ur, n.DomEvent = Co, n.DomUtil = nl, n.Draggable = Kr, n.Evented = ot, n.FeatureGroup = zr, n.GeoJSON = rr, n.GridLayer = Zi, n.Handler = Cr, n.Icon = wi, n.ImageOverlay = Hi, n.LatLng = pt, n.LatLngBounds = ut, n.Layer = pr, n.LayerGroup = bi, n.LineUtil = ps, n.Map = Ze, n.Marker = so, n.Mixin = Lr, n.Path = Yr, n.Point = F, n.PolyUtil = Ys, n.Polygon = to, n.Polyline = Wn, n.Popup = ki, n.PosAnimation = Zo, n.Projection = Di, n.Rectangle = bs, n.Renderer = Wr, n.SVG = Dr, n.SVGOverlay = Ts, n.TileLayer = Li, n.Tooltip = co, n.Transformation = et, n.Util = Y, n.VideoOverlay = Io, n.bind = l, n.bounds = K, n.canvas = Qo, n.circle = Pr, n.circleMarker = Rr, n.control = ui, n.divIcon = Ca, n.extend = e, n.featureGroup = wa, n.geoJSON = $o, n.geoJson = Qs, n.gridLayer = Pa, n.icon = xa, n.imageOverlay = La, n.latLng = nt, n.latLngBounds = Z, n.layerGroup = ba, n.map = tu, n.marker = ka, n.point = q, n.polygon = ur, n.polyline = gs, n.popup = Ea, n.rectangle = Mi, n.setOptions = A, n.stamp = c, n.svg = $r, n.svgOverlay = Ma, n.tileLayer = vs, n.tooltip = Sa, n.transformation = ft, n.version = i, n.videoOverlay = Js;
+    Ze.addInitHook("addHandler", "touchZoom", oi), Ze.BoxZoom = En, Ze.DoubleClickZoom = Mr, Ze.Drag = fo, Ze.Keyboard = br, Ze.ScrollWheelZoom = Pn, Ze.TapHold = ii, Ze.TouchZoom = oi, n.Bounds = j, n.Browser = $, n.CRS = V, n.Canvas = vs, n.Circle = Xs, n.CircleMarker = Zn, n.Class = X, n.Control = pn, n.DivIcon = Ts, n.DivOverlay = Ur, n.DomEvent = Co, n.DomUtil = nl, n.Draggable = Kr, n.Evented = ot, n.FeatureGroup = zr, n.GeoJSON = rr, n.GridLayer = Zi, n.Handler = Cr, n.Icon = wi, n.ImageOverlay = Hi, n.LatLng = pt, n.LatLngBounds = ut, n.Layer = pr, n.LayerGroup = bi, n.LineUtil = ds, n.Map = Ze, n.Marker = so, n.Mixin = Lr, n.Path = Yr, n.Point = F, n.PolyUtil = Ys, n.Polygon = to, n.Polyline = Wn, n.Popup = ki, n.PosAnimation = Zo, n.Projection = Di, n.Rectangle = ys, n.Renderer = Wr, n.SVG = Dr, n.SVGOverlay = Ps, n.TileLayer = Li, n.Tooltip = co, n.Transformation = et, n.Util = Y, n.VideoOverlay = Io, n.bind = l, n.bounds = K, n.canvas = Qo, n.circle = Pr, n.circleMarker = Rr, n.control = ui, n.divIcon = Ca, n.extend = e, n.featureGroup = wa, n.geoJSON = $o, n.geoJson = Qs, n.gridLayer = Pa, n.icon = xa, n.imageOverlay = La, n.latLng = nt, n.latLngBounds = Z, n.layerGroup = ba, n.map = tu, n.marker = ka, n.point = q, n.polygon = ur, n.polyline = ms, n.popup = Ea, n.rectangle = Mi, n.setOptions = A, n.stamp = c, n.svg = $r, n.svgOverlay = Ma, n.tileLayer = gs, n.tooltip = Sa, n.transformation = ft, n.version = i, n.videoOverlay = Js;
     var Jo = window.L;
     n.noConflict = function() {
       return window.L = Jo, this;
     }, window.L = n;
   });
 })(gk, gk.exports);
-var RZ = gk.exports, os = /* @__PURE__ */ IZ(RZ);
+var RZ = gk.exports, qs = /* @__PURE__ */ IZ(RZ);
 /**
  * LeafletContextMenu - Modern ES class-based context menu for Leaflet
  * (c) 2015, Adam Ratcliffe, GeoSmart Maps Limited
  * @author MrRedBeard, Adam Ratcliffe
  * @license MIT
  */
-let d5 = class t0 extends os.Handler {
+let d5 = class Jd extends qs.Handler {
   static BASE_CLS = "leaflet-contextmenu";
   constructor(r) {
     super(r), this._items = [], this._visible = !1, this._container = this._createContainer(r), this._createItems();
   }
   addHooks() {
     const r = this._map.getContainer();
-    os.DomEvent.on(r, "mouseleave", () => this._hide()), os.DomEvent.on(r, "keydown", () => this._onKeyDown), this._map.on("contextmenu", this._show, this), this._map.on("mousedown zoomstart", this._hide, this);
+    qs.DomEvent.on(r, "mouseleave", () => this._hide()), qs.DomEvent.on(r, "keydown", () => this._onKeyDown), this._map.on("zoomstart", (n) => {
+      setTimeout(() => {
+        this._hide();
+      }, 100);
+    }, this), this._map.on("mousedown", this._hide, this), this._map.on("contextmenu", this._show, this);
   }
   removeHooks() {
-    this._map.getContainer().removeEventListener("mouseleave", this._hide), document.removeEventListener("keydown", this._onKeyDown), this._map.off("contextmenu", this._show, this), this._map.off("mousedown zoomstart", this._hide, this);
+    this._map.getContainer().removeEventListener("mouseleave", this._hide), document.removeEventListener("keydown", this._onKeyDown), this._map.off("contextmenu", this._show, this), this._map.off("mousedown", this._hide, this), this._map.off("zoomstart", (n) => {
+      setTimeout(() => {
+        this._hide();
+      }, 100);
+    }, this);
   }
   showAt(r, n = {}) {
-    const i = r instanceof os.LatLng ? this._map.latLngToContainerPoint(r) : r;
+    const i = r instanceof qs.LatLng ? this._map.latLngToContainerPoint(r) : r;
     this._showAtPoint(i, n);
   }
   hide() {
@@ -50913,7 +50921,7 @@ let d5 = class t0 extends os.Handler {
   removeItem(r) {
     const n = typeof r == "number" ? this._container.children[r] : r;
     if (!n) return;
-    const i = os.Util.stamp(n), e = this._items.findIndex((s) => s.id === i);
+    const i = qs.Util.stamp(n), e = this._items.findIndex((s) => s.id === i);
     if (e !== -1) {
       const s = this._items[e];
       s.container && s.container.contains(s.el) && s.container.removeChild(s.el), this._items.splice(e, 1);
@@ -50937,14 +50945,14 @@ let d5 = class t0 extends os.Handler {
       r = this._items[n], r.el.style.display = "";
   }
   setDisabled(r, n) {
-    var i = this._container, e = os.Map.ContextMenu.BASE_CLS + "-item";
-    isNaN(r) || (r = i.children[r]), r && os.DomUtil.hasClass(r, e) && (n ? (os.DomUtil.addClass(r, e + "-disabled"), this._map.fire(
+    var i = this._container, e = qs.Map.ContextMenu.BASE_CLS + "-item";
+    isNaN(r) || (r = i.children[r]), r && qs.DomUtil.hasClass(r, e) && (n ? (qs.DomUtil.addClass(r, e + "-disabled"), this._map.fire(
       "contextmenu.disableitem",
       {
         contextmenu: this,
         el: r
       }
-    )) : (os.DomUtil.removeClass(r, e + "-disabled"), this._map.fire(
+    )) : (qs.DomUtil.removeClass(r, e + "-disabled"), this._map.fire(
       "contextmenu.enableitem",
       {
         contextmenu: this,
@@ -50956,8 +50964,8 @@ let d5 = class t0 extends os.Handler {
     return this._visible;
   }
   _createContainer(r) {
-    const n = os.DomUtil.create("div", t0.BASE_CLS, r._container);
-    return n.style.zIndex = 1e4, n.style.position = "absolute", n.style.display = "none", n.addEventListener("click", os.DomEvent.stop), n.addEventListener("contextmenu", os.DomEvent.stop), n;
+    const n = qs.DomUtil.create("div", Jd.BASE_CLS, r._container);
+    return n.style.zIndex = 1e4, n.style.position = "absolute", n.style.display = "none", n;
   }
   _createItems() {
     (this._map.options.contextmenuItems || []).forEach((n) => {
@@ -50971,39 +50979,46 @@ let d5 = class t0 extends os.Handler {
       return this._createSeparator(r, i);
     if (Array.isArray(n.submenu))
       return this._createSubmenu(r, n, i);
-    const e = this._insertElementAt("a", `${t0.BASE_CLS}-item`, r, i), s = n.icon ? `<img src="${n.icon}" class="${t0.BASE_CLS}-icon" />` : n.iconCls ? `<i class="${t0.BASE_CLS}-icon ${n.iconCls}"></i>` : "";
+    const e = this._insertElementAt("a", `${Jd.BASE_CLS}-item`, r, i), s = n.icon ? `<img src="${n.icon}" class="${Jd.BASE_CLS}-icon" />` : n.iconCls ? `<i class="${Jd.BASE_CLS}-icon ${n.iconCls}"></i>` : "";
     e.innerHTML = `${s}${n.text}`, e.href = "#";
     const l = this._createEventHandler(e, n.callback, n.context);
-    return e.addEventListener("click", l), {
-      id: os.Util.stamp(e),
+    return e.addEventListener("click", (a) => {
+      l(a);
+    }), {
+      id: qs.Util.stamp(e),
       el: e,
       callback: l,
       container: r
     };
   }
   _createSubmenu(r, n, i) {
-    const e = this._insertElementAt("div", `${t0.BASE_CLS}-item has-submenu`, r, i);
+    const e = this._insertElementAt("div", `${Jd.BASE_CLS}-item has-submenu`, r, i);
     e.textContent = n.text;
     const s = document.createElement("div");
-    return s.className = `${t0.BASE_CLS}-submenu`, n.submenu.forEach((l) => {
+    return s.className = `${Jd.BASE_CLS}-submenu`, n.submenu.forEach((l) => {
       const a = this._createItem(s, l);
       a.container = s;
     }), e.appendChild(s), {
-      id: os.Util.stamp(e),
+      id: qs.Util.stamp(e),
       el: e,
       submenu: s,
       container: r
     };
   }
+  _createEventHandler(r, n, i) {
+    return (e) => {
+      e.preventDefault(), e.stopPropagation(), n && n.call(i || this._map, e), this._hide();
+    };
+  }
   _getIcon(r) {
-    return os.Browser.retina && r.retinaIcon || r.icon;
+    return qs.Browser.retina && r.retinaIcon || r.icon;
   }
   _getIconCls(r) {
-    return os.Browser.retina && r.retinaIconCls || r.iconCls;
+    return qs.Browser.retina && r.retinaIconCls || r.iconCls;
   }
   _createSeparator(r, n) {
-    const i = this._insertElementAt("div", `${t0.BASE_CLS}-separator`, r, n);
-    return { id: os.Util.stamp(i), el: i };
+    const i = this._insertElementAt("div", `${Jd.BASE_CLS}-separator`, r, n);
+    return { id: qs.Util.stamp(i), el: i };
   }
   _insertElementAt(r, n, i, e) {
     const s = document.createElement(r);
@@ -51015,19 +51030,14 @@ let d5 = class t0 extends os.Handler {
     var n = this._size, i = r.style.display;
     return (!n || this._sizeChanged) && (n = {}, r.style.left = "-999999px", r.style.right = "auto", r.style.display = "block", n.x = r.offsetWidth, n.y = r.offsetHeight, r.style.left = "auto", r.style.display = i, this._sizeChanged = !1), n;
   }
-  _createEventHandler(r, n, i) {
-    return (e) => {
-      e.preventDefault(), n && n.call(i || this._map, e), this._hide();
-    };
-  }
   _show(r) {
     this._showAtPoint(r.containerPoint, r);
   }
   _showAtPoint(r, n) {
-    this._showLocation = { containerPoint: r, relatedTarget: n.relatedTarget }, this._setPosition(r), this._container.style.display = "block", this._visible = !0;
+    n.relatedTarget || this._hide(), this._showLocation = { containerPoint: r, relatedTarget: n.relatedTarget }, this._setPosition(r), this._container.style.display = "block", this._visible = !0;
   }
   _hide() {
-    this._container && (this._container.style.display = "none", this._visible = !1, this._items.filter((r) => !r.isDefault).forEach((r) => this.removeItem(r.el)), this.showAllItems(), this._map.fire("contextmenu.hide"));
+    this._container && (this._container.style.display = "none", this._visible = !1, this._items.filter((n) => !n.isDefault).forEach((n) => this.removeItem(n.el)), this.showAllItems(), this._container.querySelectorAll(".over").forEach((n) => n.classList.remove("over")), this._map.fire("contextmenu.hide"));
   }
   _setPosition(r) {
     const n = this._map.getSize(), i = this._container.getBoundingClientRect();
@@ -51037,16 +51047,16 @@ let d5 = class t0 extends os.Handler {
     r.key === "Escape" && this._hide();
   }
   _onItemMouseOver(r) {
-    os.DomUtil.addClass(r.target || r.srcElement, "over");
+    qs.DomUtil.addClass(r.target || r.srcElement, "over");
   }
   _onItemMouseOut(r) {
-    os.DomUtil.removeClass(r.target || r.srcElement, "over");
+    qs.DomUtil.removeClass(r.target || r.srcElement, "over");
   }
   bindContextMenuToLayer(r, n, { inherit: i = !0 } = {}) {
     r.on("contextmenu", (e) => {
       const s = r._map;
       if (!s.contextmenu) return;
-      s.contextmenu._items.filter((a) => !a.isDefault).forEach((a) => s.contextmenu.removeItem(a.el)), i || s.contextmenu.hideAllItems(), n.forEach((a) => {
+      s.contextmenu._items.filter((a) => !a.isDefault).forEach((a) => s.contextmenu.removeItem(a.el)), i ? s.contextmenu.showAllItems() : s.contextmenu.hideAllItems(), n.forEach((a) => {
         const c = s.contextmenu.insertItem(a);
         c.isDefault = !1, c.container = s.contextmenu._container;
       });
@@ -51864,10 +51874,10 @@ function DZ(t) {
   };
   return typeof lC == "function" ? (r.TileLayer.pouchDBCached = lC, r.tileLayer.pouchDBCached = (...n) => new r.TileLayer.pouchDBCached(...n)) : console.warn("leaflet.tilelayer.pouchdbcached did not return a valid function."), r;
 }
-const { min: BZ, max: NZ } = Math, Y0 = (t, r = 0, n = 1) => BZ(NZ(r, t), n), p5 = (t) => {
+const { min: BZ, max: NZ } = Math, K0 = (t, r = 0, n = 1) => BZ(NZ(r, t), n), p5 = (t) => {
   t._clipped = !1, t._unclipped = t.slice(0);
   for (let r = 0; r <= 3; r++)
-    r < 3 ? ((t[r] < 0 || t[r] > 255) && (t._clipped = !0), t[r] = Y0(t[r], 0, 255)) : r === 3 && (t[r] = Y0(t[r], 0, 1));
+    r < 3 ? ((t[r] < 0 || t[r] > 255) && (t._clipped = !0), t[r] = K0(t[r], 0, 255)) : r === 3 && (t[r] = K0(t[r], 0, 1));
   return t;
 }, fA = {};
 for (let t of [
@@ -51889,7 +51899,7 @@ const sr = (t, r = null) => t.length >= 3 ? Array.prototype.slice.call(t) : vr(t
   if (t.length < 2) return null;
   const r = t.length - 1;
   return vr(t[r]) == "string" ? t[r].toLowerCase() : null;
-}, { PI: qw, min: dA, max: pA } = Math, Du = (t) => Math.round(t * 100) / 100, vk = (t) => Math.round(t * 100) / 100, Nf = qw * 2, p4 = qw / 3, GZ = qw / 180, jZ = 180 / qw;
+}, { PI: qw, min: dA, max: pA } = Math, Ru = (t) => Math.round(t * 100) / 100, vk = (t) => Math.round(t * 100) / 100, Bf = qw * 2, p4 = qw / 3, GZ = qw / 180, jZ = 180 / qw;
 function _A(t) {
   return [...t.slice(0, 3).reverse(), ...t.slice(3)];
 }
@@ -51924,7 +51934,7 @@ class Fe {
 }
 const FZ = "3.1.2", Sr = (...t) => new Fe(...t);
 Sr.version = FZ;
-const S1 = {
+const E1 = {
   aliceblue: "#f0f8ff",
   antiquewhite: "#faebd7",
   aqua: "#00ffff",
@@ -52091,12 +52101,12 @@ const S1 = {
     return [n, i, e, s];
   }
   throw new Error(`unknown hex color: ${t}`);
-}, { round: Kb } = Math, gA = (...t) => {
+}, { round: Vb } = Math, gA = (...t) => {
   let [r, n, i, e] = sr(t, "rgba"), s = A1(t) || "auto";
-  e === void 0 && (e = 1), s === "auto" && (s = e < 1 ? "rgba" : "rgb"), r = Kb(r), n = Kb(n), i = Kb(i);
+  e === void 0 && (e = 1), s === "auto" && (s = e < 1 ? "rgba" : "rgb"), r = Vb(r), n = Vb(n), i = Vb(i);
   let a = "000000" + (r << 16 | n << 8 | i).toString(16);
   a = a.substr(a.length - 6);
-  let c = "0" + Kb(e * 255).toString(16);
+  let c = "0" + Vb(e * 255).toString(16);
   switch (c = c.substr(c.length - 2), s.toLowerCase()) {
     case "rgba":
       return `#${a}${c}`;
@@ -52108,18 +52118,18 @@ const S1 = {
 };
 Fe.prototype.name = function() {
   const t = gA(this._rgb, "rgb");
-  for (let r of Object.keys(S1))
-    if (S1[r] === t) return r.toLowerCase();
+  for (let r of Object.keys(E1))
+    if (E1[r] === t) return r.toLowerCase();
   return t;
 };
 er.format.named = (t) => {
-  if (t = t.toLowerCase(), S1[t]) return mA(S1[t]);
+  if (t = t.toLowerCase(), E1[t]) return mA(E1[t]);
   throw new Error("unknown color name: " + t);
 };
 er.autodetect.push({
   p: 5,
   test: (t, ...r) => {
-    if (!r.length && vr(t) === "string" && S1[t.toLowerCase()])
+    if (!r.length && vr(t) === "string" && E1[t.toLowerCase()])
       return "named";
   }
 });
@@ -52129,7 +52139,7 @@ Fe.prototype.alpha = function(t, r = !1) {
 Fe.prototype.clipped = function() {
   return this._rgb._clipped || !1;
 };
-const Ac = {
+const Tc = {
   // Corresponds roughly to RGB brighter/darker
   Kn: 18,
   // D65 standard referent
@@ -52217,27 +52227,27 @@ const Ac = {
   ["f11", [1.00962, 0.6435]],
   ["icc", [0.96422, 0.82521]]
 ]);
-function zf(t) {
+function Ff(t) {
   const r = qZ.get(String(t).toLowerCase());
   if (!r)
     throw new Error("unknown Lab illuminant " + t);
-  Ac.labWhitePoint = t, Ac.Xn = r[0], Ac.Zn = r[1];
+  Tc.labWhitePoint = t, Tc.Xn = r[0], Tc.Zn = r[1];
 }
-function Em() {
-  return Ac.labWhitePoint;
+function Mm() {
+  return Tc.labWhitePoint;
 }
 const _5 = (...t) => {
   t = sr(t, "lab");
   const [r, n, i] = t, [e, s, l] = HZ(r, n, i), [a, c, d] = vA(e, s, l);
   return [a, c, d, t.length > 3 ? t[3] : 1];
 }, HZ = (t, r, n) => {
-  const { kE: i, kK: e, kKE: s, Xn: l, Yn: a, Zn: c } = Ac, d = (t + 16) / 116, p = 2e-3 * r + d, h = d - 5e-3 * n, _ = p * p * p, u = h * h * h, y = _ > i ? _ : (116 * p - 16) / e, A = t > s ? Math.pow((t + 16) / 116, 3) : t / e, E = u > i ? u : (116 * h - 16) / e, b = y * l, M = A * a, x = E * c;
+  const { kE: i, kK: e, kKE: s, Xn: l, Yn: a, Zn: c } = Tc, d = (t + 16) / 116, p = 2e-3 * r + d, h = d - 5e-3 * n, _ = p * p * p, u = h * h * h, y = _ > i ? _ : (116 * p - 16) / e, A = t > s ? Math.pow((t + 16) / 116, 3) : t / e, E = u > i ? u : (116 * h - 16) / e, b = y * l, M = A * a, x = E * c;
   return [b, M, x];
 }, _4 = (t) => {
   const r = Math.sign(t);
   return t = Math.abs(t), (t <= 31308e-7 ? t * 12.92 : 1.055 * Math.pow(t, 1 / 2.4) - 0.055) * r;
 }, vA = (t, r, n) => {
-  const { MtxAdaptMa: i, MtxAdaptMaI: e, MtxXYZ2RGB: s, RefWhiteRGB: l, Xn: a, Yn: c, Zn: d } = Ac, p = a * i.m00 + c * i.m10 + d * i.m20, h = a * i.m01 + c * i.m11 + d * i.m21, _ = a * i.m02 + c * i.m12 + d * i.m22, u = l.X * i.m00 + l.Y * i.m10 + l.Z * i.m20, y = l.X * i.m01 + l.Y * i.m11 + l.Z * i.m21, A = l.X * i.m02 + l.Y * i.m12 + l.Z * i.m22, E = (t * i.m00 + r * i.m10 + n * i.m20) * (u / p), b = (t * i.m01 + r * i.m11 + n * i.m21) * (y / h), M = (t * i.m02 + r * i.m12 + n * i.m22) * (A / _), x = E * e.m00 + b * e.m10 + M * e.m20, C = E * e.m01 + b * e.m11 + M * e.m21, m = E * e.m02 + b * e.m12 + M * e.m22, S = _4(
+  const { MtxAdaptMa: i, MtxAdaptMaI: e, MtxXYZ2RGB: s, RefWhiteRGB: l, Xn: a, Yn: c, Zn: d } = Tc, p = a * i.m00 + c * i.m10 + d * i.m20, h = a * i.m01 + c * i.m11 + d * i.m21, _ = a * i.m02 + c * i.m12 + d * i.m22, u = l.X * i.m00 + l.Y * i.m10 + l.Z * i.m20, y = l.X * i.m01 + l.Y * i.m11 + l.Z * i.m21, A = l.X * i.m02 + l.Y * i.m12 + l.Z * i.m22, E = (t * i.m00 + r * i.m10 + n * i.m20) * (u / p), b = (t * i.m01 + r * i.m11 + n * i.m21) * (y / h), M = (t * i.m02 + r * i.m12 + n * i.m22) * (A / _), x = E * e.m00 + b * e.m10 + M * e.m20, C = E * e.m01 + b * e.m11 + M * e.m21, m = E * e.m02 + b * e.m12 + M * e.m22, S = _4(
     x * s.m00 + C * s.m10 + m * s.m20
   ), w = _4(
     x * s.m01 + C * s.m11 + m * s.m21
@@ -52250,7 +52260,7 @@ const _5 = (...t) => {
   return [c, d, p, ...e.length > 0 && e[0] < 1 ? [e[0]] : []];
 };
 function ZZ(t, r, n) {
-  const { Xn: i, Yn: e, Zn: s, kE: l, kK: a } = Ac, c = t / i, d = r / e, p = n / s, h = c > l ? Math.pow(c, 1 / 3) : (a * c + 16) / 116, _ = d > l ? Math.pow(d, 1 / 3) : (a * d + 16) / 116, u = p > l ? Math.pow(p, 1 / 3) : (a * p + 16) / 116;
+  const { Xn: i, Yn: e, Zn: s, kE: l, kK: a } = Tc, c = t / i, d = r / e, p = n / s, h = c > l ? Math.pow(c, 1 / 3) : (a * c + 16) / 116, _ = d > l ? Math.pow(d, 1 / 3) : (a * d + 16) / 116, u = p > l ? Math.pow(p, 1 / 3) : (a * p + 16) / 116;
   return [116 * _ - 16, 500 * (h - _), 200 * (_ - u)];
 }
 function m4(t) {
@@ -52259,7 +52269,7 @@ function m4(t) {
 }
 const yA = (t, r, n) => {
   t = m4(t / 255), r = m4(r / 255), n = m4(n / 255);
-  const { MtxRGB2XYZ: i, MtxAdaptMa: e, MtxAdaptMaI: s, Xn: l, Yn: a, Zn: c, As: d, Bs: p, Cs: h } = Ac;
+  const { MtxRGB2XYZ: i, MtxAdaptMa: e, MtxAdaptMaI: s, Xn: l, Yn: a, Zn: c, As: d, Bs: p, Cs: h } = Tc;
   let _ = t * i.m00 + r * i.m10 + n * i.m20, u = t * i.m01 + r * i.m11 + n * i.m21, y = t * i.m02 + r * i.m12 + n * i.m22;
   const A = l * e.m00 + a * e.m10 + c * e.m20, E = l * e.m01 + a * e.m11 + c * e.m21, b = l * e.m02 + a * e.m12 + c * e.m22;
   let M = _ * e.m00 + u * e.m10 + y * e.m20, x = _ * e.m01 + u * e.m11 + y * e.m21, C = _ * e.m02 + u * e.m12 + y * e.m22;
@@ -52269,7 +52279,7 @@ Fe.prototype.lab = function() {
   return m5(this._rgb);
 };
 const WZ = (...t) => new Fe(...t, "lab");
-Object.assign(Sr, { lab: WZ, getLabWhitePoint: Em, setLabWhitePoint: zf });
+Object.assign(Sr, { lab: WZ, getLabWhitePoint: Mm, setLabWhitePoint: Ff });
 er.format.lab = _5;
 er.autodetect.push({
   p: 2,
@@ -52280,7 +52290,7 @@ er.autodetect.push({
 });
 Fe.prototype.darken = function(t = 1) {
   const r = this, n = r.lab();
-  return n[0] -= Ac.Kn * t, new Fe(n, "lab").alpha(r.alpha(), !0);
+  return n[0] -= Tc.Kn * t, new Fe(n, "lab").alpha(r.alpha(), !0);
 };
 Fe.prototype.brighten = function(t = 1) {
   return this.darken(-t);
@@ -52312,7 +52322,7 @@ Fe.prototype.luminance = function(t, r = "rgb") {
   }
   return $Z(...this._rgb.slice(0, 3));
 };
-const $Z = (t, r, n) => (t = g4(t), r = g4(r), n = g4(n), 0.2126 * t + 0.7152 * r + 0.0722 * n), g4 = (t) => (t /= 255, t <= 0.03928 ? t / 12.92 : VZ((t + 0.055) / 1.055, 2.4)), _a = {}, C1 = (t, r, n = 0.5, ...i) => {
+const $Z = (t, r, n) => (t = g4(t), r = g4(r), n = g4(n), 0.2126 * t + 0.7152 * r + 0.0722 * n), g4 = (t) => (t /= 255, t <= 0.03928 ? t / 12.92 : VZ((t + 0.055) / 1.055, 2.4)), _a = {}, S1 = (t, r, n = 0.5, ...i) => {
   let e = i[0] || "lrgb";
   if (!_a[e] && !i.length && (e = Object.keys(_a)[0]), !_a[e])
     throw new Error(`interpolation mode ${e} is not defined`);
@@ -52321,7 +52331,7 @@ const $Z = (t, r, n) => (t = g4(t), r = g4(r), n = g4(n), 0.2126 * t + 0.7152 * 
   );
 };
 Fe.prototype.mix = Fe.prototype.interpolate = function(t, r = 0.5, ...n) {
-  return C1(this, t, r, ...n);
+  return S1(this, t, r, ...n);
 };
 Fe.prototype.premultiply = function(t = !1) {
   const r = this._rgb, n = r[3];
@@ -52366,7 +52376,7 @@ er.format.hcl = JZ;
 );
 Fe.prototype.saturate = function(t = 1) {
   const r = this, n = r.lch();
-  return n[1] += Ac.Kn * t, n[1] < 0 && (n[1] = 0), new Fe(n, "lch").alpha(r.alpha(), !0);
+  return n[1] += Tc.Kn * t, n[1] < 0 && (n[1] = 0), new Fe(n, "lch").alpha(r.alpha(), !0);
 };
 Fe.prototype.desaturate = function(t = 1) {
   return this.saturate(-t);
@@ -52405,10 +52415,10 @@ Fe.prototype.set = function(t, r, n = !1) {
     return s;
 };
 Fe.prototype.tint = function(t = 0.5, ...r) {
-  return C1(this, "white", t, ...r);
+  return S1(this, "white", t, ...r);
 };
 Fe.prototype.shade = function(t = 0.5, ...r) {
-  return C1(this, "black", t, ...r);
+  return S1(this, "black", t, ...r);
 };
 const oW = (t, r, n) => {
   const i = t._rgb, e = r._rgb;
@@ -52420,12 +52430,12 @@ const oW = (t, r, n) => {
   );
 };
 _a.rgb = oW;
-const { sqrt: v4, pow: s1 } = Math, sW = (t, r, n) => {
+const { sqrt: v4, pow: o1 } = Math, sW = (t, r, n) => {
   const [i, e, s] = t._rgb, [l, a, c] = r._rgb;
   return new Fe(
-    v4(s1(i, 2) * (1 - n) + s1(l, 2) * n),
-    v4(s1(e, 2) * (1 - n) + s1(a, 2) * n),
-    v4(s1(s, 2) * (1 - n) + s1(c, 2) * n),
+    v4(o1(i, 2) * (1 - n) + o1(l, 2) * n),
+    v4(o1(e, 2) * (1 - n) + o1(a, 2) * n),
+    v4(o1(s, 2) * (1 - n) + o1(c, 2) * n),
     "rgb"
   );
 };
@@ -52530,16 +52540,16 @@ er.autodetect.push({
 });
 const mW = (t, r, n) => O1(t, r, n, "hcg");
 _a.hcg = mW;
-const { cos: a1 } = Math, gW = (...t) => {
+const { cos: s1 } = Math, gW = (...t) => {
   t = sr(t, "hsi");
   let [r, n, i] = t, e, s, l;
-  return isNaN(r) && (r = 0), isNaN(n) && (n = 0), r > 360 && (r -= 360), r < 0 && (r += 360), r /= 360, r < 1 / 3 ? (l = (1 - n) / 3, e = (1 + n * a1(Nf * r) / a1(p4 - Nf * r)) / 3, s = 1 - (l + e)) : r < 2 / 3 ? (r -= 1 / 3, e = (1 - n) / 3, s = (1 + n * a1(Nf * r) / a1(p4 - Nf * r)) / 3, l = 1 - (e + s)) : (r -= 2 / 3, s = (1 - n) / 3, l = (1 + n * a1(Nf * r) / a1(p4 - Nf * r)) / 3, e = 1 - (s + l)), e = Y0(i * e * 3), s = Y0(i * s * 3), l = Y0(i * l * 3), [e * 255, s * 255, l * 255, t.length > 3 ? t[3] : 1];
+  return isNaN(r) && (r = 0), isNaN(n) && (n = 0), r > 360 && (r -= 360), r < 0 && (r += 360), r /= 360, r < 1 / 3 ? (l = (1 - n) / 3, e = (1 + n * s1(Bf * r) / s1(p4 - Bf * r)) / 3, s = 1 - (l + e)) : r < 2 / 3 ? (r -= 1 / 3, e = (1 - n) / 3, s = (1 + n * s1(Bf * r) / s1(p4 - Bf * r)) / 3, l = 1 - (e + s)) : (r -= 2 / 3, s = (1 - n) / 3, l = (1 + n * s1(Bf * r) / s1(p4 - Bf * r)) / 3, e = 1 - (s + l)), e = K0(i * e * 3), s = K0(i * s * 3), l = K0(i * l * 3), [e * 255, s * 255, l * 255, t.length > 3 ? t[3] : 1];
 }, { min: vW, sqrt: yW, acos: bW } = Math, wW = (...t) => {
   let [r, n, i] = sr(t, "rgb");
   r /= 255, n /= 255, i /= 255;
   let e;
   const s = vW(r, n, i), l = (r + n + i) / 3, a = l > 0 ? 1 - s / l : 0;
-  return a === 0 ? e = NaN : (e = (r - n + (r - i)) / 2, e /= yW((r - n) * (r - n) + (r - i) * (n - i)), e = bW(e), i > n && (e = Nf - e), e /= Nf), [e * 360, a, l];
+  return a === 0 ? e = NaN : (e = (r - n + (r - i)) / 2, e /= yW((r - n) * (r - n) + (r - i) * (n - i)), e = bW(e), i > n && (e = Bf - e), e /= Bf), [e * 360, a, l];
 };
 Fe.prototype.hsi = function() {
   return wW(this._rgb);
@@ -52790,7 +52800,7 @@ function Tw(t) {
     let B, D;
     if (O == null && (O = !1), isNaN(w) || w === null)
       return n;
-    O ? D = w : a && a.length > 2 ? D = b(w) / (a.length - 2) : h !== p ? D = (w - p) / (h - p) : D = 1, D = x(D), O || (D = M(D)), A !== 1 && (D = zW(D, A)), D = l[0] + D * (1 - l[0] - l[1]), D = Y0(D, 0, 1);
+    O ? D = w : a && a.length > 2 ? D = b(w) / (a.length - 2) : h !== p ? D = (w - p) / (h - p) : D = 1, D = x(D), O || (D = M(D)), A !== 1 && (D = zW(D, A)), D = l[0] + D * (1 - l[0] - l[1]), D = K0(D, 0, 1);
     const U = Math.floor(D * 1e4);
     if (y && u[U])
       B = u[U];
@@ -52988,31 +52998,31 @@ er.autodetect.push({
       return "rgb";
   }
 });
-const xh = (t, r, n) => {
-  if (!xh[n])
+const wh = (t, r, n) => {
+  if (!wh[n])
     throw new Error("unknown blend mode " + n);
-  return xh[n](t, r);
-}, l0 = (t) => (r, n) => {
+  return wh[n](t, r);
+}, a0 = (t) => (r, n) => {
   const i = Sr(n).rgb(), e = Sr(r).rgb();
   return Sr.rgb(t(i, e));
-}, u0 = (t) => (r, n) => {
+}, l0 = (t) => (r, n) => {
   const i = [];
   return i[0] = t(r[0], n[0]), i[1] = t(r[1], n[1]), i[2] = t(r[2], n[2]), i;
 }, VW = (t) => t, KW = (t, r) => t * r / 255, YW = (t, r) => t > r ? r : t, $W = (t, r) => t > r ? t : r, XW = (t, r) => 255 * (1 - (1 - t / 255) * (1 - r / 255)), QW = (t, r) => r < 128 ? 2 * t * r / 255 : 255 * (1 - 2 * (1 - t / 255) * (1 - r / 255)), JW = (t, r) => 255 * (1 - (1 - r / 255) / (t / 255)), tV = (t, r) => t === 255 ? 255 : (t = 255 * (r / 255) / (1 - t / 255), t > 255 ? 255 : t);
-xh.normal = l0(u0(VW));
-xh.multiply = l0(u0(KW));
-xh.screen = l0(u0(XW));
-xh.overlay = l0(u0(QW));
-xh.darken = l0(u0(YW));
-xh.lighten = l0(u0($W));
-xh.dodge = l0(u0(tV));
-xh.burn = l0(u0(JW));
+wh.normal = a0(l0(VW));
+wh.multiply = a0(l0(KW));
+wh.screen = a0(l0(XW));
+wh.overlay = a0(l0(QW));
+wh.darken = a0(l0(YW));
+wh.lighten = a0(l0($W));
+wh.dodge = a0(l0(tV));
+wh.burn = a0(l0(JW));
 const { pow: eV, sin: nV, cos: rV } = Math;
 function iV(t = 300, r = -1.5, n = 1, i = 1, e = [0, 1]) {
   let s = 0, l;
   vr(e) === "array" ? l = e[1] - e[0] : (l = 0, e = [e, e]);
   const a = function(c) {
-    const d = Nf * ((t + 120) / 360 + r * c), p = eV(e[0] + l * c, i), _ = (s !== 0 ? n[0] + c * s : n) * p * (1 - p) / 2, u = rV(d), y = nV(d), A = p + _ * (-0.14861 * u + 1.78277 * y), E = p + _ * (-0.29227 * u - 0.90649 * y), b = p + _ * (1.97294 * u);
+    const d = Bf * ((t + 120) / 360 + r * c), p = eV(e[0] + l * c, i), _ = (s !== 0 ? n[0] + c * s : n) * p * (1 - p) / 2, u = rV(d), y = nV(d), A = p + _ * (-0.14861 * u + 1.78277 * y), E = p + _ * (-0.29227 * u - 0.90649 * y), b = p + _ * (1.97294 * u);
     return Sr(p5([A * 255, E * 255, b * 255, 1]));
   };
   return a.start = function(c) {
@@ -53145,15 +53155,15 @@ const fV = (t, r) => {
  * You can read more about the APCA Readability Criterion at
  * https://readtech.org/ARC/
  */
-const dP = 0.027, dV = 5e-4, pV = 0.1, pP = 1.14, Yb = 0.022, _P = 1.414, _V = (t, r) => {
-  t = new Fe(t), r = new Fe(r), t.alpha() < 1 && (t = C1(r, t, t.alpha(), "rgb"));
-  const n = mP(...t.rgb()), i = mP(...r.rgb()), e = n >= Yb ? n : n + Math.pow(Yb - n, _P), s = i >= Yb ? i : i + Math.pow(Yb - i, _P), l = Math.pow(s, 0.56) - Math.pow(e, 0.57), a = Math.pow(s, 0.65) - Math.pow(e, 0.62), c = Math.abs(s - e) < dV ? 0 : e < s ? l * pP : a * pP;
+const dP = 0.027, dV = 5e-4, pV = 0.1, pP = 1.14, Kb = 0.022, _P = 1.414, _V = (t, r) => {
+  t = new Fe(t), r = new Fe(r), t.alpha() < 1 && (t = S1(r, t, t.alpha(), "rgb"));
+  const n = mP(...t.rgb()), i = mP(...r.rgb()), e = n >= Kb ? n : n + Math.pow(Kb - n, _P), s = i >= Kb ? i : i + Math.pow(Kb - i, _P), l = Math.pow(s, 0.56) - Math.pow(e, 0.57), a = Math.pow(s, 0.65) - Math.pow(e, 0.62), c = Math.abs(s - e) < dV ? 0 : e < s ? l * pP : a * pP;
   return (Math.abs(c) < pV ? 0 : c > 0 ? c - dP : c + dP) * 100;
 };
 function mP(t, r, n) {
   return 0.2126729 * Math.pow(t / 255, 2.4) + 0.7151522 * Math.pow(r / 255, 2.4) + 0.072175 * Math.pow(n / 255, 2.4);
 }
-const { sqrt: Bf, pow: jo, min: mV, max: gV, atan2: gP, abs: vP, cos: $b, sin: yP, exp: vV, PI: bP } = Math;
+const { sqrt: Df, pow: jo, min: mV, max: gV, atan2: gP, abs: vP, cos: Yb, sin: yP, exp: vV, PI: bP } = Math;
 function yV(t, r, n = 1, i = 1, e = 1) {
   var s = function(ut) {
     return 360 * ut / (2 * bP);
@@ -53161,10 +53171,10 @@ function yV(t, r, n = 1, i = 1, e = 1) {
     return 2 * bP * ut / 360;
   };
   t = new Fe(t), r = new Fe(r);
-  const [a, c, d] = Array.from(t.lab()), [p, h, _] = Array.from(r.lab()), u = (a + p) / 2, y = Bf(jo(c, 2) + jo(d, 2)), A = Bf(jo(h, 2) + jo(_, 2)), E = (y + A) / 2, b = 0.5 * (1 - Bf(jo(E, 7) / (jo(E, 7) + jo(25, 7)))), M = c * (1 + b), x = h * (1 + b), C = Bf(jo(M, 2) + jo(d, 2)), m = Bf(jo(x, 2) + jo(_, 2)), S = (C + m) / 2, w = s(gP(d, M)), O = s(gP(_, x)), B = w >= 0 ? w : w + 360, D = O >= 0 ? O : O + 360, U = vP(B - D) > 180 ? (B + D + 360) / 2 : (B + D) / 2, N = 1 - 0.17 * $b(l(U - 30)) + 0.24 * $b(l(2 * U)) + 0.32 * $b(l(3 * U + 6)) - 0.2 * $b(l(4 * U - 63));
+  const [a, c, d] = Array.from(t.lab()), [p, h, _] = Array.from(r.lab()), u = (a + p) / 2, y = Df(jo(c, 2) + jo(d, 2)), A = Df(jo(h, 2) + jo(_, 2)), E = (y + A) / 2, b = 0.5 * (1 - Df(jo(E, 7) / (jo(E, 7) + jo(25, 7)))), M = c * (1 + b), x = h * (1 + b), C = Df(jo(M, 2) + jo(d, 2)), m = Df(jo(x, 2) + jo(_, 2)), S = (C + m) / 2, w = s(gP(d, M)), O = s(gP(_, x)), B = w >= 0 ? w : w + 360, D = O >= 0 ? O : O + 360, U = vP(B - D) > 180 ? (B + D + 360) / 2 : (B + D) / 2, N = 1 - 0.17 * Yb(l(U - 30)) + 0.24 * Yb(l(2 * U)) + 0.32 * Yb(l(3 * U + 6)) - 0.2 * Yb(l(4 * U - 63));
   let Y = D - B;
-  Y = vP(Y) <= 180 ? Y : D <= B ? Y + 360 : Y - 360, Y = 2 * Bf(C * m) * yP(l(Y) / 2);
-  const X = p - a, Q = m - C, rt = 1 + 0.015 * jo(u - 50, 2) / Bf(20 + jo(u - 50, 2)), ot = 1 + 0.045 * S, F = 1 + 0.015 * S * N, W = 30 * vV(-jo((U - 275) / 25, 2)), j = -(2 * Bf(jo(S, 7) / (jo(S, 7) + jo(25, 7)))) * yP(2 * l(W)), K = Bf(
+  Y = vP(Y) <= 180 ? Y : D <= B ? Y + 360 : Y - 360, Y = 2 * Df(C * m) * yP(l(Y) / 2);
+  const X = p - a, Q = m - C, rt = 1 + 0.015 * jo(u - 50, 2) / Df(20 + jo(u - 50, 2)), ot = 1 + 0.045 * S, F = 1 + 0.015 * S * N, W = 30 * vV(-jo((U - 275) / 25, 2)), j = -(2 * Df(jo(S, 7) / (jo(S, 7) + jo(25, 7)))) * yP(2 * l(W)), K = Df(
     jo(X / (n * rt), 2) + jo(Q / (i * ot), 2) + jo(Y / (e * F), 2) + j * (Q / (i * ot)) * (Y / (e * F))
   );
   return gV(0, mV(100, K));
@@ -53277,65 +53287,65 @@ er.autodetect.push({
 const SV = (...t) => {
   const r = sr(t, "hsla");
   let n = A1(t) || "lsa";
-  return r[0] = Du(r[0] || 0) + "deg", r[1] = Du(r[1] * 100) + "%", r[2] = Du(r[2] * 100) + "%", n === "hsla" || r.length > 3 && r[3] < 1 ? (r[3] = "/ " + (r.length > 3 ? r[3] : 1), n = "hsla") : r.length = 3, `${n.substr(0, 3)}(${r.join(" ")})`;
+  return r[0] = Ru(r[0] || 0) + "deg", r[1] = Ru(r[1] * 100) + "%", r[2] = Ru(r[2] * 100) + "%", n === "hsla" || r.length > 3 && r[3] < 1 ? (r[3] = "/ " + (r.length > 3 ? r[3] : 1), n = "hsla") : r.length = 3, `${n.substr(0, 3)}(${r.join(" ")})`;
 }, CV = (...t) => {
   const r = sr(t, "lab");
   let n = A1(t) || "lab";
-  return r[0] = Du(r[0]) + "%", r[1] = Du(r[1]), r[2] = Du(r[2]), n === "laba" || r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `lab(${r.join(" ")})`;
+  return r[0] = Ru(r[0]) + "%", r[1] = Ru(r[1]), r[2] = Ru(r[2]), n === "laba" || r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `lab(${r.join(" ")})`;
 }, PV = (...t) => {
   const r = sr(t, "lch");
   let n = A1(t) || "lab";
-  return r[0] = Du(r[0]) + "%", r[1] = Du(r[1]), r[2] = isNaN(r[2]) ? "none" : Du(r[2]) + "deg", n === "lcha" || r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `lch(${r.join(" ")})`;
+  return r[0] = Ru(r[0]) + "%", r[1] = Ru(r[1]), r[2] = isNaN(r[2]) ? "none" : Ru(r[2]) + "deg", n === "lcha" || r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `lch(${r.join(" ")})`;
 }, TV = (...t) => {
   const r = sr(t, "lab");
-  return r[0] = Du(r[0] * 100) + "%", r[1] = vk(r[1]), r[2] = vk(r[2]), r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `oklab(${r.join(" ")})`;
+  return r[0] = Ru(r[0] * 100) + "%", r[1] = vk(r[1]), r[2] = vk(r[2]), r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `oklab(${r.join(" ")})`;
 }, CA = (...t) => {
   const [r, n, i, ...e] = sr(t, "rgb"), [s, l, a] = b5(r, n, i), [c, d, p] = wA(s, l, a);
   return [c, d, p, ...e.length > 0 && e[0] < 1 ? [e[0]] : []];
 }, AV = (...t) => {
   const r = sr(t, "lch");
-  return r[0] = Du(r[0] * 100) + "%", r[1] = vk(r[1]), r[2] = isNaN(r[2]) ? "none" : Du(r[2]) + "deg", r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `oklch(${r.join(" ")})`;
+  return r[0] = Ru(r[0] * 100) + "%", r[1] = vk(r[1]), r[2] = isNaN(r[2]) ? "none" : Ru(r[2]) + "deg", r.length > 3 && r[3] < 1 ? r[3] = "/ " + (r.length > 3 ? r[3] : 1) : r.length = 3, `oklch(${r.join(" ")})`;
 }, { round: x4 } = Math, OV = (...t) => {
   const r = sr(t, "rgba");
   let n = A1(t) || "rgb";
   if (n.substr(0, 3) === "hsl")
     return SV(kA(r), n);
   if (n.substr(0, 3) === "lab") {
-    const i = Em();
-    zf("d50");
+    const i = Mm();
+    Ff("d50");
     const e = CV(m5(r), n);
-    return zf(i), e;
+    return Ff(i), e;
   }
   if (n.substr(0, 3) === "lch") {
-    const i = Em();
-    zf("d50");
+    const i = Mm();
+    Ff("d50");
     const e = PV(v5(r), n);
-    return zf(i), e;
+    return Ff(i), e;
   }
   return n.substr(0, 5) === "oklab" ? TV(b5(r)) : n.substr(0, 5) === "oklch" ? AV(CA(r)) : (r[0] = x4(r[0]), r[1] = x4(r[1]), r[2] = x4(r[2]), (n === "rgba" || r.length > 3 && r[3] < 1) && (r[3] = "/ " + (r.length > 3 ? r[3] : 1), n = "rgba"), `${n.substr(0, 3)}(${r.slice(0, n === "rgb" ? 3 : 4).join(" ")})`);
 }, PA = (...t) => {
   t = sr(t, "lch");
   const [r, n, i, ...e] = t, [s, l, a] = bA(r, n, i), [c, d, p] = y5(s, l, a);
   return [c, d, p, ...e.length > 0 && e[0] < 1 ? [e[0]] : []];
-}, Uf = /((?:-?\d+)|(?:-?\d+(?:\.\d+)?)%|none)/.source, wh = /((?:-?(?:\d+(?:\.\d*)?|\.\d+)%?)|none)/.source, Aw = /((?:-?(?:\d+(?:\.\d*)?|\.\d+)%)|none)/.source, Gu = /\s*/.source, I1 = /\s+/.source, w5 = /\s*,\s*/.source, Hw = /((?:-?(?:\d+(?:\.\d*)?|\.\d+)(?:deg)?)|none)/.source, R1 = /\s*(?:\/\s*((?:[01]|[01]?\.\d+)|\d+(?:\.\d+)?%))?/.source, TA = new RegExp(
-  "^rgba?\\(" + Gu + [Uf, Uf, Uf].join(I1) + R1 + "\\)$"
+}, zf = /((?:-?\d+)|(?:-?\d+(?:\.\d+)?)%|none)/.source, bh = /((?:-?(?:\d+(?:\.\d*)?|\.\d+)%?)|none)/.source, Aw = /((?:-?(?:\d+(?:\.\d*)?|\.\d+)%)|none)/.source, Nu = /\s*/.source, I1 = /\s+/.source, w5 = /\s*,\s*/.source, Hw = /((?:-?(?:\d+(?:\.\d*)?|\.\d+)(?:deg)?)|none)/.source, R1 = /\s*(?:\/\s*((?:[01]|[01]?\.\d+)|\d+(?:\.\d+)?%))?/.source, TA = new RegExp(
+  "^rgba?\\(" + Nu + [zf, zf, zf].join(I1) + R1 + "\\)$"
 ), AA = new RegExp(
-  "^rgb\\(" + Gu + [Uf, Uf, Uf].join(w5) + Gu + "\\)$"
+  "^rgb\\(" + Nu + [zf, zf, zf].join(w5) + Nu + "\\)$"
 ), OA = new RegExp(
-  "^rgba\\(" + Gu + [Uf, Uf, Uf, wh].join(w5) + Gu + "\\)$"
+  "^rgba\\(" + Nu + [zf, zf, zf, bh].join(w5) + Nu + "\\)$"
 ), IA = new RegExp(
-  "^hsla?\\(" + Gu + [Hw, Aw, Aw].join(I1) + R1 + "\\)$"
+  "^hsla?\\(" + Nu + [Hw, Aw, Aw].join(I1) + R1 + "\\)$"
 ), RA = new RegExp(
-  "^hsl?\\(" + Gu + [Hw, Aw, Aw].join(w5) + Gu + "\\)$"
+  "^hsl?\\(" + Nu + [Hw, Aw, Aw].join(w5) + Nu + "\\)$"
 ), DA = /^hsla\(\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*,\s*([01]|[01]?\.\d+)\)$/, BA = new RegExp(
-  "^lab\\(" + Gu + [wh, wh, wh].join(I1) + R1 + "\\)$"
+  "^lab\\(" + Nu + [bh, bh, bh].join(I1) + R1 + "\\)$"
 ), NA = new RegExp(
-  "^lch\\(" + Gu + [wh, wh, Hw].join(I1) + R1 + "\\)$"
+  "^lch\\(" + Nu + [bh, bh, Hw].join(I1) + R1 + "\\)$"
 ), GA = new RegExp(
-  "^oklab\\(" + Gu + [wh, wh, wh].join(I1) + R1 + "\\)$"
+  "^oklab\\(" + Nu + [bh, bh, bh].join(I1) + R1 + "\\)$"
 ), jA = new RegExp(
-  "^oklch\\(" + Gu + [wh, wh, Hw].join(I1) + R1 + "\\)$"
-), { round: FA } = Math, l1 = (t) => t.map((r, n) => n <= 2 ? Y0(FA(r), 0, 255) : r), Fo = (t, r = 0, n = 100, i = !1) => (typeof t == "string" && t.endsWith("%") && (t = parseFloat(t.substring(0, t.length - 1)) / 100, i ? t = r + (t + 1) * 0.5 * (n - r) : t = r + t * (n - r)), +t), $a = (t, r) => t === "none" ? r : t, x5 = (t) => {
+  "^oklch\\(" + Nu + [bh, bh, Hw].join(I1) + R1 + "\\)$"
+), { round: FA } = Math, a1 = (t) => t.map((r, n) => n <= 2 ? K0(FA(r), 0, 255) : r), Fo = (t, r = 0, n = 100, i = !1) => (typeof t == "string" && t.endsWith("%") && (t = parseFloat(t.substring(0, t.length - 1)) / 100, i ? t = r + (t + 1) * 0.5 * (n - r) : t = r + t * (n - r)), +t), $a = (t, r) => t === "none" ? r : t, x5 = (t) => {
   if (t = t.toLowerCase().trim(), t === "transparent")
     return [0, 0, 0, 0];
   let r;
@@ -53348,7 +53358,7 @@ const SV = (...t) => {
     let n = r.slice(1, 4);
     for (let e = 0; e < 3; e++)
       n[e] = +Fo($a(n[e], 0), 0, 255);
-    n = l1(n);
+    n = a1(n);
     const i = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
     return n[3] = i, n;
   }
@@ -53361,7 +53371,7 @@ const SV = (...t) => {
   if ((r = t.match(IA)) || (r = t.match(RA))) {
     const n = r.slice(1, 4);
     n[0] = +$a(n[0].replace("deg", ""), 0), n[1] = +Fo($a(n[1], 0), 0, 100) * 0.01, n[2] = +Fo($a(n[2], 0), 0, 100) * 0.01;
-    const i = l1(yk(n)), e = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
+    const i = a1(yk(n)), e = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
     return i[3] = e, i;
   }
   if (r = t.match(DA)) {
@@ -53375,33 +53385,33 @@ const SV = (...t) => {
   if (r = t.match(BA)) {
     const n = r.slice(1, 4);
     n[0] = Fo($a(n[0], 0), 0, 100), n[1] = Fo($a(n[1], 0), -125, 125, !0), n[2] = Fo($a(n[2], 0), -125, 125, !0);
-    const i = Em();
-    zf("d50");
-    const e = l1(_5(n));
-    zf(i);
+    const i = Mm();
+    Ff("d50");
+    const e = a1(_5(n));
+    Ff(i);
     const s = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
     return e[3] = s, e;
   }
   if (r = t.match(NA)) {
     const n = r.slice(1, 4);
     n[0] = Fo(n[0], 0, 100), n[1] = Fo($a(n[1], 0), 0, 150, !1), n[2] = +$a(n[2].replace("deg", ""), 0);
-    const i = Em();
-    zf("d50");
-    const e = l1(g5(n));
-    zf(i);
+    const i = Mm();
+    Ff("d50");
+    const e = a1(g5(n));
+    Ff(i);
     const s = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
     return e[3] = s, e;
   }
   if (r = t.match(GA)) {
     const n = r.slice(1, 4);
     n[0] = Fo($a(n[0], 0), 0, 1), n[1] = Fo($a(n[1], 0), -0.4, 0.4, !0), n[2] = Fo($a(n[2], 0), -0.4, 0.4, !0);
-    const i = l1(y5(n)), e = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
+    const i = a1(y5(n)), e = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
     return i[3] = e, i;
   }
   if (r = t.match(jA)) {
     const n = r.slice(1, 4);
     n[0] = Fo($a(n[0], 0), 0, 1), n[1] = Fo($a(n[1], 0), 0, 0.4, !1), n[2] = +$a(n[2].replace("deg", ""), 0);
-    const i = l1(PA(n)), e = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
+    const i = a1(PA(n)), e = r[4] !== void 0 ? +Fo(r[4], 0, 1) : 1;
     return i[3] = e, i;
   }
 };
@@ -53446,10 +53456,10 @@ er.autodetect.push({
       return "hex";
   }
 });
-const { log: Xb } = Math, zA = (t) => {
+const { log: $b } = Math, zA = (t) => {
   const r = t / 100;
   let n, i, e;
-  return r < 66 ? (n = 255, i = r < 6 ? 0 : -155.25485562709179 - 0.44596950469579133 * (i = r - 2) + 104.49216199393888 * Xb(i), e = r < 20 ? 0 : -254.76935184120902 + 0.8274096064007395 * (e = r - 10) + 115.67994401066147 * Xb(e)) : (n = 351.97690566805693 + 0.114206453784165 * (n = r - 55) - 40.25366309332127 * Xb(n), i = 325.4494125711974 + 0.07943456536662342 * (i = r - 50) - 28.0852963507957 * Xb(i), e = 255), [n, i, e, 1];
+  return r < 66 ? (n = 255, i = r < 6 ? 0 : -155.25485562709179 - 0.44596950469579133 * (i = r - 2) + 104.49216199393888 * $b(i), e = r < 20 ? 0 : -254.76935184120902 + 0.8274096064007395 * (e = r - 10) + 115.67994401066147 * $b(e)) : (n = 351.97690566805693 + 0.114206453784165 * (n = r - 55) - 40.25366309332127 * $b(n), i = 325.4494125711974 + 0.07943456536662342 * (i = r - 50) - 28.0852963507957 * $b(i), e = 255), [n, i, e, 1];
 }, { round: BV } = Math, NV = (...t) => {
   const r = sr(t, "rgb"), n = r[0], i = r[2];
   let e = 1e3, s = 4e4;
@@ -53485,19 +53495,19 @@ Object.assign(Sr, {
   analyze: MA,
   average: jW,
   bezier: ZW,
-  blend: xh,
+  blend: wh,
   brewer: kV,
   Color: Fe,
-  colors: S1,
+  colors: E1,
   contrast: fV,
   contrastAPCA: _V,
   cubehelix: iV,
   deltaE: yV,
   distance: bV,
   input: er,
-  interpolate: C1,
+  interpolate: S1,
   limits: EA,
-  mix: C1,
+  mix: S1,
   random: lV,
   scale: Tw,
   scales: xV,
@@ -54466,134 +54476,36 @@ Object.assign(Sr, {
   nt.Utils = Z, L.control.elevation = (V) => new nt(V);
 });
 window.global = window;
-typeof window < "u" && (window.L = Tu);
+typeof window < "u" && (window.L = C1);
 window.PouchDB = tr;
-var Gm = Tu;
+var Nm = C1;
 window._ || (window._ = function(t) {
   return t;
 });
-window.L.tileLayer.pouchDBCached = Gm.tileLayer.pouchDBCached;
-window.LeafletPathDrag = bm;
-Tu.Map.addInitHook("addHandler", "contextmenu", LeafletContextMenu);
+window.L.tileLayer.pouchDBCached = Nm.tileLayer.pouchDBCached;
+window.LeafletPathDrag = ww;
+C1.Map.addInitHook("addHandler", "contextmenu", LeafletContextMenu);
 window.leafletContextmenu = d5;
 window.registerGeomanPlugin = cA;
-cA(Gm);
-console.log(Gm.PM);
-DZ(Gm);
+cA(Nm);
+console.log(Nm.PM);
+DZ(Nm);
 const jV = Qa?.default?.defs || Qa?.defs || Qa?.proj4 ? Qa.default || Qa : (() => {
   throw new Error("proj4 is not valid");
 })();
 window.proj4 = jV;
 window.chroma = Sr;
-{
-  const t = Tu.map(
-    "map",
-    {
-      center: [34.99717163817537, -91.98252260684968],
-      zoom: 5,
-      contextmenu: !0,
-      contextmenuWidth: 180,
-      contextmenuItems: [
-        {
-          text: "Center map here",
-          callback: (l) => t.panTo(l.latlng)
-        },
-        {
-          separator: !0
-        },
-        {
-          text: "Connections",
-          submenu: [
-            { text: "Add Connection", iconCls: "kfi-magnify-alt", callback: () => console.log("Add") },
-            { text: "Remove Connection", iconCls: "kfi-math-plus", callback: () => console.log("Remove") }
-          ]
-        },
-        "-",
-        {
-          text: "Zoom in",
-          callback: () => t.zoomIn()
-        },
-        {
-          text: "Zoom out",
-          callback: () => t.zoomOut()
-        }
-      ]
-    }
-  ).setView([34.99697374179657, -91.98339700698854], 18);
-  t.on("pm:create", (l) => {
-    l.layer.dragging && l.layer.dragging.enable();
-  }), bm.enable(), Tu.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      attribution: "&copy; OpenStreetMap contributors"
-    }
-  ).addTo(t), Tu.tileLayer.pouchDBCached(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      pouchDbName: "osm-cache",
-      useOnlyCache: !1,
-      saveToCache: !0,
-      useCache: !0,
-      crossOrigin: !0
-    }
-  ).addTo(t), t.pm.addControls(
-    {
-      position: "topleft",
-      drawCircle: !0,
-      drawMarker: !0,
-      drawPolygon: !0,
-      editMode: !0,
-      dragMode: !0,
-      cutPolygon: !0
-    }
-  );
-  const n = [
-    [34.99697374179657, -91.98339700698854],
-    [34.99745212321335, -91.98250098329999],
-    [34.99715311329774, -91.98208272457124],
-    [34.996827650708546, -91.98265135288239],
-    [34.997056331333724, -91.98305373326761]
-  ];
-  Tu.polygon(n, {
-    color: "red",
-    fillColor: "#f03",
-    fillOpacity: 0.4,
-    weight: 3,
-    draggable: !0,
-    interactive: !0
-  }).addTo(t).makeDraggable(), t.on("click", (l) => {
-    var a = l.latlng.lat, c = l.latlng.lng;
-    console.log(a + ", " + c);
-  });
-  const e = Tu.marker(new Tu.LatLng(34.997056331333724, -91.98305373326761)).addTo(t);
-  t.contextmenu.bindContextMenuToLayer(e, [
-    {
-      separator: !0
-    },
-    {
-      text: "Marker item",
-      callback: (l) => alert("Marker 1 right-clicked")
-    }
-  ], { inherit: !0 });
-  const s = [];
-  for (const l in t._layers)
-    if (t._layers.hasOwnProperty(l)) {
-      const a = t._layers[l];
-      s.push(a);
-    }
-  console.log(s);
-}
-delete Tu.Icon.Default.prototype._getIconUrl;
-Tu.Icon.Default.mergeOptions({
+delete C1.Icon.Default.prototype._getIconUrl;
+C1.Icon.Default.mergeOptions({
   iconRetinaUrl: "/content/img/marker-icon-2x.png",
   iconUrl: "/content/img/marker-icon.png",
   shadowUrl: "/content/img/marker-shadow.png"
 });
-typeof window < "u" && (window.L = Gm);
+typeof window < "u" && (window.L = Nm);
 window.PM = window.L.PM;
 const QV = window.L.PM;
 export {
   QV as PM,
-  Tu as default
+  C1 as default
 };
 //# sourceMappingURL=leaflet_bundle.es.js.map
