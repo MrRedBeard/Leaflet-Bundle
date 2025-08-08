@@ -1,3 +1,8 @@
+# 0.1.3 (2025-08-03)
+* Couple of fixes
+* Updated libraries to address issues with context menu
+* Context menu was not initialized properly
+
 # 0.1.2 (2025-08-02)
 * Rebuilt a fork of Leaflet.contextmenu and replaced the one in the bundle [https://github.com/MrRedBeard/Leaflet.contextmenu](https://github.com/MrRedBeard/Leaflet.contextmenu)
 

@@ -54,8 +54,8 @@ import 'leaflet-gpx';
 import LeafletPathDrag from 'leaflet-path-drag';
 window.LeafletPathDrag = LeafletPathDrag;
 
-// import 'leaflet-snap';
-// window.SnapMixin = L.SnapMixin;
+import 'leaflet-snap';
+window.SnapMixin = L.SnapMixin;
 
 import omnivore from '@mapbox/leaflet-omnivore';
 import GeoRasterLayer from 'georaster-layer-for-leaflet';
@@ -64,22 +64,29 @@ import './plugins/canvaslayerfield/leaflet.canvaslayer.field.js';
 
 /************************************************/
 
-import leafletContextmenu from 'leaflet-contextmenu';
+import LeafletContextMenu from 'leaflet-contextmenu';
 import '../node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css';
 L.Map.addInitHook('addHandler', 'contextmenu', LeafletContextMenu);
-window.leafletContextmenu = leafletContextmenu;
+window.LeafletContextMenu = LeafletContextMenu;
+L.ContextMenu = LeafletContextMenu;
+L.Map.prototype.contextmenu = LeafletContextMenu;
+
+// L.Map.addInitHook(function ()
+// {
+//   if (this.contextmenu) return; // avoid overwriting
+//   this.contextmenu = this._handlers.find(h => h instanceof LeafletContextMenu);
+// });
 
 // THEN load Geoman
 import 'leaflet-draw';
 import '../node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css';
-// import '@geoman-io/leaflet-geoman-free';
+import '@geoman-io/leaflet-geoman-free';
 import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css';
 
 // THEN register
 import { registerGeomanPlugin } from './register-geoman-plugin.js';
 window.registerGeomanPlugin = registerGeomanPlugin;
 registerGeomanPlugin(Leaflet);
-console.log(Leaflet.PM)
 
 /************************************************/
 
@@ -106,25 +113,31 @@ window.chroma = chroma;
 /***************************************************************************************/
 
 //ToDo: come back to elevation
+//import Elevation from './plugins/leaflet-elevation/src/leaflet-elevation.js';
+import './plugins/leaflet-elevation/src/leaflet-elevation.css';
 import * as ElevationHandlers from './ElevationHandlers.js';
+
+// console.log(Elevation);
+
 // if(typeof L.Control.Elevation === 'undefined')
 // {
 //   L.Control.Elevation = {};
 //   L.Control.Elevation.Handlers = {};
 // }
-
-import './plugins/leaflet-elevation/src/leaflet-elevation.js';
-import './plugins/leaflet-elevation/src/leaflet-elevation.css';
-
-/*** leaflet-elevation start ***/
-// for (const [key, handlerFn] of Object.entries(ElevationHandlers))
+// if (typeof L.Control?.Elevation === 'function')
 // {
-// 	const inst = handlerFn.call(L.Control.Elevation.prototype);
-// 	if (inst?.name)
-// 	{
-// 		L.Control.Elevation.Handlers[inst.name] = handlerFn;
-// 	}
+//   L.Control.Elevation.prototype._loadModules?.();
 // }
+
+// /*** leaflet-elevation start ***/
+// // for (const [key, handlerFn] of Object.entries(ElevationHandlers))
+// // {
+// // 	const inst = handlerFn.call(L.Control.Elevation.prototype);
+// // 	if (inst?.name)
+// // 	{
+// // 		L.Control.Elevation.Handlers[inst.name] = handlerFn;
+// // 	}
+// // }
 // L.Control.Elevation.prototype._loadModules = async function ()
 // {
 // 	const handlerMap = {
@@ -217,6 +230,12 @@ if(debug)
       e.layer.dragging.enable();
     }
   });
+
+  map.contextmenu.enable();
+
+  map.on('contextmenu.show', () => console.log('CTX menu shown'));
+  map.on('contextmenu.hide', () => console.log('CTX menu hidden'));
+  map.on('contextmenu', (e) => console.log('Base Leaflet contextmenu at', e.latlng));
 
   LeafletPathDrag.enable();
 
@@ -418,6 +437,8 @@ if (typeof window !== 'undefined')
 }
 
 export default L;
+
+export { LeafletContextMenu };
 
 window.PM = window.L.PM;
 export const PM = window.L.PM;

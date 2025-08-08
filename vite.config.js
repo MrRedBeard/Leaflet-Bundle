@@ -41,7 +41,9 @@ const sharedOutputOptions = {
   globals: {
     leaflet: 'L',
     'pouchdb-browser': 'PouchDB',
-    'LeafletPathDrag': 'LeafletPathDrag'
+    'LeafletPathDrag': 'LeafletPathDrag',
+    'leaflet-contextmenu': 'leaflet-contextmenu',
+    'LeafletContextMenu': 'LeafletContextMenu'
   }
 };
 
@@ -57,10 +59,10 @@ export default defineConfig({
   resolve: {
     alias: {
       //leaflet: path.resolve(__dirname, 'node_modules/leaflet'),
-      buffer: 'buffer',
+      // buffer: 'buffer',
       process: 'process/browser',
       stream: 'stream-browserify',
-      //events: 'events/',
+      // events: 'events/',
       events: 'rollup-plugin-node-polyfills/polyfills/events.js',
       global: 'globalthis',
       events: 'rollup-plugin-node-polyfills/polyfills/events.js',
@@ -82,7 +84,7 @@ export default defineConfig({
     include: [
       'leaflet',
       'leaflet-draw',
-      'leaflet-contextmenu',
+      'LeafletContextMenu',
       'leaflet-gpx',
       '@geoman-io/leaflet-geoman-free',
       'leaflet-rastercoords',
@@ -127,7 +129,7 @@ export default defineConfig({
           include: [
             'leaflet',
             'leaflet-draw',
-            'leaflet-contextmenu',
+            'LeafletContextMenu',
             'leaflet-gpx',
             '@geoman-io/leaflet-geoman-free',
             'leaflet-rastercoords',
